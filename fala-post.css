@@ -1,0 +1,261 @@
+/* --- TEMPLATE: FALA AMALDIÇOADA (INUMAKI) --- */
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Saira+Stencil+One&family=Inter:wght@400;600&display=swap');
+
+/* Escopamento */
+.speech-container {
+  --sp-bg: #0b0d14;
+  --sp-panel: #14161f;
+  --sp-gold: #d4af37;      /* Cor do Selo (Serpente) */
+  --sp-sound: #00e5ff;     /* Cor do Som (Onda) */
+  --sp-pain: #ff4040;      /* Cor do Rebote (Garganta) */
+  --text-main: #e0e6ed;
+  --text-dim: #94a3b8;
+}
+
+/* Animação de Equalizador de Áudio */
+@keyframes audio-wave {
+  0% { background-size: 100% 100%; }
+  25% { background-size: 90% 100%; }
+  50% { background-size: 95% 100%; }
+  75% { background-size: 85% 100%; }
+  100% { background-size: 100% 100%; }
+}
+
+/* Animação de "Vibração" no container (Sutil) */
+@keyframes speech-vibrate {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-1px); }
+  75% { transform: translateX(1px); }
+}
+
+/* CONTAINER PRINCIPAL */
+.speech-container {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--sp-bg);
+  
+  /* Fundo: Ondas sonoras sutis */
+  background-image: 
+    repeating-radial-gradient(circle at 50% -20%, transparent 0, var(--sp-bg) 40px),
+    repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(0, 229, 255, 0.03) 50px);
+  
+  border: 2px solid var(--sp-gold);
+  /* Cantos cortados (estilo selo de papel) */
+  border-radius: 0;
+  clip-path: polygon(
+    0 20px, 20px 0, 
+    100% 0, 100% calc(100% - 20px), 
+    calc(100% - 20px) 100%, 0 100%
+  );
+
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+  padding: 0;
+  overflow: hidden;
+}
+
+.speech-container * { box-sizing: border-box; }
+
+/* --- CABEÇALHO (O MEGAFONE) --- */
+.speech-container .speech-header {
+  text-align: center;
+  padding: 35px 20px;
+  background: linear-gradient(180deg, #1a1c29 0%, var(--sp-bg) 100%);
+  border-bottom: 2px solid var(--sp-gold);
+  position: relative;
+  z-index: 2;
+}
+
+/* SVG da Marca Inumaki (Serpente e Presas) no Fundo */
+.speech-container .speech-sigil {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px; height: 150px;
+  opacity: 0.05;
+  pointer-events: none;
+  z-index: 0;
+}
+.speech-container .speech-sigil path { fill: var(--sp-gold); }
+
+.speech-container .speech-title {
+  font-family: 'Black Ops One', cursive; /* Fonte estilo "Comando" / Militar */
+  font-size: 2.5em;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 2px;
+  position: relative; z-index: 1;
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+}
+
+.speech-container .speech-subtitle {
+  font-family: 'Saira Stencil One', cursive;
+  color: var(--sp-gold);
+  font-size: 0.9em;
+  margin-top: 5px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  position: relative; z-index: 1;
+}
+
+/* --- IMAGEM --- */
+.speech-container .speech-image-frame {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  border-top: 1px solid var(--sp-gold);
+  border-bottom: 1px solid var(--sp-sound);
+  background: #000;
+}
+.speech-container .speech-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  filter: contrast(1.1) sepia(0.2);
+}
+
+/* Overlay de "Ruído de Áudio" na imagem */
+.speech-container .speech-image-frame::after {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, transparent 0, transparent 2px, rgba(0,0,0,0.3) 3px);
+  pointer-events: none; opacity: 0.3;
+}
+
+/* --- BARRAS DE STATUS (EQUALIZADOR) --- */
+.speech-container .speech-stats {
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: rgba(20, 22, 31, 0.8);
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px dashed rgba(255,255,255,0.1);
+}
+
+.speech-container .jjk-dossier-status-item {
+  display: grid;
+  grid-template-columns: 30px 1fr 80px;
+  align-items: center;
+  gap: 15px;
+}
+
+.speech-container .jjk-dossier-status-label {
+  font-family: 'Black Ops One', cursive;
+  font-weight: 400;
+  color: var(--sp-gold);
+  font-size: 0.9em;
+  text-align: right;
+}
+
+.speech-container .jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 12px;
+  background: #000;
+  border: 1px solid #333;
+  /* Bordas retas tecnológicas */
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.speech-container .jjk-dossier-status-bar {
+  width: 100%; height: 100%; background: transparent; border: none;
+}
+
+/* HP: Vermelho Garganta (Degaste) */
+.speech-container .jjk-dossier-hp-fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--sp-pain),
+    var(--sp-pain) 4px,
+    #000 4px,
+    #000 6px
+  );
+  box-shadow: 0 0 10px var(--sp-pain);
+  transition: width 0.5s ease;
+}
+
+/* EA: Onda Sonora Azul (Equalizador) */
+.speech-container .jjk-dossier-ea-fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--sp-sound),
+    var(--sp-sound) 4px,
+    #000 4px,
+    #000 6px
+  );
+  box-shadow: 0 0 10px var(--sp-sound);
+  /* Animação de Equalizador */
+  animation: audio-wave 0.5s infinite alternate;
+  transition: width 0.5s ease;
+}
+
+.speech-container .jjk-dossier-status-value {
+  position: static; transform: none;
+  font-family: 'Saira Stencil One', cursive; font-size: 0.8em;
+  color: var(--text-main); text-align: right;
+}
+
+/* --- CONTEÚDO --- */
+.speech-container .speech-content {
+  padding: 30px 40px;
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: #d0d0d0;
+  text-align: justify;
+  position: relative;
+  z-index: 2;
+}
+
+/* Destaque: O COMANDO */
+.speech-container .speech-content b {
+  color: #000;
+  background-color: var(--sp-gold);
+  padding: 0 5px;
+  font-family: 'Black Ops One', cursive;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-radius: 2px;
+}
+
+.speech-container .speech-content i {
+  color: var(--sp-sound);
+  font-weight: 700;
+}
+
+/* --- EXTRAS (Xarope/Megafone) --- */
+.speech-container .speech-extras {
+  margin: 0 30px 30px 30px;
+  padding: 15px;
+  background: rgba(212, 175, 55, 0.05);
+  border: 2px solid var(--sp-gold);
+  position: relative;
+  z-index: 2;
+  font-size: 0.9em;
+  color: var(--text-dim);
+  font-family: 'Saira Stencil One', cursive;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.speech-container .speech-extras::before {
+  content: '📢 AUDIO_LOG';
+  display: block;
+  font-size: 0.8em;
+  color: var(--sp-gold);
+  margin-bottom: 5px;
+  border-bottom: 1px solid var(--sp-gold);
+  padding-bottom: 5px;
+}
+
+@media (max-width: 600px) {
+  .speech-container .speech-header { padding: 30px 20px; }
+  .speech-container .speech-content, 
+  .speech-container .speech-stats, 
+  .speech-container .speech-extras { padding-left: 20px; padding-right: 20px; margin-left: 10px; margin-right: 10px; margin-bottom: 20px; }
+}
