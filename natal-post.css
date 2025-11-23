@@ -1,4 +1,4 @@
-/* --- TEMPLATE: ESPECIAL DE NATAL v4 (Final Fixes) --- */
+/* --- TEMPLATE: ESPECIAL DE NATAL v5 (Seamless Snow Fix) --- */
 @import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Cinzel:wght@700&family=Inter:wght@400;700&display=swap');
 
 /* Escopamento */
@@ -20,17 +20,23 @@
   66% { box-shadow: 0 0 10px var(--xmas-gold); border-color: var(--xmas-gold); }
 }
 
-/* [CORRIGIDO] Animação das Listras Finas (Loop Perfeito) */
-/* Move exatamente o tamanho da repetição do padrão (20px na diagonal ~= 28px na horizontal) */
+/* Animação das Listras Finas (Loop Perfeito) */
 @keyframes candy-move-tight {
   0% { background-position: 0 0; }
   100% { background-position: 28px 0; } 
 }
 
-/* [NOVO] Animação de Neve sobre o Banner */
+/* [CORRIGIDO] Animação de Neve sobre o Banner (Loop Matemático Perfeito) */
+/* A distância vertical (300px) é múltiplo de 30 e 50 (tamanhos dos backgrounds), garantindo loop sem engasgo */
 @keyframes snow-banner-fall {
-  0% { background-position: 0px 0px, 0px 0px; }
-  100% { background-position: 20px 200px, 40px 300px; }
+  0% {
+    background-position: 0px 0px, 0px 0px;
+  }
+  100% {
+    /* Camada 1 move 30px pro lado, 300px pra baixo */
+    /* Camada 2 move 50px pro lado, 300px pra baixo */
+    background-position: 30px 300px, 50px 300px;
+  }
 }
 
 /* CONTAINER */
@@ -86,20 +92,20 @@
 .xmas-container .xmas-image-frame {
   width: 100%; height: 350px; position: relative;
   border-top: 2px solid var(--xmas-gold); border-bottom: 2px solid var(--xmas-green);
-  overflow: hidden; /* Importante para a neve não vazar */
+  overflow: hidden;
 }
 .xmas-container .xmas-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
   filter: contrast(1.1) brightness(1.05); z-index: 1; position: relative;
 }
 
-/* [NOVO] Neve Caindo SOBRE a imagem */
+/* Neve Caindo SOBRE a imagem */
 .xmas-container .xmas-image-frame::after {
   content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none;
   background-image: 
     radial-gradient(circle, rgba(255,255,255,0.8) 1px, transparent 1.5px),
     radial-gradient(circle, rgba(255,255,255,0.6) 1.5px, transparent 2px);
-  background-size: 30px 30px, 50px 50px;
+  background-size: 30px 30px, 50px 50px; /* Tamanhos usados para o cálculo do loop */
   animation: snow-banner-fall 10s linear infinite;
 }
 
@@ -110,10 +116,9 @@
   border-bottom: 1px dashed var(--xmas-gold);
 }
 
-/* [CORRIGIDO] Usando Grid para alinhar perfeitamente */
 .xmas-container .jjk-dossier-status-item {
   display: grid;
-  grid-template-columns: 30px 1fr auto; /* Label | Barra Flexível | Valor Automático */
+  grid-template-columns: 30px 1fr auto;
   align-items: center;
   gap: 15px;
 }
@@ -129,10 +134,9 @@
   width: 100%; height: 100%; background: transparent; border: none;
 }
 
-/* [CORRIGIDO] HP: Listras Finas e Apertadas */
+/* HP: Listras Finas e Apertadas */
 .xmas-container .jjk-dossier-hp-fill {
   height: 100%;
-  /* Padrão repetitivo curto (20px total) para listras finas */
   background: repeating-linear-gradient(
     45deg,
     var(--xmas-red) 0,
@@ -140,13 +144,12 @@
     #ff8a80 10px,
     #ff8a80 20px
   );
-  /* Animação ajustada para o novo tamanho do padrão */
   animation: candy-move-tight 2s linear infinite;
   transition: width 0.5s ease;
   box-shadow: 0 0 10px var(--xmas-red);
 }
 
-/* [CORRIGIDO] EA: Listras Finas e Apertadas */
+/* EA: Listras Finas e Apertadas */
 .xmas-container .jjk-dossier-ea-fill {
   height: 100%;
   background: repeating-linear-gradient(
@@ -161,7 +164,6 @@
   box-shadow: 0 0 10px var(--xmas-green);
 }
 
-/* [CORRIGIDO] Valor resetado para posição estática no grid */
 .xmas-container .jjk-dossier-status-value {
   position: static; transform: none;
   font-size: 0.75em; font-family: 'Inter', sans-serif; color: #fff;
