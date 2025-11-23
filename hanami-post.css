@@ -1,0 +1,248 @@
+/* --- TEMPLATE: PLANTAS DO DESASTRE (HANAMI) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Philosopher:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* Escopamento */
+.hana-container {
+  --hana-bg: #1a140a;      /* Solo Escuro */
+  --hana-wood: #3e2714;    /* Madeira Escura */
+  --hana-sap: #a4c639;     /* Seiva Vital (EA) */
+  --hana-flower: #c74b9f;  /* Flor da Hanami */
+  --hana-leaf: #2d421d;    /* Verde Musgo Escuro */
+  --hana-life: #8c331d;    /* Cor de "Vida"/Sangue de Árvore (HP) */
+  --text-parchment: #e8dcb5; /* Cor de Pergaminho */
+}
+
+/* Animação de Fluxo de Seiva */
+@keyframes sap-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Animação de "Respiração da Floresta" (Balanço sutil) */
+@keyframes forest-breathe {
+  0%, 100% { transform: translateY(0) scale(1); box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+  50% { transform: translateY(-3px) scale(1.005); box-shadow: 0 15px 40px rgba(164, 198, 57, 0.1); }
+}
+
+/* CONTAINER PRINCIPAL */
+.hana-container {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--hana-bg);
+  
+  /* Textura de Raízes no Fundo */
+  background-image: 
+    radial-gradient(circle at 100% 0%, rgba(164, 198, 57, 0.05) 10%, transparent 30%),
+    repeating-linear-gradient(45deg, rgba(62, 39, 20, 0.1) 0px, rgba(62, 39, 20, 0.1) 2px, transparent 2px, transparent 8px);
+  
+  /* Borda simulando troncos entrelaçados */
+  border: 6px solid var(--hana-wood);
+  border-image: linear-gradient(to bottom right, var(--hana-wood), var(--hana-leaf), var(--hana-wood)) 1;
+  border-radius: 15px; /* Arredondado orgânico */
+  
+  color: var(--text-parchment);
+  font-family: 'Philosopher', serif;
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  
+  animation: forest-breathe 6s ease-in-out infinite;
+}
+
+.hana-container * { box-sizing: border-box; }
+
+/* Decoração de Folhas nos Cantos (Pseudo-elementos) */
+.hana-container::before, .hana-container::after {
+  content: '🌿';
+  position: absolute;
+  font-size: 2em;
+  opacity: 0.6;
+  filter: hue-rotate(40deg) brightness(0.8);
+  z-index: 10;
+}
+.hana-container::before { top: -15px; left: -15px; transform: rotate(-45deg); }
+.hana-container::after { bottom: -15px; right: -15px; transform: rotate(135deg); }
+
+/* --- CABEÇALHO --- */
+.hana-container .hana-header {
+  padding: 30px 20px;
+  /* Fundo de Casca de Árvore estilizado */
+  background: linear-gradient(180deg, var(--hana-wood), #2a1a0d);
+  border-bottom: 3px solid var(--hana-leaf);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+  box-shadow: inset 0 -10px 20px rgba(0,0,0,0.5);
+}
+
+.hana-container .hana-title {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 2.2em;
+  color: var(--hana-sap);
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+  line-height: 1;
+}
+
+.hana-container .hana-subtitle {
+  font-family: 'Philosopher', serif;
+  color: var(--hana-flower);
+  font-size: 0.9em;
+  margin-top: 5px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+/* Ícone Floral/Raiz (SVG) */
+.hana-container .hana-icon {
+  width: 60px; height: 60px;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));
+}
+
+/* --- IMAGEM --- */
+.hana-container .hana-image-frame {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  z-index: 1;
+  border-top: 3px solid var(--hana-wood);
+  border-bottom: 3px solid var(--hana-leaf);
+  /* Moldura orgânica */
+  box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
+}
+
+.hana-container .hana-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  /* Filtro Terroso e Antigo */
+  filter: contrast(1.1) sepia(0.4) saturate(1.1);
+}
+
+/* --- BARRAS DE STATUS (Vinhas/Tubos Orgânicos) --- */
+.hana-container .hana-stats {
+  padding: 25px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  /* Fundo de musgo escuro */
+  background: rgba(45, 66, 29, 0.3);
+  position: relative;
+  z-index: 2;
+  border-bottom: 2px solid var(--hana-wood);
+}
+
+.hana-container .jjk-dossier-status-item {
+  display: flex; align-items: center; gap: 15px;
+}
+
+.hana-container .jjk-dossier-status-label {
+  font-family: 'Cinzel Decorative', cursive;
+  font-weight: 700;
+  color: var(--hana-parchment);
+  width: 35px;
+  font-size: 1em;
+  text-shadow: 1px 1px 2px #000;
+}
+
+.hana-container .jjk-dossier-status-bar-wrapper {
+  flex-grow: 1; position: relative; height: 16px;
+  background: #1a1109;
+  border: 2px solid var(--hana-wood);
+  border-radius: 20px; /* Bordas bem redondas como tubos */
+  overflow: hidden;
+  box-shadow: inset 0 3px 5px rgba(0,0,0,0.8);
+}
+
+.hana-container .jjk-dossier-status-bar {
+  width: 100%; height: 100%; background: transparent; border: none;
+}
+
+/* HP: Seiva Vital (Avermelhada/Marrom) */
+.hana-container .jjk-dossier-hp-fill {
+  height: 100%;
+  /* Gradiente que parece madeira viva */
+  background: linear-gradient(90deg, var(--hana-wood), var(--hana-life), var(--hana-wood));
+  background-size: 200% 100%;
+  animation: sap-flow 5s linear infinite reverse;
+  border-radius: 20px;
+  box-shadow: inset 0 -2px 5px rgba(0,0,0,0.5);
+  transition: width 0.5s ease;
+}
+
+/* EA: Energia Amaldiçoada da Natureza (Verde Brilhante) */
+.hana-container .jjk-dossier-ea-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--hana-leaf), var(--hana-sap), var(--hana-leaf));
+  background-size: 200% 100%;
+  animation: sap-flow 3s linear infinite;
+  border-radius: 20px;
+  box-shadow: 0 0 10px var(--hana-sap), inset 0 -2px 5px rgba(0,0,0,0.5);
+  transition: width 0.5s ease;
+}
+
+.hana-container .jjk-dossier-status-value {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  font-size: 0.75em; font-family: 'Philosopher', serif; color: #fff;
+  font-weight: 700; text-shadow: 1px 1px 2px #000;
+}
+
+/* --- CONTEÚDO --- */
+.hana-container .hana-content {
+  padding: 30px 35px;
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: var(--text-parchment);
+  text-align: justify;
+  position: relative;
+  z-index: 2;
+}
+
+/* Destaques no texto */
+.hana-container .hana-content b {
+  color: var(--hana-sap);
+  font-family: 'Cinzel Decorative', cursive;
+  font-weight: 700;
+}
+
+.hana-container .hana-content i {
+  color: var(--hana-flower);
+  font-weight: 700;
+}
+
+/* --- EXTRAS (Placa de Madeira) --- */
+.hana-container .hana-extras {
+  margin: 0 30px 30px 30px;
+  padding: 20px;
+  background: var(--hana-wood);
+  border: 2px solid var(--hana-leaf);
+  border-radius: 8px;
+  position: relative;
+  z-index: 2;
+  font-size: 0.9em;
+  color: var(--text-parchment);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+/* Ícone de flor no extra */
+.hana-container .hana-extras::before {
+  content: '🌸';
+  position: absolute; top: -10px; right: -5px;
+  font-size: 1.5em; filter: hue-rotate(-30deg);
+}
+
+@media (max-width: 600px) {
+  .hana-container .hana-header { padding: 20px; }
+  .hana-container .hana-content, 
+  .hana-container .hana-stats, 
+  .hana-container .hana-extras { padding-left: 20px; padding-right: 20px; margin-left: 0; margin-right: 0; }
+}
