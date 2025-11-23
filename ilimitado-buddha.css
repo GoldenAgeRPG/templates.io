@@ -1,28 +1,29 @@
-/* --- TEMPLATE: ILIMITADO (GOJO) - VERSÃO "ILUMINAÇÃO" --- */
+/* --- TEMPLATE: ILIMITADO (VERSÃO LÓTUS / DIVINA) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
 
-/* Escopamento */
 .buddha-container {
-  --bud-bg: #050508;       /* Vazio Escuro */
-  --bud-panel: #0a0a10;
-  --bud-gold: #d4af37;     /* Ouro Sagrado */
-  --bud-blue: #a5f3fc;     /* Ciano Pálido (Olhos) */
-  --bud-halo: rgba(212, 175, 55, 0.3);
+  /* Paleta Gojo: Azul (Ao), Vermelho (Aka), Roxo (Murasaki) */
+  --gojo-blue: #00aaff;
+  --gojo-red: #ff1a55;
+  --gojo-purple: #bc13fe;
+  --gojo-gold: #d4af37;
+  --void-bg: #08050a;
   --text-main: #e0e0e0;
   --text-dim: #a0a0a0;
 }
 
-/* Animação: Respiração Divina (Halo) */
-@keyframes divine-pulse {
-  0%, 100% { box-shadow: 0 0 20px var(--bud-halo); border-color: rgba(212, 175, 55, 0.3); }
-  50% { box-shadow: 0 0 50px var(--bud-halo), inset 0 0 20px rgba(0, 229, 255, 0.1); border-color: var(--bud-gold); }
+/* Animação: Ciclo das Cores do Infinito */
+@keyframes infinity-cycle {
+  0% { border-color: var(--gojo-blue); box-shadow: 0 0 20px rgba(0, 170, 255, 0.2); }
+  33% { border-color: var(--gojo-red); box-shadow: 0 0 20px rgba(255, 26, 85, 0.2); }
+  66% { border-color: var(--gojo-purple); box-shadow: 0 0 30px rgba(188, 19, 254, 0.3); }
+  100% { border-color: var(--gojo-blue); box-shadow: 0 0 20px rgba(0, 170, 255, 0.2); }
 }
 
-/* Animação: Fluxo Espiritual */
-@keyframes spirit-flow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Animação: Lótus Girando (Lenta e Divina) */
+@keyframes lotus-spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
 /* CONTAINER PRINCIPAL */
@@ -31,66 +32,82 @@
   max-width: 700px;
   width: 95%;
   margin: 40px auto;
-  background-color: var(--bud-bg);
+  background-color: var(--void-bg);
   
-  /* Fundo: Textura sutil de mandala ou nuvens */
-  background-image: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.05) 0%, transparent 60%);
-  
-  border: 1px solid var(--bud-gold);
-  border-radius: 8px; /* Bordas suaves */
+  /* Borda que muda de cor (Azul -> Vermelho -> Roxo) */
+  border: 2px solid var(--gojo-blue);
+  border-radius: 12px;
   position: relative;
-  
-  /* Sombra dourada etérea */
-  box-shadow: 0 0 30px var(--bud-halo);
   padding: 0;
   overflow: hidden;
   
   color: var(--text-main);
   font-family: 'Cormorant Garamond', serif;
   
-  animation: divine-pulse 6s infinite ease-in-out;
+  animation: infinity-cycle 10s infinite linear;
 }
 
 .buddha-container * { box-sizing: border-box; }
 
-/* Detalhe de Lótus nos Cantos (Pseudo-elementos) */
-.buddha-container::before, .buddha-container::after {
-  content: '🪷'; /* Pode ser trocado por SVG se preferir */
+/* Fundo de Mandala/Lótus Gigante */
+.buddha-container::before {
+  content: '';
   position: absolute;
-  font-size: 24px;
-  filter: grayscale(1) brightness(2) sepia(1) hue-rotate(0deg) saturate(5); /* Dourado */
-  opacity: 0.6;
+  top: 50%; left: 50%;
+  width: 600px; height: 600px;
+  /* SVG de Lótus no Background */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' fill='none' stroke='%23ffffff' stroke-width='0.5' stroke-opacity='0.05'%3E%3Cpath d='M50 50 C50 20 20 20 50 50 C80 20 50 20 50 50 C50 80 80 80 50 50 C20 80 50 80 50 50 Z' /%3E%3Cpath d='M50 50 C50 10 10 10 50 50 C90 10 50 10 50 50 C50 90 90 90 50 50 C10 90 50 90 50 50 Z' transform='rotate(45 50 50)'/%3E%3Ccircle cx='50' cy='50' r='30' stroke-width='0.2' /%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  opacity: 1;
+  animation: lotus-spin 60s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Lótus Decorativas nos Cantos (SVG Real) */
+.buddha-container::after {
+  content: '';
+  position: absolute;
+  top: 10px; right: 10px;
+  width: 40px; height: 40px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23d4af37'%3E%3Cpath d='M12,2C12,2 7,7 7,12C7,16 12,22 12,22C12,22 17,16 17,12C17,7 12,2 12,2M12,6C12,6 15,10 15,12C15,14 12,18 12,18C12,18 9,14 9,12C9,10 12,6 12,6Z'/%3E%3C/svg%3E");
+  background-size: contain;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 5px var(--gojo-gold));
   z-index: 10;
 }
-.buddha-container::before { top: 10px; left: 10px; }
-.buddha-container::after { top: 10px; right: 10px; }
 
 /* --- CABEÇALHO --- */
 .buddha-container .buddha-header {
   text-align: center;
   padding: 40px 20px;
-  background: linear-gradient(180deg, rgba(20, 15, 5, 0.6) 0%, transparent 100%);
-  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
+  background: linear-gradient(180deg, rgba(10, 5, 15, 0.9) 0%, transparent 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
   position: relative;
   z-index: 2;
 }
 
-/* Título Sagrado */
 .buddha-container .buddha-title {
   font-family: 'Cinzel Decorative', cursive;
-  font-weight: 700;
+  font-weight: 900;
   font-size: 2.5em;
   color: #fff;
   text-transform: uppercase;
   margin: 0;
   letter-spacing: 2px;
-  text-shadow: 0 0 15px var(--bud-gold);
+  /* Texto com gradiente das 3 cores */
+  background: linear-gradient(90deg, var(--gojo-blue), #fff, var(--gojo-red));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 20px rgba(188, 19, 254, 0.4);
   line-height: 1.1;
 }
 
 .buddha-container .buddha-subtitle {
   font-family: 'Cinzel Decorative', cursive;
-  color: var(--bud-blue);
+  color: var(--gojo-gold);
   font-size: 0.85em;
   margin-top: 10px;
   text-transform: uppercase;
@@ -104,10 +121,9 @@
   height: 350px;
   position: relative;
   z-index: 1;
-  border-top: 1px solid var(--bud-gold);
-  border-bottom: 1px solid var(--bud-gold);
-  /* Efeito de Vinheta Dourada */
-  box-shadow: inset 0 0 40px rgba(0,0,0,0.8);
+  border-top: 1px solid var(--gojo-blue);
+  border-bottom: 1px solid var(--gojo-red);
+  box-shadow: inset 0 0 50px #000;
 }
 
 .buddha-container .buddha-image-frame img {
@@ -115,11 +131,10 @@
   height: 100%;
   object-fit: cover;
   object-position: top center;
-  /* Filtro levemente etéreo */
-  filter: contrast(1.1) brightness(1.1) saturate(0.9);
+  filter: contrast(1.1) saturate(1.1);
 }
 
-/* --- BARRAS DE STATUS (Fluido Espiritual) --- */
+/* --- BARRAS DE STATUS (Equilíbrio) --- */
 .buddha-container .buddha-stats {
   padding: 20px 40px;
   display: flex;
@@ -128,7 +143,6 @@
   background: rgba(255, 255, 255, 0.02);
   position: relative;
   z-index: 2;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
 .buddha-container .jjk-dossier-status-item {
@@ -141,40 +155,36 @@
 .buddha-container .jjk-dossier-status-label {
   font-family: 'Cinzel Decorative', cursive;
   font-weight: 700;
-  color: var(--bud-gold);
+  color: var(--gojo-gold);
   font-size: 0.8em;
   text-align: right;
 }
 
 .buddha-container .jjk-dossier-status-bar-wrapper {
-  width: 100%;
-  height: 8px;
-  background: #1a1a1a;
-  border: 1px solid var(--bud-gold);
-  border-radius: 10px; /* Arredondado suave */
+  width: 100%; height: 8px;
+  background: #000;
+  border: 1px solid #333;
+  border-radius: 10px;
   overflow: hidden;
-  box-shadow: 0 0 5px rgba(212, 175, 55, 0.1);
 }
 
 .buddha-container .jjk-dossier-status-bar {
   width: 100%; height: 100%; background: transparent; border: none;
 }
 
-/* HP: Vermelho Lótus (Suave) */
+/* HP: Vermelho (Reversão) */
 .buddha-container .jjk-dossier-hp-fill {
   height: 100%;
-  background: linear-gradient(90deg, #a33333, #e57373);
-  box-shadow: 0 0 10px #e57373;
+  background: linear-gradient(90deg, #500, var(--gojo-red));
+  box-shadow: 0 0 10px var(--gojo-red);
   transition: width 0.5s ease;
 }
 
-/* EA: Ciano/Branco (Iluminação) */
+/* EA: Azul para Roxo (Infinito) */
 .buddha-container .jjk-dossier-ea-fill {
   height: 100%;
-  background: linear-gradient(90deg, var(--bud-blue), #fff, var(--bud-blue));
-  background-size: 200% 100%;
-  animation: spirit-flow 4s infinite linear;
-  box-shadow: 0 0 15px var(--bud-blue);
+  background: linear-gradient(90deg, var(--gojo-blue), var(--gojo-purple));
+  box-shadow: 0 0 10px var(--gojo-blue);
   transition: width 0.5s ease;
 }
 
@@ -187,7 +197,7 @@
 /* --- CONTEÚDO --- */
 .buddha-container .buddha-content {
   padding: 30px 40px;
-  font-size: 1.2em; /* Fonte maior para leitura elegante */
+  font-size: 1.2em;
   line-height: 1.8;
   color: #d1d5db;
   text-align: justify;
@@ -195,25 +205,31 @@
   z-index: 2;
 }
 
-/* Destaques */
+/* Destaques nas 3 Cores */
 .buddha-container .buddha-content b {
-  color: var(--bud-blue);
+  color: var(--gojo-blue);
   font-weight: 700;
-  text-shadow: 0 0 5px rgba(0, 229, 255, 0.3);
+  text-shadow: 0 0 8px rgba(0, 170, 255, 0.4);
 }
 
 .buddha-container .buddha-content i {
-  color: var(--bud-gold);
+  color: var(--gojo-red);
   font-family: 'Cinzel Decorative', cursive;
   font-weight: 700;
 }
 
-/* --- EXTRAS (Sutra) --- */
+.buddha-container .buddha-content u {
+  text-decoration: none;
+  color: var(--gojo-purple);
+  border-bottom: 1px solid var(--gojo-purple);
+}
+
+/* --- EXTRAS (Sutra Sagrado) --- */
 .buddha-container .buddha-extras {
   margin: 0 30px 30px 30px;
   padding: 20px;
-  background: linear-gradient(135deg, rgba(212, 175, 55, 0.05), transparent);
-  border: 1px solid var(--bud-gold);
+  background: linear-gradient(135deg, rgba(0, 170, 255, 0.05), rgba(188, 19, 254, 0.05));
+  border: 1px solid var(--gojo-gold);
   border-radius: 4px;
   position: relative;
   z-index: 2;
@@ -224,11 +240,12 @@
 }
 
 .buddha-container .buddha-extras::before {
-  content: '✦'; /* Estrela/Símbolo central */
+  content: '∞';
   display: block;
-  font-size: 1.2em;
-  color: var(--bud-gold);
-  margin-bottom: 10px;
+  font-size: 2em;
+  color: var(--gojo-purple);
+  margin-bottom: 5px;
+  line-height: 0.5;
 }
 
 @media (max-width: 600px) {
