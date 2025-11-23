@@ -1,0 +1,261 @@
+/* --- TEMPLATE: 8-BIT HORROR (RAID WINNERS EDITION) --- */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Mono:wght@400;700&family=Creepster&display=swap');
+
+:root {
+  --horror-bg: #080202;
+  --horror-panel: #120505;
+  --horror-red: #d32f2f;      /* Sangue Pixelado */
+  --horror-dark-red: #8a0000;
+  --horror-toxic: #76ff03;    /* Verde Ácido */
+  --horror-text: #dcdcdc;     /* Cinza Claro (Leitura) */
+  --horror-border: #4a0000;
+}
+
+/* Animação de Glitch/Defeito */
+@keyframes horror-glitch {
+  0% { text-shadow: 2px 2px 0 var(--horror-red); transform: translate(0, 0); }
+  20% { text-shadow: -2px -2px 0 var(--horror-toxic); transform: translate(-1px, 1px); }
+  40% { text-shadow: 2px -2px 0 var(--horror-red); transform: translate(1px, -1px); }
+  60% { text-shadow: -2px 2px 0 var(--horror-toxic); transform: translate(-1px, -1px); }
+  80% { text-shadow: 2px 2px 0 var(--horror-red); transform: translate(1px, 1px); }
+  100% { text-shadow: 2px 2px 0 var(--horror-red); transform: translate(0, 0); }
+}
+
+/* Animação de Piscar (High Scores) */
+@keyframes score-blink {
+  0%, 100% { opacity: 1; color: var(--horror-toxic); }
+  50% { opacity: 0.5; color: var(--horror-red); }
+}
+
+/* CONTAINER PRINCIPAL */
+.bit-container {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--horror-bg);
+  
+  /* Textura de Ruído Estático Escuro */
+  background-image: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(255, 0, 0, 0.05) 3px
+  );
+  
+  /* Borda Dupla Sangrenta */
+  border: 4px solid var(--horror-border);
+  box-shadow: 
+    0 0 0 4px #000, 
+    10px 10px 0 rgba(50, 0, 0, 0.8);
+    
+  color: var(--horror-text);
+  /* MUDANÇA 1: Fonte de Leitura Limpa (Monoespaçada) */
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px; 
+  line-height: 1.6;
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 160px; /* Espaço extra para os nomes no rodapé */
+}
+
+.bit-container * { box-sizing: border-box; }
+
+/* --- MUDANÇA 2: HALL DA FAMA (CSS PURO) --- */
+.bit-container::after {
+  /* Os nomes são inseridos aqui. Não podem ser editados no HTML */
+  content: "HIGH SCORES (RAID 1) \00000A 1. YUJI \00000A 2. MEGUMI \00000A 3. NOBARA \00000A 4. MAKI \00000A 5. TOGE \00000A 6. PANDA";
+  
+  white-space: pre; /* Permite quebra de linha com \00000A */
+  display: block;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px;
+  background-color: #000;
+  border-top: 4px solid var(--horror-red);
+  
+  font-family: 'Press Start 2P', cursive;
+  font-size: 12px;
+  line-height: 1.8;
+  text-align: center;
+  text-transform: uppercase;
+  
+  /* Animação de Arcade Defeituoso */
+  animation: score-blink 3s infinite steps(2);
+  z-index: 10;
+}
+
+/* --- CABEÇALHO --- */
+.bit-container .bit-header {
+  padding: 25px 20px;
+  background: var(--horror-panel);
+  border-bottom: 4px solid var(--horror-red);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.bit-container .bit-title {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 1.1em;
+  color: var(--horror-red);
+  text-transform: uppercase;
+  margin: 0;
+  /* Efeito Glitch no Título */
+  animation: horror-glitch 3s infinite linear;
+}
+
+.bit-container .bit-subtitle {
+  font-family: 'Press Start 2P', cursive;
+  color: #555;
+  font-size: 0.7em;
+  margin-top: 8px;
+  text-transform: uppercase;
+}
+
+/* Ícone de Caveira Pixel (SVG) */
+.bit-container .bit-icon {
+  width: 40px; height: 40px;
+  filter: drop-shadow(2px 2px 0 #000);
+}
+.bit-container .bit-icon path { fill: var(--horror-text); }
+
+/* --- IMAGEM --- */
+.bit-container .bit-image-frame {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  border-bottom: 4px solid var(--horror-red);
+  background: #000;
+  padding: 4px;
+}
+
+.bit-container .bit-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  /* Filtro de Terror (Vermelho/Escuro) */
+  filter: contrast(1.2) sepia(0.5) hue-rotate(-50deg) saturate(1.5);
+  image-rendering: pixelated;
+}
+
+/* --- BARRAS DE STATUS (Sangue e Veneno) --- */
+.bit-container .bit-stats {
+  padding: 20px 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: #0a0000;
+  border-bottom: 4px solid var(--horror-border);
+}
+
+.bit-container .jjk-dossier-status-item {
+  display: grid;
+  grid-template-columns: 50px 1fr 100px;
+  align-items: center;
+  gap: 10px;
+}
+
+.bit-container .jjk-dossier-status-label {
+  font-family: 'Press Start 2P', cursive;
+  color: var(--horror-red);
+  font-size: 0.7em;
+}
+
+.bit-container .jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 20px;
+  background: #1a0505;
+  border: 2px solid #500;
+  padding: 2px;
+}
+
+.bit-container .jjk-dossier-status-bar {
+  width: 100%; height: 100%; background: transparent; border: none;
+}
+
+/* HP: Blocos de Sangue */
+.bit-container .jjk-dossier-hp-fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--horror-red) 0,
+    var(--horror-red) 8px,
+    #000 8px,
+    #000 10px
+  );
+  transition: width 0.5s steps(10);
+}
+
+/* EA: Blocos Tóxicos */
+.bit-container .jjk-dossier-ea-fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--horror-toxic) 0,
+    var(--horror-toxic) 8px,
+    #000 8px,
+    #000 10px
+  );
+  transition: width 0.5s steps(10);
+}
+
+.bit-container .jjk-dossier-status-value {
+  position: static; transform: none;
+  font-family: 'Press Start 2P', cursive; font-size: 0.7em;
+  color: var(--horror-text); text-align: right;
+}
+
+/* --- CONTEÚDO (TEXT BOX) --- */
+.bit-container .bit-content {
+  padding: 25px;
+  color: var(--horror-text);
+  text-align: justify;
+  background: var(--horror-bg);
+  /* Fonte Legível e Grande */
+  font-family: 'Roboto Mono', monospace;
+  font-size: 14px;
+}
+
+/* Destaques */
+.bit-container .bit-content b {
+  color: var(--horror-red);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  background: rgba(255, 0, 0, 0.1);
+  padding: 0 2px;
+}
+
+.bit-container .bit-content i {
+  color: var(--horror-toxic);
+  font-style: italic;
+}
+
+/* --- EXTRAS (Inventário) --- */
+.bit-container .bit-extras {
+  margin: 0 20px 20px 20px;
+  padding: 15px;
+  background: #000;
+  border: 2px solid var(--horror-text);
+  color: var(--horror-text);
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7em;
+  line-height: 1.8;
+}
+
+.bit-container .bit-extras::before {
+  content: 'INVENTORY';
+  display: block;
+  color: var(--horror-toxic);
+  margin-bottom: 10px;
+  border-bottom: 2px dashed var(--horror-toxic);
+  padding-bottom: 5px;
+}
+
+@media (max-width: 600px) {
+  .bit-container .bit-header { flex-direction: column; text-align: center; gap: 10px; }
+  .bit-container .jjk-dossier-status-item { grid-template-columns: 1fr; gap: 5px; margin-bottom: 10px; }
+  .bit-container .jjk-dossier-status-label, 
+  .bit-container .jjk-dossier-status-value { text-align: left; }
+}
