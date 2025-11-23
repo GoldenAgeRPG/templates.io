@@ -1,0 +1,259 @@
+/* --- TEMPLATE: ESPECIAL DE NATAL --- */
+@import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Cinzel:wght@700&family=Inter:wght@400;700&display=swap');
+
+/* Escopamento */
+.xmas-container {
+  --xmas-bg: #050a05;       /* Fundo Verde Quase Preto */
+  --xmas-red: #c62828;      /* Vermelho Natal */
+  --xmas-green: #2e7d32;    /* Verde Pinheiro */
+  --xmas-gold: #ffca28;     /* Dourado Luz */
+  --xmas-snow: #e3f2fd;     /* Branco Gelo */
+  --text-main: #f0f0f0;
+  --text-dim: #b0bec5;
+}
+
+/* Animação de Neve Caindo */
+@keyframes snow-fall {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 50px 100px, 20px 200px; }
+}
+
+/* Animação de Luzes de Natal (Borda) */
+@keyframes xmas-lights {
+  0%, 100% { box-shadow: 0 0 15px var(--xmas-red); border-color: var(--xmas-red); }
+  33% { box-shadow: 0 0 15px var(--xmas-green); border-color: var(--xmas-green); }
+  66% { box-shadow: 0 0 15px var(--xmas-gold); border-color: var(--xmas-gold); }
+}
+
+/* Animação das Listras (Candy Cane) */
+@keyframes candy-move {
+  0% { background-position: 0 0; }
+  100% { background-position: 30px 0; }
+}
+
+/* CONTAINER PRINCIPAL */
+.xmas-container {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--xmas-bg);
+  
+  /* Fundo de Neve (Gradientes) */
+  background-image: 
+    radial-gradient(white 1px, transparent 1.5px),
+    radial-gradient(white 1px, transparent 1.5px);
+  background-size: 30px 30px, 50px 50px;
+  background-position: 0 0, 20px 20px;
+  animation: snow-fall 15s linear infinite;
+  
+  border: 3px solid var(--xmas-red);
+  border-radius: 12px;
+  
+  color: var(--text-main);
+  font-family: 'Inter', sans-serif;
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  
+  /* Luzes piscando na borda */
+  animation: xmas-lights 4s infinite alternate;
+}
+
+.xmas-container * { box-sizing: border-box; }
+
+/* Moldura de Gelo no topo */
+.xmas-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100px;
+  background: linear-gradient(to bottom, rgba(227, 242, 253, 0.1), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- CABEÇALHO --- */
+.xmas-container .xmas-header {
+  text-align: center;
+  padding: 30px 20px;
+  background: linear-gradient(180deg, rgba(20, 0, 0, 0.9), rgba(5, 10, 5, 0.8));
+  border-bottom: 2px solid var(--xmas-gold);
+  position: relative;
+  z-index: 2;
+}
+
+/* Ícone de Floco de Neve (SVG) */
+.xmas-container .xmas-icon {
+  position: absolute;
+  top: 15px; right: 15px;
+  width: 50px; height: 50px;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 5px var(--xmas-snow));
+}
+.xmas-container .xmas-icon path { fill: var(--xmas-snow); }
+
+.xmas-container .xmas-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 2.2em;
+  color: var(--xmas-gold);
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 0 2px 5px #000;
+  letter-spacing: 1px;
+}
+
+.xmas-container .xmas-subtitle {
+  font-family: 'Mountains of Christmas', cursive; /* Fonte Temática */
+  color: var(--xmas-snow);
+  font-size: 1.2em;
+  margin-top: 5px;
+  font-weight: 700;
+}
+
+/* --- IMAGEM --- */
+.xmas-container .xmas-image-frame {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  border-top: 2px solid var(--xmas-gold);
+  border-bottom: 2px solid var(--xmas-green);
+}
+.xmas-container .xmas-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  /* Filtro levemente frio */
+  filter: contrast(1.1) brightness(1.05);
+}
+
+/* Efeito de "Neve acumulada" na base da foto */
+.xmas-container .xmas-image-frame::after {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 40px;
+  background: linear-gradient(to top, rgba(255,255,255,0.1), transparent);
+  pointer-events: none;
+}
+
+/* --- BARRAS DE STATUS (CANDY CANE) --- */
+.xmas-container .xmas-stats {
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: rgba(0, 20, 5, 0.6);
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px dashed var(--xmas-gold);
+}
+
+.xmas-container .jjk-dossier-status-item {
+  display: flex; align-items: center; gap: 15px;
+}
+
+.xmas-container .jjk-dossier-status-label {
+  font-family: 'Cinzel', serif; font-weight: 700;
+  color: var(--xmas-gold); width: 30px; font-size: 0.9em;
+}
+
+.xmas-container .jjk-dossier-status-bar-wrapper {
+  flex-grow: 1; position: relative; height: 14px;
+  background: #000;
+  border: 1px solid #fff;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.xmas-container .jjk-dossier-status-bar {
+  width: 100%; height: 100%; background: transparent; border: none;
+}
+
+/* HP: Listras Vermelhas e Brancas */
+.xmas-container .jjk-dossier-hp-fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--xmas-red),
+    var(--xmas-red) 10px,
+    #ff8a80 10px,
+    #ff8a80 20px
+  );
+  background-size: 28px 28px;
+  animation: candy-move 1s linear infinite;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 10px var(--xmas-red);
+}
+
+/* EA: Listras Verdes e Douradas */
+.xmas-container .jjk-dossier-ea-fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--xmas-green),
+    var(--xmas-green) 10px,
+    var(--xmas-gold) 10px,
+    var(--xmas-gold) 20px
+  );
+  background-size: 28px 28px;
+  animation: candy-move 1s linear infinite reverse;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 10px var(--xmas-green);
+}
+
+.xmas-container .jjk-dossier-status-value {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
+  font-size: 0.75em; font-family: 'Inter', sans-serif; color: #fff;
+  font-weight: 700; text-shadow: 1px 1px 2px #000; left: auto;
+}
+
+/* --- CONTEÚDO --- */
+.xmas-container .xmas-content {
+  padding: 25px 35px;
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: var(--text-main);
+  text-align: justify;
+  position: relative;
+  z-index: 2;
+}
+
+/* Destaques Natalinos */
+.xmas-container .xmas-content b {
+  color: var(--xmas-red);
+  font-weight: 700;
+  text-shadow: 0 0 5px rgba(255, 0, 0, 0.3);
+}
+
+.xmas-container .xmas-content i {
+  color: var(--xmas-gold);
+  font-family: 'Mountains of Christmas', cursive; /* Fonte temática */
+  font-size: 1.2em; /* Um pouco maior pois a fonte é pequena */
+  font-weight: 700;
+}
+
+/* --- EXTRAS (Presente) --- */
+.xmas-container .xmas-extras {
+  margin: 0 30px 30px 30px;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 2px solid var(--xmas-red);
+  position: relative;
+  z-index: 2;
+  font-size: 0.9em;
+  color: var(--text-dim);
+  border-radius: 8px;
+  /* Laço de presente simulado com CSS */
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+}
+
+.xmas-container .xmas-extras::before {
+  content: '🎄 INFO';
+  position: absolute; top: -12px; left: 20px;
+  background: var(--xmas-bg); padding: 0 10px;
+  color: var(--xmas-green); font-weight: bold;
+  border: 1px solid var(--xmas-green);
+  border-radius: 4px;
+}
+
+@media (max-width: 600px) {
+  .xmas-container .xmas-header { padding: 20px; }
+  .xmas-container .xmas-content, 
+  .xmas-container .xmas-stats, 
+  .xmas-container .xmas-extras { padding-left: 20px; padding-right: 20px; margin-left: 0; margin-right: 0; }
+}
