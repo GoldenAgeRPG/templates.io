@@ -1,0 +1,226 @@
+/* --- TEMPLATE: MANIPULAÇÃO DE ESPÍRITOS (GETO) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Spectral:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* Escopamento de Variáveis */
+.spirit-container {
+  --spirit-bg: #0a0514;      /* Fundo quase preto/roxo */
+  --spirit-panel: #150a25;   /* Painéis internos */
+  --spirit-purple: #7b1fa2;  /* Roxo vibrante da energia */
+  --spirit-dark-purple: #4a148c;
+  --spirit-yellow: #e6c200;  /* Amarelo doentio dos orbes */
+  --spirit-text: #e0d0f0;    /* Texto claro */
+  --spirit-dim: #9a8aadd3;   /* Texto secundário */
+}
+
+/* Animações Temáticas */
+/* O vórtice de fundo girando */
+@keyframes spirit-swirl {
+  from { transform: rotate(0deg) scale(1.5); }
+  to { transform: rotate(360deg) scale(1.5); }
+}
+
+/* A energia "batendo" dentro das barras */
+@keyframes spirit-churn {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Flutuação sutil de fantasmas */
+@keyframes ghost-float {
+  0%, 100% { transform: translateY(0); opacity: 0.3; }
+  50% { transform: translateY(-10px); opacity: 0.6; }
+}
+
+/* --- CONTAINER PRINCIPAL "O VÓRTICE" --- */
+.spirit-container {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--spirit-bg);
+  /* Borda grossa e sombria */
+  border: 3px solid var(--spirit-dark-purple);
+  border-top-color: var(--spirit-purple);
+  border-bottom-color: var(--spirit-yellow);
+  /* Cantos "agressivos" */
+  border-radius: 20px 0 20px 0;
+  color: var(--spirit-text);
+  font-family: 'Spectral', serif;
+  position: relative;
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.9), 0 0 20px rgba(123, 31, 162, 0.3);
+  padding: 0;
+  overflow: hidden;
+}
+
+.spirit-container * { box-sizing: border-box; }
+
+/* O Fundo Espiral (Uzumaki) */
+.spirit-container::before {
+  content: '';
+  position: absolute;
+  top: -50%; left: -50%; width: 200%; height: 200%;
+  /* Um gradiente cônico que cria um efeito de redemoinho */
+  background: repeating-conic-gradient(
+    from 0deg at 50% 50%,
+    transparent 0deg,
+    rgba(74, 20, 140, 0.1) 10deg,
+    transparent 20deg,
+    rgba(230, 194, 0, 0.05) 30deg,
+    transparent 40deg
+  );
+  animation: spirit-swirl 30s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Efeito de fumaça nas bordas internas */
+.spirit-container::after {
+  content: '';
+  position: absolute; inset: 0;
+  box-shadow: inset 0 0 60px rgba(10, 5, 20, 0.8);
+  pointer-events: none; z-index: 1;
+}
+
+/* --- CABEÇALHO "O CULTO" --- */
+.spirit-container .spirit-header {
+  text-align: center; padding: 30px 20px;
+  /* Fundo semi-transparente para ver o vórtice atrás */
+  background: linear-gradient(180deg, rgba(21, 10, 37, 0.9) 0%, rgba(10, 5, 20, 0.8) 100%);
+  border-bottom: 2px solid var(--spirit-purple);
+  position: relative; z-index: 2;
+}
+
+/* Ícone de Orbe no título */
+.spirit-container .spirit-title-wrapper {
+    display: flex; align-items: center; justify-content: center; gap: 15px;
+}
+.spirit-container .spirit-orb-icon {
+    width: 20px; height: 20px; background: #000; border-radius: 50%;
+    border: 2px solid var(--spirit-yellow);
+    box-shadow: 0 0 10px var(--spirit-yellow);
+}
+
+.spirit-container .spirit-title {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 2.2em;
+  background: linear-gradient(to right, var(--spirit-text), var(--spirit-yellow));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-transform: uppercase; margin: 0;
+  text-shadow: 0 2px 10px rgba(123, 31, 162, 0.5);
+}
+
+.spirit-container .spirit-subtitle {
+  font-style: italic; color: var(--spirit-dim); font-size: 1.1em; margin-top: 10px; letter-spacing: 1px;
+}
+
+/* --- IMAGEM --- */
+.spirit-container .spirit-image-frame {
+  width: 100%; height: 350px; position: relative; z-index: 2;
+  border-top: 1px solid var(--spirit-purple);
+  border-bottom: 1px solid var(--spirit-yellow);
+}
+.spirit-container .spirit-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  /* Filtro para deixar a imagem mais sombria e roxa */
+  filter: contrast(1.1) sepia(0.2) hue-rotate(240deg) saturate(0.8);
+}
+
+/* --- BARRAS DE STATUS (ESCOPADAS & TEMÁTICAS) --- */
+.spirit-container .spirit-stats {
+  padding: 25px 30px; display: flex; flex-direction: column; gap: 15px;
+  background: rgba(21, 10, 37, 0.7); /* Fundo escuro semi-transparente */
+  position: relative; z-index: 2;
+}
+
+.spirit-container .jjk-dossier-status-item {
+  display: flex; flex-direction: column; gap: 5px;
+}
+
+/* Header da barra (Nome e Valor) */
+.spirit-container .status-header-row {
+    display: flex; justify-content: space-between; font-size: 0.9em;
+    font-family: 'Cinzel Decorative', cursive; color: var(--spirit-text);
+}
+.spirit-container .status-val-display {
+    font-weight: bold; color: var(--spirit-yellow);
+}
+
+.spirit-container .jjk-dossier-status-bar-wrapper {
+  flex-grow: 1; position: relative; height: 14px;
+  background: #0a0000; /* Fundo preto do orbe */
+  border-radius: 20px; /* Forma arredondada orgânica */
+  border: 2px solid var(--spirit-dark-purple);
+  box-shadow: inset 0 2px 5px #000;
+  overflow: hidden;
+}
+/* Sobrescreve estilos globais */
+.spirit-container .jjk-dossier-status-bar {
+  height: 100%; border-radius: 20px; overflow: hidden; background: transparent; border: none;
+}
+
+/* Barra de HP (Resistência Física - Roxo Sólido) */
+.spirit-container .jjk-dossier-hp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--spirit-dark-purple), var(--spirit-purple));
+  box-shadow: 0 0 10px var(--spirit-purple);
+  transition: width 0.5s ease;
+  border-radius: 20px;
+}
+
+/* Barra de EA (Energia Espiritual - Amarelo/Roxo Agitado) */
+.spirit-container .jjk-dossier-ea-fill {
+  height: 100%;
+  /* Gradiente complexo que parece energia se mexendo */
+  background: linear-gradient(90deg, var(--spirit-purple), var(--spirit-yellow), var(--spirit-purple));
+  background-size: 200% 100%;
+  animation: spirit-churn 4s linear infinite; /* Animação de agitação */
+  box-shadow: 0 0 15px var(--spirit-yellow);
+  transition: width 0.5s ease;
+  border-radius: 20px;
+}
+
+/* Esconde os valores padrões do script global */
+.spirit-container .jjk-dossier-status-value { display: none; }
+
+
+/* --- CONTEÚDO --- */
+.spirit-container .spirit-content {
+  padding: 10px 35px 35px 35px; font-size: 1.1em; line-height: 1.8;
+  color: var(--spirit-text); text-align: justify; position: relative; z-index: 2;
+  background: rgba(10, 5, 20, 0.4);
+}
+/* Destaques no texto parecem energia amaldiçoada */
+.spirit-container .spirit-content b {
+    color: var(--spirit-yellow); text-shadow: 0 0 5px rgba(230, 194, 0, 0.5);
+}
+.spirit-container .spirit-content i {
+    color: #b39ddb; font-family: 'Cinzel Decorative', cursive;
+}
+
+/* --- EXTRAS / NOTAS (Invocação) --- */
+.spirit-container .spirit-extras {
+  margin: 0 30px 30px 30px; padding: 20px;
+  background: linear-gradient(135deg, rgba(74, 20, 140, 0.3), rgba(0,0,0,0.5));
+  border: 1px solid var(--spirit-purple);
+  position: relative; z-index: 2;
+  border-radius: 0 20px 0 20px;
+  box-shadow: inset 0 0 20px rgba(0,0,0,1);
+}
+/* Ícone de fantasma flutuando no canto */
+.spirit-container .spirit-extras::after {
+    content: '👻'; position: absolute; bottom: 10px; right: 15px;
+    font-size: 30px; opacity: 0.3; animation: ghost-float 4s ease-in-out infinite;
+}
+.spirit-container .extras-label {
+    font-family: 'Cinzel Decorative', cursive; color: var(--spirit-yellow);
+    margin-bottom: 10px; display: block; border-bottom: 1px dashed var(--spirit-dim);
+}
+
+@media (max-width: 600px) {
+  .spirit-container .spirit-header,
+  .spirit-container .spirit-content,
+  .spirit-container .spirit-stats,
+  .spirit-container .spirit-extras { padding-left: 20px; padding-right: 20px; margin-left: 10px; margin-right: 10px; }
+}
