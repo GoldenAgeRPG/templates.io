@@ -1,0 +1,258 @@
+/* --- TEMPLATE: FORMAÇÃO DE GELO (URAUME) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;500;700&display=swap');
+
+/* Escopamento */
+.ice-container {
+  --ice-bg: #05080a;
+  --ice-panel: #0a1014;
+  --ice-cyan: #00f2ff;   /* Ciano Neon */
+  --ice-pale: #a5f3fc;   /* Azul Pálido */
+  --ice-deep: #004ecb;   /* Azul Profundo */
+  --ice-white: #f0f9ff;  /* Branco Gelo */
+  --text-main: #e0f7fa;
+  --text-dim: #819ca6;
+}
+
+/* Animação de Brilho de Gelo */
+@keyframes ice-shimmer {
+  0% { opacity: 0.3; transform: translateX(-100%) skewX(-15deg); }
+  50% { opacity: 0.6; }
+  100% { opacity: 0.3; transform: translateX(200%) skewX(-15deg); }
+}
+
+/* Animação de Nevasca Sutil */
+@keyframes snow-drift {
+  0% { background-position: 0 0; }
+  100% { background-position: 50px 50px; }
+}
+
+/* CONTAINER PRINCIPAL */
+.ice-container {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--ice-bg);
+  
+  /* Textura de Neve Caindo */
+  background-image: 
+    radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 20px 20px, 40px 40px;
+  background-position: 0 0, 10px 10px;
+  animation: snow-drift 20s linear infinite;
+
+  border: 1px solid rgba(0, 242, 255, 0.2);
+  /* Borda superior e inferior "congeladas" */
+  border-top: 4px solid var(--ice-pale);
+  border-bottom: 4px solid var(--ice-pale);
+  border-radius: 4px;
+  
+  color: var(--text-main);
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  
+  /* Sombra fria */
+  box-shadow: 0 10px 40px rgba(0, 10, 20, 0.9), 0 0 20px rgba(0, 242, 255, 0.1);
+  padding: 0;
+  overflow: hidden;
+}
+
+.ice-container * { box-sizing: border-box; }
+
+/* Efeito de Vidro Congelado (Overlay) */
+.ice-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, transparent 40%, transparent 60%, rgba(255,255,255,0.02) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- CABEÇALHO --- */
+.ice-container .ice-header {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(180deg, rgba(10, 20, 30, 0.9), rgba(5, 8, 10, 0.8));
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+/* Símbolo de Cristal de Gelo (SVG) */
+.ice-container .ice-crystal-icon {
+  position: absolute;
+  top: -20px; right: -20px;
+  width: 180px; height: 180px;
+  opacity: 0.15;
+  filter: drop-shadow(0 0 5px var(--ice-cyan));
+  pointer-events: none;
+  transform: rotate(15deg);
+}
+.ice-container .ice-crystal-icon path {
+  fill: var(--ice-cyan);
+}
+
+.ice-container .ice-title {
+  font-family: 'Cinzel', serif;
+  font-size: 2.4em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin: 0;
+  text-shadow: 0 0 10px var(--ice-deep), 0 0 20px var(--ice-cyan);
+  line-height: 1;
+  position: relative; z-index: 5;
+}
+
+.ice-container .ice-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--ice-pale);
+  font-size: 0.85em;
+  margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  font-weight: 500;
+  position: relative; z-index: 5;
+}
+
+/* --- IMAGEM --- */
+.ice-container .ice-image-frame {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 1px solid var(--ice-cyan);
+  z-index: 1;
+}
+.ice-container .ice-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  /* Filtro frio: aumenta azul e brilho */
+  filter: contrast(1.1) brightness(1.1) hue-rotate(10deg) saturate(0.8);
+}
+/* Brilho passando na imagem */
+.ice-container .ice-image-frame::after {
+  content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+  transform: skewX(-25deg);
+  animation: ice-shimmer 6s infinite;
+  pointer-events: none;
+}
+
+/* --- BARRAS DE STATUS (CRISTALINAS) --- */
+.ice-container .ice-stats {
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: rgba(0, 20, 40, 0.3); /* Azul muito escuro */
+  position: relative;
+  z-index: 2;
+  backdrop-filter: blur(2px);
+}
+
+.ice-container .jjk-dossier-status-item {
+  display: grid;
+  grid-template-columns: 30px 1fr 90px;
+  align-items: center;
+  gap: 15px;
+}
+
+.ice-container .jjk-dossier-status-label {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  color: var(--ice-pale);
+  width: 30px;
+  font-size: 0.8em;
+  text-align: right;
+}
+
+.ice-container .jjk-dossier-status-bar-wrapper {
+  width: 100%;
+  height: 8px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  overflow: hidden;
+  position: relative;
+  /* Corte angular nas bordas para parecer cristal */
+  clip-path: polygon(0 0, 100% 0, 98% 100%, 2% 100%);
+}
+
+.ice-container .jjk-dossier-status-bar {
+  width: 100%; height: 100%; background: transparent; border: none;
+}
+
+/* HP: Rosa Gélido (Sangue no Gelo) */
+.ice-container .jjk-dossier-hp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #ff8fa3, #ffc1cc);
+  box-shadow: 0 0 10px #ff8fa3;
+  transition: width 0.5s ease;
+}
+
+/* EA: Ciano Puro (Energia de Gelo) */
+.ice-container .jjk-dossier-ea-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--ice-deep), var(--ice-cyan), var(--ice-white));
+  box-shadow: 0 0 10px var(--ice-cyan);
+  transition: width 0.5s ease;
+}
+
+.ice-container .jjk-dossier-status-value {
+  position: static;
+  transform: none;
+  font-size: 0.75em;
+  font-family: 'Montserrat', sans-serif;
+  color: var(--ice-white);
+  text-align: right;
+  font-weight: 700;
+  text-shadow: 0 0 5px var(--ice-cyan);
+}
+
+/* --- CONTEÚDO --- */
+.ice-container .ice-content {
+  padding: 25px 35px;
+  font-size: 1em;
+  line-height: 1.8;
+  color: var(--text-main);
+  text-align: justify;
+  position: relative;
+  z-index: 2;
+}
+
+.ice-container .ice-content b {
+  color: var(--ice-cyan);
+  font-weight: 700;
+}
+
+.ice-container .ice-content i {
+  color: var(--ice-pale);
+  font-family: 'Cinzel', serif;
+}
+
+/* --- EXTRAS (Bloco de Gelo) --- */
+.ice-container .ice-extras {
+  margin: 0 30px 30px 30px;
+  padding: 20px;
+  /* Fundo vitrificado */
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 3px solid var(--ice-cyan);
+  position: relative;
+  z-index: 2;
+  font-size: 0.9em;
+  color: var(--text-dim);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+@media (max-width: 600px) {
+  .ice-container .ice-header { padding: 20px; }
+  .ice-container .ice-stats, 
+  .ice-container .ice-content, 
+  .ice-container .ice-extras { padding-left: 20px; padding-right: 20px; margin-left: 0; margin-right: 0; }
+}
