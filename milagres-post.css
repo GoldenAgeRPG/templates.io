@@ -1,0 +1,252 @@
+/* --- TEMPLATE: MILAGRES (HARUTA) --- */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Rye&family=Quicksand:wght@400;700&display=swap');
+
+/* Escopamento */
+.miracle-container {
+  --mir-bg: #120c1a;
+  --mir-panel: #1e142b;
+  --mir-gold: #ffd700;      /* Ouro (Sorte) */
+  --mir-purple: #b388ff;    /* Lavanda */
+  --mir-dark: #4a148c;
+  --mir-glow: #fff59d;
+  --text-main: #e1bee7;
+  --text-dim: #b39ddb;
+}
+
+/* Animação de Brilho Estelar */
+@keyframes miracle-twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.2); }
+}
+
+/* Animação de "Sorte" (Dourado correndo) */
+@keyframes luck-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* CONTAINER PRINCIPAL */
+.miracle-container {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--mir-bg);
+  
+  /* Fundo com losangos (Naipe de Ouros/Diamante) */
+  background-image: 
+    linear-gradient(135deg, #181024 25%, transparent 25%),
+    linear-gradient(225deg, #181024 25%, transparent 25%),
+    linear-gradient(45deg, #181024 25%, transparent 25%),
+    linear-gradient(315deg, #181024 25%, transparent 25%);
+  background-position: 10px 0, 10px 0, 0 0, 0 0;
+  background-size: 20px 20px;
+  background-repeat: repeat;
+  
+  border: 2px solid var(--mir-gold);
+  border-radius: 15px; /* Cantos bem redondos e amigáveis */
+  
+  color: var(--text-main);
+  font-family: 'Quicksand', sans-serif; /* Fonte arredondada */
+  position: relative;
+  
+  box-shadow: 0 0 30px rgba(179, 136, 255, 0.3);
+  padding: 0;
+  overflow: hidden;
+}
+
+.miracle-container * { box-sizing: border-box; }
+
+/* Brilhos Aleatórios (Pseudo-elementos) */
+.miracle-container::before, .miracle-container::after {
+  content: '✨';
+  position: absolute;
+  font-size: 20px;
+  animation: miracle-twinkle 3s infinite alternate;
+  z-index: 10;
+}
+.miracle-container::before { top: 20px; left: 20px; }
+.miracle-container::after { bottom: 20px; right: 20px; animation-delay: 1.5s; }
+
+/* --- CABEÇALHO --- */
+.miracle-container .miracle-header {
+  text-align: center;
+  padding: 30px 20px;
+  background: linear-gradient(180deg, rgba(74, 20, 140, 0.9), rgba(30, 20, 43, 0.8));
+  border-bottom: 4px double var(--mir-gold);
+  position: relative;
+  z-index: 2;
+}
+
+.miracle-container .miracle-title {
+  font-family: 'Rye', serif; /* Fonte estilo "Faroeste/Circo" */
+  font-size: 2.2em;
+  color: var(--mir-gold);
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 2px 2px 0 var(--mir-dark);
+  letter-spacing: 2px;
+}
+
+.miracle-container .miracle-subtitle {
+  font-family: 'Fredoka', sans-serif;
+  color: var(--mir-purple);
+  font-size: 1em;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+/* Ícone das Marcas (SVG das tatuagens do Haruta) */
+.miracle-container .marks-icon {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%; height: 100%;
+  opacity: 0.1;
+  pointer-events: none;
+}
+.miracle-container .marks-icon path { fill: var(--mir-purple); }
+
+/* --- IMAGEM --- */
+.miracle-container .miracle-image-frame {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  border-bottom: 2px solid var(--mir-gold);
+}
+.miracle-container .miracle-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  /* Filtro levemente rosado/brilhante */
+  filter: contrast(1.1) brightness(1.1) hue-rotate(-10deg);
+}
+
+/* --- BARRAS DE STATUS (Barra de Ouro) --- */
+.miracle-container .miracle-stats {
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: rgba(30, 20, 43, 0.8);
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px dashed var(--mir-purple);
+}
+
+.miracle-container .jjk-dossier-status-item {
+  display: grid;
+  grid-template-columns: 30px 1fr 80px;
+  align-items: center;
+  gap: 15px;
+}
+
+.miracle-container .jjk-dossier-status-label {
+  font-family: 'Rye', serif;
+  font-weight: 400;
+  color: var(--mir-gold);
+  width: 30px;
+  font-size: 0.9em;
+  text-align: right;
+}
+
+.miracle-container .jjk-dossier-status-bar-wrapper {
+  width: 100%;
+  height: 14px;
+  background: #2a1b3d;
+  border: 1px solid var(--mir-purple);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+}
+
+.miracle-container .jjk-dossier-status-bar {
+  width: 100%; height: 100%; background: transparent; border: none;
+}
+
+/* HP: Roxo Vibrante */
+.miracle-container .jjk-dossier-hp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--mir-dark), var(--mir-purple));
+  border-radius: 10px;
+  box-shadow: 0 0 10px var(--mir-purple);
+  transition: width 0.5s ease;
+}
+
+/* EA: Ouro Líquido (Sorte) */
+.miracle-container .jjk-dossier-ea-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #cca000, #ffd700, #fff, #ffd700);
+  background-size: 200% 100%;
+  animation: luck-flow 2s linear infinite;
+  border-radius: 10px;
+  box-shadow: 0 0 15px var(--mir-gold);
+  transition: width 0.5s ease;
+}
+
+.miracle-container .jjk-dossier-status-value {
+  position: static; transform: none;
+  font-family: 'Fredoka', sans-serif; font-weight: 600; font-size: 0.9em;
+  color: #fff; text-align: right;
+}
+
+/* --- CONTEÚDO --- */
+.miracle-container .miracle-content {
+  padding: 25px 35px;
+  font-size: 1.1em;
+  line-height: 1.7;
+  color: var(--text-main);
+  text-align: justify;
+  position: relative;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.03);
+  margin: 15px;
+  border-radius: 10px;
+}
+
+/* Destaques Lúdicos */
+.miracle-container .miracle-content b {
+  color: var(--mir-gold);
+  font-weight: 700;
+  text-shadow: 0 0 5px rgba(255, 215, 0, 0.4);
+}
+
+.miracle-container .miracle-content i {
+  color: var(--mir-purple);
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* --- EXTRAS (Carta de Tarô) --- */
+.miracle-container .miracle-extras {
+  margin: 0 30px 30px 30px;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--mir-dark), #000);
+  border: 2px solid var(--mir-gold);
+  border-radius: 8px;
+  position: relative;
+  z-index: 2;
+  font-size: 0.9em;
+  color: var(--mir-purple);
+  text-align: center;
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.5);
+}
+
+.miracle-container .miracle-extras::before {
+  content: '🍀 ESTOQUE DE MILAGRES';
+  display: block;
+  font-family: 'Rye', serif;
+  font-size: 0.8em;
+  color: var(--mir-gold);
+  margin-bottom: 8px;
+  border-bottom: 1px solid var(--mir-purple);
+  padding-bottom: 5px;
+}
+
+@media (max-width: 600px) {
+  .miracle-container .miracle-header { padding: 20px; }
+  .miracle-container .miracle-content, 
+  .miracle-container .miracle-stats, 
+  .miracle-container .miracle-extras { padding-left: 20px; padding-right: 20px; margin-left: 10px; margin-right: 10px; margin-bottom: 20px; }
+}
