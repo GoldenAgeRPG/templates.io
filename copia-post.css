@@ -1,0 +1,247 @@
+/* --- TEMPLATE: CÓPIA (YUTA) --- */
+@import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Montserrat:wght@400;700;900&family=Sacramento&display=swap');
+
+/* Escopamento */
+.copy-container {
+  --yuta-bg: #0a0a12;
+  --yuta-panel: #12121c;
+  --yuta-white: #f0f0f0;
+  --yuta-pink: #ff2a6d; /* Cor do "Amor" */
+  --yuta-blue: #05d9e8; /* Cor da "Cópia/Glitch" */
+  --yuta-border: #2a2a35;
+  --text-main: #d1d5db;
+  --text-dim: #9ca3af;
+}
+
+/* Animação de "Interferência" (Cópia) */
+@keyframes glitch-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(255, 42, 109, 0); border-color: var(--yuta-white); }
+  50% { box-shadow: 0 0 15px rgba(5, 217, 232, 0.3); border-color: var(--yuta-blue); }
+  100% { box-shadow: 0 0 0 0 rgba(255, 42, 109, 0); border-color: var(--yuta-white); }
+}
+
+/* Animação de Aura da Rika */
+@keyframes rika-aura {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* CONTAINER PRINCIPAL */
+.copy-container {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--yuta-bg);
+  
+  /* Fundo com ruído sutil */
+  background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0IiBoZWlnaHQ9IjQiPgo8cmVjdCB3aWR0aD0iNCIgaGVpZ2h0PSI0IiBmaWxsPSIjMGEwYTEyIi8+CjxyZWN0IHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4wNSkiLz4KPC9zdmc+');
+  
+  border: 1px solid var(--yuta-white);
+  border-radius: 12px;
+  
+  color: var(--text-main);
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  
+  /* Sombra dupla (Rosa e Azul) */
+  box-shadow: -5px 5px 0 rgba(5, 217, 232, 0.2), 5px -5px 0 rgba(255, 42, 109, 0.2);
+  padding: 0;
+  overflow: hidden;
+  
+  /* Borda pulsante */
+  animation: glitch-pulse 4s infinite;
+}
+
+.copy-container * { box-sizing: border-box; }
+
+/* Faixa de "Loading/Copying" no topo */
+.copy-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--yuta-pink), var(--yuta-white), var(--yuta-blue));
+  background-size: 200% 100%;
+  animation: rika-aura 3s linear infinite;
+  z-index: 10;
+}
+
+/* --- CABEÇALHO --- */
+.copy-container .copy-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30px 25px;
+  background: linear-gradient(180deg, rgba(20,20,30,0.9), rgba(10,10,18,0.8));
+  border-bottom: 1px solid var(--yuta-border);
+  position: relative;
+  z-index: 2;
+}
+
+.copy-container .copy-titles {
+  display: flex; flex-direction: column;
+}
+
+.copy-container .copy-title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 2.2em;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  color: #fff;
+  margin: 0;
+  text-shadow: 2px 2px 0 var(--yuta-pink);
+}
+
+.copy-container .copy-subtitle {
+  font-family: 'Kosugi Maru', sans-serif;
+  font-size: 0.9em;
+  color: var(--yuta-blue);
+  margin-top: 5px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Ícone do Anel */
+.copy-container .copy-icon {
+  width: 50px; height: 50px;
+  fill: none;
+  stroke: var(--yuta-white);
+  stroke-width: 2;
+  filter: drop-shadow(0 0 5px var(--yuta-white));
+  opacity: 0.8;
+}
+
+/* --- IMAGEM --- */
+.copy-container .copy-image-frame {
+  width: 100%; height: 350px; position: relative; z-index: 1;
+  border-bottom: 1px solid var(--yuta-border);
+}
+.copy-container .copy-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  /* Filtro levemente desaturado e azulado */
+  filter: saturate(0.8) contrast(1.1) hue-rotate(10deg);
+}
+
+/* Overlay de Ruído na imagem */
+.copy-container .copy-image-frame::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(180deg, transparent 80%, var(--yuta-bg) 100%);
+  pointer-events: none;
+}
+
+/* --- BARRAS DE STATUS --- */
+.copy-container .copy-stats {
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: rgba(255, 255, 255, 0.02);
+  position: relative; z-index: 2;
+}
+
+/* Grid para alinhar números (Mesmo fix do Sukuna) */
+.copy-container .jjk-dossier-status-item {
+  display: grid;
+  grid-template-columns: 30px 1fr 100px;
+  align-items: center;
+  gap: 15px;
+}
+
+.copy-container .jjk-dossier-status-label {
+  font-family: 'Montserrat', sans-serif; font-weight: 900;
+  color: var(--yuta-white); width: 30px; font-size: 0.8em;
+  text-align: right;
+}
+
+.copy-container .jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 12px;
+  background: #000;
+  border-radius: 50px;
+  border: 1px solid #333;
+  overflow: hidden;
+  position: relative;
+}
+
+.copy-container .jjk-dossier-status-bar {
+  width: 100%; height: 100%; background: transparent; border: none;
+}
+
+/* HP: Branco com brilho Rosa (Amor Puro) */
+.copy-container .jjk-dossier-hp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--yuta-white), var(--yuta-pink));
+  box-shadow: 0 0 10px var(--yuta-pink);
+  transition: width 0.5s ease;
+  border-radius: 50px;
+}
+
+/* EA: Azul Ciano com brilho (Cópia) */
+.copy-container .jjk-dossier-ea-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00555e, var(--yuta-blue));
+  box-shadow: 0 0 10px var(--yuta-blue);
+  transition: width 0.5s ease;
+  border-radius: 50px;
+}
+
+.copy-container .jjk-dossier-status-value {
+  position: static; transform: none;
+  font-size: 0.8em; font-family: 'Montserrat', sans-serif;
+  color: var(--text-dim); text-align: right; font-weight: 700;
+}
+
+/* --- CONTEÚDO --- */
+.copy-container .copy-content {
+  padding: 25px 35px;
+  font-size: 1.05em;
+  line-height: 1.8;
+  color: #ccc;
+  text-align: justify;
+  position: relative;
+  z-index: 2;
+}
+
+/* Destaques */
+.copy-container .copy-content b {
+  color: var(--yuta-pink);
+  font-weight: 700;
+}
+.copy-container .copy-content i {
+  color: var(--yuta-blue);
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* --- EXTRAS (Citação de Amor) --- */
+.copy-container .copy-extras {
+  margin: 0 30px 30px 30px;
+  padding: 15px;
+  background: rgba(255, 42, 109, 0.05);
+  border: 1px dashed var(--yuta-pink);
+  border-radius: 6px;
+  position: relative;
+  z-index: 2;
+  font-size: 0.9em;
+  color: var(--text-dim);
+}
+
+.copy-container .copy-extras::before {
+  content: 'RIKA_STATUS: MANIFESTADA';
+  display: block;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 900;
+  font-size: 0.7em;
+  color: var(--yuta-pink);
+  margin-bottom: 8px;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 600px) {
+  .copy-container .copy-header { padding: 20px; }
+  .copy-container .copy-content,
+  .copy-container .copy-stats,
+  .copy-container .copy-extras { padding-left: 20px; padding-right: 20px; margin-left: 0; margin-right: 0; }
+}
