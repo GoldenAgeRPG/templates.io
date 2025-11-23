@@ -1,0 +1,201 @@
+/* --- TEMPLATE: MUI TENPEN (MAHITO) --- */
+@import url('https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Kosugi+Maru&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* Escopamento de Variáveis - Paleta "Fosca" */
+.transfig-container {
+  --flesh-pale: #e0d3d3;     /* Cor de pele pálida/argila */
+  --flesh-mid: #c7b2b2;      /* Pele um pouco mais escura */
+  --soul-gray: #8a9ea8;      /* Cinza azulado da alma morta */
+  --flesh-raw: #b87a7a;      /* Rosa queimado (carne exposta, não sangue) */
+  --stitch-dark: #2e2222;    /* Cor da linha de costura */
+  --text-body: #3d3333;      /* Texto escuro, não preto puro */
+}
+
+/* Animação sutil de "respiração" ou instabilidade da carne */
+@keyframes flesh-breathe {
+  0%, 100% { border-radius: 8px 20px 8px 25px; }
+  50% { border-radius: 20px 8px 25px 8px; }
+}
+
+/* Animação de "borbulhar" lento para a energia */
+@keyframes soul-bubble {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 40px 0%; }
+}
+
+/* --- CONTAINER PRINCIPAL "O CORPO REMENDADO" --- */
+.transfig-container {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--flesh-pale);
+  /* Textura sutil de retalhos de pele usando gradientes suaves */
+  background-image: 
+    radial-gradient(circle at 20% 30%, var(--flesh-mid) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, var(--flesh-mid) 0%, transparent 40%);
+  /* Borda grossa tracejada que simula costura grosseira */
+  border: 4px dashed var(--stitch-dark);
+  /* Formato orgânico e instável */
+  border-radius: 8px 20px 8px 25px;
+  color: var(--text-body);
+  font-family: 'Spectral', serif;
+  position: relative;
+  box-shadow: 10px 10px 0 rgba(46, 34, 34, 0.2); /* Sombra dura, não borrada */
+  padding: 0;
+  overflow: hidden;
+  animation: flesh-breathe 8s ease-in-out infinite; /* O container "respira" lentamente */
+}
+
+.transfig-container * { box-sizing: border-box; }
+
+/* O Efeito de "Costura Central" no fundo */
+.transfig-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; width: 4px; height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    var(--stitch-dark),
+    var(--stitch-dark) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  transform: translateX(-50%);
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- CABEÇALHO --- */
+.transfig-container .transfig-header {
+  text-align: center; padding: 25px 20px;
+  background: rgba(199, 178, 178, 0.7); /* Pele média semi-transparente */
+  border-bottom: 3px dashed var(--stitch-dark);
+  position: relative; z-index: 2;
+}
+
+.transfig-container .transfig-title {
+  /* Fonte que parece escrita por uma criança perturbada */
+  font-family: 'Gloria Hallelujah', cursive; 
+  font-size: 2em;
+  color: var(--stitch-dark);
+  margin: 0;
+  transform: rotate(-2deg); /* Título levemente torto */
+}
+
+.transfig-container .transfig-subtitle {
+  font-family: 'Kosugi Maru', sans-serif;
+  color: var(--text-body);
+  font-size: 0.9em; margin-top: 10px;
+  text-transform: uppercase; letter-spacing: 1px;
+  font-weight: bold;
+}
+
+/* --- IMAGEM --- */
+.transfig-container .transfig-image-frame {
+  width: 100%; height: 350px; position: relative; z-index: 2;
+  /* Moldura interna que parece pele esticada */
+  border: 8px solid var(--flesh-mid);
+  border-style: inset;
+}
+.transfig-container .transfig-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  /* Filtro para desaturar e deixar a imagem com aspecto de "argila" */
+  filter: sepia(0.3) saturate(0.6) contrast(1.1);
+}
+
+/* --- BARRAS DE STATUS (ESCOPADAS & TEMÁTICAS) --- */
+.transfig-container .transfig-stats {
+  padding: 20px 30px; display: flex; flex-direction: column; gap: 15px;
+  background: var(--flesh-pale);
+  position: relative; z-index: 2;
+  border-bottom: 3px dashed var(--stitch-dark);
+}
+
+.transfig-container .jjk-dossier-status-item {
+  display: flex; align-items: center; gap: 15px;
+}
+
+.transfig-container .jjk-dossier-status-label {
+    font-family: 'Kosugi Maru', sans-serif; font-weight: 700;
+    color: var(--stitch-dark); width: 35px; font-size: 0.9em;
+}
+
+.transfig-container .jjk-dossier-status-bar-wrapper {
+  flex-grow: 1; position: relative; height: 16px;
+  background: var(--flesh-mid); /* Fundo da barra é cor de pele escura */
+  border-radius: 4px;
+  border: 2px solid var(--stitch-dark);
+  overflow: hidden;
+}
+.transfig-container .jjk-dossier-status-bar {
+  height: 100%; border-radius: 4px; overflow: hidden; background: transparent; border: none;
+}
+
+/* Barra de HP (Carne Crua/Exposta - Rosa Queimado) */
+.transfig-container .jjk-dossier-hp-fill {
+  height: 100%;
+  background: var(--flesh-raw);
+  /* Textura sutil de músculo */
+  background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(0,0,0,0.1) 5px, rgba(0,0,0,0.1) 10px);
+  border-right: 3px solid var(--stitch-dark); /* Borda de "corte" no final da barra */
+  transition: width 0.5s ease;
+}
+
+/* Barra de EA (Alma Morta - Cinza Azulado com "bolhas") */
+.transfig-container .jjk-dossier-ea-fill {
+  height: 100%;
+  background-color: var(--soul-gray);
+  /* Padrão de bolhas sutis */
+  background-image: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.3) 10%, transparent 20%);
+  background-size: 20px 20px;
+  animation: soul-bubble 10s linear infinite; /* Bolhas se movem lentamente */
+  border-right: 3px solid var(--stitch-dark);
+  transition: width 0.5s ease;
+}
+
+.transfig-container .jjk-dossier-status-value {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  font-size: 0.8em; font-family: 'Kosugi Maru', sans-serif;
+  color: var(--stitch-dark); font-weight: 700;
+  text-shadow: 0 0 2px var(--flesh-pale);
+}
+
+
+/* --- CONTEÚDO --- */
+.transfig-container .transfig-content {
+  padding: 20px 35px 35px 35px; font-size: 1.05em; line-height: 1.7;
+  color: var(--text-body); text-align: justify; position: relative; z-index: 2;
+  /* O fundo do texto parece uma folha de pele costurada */
+  background: var(--flesh-pale);
+  margin: 15px;
+  border: 2px solid var(--stitch-dark);
+  box-shadow: 5px 5px 0 rgba(46, 34, 34, 0.1);
+}
+/* Destaques parecem cicatrizes ou marcas na pele */
+.transfig-container .transfig-content b {
+    color: var(--stitch-dark); font-weight: 900; text-decoration: underline wavy var(--flesh-raw);
+}
+.transfig-container .transfig-content i {
+    color: var(--flesh-raw); font-family: 'Spectral', serif; font-style: italic;
+}
+
+/* --- EXTRAS / NOTAS (Remendo) --- */
+.transfig-container .transfig-extras {
+  margin: 0 30px 30px 30px; padding: 15px;
+  /* Parece um band-aid ou pedaço de couro costurado */
+  background: var(--flesh-mid);
+  border: 3px dotted var(--stitch-dark);
+  position: relative; z-index: 2;
+  border-radius: 4px;
+  font-size: 0.9em;
+  color: var(--stitch-dark);
+}
+
+@media (max-width: 600px) {
+  .transfig-container .transfig-header,
+  .transfig-container .transfig-content,
+  .transfig-container .transfig-stats,
+  .transfig-container .transfig-extras { padding-left: 15px; padding-right: 15px; margin-left: 10px; margin-right: 10px; }
+}
