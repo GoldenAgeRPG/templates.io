@@ -1,0 +1,234 @@
+/* --- TEMPLATE: FÚRIA ESTELAR (YUKI TSUKUMO) --- */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@900&family=Rajdhani:wght@500;700&family=Exo+2:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* Escopamento */
+.star-container {
+  --star-bg: #080205;
+  --star-panel: #14050b;
+  --star-magenta: #ff0055; /* Cor da Yuki */
+  --star-gold: #ffaa00;    /* Cor da Massa/Estrela */
+  --star-void: #1a000d;
+  --text-main: #f0e6ea;
+  --text-dim: #bf8e9e;
+}
+
+/* Animação de Pulsação Gravitacional */
+@keyframes gravity-crush {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 85, 0.1), inset 0 0 50px #000; }
+  50% { box-shadow: 0 0 40px rgba(255, 0, 85, 0.3), inset 0 0 20px #000; }
+}
+
+/* Brilho Estelar no Fundo */
+@keyframes star-twinkle {
+  0% { opacity: 0.3; }
+  50% { opacity: 0.8; }
+  100% { opacity: 0.3; }
+}
+
+/* CONTAINER PRINCIPAL */
+.star-container {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--star-bg);
+  
+  /* Fundo: Horizonte de Eventos */
+  background-image: 
+    radial-gradient(circle at 50% 30%, #2b0014 0%, #000 70%),
+    linear-gradient(0deg, transparent 90%, rgba(255, 0, 85, 0.05) 100%);
+  
+  /* Borda Grossa e Pesada */
+  border: 4px solid var(--star-magenta);
+  border-radius: 12px;
+  
+  color: var(--text-main);
+  font-family: 'Exo 2', sans-serif;
+  position: relative;
+  
+  /* Sombra Pesada */
+  box-shadow: 0 20px 60px #000;
+  padding: 0;
+  overflow: hidden;
+  
+  animation: gravity-crush 4s infinite ease-in-out;
+}
+
+.star-container * { box-sizing: border-box; }
+
+/* Pontos de Estrela (Overlay) */
+.star-container::before {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: radial-gradient(white 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.1;
+  animation: star-twinkle 3s infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- CABEÇALHO --- */
+.star-container .star-header {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.8), transparent);
+  border-bottom: 2px solid var(--star-magenta);
+  position: relative;
+  z-index: 2;
+}
+
+/* Ícone de Buraco Negro/Massa */
+.star-container .star-icon {
+  position: absolute;
+  top: 15px; right: 15px;
+  width: 60px; height: 60px;
+  filter: drop-shadow(0 0 10px var(--star-magenta));
+  opacity: 0.8;
+  animation: spin 20s linear infinite;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+.star-container .star-title {
+  font-family: 'Orbitron', sans-serif;
+  font-weight: 900;
+  font-size: 2.5em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  text-shadow: 3px 3px 0px var(--star-magenta);
+  line-height: 1;
+  transform: skewX(-10deg); /* Estilo agressivo */
+}
+
+.star-container .star-subtitle {
+  font-family: 'Rajdhani', sans-serif;
+  color: var(--star-gold);
+  font-size: 1em;
+  margin-top: 5px;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  font-weight: 700;
+}
+
+/* --- IMAGEM --- */
+.star-container .star-image-frame {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  border-top: 2px solid var(--star-magenta);
+  border-bottom: 2px solid var(--star-magenta);
+  background: #000;
+}
+.star-container .star-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  /* Filtro vibrante */
+  filter: contrast(1.1) saturate(1.2);
+}
+
+/* --- BARRAS DE STATUS (DENSAS) --- */
+.star-container .star-stats {
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: rgba(20, 5, 11, 0.8);
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px solid rgba(255, 0, 85, 0.2);
+}
+
+.star-container .jjk-dossier-status-item {
+  display: flex; align-items: center; gap: 15px;
+}
+
+.star-container .jjk-dossier-status-label {
+  font-family: 'Orbitron', sans-serif; font-weight: 900;
+  color: var(--star-gold); width: 30px; font-size: 0.8em;
+  text-align: right;
+}
+
+.star-container .jjk-dossier-status-bar-wrapper {
+  flex-grow: 1; position: relative; height: 16px; /* Barra grossa = PESO */
+  background: #000;
+  border: 2px solid #333;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.star-container .jjk-dossier-status-bar {
+  width: 100%; height: 100%; background: transparent; border: none;
+}
+
+/* HP: Magenta Sólido */
+.star-container .jjk-dossier-hp-fill {
+  height: 100%;
+  background: var(--star-magenta);
+  box-shadow: inset 0 -4px 0 rgba(0,0,0,0.3); /* Efeito 3D */
+  transition: width 0.5s ease;
+}
+
+/* EA: Dourado/Laranja (Estrela) */
+.star-container .jjk-dossier-ea-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--star-gold), #ffdd00);
+  box-shadow: 0 0 15px var(--star-gold);
+  transition: width 0.5s ease;
+}
+
+.star-container .jjk-dossier-status-value {
+  position: absolute; left: 10px; top: 50%; transform: translateY(-50%);
+  font-size: 0.75em; font-family: 'Rajdhani', sans-serif; color: #000; /* Texto preto na barra clara */
+  font-weight: 900; z-index: 5;
+}
+/* Ajuste para texto no HP escuro */
+.star-container .jjk-dossier-status-item:first-child .jjk-dossier-status-value { color: #fff; }
+
+/* --- CONTEÚDO --- */
+.star-container .star-content {
+  padding: 30px;
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: var(--text-main);
+  text-align: justify;
+  position: relative;
+  z-index: 2;
+}
+
+.star-container .star-content b {
+  color: var(--star-magenta);
+  font-weight: 900;
+  background: rgba(255, 0, 85, 0.1);
+  padding: 0 4px;
+  border-radius: 4px;
+}
+
+.star-container .star-content i {
+  color: var(--star-gold);
+  font-weight: 700;
+}
+
+/* --- EXTRAS (Garuda Log) --- */
+.star-container .star-extras {
+  margin: 0 30px 30px 30px;
+  padding: 15px;
+  background: rgba(255, 0, 85, 0.05);
+  border: 2px solid var(--star-magenta);
+  position: relative;
+  z-index: 2;
+  font-size: 0.9em;
+  color: var(--text-dim);
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.star-container .star-extras span { display: block; margin-bottom: 5px; }
+
+@media (max-width: 600px) {
+  .star-container .star-header { padding: 30px 15px; }
+  .star-container .star-content,
+  .star-container .star-stats,
+  .star-container .star-extras { padding-left: 20px; padding-right: 20px; margin-left: 0; margin-right: 0; }
+  .star-container .star-extras { grid-template-columns: 1fr; }
+}
