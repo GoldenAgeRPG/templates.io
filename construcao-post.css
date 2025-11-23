@@ -1,0 +1,246 @@
+/* --- TEMPLATE: CONSTRUÇÃO (MAI/YOROZU) --- */
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@300;500;700&family=Rajdhani:wght@400;600;700&family=Share+Tech+Mono&display=swap');
+
+/* Escopamento */
+.construct-container {
+  --metal-bg: #0b0d12;
+  --metal-panel: #14171f;
+  --metal-silver: #e0e0e0;
+  --metal-chrome: #b0bec5;
+  --metal-liquid: #90a4ae;
+  --const-blue: #00e5ff; /* Blueprint */
+  --const-bronze: #d7a872; /* Yorozu Armor */
+  --text-main: #cfd8dc;
+  --grid-line: rgba(0, 229, 255, 0.05);
+}
+
+/* Animação de "Scan" (Construção) */
+@keyframes construct-scan {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
+/* Animação de Metal Líquido */
+@keyframes liquid-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* CONTAINER PRINCIPAL */
+.construct-container {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--metal-bg);
+  
+  /* Fundo Blueprint (Grade Técnica) */
+  background-image: 
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 20px 20px;
+  
+  /* Borda Metálica */
+  border: 2px solid var(--metal-chrome);
+  border-radius: 4px;
+  /* Cantos chanfrados tecnológicos */
+  clip-path: polygon(
+    0 15px, 15px 0, 
+    100% 0, 100% calc(100% - 15px), 
+    calc(100% - 15px) 100%, 0 100%
+  );
+  
+  color: var(--text-main);
+  font-family: 'Rajdhani', sans-serif;
+  position: relative;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+  padding: 0;
+  overflow: hidden;
+}
+
+.construct-container * { box-sizing: border-box; }
+
+/* Linha de Scan percorrendo o post */
+.construct-container::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 229, 255, 0.02) 50%, transparent 100%);
+  background-size: 100% 200%;
+  animation: construct-scan 8s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- CABEÇALHO --- */
+.construct-container .const-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 30px;
+  background: linear-gradient(90deg, var(--metal-panel), #1c212b);
+  border-bottom: 2px solid var(--const-blue);
+  position: relative;
+  z-index: 2;
+}
+
+/* Detalhe de Parafusos nos cantos */
+.construct-container .const-header::before,
+.construct-container .const-header::after {
+  content: '+';
+  position: absolute;
+  color: var(--const-blue);
+  font-family: monospace;
+  font-weight: bold;
+}
+.construct-container .const-header::before { top: 5px; left: 5px; }
+.construct-container .const-header::after { bottom: 5px; right: 5px; }
+
+.construct-container .const-title {
+  font-family: 'Teko', sans-serif;
+  font-weight: 700;
+  font-size: 2.5em;
+  text-transform: uppercase;
+  margin: 0;
+  color: #fff;
+  line-height: 0.9;
+  letter-spacing: 1px;
+  /* Efeito de metal no texto */
+  background: linear-gradient(to bottom, #fff 40%, #999 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.construct-container .const-subtitle {
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--const-blue);
+  font-size: 0.8em;
+  margin-top: 5px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+/* Ícone de Engrenagem/Cubo (SVG) */
+.construct-container .const-icon {
+  width: 50px; height: 50px;
+  filter: drop-shadow(0 0 5px var(--const-blue));
+  opacity: 0.8;
+}
+.construct-container .const-icon path { fill: var(--metal-silver); }
+
+/* --- IMAGEM --- */
+.construct-container .const-image-frame {
+  width: 100%; height: 350px; position: relative; z-index: 1;
+  border-bottom: 1px solid var(--const-blue);
+  background: #000;
+}
+.construct-container .const-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  /* Filtro metálico frio */
+  filter: contrast(1.2) saturate(0.5) brightness(1.1);
+}
+
+/* Grid técnico sobre a imagem */
+.construct-container .const-image-frame::after {
+  content: ''; position: absolute; inset: 0;
+  background-image: linear-gradient(rgba(0, 229, 255, 0.1) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(0, 229, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  opacity: 0.3; pointer-events: none;
+}
+
+/* --- BARRAS DE STATUS (Tanques) --- */
+.construct-container .const-stats {
+  padding: 20px 30px; display: flex; flex-direction: column; gap: 12px;
+  background: rgba(0,0,0,0.3); position: relative; z-index: 2;
+  border-left: 4px solid var(--const-bronze); /* Toque da Yorozu */
+}
+
+.construct-container .jjk-dossier-status-item {
+  display: flex; align-items: center; gap: 15px;
+}
+
+.construct-container .jjk-dossier-status-label {
+  font-family: 'Teko', sans-serif; font-weight: 500;
+  color: var(--metal-silver); width: 30px; font-size: 1.2em;
+}
+
+.construct-container .jjk-dossier-status-bar-wrapper {
+  flex-grow: 1; position: relative; height: 14px;
+  background: #0e1014;
+  border: 1px solid var(--metal-chrome);
+  /* Formato chanfrado */
+  clip-path: polygon(0 0, 100% 0, 98% 100%, 2% 100%);
+}
+.construct-container .jjk-dossier-status-bar {
+  width: 100%; height: 100%; background: transparent; border: none;
+}
+
+/* HP: Estrutura Sólida (Bronze/Laranja) */
+.construct-container .jjk-dossier-hp-fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--const-bronze),
+    var(--const-bronze) 5px,
+    #a17e56 5px,
+    #a17e56 10px
+  );
+  transition: width 0.5s ease;
+}
+
+/* EA: Metal Líquido (Prata/Ciano) */
+.construct-container .jjk-dossier-ea-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #78909c, #eceff1, #78909c);
+  background-size: 200% 100%;
+  animation: liquid-shimmer 2s linear infinite;
+  box-shadow: 0 0 10px var(--const-blue);
+  transition: width 0.5s ease;
+}
+
+.construct-container .jjk-dossier-status-value {
+  position: absolute; right: 5px; top: 50%; transform: translateY(-50%);
+  font-size: 0.75em; font-family: 'Share Tech Mono', monospace; color: #000;
+  font-weight: 700; left: auto; text-shadow: none;
+  background: rgba(255,255,255,0.8); padding: 0 4px; border-radius: 2px;
+}
+
+/* --- CONTEÚDO --- */
+.construct-container .const-content {
+  padding: 25px 35px; font-size: 1.1em; line-height: 1.7;
+  color: var(--text-main); text-align: justify; position: relative; z-index: 2;
+}
+
+.construct-container .const-content b {
+  color: var(--const-blue); font-weight: 700;
+  font-family: 'Share Tech Mono', monospace;
+}
+
+.construct-container .const-content i {
+  color: var(--const-bronze); font-style: italic;
+}
+
+/* --- EXTRAS (Blueprint Data) --- */
+.construct-container .const-extras {
+  margin: 0 30px 30px 30px; padding: 15px;
+  background: rgba(0, 229, 255, 0.05);
+  border: 1px dashed var(--const-blue);
+  position: relative; z-index: 2;
+  font-size: 0.9em; color: var(--metal-liquid);
+  font-family: 'Share Tech Mono', monospace;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+}
+.construct-container .const-extras::before {
+  content: 'MATERIALIZATION_LOG';
+  position: absolute; top: -10px; left: 10px;
+  background: var(--metal-bg); padding: 0 5px; font-size: 0.8em; color: var(--const-blue);
+}
+
+@media (max-width: 600px) {
+  .construct-container .const-header { padding: 20px; }
+  .construct-container .const-content, 
+  .construct-container .const-stats, 
+  .construct-container .const-extras { padding-left: 20px; padding-right: 20px; margin-left: 0; margin-right: 0; }
+  .construct-container .const-extras { grid-template-columns: 1fr; }
+}
