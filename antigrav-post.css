@@ -1,4 +1,4 @@
-/* --- TEMPLATE: ZONA ANTIGRAVIDADE (KAORI/KENJAKU) --- */
+/* --- TEMPLATE: ZONA ANTIGRAVIDADE (KENJAKU) v2 (Particles Up) --- */
 @import url('https://fonts.googleapis.com/css2?family=Audiowide&family=Exo:wght@400;700;900&family=Syncopate:wght@400;700&display=swap');
 
 /* Escopamento */
@@ -9,13 +9,15 @@
   --grav-green: #76ff03;  /* Reversão de Técnica */
   --grav-dark: #311b92;
   --text-main: #e0e0e0;
-  --grid-line: rgba(118, 255, 3, 0.05);
+  --grid-line: rgba(118, 255, 3, 0.15); /* Aumentei um pouco a opacidade para as partículas */
 }
 
-/* Animação de Flutuação (Anti-Gravidade) */
-@keyframes anti-grav-float {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 -40px; } /* Move para cima */
+/* [NOVO] Animação de Partículas Subindo */
+@keyframes particle-rise-v2 {
+    0% { background-position: 0 200px, 20px 300px; opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { background-position: 0 -200px, 20px -300px; opacity: 0; }
 }
 
 /* Animação de Pressão (Pulso) */
@@ -32,16 +34,11 @@
   margin: 40px auto;
   background-color: var(--grav-bg);
   
-  /* Fundo com partículas subindo */
-  background-image: 
-    radial-gradient(circle, var(--grid-line) 1px, transparent 1px),
-    linear-gradient(to top, rgba(0,0,0,0.8), transparent);
-  background-size: 20px 20px, 100% 100%;
-  animation: anti-grav-float 5s linear infinite;
+  /* Fundo base escuro */
+  background-image: linear-gradient(to top, rgba(0,0,0,0.95), rgba(13, 8, 20, 0.8));
   
   border: 2px solid var(--grav-dark);
   border-radius: 15px;
-  /* Borda superior e inferior brilhantes (Verde/Roxo) */
   border-top: 4px solid var(--grav-green);
   border-bottom: 4px solid var(--grav-purple);
   
@@ -55,10 +52,26 @@
 
 .grav-container * { box-sizing: border-box; }
 
+/* [NOVO] Camada de Partículas Subindo */
+.grav-container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Duas camadas de partículas: Verde pequeno e Roxo médio */
+  background-image:
+    radial-gradient(circle at center, var(--grid-line) 1.5px, transparent 1.5px),
+    radial-gradient(circle at center, rgba(94, 53, 177, 0.2) 2.5px, transparent 2.5px);
+  background-size: 30px 50px, 60px 90px; /* Espaçamento variado */
+  animation: particle-rise-v2 12s linear infinite;
+  z-index: 0; /* Fica atrás do conteúdo principal */
+  pointer-events: none;
+}
+
 /* --- CABEÇALHO --- */
 .grav-container .grav-header {
   padding: 30px;
-  background: linear-gradient(180deg, rgba(22, 14, 36, 0.95), rgba(13, 8, 20, 0.8));
+  /* Fundo semi-transparente para ver as partículas passando */
+  background: linear-gradient(180deg, rgba(22, 14, 36, 0.9), rgba(13, 8, 20, 0.7));
   border-bottom: 1px solid var(--grav-purple);
   display: flex;
   justify-content: space-between;
@@ -73,7 +86,7 @@
 }
 
 .grav-container .grav-title {
-  font-family: 'Audiowide', cursive; /* Fonte Sci-Fi */
+  font-family: 'Audiowide', cursive;
   font-size: 2.2em;
   color: #fff;
   text-transform: uppercase;
@@ -120,18 +133,17 @@
   filter: contrast(1.1) saturate(0.9);
   transition: transform 10s ease;
 }
-/* Efeito de "Zoom Lento" (Flutuar) na imagem */
 .grav-container:hover .grav-image-frame img {
   transform: scale(1.1);
 }
 
-/* --- BARRAS DE STATUS (Gauges de Pressão) --- */
+/* --- BARRAS DE STATUS --- */
 .grav-container .grav-stats {
   padding: 20px 30px;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  background: rgba(0, 0, 0, 0.3);
+  background: rgba(0, 0, 0, 0.4);
   position: relative;
   z-index: 2;
 }
@@ -160,17 +172,16 @@
   width: 100%; height: 100%; background: transparent; border: none;
 }
 
-/* HP: Roxo (Gravidade Pesada) */
+/* HP: Roxo */
 .grav-container .jjk-dossier-hp-fill {
   height: 100%;
   background: linear-gradient(90deg, var(--grav-dark), var(--grav-purple));
   box-shadow: 0 0 15px var(--grav-purple);
   transition: width 0.5s ease;
-  /* Listras diagonais para parecer campo de força */
   background-image: repeating-linear-gradient(45deg, transparent, transparent 5px, rgba(255,255,255,0.1) 5px, rgba(255,255,255,0.1) 10px);
 }
 
-/* EA: Verde (Reversão de Técnica) */
+/* EA: Verde */
 .grav-container .jjk-dossier-ea-fill {
   height: 100%;
   background: linear-gradient(90deg, #1b5e20, var(--grav-green));
@@ -193,7 +204,7 @@
   text-align: justify;
   position: relative;
   z-index: 2;
-  background: rgba(22, 14, 36, 0.5);
+  background: rgba(22, 14, 36, 0.6); /* Mais transparência para ver o fundo */
   border-top: 1px solid rgba(118, 255, 3, 0.1);
 }
 
@@ -208,11 +219,11 @@
   font-style: italic;
 }
 
-/* --- EXTRAS (Painel Flutuante) --- */
+/* --- EXTRAS --- */
 .grav-container .grav-extras {
   margin: 0 30px 30px 30px;
   padding: 15px;
-  background: rgba(118, 255, 3, 0.05); /* Verde bem sutil */
+  background: rgba(118, 255, 3, 0.05);
   border: 1px dashed var(--grav-green);
   border-radius: 8px;
   position: relative;
