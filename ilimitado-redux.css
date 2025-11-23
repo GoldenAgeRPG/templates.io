@@ -1,0 +1,265 @@
+/* --- TEMPLATE: ILIMITADO REDUX (SATORU GOJO) --- */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@300;500;700&family=Syncopate:wght@700&display=swap');
+
+/* Escopamento */
+.limitless-redux {
+  --void-bg: #020204;
+  --inf-cyan: #00f3ff;   /* Azul (Atração) */
+  --inf-magenta: #ff0055; /* Vermelho (Repulsão) */
+  --inf-purple: #bc13fe; /* Roxo (Vazio) */
+  --inf-white: #ffffff;
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-panel: rgba(10, 10, 20, 0.7);
+}
+
+/* Animação: Singularidade de Fundo */
+@keyframes void-spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* Animação: Respiração do Infinito (Borda) */
+@keyframes infinity-breathe {
+  0%, 100% { box-shadow: 0 0 20px rgba(0, 243, 255, 0.1), inset 0 0 20px rgba(0, 243, 255, 0.05); border-color: rgba(0, 243, 255, 0.3); }
+  50% { box-shadow: 0 0 50px rgba(188, 19, 254, 0.2), inset 0 0 50px rgba(188, 19, 254, 0.1); border-color: rgba(188, 19, 254, 0.5); }
+}
+
+/* Animação: Scanline dos Seis Olhos */
+@keyframes six-eyes-scan {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
+}
+
+/* CONTAINER PRINCIPAL */
+.limitless-redux {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 50px auto;
+  background-color: var(--void-bg);
+  color: var(--inf-white);
+  font-family: 'Rajdhani', sans-serif;
+  
+  /* Estrutura de Vidro e Metal */
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+  padding: 0;
+  
+  /* Sombra Externa Massiva */
+  box-shadow: 0 20px 80px #000;
+  animation: infinity-breathe 6s infinite ease-in-out;
+  z-index: 1;
+}
+
+.limitless-redux * { box-sizing: border-box; }
+
+/* O FUNDO (Singularidade) */
+.limitless-redux::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 150%; height: 150%;
+  /* Gradiente cônico para criar o espiral */
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(0, 243, 255, 0.05) 20%,
+    transparent 40%,
+    rgba(188, 19, 254, 0.05) 60%,
+    transparent 80%,
+    rgba(0, 243, 255, 0.05) 100%
+  );
+  animation: void-spin 20s linear infinite;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Overlay de Grid Técnico (HUD) */
+.limitless-redux::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image: 
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 50px 50px;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* --- CABEÇALHO HUD --- */
+.limitless-redux .redux-header {
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+  position: relative;
+}
+
+/* Elementos decorativos de HUD nos cantos */
+.limitless-redux .hud-corner {
+  position: absolute;
+  width: 20px; height: 20px;
+  border: 2px solid var(--inf-cyan);
+  opacity: 0.7;
+}
+.limitless-redux .hud-tl { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+.limitless-redux .hud-tr { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+
+.limitless-redux .redux-title {
+  font-family: 'Syncopate', sans-serif;
+  font-weight: 700;
+  font-size: 2.5em;
+  margin: 0;
+  line-height: 0.9;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  /* Gradiente no texto */
+  background: linear-gradient(to right, #fff, var(--inf-cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px rgba(0, 243, 255, 0.5));
+}
+
+.limitless-redux .redux-subtitle {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--inf-purple);
+  font-size: 0.8em;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: right;
+}
+
+/* --- IMAGEM CENTRAL (O Olho) --- */
+.limitless-redux .redux-image-frame {
+  width: 100%;
+  height: 380px;
+  position: relative;
+  margin: 10px 0;
+  background: #000;
+  border-top: 1px solid var(--glass-border);
+  border-bottom: 1px solid var(--glass-border);
+  overflow: hidden;
+}
+
+.limitless-redux .redux-image-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  filter: contrast(1.1) brightness(1.1) saturate(0); /* P&B Inicial */
+  transition: all 0.5s ease;
+}
+
+/* Efeito ao passar o mouse: Revela as cores e o "Infinito" */
+.limitless-redux:hover .redux-image-frame img {
+  filter: contrast(1.2) brightness(1.2) saturate(1.2); /* Cor total */
+  transform: scale(1.02);
+}
+
+/* Scanline sobre a imagem */
+.limitless-redux .redux-image-frame::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 50%, rgba(0, 243, 255, 0.05) 50%);
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* --- BARRAS DE STATUS (VETORIAIS) --- */
+.limitless-redux .redux-stats {
+  padding: 10px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+
+.limitless-redux .jjk-dossier-status-item {
+  display: flex; align-items: center; gap: 15px;
+}
+
+/* Label flutuante */
+.limitless-redux .jjk-dossier-status-label {
+  font-family: 'Orbitron', sans-serif;
+  color: var(--inf-white);
+  font-size: 0.7em; width: 30px;
+  text-shadow: 0 0 5px var(--inf-cyan);
+}
+
+.limitless-redux .jjk-dossier-status-bar-wrapper {
+  flex-grow: 1; position: relative; height: 4px; /* Barra ultra fina */
+  background: rgba(255,255,255,0.1);
+  border-radius: 0;
+}
+.limitless-redux .jjk-dossier-status-bar {
+  width: 100%; height: 100%; background: transparent; border: none;
+}
+
+/* HP: Vermelho Neon (Reversão) */
+.limitless-redux .jjk-dossier-hp-fill {
+  height: 100%;
+  background: var(--inf-magenta);
+  box-shadow: 0 0 10px var(--inf-magenta);
+  transition: width 0.5s ease;
+}
+
+/* EA: Gradiente Infinito (Ciano -> Roxo) */
+.limitless-redux .jjk-dossier-ea-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--inf-cyan), var(--inf-purple));
+  box-shadow: 0 0 10px var(--inf-cyan);
+  transition: width 0.5s ease;
+}
+
+.limitless-redux .jjk-dossier-status-value {
+  position: absolute; right: 0; top: -15px;
+  font-family: 'Share Tech Mono', monospace; font-size: 0.7em; color: var(--inf-cyan);
+  left: auto; transform: none;
+}
+
+/* --- CONTEÚDO --- */
+.limitless-redux .redux-content {
+  padding: 30px;
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: #d1d5db;
+  text-align: justify;
+  /* Fundo de painel flutuante */
+  background: linear-gradient(180deg, rgba(255,255,255,0.02) 0%, transparent 100%);
+  margin: 20px;
+  border: 1px solid rgba(255,255,255,0.05);
+  backdrop-filter: blur(2px);
+}
+
+.limitless-redux .redux-content b {
+  color: var(--inf-cyan); font-weight: 700;
+}
+.limitless-redux .redux-content i {
+  color: var(--inf-purple); font-style: italic;
+}
+
+/* --- EXTRAS (Holograma) --- */
+.limitless-redux .redux-extras {
+  margin: 0 20px 20px 20px;
+  padding: 15px;
+  border: 1px solid var(--inf-cyan);
+  background: rgba(0, 243, 255, 0.05);
+  position: relative;
+  font-size: 0.85em;
+  color: var(--inf-cyan);
+  font-family: 'Share Tech Mono', monospace;
+  text-align: center;
+  display: flex; justify-content: space-around;
+}
+
+.limitless-redux .redux-extras span {
+  text-shadow: 0 0 5px rgba(0, 243, 255, 0.5);
+}
+
+@media (max-width: 600px) {
+  .limitless-redux .redux-header { flex-direction: column; align-items: center; text-align: center; gap: 10px; }
+  .limitless-redux .redux-content { margin: 10px; padding: 20px; }
+  .limitless-redux .redux-extras { flex-direction: column; gap: 5px; }
+}
