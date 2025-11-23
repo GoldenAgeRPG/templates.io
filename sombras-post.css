@@ -1,4 +1,4 @@
-/* --- TEMPLATE: DEZ SOMBRAS (MEGUMI/SUKUNA) --- */
+/* --- TEMPLATE: DEZ SOMBRAS (MEGUMI/SUKUNA) v2 --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap');
 
 /* Escopamento */
@@ -12,14 +12,14 @@
   --shd-border: #1b5e20;
 }
 
-/* Animação de Fluido (Sombra Líquida) */
+/* Animação de Fluido */
 @keyframes liquid-flow {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* Animação de "Respiração" da Sombra */
+/* Animação de Respiração */
 @keyframes shadow-breathe {
   0%, 100% { box-shadow: 0 0 20px rgba(0,0,0,0.8); }
   50% { box-shadow: 0 0 40px rgba(46, 125, 50, 0.2); }
@@ -32,19 +32,14 @@
   width: 95%;
   margin: 40px auto;
   background-color: var(--shd-bg);
-  
-  /* Fundo: Textura de "Tinta" */
   background-image: 
     radial-gradient(circle at bottom, #111 0%, transparent 70%),
     repeating-linear-gradient(45deg, #080808 0px, #080808 2px, #000 2px, #000 4px);
-  
   color: var(--shd-text);
   font-family: 'Spectral', serif;
-  
   border: 1px solid #222;
   border-bottom: 4px solid var(--shd-accent);
   border-radius: 6px;
-  
   position: relative;
   animation: shadow-breathe 5s infinite ease-in-out;
   padding: 0;
@@ -53,127 +48,85 @@
 
 .shadows-container * { box-sizing: border-box; }
 
-/* Efeito de "Gosma" no topo */
 .shadows-container::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 4px;
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
   background: linear-gradient(90deg, var(--shd-accent), var(--shd-light), var(--shd-accent));
-  background-size: 200% 100%;
-  animation: liquid-flow 10s linear infinite;
-  z-index: 10;
+  background-size: 200% 100%; animation: liquid-flow 10s linear infinite; z-index: 10;
 }
 
 /* --- CABEÇALHO --- */
 .shadows-container .shadows-header {
-  padding: 30px;
-  text-align: left;
+  padding: 30px; text-align: left;
   background: linear-gradient(180deg, rgba(0,0,0,0.8), rgba(0,0,0,0.4));
   border-bottom: 1px solid var(--shd-border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: flex; justify-content: space-between; align-items: center;
   position: relative;
 }
 
-/* Símbolo de Mão (Lobos de Jade) ao fundo */
+/* [CORRIGIDO] Símbolo de Lobo SVG */
 .shadows-container .shadows-header::after {
-  content: '🐺'; /* Pode ser substituído por um SVG ou imagem */
+  content: '';
   position: absolute;
   right: 20px;
-  font-size: 4em;
-  opacity: 0.1;
-  filter: grayscale(1);
+  width: 80px; height: 80px;
+  background-color: var(--shd-light); /* Cor do lobo */
+  /* Máscara SVG de Lobo */
+  -webkit-mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,2 L4,12 L6,22 L12,18 L18,22 L20,12 L12,2 Z M12,5 L17,12 L16,19 L12,16 L8,19 L7,12 L12,5 Z" fill="black"/></svg>');
+  mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4.93,15.68C4.35,14.68 3.56,12.33 3.56,12.33C3.56,12.33 2,10.53 2,9.29C2,6.5 6.64,2 12,2C17.36,2 22,6.5 22,9.29C22,10.53 20.44,12.33 20.44,12.33C20.44,12.33 19.65,14.68 19.07,15.68C18.5,16.68 17.07,22 12,22C6.93,22 5.5,16.68 4.93,15.68M12,16.5C14.5,16.5 15.65,13.83 15.65,13.83C15.65,13.83 16.5,11.83 16.5,10.83C16.5,9.17 14.5,7.17 12,7.17C9.5,7.17 7.5,9.17 7.5,10.83C7.5,11.83 8.35,13.83 8.35,13.83C8.35,13.83 9.5,16.5 12,16.5Z" fill="black"/></svg>');
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  opacity: 0.15; /* Transparência sutil */
   pointer-events: none;
 }
 
 .shadows-container .shadows-title {
-  font-family: 'Cinzel', serif;
-  font-weight: 900;
-  font-size: 2em;
-  color: #fff;
-  text-transform: uppercase;
-  margin: 0;
-  letter-spacing: 1px;
-  text-shadow: 0 2px 5px #000;
+  font-family: 'Cinzel', serif; font-weight: 900; font-size: 2em; color: #fff;
+  text-transform: uppercase; margin: 0; letter-spacing: 1px; text-shadow: 0 2px 5px #000;
 }
 
 .shadows-container .shadows-subtitle {
-  font-family: 'Inter', sans-serif;
-  font-size: 0.85em;
-  color: var(--shd-light);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-top: 5px;
-  font-weight: 700;
+  font-family: 'Inter', sans-serif; font-size: 0.85em; color: var(--shd-light);
+  text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; font-weight: 700;
 }
 
 /* --- IMAGEM --- */
 .shadows-container .shadows-image-frame {
-  width: 100%;
-  height: 350px;
-  position: relative;
-  background: #000;
-  /* Máscara inferior para a imagem se fundir com a sombra */
+  width: 100%; height: 350px; position: relative; background: #000;
   -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
   mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
 }
-
 .shadows-container .shadows-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  /* Filtro levemente esverdeado/desaturado */
-  filter: contrast(1.2) saturate(0.8) sepia(0.2) hue-rotate(70deg);
-  opacity: 0.9;
+  filter: contrast(1.2) saturate(0.8) sepia(0.2) hue-rotate(70deg); opacity: 0.9;
 }
 
-/* --- BARRAS DE STATUS (Líquidas) --- */
+/* --- BARRAS DE STATUS --- */
 .shadows-container .shadows-stats {
-  padding: 10px 30px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  background: rgba(0,0,0,0.5);
+  padding: 10px 30px; display: flex; flex-direction: column; gap: 12px; background: rgba(0,0,0,0.5);
 }
-
-.shadows-container .jjk-dossier-status-item {
-  display: flex; align-items: center; gap: 15px;
-}
-
+.shadows-container .jjk-dossier-status-item { display: flex; align-items: center; gap: 15px; }
 .shadows-container .jjk-dossier-status-label {
-  font-family: 'Cinzel', serif; font-weight: 700;
-  color: var(--shd-light); width: 30px; font-size: 0.8em;
+  font-family: 'Cinzel', serif; font-weight: 700; color: var(--shd-light); width: 30px; font-size: 0.8em;
 }
-
 .shadows-container .jjk-dossier-status-bar-wrapper {
-  flex-grow: 1; position: relative; height: 12px;
-  background: #111;
-  border-radius: 6px;
-  border: 1px solid #333;
-  box-shadow: inset 0 2px 5px #000;
-  overflow: hidden;
+  flex-grow: 1; position: relative; height: 12px; background: #111; border-radius: 6px;
+  border: 1px solid #333; box-shadow: inset 0 2px 5px #000; overflow: hidden;
 }
-.shadows-container .jjk-dossier-status-bar {
-  height: 100%; border-radius: 6px; background: transparent; border: none;
-}
+.shadows-container .jjk-dossier-status-bar { height: 100%; border-radius: 6px; background: transparent; border: none; }
 
-/* HP: Vermelho Escuro Sólido */
+/* HP */
 .shadows-container .jjk-dossier-hp-fill {
-  height: 100%;
-  background: #8a2b2b;
-  box-shadow: inset 0 -2px 5px rgba(0,0,0,0.5);
-  transition: width 0.5s ease;
+  height: 100%; background: #8a2b2b; box-shadow: inset 0 -2px 5px rgba(0,0,0,0.5); transition: width 0.5s ease;
 }
-
-/* EA: Líquido Verde (Shikigami) */
+/* EA */
 .shadows-container .jjk-dossier-ea-fill {
   height: 100%;
   background: linear-gradient(90deg, var(--shd-accent), var(--shd-light), var(--shd-accent));
-  background-size: 200% 100%;
-  animation: liquid-flow 3s linear infinite;
-  box-shadow: 0 0 10px var(--shd-accent);
-  transition: width 0.5s ease;
+  background-size: 200% 100%; animation: liquid-flow 3s linear infinite;
+  box-shadow: 0 0 10px var(--shd-accent); transition: width 0.5s ease;
 }
-
 .shadows-container .jjk-dossier-status-value {
   position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
   font-size: 0.7em; font-family: 'Inter', sans-serif; color: #fff;
@@ -182,45 +135,20 @@
 
 /* --- CONTEÚDO --- */
 .shadows-container .shadows-content {
-  padding: 20px 30px 30px 30px;
-  font-size: 1.1em;
-  line-height: 1.8;
-  color: #c0c0c0;
-  text-align: justify;
+  padding: 20px 30px 30px 30px; font-size: 1.1em; line-height: 1.8; color: #c0c0c0; text-align: justify;
 }
+.shadows-container .shadows-content b { color: var(--shd-light); font-weight: 700; text-shadow: 0 0 5px rgba(46, 125, 50, 0.5); }
+.shadows-container .shadows-content i { color: #fff; font-family: 'Cinzel', serif; }
 
-.shadows-container .shadows-content b {
-  color: var(--shd-light); font-weight: 700;
-  text-shadow: 0 0 5px rgba(46, 125, 50, 0.5);
-}
-
-.shadows-container .shadows-content i {
-  color: #fff;
-  font-family: 'Cinzel', serif;
-}
-
-/* --- EXTRAS (Cartão de Invocação) --- */
+/* Extras */
 .shadows-container .shadows-extras {
-  margin: 0 30px 30px 30px;
-  padding: 15px;
-  background: rgba(46, 125, 50, 0.05);
-  border: 1px solid var(--shd-border);
-  border-radius: 4px;
-  font-size: 0.9em;
-  color: #8ca38d;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 5px;
+  margin: 0 30px 30px 30px; padding: 15px; background: rgba(46, 125, 50, 0.05);
+  border: 1px solid var(--shd-border); border-radius: 4px; font-size: 0.9em; color: #8ca38d;
+  display: grid; grid-template-columns: 1fr; gap: 5px;
 }
 .shadows-container .shadows-extras::before {
-  content: 'ESTADO DAS SOMBRAS';
-  display: block;
-  font-family: 'Cinzel', serif;
-  font-size: 0.8em;
-  color: var(--shd-light);
-  border-bottom: 1px solid var(--shd-border);
-  padding-bottom: 5px;
-  margin-bottom: 5px;
+  content: 'ESTADO DAS SOMBRAS'; display: block; font-family: 'Cinzel', serif; font-size: 0.8em;
+  color: var(--shd-light); border-bottom: 1px solid var(--shd-border); padding-bottom: 5px; margin-bottom: 5px;
 }
 
 @media (max-width: 600px) {
