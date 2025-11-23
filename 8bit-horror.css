@@ -1,4 +1,4 @@
-/* --- TEMPLATE: 8-BIT HORROR (RAID WINNERS EDITION) --- */
+/* --- TEMPLATE: 8-BIT HORROR (RAID WINNERS EDITION) v2 --- */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Mono:wght@400;700&family=Creepster&display=swap');
 
 :root {
@@ -9,6 +9,7 @@
   --horror-toxic: #76ff03;    /* Verde Ácido */
   --horror-text: #dcdcdc;     /* Cinza Claro (Leitura) */
   --horror-border: #4a0000;
+  --horror-dim: #552222;      /* Cor Discreta para o Footer */
 }
 
 /* Animação de Glitch/Defeito */
@@ -19,12 +20,6 @@
   60% { text-shadow: -2px 2px 0 var(--horror-toxic); transform: translate(-1px, -1px); }
   80% { text-shadow: 2px 2px 0 var(--horror-red); transform: translate(1px, 1px); }
   100% { text-shadow: 2px 2px 0 var(--horror-red); transform: translate(0, 0); }
-}
-
-/* Animação de Piscar (High Scores) */
-@keyframes score-blink {
-  0%, 100% { opacity: 1; color: var(--horror-toxic); }
-  50% { opacity: 0.5; color: var(--horror-red); }
 }
 
 /* CONTAINER PRINCIPAL */
@@ -50,41 +45,40 @@
     10px 10px 0 rgba(50, 0, 0, 0.8);
     
   color: var(--horror-text);
-  /* MUDANÇA 1: Fonte de Leitura Limpa (Monoespaçada) */
   font-family: 'Roboto Mono', monospace;
   font-size: 14px; 
   line-height: 1.6;
   padding: 0;
   position: relative;
   overflow: hidden;
-  padding-bottom: 160px; /* Espaço extra para os nomes no rodapé */
+  
+  /* [AJUSTE] Espaço apenas para a barra fina no rodapé */
+  padding-bottom: 50px; 
 }
 
 .bit-container * { box-sizing: border-box; }
 
-/* --- MUDANÇA 2: HALL DA FAMA (CSS PURO) --- */
+/* --- HALL DA FAMA (RODAPÉ DISCRETO) --- */
 .bit-container::after {
-  /* Os nomes são inseridos aqui. Não podem ser editados no HTML */
-  content: "HIGH SCORES (RAID 1) \00000A 1. YUJI \00000A 2. MEGUMI \00000A 3. NOBARA \00000A 4. MAKI \00000A 5. TOGE \00000A 6. PANDA";
+  /* Os nomes ficam aqui, separados por bullet points */
+  content: "YUJI  •  MEGUMI  •  NOBARA  •  MAKI  •  TOGE  •  PANDA";
   
-  white-space: pre; /* Permite quebra de linha com \00000A */
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
-  padding: 20px;
-  background-color: #000;
-  border-top: 4px solid var(--horror-red);
+  height: 40px; /* Altura fixa */
+  
+  background-color: #050000;
+  border-top: 2px solid var(--horror-border);
   
   font-family: 'Press Start 2P', cursive;
-  font-size: 12px;
-  line-height: 1.8;
-  text-align: center;
-  text-transform: uppercase;
-  
-  /* Animação de Arcade Defeituoso */
-  animation: score-blink 3s infinite steps(2);
+  font-size: 9px; /* Fonte pequena e discreta */
+  color: var(--horror-dim); /* Cor escura para não chamar atenção */
+  letter-spacing: 1px;
   z-index: 10;
 }
 
@@ -104,7 +98,6 @@
   color: var(--horror-red);
   text-transform: uppercase;
   margin: 0;
-  /* Efeito Glitch no Título */
   animation: horror-glitch 3s infinite linear;
 }
 
@@ -116,7 +109,7 @@
   text-transform: uppercase;
 }
 
-/* Ícone de Caveira Pixel (SVG) */
+/* Ícone de Caveira */
 .bit-container .bit-icon {
   width: 40px; height: 40px;
   filter: drop-shadow(2px 2px 0 #000);
@@ -135,12 +128,11 @@
 
 .bit-container .bit-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  /* Filtro de Terror (Vermelho/Escuro) */
   filter: contrast(1.2) sepia(0.5) hue-rotate(-50deg) saturate(1.5);
   image-rendering: pixelated;
 }
 
-/* --- BARRAS DE STATUS (Sangue e Veneno) --- */
+/* --- BARRAS DE STATUS --- */
 .bit-container .bit-stats {
   padding: 20px 25px;
   display: flex;
@@ -174,7 +166,7 @@
   width: 100%; height: 100%; background: transparent; border: none;
 }
 
-/* HP: Blocos de Sangue */
+/* HP */
 .bit-container .jjk-dossier-hp-fill {
   height: 100%;
   background: repeating-linear-gradient(
@@ -187,7 +179,7 @@
   transition: width 0.5s steps(10);
 }
 
-/* EA: Blocos Tóxicos */
+/* EA */
 .bit-container .jjk-dossier-ea-fill {
   height: 100%;
   background: repeating-linear-gradient(
@@ -206,18 +198,16 @@
   color: var(--horror-text); text-align: right;
 }
 
-/* --- CONTEÚDO (TEXT BOX) --- */
+/* --- CONTEÚDO --- */
 .bit-container .bit-content {
   padding: 25px;
   color: var(--horror-text);
   text-align: justify;
   background: var(--horror-bg);
-  /* Fonte Legível e Grande */
   font-family: 'Roboto Mono', monospace;
   font-size: 14px;
 }
 
-/* Destaques */
 .bit-container .bit-content b {
   color: var(--horror-red);
   font-weight: 700;
@@ -232,7 +222,7 @@
   font-style: italic;
 }
 
-/* --- EXTRAS (Inventário) --- */
+/* --- EXTRAS --- */
 .bit-container .bit-extras {
   margin: 0 20px 20px 20px;
   padding: 15px;
@@ -258,4 +248,6 @@
   .bit-container .jjk-dossier-status-item { grid-template-columns: 1fr; gap: 5px; margin-bottom: 10px; }
   .bit-container .jjk-dossier-status-label, 
   .bit-container .jjk-dossier-status-value { text-align: left; }
+  /* Ajuste para mobile dos nomes */
+  .bit-container::after { font-size: 7px; white-space: normal; }
 }
