@@ -1,28 +1,40 @@
-/* --- TEMPLATE: COMEDIANTE (TAKABA) --- */
+/* --- TEMPLATE: COMEDIANTE (TAKABA) v2 (Animated) --- */
 @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Permanent+Marker&display=swap');
 
 /* Escopamento */
 .comic-container {
-  --comic-bg: #1a1625;      /* Roxo muito escuro (Fundo) */
-  --comic-paper: #fffbf0;   /* Branco papel envelhecido */
-  --comic-yellow: #ffcc00;  /* Amarelo Título */
-  --comic-cyan: #00e5ff;    /* Energia */
-  --comic-pink: #ff0090;    /* Vida/Acento */
-  --comic-black: #111111;   /* Contornos */
+  --comic-bg: #1a1625;
+  --comic-paper: #fffbf0;
+  --comic-yellow: #ffcc00;
+  --comic-cyan: #00e5ff;
+  --comic-pink: #ff0090;
+  --comic-black: #111111;
   --comic-halftone: rgba(255, 255, 255, 0.05);
-}
-
-/* Animação "Pop" (Quadrinhos) */
-@keyframes comic-pop {
-  0% { transform: scale(0.95); }
-  50% { transform: scale(1.02); }
-  100% { transform: scale(1); }
 }
 
 /* Animação de Fundo (Retículas movendo) */
 @keyframes halftone-move {
   0% { background-position: 0 0; }
   100% { background-position: 20px 20px; }
+}
+
+/* [NOVO] Ícone Rindo (Balança e Cresce) */
+@keyframes comic-wiggle {
+  0%, 100% { transform: rotate(15deg) scale(1); }
+  50% { transform: rotate(5deg) scale(1.1); }
+}
+
+/* [NOVO] Tag Pulsante (Adesivo) */
+@keyframes sticker-pulse {
+  0% { transform: rotate(-10deg) scale(1); }
+  50% { transform: rotate(-10deg) scale(1.1); }
+  100% { transform: rotate(-10deg) scale(1); }
+}
+
+/* [NOVO] Flutuação da Caixa de Extras */
+@keyframes comic-float {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-5px) rotate(1deg); }
 }
 
 /* CONTAINER PRINCIPAL */
@@ -33,26 +45,26 @@
   margin: 40px auto;
   background-color: var(--comic-bg);
   
-  /* Padrão de Retículas (Halftone) */
+  /* Padrão de Retículas (Halftone) Animado */
   background-image: radial-gradient(var(--comic-halftone) 20%, transparent 20%);
   background-size: 10px 10px;
-  animation: halftone-move 10s linear infinite;
+  animation: halftone-move 20s linear infinite; /* Movimento lento e constante */
 
-  /* Borda Estilo Gibi (Grossa) */
+  /* Borda Estilo Gibi */
   border: 4px solid var(--comic-black);
-  box-shadow: 10px 10px 0 var(--comic-yellow); /* Sombra sólida */
-  border-radius: 0; /* Cantos retos */
+  box-shadow: 10px 10px 0 var(--comic-yellow);
+  border-radius: 0;
   
   color: var(--comic-paper);
   font-family: 'Comic Neue', cursive;
   position: relative;
   padding: 0;
-  overflow: visible; /* Permite elementos "saltarem" pra fora */
+  overflow: visible;
 }
 
 .comic-container * { box-sizing: border-box; }
 
-/* --- CABEÇALHO "MANCHETE" --- */
+/* --- CABEÇALHO --- */
 .comic-container .comic-header {
   background: var(--comic-yellow);
   padding: 20px;
@@ -60,16 +72,17 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  transform: skewY(-2deg); /* Cabeçalho torto */
+  transform: skewY(-2deg);
   margin-top: 10px;
   box-shadow: 0 5px 0 rgba(0,0,0,0.2);
 }
 
-/* Ícone "Onomatopeia" (SVG) */
+/* Ícone Animado */
 .comic-container .comic-icon {
   width: 60px; height: 60px;
   filter: drop-shadow(3px 3px 0 #000);
-  transform: rotate(15deg);
+  /* Aplica a animação de risada */
+  animation: comic-wiggle 2s ease-in-out infinite;
 }
 .comic-container .comic-icon path { fill: var(--comic-pink); }
 
@@ -89,11 +102,11 @@
   color: var(--comic-black);
   font-size: 0.9em;
   opacity: 0.8;
-  transform: rotate(2deg); /* Subtítulo torto ao contrário */
+  transform: rotate(2deg);
   margin-top: 5px;
 }
 
-/* --- IMAGEM (QUADRINHO) --- */
+/* --- IMAGEM --- */
 .comic-container .comic-image-frame {
   width: 95%;
   height: 350px;
@@ -109,11 +122,10 @@
   height: 100%;
   object-fit: cover;
   object-position: top center;
-  /* Filtro Halftone simulado (alto contraste) */
   filter: contrast(1.2) saturate(1.3);
 }
 
-/* Tag "Ao Vivo" */
+/* Tag "Ao Vivo" Animada */
 .comic-container .comic-image-frame::after {
   content: 'AO VIVO!';
   position: absolute;
@@ -123,11 +135,12 @@
   font-family: 'Bangers', cursive;
   padding: 5px 10px;
   border: 2px solid var(--comic-black);
-  transform: rotate(-10deg);
   box-shadow: 3px 3px 0 #000;
+  /* Aplica a animação de pulso */
+  animation: sticker-pulse 1.5s infinite;
 }
 
-/* --- BARRAS DE STATUS (STAMINA) --- */
+/* --- BARRAS DE STATUS --- */
 .comic-container .comic-stats {
   padding: 10px 25px;
   display: flex;
@@ -154,14 +167,14 @@
   border: 2px solid #fff;
   border-radius: 10px;
   overflow: hidden;
-  transform: skewX(-10deg); /* Barra inclinada estilo jogo de luta */
+  transform: skewX(-10deg);
 }
 
 .comic-container .jjk-dossier-status-bar {
   width: 100%; height: 100%; background: transparent; border: none;
 }
 
-/* HP: Rosa Chiclete */
+/* HP */
 .comic-container .jjk-dossier-hp-fill {
   height: 100%;
   background: repeating-linear-gradient(
@@ -175,7 +188,7 @@
   transition: width 0.5s ease;
 }
 
-/* EA: Ciano Elétrico */
+/* EA */
 .comic-container .jjk-dossier-ea-fill {
   height: 100%;
   background: repeating-linear-gradient(
@@ -195,7 +208,7 @@
   text-shadow: 1px 1px 0 #000; z-index: 5; left: auto;
 }
 
-/* --- CONTEÚDO (BALÃO DE FALA) --- */
+/* --- CONTEÚDO --- */
 .comic-container .comic-content {
   background: var(--comic-paper);
   color: #000;
@@ -212,17 +225,13 @@
 
 /* Rabinho do balão */
 .comic-container .comic-content::before {
-  content: '';
-  position: absolute;
-  top: -20px; left: 40px;
+  content: ''; position: absolute; top: -20px; left: 40px;
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-bottom: 20px solid var(--comic-black);
 }
 .comic-container .comic-content::after {
-  content: '';
-  position: absolute;
-  top: -14px; left: 44px;
+  content: ''; position: absolute; top: -14px; left: 44px;
   border-left: 16px solid transparent;
   border-right: 16px solid transparent;
   border-bottom: 16px solid var(--comic-paper);
@@ -241,7 +250,7 @@
   padding: 0 4px;
 }
 
-/* --- EXTRAS (Legenda de Narrador) --- */
+/* --- EXTRAS (Animado) --- */
 .comic-container .comic-extras {
   margin: 0 20px 20px 20px;
   padding: 15px;
@@ -251,7 +260,8 @@
   font-family: 'Bangers', cursive;
   font-size: 1em;
   letter-spacing: 1px;
-  transform: rotate(-1deg);
+  /* Animação de Flutuar */
+  animation: comic-float 4s ease-in-out infinite;
 }
 .comic-container .comic-extras::before {
   content: 'NOTA DO EDITOR:';
