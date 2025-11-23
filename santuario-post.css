@@ -1,0 +1,242 @@
+/* --- TEMPLATE: SANTUÁRIO MALEVOLENTE (SUKUNA) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap');
+
+/* Escopamento */
+.shrine-container {
+  --sukuna-bg: #0a0202;
+  --sukuna-panel: #140505;
+  --sukuna-red: #ff003c;   /* Vermelho Neon/Corte */
+  --sukuna-dark: #4a0011;  /* Vermelho Sangue Seco */
+  --sukuna-bone: #e3dac9;  /* Branco Osso */
+  --sukuna-gold: #d4af37;  /* Dourado Real */
+  --text-main: #f0e6e6;
+  --text-dim: #bf8e8e;
+}
+
+/* Animação de "Corte" (Dismantle) */
+@keyframes dismantle-slash {
+  0% { transform: translateX(-100%) skewX(-45deg); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateX(200%) skewX(-45deg); opacity: 0; }
+}
+
+/* Animação de Pulsação Maligna */
+@keyframes malice-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(255, 0, 60, 0.1); }
+  50% { box-shadow: 0 0 40px rgba(255, 0, 60, 0.3); }
+}
+
+/* CONTAINER PRINCIPAL */
+.shrine-container {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--sukuna-bg);
+  
+  /* Fundo: Marcas de corte sutis */
+  background-image: 
+    repeating-linear-gradient(
+      135deg,
+      transparent 0px,
+      transparent 100px,
+      rgba(255, 0, 60, 0.02) 100px,
+      rgba(255, 0, 60, 0.02) 101px
+    );
+  
+  border: 2px solid var(--sukuna-dark);
+  /* Cantos cortados (Clip-path) */
+  clip-path: polygon(
+    0 20px, 20px 0, 
+    100% 0, 100% calc(100% - 20px), 
+    calc(100% - 20px) 100%, 0 100%
+  );
+  
+  color: var(--text-main);
+  font-family: 'Spectral', serif;
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px var(--sukuna-red); /* Borda falsa externa */
+}
+
+.shrine-container * { box-sizing: border-box; }
+
+/* Efeito de Corte Passando na Tela */
+.shrine-container::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: dismantle-slash 6s infinite ease-in-out; /* Corte lento e constante */
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* --- CABEÇALHO --- */
+.shrine-container .shrine-header {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(180deg, #1a0505 0%, #0a0202 100%);
+  border-bottom: 2px solid var(--sukuna-red);
+  position: relative;
+  z-index: 2;
+}
+
+/* Ícone de Santuário (SVG) */
+.shrine-container .shrine-icon {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 180px; height: 180px;
+  opacity: 0.1;
+  pointer-events: none;
+}
+.shrine-container .shrine-icon path { fill: var(--sukuna-red); }
+
+.shrine-container .shrine-title {
+  font-family: 'Cinzel', serif;
+  font-size: 2.5em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin: 0;
+  text-shadow: 0 0 10px var(--sukuna-red);
+  line-height: 1;
+  position: relative;
+}
+
+.shrine-container .shrine-subtitle {
+  font-family: 'Cinzel', serif;
+  color: var(--sukuna-bone);
+  font-size: 0.85em;
+  margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  font-weight: 700;
+  position: relative;
+  border-top: 1px solid var(--sukuna-dark);
+  display: inline-block;
+  padding-top: 5px;
+}
+
+/* --- IMAGEM --- */
+.shrine-container .shrine-image-frame {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  border-bottom: 2px solid var(--sukuna-red);
+}
+.shrine-container .shrine-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  /* Filtro Ameaçador: Alto contraste, saturação seletiva */
+  filter: contrast(1.3) saturate(0.8);
+}
+
+/* --- BARRAS DE STATUS (AFIADAS) --- */
+.shrine-container .shrine-stats {
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: rgba(10, 2, 2, 0.8);
+  position: relative;
+  z-index: 2;
+}
+
+.shrine-container .jjk-dossier-status-item {
+  display: flex; align-items: center; gap: 15px;
+}
+
+.shrine-container .jjk-dossier-status-label {
+  font-family: 'Cinzel', serif; font-weight: 900;
+  color: var(--sukuna-red); width: 30px; font-size: 0.9em;
+  text-shadow: 0 0 5px var(--sukuna-red);
+}
+
+.shrine-container .jjk-dossier-status-bar-wrapper {
+  flex-grow: 1; position: relative; height: 8px;
+  background: #000;
+  /* Bordas afiadas, sem radius */
+  border: 1px solid var(--sukuna-dark);
+  transform: skewX(-20deg); /* Barra inclinada/agressiva */
+}
+
+.shrine-container .jjk-dossier-status-bar {
+  width: 100%; height: 100%; background: transparent; border: none;
+}
+
+/* HP: Vermelho Carmesim Sólido */
+.shrine-container .jjk-dossier-hp-fill {
+  height: 100%;
+  background: var(--sukuna-red);
+  box-shadow: 0 0 10px var(--sukuna-red);
+  transition: width 0.5s ease;
+}
+
+/* EA: Preto/Roxo Maligno */
+.shrine-container .jjk-dossier-ea-fill {
+  height: 100%;
+  background: #fff; /* Energia pura/branca para contraste com o fundo escuro */
+  box-shadow: 0 0 10px #fff;
+  transition: width 0.5s ease;
+}
+
+.shrine-container .jjk-dossier-status-value {
+  position: absolute; right: 0; top: -20px;
+  font-size: 0.8em; font-family: 'Cinzel', serif;
+  color: var(--sukuna-bone); text-align: right; font-weight: 700;
+  left: auto; transform: skewX(20deg); /* Compensa a inclinação */
+}
+
+/* --- CONTEÚDO --- */
+.shrine-container .shrine-content {
+  padding: 25px 40px;
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: var(--text-main);
+  text-align: justify;
+  position: relative;
+  z-index: 2;
+  /* Linha vertical decorativa */
+  border-left: 1px solid var(--sukuna-dark);
+  margin-left: 20px;
+}
+
+.shrine-container .shrine-content b {
+  color: var(--sukuna-red);
+  font-weight: 900;
+}
+
+.shrine-container .shrine-content i {
+  color: var(--sukuna-bone);
+  font-family: 'Cinzel', serif;
+}
+
+/* --- EXTRAS (Pergaminho Amaldiçoado) --- */
+.shrine-container .shrine-extras {
+  margin: 0 30px 30px 30px;
+  padding: 20px;
+  background: rgba(255, 0, 60, 0.05);
+  border: 1px solid var(--sukuna-red);
+  position: relative;
+  z-index: 2;
+  font-size: 0.9em;
+  color: var(--sukuna-bone);
+  text-align: center;
+  clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
+}
+
+.shrine-container .shrine-extras b {
+  color: var(--sukuna-red);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 600px) {
+  .shrine-container .shrine-header { padding: 30px 15px; }
+  .shrine-container .shrine-content { padding: 20px; margin-left: 0; border-left: none; }
+}
