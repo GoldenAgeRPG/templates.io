@@ -1,4 +1,4 @@
-/* --- TEMPLATE: 8-BIT SEA v2 (Pixel Bubbles) --- */
+/* --- TEMPLATE: 8-BIT SEA v3 (Survivor Edition) --- */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Mono:wght@400;700&display=swap');
 
 :root {
@@ -8,34 +8,29 @@
   --sea-cyan: #00e5ff;
   --sea-coral: #ff6f61;
   --sea-foam: #e0f7fa;
+  --sea-gold: #ffd700; /* Novo: Dourado para a tag */
   --sea-border: #0d47a1;
-  --sea-bubble: rgba(0, 229, 255, 0.6); /* Cor das bolhas 8bit */
+  --sea-bubble: rgba(0, 229, 255, 0.6);
 }
 
-/* Animação de Flutuar na Água (Container) */
+/* Animação de Flutuar */
 @keyframes water-bob {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-5px); }
 }
 
-/* Animação de Piscar (Rodapé) */
+/* Animação de Piscar */
 @keyframes score-blink {
-  0%, 100% { opacity: 1; color: var(--sea-cyan); }
-  50% { opacity: 0.5; color: var(--sea-foam); }
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
 }
 
-/* [NOVO] Animação de Bolhas 8-Bit Subindo */
+/* Animação de Bolhas 8-Bit */
 @keyframes pixel-bubble-rise {
-  0% {
-    transform: translateY(100px); /* Começa abaixo */
-    opacity: 0;
-  }
+  0% { transform: translateY(100px); opacity: 0; }
   10% { opacity: 1; }
   90% { opacity: 1; }
-  100% {
-    transform: translateY(-600px); /* Sobe até sumir */
-    opacity: 0;
-  }
+  100% { transform: translateY(-600px); opacity: 0; }
 }
 
 /* CONTAINER PRINCIPAL */
@@ -46,7 +41,7 @@
   margin: 40px auto;
   background-color: var(--sea-bg);
   
-  /* Fundo de Ondas Pixeladas */
+  /* Fundo */
   background-image: 
     linear-gradient(transparent 95%, rgba(0, 229, 255, 0.1) 50%),
     repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 96, 255, 0.05) 10px, rgba(0, 96, 255, 0.05) 20px);
@@ -62,66 +57,62 @@
   position: relative;
   overflow: hidden;
   animation: water-bob 4s ease-in-out infinite;
+
+  /* [CORREÇÃO DE CORTE] Flex Column para organizar o layout verticalmente */
+  display: flex;
+  flex-direction: column;
 }
 
 .sea-container * { box-sizing: border-box; }
 
-/* [NOVO] Bolhas 8-Bit - Canto Esquerdo (::before) */
+/* Bolhas 8-Bit (Cantos) */
 .sea-container::before {
-  content: '';
-  position: absolute;
-  bottom: -20px; left: 20px;
-  /* Cria UMA bolha quadrada oca (visual 8bit) */
-  width: 8px; height: 8px;
-  background: transparent;
-  border: 2px solid var(--sea-cyan);
-  /* Clona essa bolha verticalmente usando shadows sólidas */
-  box-shadow: 
-    0 60px 0 var(--sea-cyan),
-    0 120px 0 var(--sea-blue),
-    0 180px 0 var(--sea-cyan),
-    -10px 240px 0 var(--sea-blue),
-    10px 300px 0 var(--sea-cyan);
-  opacity: 0.4;
-  z-index: 0; /* Atrás do conteúdo */
-  animation: pixel-bubble-rise 8s linear infinite;
+  content: ''; position: absolute; bottom: -20px; left: 20px;
+  width: 8px; height: 8px; background: transparent; border: 2px solid var(--sea-cyan);
+  box-shadow: 0 60px 0 var(--sea-cyan), 0 120px 0 var(--sea-blue), 0 180px 0 var(--sea-cyan), -10px 240px 0 var(--sea-blue), 10px 300px 0 var(--sea-cyan);
+  opacity: 0.4; z-index: 0; animation: pixel-bubble-rise 8s linear infinite;
 }
-
-/* [NOVO] Bolhas 8-Bit - Canto Direito (::after) */
 .sea-container::after {
-  content: '';
-  position: absolute;
-  bottom: -40px; right: 20px; /* Começa um pouco diferente */
-  width: 6px; height: 6px; /* Tamanho diferente */
-  background: transparent;
-  border: 2px solid var(--sea-blue); /* Cor diferente */
-  box-shadow: 
-    0 50px 0 var(--sea-blue),
-    0 100px 0 var(--sea-cyan),
-    -5px 150px 0 var(--sea-blue),
-    5px 200px 0 var(--sea-cyan),
-    0 250px 0 var(--sea-blue);
-  opacity: 0.3;
-  z-index: 0;
-  animation: pixel-bubble-rise 10s linear infinite; /* Velocidade diferente */
-  animation-delay: 1s;
+  content: ''; position: absolute; bottom: -40px; right: 20px;
+  width: 6px; height: 6px; background: transparent; border: 2px solid var(--sea-blue);
+  box-shadow: 0 50px 0 var(--sea-blue), 0 100px 0 var(--sea-cyan), -5px 150px 0 var(--sea-blue), 5px 200px 0 var(--sea-cyan), 0 250px 0 var(--sea-blue);
+  opacity: 0.3; z-index: 0; animation: pixel-bubble-rise 10s linear infinite; animation-delay: 1s;
 }
-
 
 /* --- CABEÇALHO --- */
 .sea-container .sea-header {
-  padding: 25px 20px;
+  padding: 20px;
   background: linear-gradient(180deg, var(--sea-panel), var(--sea-bg));
   border-bottom: 4px solid var(--sea-cyan);
-  display: flex; align-items: center; justify-content: space-between;
   position: relative; z-index: 2;
+  /* Flex column para acomodar a nova tag embaixo */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-/* Decoração de texto 8bit */
+.sea-container .sea-header-top {
+  display: flex; justify-content: space-between; align-items: center; width: 100%;
+}
+
+/* [NOVO] Tag de Sobrevivente */
+.sea-container .sea-survivor-tag {
+  font-family: 'Press Start 2P', cursive;
+  font-size: 0.7em;
+  color: var(--sea-gold);
+  text-align: center;
+  width: 100%;
+  padding-top: 10px;
+  border-top: 2px dashed rgba(0, 229, 255, 0.3);
+  letter-spacing: 1px;
+  text-shadow: 2px 2px 0 #000;
+  animation: score-blink 3s infinite;
+}
+
+/* Decoração */
 .sea-container .sea-header::before {
-  content: '° . o [ ] . °';
-  position: absolute; top: 5px; right: 10px;
-  font-family: 'Press Start 2P', cursive; color: var(--sea-cyan); font-size: 8px; opacity: 0.5;
+  content: '° . o [ ] . °'; position: absolute; top: 5px; right: 10px;
+  font-family: 'Press Start 2P', cursive; color: var(--sea-bubble); font-size: 8px; opacity: 0.5;
 }
 
 .sea-container .sea-title {
@@ -133,7 +124,6 @@
   font-size: 0.7em; margin-top: 8px; text-transform: uppercase;
 }
 
-/* Ícone 8-bit (SVG) */
 .sea-container .sea-icon {
   width: 40px; height: 40px; filter: drop-shadow(2px 2px 0 #000);
 }
@@ -142,21 +132,20 @@
 /* --- IMAGEM --- */
 .sea-container .sea-image-frame {
   width: 100%; height: 350px; position: relative;
-  border-bottom: 4px solid var(--sea-cyan); background: #000; padding: 4px; z-index: 2;
+  border-bottom: 4px solid var(--sea-cyan); background: #000; padding: 4px; z-index: 2; flex-shrink: 0;
 }
 .sea-container .sea-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
   filter: contrast(1.1) sepia(0.2) hue-rotate(180deg) saturate(1.2) brightness(0.9);
   image-rendering: pixelated;
 }
-/* Overlay de Água na Imagem */
 .sea-container .sea-image-frame::after {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(to bottom, transparent 60%, rgba(0, 229, 255, 0.2) 100%);
   pointer-events: none;
 }
 
-/* --- BARRAS DE STATUS --- */
+/* --- BARRAS --- */
 .sea-container .sea-stats {
   padding: 20px 25px; display: flex; flex-direction: column; gap: 15px;
   background: #020205; border-bottom: 4px solid var(--sea-border); z-index: 2; position: relative;
@@ -168,7 +157,6 @@
 }
 .sea-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
 
-/* HP / EA com steps(10) para visual de blocos */
 .sea-container .jjk-dossier-hp-fill {
   height: 100%; background: repeating-linear-gradient(90deg, var(--sea-coral) 0, var(--sea-coral) 8px, #000 8px, #000 10px);
   transition: width 0.5s steps(10);
@@ -196,7 +184,8 @@
 
 /* --- EXTRAS --- */
 .sea-container .sea-extras {
-  margin: 0 20px 0px 20px; /* Margem inferior 0 para colar no rodapé */
+  /* [CORREÇÃO DE CORTE] Margem inferior adicionada */
+  margin: 0 20px 20px 20px;
   padding: 15px; background: #001e36; border: 2px solid var(--sea-cyan); border-bottom: none;
   color: var(--sea-cyan); font-family: 'Press Start 2P', cursive; font-size: 0.7em; line-height: 1.8;
   box-shadow: inset 0 0 20px rgba(0,0,0,0.5); z-index: 2; position: relative;
@@ -206,19 +195,21 @@
   border-bottom: 2px dashed #fff; padding-bottom: 5px;
 }
 
-/* [NOVO] HALL DA FAMA (Rodapé Físico) */
+/* --- RODAPÉ --- */
 .sea-footer {
   display: flex; align-items: center; justify-content: center;
-  width: 100%; height: 40px;
+  width: 100%; padding: 10px;
   background-color: #000; border-top: 4px solid var(--sea-border);
   font-family: 'Press Start 2P', cursive; font-size: 9px; color: var(--sea-cyan);
   letter-spacing: 1px; z-index: 10; position: relative;
-  animation: score-blink 4s infinite steps(2);
+  /* [FIX] Flex-shrink para garantir que ele não suma */
+  flex-shrink: 0;
+  margin-top: auto; /* Empurra para o fundo se sobrar espaço */
 }
 
 @media (max-width: 600px) {
-  .sea-container .sea-header { flex-direction: column; text-align: center; gap: 10px; }
+  .sea-container .sea-header-top { flex-direction: column; text-align: center; gap: 10px; }
   .sea-container .jjk-dossier-status-item { grid-template-columns: 1fr; gap: 5px; margin-bottom: 10px; }
   .sea-container .jjk-dossier-status-label, .sea-container .jjk-dossier-status-value { text-align: left; }
-  .sea-footer { font-size: 7px; white-space: normal; text-align: center; padding: 5px; height: auto; }
+  .sea-footer { font-size: 7px; white-space: normal; text-align: center; }
 }
