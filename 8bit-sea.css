@@ -1,33 +1,41 @@
-/* --- TEMPLATE: 8-BIT SEA (DEEP ZONE) --- */
+/* --- TEMPLATE: 8-BIT SEA v2 (Pixel Bubbles) --- */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Mono:wght@400;700&display=swap');
 
 :root {
   --sea-bg: #020408;
   --sea-panel: #05101a;
   --sea-blue: #0060ff;
-  --sea-cyan: #00e5ff;     /* EA / Destaques */
-  --sea-coral: #ff6f61;    /* HP / Perigo */
-  --sea-foam: #e0f7fa;     /* Texto */
+  --sea-cyan: #00e5ff;
+  --sea-coral: #ff6f61;
+  --sea-foam: #e0f7fa;
   --sea-border: #0d47a1;
-  --sea-bubble: rgba(0, 229, 255, 0.1);
+  --sea-bubble: rgba(0, 229, 255, 0.6); /* Cor das bolhas 8bit */
 }
 
-/* Animação de Flutuar na Água (Bobbing) */
+/* Animação de Flutuar na Água (Container) */
 @keyframes water-bob {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-5px); }
 }
 
-/* Animação de Ondas (Background) */
-@keyframes wave-scroll {
-  0% { background-position: 0 0; }
-  100% { background-position: 40px 0; }
-}
-
-/* Animação de Piscar (Score) */
+/* Animação de Piscar (Rodapé) */
 @keyframes score-blink {
   0%, 100% { opacity: 1; color: var(--sea-cyan); }
   50% { opacity: 0.5; color: var(--sea-foam); }
+}
+
+/* [NOVO] Animação de Bolhas 8-Bit Subindo */
+@keyframes pixel-bubble-rise {
+  0% {
+    transform: translateY(100px); /* Começa abaixo */
+    opacity: 0;
+  }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% {
+    transform: translateY(-600px); /* Sobe até sumir */
+    opacity: 0;
+  }
 }
 
 /* CONTAINER PRINCIPAL */
@@ -41,19 +49,10 @@
   /* Fundo de Ondas Pixeladas */
   background-image: 
     linear-gradient(transparent 95%, rgba(0, 229, 255, 0.1) 50%),
-    repeating-linear-gradient(
-      45deg,
-      transparent,
-      transparent 10px,
-      rgba(0, 96, 255, 0.05) 10px,
-      rgba(0, 96, 255, 0.05) 20px
-    );
+    repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 96, 255, 0.05) 10px, rgba(0, 96, 255, 0.05) 20px);
   
-  /* Borda Estilo "Aquário" */
   border: 4px solid var(--sea-border);
-  box-shadow: 
-    0 0 0 4px #000, 
-    0 0 30px rgba(0, 229, 255, 0.1);
+  box-shadow: 0 0 0 4px #000, 0 0 30px rgba(0, 229, 255, 0.1);
     
   color: var(--sea-foam);
   font-family: 'Roboto Mono', monospace;
@@ -62,219 +61,164 @@
   padding: 0;
   position: relative;
   overflow: hidden;
-  padding-bottom: 50px; /* Espaço para o rodapé */
-  
-  /* Tudo flutua levemente */
   animation: water-bob 4s ease-in-out infinite;
 }
 
 .sea-container * { box-sizing: border-box; }
 
-/* --- HALL DA FAMA (RODAPÉ) --- */
-.sea-container::after {
-  content: "YUJI  •  MEGUMI  •  NOBARA  •  MAKI  •  TOGE  •  PANDA";
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* [NOVO] Bolhas 8-Bit - Canto Esquerdo (::before) */
+.sea-container::before {
+  content: '';
   position: absolute;
-  bottom: 0; left: 0; width: 100%; height: 40px;
-  
-  background-color: #000;
-  border-top: 2px solid var(--sea-border);
-  
-  font-family: 'Press Start 2P', cursive;
-  font-size: 9px;
-  color: var(--sea-cyan);
-  letter-spacing: 1px;
-  z-index: 10;
-  animation: score-blink 4s infinite steps(2);
+  bottom: -20px; left: 20px;
+  /* Cria UMA bolha quadrada oca (visual 8bit) */
+  width: 8px; height: 8px;
+  background: transparent;
+  border: 2px solid var(--sea-cyan);
+  /* Clona essa bolha verticalmente usando shadows sólidas */
+  box-shadow: 
+    0 60px 0 var(--sea-cyan),
+    0 120px 0 var(--sea-blue),
+    0 180px 0 var(--sea-cyan),
+    -10px 240px 0 var(--sea-blue),
+    10px 300px 0 var(--sea-cyan);
+  opacity: 0.4;
+  z-index: 0; /* Atrás do conteúdo */
+  animation: pixel-bubble-rise 8s linear infinite;
 }
+
+/* [NOVO] Bolhas 8-Bit - Canto Direito (::after) */
+.sea-container::after {
+  content: '';
+  position: absolute;
+  bottom: -40px; right: 20px; /* Começa um pouco diferente */
+  width: 6px; height: 6px; /* Tamanho diferente */
+  background: transparent;
+  border: 2px solid var(--sea-blue); /* Cor diferente */
+  box-shadow: 
+    0 50px 0 var(--sea-blue),
+    0 100px 0 var(--sea-cyan),
+    -5px 150px 0 var(--sea-blue),
+    5px 200px 0 var(--sea-cyan),
+    0 250px 0 var(--sea-blue);
+  opacity: 0.3;
+  z-index: 0;
+  animation: pixel-bubble-rise 10s linear infinite; /* Velocidade diferente */
+  animation-delay: 1s;
+}
+
 
 /* --- CABEÇALHO --- */
 .sea-container .sea-header {
   padding: 25px 20px;
   background: linear-gradient(180deg, var(--sea-panel), var(--sea-bg));
   border-bottom: 4px solid var(--sea-cyan);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
+  display: flex; align-items: center; justify-content: space-between;
+  position: relative; z-index: 2;
 }
 
-/* Bolhas Decorativas no Header */
+/* Decoração de texto 8bit */
 .sea-container .sea-header::before {
-  content: '° . o . °';
-  position: absolute;
-  top: 5px; right: 10px;
-  font-family: 'Press Start 2P', cursive;
-  color: var(--sea-bubble);
-  font-size: 10px;
+  content: '° . o [ ] . °';
+  position: absolute; top: 5px; right: 10px;
+  font-family: 'Press Start 2P', cursive; color: var(--sea-cyan); font-size: 8px; opacity: 0.5;
 }
 
 .sea-container .sea-title {
-  font-family: 'Press Start 2P', cursive;
-  font-size: 1.1em;
-  color: var(--sea-cyan);
-  text-transform: uppercase;
-  margin: 0;
-  text-shadow: 2px 2px 0 #001e36;
+  font-family: 'Press Start 2P', cursive; font-size: 1.1em; color: var(--sea-cyan);
+  text-transform: uppercase; margin: 0; text-shadow: 2px 2px 0 #001e36;
 }
-
 .sea-container .sea-subtitle {
-  font-family: 'Press Start 2P', cursive;
-  color: var(--sea-blue);
-  font-size: 0.7em;
-  margin-top: 8px;
-  text-transform: uppercase;
+  font-family: 'Press Start 2P', cursive; color: var(--sea-blue);
+  font-size: 0.7em; margin-top: 8px; text-transform: uppercase;
 }
 
-/* Ícone de Peixe/Onda 8-bit (SVG) */
+/* Ícone 8-bit (SVG) */
 .sea-container .sea-icon {
-  width: 40px; height: 40px;
-  filter: drop-shadow(2px 2px 0 #000);
+  width: 40px; height: 40px; filter: drop-shadow(2px 2px 0 #000);
 }
 .sea-container .sea-icon path { fill: var(--sea-foam); }
 
 /* --- IMAGEM --- */
 .sea-container .sea-image-frame {
-  width: 100%;
-  height: 350px;
-  position: relative;
-  border-bottom: 4px solid var(--sea-cyan);
-  background: #000;
-  padding: 4px;
+  width: 100%; height: 350px; position: relative;
+  border-bottom: 4px solid var(--sea-cyan); background: #000; padding: 4px; z-index: 2;
 }
-
 .sea-container .sea-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  /* Filtro Subaquático (Azulado) */
   filter: contrast(1.1) sepia(0.2) hue-rotate(180deg) saturate(1.2) brightness(0.9);
   image-rendering: pixelated;
 }
-
 /* Overlay de Água na Imagem */
 .sea-container .sea-image-frame::after {
-  content: '';
-  position: absolute; inset: 0;
+  content: ''; position: absolute; inset: 0;
   background: linear-gradient(to bottom, transparent 60%, rgba(0, 229, 255, 0.2) 100%);
   pointer-events: none;
 }
 
 /* --- BARRAS DE STATUS --- */
 .sea-container .sea-stats {
-  padding: 20px 25px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  background: #020205;
-  border-bottom: 4px solid var(--sea-border);
+  padding: 20px 25px; display: flex; flex-direction: column; gap: 15px;
+  background: #020205; border-bottom: 4px solid var(--sea-border); z-index: 2; position: relative;
 }
-
-.sea-container .jjk-dossier-status-item {
-  display: grid;
-  grid-template-columns: 50px 1fr 100px;
-  align-items: center;
-  gap: 10px;
-}
-
-.sea-container .jjk-dossier-status-label {
-  font-family: 'Press Start 2P', cursive;
-  color: var(--sea-cyan);
-  font-size: 0.7em;
-}
-
+.sea-container .jjk-dossier-status-item { display: grid; grid-template-columns: 50px 1fr 100px; align-items: center; gap: 10px; }
+.sea-container .jjk-dossier-status-label { font-family: 'Press Start 2P', cursive; color: var(--sea-cyan); font-size: 0.7em; }
 .sea-container .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 20px;
-  background: #001021;
-  border: 2px solid #fff;
-  padding: 2px;
+  width: 100%; height: 20px; background: #001021; border: 2px solid #fff; padding: 2px;
 }
+.sea-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
 
-.sea-container .jjk-dossier-status-bar {
-  width: 100%; height: 100%; background: transparent; border: none;
-}
-
-/* HP: Coral (Vermelho suave) */
+/* HP / EA com steps(10) para visual de blocos */
 .sea-container .jjk-dossier-hp-fill {
-  height: 100%;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--sea-coral) 0,
-    var(--sea-coral) 8px,
-    #000 8px,
-    #000 10px
-  );
+  height: 100%; background: repeating-linear-gradient(90deg, var(--sea-coral) 0, var(--sea-coral) 8px, #000 8px, #000 10px);
   transition: width 0.5s steps(10);
 }
-
-/* EA: Azul Oceano */
 .sea-container .jjk-dossier-ea-fill {
-  height: 100%;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--sea-blue) 0,
-    var(--sea-blue) 8px,
-    #000 8px,
-    #000 10px
-  );
+  height: 100%; background: repeating-linear-gradient(90deg, var(--sea-blue) 0, var(--sea-blue) 8px, #000 8px, #000 10px);
   transition: width 0.5s steps(10);
 }
-
 .sea-container .jjk-dossier-status-value {
-  position: static; transform: none;
-  font-family: 'Press Start 2P', cursive; font-size: 0.7em;
+  position: static; transform: none; font-family: 'Press Start 2P', cursive; font-size: 0.7em;
   color: var(--sea-foam); text-align: right;
 }
 
 /* --- CONTEÚDO --- */
 .sea-container .sea-content {
-  padding: 25px;
-  color: var(--sea-foam);
-  text-align: justify;
-  background: rgba(0, 229, 255, 0.02);
-  font-family: 'Roboto Mono', monospace;
-  font-size: 14px;
+  padding: 25px; color: var(--sea-foam); text-align: justify;
+  background: rgba(0, 229, 255, 0.02); font-family: 'Roboto Mono', monospace; font-size: 14px;
+  z-index: 2; position: relative;
 }
-
 .sea-container .sea-content b {
-  color: var(--sea-cyan);
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+  color: var(--sea-cyan); font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
   text-shadow: 0 0 5px rgba(0, 229, 255, 0.4);
 }
+.sea-container .sea-content i { color: var(--sea-coral); font-style: italic; }
 
-.sea-container .sea-content i {
-  color: var(--sea-coral);
-  font-style: italic;
-}
-
-/* --- EXTRAS (Menu Azul) --- */
+/* --- EXTRAS --- */
 .sea-container .sea-extras {
-  margin: 0 20px 20px 20px;
-  padding: 15px;
-  background: #001e36;
-  border: 2px solid var(--sea-cyan);
-  color: var(--sea-cyan);
-  font-family: 'Press Start 2P', cursive;
-  font-size: 0.7em;
-  line-height: 1.8;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+  margin: 0 20px 0px 20px; /* Margem inferior 0 para colar no rodapé */
+  padding: 15px; background: #001e36; border: 2px solid var(--sea-cyan); border-bottom: none;
+  color: var(--sea-cyan); font-family: 'Press Start 2P', cursive; font-size: 0.7em; line-height: 1.8;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5); z-index: 2; position: relative;
+}
+.sea-container .sea-extras::before {
+  content: 'INVENTORY'; display: block; color: #fff; margin-bottom: 10px;
+  border-bottom: 2px dashed #fff; padding-bottom: 5px;
 }
 
-.sea-container .sea-extras::before {
-  content: 'INVENTORY';
-  display: block;
-  color: #fff;
-  margin-bottom: 10px;
-  border-bottom: 2px dashed #fff;
-  padding-bottom: 5px;
+/* [NOVO] HALL DA FAMA (Rodapé Físico) */
+.sea-footer {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; height: 40px;
+  background-color: #000; border-top: 4px solid var(--sea-border);
+  font-family: 'Press Start 2P', cursive; font-size: 9px; color: var(--sea-cyan);
+  letter-spacing: 1px; z-index: 10; position: relative;
+  animation: score-blink 4s infinite steps(2);
 }
 
 @media (max-width: 600px) {
   .sea-container .sea-header { flex-direction: column; text-align: center; gap: 10px; }
   .sea-container .jjk-dossier-status-item { grid-template-columns: 1fr; gap: 5px; margin-bottom: 10px; }
-  .sea-container .jjk-dossier-status-label, 
-  .sea-container .jjk-dossier-status-value { text-align: left; }
-  .sea-container::after { font-size: 7px; white-space: normal; }
+  .sea-container .jjk-dossier-status-label, .sea-container .jjk-dossier-status-value { text-align: left; }
+  .sea-footer { font-size: 7px; white-space: normal; text-align: center; padding: 5px; height: auto; }
 }
