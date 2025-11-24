@@ -1,4 +1,4 @@
-/* --- TEMPLATE: 8-BIT SEA v4 (Survivor Tag CSS) --- */
+/* --- TEMPLATE: 8-BIT SEA v5 (Hardcoded Footer) --- */
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto+Mono:wght@400;700&display=swap');
 
 :root {
@@ -8,7 +8,7 @@
   --sea-cyan: #00e5ff;
   --sea-coral: #ff6f61;
   --sea-foam: #e0f7fa;
-  --sea-gold: #ffd700; /* Dourado para o Survivor */
+  --sea-gold: #ffd700;
   --sea-border: #0d47a1;
   --sea-bubble: rgba(0, 229, 255, 0.6);
 }
@@ -28,6 +28,14 @@
   90% { opacity: 1; }
   100% { transform: translateY(-600px); opacity: 0; }
 }
+@keyframes candy-move-tight {
+  0% { background-position: 0 0; }
+  100% { background-position: 28px 0; } 
+}
+@keyframes snow-banner-fall {
+  0% { background-position: 0px 0px, 0px 0px; }
+  100% { background-position: 20px 200px, 40px 300px; }
+}
 
 /* CONTAINER PRINCIPAL */
 .sea-container {
@@ -37,7 +45,7 @@
   margin: 40px auto;
   background-color: var(--sea-bg);
   
-  /* Fundo Pixelado */
+  /* Fundo */
   background-image: 
     linear-gradient(transparent 95%, rgba(0, 229, 255, 0.1) 50%),
     repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 96, 255, 0.05) 10px, rgba(0, 96, 255, 0.05) 20px);
@@ -53,7 +61,6 @@
   position: relative;
   overflow: hidden;
   
-  /* Flex Layout para evitar cortes */
   display: flex;
   flex-direction: column;
   
@@ -66,54 +73,53 @@
 .sea-container::before {
   content: ''; position: absolute; bottom: -20px; left: 20px;
   width: 8px; height: 8px; border: 2px solid var(--sea-cyan);
-  box-shadow: 0 60px 0 var(--sea-cyan), 0 120px 0 var(--sea-blue), 0 180px 0 var(--sea-cyan);
+  box-shadow: 0 60px 0 var(--sea-cyan), 0 120px 0 var(--sea-blue), 0 180px 0 var(--sea-cyan), -10px 240px 0 var(--sea-blue), 10px 300px 0 var(--sea-cyan);
   opacity: 0.4; z-index: 0; animation: pixel-bubble-rise 8s linear infinite; pointer-events: none;
 }
 .sea-container::after {
   content: ''; position: absolute; bottom: -40px; right: 20px;
   width: 6px; height: 6px; border: 2px solid var(--sea-blue);
-  box-shadow: 0 50px 0 var(--sea-blue), 0 100px 0 var(--sea-cyan);
+  box-shadow: 0 50px 0 var(--sea-blue), 0 100px 0 var(--sea-cyan), -5px 150px 0 var(--sea-blue), 5px 200px 0 var(--sea-cyan), 0 250px 0 var(--sea-blue);
   opacity: 0.3; z-index: 0; animation: pixel-bubble-rise 10s linear infinite; animation-delay: 1s; pointer-events: none;
 }
 
 /* --- CABEÇALHO --- */
 .sea-container .sea-header {
-  padding: 25px 20px;
+  padding: 20px;
   background: linear-gradient(180deg, var(--sea-panel), var(--sea-bg));
-  border-bottom: 4px solid var(--sea-cyan); /* A linha azul onde a tag vai sentar */
+  border-bottom: 4px solid var(--sea-cyan);
   position: relative; 
   z-index: 2;
-  margin-bottom: 0; /* Remove margem para colar na imagem */
+  margin-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-/* [NOVO] TAG SOBREVIVENTE (Inserida via CSS) */
+/* TAG SOBREVIVENTE (FIXA NO CSS) */
 .sea-container .sea-header::after {
   content: '★ SOBREVIVENTE DA S0 ★';
   position: absolute;
-  bottom: -10px; /* Puxa para baixo para ficar em cima da linha */
+  bottom: -10px;
   left: 50%;
   transform: translateX(-50%);
-  
-  background-color: var(--sea-bg); /* Fundo igual ao container para "cortar" a linha */
+  background-color: var(--sea-bg);
   color: var(--sea-gold);
   font-family: 'Press Start 2P', cursive;
   font-size: 9px;
   padding: 2px 8px;
-  border: 2px solid var(--sea-border); /* Borda para parecer uma plaqueta */
-  
+  border: 2px solid var(--sea-border);
   text-shadow: 1px 1px 0 #000;
   white-space: nowrap;
-  z-index: 10; /* Fica acima da borda e da imagem */
-}
-
-/* Decoração de Bolhas no Texto */
-.sea-container .sea-header-top::before {
-  content: '° . o [ ] . °'; position: absolute; top: 5px; right: 10px;
-  font-family: 'Press Start 2P', cursive; color: var(--sea-bubble); font-size: 8px; opacity: 0.5;
+  z-index: 10;
 }
 
 .sea-container .sea-header-top {
-  display: flex; justify-content: space-between; align-items: center;
+  display: flex; justify-content: space-between; align-items: center; width: 100%;
+}
+.sea-container .sea-header-top::before {
+  content: '° . o [ ] . °'; position: absolute; top: 5px; right: 10px;
+  font-family: 'Press Start 2P', cursive; color: var(--sea-bubble); font-size: 8px; opacity: 0.5;
 }
 
 .sea-container .sea-title {
@@ -186,33 +192,39 @@
 }
 .sea-container .sea-content i { color: var(--sea-coral); font-style: italic; }
 
-/* --- EXTRAS (Corrigido o corte) --- */
+/* --- EXTRAS --- */
 .sea-container .sea-extras {
   margin: 0 20px 20px 20px;
   padding: 15px; background: #001e36; border: 2px solid var(--sea-cyan); border-bottom: none;
   color: var(--sea-cyan); font-family: 'Press Start 2P', cursive; font-size: 0.7em; line-height: 1.8;
   box-shadow: inset 0 0 20px rgba(0,0,0,0.5); z-index: 2; position: relative;
-  flex-shrink: 0; /* Garante que não encolha */
+  flex-shrink: 0;
 }
 .sea-container .sea-extras::before {
   content: 'INVENTORY'; display: block; color: #fff; margin-bottom: 10px;
   border-bottom: 2px dashed #fff; padding-bottom: 5px;
 }
 
-/* --- RODAPÉ --- */
+/* --- RODAPÉ (NOMES FIXOS) --- */
 .sea-footer {
   display: flex; align-items: center; justify-content: center;
   width: 100%; padding: 15px;
   background-color: #000; border-top: 4px solid var(--sea-border);
+  /* Fonte e cor padrão */
   font-family: 'Press Start 2P', cursive; font-size: 9px; color: var(--sea-cyan);
   letter-spacing: 1px; z-index: 10; position: relative;
-  flex-shrink: 0;
-  margin-top: auto; /* Empurra para o final do container flex */
+  flex-shrink: 0; margin-top: auto;
+}
+
+/* [NOVO] CONTEÚDO DO RODAPÉ INJETADO PELO CSS */
+.sea-footer::after {
+  content: "YUJI • MEGUMI • NOBARA • MAKI • TOGE • PANDA";
+  animation: score-blink 4s infinite steps(2);
 }
 
 @media (max-width: 600px) {
   .sea-container .sea-header-top { flex-direction: column; text-align: center; gap: 10px; }
   .sea-container .jjk-dossier-status-item { grid-template-columns: 1fr; gap: 5px; margin-bottom: 10px; }
   .sea-container .jjk-dossier-status-label, .sea-container .jjk-dossier-status-value { text-align: left; }
-  .sea-footer { font-size: 7px; white-space: normal; text-align: center; }
+  .sea-footer::after { font-size: 7px; white-space: normal; text-align: center; }
 }
