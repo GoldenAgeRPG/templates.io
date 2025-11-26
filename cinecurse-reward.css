@@ -1,4 +1,4 @@
-/* --- TEMPLATE: CINECURSE REWARD (FINAL) --- */
+/* --- TEMPLATE: CINECURSE REWARD (FINAL FIX) --- */
 @import url('https://fonts.googleapis.com/css2?family=Limelight&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@700&display=swap');
 
 :root {
@@ -10,7 +10,6 @@
   --cine-black: #080808;
 }
 
-/* Animação suave de tremulação (Filme) */
 @keyframes film-flicker {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.98; }
@@ -23,10 +22,8 @@
   width: 95%;
   margin: 40px auto;
   background-color: var(--cine-black);
-  /* Textura de Ruído Sutil */
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
   
-  /* Bordas de Filme */
   border-left: 25px solid #000;
   border-right: 25px solid #000;
   position: relative;
@@ -40,7 +37,7 @@
 }
 .cine-container * { box-sizing: border-box; }
 
-/* Furinhos do Filme */
+/* Furos laterais */
 .cine-container::before, .cine-container::after {
   content: ''; position: absolute; top: 0; bottom: 0; width: 15px;
   background-image: linear-gradient(to bottom, #333 50%, transparent 50%);
@@ -58,7 +55,7 @@
 }
 .cine-award-banner::before { content: '★ OFFICIAL SELECTION: GOLDEN TICKET ★'; }
 
-/* --- HEADER (TITLE CARD STYLE) --- */
+/* HEADER (TITLE CARD STYLE) */
 .cine-header {
   padding: 40px 20px; 
   text-align: center;
@@ -78,45 +75,36 @@
 }
 
 .cine-title {
-  font-family: 'Limelight', cursive; 
-  font-size: 2.2em; 
-  color: #fff; 
-  text-transform: uppercase;
-  margin: 0; 
-  letter-spacing: 3px; 
-  line-height: 1;
+  font-family: 'Limelight', cursive; font-size: 2.2em; color: #fff; text-transform: uppercase;
+  margin: 0; letter-spacing: 3px; line-height: 1;
   text-shadow: 2px 2px 0 var(--cine-gold-dim);
 }
 
 .cine-subtitle {
-  font-family: 'Courier Prime', monospace; 
-  font-size: 0.8em; 
-  color: var(--cine-gold);
-  text-transform: uppercase; 
-  letter-spacing: 4px; 
-  margin-top: 15px; 
-  display: block;
-  opacity: 0.8;
+  font-family: 'Courier Prime', monospace; font-size: 0.8em; color: var(--cine-gold);
+  text-transform: uppercase; letter-spacing: 4px; margin-top: 15px; display: block; opacity: 0.8;
 }
-.cine-subtitle::before, .cine-subtitle::after {
-    content: '—'; margin: 0 10px; opacity: 0.5;
-}
+.cine-subtitle::before, .cine-subtitle::after { content: '—'; margin: 0 10px; opacity: 0.5; }
 
-/* --- IMAGEM --- */
+/* --- IMAGEM (CORRIGIDA) --- */
 .cine-image-frame {
   width: 100%;
-  height: auto; /* Altura ajustável */
-  min-height: 200px;
+  height: 400px; /* Altura FIXA para não esticar */
   position: relative;
-  background: transparent;
+  background: #000;
   border-top: 1px solid var(--cine-gold-dim);
   display: block;
   padding: 0; margin: 0;
+  overflow: hidden; /* Garante que o excesso seja cortado */
 }
 
 .cine-image-frame img {
-  width: 100%; height: auto; display: block;
-  /* Filtro Noir */
+  width: 100%; 
+  height: 100%; /* Força a altura do container */
+  display: block;
+  object-fit: cover; /* Preenche o espaço sem distorcer (corta excesso se precisar) */
+  object-position: center 25%; /* Foco um pouco acima do centro */
+  
   filter: grayscale(80%) sepia(20%) contrast(1.2);
   transition: filter 0.5s ease;
 }
