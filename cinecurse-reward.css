@@ -1,4 +1,4 @@
-/* --- TEMPLATE: CINECURSE REWARD V2 (FINAL) --- */
+/* --- TEMPLATE: CINECURSE REWARD (FINAL) --- */
 @import url('https://fonts.googleapis.com/css2?family=Limelight&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@700&display=swap');
 
 :root {
@@ -10,9 +10,10 @@
   --cine-black: #080808;
 }
 
+/* Animação suave de tremulação (Filme) */
 @keyframes film-flicker {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.97; }
+  50% { opacity: 0.98; }
 }
 
 /* CONTAINER */
@@ -22,8 +23,10 @@
   width: 95%;
   margin: 40px auto;
   background-color: var(--cine-black);
+  /* Textura de Ruído Sutil */
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
   
+  /* Bordas de Filme */
   border-left: 25px solid #000;
   border-right: 25px solid #000;
   position: relative;
@@ -37,7 +40,7 @@
 }
 .cine-container * { box-sizing: border-box; }
 
-/* Furos laterais */
+/* Furinhos do Filme */
 .cine-container::before, .cine-container::after {
   content: ''; position: absolute; top: 0; bottom: 0; width: 15px;
   background-image: linear-gradient(to bottom, #333 50%, transparent 50%);
@@ -47,44 +50,73 @@
 .cine-container::before { left: -20px; }
 .cine-container::after { right: -20px; }
 
-/* FAIXA */
+/* FAIXA DE PRÊMIO */
 .cine-award-banner {
   background: var(--cine-gold); color: #000; text-align: center;
   font-family: 'Cinzel Decorative', cursive; font-size: 0.7em; letter-spacing: 3px; font-weight: 900;
-  padding: 6px; text-transform: uppercase; border-bottom: 3px solid #000;
+  padding: 8px; text-transform: uppercase; border-bottom: 4px solid #000;
 }
-.cine-award-banner::before { content: '★ OFFICIAL SELECTION: CINECURSE ★'; }
+.cine-award-banner::before { content: '★ OFFICIAL SELECTION: GOLDEN TICKET ★'; }
 
-/* HEADER */
+/* --- HEADER (TITLE CARD STYLE) --- */
 .cine-header {
-  padding: 40px 20px; text-align: center;
-  background: radial-gradient(circle at bottom, #1f1f1f 0%, #000 100%);
-  border-bottom: 2px solid var(--cine-gold-dim);
+  padding: 40px 20px; 
+  text-align: center;
+  background-color: #050505;
+  border-bottom: 1px solid var(--cine-gold-dim);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
+
+.cine-title-box {
+  border: 3px double var(--cine-gold);
+  padding: 15px 30px;
+  background: #000;
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.1);
+}
+
 .cine-title {
-  font-family: 'Limelight', cursive; font-size: 2.5em; color: #fff; text-transform: uppercase;
-  margin: 0; letter-spacing: 2px; text-shadow: 0 0 15px rgba(255,255,255,0.3); line-height: 1;
+  font-family: 'Limelight', cursive; 
+  font-size: 2.2em; 
+  color: #fff; 
+  text-transform: uppercase;
+  margin: 0; 
+  letter-spacing: 3px; 
+  line-height: 1;
+  text-shadow: 2px 2px 0 var(--cine-gold-dim);
 }
+
 .cine-subtitle {
-  font-family: 'Courier Prime', monospace; font-size: 0.9em; color: var(--cine-gold);
-  text-transform: uppercase; letter-spacing: 4px; margin-top: 12px; display: inline-block;
+  font-family: 'Courier Prime', monospace; 
+  font-size: 0.8em; 
+  color: var(--cine-gold);
+  text-transform: uppercase; 
+  letter-spacing: 4px; 
+  margin-top: 15px; 
+  display: block;
+  opacity: 0.8;
+}
+.cine-subtitle::before, .cine-subtitle::after {
+    content: '—'; margin: 0 10px; opacity: 0.5;
 }
 
 /* --- IMAGEM --- */
 .cine-image-frame {
   width: 100%;
-  height: 350px; /* Altura fixa para não esticar o template */
+  height: auto; /* Altura ajustável */
+  min-height: 200px;
   position: relative;
-  background: #000;
-  border-top: 2px solid #000;
-  overflow: hidden; /* Corta o excesso */
+  background: transparent;
+  border-top: 1px solid var(--cine-gold-dim);
+  display: block;
+  padding: 0; margin: 0;
 }
+
 .cine-image-frame img {
-  width: 100%; 
-  height: 100%; 
-  object-fit: cover; /* Preenche todo o espaço sem distorcer */
-  object-position: top center; /* Prioriza a parte de cima da imagem */
-  
+  width: 100%; height: auto; display: block;
+  /* Filtro Noir */
   filter: grayscale(80%) sepia(20%) contrast(1.2);
   transition: filter 0.5s ease;
 }
@@ -92,7 +124,7 @@
   filter: grayscale(0%) sepia(0%) contrast(1.1);
 }
 
-/* DIVISOR */
+/* DIVISOR DE FILME */
 .cine-film-divider {
     height: 36px; background-color: #080808; position: relative;
     border-top: 3px solid #000; border-bottom: 3px solid #000; margin-bottom: -1px;
@@ -125,7 +157,7 @@
   background: radial-gradient(ellipse at center, rgba(255,255,255,0.02) 0%, transparent 70%);
   border-top: 1px dashed #333;
 }
-.cine-content b { color: var(--cine-gold); font-weight: 700; }
+.cine-content b { color: var(--cine-gold); font-weight: 700; text-transform: uppercase; }
 .cine-content i { color: #fff; font-style: italic; }
 
 /* EXTRAS */
@@ -135,7 +167,7 @@
   position: relative; font-size: 0.9em; color: var(--cine-dim);
 }
 .cine-extras::before {
-  content: 'DIRECTOR\'S CUT'; display: block; font-family: 'Cinzel Decorative', cursive;
+  content: 'DIRECTOR\'S CUT // NOTES'; display: block; font-family: 'Cinzel Decorative', cursive;
   font-size: 0.7em; color: var(--cine-gold); margin-bottom: 10px; letter-spacing: 1px;
   border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 5px;
 }
