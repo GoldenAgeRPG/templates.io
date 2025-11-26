@@ -155,7 +155,7 @@
   position: relative; font-size: 0.9em; color: var(--cine-dim);
 }
 .cine-extras::before {
-  content: 'DIRECTOR\'S CUT // NOTES'; display: block; font-family: 'Cinzel Decorative', cursive;
+  content: 'DIRECTOR\'S CUT'; display: block; font-family: 'Cinzel Decorative', cursive;
   font-size: 0.7em; color: var(--cine-gold); margin-bottom: 10px; letter-spacing: 1px;
   border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 5px;
 }
