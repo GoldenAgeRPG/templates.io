@@ -1,209 +1,219 @@
-/* --- TEMPLATE: CINECURSE PREMIER (TIER S REWARD) --- */
-@import url('https://fonts.googleapis.com/css2?family=Limelight&family=Monoton&family=Cinzel+Decorative:wght@700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
+/* --- TEMPLATE: CINECURSE (NOIR EDITION) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Limelight&display=swap');
 
 :root {
-    --cine-red: #4a0a0a;
-    --cine-dark-red: #240404;
-    --cine-gold: #d4af37; /* Ouro Metálico */
-    --cine-gold-dim: #8c702a;
-    --cine-screen-bg: #121212;
-    --cine-light: #f0f0f0;
-    --cine-shadow: #000000;
+  --cine-bg: #141414;
+  --cine-paper: #1a1a1a;
+  --cine-gold: #c5a059;    /* Ouro Fosco */
+  --cine-gold-dim: #6e5a30;
+  --cine-text: #e0e0e0;
+  --cine-dim: #888;
 }
 
-/* --- PALCO E FUNDO (O Ambiente) --- */
-.cine-stage-wrapper {
-    /* Fundo geral com cortinas e luzes */
-    background: 
-        /* Holofotes cruzados (luzes brancas sutis) */
-        linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.05) 50%, transparent 55%),
-        linear-gradient(-45deg, transparent 45%, rgba(255,255,255,0.05) 50%, transparent 55%),
-        /* Textura de Cortina de Veludo */
-        radial-gradient(circle at 50% 0%, var(--cine-red) 0%, var(--cine-dark-red) 80%);
-    background-size: 200% 200%, 200% 200%, 100% 100%;
-    padding: 40px 20px;
-    border-top: 5px solid var(--cine-gold);
-    border-bottom: 5px solid var(--cine-gold);
-    box-shadow: inset 0 0 100px var(--cine-shadow);
-    position: relative;
-    overflow: hidden;
+/* CONTAINER PRINCIPAL */
+.cine-container {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--cine-bg);
+  
+  /* Textura de Grão de Filme Estático (Sutil) */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+  
+  /* Borda Dupla Elegante */
+  border: 1px solid var(--cine-gold-dim);
+  outline: 1px solid var(--cine-bg);
+  outline-offset: -5px;
+  box-shadow: 0 0 0 5px var(--cine-bg), 0 0 0 6px var(--cine-gold-dim), 0 15px 30px #000;
+  
+  color: var(--cine-text);
+  font-family: 'Courier Prime', monospace;
+  position: relative;
+  padding: 0;
+  overflow: hidden;
 }
 
-/* A MOLDURA DA TELA (Art Déco Dourado) */
-.cine-screen-frame {
-    max-width: 800px;
-    margin: 0 auto;
-    position: relative;
-    /* Borda complexa dourada */
-    border: 8px solid transparent;
-    border-image: linear-gradient(to bottom right, var(--cine-gold) 0%, var(--cine-gold-dim) 50%, var(--cine-gold) 100%) 1;
-    box-shadow: 
-        0 0 30px rgba(212, 175, 55, 0.5), /* Brilho externo dourado */
-        inset 0 0 50px var(--cine-shadow); /* Sombra interna na tela */
-    background: var(--cine-screen-bg);
+.cine-container * { box-sizing: border-box; }
+
+/* --- CABEÇALHO --- */
+.cine-container .cine-header {
+  padding: 30px 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--cine-gold-dim);
+  background: linear-gradient(to bottom, #1f1f1f, var(--cine-bg));
 }
 
-/* Efeito de "Luz do Projetor" na tela */
-.cine-screen-frame::before {
-    content: '';
-    position: absolute; inset: 0;
-    background: radial-gradient(ellipse at center top, rgba(255,255,255,0.15) 0%, transparent 70%);
-    pointer-events: none; z-index: 0;
+.cine-container .cine-title {
+  font-family: 'Limelight', cursive;
+  font-size: 2.2em;
+  color: var(--cine-gold);
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 2px;
+  line-height: 1;
+  text-shadow: 0 2px 5px rgba(0,0,0,0.5);
 }
 
-/* Efeito de Granulação de Filme e Riscos (Estático) */
-.cine-screen-frame::after {
-    content: '';
-    position: absolute; inset: 0;
-    opacity: 0.08;
-    background-image: 
-        /* Riscos verticais */
-        repeating-linear-gradient(90deg, transparent, transparent 50px, rgba(255,255,255,0.2) 50px, rgba(255,255,255,0.2) 51px),
-        /* Ruído */
-        url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
-    pointer-events: none; z-index: 1;
-    mix-blend-mode: overlay;
+.cine-container .cine-subtitle {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.8em;
+  color: var(--cine-dim);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-top: 8px;
 }
 
-/* --- CONTEÚDO INTERNO --- */
-.cine-content-box {
-    position: relative; z-index: 2;
-    padding: 0;
-    color: var(--cine-light);
+/* --- IMAGEM --- */
+.cine-container .cine-image-frame {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid var(--cine-gold);
+  background: #000;
 }
 
-/* Header Estilo Letreiro de Neon */
-.cine-marquee {
-    background: linear-gradient(to bottom, #222, #000);
-    padding: 25px 15px;
-    text-align: center;
-    border-bottom: 4px solid var(--cine-gold);
-    position: relative;
-    overflow: hidden;
-}
-/* As luzinhas do letreiro */
-.cine-marquee::before, .cine-marquee::after {
-    content: '•••••••••••••••••••••••••••••••••••••••••••';
-    position: absolute; left: 0; width: 100%;
-    color: var(--cine-gold); font-size: 10px; letter-spacing: 5px;
-    opacity: 0.7;
-    text-shadow: 0 0 5px var(--cine-gold);
-}
-.cine-marquee::before { top: 2px; }
-.cine-marquee::after { bottom: 2px; }
-
-.cine-title-text {
-    font-family: 'Monoton', cursive; /* Fonte estilo Neon/Disco */
-    font-size: 2.5em; color: var(--cine-gold);
-    text-transform: uppercase; margin: 0; line-height: 1;
-    text-shadow: 0 0 15px var(--cine-gold), 0 0 30px var(--cine-gold-dim);
-    font-weight: 400;
-}
-.cine-subtitle-text {
-    font-family: 'Limelight', cursive;
-    color: #fff; margin-top: 10px; font-size: 1em; letter-spacing: 2px;
+.cine-container .cine-image-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  /* Filtro Noir Clássico */
+  filter: grayscale(100%) contrast(1.1) brightness(0.9);
+  transition: filter 0.5s ease;
 }
 
-/* Imagem Widescreen */
-.cine-wide-shot {
-    width: 100%; height: 350px;
-    border-top: 2px solid #000; border-bottom: 2px solid #000;
-    position: relative;
-    /* Efeito de vinheta de lente */
-    box-shadow: inset 0 0 80px #000;
-}
-.cine-wide-shot img {
-    width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
-    /* Filtro Noir Dramático */
-    filter: grayscale(100%) contrast(1.3) brightness(0.8) sepia(20%);
-    position: relative; z-index: -1;
+/* Hover: Recupera um pouco de cor (Sépia) */
+.cine-container:hover .cine-image-frame img {
+  filter: sepia(50%) contrast(1.2);
 }
 
-/* --- STATUS (Estilo Fotômetro/Painel de Controle) --- */
-.cine-control-panel {
-    display: flex; gap: 20px; padding: 20px 30px;
-    background: #0a0a0a; border-bottom: 1px solid #333;
-    align-items: center; justify-content: center;
-}
-.cine-meter {
-    flex: 1; display: flex; flex-direction: column; gap: 5px;
-}
-.cine-meter-label {
-    font-family: 'Limelight', cursive; color: var(--cine-gold); font-size: 0.9em; text-align: center;
-}
-.cine-gauge-wrapper {
-    height: 14px; background: #1a1a1a; border: 2px solid var(--cine-gold-dim);
-    border-radius: 10px; overflow: hidden; position: relative;
-    box-shadow: inset 0 2px 5px #000;
-}
-/* Ponteiro do medidor */
-.cine-gauge-wrapper::after {
-    content: ''; position: absolute; top:0; bottom:0; width: 2px; background: #fff; left: 50%; z-index: 5; opacity: 0.5;
-}
-.jjk-dossier-hp-fill { background: linear-gradient(90deg, #8b0000, #ff0000); height: 100%; box-shadow: 0 0 10px #ff0000; }
-.jjk-dossier-ea-fill { background: linear-gradient(90deg, #4b0082, #9932cc); height: 100%; box-shadow: 0 0 10px #9932cc; }
-.cine-meter-val {
-    font-family: 'Courier Prime', monospace; color: #ccc; font-size: 0.8em; text-align: center; font-weight: bold;
+/* --- BARRAS DE STATUS (Minimalistas) --- */
+.cine-container .cine-stats {
+  padding: 20px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-bottom: 1px dashed var(--cine-dim);
 }
 
-/* TEXTO DO POST (Roteiro) */
-.cine-script-body {
-    padding: 40px;
-    font-family: 'Courier Prime', monospace; font-size: 1.1em; line-height: 1.8; color: #ddd;
-    background: transparent;
-    text-shadow: 1px 1px 2px #000;
-}
-.cine-script-body b { color: var(--cine-gold); text-transform: uppercase; }
-.cine-script-body i { font-style: italic; color: #aaa; }
-
-/* --- RODAPÉ: CALÇADA DA FAMA (O Prêmio) --- */
-.walk-of-fame-footer {
-    background: linear-gradient(to bottom, #1a1a1a, #000);
-    padding: 30px 20px;
-    text-align: center;
-    border-top: 3px solid var(--cine-gold);
-    position: relative;
-}
-/* Placa de Latão */
-.star-plaque {
-    display: inline-block;
-    background: linear-gradient(135deg, var(--cine-gold) 0%, var(--cine-gold-dim) 100%);
-    padding: 15px 30px;
-    border: 3px solid #4a3817;
-    box-shadow: 
-        inset 0 0 20px rgba(0,0,0,0.5), /* Profundidade interna */
-        0 5px 15px #000; /* Sombra externa */
-    position: relative;
-}
-/* A Estrela */
-.star-plaque::before {
-    content: '★';
-    display: block; font-size: 2em; color: #240404; margin-bottom: 5px;
-    text-shadow: 1px 1px 0 rgba(255,255,255,0.2);
+.cine-container .jjk-dossier-status-item {
+  display: grid;
+  grid-template-columns: 30px 1fr 80px;
+  align-items: center;
+  gap: 15px;
 }
 
-/* O NOME DO JOGADOR (Via CSS) */
-.director-star::after {
-    content: "NOMINEE"; /* Padrão */
-    display: block;
-    font-family: 'Cinzel Decorative', cursive; /* Fonte de premiação chique */
-    font-size: 1.5em;
-    color: #240404;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    text-shadow: 1px 1px 0 rgba(255,255,255,0.3); /* Efeito de baixo relevo */
-}
-.award-title {
-    font-family: 'Limelight', cursive; font-size: 0.7em; color: #4a3817; margin-top: 5px; text-transform: uppercase;
+.cine-container .jjk-dossier-status-label {
+  font-family: 'Cinzel', serif; font-weight: 700;
+  color: var(--cine-gold); font-size: 0.8em; text-align: right;
 }
 
-/* ==========================================================================
-   --- CALÇADA DA FAMA (Nomes dos Vencedores) ---
-   [ADMIN] Adicione os nomes aqui.
-   No HTML use: <div class="director-star p-SEU_CODIGO"></div>
-   ========================================================================== */
-.director-star.p-ayaka::after   { content: "AYAKA GOJO"; }
-.director-star.p-megumi::after  { content: "MEGUMI FUSHIGURO"; }
-.director-star.p-sukuna::after  { content: "RYOMEN SUKUNA"; }
-/* Adicione mais linhas abaixo... */
+.cine-container .jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 6px;
+  background: #222;
+  border: 1px solid #444;
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.cine-container .jjk-dossier-status-bar {
+  width: 100%; height: 100%; background: transparent; border: none;
+}
+
+/* HP: Branco */
+.cine-container .jjk-dossier-hp-fill {
+  height: 100%; background: #ddd; transition: width 0.5s ease;
+}
+/* EA: Ouro */
+.cine-container .jjk-dossier-ea-fill {
+  height: 100%; background: var(--cine-gold); transition: width 0.5s ease;
+}
+
+.cine-container .jjk-dossier-status-value {
+  position: static; transform: none;
+  font-family: 'Courier Prime', monospace; font-weight: 700; font-size: 0.8em;
+  color: var(--cine-dim); text-align: right;
+}
+
+/* --- CONTEÚDO (ROTEIRO) --- */
+.cine-container .cine-content {
+  padding: 30px 40px;
+  font-size: 1em;
+  line-height: 1.7;
+  color: #ccc;
+  text-align: justify;
+}
+
+.cine-container .cine-content b {
+  color: var(--cine-gold);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.cine-container .cine-content i {
+  color: #fff;
+  font-style: italic;
+}
+
+/* --- EXTRAS (NOTAS DO DIRETOR) - A Nova Caixa --- */
+.cine-container .cine-extras {
+  margin: 0 40px 30px 40px;
+  padding: 15px;
+  background: rgba(197, 160, 89, 0.05);
+  border: 1px solid var(--cine-gold-dim);
+  font-size: 0.85em;
+  color: var(--cine-dim);
+  position: relative;
+}
+
+.cine-container .cine-extras::before {
+  content: 'DIRECTOR\'S NOTES';
+  position: absolute;
+  top: -10px; left: 10px;
+  background: var(--cine-bg);
+  padding: 0 8px;
+  font-family: 'Cinzel', serif;
+  font-size: 0.7em;
+  color: var(--cine-gold);
+  border: 1px solid var(--cine-gold-dim);
+}
+
+/* --- RODAPÉ (CRÉDITOS / NOME) --- */
+.cine-container .cine-footer {
+  background: #000;
+  padding: 15px;
+  text-align: center;
+  border-top: 3px double var(--cine-gold-dim);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.cine-container .cine-footer::before {
+  content: '★ STARRING:';
+  font-family: 'Limelight', cursive;
+  color: var(--cine-dim);
+  font-size: 0.8em;
+  letter-spacing: 2px;
+}
+
+/* NOME DO JOGADOR (Editável via CSS Admin) */
+.cine-container .player-name::after {
+  content: "THE WINNER"; /* Fallback */
+  font-family: 'Cinzel', serif;
+  color: var(--cine-gold);
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+/* --- LISTA DE NOMES (Adicione aqui) --- */
+.cine-container .player-name.p-ayaka::after { content: "AYAKA GOJO"; }
+.cine-container .player-name.p-megumi::after { content: "MEGUMI FUSHIGURO"; }
+
+@media (max-width: 600px) {
+  .cine-container .cine-stats, 
+  .cine-container .cine-content, 
+  .cine-container .cine-extras { padding-left: 20px; padding-right: 20px; margin-left: 10px; margin-right: 10px; margin-bottom: 20px; }
+}
