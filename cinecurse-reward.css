@@ -1,35 +1,29 @@
-/* --- TEMPLATE: CINECURSE REWARD (FILM STRIP EDITION) --- */
+/* --- TEMPLATE: CINECURSE REWARD V2 (FINAL) --- */
 @import url('https://fonts.googleapis.com/css2?family=Limelight&family=Courier+Prime:ital,wght@0,400;0,700;1,400&family=Cinzel+Decorative:wght@700&display=swap');
 
 :root {
   --cine-bg: #121212;
-  --cine-gold: #d4af37;    /* Ouro Clássico */
+  --cine-gold: #d4af37;
   --cine-gold-dim: #8a701e;
   --cine-silver: #c0c0c0;
   --cine-text: #e0e0e0;
   --cine-black: #080808;
 }
 
-/* Animação: Flicker de Filme Antigo (Sutil) */
 @keyframes film-flicker {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0.95; }
-  55% { opacity: 0.9; }
-  60% { opacity: 1; }
+  50% { opacity: 0.97; }
 }
 
-/* CONTAINER PRINCIPAL */
+/* CONTAINER */
 .cine-container {
   box-sizing: border-box;
   max-width: 750px;
   width: 95%;
   margin: 40px auto;
   background-color: var(--cine-black);
-  
-  /* Textura de Ruído */
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
   
-  /* Bordas Laterais de Filme (CSS Gradient) */
   border-left: 25px solid #000;
   border-right: 25px solid #000;
   position: relative;
@@ -39,217 +33,128 @@
   box-shadow: 0 20px 60px #000;
   padding: 0;
   overflow: hidden;
-  
-  animation: film-flicker 4s infinite;
+  animation: film-flicker 5s infinite;
 }
-
 .cine-container * { box-sizing: border-box; }
 
-/* Os furos do filme nas laterais (Pseudo-elementos) */
+/* Furos laterais */
 .cine-container::before, .cine-container::after {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0; width: 15px;
-  /* Cria os quadrados brancos repetidos */
+  content: ''; position: absolute; top: 0; bottom: 0; width: 15px;
   background-image: linear-gradient(to bottom, #333 50%, transparent 50%);
-  background-size: 100% 30px;
-  z-index: 10;
-  opacity: 0.5;
+  background-size: 100% 24px;
+  z-index: 10; opacity: 0.6; pointer-events: none;
 }
 .cine-container::before { left: -20px; }
 .cine-container::after { right: -20px; }
 
-/* --- FAIXA DE PRÊMIO (CSS PURO) --- */
+/* FAIXA */
 .cine-award-banner {
-  background: var(--cine-gold);
-  color: #000;
-  text-align: center;
-  font-family: 'Cinzel Decorative', cursive;
-  font-size: 0.7em;
-  letter-spacing: 3px;
-  font-weight: 900;
-  padding: 5px;
-  text-transform: uppercase;
-  border-bottom: 2px solid #000;
+  background: var(--cine-gold); color: #000; text-align: center;
+  font-family: 'Cinzel Decorative', cursive; font-size: 0.7em; letter-spacing: 3px; font-weight: 900;
+  padding: 6px; text-transform: uppercase; border-bottom: 3px solid #000;
 }
 .cine-award-banner::before { content: '★ OFFICIAL SELECTION: GOLDEN TICKET ★'; }
 
-/* --- CABEÇALHO --- */
+/* HEADER */
 .cine-header {
-  padding: 40px 20px;
-  text-align: center;
+  padding: 40px 20px; text-align: center;
   background: radial-gradient(circle at bottom, #1f1f1f 0%, #000 100%);
-  border-bottom: 1px solid var(--cine-gold-dim);
-  position: relative;
+  border-bottom: 2px solid var(--cine-gold-dim);
 }
-
 .cine-title {
-  font-family: 'Limelight', cursive;
-  font-size: 2.5em;
-  color: #fff;
-  text-transform: uppercase;
-  margin: 0;
-  letter-spacing: 2px;
-  text-shadow: 0 0 15px rgba(255,255,255,0.3);
-  line-height: 1;
+  font-family: 'Limelight', cursive; font-size: 2.5em; color: #fff; text-transform: uppercase;
+  margin: 0; letter-spacing: 2px; text-shadow: 0 0 15px rgba(255,255,255,0.3); line-height: 1;
 }
-
 .cine-subtitle {
-  font-family: 'Courier Prime', monospace;
-  font-size: 0.9em;
-  color: var(--cine-gold);
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  margin-top: 10px;
-  position: relative;
-  display: inline-block;
+  font-family: 'Courier Prime', monospace; font-size: 0.9em; color: var(--cine-gold);
+  text-transform: uppercase; letter-spacing: 4px; margin-top: 12px; display: inline-block;
 }
-/* Linhas decorativas ao lado do subtítulo */
-.cine-subtitle::before, .cine-subtitle::after {
-  content: ''; position: absolute; top: 50%; width: 30px; height: 1px; background: var(--cine-gold); opacity: 0.5;
-}
-.cine-subtitle::before { right: 100%; margin-right: 10px; }
-.cine-subtitle::after { left: 100%; margin-left: 10px; }
 
 /* --- IMAGEM --- */
 .cine-image-frame {
   width: 100%;
-  height: 320px;
+  height: 350px; /* Altura fixa para não esticar o template */
   position: relative;
-  border-top: 1px solid #333;
-  border-bottom: 3px double var(--cine-gold);
   background: #000;
+  border-top: 2px solid #000;
+  overflow: hidden; /* Corta o excesso */
 }
-
 .cine-image-frame img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: top center;
-  /* Filtro Cinematic */
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; /* Preenche todo o espaço sem distorcer */
+  object-position: top center; /* Prioriza a parte de cima da imagem */
+  
   filter: grayscale(80%) sepia(20%) contrast(1.2);
   transition: filter 0.5s ease;
 }
-/* Efeito ao passar o mouse */
 .cine-container:hover .cine-image-frame img {
   filter: grayscale(0%) sepia(0%) contrast(1.1);
 }
 
-/* --- BARRAS DE STATUS (Art Déco) --- */
+/* DIVISOR */
+.cine-film-divider {
+    height: 36px; background-color: #080808; position: relative;
+    border-top: 3px solid #000; border-bottom: 3px solid #000; margin-bottom: -1px;
+}
+.cine-film-divider::before, .cine-film-divider::after {
+    content: ''; position: absolute; left: 0; right: 0; height: 12px;
+    background-image: linear-gradient(to right, #333 50%, transparent 50%);
+    background-size: 24px 100%; opacity: 0.6;
+}
+.cine-film-divider::before { top: 1px; }
+.cine-film-divider::after { bottom: 1px; }
+
+/* STATUS */
 .cine-stats {
-  padding: 25px 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  border-bottom: 1px dashed #333;
+  padding: 30px 40px; display: flex; flex-direction: column; gap: 15px;
+  border-top: 1px solid var(--cine-gold-dim);
+  background: linear-gradient(to bottom, #111, #080808);
 }
-
-.jjk-dossier-status-item {
-  display: grid;
-  grid-template-columns: 40px 1fr 80px;
-  align-items: center;
-  gap: 15px;
-}
-
-.jjk-dossier-status-label {
-  font-family: 'Cinzel Decorative', cursive; font-weight: 700;
-  color: var(--cine-gold); font-size: 0.8em; text-align: right;
-}
-
-.jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 8px;
-  background: #1a1a1a;
-  border: 1px solid var(--cine-gold-dim);
-  border-radius: 2px; /* Quadrado */
-  overflow: hidden;
-}
-
+.jjk-dossier-status-item { display: grid; grid-template-columns: 40px 1fr 80px; align-items: center; gap: 15px; }
+.jjk-dossier-status-label { font-family: 'Cinzel Decorative', cursive; font-weight: 700; color: var(--cine-gold); font-size: 0.8em; text-align: right; }
+.jjk-dossier-status-bar-wrapper { width: 100%; height: 8px; background: #1a1a1a; border: 1px solid var(--cine-gold-dim); border-radius: 2px; overflow: hidden; }
 .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
-
 .jjk-dossier-hp-fill { height: 100%; background: var(--cine-silver); transition: width 0.5s ease; }
 .jjk-dossier-ea-fill { height: 100%; background: var(--cine-gold); transition: width 0.5s ease; }
+.jjk-dossier-status-value { position: static; transform: none; font-family: 'Courier Prime', monospace; font-weight: 700; font-size: 0.8em; color: var(--cine-text); text-align: right; }
 
-.jjk-dossier-status-value {
-  position: static; transform: none;
-  font-family: 'Courier Prime', monospace; font-weight: 700; font-size: 0.8em;
-  color: var(--cine-text); text-align: right;
-}
-
-/* --- CONTEÚDO --- */
+/* CONTEÚDO */
 .cine-content {
-  padding: 30px 50px;
-  font-size: 1.05em;
-  line-height: 1.8;
-  color: #ccc;
-  text-align: justify;
+  padding: 30px 50px; font-size: 1.05em; line-height: 1.8; color: #ccc; text-align: justify;
   background: radial-gradient(ellipse at center, rgba(255,255,255,0.02) 0%, transparent 70%);
+  border-top: 1px dashed #333;
 }
-
 .cine-content b { color: var(--cine-gold); font-weight: 700; }
 .cine-content i { color: #fff; font-style: italic; }
 
-/* --- EXTRAS (Notas do Diretor) --- */
+/* EXTRAS */
 .cine-extras {
-  margin: 0 40px 30px 40px;
-  padding: 20px;
-  background: rgba(197, 160, 89, 0.05);
-  border: 1px solid var(--cine-gold-dim);
-  border-left: 4px solid var(--cine-gold);
-  position: relative;
-  font-size: 0.9em;
-  color: var(--cine-dim);
+  margin: 0 40px 30px 40px; padding: 20px; background: rgba(197, 160, 89, 0.05);
+  border: 1px solid var(--cine-gold-dim); border-left: 4px solid var(--cine-gold);
+  position: relative; font-size: 0.9em; color: var(--cine-dim);
 }
-
 .cine-extras::before {
-  content: 'DIRECTOR\'S CUT // NOTES';
-  display: block;
-  font-family: 'Cinzel Decorative', cursive;
-  font-size: 0.7em;
-  color: var(--cine-gold);
-  margin-bottom: 10px;
-  letter-spacing: 1px;
-  border-bottom: 1px solid rgba(212, 175, 55, 0.3);
-  padding-bottom: 5px;
+  content: 'DIRECTOR\'S CUT'; display: block; font-family: 'Cinzel Decorative', cursive;
+  font-size: 0.7em; color: var(--cine-gold); margin-bottom: 10px; letter-spacing: 1px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.3); padding-bottom: 5px;
 }
 
-/* --- RODAPÉ (CRÉDITOS) --- */
-.cine-footer {
-  background: #080808;
-  padding: 25px;
-  text-align: center;
-  border-top: 2px solid var(--cine-gold);
-}
+/* RODAPÉ */
+.cine-footer { background: #080808; padding: 25px; text-align: center; border-top: 2px solid var(--cine-gold); }
+.cine-footer::before { content: '★ STARRING ★'; display: block; font-family: 'Limelight', cursive; font-size: 0.9em; color: var(--cine-dim); margin-bottom: 10px; letter-spacing: 3px; }
+.player-name::after { content: "UNCREDITED"; font-family: 'Cinzel Decorative', cursive; font-size: 1.8em; color: var(--cine-gold); text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(212, 175, 55, 0.3); }
 
-.cine-footer::before {
-  content: '★ STARRING ★';
-  display: block;
-  font-family: 'Limelight', cursive;
-  font-size: 0.9em;
-  color: var(--cine-dim);
-  margin-bottom: 10px;
-  letter-spacing: 3px;
-}
-
-/* NOME DO JOGADOR (CSS) */
-.player-name::after {
-  content: "UNCREDITED"; /* Fallback */
-  font-family: 'Cinzel Decorative', cursive;
-  font-size: 1.8em;
-  color: var(--cine-gold);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
-}
-
-/* ==========================================================================
-   --- LISTA DE VENCEDORES (Edite Aqui) ---
-   ========================================================================== */
+/* NOMES (ADMIN) */
 .player-name.p-ayaka::after   { content: "AYAKA GOJO"; }
 .player-name.p-megumi::after  { content: "MEGUMI FUSHIGURO"; }
 .player-name.p-sukuna::after  { content: "RYOMEN SUKUNA"; }
-/* Adicione novos vencedores aqui */
 
 @media (max-width: 600px) {
-  .cine-container { border-left: 10px solid #000; border-right: 10px solid #000; }
-  .cine-container::before { left: -15px; }
-  .cine-container::after { right: -15px; }
-  .cine-content { padding: 20px; }
+  .cine-container { border-left: 15px solid #000; border-right: 15px solid #000; }
+  .cine-container::before { left: -15px; background-size: 100% 18px; }
+  .cine-container::after { right: -15px; background-size: 100% 18px; }
+  .cine-film-divider { height: 28px; } .cine-film-divider::before, .cine-film-divider::after { height: 8px; background-size: 18px 100%; }
+  .cine-content, .cine-stats, .cine-extras { padding-left: 25px; padding-right: 25px; }
+  .cine-extras { margin-left: 20px; margin-right: 20px; }
 }
