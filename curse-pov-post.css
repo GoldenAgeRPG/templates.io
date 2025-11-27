@@ -1,0 +1,232 @@
+/* --- TEMPLATE: CURSE POV (INSTINTO PROFANO) --- */
+@import url('https://fonts.googleapis.com/css2?family=Nosifer&family=Butcherman&family=Roboto+Mono:wght@400;700&display=swap');
+
+:root {
+  --curse-bg: #0a0505;       /* Quase preto */
+  --curse-flesh: #1a0a0a;    /* Fundo carne escura */
+  --curse-blood: #ff0f0f;    /* Vermelho Sangue Neon */
+  --curse-energy: #9d00ff;   /* Roxo Energia Instável */
+  --curse-dim: #5a4a4a;
+  --curse-text: #d0d0d0;
+}
+
+/* Animação: Pulsação Orgânica (Como um coração exposto) */
+@keyframes flesh-pulse {
+  0%, 100% { box-shadow: 0 0 10px rgba(255, 15, 15, 0.2) inset; }
+  50% { box-shadow: 0 0 30px rgba(255, 15, 15, 0.5) inset; }
+}
+
+/* Animação: Glitch/Tremor Constante */
+@keyframes curse-shiver {
+  0% { transform: translate(0, 0) skew(0deg); }
+  20% { transform: translate(-1px, 1px) skew(0.5deg); }
+  40% { transform: translate(1px, -1px) skew(-0.5deg); }
+  60% { transform: translate(-2px, 0) skew(0deg); }
+  80% { transform: translate(1px, 2px) skew(1deg); }
+  100% { transform: translate(0, 0) skew(0deg); }
+}
+
+/* Animação: Estática de Fundo */
+@keyframes static-noise {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 100%; }
+}
+
+/* CONTAINER PRINCIPAL */
+.curse-container {
+  box-sizing: border-box;
+  max-width: 720px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--curse-bg);
+  
+  /* Textura de Ruído e Veias */
+  background-image: 
+    linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(10,5,5,0.9)),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E");
+  
+  /* Bordas Rasgadas/Irregulares */
+  border: 2px solid var(--curse-blood);
+  clip-path: polygon(
+    0% 2%, 5% 0%, 95% 1%, 100% 4%, 
+    99% 95%, 94% 100%, 4% 99%, 0% 96%
+  );
+  
+  color: var(--curse-text);
+  font-family: 'Roboto Mono', monospace; /* Fonte monoespaçada para parecer dados brutos */
+  position: relative;
+  box-shadow: 0 0 30px rgba(255, 15, 15, 0.3);
+  padding: 5px;
+  overflow: hidden;
+  
+  animation: curse-shiver 0.8s infinite steps(10); /* O post todo treme */
+}
+
+.curse-container * { box-sizing: border-box; }
+
+/* Efeito de "Sangramento" nas bordas internas */
+.curse-container::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.8), inset 0 0 10px var(--curse-blood);
+  pointer-events: none; z-index: 10;
+  animation: flesh-pulse 4s infinite;
+}
+
+/* --- CABEÇALHO (A Boca/Olhos) --- */
+.curse-header {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(to bottom, #000, var(--curse-flesh));
+  border-bottom: 3px dashed var(--curse-blood);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Olhos Brilhantes no Fundo do Header */
+.curse-header::after {
+  content: '● ● ●';
+  font-size: 60px; color: var(--curse-blood);
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  opacity: 0.1; filter: blur(8px); letter-spacing: 50px;
+  animation: flesh-pulse 2s infinite alternate;
+}
+
+.curse-title {
+  font-family: 'Nosifer', cursive; /* Fonte de "sangue escorrendo" */
+  font-size: 2.5em;
+  color: var(--curse-blood);
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 3px 3px 0 #000, 0 0 15px var(--curse-blood);
+  position: relative; z-index: 2;
+}
+
+.curse-subtitle {
+  font-family: 'Butcherman', cursive; /* Fonte de "açougueiro" */
+  color: var(--curse-energy);
+  font-size: 1.1em;
+  margin-top: 10px;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  position: relative; z-index: 2;
+}
+
+/* --- IMAGEM (A Visão Deturpada) --- */
+.curse-image-frame {
+  width: 100%; height: 320px;
+  position: relative;
+  background: #000;
+  border-top: 2px solid #000;
+  border-bottom: 4px solid var(--curse-blood);
+  overflow: hidden;
+}
+.curse-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center;
+  /* Filtro de Corrupção: Alto contraste, vermelho estourado */
+  filter: grayscale(100%) contrast(1.5) brightness(0.8) drop-shadow(0 0 0 red);
+  mix-blend-mode: hard-light;
+  opacity: 0.8;
+  transition: 0.3s;
+}
+/* Efeito Glitch ao passar o mouse */
+.curse-container:hover .curse-image-frame img {
+  filter: grayscale(0%) contrast(1.2) saturate(1.5);
+  opacity: 1;
+  transform: scale(1.05) translate(-5px, 5px);
+  clip-path: polygon(0 0, 100% 5%, 95% 100%, 5% 95%);
+}
+
+/* --- BARRAS DE STATUS (Fome e Poder) --- */
+.curse-stats {
+  padding: 25px 35px;
+  display: flex; flex-direction: column; gap: 20px;
+  background: rgba(20, 5, 5, 0.6);
+  border-bottom: 1px dashed var(--curse-dim);
+  position: relative; z-index: 2;
+}
+.jjk-dossier-status-item {
+  display: grid; grid-template-columns: 50px 1fr 80px; align-items: center; gap: 15px;
+}
+.jjk-dossier-status-label {
+  font-family: 'Nosifer', cursive; color: var(--curse-blood);
+  font-size: 0.8em; text-align: right;
+}
+
+/* Wrapper da barra parecendo uma ferida aberta */
+.jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 18px; background: #000;
+  border: 2px solid var(--curse-dim);
+  border-radius: 10px; overflow: hidden;
+  box-shadow: inset 0 0 10px #000;
+  position: relative;
+}
+.jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
+
+/* HP: Sangue borbulhante */
+.jjk-dossier-hp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--curse-blood), #500);
+  box-shadow: 0 0 15px var(--curse-blood);
+  transition: width 0.5s ease;
+  /* Textura de bolhas */
+  background-image: repeating-radial-gradient(circle at 50% 50%, transparent 0%, transparent 5%, rgba(0,0,0,0.4) 6%, transparent 7%);
+  background-size: 20px 20px;
+  animation: static-noise 10s linear infinite;
+}
+
+/* EA: Energia Roxa/Verde Instável */
+.jjk-dossier-ea-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--curse-energy), #0f0);
+  box-shadow: 0 0 15px var(--curse-energy);
+  transition: width 0.5s ease;
+  filter: hue-rotate(0deg);
+  animation: curse-pulse 1s infinite alternate; /* Muda de cor rápido */
+}
+@keyframes curse-pulse { from { filter: hue-rotate(0deg); } to { filter: hue-rotate(90deg); } }
+
+.jjk-dossier-status-value {
+  position: static; transform: none; font-family: 'Roboto Mono', monospace;
+  font-weight: 700; font-size: 1em; color: var(--curse-text); text-align: right;
+}
+
+/* --- CONTEÚDO (Os Pensamentos Distorcidos) --- */
+.curse-content {
+  padding: 30px 40px;
+  font-size: 1.1em; line-height: 1.6; color: var(--curse-text);
+  text-align: justify; position: relative; z-index: 2;
+  /* Fundo de "carne" */
+  background: rgba(40, 10, 10, 0.4);
+  margin: 10px; border: 1px solid var(--curse-blood);
+  box-shadow: inset 0 0 30px #000;
+}
+
+/* Destaques Agressivos */
+.curse-content b {
+  color: var(--curse-blood); font-family: 'Nosifer', cursive;
+  font-weight: normal; font-size: 1.2em; text-shadow: 0 0 5px var(--curse-blood);
+}
+.curse-content i {
+  color: var(--curse-energy); font-family: 'Butcherman', cursive;
+  font-style: normal; letter-spacing: 1px; font-size: 1.1em;
+}
+
+/* --- EXTRAS (Instintos) --- */
+.curse-extras {
+  margin: 0 30px 30px 30px; padding: 20px;
+  background: #080202; border: 2px dashed var(--curse-blood);
+  position: relative; z-index: 2; font-size: 0.9em; color: var(--curse-dim);
+  font-family: 'Roboto Mono', monospace; text-transform: uppercase;
+}
+.curse-extras::before {
+  content: '/// DADOS DO HOSPEDEIRO ///'; display: block; font-weight: 700; color: var(--curse-blood);
+  margin-bottom: 10px; letter-spacing: 2px;
+  animation: curse-shiver 0.2s infinite;
+}
+
+@media (max-width: 600px) {
+  .curse-container { border-width: 1px; margin: 10px auto; width: 98%; }
+  .curse-header { padding: 20px; }
+  .curse-title { font-size: 1.8em; }
+  .curse-content, .curse-stats, .curse-extras { padding-left: 15px; padding-right: 15px; margin-left: 5px; margin-right: 5px; margin-bottom: 20px; }
+}
