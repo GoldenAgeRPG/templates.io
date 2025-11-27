@@ -1,0 +1,291 @@
+/* --- TEMPLATE: MANGA STYLE (SHONEN JUMP) --- */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Kosugi+Maru&family=Mochiy+Pop+One&display=swap');
+
+:root {
+  --manga-black: #050505;
+  --manga-ink: #1a1a1a;
+  --manga-white: #ffffff;
+  --manga-paper: #f4f4f0;
+  --manga-screentone: #ddd;
+  --manga-accent: #e60000; /* Vermelho Jump */
+}
+
+/* Animação: Linhas de Ação (Speed Lines) */
+@keyframes speed-lines {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px -100px; }
+}
+
+/* Animação: Tremor de Impacto (Onomatopeia) */
+@keyframes rumble {
+  0%, 100% { transform: translate(0, 0) rotate(-5deg); }
+  25% { transform: translate(-2px, 2px) rotate(-4deg); }
+  75% { transform: translate(2px, -2px) rotate(-6deg); }
+}
+
+/* CONTAINER PRINCIPAL (A Página) */
+.manga-container {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--manga-white);
+  
+  /* Fundo de Retículas (Screentone) */
+  background-image: 
+    radial-gradient(var(--manga-screentone) 15%, transparent 16%),
+    radial-gradient(var(--manga-screentone) 15%, transparent 16%);
+  background-size: 10px 10px;
+  background-position: 0 0, 5px 5px;
+  
+  /* Borda Grossa de Nanquim */
+  border: 4px solid var(--manga-black);
+  box-shadow: 10px 10px 0 var(--manga-ink);
+  
+  color: var(--manga-black);
+  font-family: 'Kosugi Maru', sans-serif; /* Fonte estilo mangá */
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+}
+
+.manga-container * { box-sizing: border-box; }
+
+/* Linhas de Velocidade (Overlay) */
+.manga-container::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(0,0,0,0.03) 10px,
+    rgba(0,0,0,0.03) 20px
+  );
+  animation: speed-lines 2s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* --- CABEÇALHO (Manchete) --- */
+.manga-container .manga-header {
+  padding: 30px 20px;
+  position: relative;
+  z-index: 2;
+  border-bottom: 4px solid var(--manga-black);
+  background: var(--manga-white);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* Recorte diagonal no fundo */
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  margin-bottom: -20px; /* Sobrepõe a imagem */
+}
+
+/* Onomatopeia "DON!" (ドン) */
+.manga-container .manga-sfx {
+  font-family: 'Mochiy Pop One', sans-serif;
+  font-size: 3em;
+  color: var(--manga-black);
+  position: absolute;
+  right: 10px; top: 0px;
+  z-index: 1;
+  opacity: 0.15;
+  transform: rotate(-15deg);
+  pointer-events: none;
+}
+
+.manga-container .manga-title {
+  font-family: 'Bangers', cursive; /* Fonte de Impacto */
+  font-size: 2.5em;
+  color: var(--manga-black);
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1;
+  text-shadow: 2px 2px 0 #ccc;
+  transform: rotate(-1deg);
+}
+
+.manga-container .manga-subtitle {
+  font-size: 0.8em;
+  background: var(--manga-black);
+  color: var(--manga-white);
+  padding: 2px 8px;
+  display: inline-block;
+  transform: rotate(1deg);
+  margin-top: 5px;
+  font-weight: 700;
+}
+
+/* --- IMAGEM (Painel de Mangá) --- */
+.manga-container .manga-image-frame {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  border-bottom: 4px solid var(--manga-black);
+  overflow: hidden;
+}
+
+.manga-container .manga-image-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  /* Filtro Mangá: Grayscale + Alto Contraste + Halftone simulado */
+  filter: grayscale(100%) contrast(1.2) brightness(1.1);
+  transition: filter 0.3s ease;
+}
+
+/* Hover: "Color Spread" (Página Colorida) */
+.manga-container:hover .manga-image-frame img {
+  filter: grayscale(0%) contrast(1.1);
+}
+
+/* --- BARRAS DE STATUS (Tinta) --- */
+.manga-container .manga-stats {
+  padding: 30px 25px 15px 25px;
+  display: flex; flex-direction: column; gap: 15px;
+  background: #fff;
+  position: relative;
+  z-index: 2;
+  border-bottom: 2px dashed #ccc;
+}
+
+.manga-container .jjk-dossier-status-item {
+  display: flex; align-items: center; gap: 10px;
+}
+
+.manga-container .jjk-dossier-status-label {
+  font-family: 'Bangers', cursive;
+  font-size: 1.2em;
+  color: var(--manga-black);
+  width: 40px;
+  text-align: right;
+}
+
+.manga-container .jjk-dossier-status-bar-wrapper {
+  flex-grow: 1; position: relative; height: 16px;
+  background: #fff;
+  border: 2px solid var(--manga-black);
+  /* Sombra sólida para parecer 3D desenhado */
+  box-shadow: 3px 3px 0 #ccc;
+  border-radius: 0;
+}
+
+.manga-container .jjk-dossier-status-bar {
+  width: 100%; height: 100%; background: transparent; border: none;
+}
+
+/* HP: Tinta Preta */
+.manga-container .jjk-dossier-hp-fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--manga-black),
+    var(--manga-black) 5px,
+    #333 5px,
+    #333 10px
+  );
+  transition: width 0.5s ease;
+}
+
+/* EA: Tinta Cinza/Hachura */
+.manga-container .jjk-dossier-ea-fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    #999,
+    #999 2px,
+    #fff 2px,
+    #fff 4px
+  );
+  transition: width 0.5s ease;
+}
+
+.manga-container .jjk-dossier-status-value {
+  position: absolute; right: 5px; top: 50%; transform: translateY(-50%);
+  font-family: 'Bangers', cursive; font-size: 0.8em;
+  /* Cor inteligente: Branco se fundo for preto, preto se fundo for branco */
+  color: var(--manga-accent); /* Usando vermelho para destaque */
+  text-shadow: 1px 1px 0 #fff;
+  left: auto;
+}
+
+/* --- CONTEÚDO (Balão de Fala) --- */
+.manga-container .manga-content {
+  padding: 25px 35px;
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: var(--manga-black);
+  text-align: justify;
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  margin: 20px;
+  border: 3px solid var(--manga-black);
+  border-radius: 15px 15px 0 15px; /* Formato de balão */
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.1);
+}
+
+/* Rabinho do Balão */
+.manga-container .manga-content::after {
+  content: ''; position: absolute; bottom: -20px; right: -3px;
+  border-top: 20px solid var(--manga-black);
+  border-left: 20px solid transparent;
+  width: 0; height: 0;
+}
+.manga-container .manga-content::before {
+  content: ''; position: absolute; bottom: -14px; right: 0px;
+  border-top: 16px solid #fff;
+  border-left: 16px solid transparent;
+  width: 0; height: 0;
+  z-index: 1;
+}
+
+.manga-container .manga-content b {
+  font-weight: 900;
+  font-size: 1.1em;
+  /* Efeito de "Grito" */
+  font-family: 'Mochiy Pop One', sans-serif;
+}
+
+.manga-container .manga-content i {
+  background: var(--manga-black);
+  color: #fff;
+  padding: 0 4px;
+  font-style: italic;
+}
+
+/* --- EXTRAS (Nota de Rodapé / Editor) --- */
+.manga-container .manga-extras {
+  margin: 0 20px 20px 20px;
+  padding: 10px 15px;
+  background: var(--manga-black);
+  color: #fff;
+  font-family: 'Bangers', cursive;
+  font-size: 1em;
+  transform: rotate(-1deg);
+  position: relative;
+  z-index: 5;
+  letter-spacing: 1px;
+}
+
+/* Selo "To Be Continued" */
+.manga-container .manga-tbc {
+  position: absolute;
+  bottom: 10px; right: 20px;
+  font-family: 'Mochiy Pop One', sans-serif;
+  font-size: 1.5em;
+  color: var(--manga-black);
+  font-weight: 900;
+  opacity: 0.2;
+  transform: rotate(-5deg);
+}
+
+@media (max-width: 600px) {
+  .manga-container .manga-header { padding: 20px; flex-direction: column; align-items: flex-start; }
+  .manga-container .manga-content, 
+  .manga-container .manga-stats, 
+  .manga-container .manga-extras { padding-left: 20px; padding-right: 20px; margin-left: 10px; margin-right: 10px; margin-bottom: 20px; }
+  .manga-container .manga-content { border-radius: 10px; }
+}
