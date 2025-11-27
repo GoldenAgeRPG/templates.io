@@ -1,4 +1,4 @@
-/* --- TEMPLATE: ARTE & CORES (GALLERY EDITION) --- */
+/* --- TEMPLATE: ARTE & CORES v3 (NO EMOJI) --- */
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Caveat:wght@700&family=Nunito:wght@400;800&display=swap');
 
 :root {
@@ -63,9 +63,14 @@
   clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
   margin-bottom: -20px;
 }
+
+/* Ícone SVG (Pincel) */
 .art-container .art-icon {
-  font-size: 2.5em; margin-bottom: 5px; filter: drop-shadow(3px 3px 0 var(--art-magenta));
+  width: 50px; height: 50px; margin: 0 auto 5px auto;
+  filter: drop-shadow(3px 3px 0 var(--art-magenta));
 }
+.art-container .art-icon path { fill: #fff; }
+
 .art-container .art-title {
   font-family: 'Permanent Marker', cursive; font-size: 2.2em; color: #fff; margin: 0;
   text-shadow: 2px 2px 0 var(--art-cyan), -2px -2px 0 var(--art-magenta);
@@ -76,40 +81,27 @@
   font-weight: 700; margin-top: 5px;
 }
 
-/* --- GALERIA DE 4 IMAGENS (NOVO) --- */
+/* GALERIA (4 IMAGENS) */
 .art-gallery {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* 2 colunas */
+  grid-template-columns: 1fr 1fr;
   gap: 10px;
-  padding: 30px 40px 10px 40px; /* Espaço lateral */
-  position: relative;
-  z-index: 1;
+  padding: 30px 40px 10px 40px;
+  position: relative; z-index: 1;
 }
-
 .art-gallery-item {
-  width: 100%;
-  height: 180px; /* Altura fixa para os quadros */
-  background: #fff;
-  border: 3px solid #000;
-  padding: 4px; /* Moldura branca interna */
-  box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
-  transform-origin: center;
+  width: 100%; height: 180px; background: #fff;
+  border: 3px solid #000; padding: 4px;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.2); transform-origin: center;
 }
-
-/* Imagem dentro do quadro */
 .art-gallery-item img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: center;
-  filter: saturate(1.2) contrast(1.1);
-  display: block;
+  width: 100%; height: 100%; object-fit: cover; object-position: center;
+  filter: saturate(1.2) contrast(1.1); display: block;
 }
-
-/* Rotações artísticas para cada quadro */
 .art-gallery-item:nth-child(1) { transform: rotate(-2deg); z-index: 2; }
 .art-gallery-item:nth-child(2) { transform: rotate(3deg); z-index: 1; }
 .art-gallery-item:nth-child(3) { transform: rotate(1deg); z-index: 1; margin-top: -10px; }
 .art-gallery-item:nth-child(4) { transform: rotate(-4deg); z-index: 2; margin-top: -10px; }
-
 
 /* STATUS */
 .art-container .art-stats {
@@ -117,7 +109,7 @@
   position: relative; z-index: 2; margin-top: 10px;
 }
 .art-container .jjk-dossier-status-item { display: grid; grid-template-columns: 40px 1fr 80px; align-items: center; gap: 10px; }
-.art-container .jjk-dossier-status-label { font-family: 'Permanent Marker', cursive; font-size: 1.1em; color: var(--art-ink); }
+.art-container .jjk-dossier-status-label { font-family: 'Permanent Marker', cursive; font-size: 1.1em; color: var(--art-ink); text-align: right; }
 .art-container .jjk-dossier-status-bar-wrapper {
   width: 100%; height: 18px; background: #eee; border: 2px solid #000;
   border-radius: 20px; overflow: hidden;
@@ -157,14 +149,25 @@
   border-radius: 10px 10px 30px 10px; position: relative; box-shadow: 5px 5px 0 var(--art-cyan);
 }
 .art-container .art-extras::before {
-  content: '🎨 PALETA DE CORES'; display: block; font-family: 'Permanent Marker', cursive;
+  content: 'PALETA DE CORES'; display: block; font-family: 'Permanent Marker', cursive;
   font-size: 0.9em; color: var(--art-yellow); margin-bottom: 10px;
   border-bottom: 2px dashed #fff; padding-bottom: 5px;
+}
+
+/* --- ASSINATURA (Estilo Grafite) --- */
+.art-signature {
+  text-align: right; padding: 0 30px 25px 30px; position: relative; z-index: 5;
+}
+.art-signature::after {
+  content: 'AYAKASHI SAYONARA';
+  font-family: 'Permanent Marker', cursive; font-size: 1em;
+  color: #000; text-shadow: 2px 2px 0 var(--art-cyan);
+  transform: rotate(-2deg); display: inline-block;
 }
 
 @media (max-width: 600px) {
   .art-container .art-header { padding: 30px 15px; }
   .art-container .art-content, .art-container .art-stats, .art-container .art-extras { padding-left: 20px; padding-right: 20px; }
-  .art-gallery { grid-template-columns: 1fr; } /* 1 coluna no celular */
+  .art-gallery { grid-template-columns: 1fr; }
   .art-gallery-item { margin-top: 0 !important; }
 }
