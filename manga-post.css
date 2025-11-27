@@ -1,4 +1,4 @@
-/* --- TEMPLATE: MANGA STYLE (SHONEN JUMP) v2 --- */
+/* --- TEMPLATE: MANGA PAGE (SHONEN STYLE) --- */
 @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Kosugi+Maru&family=Mochiy+Pop+One&display=swap');
 
 :root {
@@ -6,161 +6,211 @@
   --manga-ink: #1a1a1a;
   --manga-white: #ffffff;
   --manga-paper: #f4f4f0;
-  --manga-screentone: #ddd;
-  --manga-accent: #e60000; /* Vermelho Jump */
+  --manga-screentone: #cccccc;
+  --manga-accent: #e60000; /* Vermelho Sangue/Jump */
+  --manga-blue: #0066cc;   /* Azul Caneta */
 }
 
-/* Animação: Linhas de Ação */
-@keyframes speed-lines {
+/* Animação: Speed Lines no Fundo */
+@keyframes speed-lines-anim {
   0% { background-position: 0 0; }
   100% { background-position: 100px -100px; }
 }
 
-/* CONTAINER PRINCIPAL */
-.manga-container {
+/* CONTAINER PRINCIPAL (A PÁGINA) */
+.manga-page-container {
   box-sizing: border-box;
-  max-width: 700px;
+  max-width: 720px;
   width: 95%;
   margin: 40px auto;
   background-color: var(--manga-white);
   
-  /* Fundo de Retículas */
+  /* Fundo de Retícula (Pontilhada) */
   background-image: 
-    radial-gradient(var(--manga-screentone) 15%, transparent 16%),
-    radial-gradient(var(--manga-screentone) 15%, transparent 16%);
-  background-size: 10px 10px;
-  background-position: 0 0, 5px 5px;
+    radial-gradient(var(--manga-screentone) 20%, transparent 20%),
+    radial-gradient(var(--manga-screentone) 20%, transparent 20%);
+  background-size: 8px 8px;
+  background-position: 0 0, 4px 4px;
   
   border: 4px solid var(--manga-black);
+  /* Sombra estilo hachura sólida */
   box-shadow: 10px 10px 0 var(--manga-ink);
   
   color: var(--manga-black);
   font-family: 'Kosugi Maru', sans-serif;
   position: relative;
-  padding: 0;
+  padding: 15px; /* Margem da página */
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Espaço entre os quadros (Gutter) */
+}
+
+.manga-page-container * { box-sizing: border-box; }
+
+/* --- QUADRO 1: CABEÇALHO E IMAGEM (SPLASH PANEL) --- */
+.manga-panel-visual {
+  border: 3px solid var(--manga-black);
+  background: #fff;
+  position: relative;
   overflow: hidden;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
 }
-.manga-container * { box-sizing: border-box; }
 
-/* Overlay Speed Lines */
-.manga-container::before {
+/* Speedlines Overlay na Imagem */
+.manga-panel-visual::before {
   content: ''; position: absolute; inset: 0;
-  background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.03) 10px, rgba(0,0,0,0.03) 20px);
-  animation: speed-lines 2s linear infinite; pointer-events: none; z-index: 0;
+  background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.05) 10px, rgba(0,0,0,0.05) 20px);
+  animation: speed-lines-anim 0.5s linear infinite; /* Rápido! */
+  pointer-events: none; z-index: 2;
 }
 
-/* HEADER */
-.manga-container .manga-header {
-  padding: 30px 20px; position: relative; z-index: 2;
-  border-bottom: 4px solid var(--manga-black); background: var(--manga-white);
-  display: flex; align-items: center; justify-content: space-between;
-  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); margin-bottom: -20px;
+/* Título Flutuante (Manchete) */
+.manga-header-float {
+  position: absolute;
+  top: 15px; left: -5px;
+  background: var(--manga-black);
+  color: var(--manga-white);
+  padding: 5px 15px;
+  transform: rotate(-2deg);
+  z-index: 5;
+  box-shadow: 3px 3px 0 var(--manga-accent);
+}
+.manga-title {
+  font-family: 'Bangers', cursive; font-size: 1.8em; margin: 0; line-height: 1; letter-spacing: 1px;
+}
+.manga-subtitle {
+  font-family: 'Kosugi Maru', sans-serif; font-size: 0.7em; text-transform: uppercase; color: var(--manga-accent);
 }
 
-.manga-container .manga-sfx {
-  font-family: 'Mochiy Pop One', sans-serif; font-size: 3em; color: var(--manga-black);
-  position: absolute; right: 10px; top: 0px; z-index: 1; opacity: 0.15;
-  transform: rotate(-15deg); pointer-events: none;
+/* Onomatopeia (SFX) */
+.manga-sfx {
+  position: absolute; bottom: 10px; right: 10px;
+  font-family: 'Mochiy Pop One', sans-serif; font-size: 4em; color: #fff;
+  text-shadow: 3px 3px 0 #000, -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+  z-index: 5; transform: rotate(-10deg); pointer-events: none; opacity: 0.9;
 }
 
-.manga-container .manga-title {
-  font-family: 'Bangers', cursive; font-size: 2.5em; color: var(--manga-black);
-  text-transform: uppercase; margin: 0; line-height: 1; text-shadow: 2px 2px 0 #ccc; transform: rotate(-1deg);
+/* Imagem */
+.manga-img-wrapper {
+  width: 100%; height: 350px;
+  background: #000;
+  position: relative;
 }
-
-.manga-container .manga-subtitle {
-  font-size: 0.8em; background: var(--manga-black); color: var(--manga-white);
-  padding: 2px 8px; display: inline-block; transform: rotate(1deg); margin-top: 5px; font-weight: 700;
-}
-
-/* IMAGEM */
-.manga-container .manga-image-frame {
-  width: 100%; height: 350px; position: relative; z-index: 1;
-  background: #fff; border-bottom: 4px solid var(--manga-black); overflow: hidden;
-}
-.manga-container .manga-image-frame img {
+.manga-img-wrapper img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  filter: grayscale(100%) contrast(1.2) brightness(1.1); transition: filter 0.3s ease;
+  /* Filtro Mangá: Preto e Branco de alto contraste */
+  filter: grayscale(100%) contrast(1.2) brightness(1.1);
+  transition: filter 0.3s;
 }
-.manga-container:hover .manga-image-frame img { filter: grayscale(0%) contrast(1.1); }
-
-/* STATUS */
-.manga-container .manga-stats {
-  padding: 30px 25px 15px 25px; display: flex; flex-direction: column; gap: 15px;
-  background: #fff; position: relative; z-index: 2; border-bottom: 2px dashed #ccc;
-}
-.manga-container .jjk-dossier-status-item { display: flex; align-items: center; gap: 10px; }
-.manga-container .jjk-dossier-status-label {
-  font-family: 'Bangers', cursive; font-size: 1.2em; color: var(--manga-black); width: 40px; text-align: right;
-}
-.manga-container .jjk-dossier-status-bar-wrapper {
-  flex-grow: 1; position: relative; height: 16px; background: #fff;
-  border: 2px solid var(--manga-black); box-shadow: 3px 3px 0 #ccc; border-radius: 0;
-}
-.manga-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
-.manga-container .jjk-dossier-hp-fill {
-  height: 100%; background: repeating-linear-gradient(-45deg, var(--manga-black), var(--manga-black) 5px, #333 5px, #333 10px); transition: width 0.5s ease;
-}
-.manga-container .jjk-dossier-ea-fill {
-  height: 100%; background: repeating-linear-gradient(90deg, #999, #999 2px, #fff 2px, #fff 4px); transition: width 0.5s ease;
-}
-.manga-container .jjk-dossier-status-value {
-  position: absolute; right: 5px; top: 50%; transform: translateY(-50%);
-  font-family: 'Bangers', cursive; font-size: 0.8em; color: var(--manga-accent); text-shadow: 1px 1px 0 #fff; left: auto;
+.manga-page-container:hover .manga-img-wrapper img {
+  /* Efeito "Página Colorida" ao passar o mouse */
+  filter: grayscale(0%) contrast(1.1);
 }
 
-/* CONTEÚDO */
-.manga-container .manga-content {
-  padding: 25px 35px; font-size: 1.1em; line-height: 1.6; color: var(--manga-black);
-  text-align: justify; position: relative; z-index: 2; background: #fff;
-  margin: 20px; border: 3px solid var(--manga-black); border-radius: 15px 15px 0 15px;
+/* --- QUADRO 2: STATUS (DATABOOK) --- */
+.manga-panel-stats {
+  border: 3px solid var(--manga-black);
+  background: #fff;
+  padding: 15px;
+  display: flex; flex-direction: column; gap: 10px;
+  position: relative;
+}
+
+/* Etiqueta do Databook */
+.manga-panel-stats::after {
+  content: 'DATABOOK // STATUS';
+  position: absolute; top: -10px; right: 10px;
+  background: #fff; padding: 0 5px;
+  font-family: 'Bangers', cursive; font-size: 0.9em;
+  border: 2px solid var(--manga-black);
+}
+
+.jjk-dossier-status-item {
+  display: grid; grid-template-columns: 40px 1fr 100px; align-items: center; gap: 10px;
+}
+
+.jjk-dossier-status-label {
+  font-family: 'Bangers', cursive; font-size: 1.2em; color: var(--manga-black); text-align: right;
+}
+
+.jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 14px;
+  border: 2px solid var(--manga-black);
+  background: #fff;
+  /* Sombra dura interna */
+  box-shadow: inset 2px 2px 0 #ccc;
+}
+.jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
+
+/* HP: Hachura Preta */
+.jjk-dossier-hp-fill {
+  height: 100%;
+  background: repeating-linear-gradient(-45deg, var(--manga-black), var(--manga-black) 4px, #fff 4px, #fff 6px);
+  border-right: 2px solid var(--manga-black);
+  transition: width 0.5s;
+}
+/* EA: Hachura Cinza */
+.jjk-dossier-ea-fill {
+  height: 100%;
+  background: repeating-linear-gradient(45deg, #999, #999 4px, #fff 4px, #fff 6px);
+  border-right: 2px solid var(--manga-black);
+  transition: width 0.5s;
+}
+
+.jjk-dossier-status-value {
+  font-family: 'Bangers', cursive; font-size: 1em; color: var(--manga-black); text-align: right;
+}
+
+/* --- QUADRO 3: TEXTO (MONÓLOGO) --- */
+.manga-panel-text {
+  border: 3px solid var(--manga-black);
+  background: #fff;
+  padding: 25px 30px;
+  font-size: 1.1em; line-height: 1.6;
+  text-align: justify;
+  position: relative;
   box-shadow: 5px 5px 0 rgba(0,0,0,0.1);
 }
-.manga-container .manga-content::after {
-  content: ''; position: absolute; bottom: -20px; right: -3px;
-  border-top: 20px solid var(--manga-black); border-left: 20px solid transparent; width: 0; height: 0;
-}
-.manga-container .manga-content::before {
-  content: ''; position: absolute; bottom: -14px; right: 0px;
-  border-top: 16px solid #fff; border-left: 16px solid transparent; width: 0; height: 0; z-index: 1;
-}
-.manga-container .manga-content b { font-weight: 900; font-size: 1.1em; font-family: 'Mochiy Pop One', sans-serif; }
-.manga-container .manga-content i { background: var(--manga-black); color: #fff; padding: 0 4px; font-style: italic; }
 
-/* EXTRAS */
-.manga-container .manga-extras {
-  margin: 0 20px 20px 20px; padding: 10px 15px; background: var(--manga-black);
-  color: #fff; font-family: 'Bangers', cursive; font-size: 1em;
-  transform: rotate(-1deg); position: relative; z-index: 5; letter-spacing: 1px;
+/* Cantos de "Quadro de Texto" */
+.manga-panel-text::before {
+  content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px;
+  border: 1px dashed #ccc; pointer-events: none;
 }
 
-/* --- ASSINATURA (NOVO) --- */
-.manga-container .manga-signature {
-  text-align: right;
-  padding: 0 25px 25px 25px;
-  position: relative;
-  z-index: 5;
+.manga-panel-text b {
+  font-family: 'Mochiy Pop One', sans-serif; font-size: 1em;
+  text-transform: uppercase;
+}
+.manga-panel-text i {
+  background: var(--manga-black); color: #fff; padding: 0 4px; font-style: italic;
 }
 
-/* Texto inserido via CSS (Não editável no HTML) */
-.manga-container .manga-signature::after {
+/* --- EXTRAS (Nota de Rodapé) --- */
+.manga-extras {
+  border: 2px dashed var(--manga-black);
+  background: var(--manga-white);
+  padding: 10px;
+  font-family: 'Bangers', cursive; font-size: 1em;
+  text-align: center;
+  transform: rotate(-1deg);
+}
+
+/* --- ASSINATURA --- */
+.manga-signature {
+  text-align: right; margin-top: -10px; z-index: 10;
+}
+.manga-signature::after {
   content: 'AYAKASHI SAYONARA';
-  font-family: 'Mochiy Pop One', sans-serif;
-  font-size: 0.9em;
-  color: var(--manga-accent);
-  background: #fff;
-  border: 3px solid var(--manga-black);
-  padding: 5px 10px;
-  box-shadow: 4px 4px 0 var(--manga-black);
-  display: inline-block;
-  transform: rotate(-2deg);
+  font-family: 'Mochiy Pop One', sans-serif; font-size: 0.8em;
+  background: var(--manga-black); color: #fff;
+  padding: 4px 10px;
+  border: 2px solid #fff; outline: 2px solid var(--manga-black);
+  display: inline-block; transform: rotate(-3deg);
 }
 
 @media (max-width: 600px) {
-  .manga-container .manga-header { padding: 20px; flex-direction: column; align-items: flex-start; }
-  .manga-container .manga-content, 
-  .manga-container .manga-stats, 
-  .manga-container .manga-extras,
-  .manga-container .manga-signature { padding-left: 20px; padding-right: 20px; margin-left: 10px; margin-right: 10px; margin-bottom: 20px; }
-  .manga-container .manga-content { border-radius: 10px; }
+  .manga-page-container { padding: 10px; }
+  .manga-panel-visual, .manga-panel-stats, .manga-panel-text { margin-bottom: 0; }
+  .manga-sfx { font-size: 2em; }
 }
