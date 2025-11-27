@@ -1,0 +1,266 @@
+/* --- TEMPLATE: PROPORÇÃO (NANAMI) --- */
+@import url('https://fonts.googleapis.com/css2?family=Jura:wght@400;700&family=Oswald:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap');
+
+/* Escopamento */
+.ratio-container {
+  --nanami-bg: #1a1a1d;
+  --nanami-panel: #252529;
+  --nanami-beige: #c5b49a;  /* Cor do Terno */
+  --nanami-green: #bfff00;  /* Ponto Fraco (Neon) */
+  --nanami-blue: #1e2a4a;   /* Gravata */
+  --nanami-text: #e0e0e0;
+  --grid-line: rgba(197, 180, 154, 0.1);
+}
+
+/* Animação de "Scan" da Linha */
+@keyframes ratio-scan {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
+}
+
+/* Animação de Ponto Crítico (Pulso) */
+@keyframes crit-pulse {
+  0%, 100% { box-shadow: 0 0 5px var(--nanami-green); transform: scale(1); }
+  50% { box-shadow: 0 0 15px var(--nanami-green); transform: scale(1.2); }
+}
+
+/* CONTAINER PRINCIPAL */
+.ratio-container {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--nanami-bg);
+  
+  /* Fundo: Papel Milimetrado Técnico */
+  background-image: 
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: 20px 20px;
+  
+  border: 1px solid var(--nanami-beige);
+  border-left: 6px solid var(--nanami-beige); /* Lateral grossa */
+  border-radius: 2px;
+  
+  color: var(--nanami-text);
+  font-family: 'Jura', sans-serif; /* Fonte técnica */
+  position: relative;
+  box-shadow: 10px 10px 0 rgba(0,0,0,0.5); /* Sombra sólida "escritório" */
+  padding: 0;
+  overflow: hidden;
+}
+
+.ratio-container * { box-sizing: border-box; }
+
+/* A LINHA 7:3 (Decorativa no fundo) */
+.ratio-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 70%; /* A proporção 7:3 */
+  width: 2px; height: 100%;
+  background: var(--nanami-green);
+  opacity: 0.3;
+  z-index: 0;
+  box-shadow: 0 0 10px var(--nanami-green);
+}
+
+/* Ponto Crítico na Linha */
+.ratio-container::after {
+  content: '';
+  position: absolute;
+  top: 20%; left: 70%; /* Ponto na linha */
+  width: 10px; height: 10px;
+  background: var(--nanami-green);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: crit-pulse 2s infinite;
+  z-index: 0;
+  opacity: 0.8;
+}
+
+/* --- CABEÇALHO --- */
+.ratio-container .ratio-header {
+  padding: 25px 30px;
+  background: var(--nanami-panel);
+  border-bottom: 2px solid var(--nanami-beige);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+.ratio-container .ratio-info {
+  display: flex; flex-direction: column;
+}
+
+.ratio-container .ratio-title {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  font-size: 2em;
+  text-transform: uppercase;
+  color: var(--nanami-beige);
+  margin: 0;
+  line-height: 1;
+  letter-spacing: 1px;
+}
+
+.ratio-container .ratio-subtitle {
+  font-family: 'Roboto Mono', monospace;
+  color: #888;
+  font-size: 0.8em;
+  margin-top: 5px;
+  display: flex; gap: 10px;
+}
+
+/* Relógio de Ponto */
+.ratio-container .ratio-clock {
+  font-family: 'Roboto Mono', monospace;
+  font-weight: 700;
+  color: var(--nanami-green);
+  border: 1px solid var(--nanami-green);
+  padding: 2px 6px;
+  border-radius: 2px;
+  font-size: 0.9em;
+}
+
+/* --- IMAGEM --- */
+.ratio-container .ratio-image-frame {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  z-index: 1;
+  background: #000;
+  border-bottom: 4px solid var(--nanami-blue); /* Gravata */
+}
+.ratio-container .ratio-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  filter: sepia(0.2) contrast(1.1) saturate(0.8);
+}
+
+/* Régua sobre a imagem */
+.ratio-container .ratio-image-frame::after {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 20px;
+  background: repeating-linear-gradient(90deg, transparent, transparent 19px, #fff 19px, #fff 20px);
+  opacity: 0.5; pointer-events: none;
+}
+
+/* --- BARRAS DE STATUS (RÉGUA) --- */
+.ratio-container .ratio-stats {
+  padding: 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  background: rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 2;
+  border-bottom: 1px solid #333;
+}
+
+.ratio-container .jjk-dossier-status-item {
+  display: grid;
+  grid-template-columns: 40px 1fr 80px;
+  align-items: center;
+  gap: 15px;
+}
+
+.ratio-container .jjk-dossier-status-label {
+  font-family: 'Oswald', sans-serif;
+  color: var(--nanami-beige);
+  font-size: 0.9em;
+  text-align: right;
+}
+
+.ratio-container .jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 12px;
+  background: #111;
+  border: 1px solid #444;
+  /* Marcações de régua no fundo da barra */
+  background-image: repeating-linear-gradient(90deg, transparent, transparent 9%, #333 9%, #333 10%);
+  border-radius: 0;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Linha de 7:3 na própria barra */
+.ratio-container .jjk-dossier-status-bar-wrapper::after {
+  content: ''; position: absolute; top:0; bottom:0; left: 70%; width: 2px;
+  background: var(--nanami-green); z-index: 5;
+}
+
+.ratio-container .jjk-dossier-status-bar {
+  width: 100%; height: 100%; background: transparent; border: none;
+}
+
+/* HP: Bege/Dourado */
+.ratio-container .jjk-dossier-hp-fill {
+  height: 100%;
+  background: var(--nanami-beige);
+  transition: width 0.5s ease;
+}
+
+/* EA: Azul Corporativo */
+.ratio-container .jjk-dossier-ea-fill {
+  height: 100%;
+  background: var(--nanami-blue);
+  transition: width 0.5s ease;
+}
+
+.ratio-container .jjk-dossier-status-value {
+  position: static; transform: none;
+  font-family: 'Roboto Mono', monospace; font-size: 0.8em; color: #fff; text-align: right;
+}
+
+/* --- CONTEÚDO --- */
+.ratio-container .ratio-content {
+  padding: 30px 40px;
+  font-size: 1.1em;
+  line-height: 1.6;
+  color: #ccc;
+  text-align: justify;
+  position: relative;
+  z-index: 2;
+}
+
+/* Destaques "Analíticos" */
+.ratio-container .ratio-content b {
+  color: var(--nanami-green);
+  font-family: 'Oswald', sans-serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--nanami-green);
+}
+
+.ratio-container .ratio-content i {
+  color: var(--nanami-beige);
+  font-style: italic;
+}
+
+/* --- EXTRAS (Relatório) --- */
+.ratio-container .ratio-extras {
+  margin: 0 30px 30px 30px;
+  padding: 15px;
+  background: #202024;
+  border-left: 4px solid var(--nanami-green);
+  position: relative;
+  z-index: 2;
+  font-size: 0.85em;
+  color: #aaa;
+  font-family: 'Roboto Mono', monospace;
+}
+
+.ratio-container .ratio-extras::before {
+  content: 'ANÁLISE DE CAMPO';
+  display: block;
+  font-weight: 700;
+  color: var(--nanami-green);
+  margin-bottom: 5px;
+}
+
+@media (max-width: 600px) {
+  .ratio-container .ratio-header { padding: 20px; }
+  .ratio-container .ratio-content, 
+  .ratio-container .ratio-stats, 
+  .ratio-container .ratio-extras { padding-left: 20px; padding-right: 20px; margin-left: 10px; margin-right: 10px; margin-bottom: 20px; }
+}
