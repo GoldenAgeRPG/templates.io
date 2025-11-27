@@ -1,4 +1,4 @@
-/* --- TEMPLATE: ARTE & CORES (HIPERCOLORIDO) --- */
+/* --- TEMPLATE: ARTE & CORES (GALLERY EDITION) --- */
 @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Caveat:wght@700&family=Nunito:wght@400;800&display=swap');
 
 :root {
@@ -10,7 +10,7 @@
   --art-paint: #ff4081;
 }
 
-/* Animação: Ciclo de Cores (Arco-Íris) */
+/* Animação: Ciclo de Cores */
 @keyframes rainbow-border {
   0% { border-color: var(--art-cyan); box-shadow: 5px 5px 0 var(--art-magenta); }
   33% { border-color: var(--art-magenta); box-shadow: 5px 5px 0 var(--art-yellow); }
@@ -25,201 +25,146 @@
   100% { background-position: 0% 50%; }
 }
 
-/* CONTAINER PRINCIPAL (A Tela) */
+/* CONTAINER PRINCIPAL */
 .art-container {
   box-sizing: border-box;
   max-width: 700px;
   width: 95%;
   margin: 40px auto;
   background-color: var(--art-bg);
-  
-  /* Textura de Papel de Aquarela */
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.1'/%3E%3C/svg%3E");
   
   border: 4px solid var(--art-cyan);
   border-radius: 15px;
   
   color: var(--art-ink);
-  font-family: 'Nunito', sans-serif; /* Fonte redonda e legível */
+  font-family: 'Nunito', sans-serif;
   position: relative;
   padding: 0;
   overflow: hidden;
-  
-  /* Borda Animada */
   animation: rainbow-border 4s infinite linear;
 }
-
 .art-container * { box-sizing: border-box; }
 
-/* Respingos de Tinta (Pseudo-elementos) */
+/* Respingos de Tinta */
 .art-container::before, .art-container::after {
   content: ''; position: absolute; width: 80px; height: 80px;
   background: var(--art-yellow);
-  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%; /* Forma orgânica */
-  opacity: 0.4; z-index: 0; pointer-events: none;
-  mix-blend-mode: multiply;
+  border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  opacity: 0.4; z-index: 0; pointer-events: none; mix-blend-mode: multiply;
 }
 .art-container::before { top: -20px; left: -20px; background: var(--art-cyan); transform: rotate(45deg); }
 .art-container::after { bottom: -20px; right: -20px; background: var(--art-magenta); transform: rotate(-20deg); }
 
-/* --- CABEÇALHO --- */
+/* HEADER */
 .art-container .art-header {
-  text-align: center;
-  padding: 30px 20px;
-  position: relative;
-  z-index: 2;
-  /* Fundo rasgado */
-  background: #000;
-  color: #fff;
+  text-align: center; padding: 30px 20px; position: relative; z-index: 2;
+  background: #000; color: #fff;
   clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%);
   margin-bottom: -20px;
 }
-
 .art-container .art-icon {
   font-size: 2.5em; margin-bottom: 5px; filter: drop-shadow(3px 3px 0 var(--art-magenta));
 }
-
 .art-container .art-title {
-  font-family: 'Permanent Marker', cursive;
-  font-size: 2.2em;
-  color: #fff;
-  margin: 0;
+  font-family: 'Permanent Marker', cursive; font-size: 2.2em; color: #fff; margin: 0;
   text-shadow: 2px 2px 0 var(--art-cyan), -2px -2px 0 var(--art-magenta);
-  transform: rotate(-2deg);
-  line-height: 1.2;
+  transform: rotate(-2deg); line-height: 1.2;
 }
-
 .art-container .art-subtitle {
-  font-family: 'Caveat', cursive;
-  font-size: 1.4em;
-  color: var(--art-yellow);
-  font-weight: 700;
-  margin-top: 5px;
+  font-family: 'Caveat', cursive; font-size: 1.4em; color: var(--art-yellow);
+  font-weight: 700; margin-top: 5px;
 }
 
-/* --- IMAGEM (Moldura de Quadro) --- */
-.art-container .art-image-frame {
-  width: calc(100% - 40px);
-  height: 320px;
-  margin: 20px auto 10px auto;
+/* --- GALERIA DE 4 IMAGENS (NOVO) --- */
+.art-gallery {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 colunas */
+  gap: 10px;
+  padding: 30px 40px 10px 40px; /* Espaço lateral */
   position: relative;
   z-index: 1;
-  border: 4px solid #000;
+}
+
+.art-gallery-item {
+  width: 100%;
+  height: 180px; /* Altura fixa para os quadros */
   background: #fff;
-  box-shadow: 5px 5px 0 rgba(0,0,0,0.1);
-  transform: rotate(1deg); /* Levemente torta */
+  border: 3px solid #000;
+  padding: 4px; /* Moldura branca interna */
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+  transform-origin: center;
 }
-.art-container .art-image-frame img {
+
+/* Imagem dentro do quadro */
+.art-gallery-item img {
   width: 100%; height: 100%;
-  object-fit: cover; object-position: top center;
-  /* Filtro Vibrante */
-  filter: saturate(1.5) contrast(1.1);
-  transition: 0.3s;
-}
-.art-container:hover .art-image-frame img {
-  filter: saturate(2); /* Hiper-saturado no hover */
+  object-fit: cover; object-position: center;
+  filter: saturate(1.2) contrast(1.1);
+  display: block;
 }
 
-/* --- BARRAS DE STATUS (Tinta Fresca) --- */
+/* Rotações artísticas para cada quadro */
+.art-gallery-item:nth-child(1) { transform: rotate(-2deg); z-index: 2; }
+.art-gallery-item:nth-child(2) { transform: rotate(3deg); z-index: 1; }
+.art-gallery-item:nth-child(3) { transform: rotate(1deg); z-index: 1; margin-top: -10px; }
+.art-gallery-item:nth-child(4) { transform: rotate(-4deg); z-index: 2; margin-top: -10px; }
+
+
+/* STATUS */
 .art-container .art-stats {
-  padding: 20px 30px;
-  display: flex; flex-direction: column; gap: 15px;
-  position: relative; z-index: 2;
+  padding: 20px 30px; display: flex; flex-direction: column; gap: 15px;
+  position: relative; z-index: 2; margin-top: 10px;
 }
-
-.art-container .jjk-dossier-status-item {
-  display: grid; grid-template-columns: 40px 1fr 80px; align-items: center; gap: 10px;
-}
-
-.art-container .jjk-dossier-status-label {
-  font-family: 'Permanent Marker', cursive;
-  font-size: 1.1em; color: var(--art-ink);
-}
-
+.art-container .jjk-dossier-status-item { display: grid; grid-template-columns: 40px 1fr 80px; align-items: center; gap: 10px; }
+.art-container .jjk-dossier-status-label { font-family: 'Permanent Marker', cursive; font-size: 1.1em; color: var(--art-ink); }
 .art-container .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 18px;
-  background: #eee;
-  border: 2px solid #000;
-  border-radius: 20px; /* Tubo redondo */
-  overflow: hidden;
+  width: 100%; height: 18px; background: #eee; border: 2px solid #000;
+  border-radius: 20px; overflow: hidden;
 }
 .art-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
-
-/* HP: Tinta Rosa/Vermelha */
 .art-container .jjk-dossier-hp-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #ff0055, #ff6b6b, #ff0055);
-  background-size: 200% 100%;
-  animation: paint-flow 3s infinite ease;
-  border-right: 2px solid #fff;
-  border-radius: 20px;
+  height: 100%; background: linear-gradient(90deg, #ff0055, #ff6b6b, #ff0055);
+  background-size: 200% 100%; animation: paint-flow 3s infinite ease;
+  border-right: 2px solid #fff; border-radius: 20px;
 }
-
-/* EA: Tinta Ciano/Azul */
 .art-container .jjk-dossier-ea-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #00bcd4, #00e5ff, #00bcd4);
-  background-size: 200% 100%;
-  animation: paint-flow 4s infinite ease;
-  border-right: 2px solid #fff;
-  border-radius: 20px;
+  height: 100%; background: linear-gradient(90deg, #00bcd4, #00e5ff, #00bcd4);
+  background-size: 200% 100%; animation: paint-flow 4s infinite ease;
+  border-right: 2px solid #fff; border-radius: 20px;
 }
-
 .art-container .jjk-dossier-status-value {
   font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.9em;
   color: var(--art-ink); text-align: right;
 }
 
-/* --- CONTEÚDO --- */
+/* CONTEÚDO */
 .art-container .art-content {
-  padding: 20px 30px;
-  font-size: 1.1em; line-height: 1.6;
-  color: #333;
-  text-align: justify;
-  position: relative; z-index: 2;
+  padding: 20px 30px; font-size: 1.1em; line-height: 1.6; color: #333;
+  text-align: justify; position: relative; z-index: 2;
 }
-
-/* Destaques "Marca-Texto" */
 .art-container .art-content b {
-  background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%); /* Marca texto verde/azul */
-  padding: 0 4px;
-  color: #000;
-  font-weight: 800;
-  border-radius: 2px;
+  background: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+  padding: 0 4px; color: #000; font-weight: 800; border-radius: 2px;
 }
-
 .art-container .art-content i {
-  font-family: 'Caveat', cursive;
-  font-size: 1.3em;
-  color: var(--art-magenta);
-  font-weight: 700;
+  font-family: 'Caveat', cursive; font-size: 1.3em; color: var(--art-magenta); font-weight: 700;
 }
 
-/* --- EXTRAS (Paleta) --- */
+/* EXTRAS */
 .art-container .art-extras {
-  margin: 0 30px 30px 30px;
-  padding: 20px;
-  background: #000;
-  color: #fff;
-  border-radius: 10px 10px 30px 10px; /* Formato assimétrico */
-  position: relative;
-  box-shadow: 5px 5px 0 var(--art-cyan);
+  margin: 0 30px 30px 30px; padding: 20px; background: #000; color: #fff;
+  border-radius: 10px 10px 30px 10px; position: relative; box-shadow: 5px 5px 0 var(--art-cyan);
 }
-
 .art-container .art-extras::before {
-  content: '🎨 PALETA DE CORES';
-  display: block;
-  font-family: 'Permanent Marker', cursive;
-  font-size: 0.9em;
-  color: var(--art-yellow);
-  margin-bottom: 10px;
-  border-bottom: 2px dashed #fff;
-  padding-bottom: 5px;
+  content: '🎨 PALETA DE CORES'; display: block; font-family: 'Permanent Marker', cursive;
+  font-size: 0.9em; color: var(--art-yellow); margin-bottom: 10px;
+  border-bottom: 2px dashed #fff; padding-bottom: 5px;
 }
 
 @media (max-width: 600px) {
   .art-container .art-header { padding: 30px 15px; }
-  .art-container .art-content, 
-  .art-container .art-stats, 
-  .art-container .art-extras { padding-left: 20px; padding-right: 20px; }
+  .art-container .art-content, .art-container .art-stats, .art-container .art-extras { padding-left: 20px; padding-right: 20px; }
+  .art-gallery { grid-template-columns: 1fr; } /* 1 coluna no celular */
+  .art-gallery-item { margin-top: 0 !important; }
 }
