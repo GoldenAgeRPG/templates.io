@@ -1,0 +1,254 @@
+/* --- TEMPLATE: RESSONÂNCIA (NOBARA) --- */
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Sancreek&family=Spectral:ital,wght@0,400;0,700;1,400&display=swap');
+
+/* Escopamento */
+.straw-container {
+  --straw-bg: #1a120b;     /* Madeira muito escura */
+  --straw-panel: #261a12;
+  --straw-rust: #cd5c5c;   /* Ferrugem / Rosa Escuro */
+  --straw-nail: #8d6e63;   /* Cor de Ferro Velho */
+  --straw-energy: #2979ff; /* Azul da Ressonância */
+  --straw-wood: #3e2723;
+  --text-main: #d7ccc8;
+  --text-dim: #a1887f;
+}
+
+/* Animação de "Batida de Martelo" (Vibração) */
+@keyframes hammer-hit {
+  0% { transform: translate(0, 0); }
+  95% { transform: translate(0, 0); }
+  96% { transform: translate(-2px, 2px); }
+  97% { transform: translate(2px, -2px); }
+  98% { transform: translate(-2px, -2px); }
+  99% { transform: translate(2px, 2px); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Animação de Fluxo de Energia (Cursed Energy) */
+@keyframes curse-pulse {
+  0% { box-shadow: 0 0 5px var(--straw-energy); }
+  50% { box-shadow: 0 0 15px var(--straw-energy); }
+  100% { box-shadow: 0 0 5px var(--straw-energy); }
+}
+
+/* CONTAINER PRINCIPAL */
+.straw-container {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--straw-bg);
+  
+  /* Textura de Madeira */
+  background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.02) 0px, rgba(255,255,255,0.02) 1px, transparent 1px, transparent 10px);
+  
+  /* Borda Grossa de Madeira com "Pregos" nos cantos */
+  border: 4px solid var(--straw-wood);
+  border-radius: 2px;
+  position: relative;
+  
+  color: var(--text-main);
+  font-family: 'Spectral', serif;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  padding: 0;
+  overflow: hidden;
+  
+  animation: hammer-hit 5s infinite; /* O post vibra como se recebesse marteladas */
+}
+
+.straw-container * { box-sizing: border-box; }
+
+/* Pregos nos Cantos (Pseudo-elementos) */
+.straw-container::before, .straw-container::after {
+  content: '';
+  position: absolute;
+  width: 12px; height: 12px;
+  background: var(--straw-nail);
+  border-radius: 50%;
+  box-shadow: inset 2px 2px 0 rgba(0,0,0,0.5), 1px 1px 2px #000;
+  z-index: 10;
+}
+.straw-container::before { top: 10px; left: 10px; box-shadow: 638px 0 0 var(--straw-nail), inset 2px 2px 0 rgba(0,0,0,0.5); } /* Clone para direita */
+.straw-container::after { bottom: 10px; left: 10px; box-shadow: 638px 0 0 var(--straw-nail), inset 2px 2px 0 rgba(0,0,0,0.5); }
+
+/* --- CABEÇALHO --- */
+.straw-container .straw-header {
+  text-align: center;
+  padding: 30px 20px;
+  background: radial-gradient(circle at top, #3e2723 0%, var(--straw-bg) 100%);
+  border-bottom: 3px solid var(--straw-rust);
+  position: relative;
+  z-index: 2;
+}
+
+.straw-container .straw-icon {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 150px; height: 150px; opacity: 0.05; pointer-events: none;
+}
+.straw-container .straw-icon path { fill: var(--straw-rust); }
+
+.straw-container .straw-title {
+  font-family: 'Sancreek', serif; /* Fonte estilo Western/Rústico */
+  font-size: 2.2em;
+  color: var(--straw-rust);
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 2px 2px 0 #000;
+  letter-spacing: 1px;
+}
+
+.straw-container .straw-subtitle {
+  font-family: 'Spectral', serif;
+  color: var(--straw-energy);
+  font-size: 0.9em;
+  margin-top: 5px;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+/* --- IMAGEM --- */
+.straw-container .straw-image-frame {
+  width: 100%;
+  height: 350px;
+  position: relative;
+  background: #000;
+  border-top: 2px solid #000;
+  border-bottom: 3px solid var(--straw-rust);
+  padding: 5px; /* Moldura interna */
+}
+
+.straw-container .straw-image-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  /* Filtro Quente e Sujo */
+  filter: sepia(0.4) contrast(1.2) saturate(0.8);
+}
+
+/* --- BARRAS DE STATUS (Madeira e Energia) --- */
+.straw-container .straw-stats {
+  padding: 25px 35px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: rgba(0,0,0,0.2);
+  position: relative;
+  z-index: 2;
+}
+
+.straw-container .jjk-dossier-status-item {
+  display: grid;
+  grid-template-columns: 30px 1fr 80px;
+  align-items: center;
+  gap: 15px;
+}
+
+.straw-container .jjk-dossier-status-label {
+  font-family: 'Sancreek', serif;
+  font-weight: 400;
+  color: var(--straw-rust);
+  font-size: 0.9em;
+  text-align: right;
+}
+
+.straw-container .jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 14px;
+  background: #1a0e08;
+  border: 1px solid var(--straw-wood);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: inset 0 2px 5px #000;
+}
+
+.straw-container .jjk-dossier-status-bar {
+  width: 100%; height: 100%; background: transparent; border: none;
+}
+
+/* HP: Vermelho Ferrugem */
+.straw-container .jjk-dossier-hp-fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--straw-rust),
+    var(--straw-rust) 10px,
+    #803030 10px,
+    #803030 20px
+  );
+  box-shadow: 0 0 5px var(--straw-rust);
+  transition: width 0.5s ease;
+}
+
+/* EA: Azul Ressonância (Pulsante) */
+.straw-container .jjk-dossier-ea-fill {
+  height: 100%;
+  background: var(--straw-energy);
+  box-shadow: 0 0 10px var(--straw-energy);
+  animation: curse-pulse 2s infinite alternate;
+  transition: width 0.5s ease;
+}
+
+.straw-container .jjk-dossier-status-value {
+  position: static; transform: none;
+  font-family: 'Spectral', serif; font-weight: 700; font-size: 0.9em;
+  color: var(--text-dim); text-align: right;
+}
+
+/* --- CONTEÚDO --- */
+.straw-container .straw-content {
+  padding: 25px 40px;
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: var(--text-main);
+  text-align: justify;
+  position: relative;
+  z-index: 2;
+  /* Papel de Talismã no fundo */
+  background: rgba(62, 39, 35, 0.1);
+  margin: 10px 20px;
+  border: 1px dashed var(--straw-rust);
+}
+
+/* Destaques */
+.straw-container .straw-content b {
+  color: var(--straw-rust);
+  font-weight: 900;
+  border-bottom: 2px solid var(--straw-rust);
+}
+
+.straw-container .straw-content i {
+  color: var(--straw-energy);
+  font-style: italic;
+  font-weight: 700;
+}
+
+/* --- EXTRAS (Boneca de Palha) --- */
+.straw-container .straw-extras {
+  margin: 0 30px 30px 30px;
+  padding: 20px;
+  background: #261a12;
+  border: 1px solid var(--straw-wood);
+  position: relative;
+  z-index: 2;
+  font-size: 0.9em;
+  color: var(--text-dim);
+  box-shadow: 5px 5px 0 #000;
+}
+
+.straw-container .straw-extras::before {
+  content: 'VODUU LOG';
+  display: block;
+  font-family: 'Sancreek', serif;
+  font-size: 0.8em;
+  color: var(--straw-energy);
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+@media (max-width: 600px) {
+  .straw-container .straw-header { padding: 20px; }
+  .straw-container .straw-content, 
+  .straw-container .straw-stats, 
+  .straw-container .straw-extras { padding-left: 20px; padding-right: 20px; margin-left: 10px; margin-right: 10px; margin-bottom: 20px; }
+  .straw-container::before { box-shadow: 300px 0 0 var(--straw-nail), inset 2px 2px 0 rgba(0,0,0,0.5); }
+  .straw-container::after { box-shadow: 300px 0 0 var(--straw-nail), inset 2px 2px 0 rgba(0,0,0,0.5); }
+}
