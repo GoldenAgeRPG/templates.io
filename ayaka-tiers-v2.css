@@ -1,60 +1,46 @@
-/* --- TEMPLATE: AYAKA GOJO - TIER S (ABSOLUTE REVELATION) --- */
+/* --- TEMPLATE: AYAKA GOJO - TIER S v2 (Static Image + Extra Box) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Syncopate:wght@400;700&display=swap');
 
 :root {
   --s-bg-depth: #020204;
   --s-cyan: #00f7ff;
   --s-gold: #ffd700;
-  --s-glass-panel: rgba(10, 15, 20, 0.75); /* Painel de leitura escuro e translúcido */
+  --s-glass-panel: rgba(10, 15, 20, 0.75);
   --s-text-light: #f4f4f4;
   --s-text-dim: #b0b8c0;
 }
 
-/* Animação da Aura Externa (Respiração Divina) */
+/* Animação da Aura Externa */
 @keyframes celestial-pulse {
   0%, 100% { box-shadow: 0 0 30px rgba(0, 247, 255, 0.2), 0 0 60px rgba(0, 247, 255, 0.1); }
   50% { box-shadow: 0 0 50px rgba(255, 215, 0, 0.3), 0 0 100px rgba(255, 215, 0, 0.15); }
 }
 
-/* Animação do Fundo (Fluxo de Energia dos Seis Olhos) */
-@keyframes six-eyes-flow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* CONTAINER PRINCIPAL - O Artefato */
+/* CONTAINER PRINCIPAL */
 .shomei-s-container {
   box-sizing: border-box;
   max-width: 720px;
   width: 95%;
   margin: 60px auto;
-  
-  /* O Fundo "Vivo" dos Seis Olhos */
   background-color: var(--s-bg-depth);
   background-image: 
     radial-gradient(circle at 20% 30%, rgba(0, 247, 255, 0.15), transparent 40%),
     radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.15), transparent 40%),
     linear-gradient(135deg, rgba(0,247,255,0.05) 0%, transparent 50%, rgba(255,215,0,0.05) 100%);
   background-size: 200% 200%;
-  
-  /* Borda de Luz Sólida */
   border: 0 solid transparent;
   border-image: linear-gradient(to bottom, var(--s-cyan), var(--s-gold)) 1;
   border-width: 2px;
-  
   color: var(--s-text-light);
   font-family: 'Cormorant Garamond', serif;
   position: relative;
-  
-  /* O grande diferencial: Aura externa em vez de sombra */
   animation: celestial-pulse 8s ease-in-out infinite;
-  padding: 3px; /* Espaço para a borda brilhar */
+  padding: 3px;
   overflow: hidden;
 }
 .shomei-s-container * { box-sizing: border-box; }
 
-/* Padrão Geométrico Sutil no Fundo (Estrutura da Realidade) */
+/* Padrão Geométrico Fundo */
 .shomei-s-container::before {
   content: ''; position: absolute; inset: 0;
   background-image: 
@@ -62,40 +48,26 @@
     linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size: 50px 50px;
   background-position: center;
-  mask-image: radial-gradient(circle, black 30%, transparent 80%); /* Desaparece nas bordas */
+  mask-image: radial-gradient(circle, black 30%, transparent 80%);
   z-index: 0; pointer-events: none;
 }
 
-/* --- CAMADA DE VIDRO FOSCO (ONDE FICA O CONTEÚDO) --- */
-/* Isso garante a leitura perfeita. O fundo caótico fica atrás disso. */
+/* CAMADA DE VIDRO FOSCO */
 .shomei-glass-panel {
   background: var(--s-glass-panel);
-  backdrop-filter: blur(10px); /* O segredo do efeito "Tier S" */
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.08);
-  position: relative;
-  z-index: 2;
-  height: 100%;
+  position: relative; z-index: 2; height: 100%;
 }
 
-/* --- CABEÇALHO --- */
+/* CABEÇALHO */
 .shomei-header {
-  padding: 50px 20px 30px;
-  text-align: center;
-  position: relative;
+  padding: 50px 20px 30px; text-align: center; position: relative;
   border-bottom: 1px solid rgba(255,255,255,0.05);
   background: linear-gradient(to bottom, rgba(0,0,0,0.4), transparent);
 }
-
-/* Emblema Superior */
-.shomei-emblem {
-  margin: 0 auto 20px; width: 60px; height: 60px;
-  display: flex; align-items: center; justify-content: center;
-}
-.shomei-emblem svg {
-  width: 100%; height: 100%;
-  filter: drop-shadow(0 0 8px var(--s-cyan));
-}
-
+.shomei-emblem { margin: 0 auto 20px; width: 60px; height: 60px; display: flex; align-items: center; justify-content: center; }
+.shomei-emblem svg { width: 100%; height: 100%; filter: drop-shadow(0 0 8px var(--s-cyan)); }
 .shomei-title {
   font-family: 'Cinzel Decorative', serif; font-size: 3em; color: #ffffff;
   text-transform: uppercase; margin: 0; letter-spacing: 6px; line-height: 1;
@@ -103,88 +75,70 @@
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   text-shadow: 0 0 20px rgba(0, 247, 255, 0.4);
 }
-
 .shomei-subtitle {
   font-family: 'Syncopate', sans-serif; color: var(--s-gold); font-size: 0.7em;
   margin-top: 15px; text-transform: uppercase; letter-spacing: 4px; font-weight: 700;
 }
 
-/* --- IMAGEM --- */
+/* --- IMAGEM (HOVER REMOVIDO) --- */
 .shomei-image-frame {
   width: 100%; height: 400px; position: relative;
-  background: #020204;
-  border-bottom: 2px solid var(--s-gold);
-  overflow: hidden;
+  background: #020204; border-bottom: 2px solid var(--s-gold); overflow: hidden;
 }
 .shomei-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  /* Filtro Etereo: Alto brilho, contraste suave */
+  /* Filtro Etereo Fixo */
   filter: brightness(1.1) contrast(1.05) saturate(0.9) sepia(0.1);
-  transition: 0.7s ease;
 }
-.shomei-s-container:hover .shomei-image-frame img {
-  filter: brightness(1.2) contrast(1.2) saturate(1.1) sepia(0);
-  transform: scale(1.02);
-}
-/* Overlay de Reflexo no Vidro */
+/* Overlay de Reflexo */
 .shomei-image-frame::after {
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, transparent 40%, rgba(255,215,0,0.1) 100%);
   pointer-events: none;
 }
 
-/* --- STATUS (Cristais de Energia) --- */
+/* STATUS */
 .shomei-stats {
   padding: 35px 50px; display: flex; flex-direction: column; gap: 25px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
-  background: rgba(0,0,0,0.2);
+  border-bottom: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.2);
 }
-.jjk-dossier-status-item {
-  display: grid; grid-template-columns: 50px 1fr 100px; align-items: center; gap: 20px;
-}
-.jjk-dossier-status-label {
-  font-family: 'Syncopate', sans-serif; font-weight: 700; color: var(--s-cyan); font-size: 0.8em; text-align: right;
-}
-/* Barra de Cristal */
+.jjk-dossier-status-item { display: grid; grid-template-columns: 50px 1fr 100px; align-items: center; gap: 20px; }
+.jjk-dossier-status-label { font-family: 'Syncopate', sans-serif; font-weight: 700; color: var(--s-cyan); font-size: 0.8em; text-align: right; }
 .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 10px;
-  background: rgba(0,0,0,0.5);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 2px; overflow: hidden;
-  box-shadow: inset 0 0 10px rgba(0,0,0,0.8);
-  position: relative;
+  width: 100%; height: 10px; background: rgba(0,0,0,0.5);
+  border: 1px solid rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.8); position: relative;
 }
 .jjk-dossier-status-bar-fill { height: 100%; position: relative; overflow: hidden; }
-
-/* Efeito de Brilho Passando (Shimmer) nas barras */
 .jjk-dossier-status-bar-fill::after {
   content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
   animation: bar-shimmer 3s infinite;
 }
 @keyframes bar-shimmer { 0% { left: -100%; } 50%, 100% { left: 100%; } }
-
 .jjk-dossier-hp-fill { background: linear-gradient(90deg, #ddd, #fff); box-shadow: 0 0 15px #fff; }
 .jjk-dossier-ea-fill { background: linear-gradient(90deg, var(--s-cyan), #a0fbff); box-shadow: 0 0 15px var(--s-cyan); }
-.jjk-dossier-status-value {
-  font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.8em; color: var(--s-text-dim); text-align: right;
-}
+.jjk-dossier-status-value { font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 0.8em; color: var(--s-text-dim); text-align: right; }
 
-/* --- CONTEÚDO (A Revelação) --- */
+/* --- CONTEÚDO PRINCIPAL --- */
 .shomei-content {
   padding: 40px 50px; font-size: 1.25em; line-height: 1.7; color: var(--s-text-light);
   text-align: justify; position: relative;
+  border-bottom: 1px solid rgba(255,255,255,0.05); /* Separador */
 }
-.shomei-content b {
-  color: var(--s-cyan); font-weight: 700;
-  text-shadow: 0 0 8px rgba(0, 247, 255, 0.5);
-}
-.shomei-content i {
-  color: var(--s-gold); font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600;
-  text-shadow: 0 0 8px rgba(255, 215, 0, 0.5);
-}
+.shomei-content b { color: var(--s-cyan); font-weight: 700; text-shadow: 0 0 8px rgba(0, 247, 255, 0.5); }
+.shomei-content i { color: var(--s-gold); font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 600; text-shadow: 0 0 8px rgba(255, 215, 0, 0.5); }
 
-/* --- EXTRAS (Dados Sagrados) --- */
+/* --- NOVA SEGUNDA CAIXA DE CONTEÚDO --- */
+.shomei-secondary-content {
+  padding: 30px 50px; font-size: 1.1em; line-height: 1.6; 
+  color: var(--s-text-dim); /* Texto um pouco mais apagado */
+  text-align: justify; position: relative;
+  background: rgba(0,0,0,0.2); /* Fundo ligeiramente mais escuro */
+}
+.shomei-secondary-content b { color: var(--s-cyan); }
+
+/* EXTRAS (Footer) */
 .shomei-extras {
   margin: 0; padding: 30px 50px;
   background: linear-gradient(to right, rgba(255, 215, 0, 0.05), transparent);
@@ -200,6 +154,6 @@
   .shomei-s-container { width: 98%; margin: 20px auto; }
   .shomei-header { padding: 40px 20px; }
   .shomei-title { font-size: 2.2em; }
-  .shomei-content, .shomei-stats, .shomei-extras { padding-left: 25px; padding-right: 25px; }
+  .shomei-content, .shomei-secondary-content, .shomei-stats, .shomei-extras { padding-left: 25px; padding-right: 25px; }
   .shomei-extras { flex-direction: column; gap: 20px; }
 }
