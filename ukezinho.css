@@ -1,4 +1,4 @@
-/* --- TEMPLATE: UKEZINHO (HIGH CONTRAST FACETS) --- */
+/* --- TEMPLATE: UKEZINHO (DENSE POLYGONAL CRYSTAL) --- */
 
 :root {
   /* PALETA TRAVADA */
@@ -10,43 +10,39 @@
   --uke-glass-read: rgba(255, 255, 255, 0.7); 
 }
 
-/* CONTAINER PRINCIPAL (FACES NÍTIDAS) */
+/* CONTAINER PRINCIPAL (ALTA FREQUÊNCIA DE FACETAS) */
 .ukezinho-container {
   box-sizing: border-box; max-width: 720px; width: 95%; margin: 40px auto;
   
   background-color: var(--uke-bg-base);
   
-  /* --- TEXTURA 3D GEOMÉTRICA (Cortes Secos e Alto Contraste) --- */
+  /* --- TEXTURA LAPIDADA DENSA (Muitas faces) --- */
   background-image: 
-    /* 1. Face de Luz Principal (Branco Forte) - Corte diagonal seco */
-    linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 45%, transparent 45.1%),
+    /* 1. Malha de Triângulos de Luz (Alta Frequência) */
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.2) 0px, rgba(255,255,255,0.2) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 1px, transparent 1px, transparent 40px),
     
-    /* 2. Face de Sombra Profunda (Roxo) - Vindo de baixo */
-    linear-gradient(325deg, rgba(145, 95, 170, 0.6) 0%, rgba(145, 95, 170, 0.2) 35%, transparent 35.1%),
+    /* 2. Cortes Secos de Sombra (Roxo) - Vários ângulos */
+    linear-gradient(30deg, rgba(145, 95, 170, 0.3) 20%, transparent 20.1%),
+    linear-gradient(150deg, transparent 60%, rgba(145, 95, 170, 0.3) 60.1%),
     
-    /* 3. Estilhaço de Luz Lateral (Corte Vertical) */
-    linear-gradient(100deg, transparent 65%, rgba(255,255,255,0.5) 65.1%, rgba(255,255,255,0.1) 85%, transparent 85.1%),
+    /* 3. Cortes Secos de Luz (Branco) - Criam os reflexos */
+    linear-gradient(210deg, rgba(255,255,255,0.4) 15%, transparent 15.1%),
+    linear-gradient(330deg, transparent 70%, rgba(255,255,255,0.3) 70.1%),
     
-    /* 4. Estilhaço de Sombra Cruzado */
-    linear-gradient(210deg, transparent 40%, rgba(100, 50, 120, 0.3) 40.1%, transparent 70%),
-    
-    /* 5. Triângulo de Luz Superior Direito */
-    linear-gradient(225deg, rgba(255,255,255,0.4) 0%, transparent 30%),
-    
-    /* 6. Base Levemente Texturizada */
-    linear-gradient(to bottom, transparent, rgba(209, 71, 163, 0.2));
+    /* 4. Gradiente de Profundidade Base */
+    linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(209, 71, 163, 0.2));
   /* ----------------------------------------------------------- */
   
-  background-attachment: fixed;
+  background-attachment: fixed; /* Fundo fixo ao rolar */
   background-size: cover;
   
   border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 16px;
-  /* Sombra interna forte para dar volume */
   box-shadow: 
     0 20px 50px rgba(100, 50, 100, 0.4),
-    inset 0 0 0 1px rgba(255,255,255,0.3),
-    inset 0 0 60px rgba(255, 255, 255, 0.5);
+    inset 0 0 0 1px rgba(255,255,255,0.4),
+    inset 0 0 80px rgba(255, 255, 255, 0.5);
     
   color: var(--uke-text); 
   font-family: 'Raleway', sans-serif;
@@ -104,8 +100,8 @@
   padding: 20px 40px; 
   display: flex; flex-direction: column; gap: 15px;
   background: rgba(255, 255, 255, 0.4);
-  /* Textura poligonal sutil */
-  background-image: linear-gradient(120deg, rgba(255,255,255,0.4) 0%, transparent 40%);
+  /* Textura de facetas pequenas */
+  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.2) 0px, transparent 1px, transparent 20px);
 }
 
 .ukezinho-container .jjk-dossier-status-item {
@@ -143,21 +139,20 @@
   text-align: right; white-space: nowrap; font-weight: 700;
 }
 
-/* CONTEÚDO (FACETAS INTERNAS MARCANTES) */
+/* CONTEÚDO (FACETAS INTERNAS VISÍVEIS) */
 .ukezinho-content {
   padding: 30px 40px; font-size: 1.1em; line-height: 1.8; color: var(--uke-text);
   text-align: justify; 
   
   background-color: var(--uke-glass-read);
   
-  /* Facetas internas nítidas (sem borrar) */
+  /* Textura interna de cristal */
   background-image: 
-    linear-gradient(135deg, rgba(255,255,255,0.7) 0%, transparent 30%), /* Canto superior luz */
-    linear-gradient(300deg, transparent 60%, rgba(209, 71, 163, 0.1) 60.1%), /* Canto inferior sombra */
-    linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.5) 40.1%, rgba(255,255,255,0.2) 60%, transparent 60.1%); /* Faixa central */
+    repeating-linear-gradient(135deg, rgba(255,255,255,0.3) 0px, transparent 1px, transparent 50px),
+    linear-gradient(200deg, rgba(255,255,255,0.4) 0%, transparent 40%);
     
   border-top: 1px solid rgba(255, 255, 255, 0.6);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(5px);
 }
 .ukezinho-content b {
   color: var(--uke-pink); font-weight: 800;
