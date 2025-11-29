@@ -1,8 +1,8 @@
-/* --- TEMPLATE: ANDROID 18 (STREET BRAWLER v2) --- */
-@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Russo+One&family=Koulen&family=Roboto:wght@400;700&display=swap');
+/* --- TEMPLATE: ANDROID 18 (STREET BRAWLER v3 - ISOLATED) --- */
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Russo+One&family=Koulen&family=Roboto:wght@400;700&family=Audiowide&family=Teko:wght@600&display=swap');
 
 :root {
-  --brawl-bg: #0a0c10;      /* Fundo mais escuro e sólido */
+  --brawl-bg: #0a0c10;
   --brawl-denim: #2c3e50;
   --brawl-yellow: #ffea00;
   --brawl-red: #d50000;
@@ -14,15 +14,16 @@
   0% { background-position: 0 0; }
   100% { background-position: 100px 0; }
 }
+@keyframes radar-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 
 /* CONTAINER */
 .brawler-container {
   box-sizing: border-box; max-width: 720px; width: 95%; margin: 40px auto;
   background-color: var(--brawl-bg);
-  
-  /* Textura mais sutil */
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
-  
   border: 4px solid var(--brawl-dark); border-bottom: 8px solid var(--brawl-denim);
   color: var(--brawl-white); font-family: 'Roboto', sans-serif;
   position: relative; box-shadow: 10px 10px 0 rgba(0,0,0,0.8); padding: 0; overflow: hidden;
@@ -42,7 +43,10 @@
   background: linear-gradient(135deg, var(--brawl-denim) 60%, var(--brawl-dark) 100%);
   border-bottom: 4px solid var(--brawl-yellow);
   clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); position: relative; z-index: 2;
+  display: flex; justify-content: space-between; align-items: center;
 }
+.brawler-title-box { display: flex; flex-direction: column; }
+
 .brawler-title {
   font-family: 'Black Ops One', cursive; font-size: 2.5em; color: #fff;
   text-transform: uppercase; margin: 0; text-shadow: 4px 4px 0 #000;
@@ -51,6 +55,17 @@
 .brawler-subtitle {
   font-family: 'Koulen', sans-serif; font-size: 1.4em; color: var(--brawl-yellow);
   text-transform: uppercase; margin-top: 5px; transform: skewX(-10deg); text-shadow: 2px 2px 0 #000;
+}
+
+/* Radar */
+.c18-radar {
+  width: 40px; height: 40px; border: 2px solid var(--brawl-yellow); border-radius: 50%;
+  position: relative; background: rgba(255, 234, 0, 0.1); margin-right: 10px;
+}
+.c18-radar::before {
+  content: ''; position: absolute; top: 50%; left: 50%; width: 50%; height: 2px;
+  background: var(--brawl-yellow); transform-origin: left center;
+  animation: radar-spin 2s linear infinite;
 }
 
 /* IMAGEM */
@@ -67,38 +82,48 @@
   background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, transparent 30%); pointer-events: none;
 }
 
-/* STATUS */
+/* --- STATUS ISOLADOS (Bateria Infinita) --- */
 .brawler-stats {
   padding: 20px 30px 20px 50px; display: flex; flex-direction: column; gap: 15px;
   background: rgba(0,0,0,0.5); position: relative; z-index: 2; border-bottom: 2px dashed #555;
 }
-.jjk-dossier-status-item {
+
+/* Grid Específico */
+.brawler-container .jjk-dossier-status-item {
   display: grid; grid-template-columns: 50px 1fr 80px; align-items: center; gap: 10px;
 }
-.jjk-dossier-status-label {
-  font-family: 'Russo One', sans-serif; font-size: 1em; color: var(--brawl-white);
+
+/* Labels (HP/EA) */
+.brawler-container .jjk-dossier-status-label {
+  font-family: 'Russo One', sans-serif; font-size: 1em; color: var(--brawl-white) !important;
   text-align: right; text-shadow: 2px 2px 0 #000; transform: skewX(-10deg);
 }
-.jjk-dossier-status-bar-wrapper {
+
+/* Barra Wrapper (Inclinada e Grossa) */
+.brawler-container .jjk-dossier-status-bar-wrapper {
   width: 100%; height: 20px; background: #333; border: 3px solid #000;
-  transform: skewX(-15deg); overflow: hidden;
+  transform: skewX(-15deg); overflow: hidden; border-radius: 0; /* Garante quina viva */
 }
-.jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
-.jjk-dossier-hp-fill {
+.brawler-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
+
+/* HP Fill */
+.brawler-container .jjk-dossier-hp-fill {
   height: 100%; background: var(--brawl-red);
   box-shadow: inset 0 5px 0 rgba(255,255,255,0.2); transition: width 0.2s ease;
 }
-.jjk-dossier-ea-fill {
+
+/* EA Fill (Energia Infinita) */
+.brawler-container .jjk-dossier-ea-fill {
   height: 100%;
   background: repeating-linear-gradient(90deg, var(--brawl-yellow), var(--brawl-yellow) 10px, #ff9100 10px, #ff9100 20px);
   animation: power-surge 0.5s linear infinite; box-shadow: 0 0 10px var(--brawl-yellow);
 }
 
-/* [CORRIGIDO] Valor Numérico Menor e Travado */
-.jjk-dossier-status-value {
-  font-family: 'Black Ops One', cursive; font-size: 0.8em; /* Reduzido de 1em */
-  color: var(--brawl-yellow); text-align: right; transform: skewX(-10deg);
-  white-space: nowrap; /* Impede quebra de linha */
+/* Valores Numéricos */
+.brawler-container .jjk-dossier-status-value {
+  font-family: 'Black Ops One', cursive; font-size: 0.8em;
+  color: var(--brawl-yellow) !important; text-align: right; transform: skewX(-10deg);
+  white-space: nowrap;
 }
 
 /* CONTEÚDO */
@@ -130,8 +155,7 @@
   border-top: 4px solid var(--brawl-yellow); position: relative; z-index: 5;
 }
 
-/* [CORRIGIDO] Assinatura via CSS */
-.brawler-signature::after {
+.c18-signature::after {
   content: 'Meredith Scholz';
   font-family: 'Russo One', sans-serif; font-size: 1.5em; color: #fff;
   text-transform: uppercase; letter-spacing: 2px;
