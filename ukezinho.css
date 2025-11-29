@@ -1,44 +1,47 @@
-/* --- TEMPLATE: UKEZINHO (FACETED 3D CRYSTAL - FINAL COLORS) --- */
+/* --- TEMPLATE: UKEZINHO (INTENSE FACETED CRYSTAL) --- */
 
 :root {
-  /* PALETA TRAVADA */
+  /* PALETA TRAVADA (Perfeita) */
   --uke-bg-base: #e0b0d5;   /* Rosa Orquídea Base */
   --uke-pink: #d147a3;      /* Rosa Choque */
   --uke-purple: #915faa;    /* Roxo Médio */
   --uke-cyan: #70d6ff;      /* Ciano */
   --uke-text: #4a1a4a;      /* Texto Roxo Escuro */
-  --uke-glass-read: rgba(255, 255, 255, 0.65); /* Vidro Leitoso */
+  --uke-glass-read: rgba(255, 255, 255, 0.7); /* Vidro Leitoso Base */
 }
 
-/* CONTAINER PRINCIPAL */
+/* CONTAINER PRINCIPAL (Fundo com MUITAS faces 3D) */
 .ukezinho-container {
   box-sizing: border-box; max-width: 720px; width: 95%; margin: 40px auto;
   
-  /* COR BASE (Mantida) */
+  /* Cor Base */
   background-color: var(--uke-bg-base);
   
-  /* NOVA TEXTURA DE FACETAS 3D (Simulada com Gradientes) */
+  /* --- NOVA TEXTURA INTENSIFICADA --- */
   background-image: 
-    /* Camada 1: Facetas de Luz Principal (Branco Transparente) */
-    linear-gradient(115deg, rgba(255,255,255,0.4) 0%, transparent 25%, transparent 75%, rgba(255,255,255,0.3) 100%),
-    /* Camada 2: Facetas de Sombra (Roxo Transparente) - Cortes abruptos */
-    linear-gradient(210deg, transparent 0%, transparent 40%, rgba(145, 95, 170, 0.4) 40%, rgba(145, 95, 170, 0.1) 60%, transparent 60%),
-    /* Camada 3: Cortes Transversais de Luz */
-    linear-gradient(60deg, transparent 0%, transparent 55%, rgba(255,255,255,0.3) 55%, transparent 56%),
-    /* Camada 4: Profundidade Adicional */
-    linear-gradient(310deg, rgba(145, 95, 170, 0.3) 0%, transparent 30%, transparent 80%, rgba(255,255,255,0.2) 100%),
-    /* Camada 5: As linhas finas originais (Reduzidas para não poluir) */
-    repeating-linear-gradient(45deg, rgba(255,255,255,0.1) 0px, transparent 1px, transparent 60px);
+    /* Camada 1: Reflexo forte superior esquerdo (Branco) */
+    linear-gradient(135deg, rgba(255,255,255,0.6) 0%, transparent 20%),
+    /* Camada 2: Face de sombra grande (Roxo) */
+    linear-gradient(220deg, rgba(145, 95, 170, 0.5) 0%, transparent 35%),
+    /* Camada 3: Face de luz cruzada cortante */
+    linear-gradient(70deg, transparent 30%, rgba(255,255,255,0.3) 30%, rgba(255,255,255,0.1) 60%, transparent 60%),
+    /* Camada 4: Outra sombra angular para profundidade */
+    linear-gradient(310deg, transparent 50%, rgba(145, 95, 170, 0.3) 70%, transparent 90%),
+    /* Camada 5: Facetas centrais de luz */
+    linear-gradient(180deg, transparent 0%, rgba(255,255,255,0.2) 30%, transparent 60%),
+    /* Camada 6: Gradiente de base para unir tudo */
+    linear-gradient(to bottom right, rgba(209, 71, 163, 0.1), rgba(145, 95, 170, 0.2));
   
-  background-attachment: fixed; /* Dá profundidade ao rolar */
+  background-attachment: fixed;
   background-size: cover;
+  /* ---------------------------------- */
   
   /* Borda e Sombra */
-  border: 1px solid rgba(255, 255, 255, 0.5);
-  border-radius: 15px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
   box-shadow: 
-    0 15px 35px rgba(209, 71, 163, 0.3),
-    inset 0 0 60px rgba(255, 255, 255, 0.4);
+    0 20px 40px rgba(145, 95, 170, 0.4),
+    inset 0 0 80px rgba(255, 255, 255, 0.5);
     
   color: var(--uke-text); 
   font-family: 'Raleway', sans-serif;
@@ -49,7 +52,7 @@
 /* HEADER (Ícone Perfeito Mantido) */
 .ukezinho-header {
   padding: 25px 40px;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.25), transparent);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.3), transparent);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   display: flex; align-items: center; gap: 20px;
 }
@@ -59,12 +62,10 @@
   display: block; width: 70px; height: 70px;
   background-image: url('https://i.imgur.com/QAvLIFV.png');
   background-size: contain; background-repeat: no-repeat; background-position: center;
-  
-  /* Integração do Ícone (NÃO MEXER) */
+  /* Integração do Ícone TRAVADA */
   opacity: 0.8; 
   mix-blend-mode: overlay; 
-  filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
-  
+  filter: drop-shadow(0 0 2px rgba(255,255,255,0.6));
   flex-shrink: 0;
 }
 
@@ -97,7 +98,9 @@
 .ukezinho-stats {
   padding: 20px 40px; 
   display: flex; flex-direction: column; gap: 15px;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(255, 255, 255, 0.3);
+  /* Facetas sutis na área de status também */
+  background-image: linear-gradient(110deg, rgba(255,255,255,0.2) 0%, transparent 30%);
 }
 
 .ukezinho-container .jjk-dossier-status-item {
@@ -137,13 +140,23 @@
   text-align: right; white-space: nowrap; font-weight: 700;
 }
 
-/* CONTEÚDO */
+/* CONTEÚDO (Com Facetas Internas Suaves) */
 .ukezinho-content {
   padding: 30px 40px; font-size: 1.1em; line-height: 1.8; color: var(--uke-text);
   text-align: justify; 
-  background: var(--uke-glass-read);
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(8px); /* Aumentei o blur para destacar do fundo facetado */
+  
+  /* Cor base leitosa para leitura */
+  background-color: var(--uke-glass-read);
+  
+  /* --- FACETAS INTERNAS (Mais claras e sutis) --- */
+  background-image: 
+    linear-gradient(120deg, rgba(255,255,255,0.4) 0%, transparent 25%),
+    linear-gradient(200deg, transparent 40%, rgba(255,255,255,0.2) 60%, transparent 80%),
+    linear-gradient(340deg, rgba(255,255,255,0.3) 0%, transparent 20%);
+  /* --------------------------------------------- */
+    
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px); /* Blur aumentado para misturar as facetas */
 }
 .ukezinho-content b {
   color: var(--uke-pink); font-weight: 800;
@@ -156,7 +169,8 @@
 /* EXTRAS */
 .ukezinho-extras {
   margin: 0 40px 20px 40px; padding: 15px 25px; 
-  background: rgba(255, 255, 255, 0.65); 
+  background: rgba(255, 255, 255, 0.7); 
+  background-image: linear-gradient(45deg, rgba(255,255,255,0.3) 0%, transparent 50%);
   border: 1px solid rgba(145, 95, 170, 0.3);
   border-radius: 8px;
   color: var(--uke-text); font-size: 0.95em;
@@ -165,7 +179,7 @@
 /* RODAPÉ */
 .ukezinho-footer {
   text-align: right; padding: 20px 40px; 
-  background: linear-gradient(to left, rgba(255, 255, 255, 0.35), transparent);
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.4), transparent);
   border-top: 1px solid rgba(255, 255, 255, 0.4);
 }
 
