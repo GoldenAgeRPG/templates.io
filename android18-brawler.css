@@ -1,243 +1,115 @@
-/* --- TEMPLATE: ANDROID 18 (STREET BRAWLER) --- */
-@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Russo+One&family=Koulen&family=Roboto:wght@400;700&display=swap');
+/* --- TEMPLATE: KUREN SHIN v5 (FINAL FIX) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+SC:wght@400;700&family=Mate+SC&display=swap');
 
 :root {
-  --brawl-bg: #1a1a1a;
-  --brawl-denim: #2c3e50;    /* Jeans Escuro */
-  --brawl-yellow: #ffea00;   /* Impacto */
-  --brawl-red: #d50000;      /* Sangue/Dano */
-  --brawl-white: #f0f0f0;
-  --brawl-dark: #000000;
+  --kur-bg: #050508;
+  --kur-panel: #0f0f14;
+  --kur-gold: #f2d06b;
+  --kur-red: #ff0033;
+  --kur-aura: #a2d2ff;
+  --kur-text: #e0e0e0;
+  --kur-chain-dark: #8a7030;
 }
 
-/* Animação: Tremor de Impacto (Rumble) */
-@keyframes impact-shake {
-  0% { transform: translate(0, 0); }
-  10% { transform: translate(-2px, -2px); }
-  20% { transform: translate(2px, 2px); }
-  30% { transform: translate(-2px, 2px); }
-  40% { transform: translate(2px, -2px); }
-  50% { transform: translate(0, 0); }
-  100% { transform: translate(0, 0); }
-}
+/* ANIMAÇÕES */
+@keyframes chain-slide { 0% { background-position: 0 0; } 100% { background-position: 0 60px; } }
+@keyframes scarlet-pulse { 0%, 100% { box-shadow: 0 0 15px rgba(242, 208, 107, 0.1); border-color: var(--kur-gold); } 50% { box-shadow: 0 0 25px rgba(255, 0, 51, 0.2); border-color: var(--kur-red); } }
 
-/* Animação: Energia Infinita (Barra fluindo rápido e furiosa) */
-@keyframes power-surge {
-  0% { background-position: 0 0; }
-  100% { background-position: 100px 0; }
-}
-
-/* CONTAINER PRINCIPAL */
-.brawler-container {
-  box-sizing: border-box;
-  max-width: 720px;
-  width: 95%;
-  margin: 40px auto;
-  background-color: var(--brawl-bg);
+/* CONTAINER (FUNDO MAIS SÓLIDO) */
+.kuren-container {
+  box-sizing: border-box; max-width: 750px; width: 95%; margin: 40px auto;
   
-  /* Fundo: Textura de Asfalto/Concreto */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+  /* Fundo escuro e sólido para garantir contraste */
+  background-color: #020203;
+  background-image: radial-gradient(circle at 50% 50%, rgba(20, 20, 30, 0.8) 20%, #000 90%);
   
-  /* Borda Sólida e Pesada */
-  border: 4px solid var(--brawl-dark);
-  border-bottom: 8px solid var(--brawl-denim);
-  
-  color: var(--brawl-white);
-  font-family: 'Roboto', sans-serif;
-  position: relative;
-  box-shadow: 10px 10px 0 rgba(0,0,0,0.8); /* Sombra dura */
-  padding: 0;
-  overflow: hidden;
+  border: 2px solid var(--kur-gold); border-radius: 2px; padding: 0 40px; position: relative;
+  color: var(--kur-text); font-family: 'Mate SC', serif;
+  box-shadow: 0 20px 60px #000; overflow: hidden;
+  animation: scarlet-pulse 5s infinite ease-in-out;
 }
-.brawler-container * { box-sizing: border-box; }
+.kuren-container * { box-sizing: border-box; }
 
-/* Faixa Lateral (Mangas Listradas - Tecido) */
-.brawler-container::before {
-  content: '';
-  position: absolute; top: 0; bottom: 0; left: 0; width: 30px;
-  background: repeating-linear-gradient(
-    -45deg,
-    #111,
-    #111 10px,
-    #eee 10px,
-    #eee 20px
-  );
-  border-right: 3px solid #000;
-  z-index: 10;
+/* CORRENTES */
+.kuren-container::before, .kuren-container::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 30px;
+  background-image: url("data:image/svg+xml,%3Csvg width='30' height='60' viewBox='0 0 30 60' xmlns='http://www.w3.org/2000/svg'%3E%3C!-- Elo Fundo --%3E%3Cellipse cx='15' cy='15' rx='8' ry='12' fill='none' stroke='%238a7030' stroke-width='3'/%3E%3C!-- Elo Frente --%3E%3Cellipse cx='15' cy='45' rx='8' ry='12' fill='none' stroke='%23f2d06b' stroke-width='3'/%3E%3C!-- Conexão --%3E%3Cpath d='M15 27 L15 33' stroke='%23f2d06b' stroke-width='3'/%3E%3C/svg%3E");
+  background-repeat: repeat-y; opacity: 1; z-index: 10;
+  animation: chain-slide 4s linear infinite;
 }
+.kuren-container::before { left: 5px; border-right: 1px solid rgba(255,255,255,0.05); }
+.kuren-container::after { right: 5px; border-left: 1px solid rgba(255,255,255,0.05); }
 
-/* HEADER (VS SCREEN) */
-.brawler-header {
-  padding: 30px 20px 30px 50px; /* Espaço para a faixa lateral */
-  background: linear-gradient(135deg, var(--brawl-denim) 60%, var(--brawl-dark) 100%);
-  border-bottom: 4px solid var(--brawl-yellow);
-  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-  position: relative;
-  z-index: 2;
+/* HEADER */
+.kuren-header {
+  text-align: center; padding: 40px 20px; border-bottom: 1px solid var(--kur-gold);
+  position: relative; background: linear-gradient(to bottom, rgba(255,0,51,0.05), transparent);
 }
+.kuren-icon-wrapper { width: 40px; height: 40px; margin: 0 auto 10px; color: var(--kur-red); filter: drop-shadow(0 0 5px var(--kur-red)); }
+.kuren-icon-wrapper svg { width: 100%; height: 100%; fill: currentColor; }
+.kuren-title { font-family: 'Cinzel', serif; font-weight: 700; font-size: 2.2em; color: var(--kur-gold); text-transform: uppercase; margin: 0; letter-spacing: 3px; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
+.kuren-subtitle { font-family: 'Cormorant SC', serif; font-size: 1em; color: var(--kur-text); text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; opacity: 0.8; }
 
-.brawler-title {
-  font-family: 'Black Ops One', cursive; /* Fonte Militar/Pesada */
-  font-size: 2.5em;
-  color: #fff;
-  text-transform: uppercase;
-  margin: 0;
-  text-shadow: 4px 4px 0 #000;
-  line-height: 1;
-  transform: skewX(-10deg); /* Inclinação de velocidade */
+/* IMAGEM */
+.kuren-image-frame { width: 100%; height: 350px; position: relative; margin: 20px 0; border: 1px solid var(--kur-gold); padding: 3px; background: rgba(242, 208, 107, 0.1); }
+.kuren-image-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top center; filter: contrast(1.1) saturate(0.9); }
+.kuren-image-frame::after { content: ''; position: absolute; inset: 0; border: 1px solid var(--kur-red); opacity: 0.3; pointer-events: none; }
+
+/* STATUS (Grid) */
+.kuren-stats { padding: 10px 30px; display: flex; flex-direction: column; gap: 15px; position: relative; }
+
+.jjk-dossier-status-item { 
+  display: grid; 
+  /* Label fixa (40px) | Barra (Flex) | Valor fixo (80px) */
+  grid-template-columns: 40px 1fr 80px; 
+  align-items: center; gap: 10px; 
 }
 
-.brawler-subtitle {
-  font-family: 'Koulen', sans-serif;
-  font-size: 1.4em;
-  color: var(--brawl-yellow);
-  text-transform: uppercase;
-  margin-top: 5px;
-  transform: skewX(-10deg);
-  text-shadow: 2px 2px 0 #000;
-}
-
-/* IMAGEM (RETTRATO DE LUTADOR) */
-.brawler-image-frame {
-  width: 100%; height: 350px;
-  position: relative;
-  background: #000;
-  border-bottom: 4px solid var(--brawl-dark);
-  margin-top: -20px;
-  z-index: 1;
-}
-.brawler-image-frame img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  filter: contrast(1.2) saturate(1.1);
-}
-/* Efeito de "Dano" na imagem */
-.brawler-image-frame::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, transparent 30%);
-  pointer-events: none;
-}
-
-/* STATUS (HUD DE JOGO DE LUTA) */
-.brawler-stats {
-  padding: 20px 30px 20px 50px;
-  display: flex; flex-direction: column; gap: 15px;
-  background: rgba(0,0,0,0.5);
-  position: relative; z-index: 2;
-  border-bottom: 2px dashed #555;
-}
-
-.jjk-dossier-status-item {
-  display: grid; grid-template-columns: 50px 1fr 80px; align-items: center; gap: 10px;
-}
-
-.jjk-dossier-status-label {
-  font-family: 'Russo One', sans-serif;
-  font-size: 1em; color: var(--brawl-white);
-  text-align: right; text-shadow: 2px 2px 0 #000;
-  transform: skewX(-10deg);
-}
-
-.jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 20px; /* Barra grossa */
-  background: #333;
-  border: 3px solid #000;
-  transform: skewX(-15deg); /* Inclinação agressiva */
-  overflow: hidden;
-}
+.jjk-dossier-status-label { font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.8em; text-align: right; }
+.jjk-dossier-status-bar-wrapper { width: 100%; height: 8px; background: #111; border: 1px solid var(--kur-chain-dark); border-radius: 10px; overflow: hidden; }
 .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
 
-/* HP: Vermelho Sangue Sólido */
-.jjk-dossier-hp-fill {
-  height: 100%;
-  background: var(--brawl-red);
-  box-shadow: inset 0 5px 0 rgba(255,255,255,0.2); /* Brilho plástico */
-  transition: width 0.2s ease; /* Transição rápida de dano */
+/* Cores Específicas */
+.jjk-dossier-status-item:first-child .jjk-dossier-status-label,
+.jjk-dossier-status-item:first-child .jjk-dossier-status-value { color: var(--kur-red); text-shadow: 0 0 5px rgba(255, 0, 51, 0.4); }
+
+.jjk-dossier-status-item:last-child .jjk-dossier-status-label,
+.jjk-dossier-status-item:last-child .jjk-dossier-status-value { color: var(--kur-gold); text-shadow: 0 0 5px rgba(242, 208, 107, 0.4); }
+
+.jjk-dossier-hp-fill { height: 100%; background: var(--kur-red); box-shadow: 0 0 10px var(--kur-red); transition: width 0.5s ease; }
+.jjk-dossier-ea-fill { height: 100%; background: var(--kur-gold); box-shadow: 0 0 10px var(--kur-gold); transition: width 0.5s ease; }
+
+/* [FIX] Fonte Reduzida e Sem Quebra de Linha */
+.jjk-dossier-status-value { 
+  font-family: 'Cormorant SC', serif; font-weight: 700; 
+  font-size: 0.8em; /* Fonte menor */
+  text-align: right; 
+  white-space: nowrap; /* Impede quebra de linha */
 }
 
-/* EA: Amarelo Alta Voltagem */
-.jjk-dossier-ea-fill {
-  height: 100%;
-  background: repeating-linear-gradient(
-    90deg,
-    var(--brawl-yellow),
-    var(--brawl-yellow) 10px,
-    #ff9100 10px,
-    #ff9100 20px
-  );
-  animation: power-surge 0.5s linear infinite; /* Movimento muito rápido */
-  box-shadow: 0 0 10px var(--brawl-yellow);
+/* CONTEÚDO */
+.kuren-content { padding: 20px 30px; font-size: 1.15em; line-height: 1.8; color: #ccc; text-align: justify; position: relative; border-top: 1px dashed rgba(242, 208, 107, 0.2); border-bottom: 1px dashed rgba(242, 208, 107, 0.2); margin: 10px 0; }
+.kuren-content b { color: var(--kur-red); font-weight: 700; }
+.kuren-content i { color: var(--kur-gold); font-style: italic; }
+
+/* EXTRAS */
+.kuren-extras { padding: 15px; background: rgba(255, 0, 51, 0.05); border-left: 3px solid var(--kur-red); margin: 0 30px 20px; font-size: 0.9em; color: var(--kur-text); font-family: 'Cormorant SC', serif; display: flex; justify-content: space-between; }
+
+/* RODAPÉ (ASSINATURA SEGURA) */
+.kuren-footer { padding: 25px; text-align: center; background: #020204; border-top: 2px solid var(--kur-gold); position: relative; z-index: 11; }
+
+/* Nome via CSS */
+.kuren-signature::after { 
+  content: "UNKNOWN"; /* Default */
+  font-family: 'Cinzel', serif; font-size: 1.5em; color: var(--kur-gold); letter-spacing: 5px; font-weight: 700; text-shadow: 0 0 15px rgba(242, 208, 107, 0.3); 
 }
 
-.jjk-dossier-status-value {
-  font-family: 'Black Ops One', cursive;
-  font-size: 1em; color: var(--brawl-yellow);
-  text-align: right; transform: skewX(-10deg);
-}
-
-/* CONTEÚDO (FALA DE VITÓRIA) */
-.brawler-content {
-  padding: 30px 30px 30px 50px;
-  font-size: 1.1em; line-height: 1.6;
-  color: #ddd; text-align: justify;
-  background: transparent;
-  position: relative; z-index: 2;
-}
-
-/* Destaques de Impacto */
-.brawler-content b {
-  color: var(--brawl-yellow);
-  font-family: 'Russo One', sans-serif;
-  text-transform: uppercase;
-  background: #000; padding: 0 5px;
-  transform: skewX(-10deg); display: inline-block;
-}
-.brawler-content i {
-  color: var(--brawl-red); font-weight: 700; border-bottom: 2px solid var(--brawl-red);
-}
-
-/* EXTRAS (COMBO LIST) */
-.brawler-extras {
-  margin: 0 30px 30px 50px;
-  padding: 15px;
-  background: #111;
-  border: 2px solid var(--brawl-red);
-  color: var(--brawl-white);
-  font-family: 'Koulen', sans-serif;
-  font-size: 1.1em;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  position: relative; z-index: 2;
-  /* Efeito de "Rasgo" */
-  clip-path: polygon(0 0, 100% 0, 98% 90%, 2% 100%);
-}
-.brawler-extras::before {
-  content: 'FIGHT RECORD';
-  display: block; font-family: 'Black Ops One'; color: var(--brawl-red);
-  font-size: 0.8em; margin-bottom: 10px; border-bottom: 1px dashed #555;
-}
-
-/* RODAPÉ (ASSINATURA) */
-.brawler-footer {
-  text-align: right; padding: 15px 30px;
-  background: var(--brawl-dark);
-  border-top: 4px solid var(--brawl-yellow);
-  position: relative; z-index: 5;
-}
-
-.brawler-signature {
-  font-family: 'Russo One', sans-serif;
-  font-size: 1.5em;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  /* Efeito Graffiti */
-  text-shadow: 3px 3px 0 var(--brawl-red), -1px -1px 0 var(--brawl-denim);
-  transform: rotate(-2deg);
-  display: inline-block;
-}
+/* --- LISTA DE JOGADORES (Admin) --- */
+.kuren-signature.p-kuren::after { content: "KUREN SHIN"; }
+/* Adicione mais jogadores aqui */
 
 @media (max-width: 600px) {
-  .brawler-container { padding-left: 0; }
-  .brawler-container::before { width: 10px; } /* Listra menor no mobile */
-  .brawler-header, .brawler-content, .brawler-stats, .brawler-extras { padding-left: 20px; }
+  .kuren-container { padding: 0 35px; }
+  .kuren-header, .kuren-content, .kuren-stats { padding: 20px 10px; }
+  .kuren-extras { flex-direction: column; gap: 5px; text-align: center; }
 }
