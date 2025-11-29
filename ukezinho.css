@@ -1,4 +1,4 @@
-/* --- TEMPLATE: UKEZINHO (CLEAN FACETED CRYSTAL - NO LINES) --- */
+/* --- TEMPLATE: UKEZINHO (HIGH CONTRAST FACETS) --- */
 
 :root {
   /* PALETA TRAVADA */
@@ -10,43 +10,43 @@
   --uke-glass-read: rgba(255, 255, 255, 0.7); 
 }
 
-/* CONTAINER PRINCIPAL (FACES VISÍVEIS LIMPAS) */
+/* CONTAINER PRINCIPAL (FACES NÍTIDAS) */
 .ukezinho-container {
   box-sizing: border-box; max-width: 720px; width: 95%; margin: 40px auto;
   
   background-color: var(--uke-bg-base);
   
-  /* --- TEXTURA SHATTERED LIMPA (Sem linhas finas) --- */
+  /* --- TEXTURA 3D GEOMÉTRICA (Cortes Secos e Alto Contraste) --- */
   background-image: 
-    /* 1. Grande corte de luz superior esquerdo */
-    linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 40%, transparent 41%),
+    /* 1. Face de Luz Principal (Branco Forte) - Corte diagonal seco */
+    linear-gradient(135deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.2) 45%, transparent 45.1%),
     
-    /* 2. Triângulo de sombra inferior direito */
-    linear-gradient(315deg, rgba(145, 95, 170, 0.4) 0%, transparent 35%),
+    /* 2. Face de Sombra Profunda (Roxo) - Vindo de baixo */
+    linear-gradient(325deg, rgba(145, 95, 170, 0.6) 0%, rgba(145, 95, 170, 0.2) 35%, transparent 35.1%),
     
-    /* 3. Lâmina fina vertical (corte seco de luz) */
-    linear-gradient(105deg, transparent 60%, rgba(255,255,255,0.25) 61%, rgba(255,255,255,0.25) 75%, transparent 76%),
+    /* 3. Estilhaço de Luz Lateral (Corte Vertical) */
+    linear-gradient(100deg, transparent 65%, rgba(255,255,255,0.5) 65.1%, rgba(255,255,255,0.1) 85%, transparent 85.1%),
     
-    /* 4. Lâmina diagonal oposta (corte seco roxo) */
-    linear-gradient(25deg, transparent 30%, rgba(145, 95, 170, 0.15) 31%, rgba(145, 95, 170, 0.15) 50%, transparent 51%),
+    /* 4. Estilhaço de Sombra Cruzado */
+    linear-gradient(210deg, transparent 40%, rgba(100, 50, 120, 0.3) 40.1%, transparent 70%),
     
-    /* 5. Fragmento central */
-    linear-gradient(200deg, rgba(255,255,255,0.3) 0%, transparent 20%),
+    /* 5. Triângulo de Luz Superior Direito */
+    linear-gradient(225deg, rgba(255,255,255,0.4) 0%, transparent 30%),
     
-    /* 6. Fragmento lateral */
-    linear-gradient(340deg, transparent 70%, rgba(209, 71, 163, 0.2) 100%);
-    
-  /* (A camada de 'repeating-linear-gradient' dos riscos foi removida daqui) */
+    /* 6. Base Levemente Texturizada */
+    linear-gradient(to bottom, transparent, rgba(209, 71, 163, 0.2));
   /* ----------------------------------------------------------- */
   
   background-attachment: fixed;
   background-size: cover;
   
-  border: 1px solid rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.8);
   border-radius: 16px;
+  /* Sombra interna forte para dar volume */
   box-shadow: 
-    0 20px 50px rgba(145, 95, 170, 0.4),
-    inset 0 0 80px rgba(255, 255, 255, 0.4);
+    0 20px 50px rgba(100, 50, 100, 0.4),
+    inset 0 0 0 1px rgba(255,255,255,0.3),
+    inset 0 0 60px rgba(255, 255, 255, 0.5);
     
   color: var(--uke-text); 
   font-family: 'Raleway', sans-serif;
@@ -57,8 +57,8 @@
 /* HEADER */
 .ukezinho-header {
   padding: 25px 40px;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.3), transparent);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.4), transparent);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
   display: flex; align-items: center; gap: 20px;
 }
 
@@ -79,7 +79,7 @@
 .ukezinho-title {
   font-family: 'Cinzel Decorative', cursive; font-size: 2.2em; color: #7a3e7a;
   text-transform: uppercase; margin: 0; 
-  text-shadow: 1px 1px 0 rgba(255,255,255,0.8);
+  text-shadow: 1px 1px 0 rgba(255,255,255,0.9);
   line-height: 1.1; letter-spacing: 1px;
 }
 .ukezinho-subtitle {
@@ -90,7 +90,7 @@
 /* IMAGEM */
 .ukezinho-image-frame {
   width: 100%; height: 320px; position: relative;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   background: #fff;
 }
 .ukezinho-image-frame img {
@@ -103,8 +103,9 @@
 .ukezinho-stats {
   padding: 20px 40px; 
   display: flex; flex-direction: column; gap: 15px;
-  background: rgba(255, 255, 255, 0.3);
-  background-image: linear-gradient(110deg, rgba(255,255,255,0.3) 0%, transparent 15%);
+  background: rgba(255, 255, 255, 0.4);
+  /* Textura poligonal sutil */
+  background-image: linear-gradient(120deg, rgba(255,255,255,0.4) 0%, transparent 40%);
 }
 
 .ukezinho-container .jjk-dossier-status-item {
@@ -120,8 +121,8 @@
 /* Wrapper da barra */
 .ukezinho-container .jjk-dossier-status-bar-wrapper {
   width: 100%; height: 12px; 
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(209, 71, 163, 0.3);
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(209, 71, 163, 0.4);
   border-radius: 6px;
   overflow: hidden; margin: 0; transform: none;
 }
@@ -142,21 +143,21 @@
   text-align: right; white-space: nowrap; font-weight: 700;
 }
 
-/* CONTEÚDO (FACETAS INTERNAS LIMPAS) */
+/* CONTEÚDO (FACETAS INTERNAS MARCANTES) */
 .ukezinho-content {
   padding: 30px 40px; font-size: 1.1em; line-height: 1.8; color: var(--uke-text);
   text-align: justify; 
   
   background-color: var(--uke-glass-read);
   
-  /* Facetas internas mais nítidas para combinar com o fundo */
+  /* Facetas internas nítidas (sem borrar) */
   background-image: 
-    linear-gradient(135deg, rgba(255,255,255,0.6) 0%, transparent 20%),
-    linear-gradient(280deg, transparent 60%, rgba(209, 71, 163, 0.05) 61%),
-    linear-gradient(45deg, transparent 45%, rgba(255,255,255,0.4) 45%, rgba(255,255,255,0.1) 55%, transparent 55%);
+    linear-gradient(135deg, rgba(255,255,255,0.7) 0%, transparent 30%), /* Canto superior luz */
+    linear-gradient(300deg, transparent 60%, rgba(209, 71, 163, 0.1) 60.1%), /* Canto inferior sombra */
+    linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.5) 40.1%, rgba(255,255,255,0.2) 60%, transparent 60.1%); /* Faixa central */
     
-  border-top: 1px solid rgba(255, 255, 255, 0.5);
-  backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
 }
 .ukezinho-content b {
   color: var(--uke-pink); font-weight: 800;
@@ -178,8 +179,8 @@
 /* RODAPÉ */
 .ukezinho-footer {
   text-align: right; padding: 20px 40px; 
-  background: linear-gradient(to left, rgba(255, 255, 255, 0.4), transparent);
-  border-top: 1px solid rgba(255, 255, 255, 0.4);
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.5), transparent);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 /* Assinatura */
