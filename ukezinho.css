@@ -1,4 +1,4 @@
-/* --- TEMPLATE: UKEZINHO (MAXIMUM SHATTERED CRYSTAL) --- */
+/* --- TEMPLATE: UKEZINHO (CLEAN FACETED CRYSTAL - NO LINES) --- */
 
 :root {
   /* PALETA TRAVADA */
@@ -10,13 +10,13 @@
   --uke-glass-read: rgba(255, 255, 255, 0.7); 
 }
 
-/* CONTAINER PRINCIPAL (MUITAS FACES VISÍVEIS) */
+/* CONTAINER PRINCIPAL (FACES VISÍVEIS LIMPAS) */
 .ukezinho-container {
   box-sizing: border-box; max-width: 720px; width: 95%; margin: 40px auto;
   
   background-color: var(--uke-bg-base);
   
-  /* --- TEXTURA SHATTERED (Cortes Secos para formar Polígonos) --- */
+  /* --- TEXTURA SHATTERED LIMPA (Sem linhas finas) --- */
   background-image: 
     /* 1. Grande corte de luz superior esquerdo */
     linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 40%, transparent 41%),
@@ -24,7 +24,7 @@
     /* 2. Triângulo de sombra inferior direito */
     linear-gradient(315deg, rgba(145, 95, 170, 0.4) 0%, transparent 35%),
     
-    /* 3. Lâmina fina vertical (corte seco) */
+    /* 3. Lâmina fina vertical (corte seco de luz) */
     linear-gradient(105deg, transparent 60%, rgba(255,255,255,0.25) 61%, rgba(255,255,255,0.25) 75%, transparent 76%),
     
     /* 4. Lâmina diagonal oposta (corte seco roxo) */
@@ -34,10 +34,9 @@
     linear-gradient(200deg, rgba(255,255,255,0.3) 0%, transparent 20%),
     
     /* 6. Fragmento lateral */
-    linear-gradient(340deg, transparent 70%, rgba(209, 71, 163, 0.2) 100%),
+    linear-gradient(340deg, transparent 70%, rgba(209, 71, 163, 0.2) 100%);
     
-    /* 7. Malha fina de risco (arestas do cristal) */
-    repeating-linear-gradient(60deg, rgba(255,255,255,0.2) 0px, rgba(255,255,255,0.2) 1px, transparent 1px, transparent 80px);
+  /* (A camada de 'repeating-linear-gradient' dos riscos foi removida daqui) */
   /* ----------------------------------------------------------- */
   
   background-attachment: fixed;
@@ -143,7 +142,7 @@
   text-align: right; white-space: nowrap; font-weight: 700;
 }
 
-/* CONTEÚDO (FACETAS INTERNAS VISÍVEIS) */
+/* CONTEÚDO (FACETAS INTERNAS LIMPAS) */
 .ukezinho-content {
   padding: 30px 40px; font-size: 1.1em; line-height: 1.8; color: var(--uke-text);
   text-align: justify; 
