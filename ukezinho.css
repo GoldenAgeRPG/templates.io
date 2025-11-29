@@ -1,4 +1,4 @@
-/* --- TEMPLATE: UKEZINHO (DENSE POLYGONAL CRYSTAL) --- */
+/* --- TEMPLATE: UKEZINHO (SOLID CRYSTAL - NO LINES, SCROLLS WITH CARD) --- */
 
 :root {
   /* PALETA TRAVADA */
@@ -10,39 +10,40 @@
   --uke-glass-read: rgba(255, 255, 255, 0.7); 
 }
 
-/* CONTAINER PRINCIPAL (ALTA FREQUÊNCIA DE FACETAS) */
+/* CONTAINER PRINCIPAL */
 .ukezinho-container {
   box-sizing: border-box; max-width: 720px; width: 95%; margin: 40px auto;
   
   background-color: var(--uke-bg-base);
   
-  /* --- TEXTURA LAPIDADA DENSA (Muitas faces) --- */
+  /* --- TEXTURA DE FACETAS SÓLIDAS (Sem riscos, cortes geométricos) --- */
   background-image: 
-    /* 1. Malha de Triângulos de Luz (Alta Frequência) */
-    repeating-linear-gradient(45deg, rgba(255,255,255,0.2) 0px, rgba(255,255,255,0.2) 1px, transparent 1px, transparent 40px),
-    repeating-linear-gradient(-45deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 1px, transparent 1px, transparent 40px),
+    /* 1. Grande Face de Luz Superior (Corte Diagonal Nítido) */
+    linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 50%, transparent 50.1%),
     
-    /* 2. Cortes Secos de Sombra (Roxo) - Vários ângulos */
-    linear-gradient(30deg, rgba(145, 95, 170, 0.3) 20%, transparent 20.1%),
-    linear-gradient(150deg, transparent 60%, rgba(145, 95, 170, 0.3) 60.1%),
+    /* 2. Face de Sombra Inferior (Roxo) */
+    linear-gradient(315deg, rgba(145, 95, 170, 0.5) 0%, rgba(145, 95, 170, 0.2) 40%, transparent 40.1%),
     
-    /* 3. Cortes Secos de Luz (Branco) - Criam os reflexos */
-    linear-gradient(210deg, rgba(255,255,255,0.4) 15%, transparent 15.1%),
-    linear-gradient(330deg, transparent 70%, rgba(255,255,255,0.3) 70.1%),
+    /* 3. Polígono Lateral de Luz (Branco) */
+    linear-gradient(80deg, transparent 60%, rgba(255,255,255,0.3) 60.1%, rgba(255,255,255,0.1) 85%, transparent 85.1%),
     
-    /* 4. Gradiente de Profundidade Base */
-    linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(209, 71, 163, 0.2));
-  /* ----------------------------------------------------------- */
+    /* 4. Polígono de Sombra Cruzada */
+    linear-gradient(200deg, transparent 30%, rgba(145, 95, 170, 0.3) 30.1%, transparent 70%),
+    
+    /* 5. Base suave */
+    linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(209, 71, 163, 0.1));
+  /* ---------------------------------------------------------------- */
   
-  background-attachment: fixed; /* Fundo fixo ao rolar */
+  /* IMPORTANTE: Removido 'fixed' para o cristal mover junto com o scroll */
+  background-attachment: scroll; 
   background-size: cover;
   
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: 16px;
   box-shadow: 
-    0 20px 50px rgba(100, 50, 100, 0.4),
-    inset 0 0 0 1px rgba(255,255,255,0.4),
-    inset 0 0 80px rgba(255, 255, 255, 0.5);
+    0 15px 40px rgba(145, 95, 170, 0.3),
+    inset 0 0 0 1px rgba(255,255,255,0.2), /* Borda interna sutil */
+    inset 0 0 60px rgba(255, 255, 255, 0.4);
     
   color: var(--uke-text); 
   font-family: 'Raleway', sans-serif;
@@ -99,9 +100,7 @@
 .ukezinho-stats {
   padding: 20px 40px; 
   display: flex; flex-direction: column; gap: 15px;
-  background: rgba(255, 255, 255, 0.4);
-  /* Textura de facetas pequenas */
-  background-image: repeating-linear-gradient(45deg, rgba(255,255,255,0.2) 0px, transparent 1px, transparent 20px);
+  background: rgba(255, 255, 255, 0.3);
 }
 
 .ukezinho-container .jjk-dossier-status-item {
@@ -139,17 +138,17 @@
   text-align: right; white-space: nowrap; font-weight: 700;
 }
 
-/* CONTEÚDO (FACETAS INTERNAS VISÍVEIS) */
+/* CONTEÚDO (FACETAS SÓLIDAS) */
 .ukezinho-content {
   padding: 30px 40px; font-size: 1.1em; line-height: 1.8; color: var(--uke-text);
   text-align: justify; 
   
   background-color: var(--uke-glass-read);
   
-  /* Textura interna de cristal */
+  /* Facetas limpas dentro do conteúdo tbm */
   background-image: 
-    repeating-linear-gradient(135deg, rgba(255,255,255,0.3) 0px, transparent 1px, transparent 50px),
-    linear-gradient(200deg, rgba(255,255,255,0.4) 0%, transparent 40%);
+    linear-gradient(135deg, rgba(255,255,255,0.5) 0%, transparent 40%),
+    linear-gradient(225deg, transparent 60%, rgba(209, 71, 163, 0.1) 60.1%);
     
   border-top: 1px solid rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(5px);
