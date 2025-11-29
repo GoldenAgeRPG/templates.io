@@ -1,0 +1,188 @@
+/* --- TEMPLATE: TAKAHASHI RYUUJI v2 (PHYSICAL SKY & ALTITUDE) --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;800&family=Cinzel:wght@700&family=Pinyon+Script&display=swap');
+
+:root {
+  --sky-white: #ffffff;
+  --sky-mist: #f0f8ff;      /* AliceBlue (Nuvem) */
+  --sky-blue-light: #b3e5fc; /* Azul Claro (Contraste) */
+  --sky-blue: #4fc3f7;      /* Light Blue 300 (Destaque) */
+  --sky-deep: #0277bd;      /* Light Blue 800 (Profundo) */
+  --sky-navy: #002147;      /* Navy (Texto) */
+  --sky-border: #81d4fa;
+}
+
+/* Animação: Flutuar Suave */
+@keyframes cloud-float {
+  0%, 100% { transform: translateY(0); box-shadow: 0 15px 40px rgba(2, 119, 189, 0.15); }
+  50% { transform: translateY(-5px); box-shadow: 0 25px 50px rgba(2, 119, 189, 0.25); }
+}
+
+/* Animação: Fluxo de Vento Lateral (Sutil) */
+@keyframes wind-flow {
+  0% { background-position: 0 0; }
+  100% { background-position: 100% 0; }
+}
+
+/* CONTAINER PRINCIPAL */
+.ryu-container {
+  box-sizing: border-box;
+  max-width: 780px; /* Mais largo para os elementos laterais */
+  width: 95%;
+  margin: 50px auto;
+  
+  /* Fundo Atmosférico: Gradiente Céu + Textura de Nuvem */
+  background-color: var(--sky-white);
+  background-image: 
+    linear-gradient(180deg, var(--sky-white) 20%, var(--sky-mist) 80%, var(--sky-blue-light) 100%),
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.01' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
+  
+  border: 2px solid var(--sky-border);
+  border-top: 6px solid var(--sky-deep); /* Faixa superior grossa */
+  border-radius: 8px;
+  
+  color: var(--sky-navy);
+  font-family: 'Montserrat', sans-serif;
+  position: relative;
+  padding: 0 50px; /* Espaço para laterais */
+  overflow: hidden;
+  
+  animation: cloud-float 6s ease-in-out infinite;
+}
+.ryu-container * { box-sizing: border-box; }
+
+/* --- ELEMENTOS LATERAIS (Altímetro / Fluxo de Ar) --- */
+.ryu-container::before, .ryu-container::after {
+  content: '';
+  position: absolute; top: 0; bottom: 0; width: 30px;
+  /* SVG de Indicador de Altitude / Vento */
+  background-image: url("data:image/svg+xml,%3Csvg width='30' height='100' viewBox='0 0 30 100' xmlns='http://www.w3.org/2000/svg'%3E%3C!-- Linha Central --%3E%3Cline x1='15' y1='0' x2='15' y2='100' stroke='%23b3e5fc' stroke-width='1' stroke-dasharray='5,5'/%3E%3C!-- Marcadores --%3E%3Cline x1='5' y1='20' x2='25' y2='20' stroke='%234fc3f7' stroke-width='2'/%3E%3Cline x1='10' y1='40' x2='20' y2='40' stroke='%2381d4fa' stroke-width='1'/%3E%3Cline x1='5' y1='60' x2='25' y2='60' stroke='%234fc3f7' stroke-width='2'/%3E%3Cline x1='10' y1='80' x2='20' y2='80' stroke='%2381d4fa' stroke-width='1'/%3E%3C!-- Seta de Vento --%3E%3Cpath d='M15 5 L10 10 L15 15 L20 10 Z' fill='%230277bd' opacity='0.6'/%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+  opacity: 0.5; z-index: 1;
+}
+.ryu-container::before { left: 10px; }
+.ryu-container::after { right: 10px; transform: scaleX(-1); }
+
+/* Detalhe de "Vento Passando" no topo */
+.ryu-container::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 10px;
+  background-image: repeating-linear-gradient(90deg, transparent, transparent 20px, rgba(255,255,255,0.5) 20px, rgba(255,255,255,0.5) 40px);
+  animation: wind-flow 4s linear infinite;
+  z-index: 3; pointer-events: none;
+}
+
+/* HEADER (Painel de Instrumento) */
+.ryu-header {
+  text-align: center; padding: 30px 20px;
+  border-bottom: 2px solid var(--sky-border);
+  background: linear-gradient(to bottom, rgba(255,255,255,0.9), rgba(240, 248, 255, 0.8));
+  position: relative; z-index: 2;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+
+.ryu-icon-wrapper {
+  width: 50px; height: 50px; margin: 0 auto 10px;
+  background: #fff; border-radius: 50%; border: 2px solid var(--sky-blue);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--sky-deep); filter: drop-shadow(0 2px 5px rgba(2, 119, 189, 0.2));
+}
+.ryu-icon-wrapper svg { width: 30px; height: 30px; fill: currentColor; }
+
+.ryu-title {
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 2.4em;
+  color: var(--sky-deep); text-transform: uppercase; margin: 0; letter-spacing: 3px;
+  text-shadow: 2px 2px 0 #fff, 0 0 10px rgba(79, 195, 247, 0.3);
+}
+.ryu-subtitle {
+  font-family: 'Cinzel', serif; font-size: 0.9em; color: var(--sky-blue);
+  text-transform: uppercase; letter-spacing: 3px; margin-top: 5px; font-weight: 700;
+}
+
+/* IMAGEM (Janela do Cockpit) */
+.ryu-image-frame {
+  width: 100%; height: 380px; position: relative; margin: 20px 0;
+  background: var(--sky-navy);
+  border: 4px solid #fff; outline: 2px solid var(--sky-blue);
+  border-radius: 4px; overflow: hidden; z-index: 2;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+.ryu-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  filter: brightness(1.1) contrast(1.05) saturate(1.1);
+}
+
+/* STATUS (Indicadores de Vôo) */
+.ryu-stats {
+  padding: 20px 40px; display: flex; flex-direction: column; gap: 15px;
+  background: rgba(255, 255, 255, 0.8); position: relative; z-index: 2;
+  border: 1px solid var(--sky-border); border-radius: 4px; margin-bottom: 20px;
+}
+.jjk-dossier-status-item {
+  display: grid; grid-template-columns: 50px 1fr 80px; align-items: center; gap: 15px;
+}
+.jjk-dossier-status-label {
+  font-family: 'Montserrat', sans-serif; font-weight: 800;
+  color: var(--sky-deep); font-size: 0.85em; text-align: right; letter-spacing: 1px;
+}
+.jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 12px; background: var(--sky-mist);
+  border-radius: 10px; overflow: hidden; border: 1px solid var(--sky-border);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+}
+.jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
+
+/* HP: Azul Céu Vibrante */
+.jjk-dossier-hp-fill {
+  height: 100%; background: linear-gradient(90deg, var(--sky-blue), var(--sky-deep));
+  border-radius: 10px; box-shadow: 0 0 8px var(--sky-blue); transition: width 0.5s ease;
+}
+/* EA: Ciano Vento */
+.jjk-dossier-ea-fill {
+  height: 100%; background: linear-gradient(90deg, #80deea, var(--sky-blue));
+  border-radius: 10px; box-shadow: 0 0 8px #80deea; transition: width 0.5s ease;
+}
+
+.jjk-dossier-status-value {
+  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.85em;
+  color: var(--sky-navy); text-align: right;
+}
+
+/* CONTEÚDO (Claro e Arejado) */
+.ryu-content {
+  padding: 25px 40px; font-size: 1.15em; line-height: 1.9;
+  color: var(--sky-navy); text-align: justify; position: relative; z-index: 2;
+  background: rgba(255, 255, 255, 0.7);
+  border-top: 1px solid var(--sky-border); border-bottom: 1px solid var(--sky-border);
+}
+.ryu-content b { color: var(--sky-deep); font-weight: 800; letter-spacing: 0.5px; }
+.ryu-content i { color: var(--sky-blue); font-style: italic; font-weight: 600; }
+
+/* EXTRAS (Dados de Vôo) */
+.ryu-extras {
+  margin: 20px 40px 30px 40px; padding: 15px;
+  background: var(--sky-mist); border: 2px solid var(--sky-blue);
+  border-radius: 4px; position: relative; z-index: 2;
+  font-size: 0.9em; color: var(--sky-deep);
+  display: flex; justify-content: space-between;
+  font-family: 'Montserrat', sans-serif; font-weight: 600;
+}
+
+/* ASSINATURA */
+.ryu-footer {
+  padding: 25px; text-align: center; background: var(--sky-white);
+  border-top: 2px solid var(--sky-border); position: relative; z-index: 3;
+}
+.ryu-signature::after {
+  content: 'Takahashi Ryuuji';
+  font-family: 'Pinyon Script', cursive;
+  font-size: 3em; color: var(--sky-deep);
+  font-weight: 400;
+  text-shadow: 1px 1px 2px #fff, 0 0 15px rgba(79, 195, 247, 0.3);
+}
+
+@media (max-width: 600px) {
+  .ryu-container { padding: 0 10px; width: 98%; }
+  /* Esconde os elementos laterais no mobile para ganhar espaço */
+  .ryu-container::before, .ryu-container::after { display: none; }
+  .ryu-header, .ryu-content, .ryu-stats, .ryu-extras { padding: 20px 15px; }
+  .ryu-extras { flex-direction: column; gap: 10px; text-align: center; }
+}
