@@ -1,197 +1,154 @@
-/* --- TEMPLATE: CRYSTAL MEMORY (PINK VARIANT) --- */
+/* --- TEMPLATE: UKEZINHO (CRYSTAL MEMORY) --- */
 
 :root {
-  --crys-bg-dark: #1a0a16;   /* Fundo Roxo Escuro quase preto */
-  --crys-base: #4a004e;      /* Roxo Base */
-  --crys-pink: #ff66cc;      /* Rosa Hot Pink (Principal) */
-  --crys-light: #ffccff;     /* Rosa Claro (Brilho) */
-  --crys-glass: rgba(40, 10, 35, 0.6); /* Vidro Roxo */
-  --crys-text: #ffeefc;      /* Texto Branco Rosado */
+  --uke-bg: #1a0a16;        /* Fundo escuro */
+  --uke-primary: #ff66cc;   /* Rosa Principal */
+  --uke-secondary: #6a00ff; /* Roxo Profundo */
+  --uke-light: #ffeefc;     /* Texto Claro */
+  --uke-glass: rgba(40, 10, 35, 0.7); /* Efeito Vidro */
 }
 
-/* Animação do Símbolo */
+/* Animação de Flutuação da Logo */
 @keyframes crystal-float {
-  0%, 100% { transform: translateY(0px); filter: drop-shadow(0 0 5px var(--crys-pink)); }
-  50% { transform: translateY(-5px); filter: drop-shadow(0 0 15px var(--crys-pink)); }
+  0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 5px var(--uke-primary)); }
+  50% { transform: translateY(-5px); filter: drop-shadow(0 0 15px var(--uke-primary)); }
 }
 
-@keyframes pink-pulse {
-  0% { opacity: 0.8; }
-  100% { opacity: 1; box-shadow: 0 0 10px var(--crys-pink); }
-}
-
-/* CONTAINER */
-.crystal-container {
-  position: relative;
-  max-width: 750px;
-  margin: 40px auto;
-  background: linear-gradient(135deg, var(--crys-bg-dark), var(--crys-base));
-  color: var(--crys-text);
+/* CONTAINER PRINCIPAL */
+.ukezinho-container {
+  box-sizing: border-box; max-width: 720px; width: 95%; margin: 40px auto;
+  background: linear-gradient(135deg, var(--uke-bg), #2a0033);
+  /* Borda brilhante e Clip-path para formato de cristal */
+  border: 1px solid var(--uke-primary);
+  box-shadow: 0 0 20px rgba(255, 102, 204, 0.2);
+  color: var(--uke-light); 
   font-family: 'Raleway', sans-serif;
-  overflow: hidden;
-  /* Bordas Rosa */
-  box-shadow: 
-    0 0 20px rgba(255, 102, 204, 0.3), 
-    0 0 0 2px rgba(255, 102, 204, 0.4) inset;
-  clip-path: polygon(5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 0% 5%);
-  padding: 4px;
+  position: relative; padding: 0; overflow: hidden;
+  /* Recorte nos cantos */
+  clip-path: polygon(2% 0, 98% 0, 100% 2%, 100% 98%, 98% 100%, 2% 100%, 0 98%, 0 2%);
 }
-
-.crystal-inner-wrapper {
-   background: var(--crys-glass);
-   backdrop-filter: blur(8px);
-   -webkit-backdrop-filter: blur(8px);
-   clip-path: polygon(5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 0% 5%);
-   height: 100%;
-}
-
-/* DECORAÇÃO DE FUNDO */
-.crystal-shard {
-  position: absolute;
-  background: linear-gradient(to top, var(--crys-pink), transparent);
-  opacity: 0.2;
-  z-index: 0;
-  pointer-events: none;
-}
-.shard-1 {
-  width: 100px; height: 300px; top: -50px; left: -20px;
-  transform: rotate(35deg);
-  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
-}
-.shard-2 {
-  width: 80px; height: 250px; bottom: -30px; right: -10px;
-  transform: rotate(-25deg);
-  background: linear-gradient(to bottom, var(--crys-light), transparent);
-  clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
-}
+.ukezinho-container * { box-sizing: border-box; }
 
 /* HEADER */
-.crystal-header {
-  display: flex;
-  align-items: center;
-  padding: 30px;
-  position: relative;
-  z-index: 2;
-  border-bottom: 2px solid rgba(255, 102, 204, 0.3);
-  background: linear-gradient(90deg, rgba(74, 0, 78, 0.4) 0%, transparent 100%);
+.ukezinho-header {
+  padding: 20px 30px;
+  background: linear-gradient(90deg, rgba(106, 0, 255, 0.3) 0%, transparent 100%);
+  border-bottom: 1px solid var(--uke-primary);
+  display: flex; align-items: center; gap: 20px;
 }
 
-/* SÍMBOLO (Agora no CSS) */
-.crystal-symbol-box {
-  width: 80px;
-  height: 80px;
-  margin-right: 25px;
-  flex-shrink: 0;
-  /* Imagem definida aqui */
+/* LOGO INJETADA VIA CSS */
+.ukezinho-header::before {
+  content: '';
+  display: block; width: 70px; height: 70px;
   background-image: url('https://i.imgur.com/QAvLIFV.png');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  background-size: contain; background-repeat: no-repeat; background-position: center;
   animation: crystal-float 4s ease-in-out infinite;
+  flex-shrink: 0;
 }
 
-.crystal-title-box { flex-grow: 1; }
-.crystal-title {
-  font-family: 'Cinzel Decorative', cursive;
-  font-size: 2.2em; margin: 0; color: #fff;
-  text-transform: uppercase;
-  text-shadow: 0 0 10px var(--crys-pink);
-  letter-spacing: 2px; line-height: 1.1;
+.ukezinho-title-wrapper { display: flex; flex-direction: column; }
+
+.ukezinho-title {
+  font-family: 'Cinzel Decorative', cursive; font-size: 2em; color: #fff;
+  text-transform: uppercase; margin: 0; 
+  text-shadow: 0 0 10px var(--uke-primary); line-height: 1;
 }
-.crystal-subtitle {
-  font-family: 'Raleway', sans-serif;
-  font-size: 1em; color: var(--crys-pink);
-  text-transform: uppercase; letter-spacing: 3px;
-  margin-top: 5px; font-weight: 700;
+.ukezinho-subtitle {
+  font-family: 'Raleway', sans-serif; font-size: 0.9em; color: var(--uke-primary);
+  text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; font-weight: 700;
 }
 
-/* --- STATUS BARS (Estilo Cristalino) --- */
-.crystal-stats {
-  padding: 0 40px; margin-top: 20px;
+/* IMAGEM */
+.ukezinho-image-frame {
+  width: 100%; height: 300px; position: relative;
+  border-bottom: 1px solid var(--uke-primary);
+  background: #000;
+}
+.ukezinho-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  opacity: 0.9;
+}
+
+/* STATUS (ISOLAMENTO DO SCRIPT) */
+.ukezinho-stats {
+  padding: 15px 30px; background: rgba(0,0,0,0.3);
   display: flex; flex-direction: column; gap: 10px;
-  position: relative; z-index: 2;
+  border-bottom: 1px dashed rgba(255, 102, 204, 0.3);
 }
 
-/* Scoping para isolar as barras */
-.crystal-container .jjk-dossier-status-item {
+.ukezinho-container .jjk-dossier-status-item {
   display: grid; grid-template-columns: 40px 1fr 80px; align-items: center; gap: 10px;
   margin: 0; padding: 0; background: transparent; border: none;
 }
 
-.crystal-container .jjk-dossier-status-label {
-  font-family: 'Cinzel Decorative', cursive; font-size: 0.9em; 
-  color: var(--crys-light) !important;
-  text-align: right; background: none; border: none; padding: 0;
+.ukezinho-container .jjk-dossier-status-label {
+  font-family: 'Cinzel Decorative', cursive; font-size: 0.8em; 
+  color: var(--uke-primary) !important; text-align: right;
 }
 
-.crystal-container .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 12px; 
-  background: rgba(0,0,0,0.5); /* Fundo da calha escuro */
-  border: 1px solid var(--crys-pink);
-  transform: skewX(-20deg); /* Inclinação estilo cristal */
-  overflow: hidden; border-radius: 0; box-shadow: none; margin: 0;
+.ukezinho-container .jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 10px; background: rgba(0,0,0,0.5);
+  border: 1px solid var(--uke-secondary);
+  transform: skewX(-20deg); /* Inclinação Cristalina */
+  overflow: hidden; border-radius: 0; margin: 0;
 }
 
-.crystal-container .jjk-dossier-status-bar { 
-  width: 100%; height: 100%; background: transparent; border: none; margin: 0; padding: 0;
-}
-.crystal-container .jjk-dossier-status-bar-fill { 
-  height: 100%; transition: width 0.2s ease; border-radius: 0;
-}
+.ukezinho-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; margin: 0; padding: 0; }
+.ukezinho-container .jjk-dossier-status-bar-fill { height: 100%; transition: width 0.2s ease; border-radius: 0; }
 
 /* Cores das Barras */
-.crystal-container .jjk-dossier-hp-fill {
-  background: linear-gradient(90deg, var(--crys-pink), #ff0066) !important;
-  box-shadow: 0 0 5px var(--crys-pink);
+.ukezinho-container .jjk-dossier-hp-fill {
+  background: linear-gradient(90deg, var(--uke-secondary), var(--uke-primary)) !important;
+  box-shadow: 0 0 5px var(--uke-primary);
 }
-.crystal-container .jjk-dossier-ea-fill {
-  background: linear-gradient(90deg, var(--crys-light), var(--crys-pink)) !important;
-  animation: pink-pulse 1s infinite alternate;
+.ukezinho-container .jjk-dossier-ea-fill {
+  background: linear-gradient(90deg, #fff, var(--uke-primary)) !important;
 }
 
-.crystal-container .jjk-dossier-status-value {
-  font-family: 'Raleway', sans-serif; font-size: 0.8em; font-weight: 700;
-  color: var(--crys-pink) !important; text-align: right; 
-  white-space: nowrap; background: none; border: none;
+.ukezinho-container .jjk-dossier-status-value {
+  font-family: 'Raleway', sans-serif; font-size: 0.8em; color: #fff !important; 
+  text-align: right; white-space: nowrap;
 }
 
 /* CONTEÚDO */
-.crystal-content {
-  padding: 30px 50px;
-  font-size: 1.1em; line-height: 1.7; text-align: justify;
-  position: relative; z-index: 2;
+.ukezinho-content {
+  padding: 30px; font-size: 1.1em; line-height: 1.6; color: var(--uke-light);
+  text-align: justify; background: var(--uke-glass);
+  backdrop-filter: blur(5px);
 }
-.crystal-content b, .crystal-content strong {
-  color: var(--crys-pink); font-weight: 700;
-  text-shadow: 0 0 5px rgba(255, 102, 204, 0.4);
+.ukezinho-content b {
+  color: var(--uke-primary); font-weight: 700;
+  text-shadow: 0 0 5px rgba(255, 102, 204, 0.3);
 }
-.crystal-content i, .crystal-content em {
-  color: var(--crys-light);
-  font-family: 'Cinzel Decorative', cursive; font-size: 0.95em;
-}
-
-/* RODAPÉ & ASSINATURA */
-.crystal-footer {
-  padding: 20px 50px; text-align: right;
-  position: relative; z-index: 2;
-  border-top: 1px solid rgba(255, 102, 204, 0.3);
-  background: linear-gradient(90deg, transparent 0%, rgba(74, 0, 78, 0.2) 100%);
+.ukezinho-content i {
+  color: #dcbdfc; font-family: 'Cinzel Decorative', cursive; font-size: 0.95em;
 }
 
-.crystal-signature {
-  font-family: 'Cinzel Decorative', cursive; font-size: 1.2em;
-  color: var(--crys-pink); letter-spacing: 1px;
+/* EXTRAS */
+.ukezinho-extras {
+  margin: 0 30px 20px 30px; padding: 15px; 
+  background: rgba(106, 0, 255, 0.1); 
+  border: 1px solid var(--uke-secondary);
+  color: var(--uke-light); font-size: 0.9em;
 }
-.crystal-signature::after {
+
+/* RODAPÉ */
+.ukezinho-footer {
+  text-align: right; padding: 15px 30px; 
+  background: linear-gradient(90deg, transparent, rgba(106, 0, 255, 0.2));
+  border-top: 1px solid var(--uke-primary);
+}
+
+.ukezinho-signature::after {
   content: 'Nome a Definir ♦';
-  color: var(--crys-pink);
-  text-shadow: 0 0 5px var(--crys-base);
+  font-family: 'Cinzel Decorative', cursive; font-size: 1.2em; 
+  color: var(--uke-primary); text-transform: uppercase; letter-spacing: 1px;
+  text-shadow: 0 0 5px var(--uke-secondary);
 }
 
 /* Responsivo */
 @media (max-width: 600px) {
-  .crystal-header { flex-direction: column; text-align: center; padding: 20px; }
-  .crystal-symbol-box { margin-right: 0; margin-bottom: 15px; }
-  .crystal-content, .crystal-footer, .crystal-stats { padding: 30px 20px; }
-  .crystal-shard { display: none; }
+  .ukezinho-header { flex-direction: column; text-align: center; }
+  .ukezinho-content, .ukezinho-stats, .ukezinho-extras { padding-left: 15px; padding-right: 15px; }
 }
