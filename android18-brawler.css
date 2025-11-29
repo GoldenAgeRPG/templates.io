@@ -1,0 +1,243 @@
+/* --- TEMPLATE: ANDROID 18 (STREET BRAWLER) --- */
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Russo+One&family=Koulen&family=Roboto:wght@400;700&display=swap');
+
+:root {
+  --brawl-bg: #1a1a1a;
+  --brawl-denim: #2c3e50;    /* Jeans Escuro */
+  --brawl-yellow: #ffea00;   /* Impacto */
+  --brawl-red: #d50000;      /* Sangue/Dano */
+  --brawl-white: #f0f0f0;
+  --brawl-dark: #000000;
+}
+
+/* Animação: Tremor de Impacto (Rumble) */
+@keyframes impact-shake {
+  0% { transform: translate(0, 0); }
+  10% { transform: translate(-2px, -2px); }
+  20% { transform: translate(2px, 2px); }
+  30% { transform: translate(-2px, 2px); }
+  40% { transform: translate(2px, -2px); }
+  50% { transform: translate(0, 0); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Animação: Energia Infinita (Barra fluindo rápido e furiosa) */
+@keyframes power-surge {
+  0% { background-position: 0 0; }
+  100% { background-position: 100px 0; }
+}
+
+/* CONTAINER PRINCIPAL */
+.brawler-container {
+  box-sizing: border-box;
+  max-width: 720px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--brawl-bg);
+  
+  /* Fundo: Textura de Asfalto/Concreto */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+  
+  /* Borda Sólida e Pesada */
+  border: 4px solid var(--brawl-dark);
+  border-bottom: 8px solid var(--brawl-denim);
+  
+  color: var(--brawl-white);
+  font-family: 'Roboto', sans-serif;
+  position: relative;
+  box-shadow: 10px 10px 0 rgba(0,0,0,0.8); /* Sombra dura */
+  padding: 0;
+  overflow: hidden;
+}
+.brawler-container * { box-sizing: border-box; }
+
+/* Faixa Lateral (Mangas Listradas - Tecido) */
+.brawler-container::before {
+  content: '';
+  position: absolute; top: 0; bottom: 0; left: 0; width: 30px;
+  background: repeating-linear-gradient(
+    -45deg,
+    #111,
+    #111 10px,
+    #eee 10px,
+    #eee 20px
+  );
+  border-right: 3px solid #000;
+  z-index: 10;
+}
+
+/* HEADER (VS SCREEN) */
+.brawler-header {
+  padding: 30px 20px 30px 50px; /* Espaço para a faixa lateral */
+  background: linear-gradient(135deg, var(--brawl-denim) 60%, var(--brawl-dark) 100%);
+  border-bottom: 4px solid var(--brawl-yellow);
+  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+  position: relative;
+  z-index: 2;
+}
+
+.brawler-title {
+  font-family: 'Black Ops One', cursive; /* Fonte Militar/Pesada */
+  font-size: 2.5em;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 4px 4px 0 #000;
+  line-height: 1;
+  transform: skewX(-10deg); /* Inclinação de velocidade */
+}
+
+.brawler-subtitle {
+  font-family: 'Koulen', sans-serif;
+  font-size: 1.4em;
+  color: var(--brawl-yellow);
+  text-transform: uppercase;
+  margin-top: 5px;
+  transform: skewX(-10deg);
+  text-shadow: 2px 2px 0 #000;
+}
+
+/* IMAGEM (RETTRATO DE LUTADOR) */
+.brawler-image-frame {
+  width: 100%; height: 350px;
+  position: relative;
+  background: #000;
+  border-bottom: 4px solid var(--brawl-dark);
+  margin-top: -20px;
+  z-index: 1;
+}
+.brawler-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  filter: contrast(1.2) saturate(1.1);
+}
+/* Efeito de "Dano" na imagem */
+.brawler-image-frame::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, transparent 30%);
+  pointer-events: none;
+}
+
+/* STATUS (HUD DE JOGO DE LUTA) */
+.brawler-stats {
+  padding: 20px 30px 20px 50px;
+  display: flex; flex-direction: column; gap: 15px;
+  background: rgba(0,0,0,0.5);
+  position: relative; z-index: 2;
+  border-bottom: 2px dashed #555;
+}
+
+.jjk-dossier-status-item {
+  display: grid; grid-template-columns: 50px 1fr 80px; align-items: center; gap: 10px;
+}
+
+.jjk-dossier-status-label {
+  font-family: 'Russo One', sans-serif;
+  font-size: 1em; color: var(--brawl-white);
+  text-align: right; text-shadow: 2px 2px 0 #000;
+  transform: skewX(-10deg);
+}
+
+.jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 20px; /* Barra grossa */
+  background: #333;
+  border: 3px solid #000;
+  transform: skewX(-15deg); /* Inclinação agressiva */
+  overflow: hidden;
+}
+.jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
+
+/* HP: Vermelho Sangue Sólido */
+.jjk-dossier-hp-fill {
+  height: 100%;
+  background: var(--brawl-red);
+  box-shadow: inset 0 5px 0 rgba(255,255,255,0.2); /* Brilho plástico */
+  transition: width 0.2s ease; /* Transição rápida de dano */
+}
+
+/* EA: Amarelo Alta Voltagem */
+.jjk-dossier-ea-fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    var(--brawl-yellow),
+    var(--brawl-yellow) 10px,
+    #ff9100 10px,
+    #ff9100 20px
+  );
+  animation: power-surge 0.5s linear infinite; /* Movimento muito rápido */
+  box-shadow: 0 0 10px var(--brawl-yellow);
+}
+
+.jjk-dossier-status-value {
+  font-family: 'Black Ops One', cursive;
+  font-size: 1em; color: var(--brawl-yellow);
+  text-align: right; transform: skewX(-10deg);
+}
+
+/* CONTEÚDO (FALA DE VITÓRIA) */
+.brawler-content {
+  padding: 30px 30px 30px 50px;
+  font-size: 1.1em; line-height: 1.6;
+  color: #ddd; text-align: justify;
+  background: transparent;
+  position: relative; z-index: 2;
+}
+
+/* Destaques de Impacto */
+.brawler-content b {
+  color: var(--brawl-yellow);
+  font-family: 'Russo One', sans-serif;
+  text-transform: uppercase;
+  background: #000; padding: 0 5px;
+  transform: skewX(-10deg); display: inline-block;
+}
+.brawler-content i {
+  color: var(--brawl-red); font-weight: 700; border-bottom: 2px solid var(--brawl-red);
+}
+
+/* EXTRAS (COMBO LIST) */
+.brawler-extras {
+  margin: 0 30px 30px 50px;
+  padding: 15px;
+  background: #111;
+  border: 2px solid var(--brawl-red);
+  color: var(--brawl-white);
+  font-family: 'Koulen', sans-serif;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  position: relative; z-index: 2;
+  /* Efeito de "Rasgo" */
+  clip-path: polygon(0 0, 100% 0, 98% 90%, 2% 100%);
+}
+.brawler-extras::before {
+  content: 'FIGHT RECORD';
+  display: block; font-family: 'Black Ops One'; color: var(--brawl-red);
+  font-size: 0.8em; margin-bottom: 10px; border-bottom: 1px dashed #555;
+}
+
+/* RODAPÉ (ASSINATURA) */
+.brawler-footer {
+  text-align: right; padding: 15px 30px;
+  background: var(--brawl-dark);
+  border-top: 4px solid var(--brawl-yellow);
+  position: relative; z-index: 5;
+}
+
+.brawler-signature {
+  font-family: 'Russo One', sans-serif;
+  font-size: 1.5em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  /* Efeito Graffiti */
+  text-shadow: 3px 3px 0 var(--brawl-red), -1px -1px 0 var(--brawl-denim);
+  transform: rotate(-2deg);
+  display: inline-block;
+}
+
+@media (max-width: 600px) {
+  .brawler-container { padding-left: 0; }
+  .brawler-container::before { width: 10px; } /* Listra menor no mobile */
+  .brawler-header, .brawler-content, .brawler-stats, .brawler-extras { padding-left: 20px; }
+}
