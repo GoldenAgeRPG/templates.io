@@ -1,4 +1,4 @@
-/* --- TEMPLATE: MARI EL-MELLOI (MERCURY RISING) --- */
+/* --- TEMPLATE: MARI EL-MELLOI (MERCURY RISING v2) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Montserrat:wght@300;400;600&family=Pinyon+Script&display=swap');
 
 :root {
@@ -7,39 +7,38 @@
   --metal-chrome-light: #e8e8e8;
   --metal-chrome-mid: #a0a0a0;
   --metal-chrome-dark: #505050;
-  --metal-accent-blue: #c0e0ff; /* Reflexo azulado sutil */
+  --metal-accent-blue: #c0e0ff;
 }
 
 /* --- ANIMAÇÕES --- */
 
-/* O metal líquido no rodapé (Ondas) */
+/* Metal Líquido (Ondas) - Loop Corrigido */
 @keyframes flow-wave {
   0% { transform: translateX(0); }
   100% { transform: translateX(-50%); }
 }
 
-/* As bolhas subindo */
+/* Bolhas Subindo (Mais alto e mais lento) */
 @keyframes metal-rise {
   0% {
-    transform: translateY(100vh) scale(0.2);
+    transform: translateY(100px) scale(0.5); /* Começa abaixo */
     opacity: 0;
   }
   10% { opacity: 1; }
-  50% { transform: translateY(50vh) scale(1) translateX(5px); }
-  90% { opacity: 1; }
+  80% { opacity: 1; }
   100% {
-    transform: translateY(-10vh) scale(0.5) translateX(-5px);
+    transform: translateY(-400px) scale(1); /* Sobe até o meio da tela */
     opacity: 0;
   }
 }
 
-/* Brilho metálico pulsante */
+/* Brilho metálico */
 @keyframes chrome-pulse {
   0%, 100% { box-shadow: 0 0 5px rgba(255,255,255,0.2); }
   50% { box-shadow: 0 0 15px rgba(192, 224, 255, 0.5); }
 }
 
-/* --- ESTRUTURA PRINCIPAL (GRID) --- */
+/* CONTAINER PRINCIPAL (GRID) */
 .mari-container {
   box-sizing: border-box;
   max-width: 800px;
@@ -47,10 +46,9 @@
   margin: 40px auto;
   background-color: var(--metal-bg);
   
-  /* Estrutura de 3 colunas: Lateral | Conteúdo | Lateral */
   display: grid;
   grid-template-columns: 60px 1fr 60px;
-  grid-template-rows: auto auto 1fr auto auto; /* Header, Img, Texto, Extras, Footer */
+  grid-template-rows: auto auto 1fr auto auto;
   
   border: 3px solid var(--metal-chrome-dark);
   border-image: linear-gradient(to bottom, var(--metal-chrome-light), var(--metal-chrome-dark)) 1;
@@ -64,7 +62,7 @@
 
 /* --- LATERAIS (Canais das Bolhas) --- */
 .mari-sidebar {
-  grid-row: 1 / -1; /* Ocupa toda a altura */
+  grid-row: 1 / -1;
   position: relative;
   background: linear-gradient(to right, #0a0a0a, #1a1a1a, #0a0a0a);
   border-right: 1px solid var(--metal-chrome-dark);
@@ -78,34 +76,27 @@
 /* AS BOLHAS DE METAL */
 .metal-bubble {
   position: absolute;
-  bottom: -20px;
+  bottom: -40px; /* Começa escondido */
   border-radius: 50%;
-  /* Gradiente complexo para parecer mercúrio/cromo */
-  background: radial-gradient(circle at 30% 30%, 
-    #fff, 
-    var(--metal-accent-blue) 10%, 
-    var(--metal-chrome-mid) 40%, 
-    var(--metal-chrome-dark) 80%, 
-    #000 100%);
+  background: radial-gradient(circle at 30% 30%, #fff, var(--metal-accent-blue) 10%, var(--metal-chrome-mid) 40%, var(--metal-chrome-dark) 80%, #000 100%);
   box-shadow: inset -2px -2px 5px rgba(0,0,0,0.8), 0 0 5px rgba(255,255,255,0.5);
   opacity: 0;
   animation: metal-rise linear infinite;
 }
 
-/* Variações das Bolhas (Tamanho e Tempo) */
-.mb1 { width: 20px; height: 20px; left: 10%; animation-duration: 7s; animation-delay: 0s; }
-.mb2 { width: 35px; height: 35px; left: 40%; animation-duration: 9s; animation-delay: 2s; }
-.mb3 { width: 15px; height: 15px; left: 70%; animation-duration: 6s; animation-delay: 4s; }
-.mb4 { width: 25px; height: 25px; left: 20%; animation-duration: 8s; animation-delay: 1s; }
-.mb5 { width: 30px; height: 30px; left: 50%; animation-duration: 10s; animation-delay: 5s; }
+/* Variações das Bolhas (Mais lentas) */
+.mb1 { width: 20px; height: 20px; left: 10%; animation-duration: 12s; animation-delay: 0s; }
+.mb2 { width: 35px; height: 35px; left: 40%; animation-duration: 15s; animation-delay: 5s; }
+.mb3 { width: 15px; height: 15px; left: 70%; animation-duration: 10s; animation-delay: 2s; }
+.mb4 { width: 25px; height: 25px; left: 20%; animation-duration: 14s; animation-delay: 8s; }
+.mb5 { width: 30px; height: 30px; left: 50%; animation-duration: 18s; animation-delay: 1s; }
 
 
 /* --- CONTEÚDO CENTRAL --- */
 .mari-content-col {
   grid-column: 2;
-  background: var(--metal-bg); /* Fundo sólido para tapar as bolhas se elas cruzassem */
-  position: relative;
-  z-index: 2;
+  background: var(--metal-bg);
+  position: relative; z-index: 2;
   display: flex; flex-direction: column;
 }
 
@@ -117,18 +108,14 @@
 }
 .mari-icon-wrapper {
   width: 50px; height: 50px; margin: 0 auto 10px;
-  /* Ícone metálico */
   background: linear-gradient(135deg, var(--metal-chrome-light), var(--metal-chrome-dark));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   filter: drop-shadow(0 2px 2px #000);
 }
 .mari-icon-wrapper svg { width: 100%; height: 100%; fill: currentColor; }
 
 .mari-title {
-  font-family: 'Cinzel Decorative', cursive; font-size: 2.2em;
-  margin: 0; letter-spacing: 2px;
-  /* Texto Metálico */
+  font-family: 'Cinzel Decorative', cursive; font-size: 2.2em; margin: 0; letter-spacing: 2px;
   background: linear-gradient(to bottom, #fff, var(--metal-chrome-mid), var(--metal-chrome-dark));
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
   text-shadow: 0 2px 5px rgba(0,0,0,0.5);
@@ -141,54 +128,42 @@
 /* IMAGEM */
 .mari-image-frame {
   width: 100%; height: 350px; position: relative;
-  border-bottom: 3px solid var(--metal-chrome-dark);
-  background: #000;
+  border-bottom: 3px solid var(--metal-chrome-dark); background: #000;
 }
 .mari-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  filter: grayscale(0.8) contrast(1.2) brightness(0.9); /* Look metálico frio */
-  transition: 0.5s;
+  filter: grayscale(0.8) contrast(1.2) brightness(0.9); transition: 0.5s;
 }
 .mari-container:hover .mari-image-frame img { filter: grayscale(0.2) contrast(1.1); }
 
-/* STATUS (Tubos de Mercúrio) */
+/* STATUS */
 .mari-stats {
   padding: 20px 30px; display: flex; flex-direction: column; gap: 15px;
   background: #141414; border-bottom: 1px solid var(--metal-chrome-dark);
 }
-.jjk-dossier-status-item {
-  display: grid; grid-template-columns: 50px 1fr 80px; align-items: center; gap: 15px;
-}
+.jjk-dossier-status-item { display: grid; grid-template-columns: 50px 1fr 80px; align-items: center; gap: 15px; }
 .jjk-dossier-status-label {
   font-family: 'Cinzel Decorative', cursive; font-weight: 700;
   color: var(--metal-chrome-light); font-size: 0.9em; text-align: right;
 }
-/* Tubo de vidro */
 .jjk-dossier-status-bar-wrapper {
   width: 100%; height: 12px; background: #000;
-  border-radius: 10px; overflow: hidden;
-  border: 1px solid var(--metal-chrome-dark);
+  border-radius: 10px; overflow: hidden; border: 1px solid var(--metal-chrome-dark);
   box-shadow: inset 0 2px 5px #000;
 }
 .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
 
-/* Preenchimento: Metal Líquido */
+/* Preenchimento */
 .jjk-dossier-hp-fill, .jjk-dossier-ea-fill {
   height: 100%;
-  /* Gradiente de mercúrio */
   background: linear-gradient(90deg, var(--metal-chrome-dark), var(--metal-chrome-light), var(--metal-chrome-mid));
-  border-radius: 10px;
-  box-shadow: 0 0 10px var(--metal-chrome-light);
-  transition: width 0.5s ease;
-  position: relative;
-  overflow: hidden;
+  border-radius: 10px; box-shadow: 0 0 10px var(--metal-chrome-light);
+  transition: width 0.5s ease; position: relative; overflow: hidden;
 }
-/* Brilho extra no metal */
 .jjk-dossier-hp-fill::after, .jjk-dossier-ea-fill::after {
   content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%;
   background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
 }
-
 .jjk-dossier-status-value {
   font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.9em;
   color: var(--metal-chrome-light); text-align: right;
@@ -197,8 +172,7 @@
 /* CONTEÚDO */
 .mari-content {
   padding: 30px; font-size: 1.1em; line-height: 1.8;
-  color: var(--metal-chrome-light); text-align: justify;
-  background: var(--metal-bg);
+  color: var(--metal-chrome-light); text-align: justify; background: var(--metal-bg);
 }
 .mari-content b { color: #fff; font-weight: 700; text-shadow: 0 0 5px var(--metal-chrome-light); }
 .mari-content i { color: var(--metal-accent-blue); }
@@ -208,45 +182,44 @@
   margin: 0 30px 20px; padding: 15px;
   background: #111; border: 1px solid var(--metal-chrome-dark);
   color: var(--metal-chrome-mid); font-family: 'Cinzel Decorative', cursive;
-  text-align: center; font-size: 0.9em;
-  box-shadow: inset 0 0 20px #000;
+  text-align: center; font-size: 0.9em; box-shadow: inset 0 0 20px #000;
 }
 
-/* --- RODAPÉ & PISCINA DE METAL --- */
+/* --- RODAPÉ & PISCINA DE METAL (CORRIGIDO) --- */
 .mari-footer-pool {
-  grid-column: 1 / -1; /* Ocupa as 3 colunas */
-  position: relative;
-  height: 120px;
-  background: #0a0a0a;
-  overflow: hidden;
-  border-top: 3px solid var(--metal-chrome-dark);
-  margin-top: auto; /* Empurra para o fundo */
+  grid-column: 1 / -1;
+  position: relative; height: 120px; background: #0a0a0a;
+  overflow: hidden; border-top: 3px solid var(--metal-chrome-dark);
+  margin-top: auto;
 }
 
-/* Camadas de Ondas SVG */
+/* Ondas SVG (Loop Perfeito) */
 .metal-wave {
-  position: absolute; bottom: 0; left: 0; width: 200%; height: 100%;
-  background-repeat: repeat-x; background-position: bottom;
+  position: absolute; bottom: 0; left: 0; 
+  width: 200%; /* Dobro do tamanho para scrollar */
+  height: 100%;
+  background-repeat: repeat-x; 
+  background-position: bottom left;
   animation: flow-wave linear infinite;
 }
+
+/* As imagens SVG abaixo foram desenhadas para serem perfeitamente repetíveis horizontalmente */
 .wave1 {
-  /* Onda frontal - Mais clara e rápida */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='50%25' y1='0%25' x2='50%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23e8e8e8'/%3E%3Cstop offset='100%25' stop-color='%23a0a0a0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0,60 C150,90 300,30 450,60 C600,90 750,30 900,60 C1050,90 1200,30 1350,60 L1350,120 L0,120 Z' fill='url(%23a)' opacity='0.8'/%3E%3C/svg%3E");
-  background-size: 1200px 120px; animation-duration: 6s; z-index: 3;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='50%25' y1='0%25' x2='50%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23e8e8e8'/%3E%3Cstop offset='100%25' stop-color='%23a0a0a0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0,60 C150,90 300,30 450,60 C600,90 750,30 900,60 C1050,90 1200,30 1350,60 L1350,120 L0,120 Z' fill='url(%23a)' opacity='0.8'/%3E%3C/svg%3E");
+  background-size: 50% 100%; /* 50% de 200% = 100% do container, garantindo repetição */
+  animation-duration: 10s; z-index: 3;
 }
 .wave2 {
-  /* Onda média */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,70 C200,40 400,100 600,70 C800,40 1000,100 1200,70 L1200,120 L0,120 Z' fill='%23505050' opacity='0.6'/%3E%3C/svg%3E");
-  background-size: 1000px 120px; animation-duration: 10s; bottom: 5px; z-index: 2;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,70 C200,40 400,100 600,70 C800,40 1000,100 1200,70 L1200,120 L0,120 Z' fill='%23505050' opacity='0.6'/%3E%3C/svg%3E");
+  background-size: 50% 100%; 
+  animation-duration: 15s; bottom: 5px; z-index: 2;
 }
 .wave3 {
-  /* Onda de fundo - Escura e lenta */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,80 C300,110 600,50 900,80 C1200,110 1500,50 1800,80 L1800,120 L0,120 Z' fill='%23202020' opacity='0.9'/%3E%3C/svg%3E");
-  background-size: 1400px 120px; animation-duration: 15s; bottom: 10px; z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,80 C300,110 600,50 900,80 C1200,110 1500,50 1800,80 L1800,120 L0,120 Z' fill='%23202020' opacity='0.9'/%3E%3C/svg%3E");
+  background-size: 50% 100%; 
+  animation-duration: 20s; bottom: 10px; z-index: 1;
 }
 
-
-/* Assinatura sobre o metal */
 .mari-signature {
   position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
   z-index: 10; text-align: center; width: 100%;
@@ -254,15 +227,12 @@
 .mari-signature::after {
   content: 'Mari El-Melloi Archisorte';
   font-family: 'Pinyon Script', cursive; font-size: 2.8em;
-  /* Texto Metálico Brilhante */
   background: linear-gradient(to bottom, #fff 40%, var(--metal-chrome-mid) 60%);
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.8));
-  font-weight: 400;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.8)); font-weight: 400;
 }
 
 @media (max-width: 700px) {
-  /* No mobile, as laterais somem para dar espaço ao conteúdo */
   .mari-container { grid-template-columns: 0 1fr 0; border: 1px solid var(--metal-chrome-dark); }
   .mari-sidebar { display: none; }
   .mari-content, .mari-stats, .mari-header { padding-left: 15px; padding-right: 15px; }
