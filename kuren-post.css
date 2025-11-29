@@ -1,0 +1,238 @@
+/* --- TEMPLATE: KUREN SHIN (CHAINS & BLOOD) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Metal+Mania&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+  --kuren-bg: #080505;
+  --kuren-panel: #120a0a;
+  --kuren-red: #8a0b0b;    /* Vermelho Sangue Escuro */
+  --kuren-bright-red: #ff1a1a;
+  --kuren-gold: #c5a059;    /* Ouro Envelhecido */
+  --kuren-metal: #2c2c2c;
+  --kuren-text: #dcdcdc;
+}
+
+/* Animação: Pulsação de Sangue nas Correntes */
+@keyframes blood-pulse {
+  0%, 100% { filter: drop-shadow(0 0 2px var(--kuren-red)); }
+  50% { filter: drop-shadow(0 0 8px var(--kuren-bright-red)); }
+}
+
+/* CONTAINER PRINCIPAL */
+.kuren-container {
+  box-sizing: border-box;
+  max-width: 750px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--kuren-bg);
+  
+  /* Textura de Metal Escuro */
+  background-image: repeating-linear-gradient(45deg, #0a0606 0, #0a0606 10px, #0f0808 10px, #0f0808 20px);
+  
+  /* Borda Dupla (Ouro e Vermelho) */
+  border: 2px solid var(--kuren-gold);
+  outline: 1px solid var(--kuren-red);
+  outline-offset: -6px;
+  
+  border-radius: 4px;
+  color: var(--kuren-text);
+  font-family: 'Crimson Text', serif;
+  position: relative;
+  padding: 0 30px; /* Espaço lateral para as correntes */
+  box-shadow: 0 20px 60px #000;
+  overflow: hidden;
+}
+
+.kuren-container * { box-sizing: border-box; }
+
+/* --- CORRENTES LATERAIS (SVG REPEAT) --- */
+.kuren-container::before, .kuren-container::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; width: 20px;
+  /* SVG de Corrente */
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='40' viewBox='0 0 20 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10 2 C5.58 2 2 5.58 2 10 C2 14.42 5.58 18 10 18 C14.42 18 18 14.42 18 10 C18 5.58 14.42 2 10 2 M10 22 C5.58 22 2 25.58 2 30 C2 34.42 5.58 38 10 38 C14.42 38 18 34.42 18 30 C18 25.58 14.42 22 10 22 M10 16 L10 24' stroke='%23c5a059' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+  background-repeat: repeat-y;
+  opacity: 0.8;
+  z-index: 10;
+}
+.kuren-container::before { left: 5px; }
+.kuren-container::after { right: 5px; }
+
+/* --- CABEÇALHO --- */
+.kuren-header {
+  text-align: center;
+  padding: 40px 20px;
+  background: linear-gradient(to bottom, #1a0505, transparent);
+  border-bottom: 1px solid var(--kuren-red);
+  position: relative;
+}
+
+/* Ícone Central (Cadeado/Selo) */
+.kuren-header-icon {
+  width: 50px; height: 50px;
+  margin: 0 auto 10px auto;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--kuren-gold);
+  animation: blood-pulse 4s infinite;
+}
+.kuren-header-icon svg { width: 100%; height: 100%; fill: currentColor; }
+
+.kuren-title {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 2.5em;
+  color: var(--kuren-gold);
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px #000;
+  line-height: 1;
+}
+
+.kuren-subtitle {
+  font-family: 'Crimson Text', serif;
+  font-size: 1.1em;
+  color: var(--kuren-red);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-top: 10px;
+  font-weight: 700;
+  border-top: 1px solid var(--kuren-red);
+  display: inline-block;
+  padding-top: 5px;
+}
+
+/* --- IMAGEM --- */
+.kuren-image-frame {
+  width: 100%;
+  height: 350px; /* Altura fixa */
+  position: relative;
+  background: #000;
+  border: 2px solid var(--kuren-metal);
+  margin: 10px 0;
+  box-shadow: 0 0 20px rgba(138, 11, 11, 0.2);
+}
+
+.kuren-image-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top center;
+  /* Filtro Dark Fantasy */
+  filter: contrast(1.2) brightness(0.8) sepia(0.2);
+  transition: 0.5s;
+}
+.kuren-container:hover .kuren-image-frame img {
+  filter: contrast(1.1) brightness(1);
+}
+
+/* --- STATUS (Grids) --- */
+.kuren-stats {
+  padding: 20px;
+  display: flex; flex-direction: column; gap: 12px;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid var(--kuren-metal);
+}
+
+.jjk-dossier-status-item {
+  display: grid;
+  grid-template-columns: 40px 1fr 80px;
+  align-items: center;
+  gap: 15px;
+}
+
+.jjk-dossier-status-label {
+  font-family: 'Cinzel Decorative', cursive;
+  font-weight: 700;
+  color: var(--kuren-gold);
+  font-size: 0.9em;
+  text-align: right;
+}
+
+.jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 12px;
+  background: #000;
+  border: 1px solid var(--kuren-red);
+  border-radius: 2px;
+  overflow: hidden;
+  box-shadow: inset 0 0 5px #000;
+}
+
+.jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
+
+/* HP: Sangue Escuro */
+.jjk-dossier-hp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3d0000, var(--kuren-red));
+  transition: width 0.5s ease;
+}
+
+/* EA: Ouro Derretido */
+.jjk-dossier-ea-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #5c4518, var(--kuren-gold));
+  transition: width 0.5s ease;
+}
+
+.jjk-dossier-status-value {
+  position: static; transform: none;
+  font-family: 'Cinzel Decorative', cursive; font-weight: 700; font-size: 0.8em;
+  color: var(--kuren-text); text-align: right;
+}
+
+/* --- CONTEÚDO --- */
+.kuren-content {
+  padding: 30px;
+  font-size: 1.2em;
+  line-height: 1.7;
+  color: #ccc;
+  text-align: justify;
+  background: linear-gradient(to bottom, rgba(20, 10, 10, 0.5), transparent);
+  border-top: 1px solid var(--kuren-metal);
+  border-bottom: 1px solid var(--kuren-metal);
+  margin: 20px 0;
+}
+
+.kuren-content b {
+  color: var(--kuren-red);
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 1.1em;
+}
+
+.kuren-content i {
+  color: var(--kuren-gold);
+  font-style: italic;
+}
+
+/* --- EXTRAS --- */
+.kuren-extras {
+  padding: 15px;
+  background: #0a0000;
+  border: 1px dashed var(--kuren-red);
+  color: var(--kuren-gold);
+  font-size: 0.9em;
+  text-align: center;
+  font-family: 'Cinzel Decorative', cursive;
+}
+
+/* --- RODAPÉ (ASSINATURA) --- */
+.kuren-footer {
+  padding: 20px;
+  text-align: center;
+  border-top: 2px solid var(--kuren-gold);
+  background: #050000;
+}
+
+/* O NOME TRAVADO NO CSS */
+.kuren-signature::after {
+  content: 'KUREN SHIN';
+  font-family: 'Metal Mania', cursive; /* Fonte estilo Metal/Gótica */
+  font-size: 2em;
+  color: var(--kuren-red);
+  letter-spacing: 3px;
+  text-shadow: 0 0 10px #000, 1px 1px 0 var(--kuren-gold);
+}
+
+@media (max-width: 600px) {
+  .kuren-container { padding: 0 15px; }
+  .kuren-container::before { left: 2px; }
+  .kuren-container::after { right: 2px; }
+  .kuren-header, .kuren-content, .kuren-stats { padding: 20px 10px; }
+}
