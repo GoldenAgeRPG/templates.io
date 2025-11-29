@@ -1,4 +1,4 @@
-/* --- TEMPLATE: UKEZINHO (FINAL CRYSTAL - VISIBLE ICON) --- */
+/* --- TEMPLATE: UKEZINHO (FINAL CRYSTAL - NEW COLORED ICON) --- */
 
 :root {
   /* PALETA TRAVADA */
@@ -16,23 +16,14 @@
   
   background-color: var(--uke-bg-base);
   
-  /* --- TEXTURA DE FACETAS SÓLIDAS (Sem riscos) --- */
+  /* --- TEXTURA DE FACETAS SÓLIDAS --- */
   background-image: 
-    /* 1. Grande Face de Luz Superior */
     linear-gradient(135deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.1) 50%, transparent 50.1%),
-    
-    /* 2. Face de Sombra Inferior */
     linear-gradient(315deg, rgba(145, 95, 170, 0.5) 0%, rgba(145, 95, 170, 0.2) 40%, transparent 40.1%),
-    
-    /* 3. Polígono Lateral de Luz */
     linear-gradient(80deg, transparent 60%, rgba(255,255,255,0.3) 60.1%, rgba(255,255,255,0.1) 85%, transparent 85.1%),
-    
-    /* 4. Polígono de Sombra Cruzada */
     linear-gradient(200deg, transparent 30%, rgba(145, 95, 170, 0.3) 30.1%, transparent 70%),
-    
-    /* 5. Base suave */
     linear-gradient(to bottom, rgba(255,255,255,0.1), rgba(209, 71, 163, 0.1));
-  /* ---------------------------------------------------------------- */
+  /* ---------------------------------- */
   
   background-attachment: scroll; 
   background-size: cover;
@@ -60,15 +51,16 @@
 
 .ukezinho-header::before {
   content: '';
-  display: block; width: 70px; height: 70px;
-  background-image: url('https://i.imgur.com/QAvLIFV.png');
+  display: block; width: 75px; height: 75px; /* Leve aumento para o novo ícone */
+  /* NOVA URL DO ÍCONE */
+  background-image: url('https://i.imgur.com/JlceAt8.png');
   background-size: contain; background-repeat: no-repeat; background-position: center;
   
-  /* --- ÍCONE MAIS VISÍVEL --- */
-  opacity: 1; /* Máxima visibilidade */
-  mix-blend-mode: overlay; /* Mantém a fusão de cores */
-  /* Brightness aumenta o branco antes de fundir / Sombra destaca do fundo */
-  filter: brightness(1.3) drop-shadow(0 0 5px rgba(255,255,255,0.9));
+  /* --- AJUSTE DE VISIBILIDADE PARA ÍCONE COLORIDO --- */
+  opacity: 0.95; /* Quase totalmente opaco para mostrar as cores originais */
+  mix-blend-mode: normal; /* Remove a fusão agressiva, cores reais */
+  /* Sombra suave para destacar do fundo */
+  filter: drop-shadow(0 0 5px rgba(255,255,255,0.4));
   
   flex-shrink: 0;
 }
