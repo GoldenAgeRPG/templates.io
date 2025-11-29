@@ -1,0 +1,173 @@
+/* --- TEMPLATE: CRYSTAL MEMORY (HONKAI INSPIRED) --- */
+
+:root {
+  --crys-bg-dark: #0a0b1a; /* Fundo muito escuro */
+  --crys-indigo: #1a1f4c; /* Azul índigo base */
+  --crys-purple: #6a00ff; /* Roxo vibrante */
+  --crys-cyan: #00f7ff; /* Ciano elétrico para luzes */
+  --crys-text: #e1e6ff; /* Texto claro azulado */
+  --crys-glass: rgba(20, 25, 60, 0.6); /* Efeito de vidro */
+}
+
+/* Animação de flutuar suave para o símbolo */
+@keyframes crystal-float {
+  0%, 100% { transform: translateY(0px); filter: drop-shadow(0 0 10px var(--crys-cyan)); }
+  50% { transform: translateY(-5px); filter: drop-shadow(0 0 20px var(--crys-cyan)); }
+}
+
+/* CONTAINER PRINCIPAL */
+.crystal-container {
+  position: relative;
+  max-width: 750px;
+  margin: 40px auto;
+  /* Fundo degradê complexo */
+  background: linear-gradient(135deg, var(--crys-bg-dark), var(--crys-indigo));
+  color: var(--crys-text);
+  font-family: 'Raleway', sans-serif;
+  overflow: hidden;
+  /* Borda brilhante externa */
+  box-shadow: 
+    0 0 20px rgba(0, 247, 255, 0.2), /* Luz Ciano */
+    0 0 0 2px rgba(106, 0, 255, 0.5) inset; /* Borda interna Roxa */
+    /* Recorte nos cantos para parecer uma joia */
+  clip-path: polygon(5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 0% 5%);
+  padding: 4px; /* Espaço para a borda interna */
+}
+
+/* Wrapper interno para o efeito de vidro */
+.crystal-inner-wrapper {
+   background: var(--crys-glass);
+   backdrop-filter: blur(10px); /* O efeito de vidro fosco */
+   -webkit-backdrop-filter: blur(10px);
+   clip-path: polygon(5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 0% 5%);
+   height: 100%;
+}
+
+/* --- FRAGMENTOS DECORATIVOS (SHARDS) --- */
+.crystal-shard {
+  position: absolute;
+  background: linear-gradient(to top, var(--crys-purple), transparent);
+  opacity: 0.3;
+  z-index: 0;
+  pointer-events: none;
+}
+.shard-1 {
+  width: 100px; height: 300px; top: -50px; left: -20px;
+  transform: rotate(35deg);
+  clip-path: polygon(50% 0%, 100% 100%, 0% 100%);
+}
+.shard-2 {
+  width: 80px; height: 250px; bottom: -30px; right: -10px;
+  transform: rotate(-25deg);
+  background: linear-gradient(to bottom, var(--crys-cyan), transparent);
+  clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
+}
+
+/* --- CABEÇALHO --- */
+.crystal-header {
+  display: flex;
+  align-items: center;
+  padding: 30px;
+  position: relative;
+  z-index: 2;
+  border-bottom: 2px solid rgba(0, 247, 255, 0.3);
+  background: linear-gradient(90deg, rgba(106, 0, 255, 0.2) 0%, transparent 100%);
+}
+
+/* Símbolo */
+.crystal-symbol-wrapper {
+  flex-shrink: 0;
+  margin-right: 25px;
+}
+.crystal-symbol-img {
+  width: 80px;
+  height: auto;
+  animation: crystal-float 4s ease-in-out infinite;
+}
+
+/* Títulos */
+.crystal-title-box {
+  flex-grow: 1;
+}
+.crystal-title {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 2.2em;
+  margin: 0;
+  color: #fff;
+  text-transform: uppercase;
+  text-shadow: 0 0 10px var(--crys-cyan);
+  letter-spacing: 2px;
+  line-height: 1.1;
+}
+.crystal-subtitle {
+  font-family: 'Raleway', sans-serif;
+  font-size: 1em;
+  color: var(--crys-cyan);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-top: 5px;
+  font-weight: 700;
+}
+
+/* --- CONTEÚDO --- */
+.crystal-content {
+  padding: 40px 50px;
+  font-size: 1.1em;
+  line-height: 1.7;
+  text-align: justify;
+  position: relative;
+  z-index: 2;
+}
+
+/* Estilização de Texto */
+.crystal-content b, .crystal-content strong {
+  color: var(--crys-cyan);
+  font-weight: 700;
+  text-shadow: 0 0 5px rgba(0, 247, 255, 0.4);
+}
+.crystal-content i, .crystal-content em {
+  color: #bbaaff;
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 0.95em;
+}
+
+/* --- RODAPÉ & ASSINATURA --- */
+.crystal-footer {
+  padding: 20px 50px;
+  text-align: right;
+  position: relative;
+  z-index: 2;
+  border-top: 1px solid rgba(106, 0, 255, 0.3);
+  background: linear-gradient(90deg, transparent 0%, rgba(106, 0, 255, 0.1) 100%);
+}
+
+.crystal-signature {
+  font-family: 'Cinzel Decorative', cursive;
+  font-size: 1.2em;
+  color: var(--crys-cyan);
+  letter-spacing: 1px;
+}
+
+/* NOME TRAVADO NO CSS */
+.crystal-signature::after {
+  content: 'Nome a Definir ♦';
+  color: var(--crys-cyan);
+  text-shadow: 0 0 5px var(--crys-purple);
+}
+
+/* --- RESPONSIVO --- */
+@media (max-width: 600px) {
+  .crystal-header {
+    flex-direction: column;
+    text-align: center;
+    padding: 20px;
+  }
+  .crystal-symbol-wrapper {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+  .crystal-content, .crystal-footer {
+    padding: 30px 20px;
+  }
+  .crystal-shard { display: none; }
+}
