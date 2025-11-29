@@ -1,27 +1,34 @@
-/* --- TEMPLATE: TAKAHASHI RYUUJI v3 (SKYWALKER STYLE) --- */
+/* --- TEMPLATE: TAKAHASHI RYUUJI v4 (CLOUD GALLERY) --- */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800&family=Cinzel:wght@700&family=Pinyon+Script&display=swap');
 
 :root {
-  --sky-bg: #f0f8ff;       /* AliceBlue (Fundo Geral) */
-  --sky-panel: #ffffff;    /* Painéis (Conteúdo) */
+  --sky-bg: #f0f8ff;       /* AliceBlue */
   --sky-white: #ffffff;
-  --sky-blue-light: #b3e5fc; /* Azul Claro (Contraste) */
-  --sky-blue: #4fc3f7;      /* Light Blue 300 (Destaque) */
-  --sky-deep: #0277bd;      /* Light Blue 800 (Profundo/Texto) */
-  --sky-navy: #002147;      /* Navy (Texto Escuro) */
-  --sky-cloud-shadow: rgba(2, 119, 189, 0.1);
+  --sky-blue-light: #b3e5fc;
+  --sky-blue: #4fc3f7;      
+  --sky-deep: #0277bd;      
+  --sky-navy: #002147;
+  --sky-sunset: #ffcc80;   /* Cor para HP (Pôr do Sol) */
+  --sky-sunset-dark: #fb8c00;
 }
 
-/* Animação: Nuvens Laterais Subindo (Fluxo de Ar) */
+/* Animação: Nuvens Laterais (Loop Perfeito) */
+/* O movimento (70px) deve ser igual à altura do padrão no background-size */
 @keyframes cloud-rise {
   0% { background-position: 0 0; }
-  100% { background-position: 0 -100px; }
+  100% { background-position: 0 -70px; }
 }
 
-/* Animação: Pulso de Vento (Borda) */
+/* Animação: Pulso de Vento */
 @keyframes wind-pulse {
-  0%, 100% { box-shadow: 0 0 20px var(--sky-cloud-shadow); border-color: var(--sky-blue-light); }
-  50% { box-shadow: 0 0 40px var(--sky-cloud-shadow); border-color: var(--sky-blue); }
+  0%, 100% { box-shadow: 0 0 20px rgba(2, 119, 189, 0.1); border-color: var(--sky-blue-light); }
+  50% { box-shadow: 0 0 40px rgba(79, 195, 247, 0.3); border-color: var(--sky-blue); }
+}
+
+/* Animação: Flutuar das Imagens */
+@keyframes cloud-bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 /* CONTAINER PRINCIPAL */
@@ -31,38 +38,37 @@
   width: 95%;
   margin: 50px auto;
   
-  /* Fundo Atmosférico */
   background-color: var(--sky-bg);
   background-image: radial-gradient(circle at 50% 0%, #fff 10%, var(--sky-bg) 80%);
   
   border: 2px solid var(--sky-blue-light);
-  border-radius: 4px;
-  padding: 0 40px; /* Espaço para as nuvens laterais */
+  border-radius: 8px;
+  padding: 0 45px; /* Espaço para as nuvens laterais */
   position: relative;
   
   color: var(--sky-navy);
   font-family: 'Montserrat', sans-serif;
-  box-shadow: 0 20px 60px rgba(0, 33, 71, 0.1);
+  box-shadow: 0 20px 60px rgba(0, 33, 71, 0.15);
   overflow: hidden;
   
   animation: wind-pulse 5s infinite ease-in-out;
 }
 .ryu-container * { box-sizing: border-box; }
 
-/* --- NUVENS LATERAIS (Colunas de Vento) --- */
+/* --- NUVENS LATERAIS (CORRIGIDO) --- */
 .ryu-container::before, .ryu-container::after {
   content: '';
   position: absolute; top: 0; bottom: 0; width: 35px;
-  /* SVG de Nuvem Estilizada (Fluxo Vertical) */
-  background-image: url("data:image/svg+xml,%3Csvg width='35' height='70' viewBox='0 0 35 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 10 Q 17.5 0, 30 10 Q 35 25, 30 40 Q 17.5 50, 5 40 Q 0 25, 5 10 Z' fill='%23b3e5fc' opacity='0.3'/%3E%3Cpath d='M10 30 Q 22.5 20, 35 30 Q 40 45, 35 60 Q 22.5 70, 10 60 Q 5 45, 10 30 Z' fill='%234fc3f7' opacity='0.2'/%3E%3C/svg%3E");
+  /* SVG de Nuvem */
+  background-image: url("data:image/svg+xml,%3Csvg width='35' height='70' viewBox='0 0 35 70' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M5 15 Q 17.5 5, 30 15 Q 35 30, 30 45 Q 17.5 55, 5 45 Q 0 30, 5 15 Z' fill='%23b3e5fc' opacity='0.4'/%3E%3C/svg%3E");
   background-repeat: repeat-y;
+  /* Tamanho vertical travado em 70px para casar com a animação */
+  background-size: 100% 70px; 
   z-index: 10;
-  /* Animação suave de subida */
-  animation: cloud-rise 8s linear infinite;
+  animation: cloud-rise 4s linear infinite;
 }
 .ryu-container::before { left: 0; border-right: 1px solid rgba(255,255,255,0.5); }
 .ryu-container::after { right: 0; border-left: 1px solid rgba(255,255,255,0.5); transform: scaleX(-1); }
-
 
 /* HEADER */
 .ryu-header {
@@ -73,12 +79,10 @@
 }
 
 .ryu-icon-wrapper {
-  width: 50px; height: 50px; margin: 0 auto 15px;
-  background: #fff; border-radius: 50%; border: 2px solid var(--sky-blue);
-  display: flex; align-items: center; justify-content: center;
-  color: var(--sky-deep); filter: drop-shadow(0 4px 8px rgba(2, 119, 189, 0.2));
+  width: 60px; height: 60px; margin: 0 auto 10px;
+  color: var(--sky-blue); filter: drop-shadow(0 5px 10px rgba(79, 195, 247, 0.4));
 }
-.ryu-icon-wrapper svg { width: 30px; height: 30px; fill: currentColor; }
+.ryu-icon-wrapper svg { width: 100%; height: 100%; fill: currentColor; }
 
 .ryu-title {
   font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 2.4em;
@@ -90,104 +94,142 @@
   text-transform: uppercase; letter-spacing: 3px; margin-top: 5px; font-weight: 700;
 }
 
-/* IMAGEM (Janela Panorâmica) */
-.ryu-image-frame {
-  width: 100%; height: 380px; position: relative; margin: 30px 0;
-  border: 3px solid #fff;
-  box-shadow: 0 0 20px rgba(79, 195, 247, 0.3);
-  background: var(--sky-bg); border-radius: 4px; overflow: hidden;
-}
-.ryu-image-frame img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  filter: brightness(1.05) saturate(1.1) contrast(1.05);
-}
-/* Efeito de reflexo/brilho na "janela" */
-.ryu-image-frame::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, transparent 50%, rgba(179, 229, 252, 0.1) 100%);
-  pointer-events: none;
+/* --- GALERIA DE NUVENS (3 IMAGENS) --- */
+.ryu-cloud-gallery {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+  position: relative;
+  margin-bottom: 20px;
 }
 
+/* Configuração Comum das Nuvens */
+.ryu-cloud-img {
+  position: absolute;
+  object-fit: cover;
+  /* Máscara em forma de nuvem */
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17,19C19.76,19 22,16.76 22,14C22,11.24 19.76,9 17,9V9C16.97,6.33 14.73,4.17 12.03,4.25C9.75,4.32 7.77,5.92 7.24,8.12C4.69,8.28 2.5,10.5 2.5,13.25C2.5,16.15 4.7,18.55 7.55,18.75L7.5,19C7.5,19 17,19 17,19Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17,19C19.76,19 22,16.76 22,14C22,11.24 19.76,9 17,9V9C16.97,6.33 14.73,4.17 12.03,4.25C9.75,4.32 7.77,5.92 7.24,8.12C4.69,8.28 2.5,10.5 2.5,13.25C2.5,16.15 4.7,18.55 7.55,18.75L7.5,19C7.5,19 17,19 17,19Z'/%3E%3C/svg%3E");
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  transition: transform 0.3s;
+  filter: brightness(1.05) saturate(1.1);
+  animation: cloud-bob 4s infinite ease-in-out;
+}
 
-/* STATUS (Medidores de Pressão) */
+/* Nuvem Esquerda */
+.cloud-1 {
+  width: 180px; height: 140px;
+  left: 20px; bottom: 20px;
+  z-index: 2;
+  animation-delay: 0s;
+}
+/* Nuvem Central (Maior) */
+.cloud-2 {
+  width: 280px; height: 220px;
+  top: 20px;
+  z-index: 3;
+  animation-delay: 1.5s;
+}
+/* Nuvem Direita */
+.cloud-3 {
+  width: 190px; height: 150px;
+  right: 20px; bottom: 40px;
+  z-index: 1;
+  animation-delay: 0.5s;
+}
+
+.ryu-container:hover .ryu-cloud-img { filter: brightness(1.15) saturate(1.2); }
+
+/* --- STATUS (CÉU E SOL) --- */
 .ryu-stats {
-  padding: 25px 40px; display: flex; flex-direction: column; gap: 20px;
-  background: rgba(255, 255, 255, 0.8); border: 1px solid var(--sky-blue-light);
-  border-radius: 8px; position: relative; z-index: 5;
+  padding: 20px 40px; display: flex; flex-direction: column; gap: 15px;
+  background: rgba(255, 255, 255, 0.8); position: relative; z-index: 5;
+  border: 1px solid var(--sky-blue-light); border-radius: 8px; margin-bottom: 20px;
 }
-
 .jjk-dossier-status-item {
   display: grid; grid-template-columns: 60px 1fr 80px; align-items: center; gap: 15px;
 }
 
+/* Label */
+.jjk-dossier-status-label {
+  font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.85em; text-align: right; letter-spacing: 0.5px;
+}
+/* Cor específica para o Label de HP (Laranja) */
+.jjk-dossier-status-item:first-child .jjk-dossier-status-label { color: var(--sky-sunset-dark); }
+/* Cor específica para o Label de EA (Azul) */
+.jjk-dossier-status-item:last-child .jjk-dossier-status-label { color: var(--sky-deep); }
+
+
+/* Wrapper */
 .jjk-dossier-status-bar-wrapper {
   width: 100%; height: 14px; background: var(--sky-bg);
   border-radius: 14px; overflow: hidden; border: 2px solid #fff;
-  box-shadow: inset 0 2px 4px rgba(0, 33, 71, 0.05), 0 2px 5px rgba(79, 195, 247, 0.2);
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
 }
 .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
 
-/* HP: Azul Céu Brilhante (Pressão) */
+/* HP: Pôr do Sol (Laranja) */
 .jjk-dossier-hp-fill {
-  height: 100%; background: linear-gradient(90deg, var(--sky-blue), var(--sky-deep));
+  height: 100%; background: linear-gradient(90deg, var(--sky-sunset), var(--sky-sunset-dark));
+  border-radius: 14px; box-shadow: 0 0 10px var(--sky-sunset) inset; transition: width 0.5s ease;
+}
+
+/* EA: Céu Azul */
+.jjk-dossier-ea-fill {
+  height: 100%; background: linear-gradient(90deg, var(--sky-blue-light), var(--sky-blue));
   border-radius: 14px; box-shadow: 0 0 10px var(--sky-blue) inset; transition: width 0.5s ease;
 }
-/* EA: Ciano Vento (Altitude) */
-.jjk-dossier-ea-fill {
-  height: 100%; background: linear-gradient(90deg, #80deea, var(--sky-blue));
-  border-radius: 14px; box-shadow: 0 0 10px #80deea inset; transition: width 0.5s ease;
-}
 
-/* Fontes dos Status */
-.jjk-dossier-status-label {
-  font-family: 'Montserrat', sans-serif; font-weight: 800;
-  color: var(--sky-deep); font-size: 0.85em; text-align: right; letter-spacing: 0.5px;
-}
+/* Valor */
 .jjk-dossier-status-value {
-  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.9em;
-  color: var(--sky-navy); text-align: right;
+  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.9em; text-align: right;
 }
+.jjk-dossier-status-item:first-child .jjk-dossier-status-value { color: var(--sky-sunset-dark); }
+.jjk-dossier-status-item:last-child .jjk-dossier-status-value { color: var(--sky-deep); }
 
 
-/* CONTEÚDO (Claro e Arejado) */
+/* CONTEÚDO */
 .ryu-content {
   padding: 30px 40px; font-size: 1.15em; line-height: 1.9;
-  color: var(--sky-navy); text-align: justify; position: relative;
-  background: rgba(255, 255, 255, 0.9);
-  border-top: 1px solid var(--sky-blue-light);
-  border-bottom: 1px solid var(--sky-blue-light);
-  margin: 20px 0; border-radius: 4px; z-index: 5;
+  color: var(--sky-navy); text-align: justify; position: relative; z-index: 5;
+  background: rgba(255, 255, 255, 0.7);
+  border-top: 1px solid var(--sky-blue-light); border-bottom: 1px solid var(--sky-blue-light);
+  margin: 10px 0; border-radius: 4px;
 }
 .ryu-content b { color: var(--sky-deep); font-weight: 800; }
 .ryu-content i { color: var(--sky-blue); font-style: italic; font-weight: 600; }
 
-/* EXTRAS (Dados de Vôo) */
+/* EXTRAS */
 .ryu-extras {
-  margin: 0 40px 30px 40px; padding: 15px 25px;
-  background: var(--sky-bg); border: 2px solid var(--sky-blue);
-  border-radius: 50px; /* Forma de cápsula */
+  margin: 20px 40px 30px 40px; padding: 15px 25px;
+  background: var(--sky-mist); border: 2px solid var(--sky-blue);
+  border-radius: 50px; position: relative; z-index: 5;
   font-size: 0.9em; color: var(--sky-deep);
   display: flex; justify-content: space-between;
   font-family: 'Montserrat', sans-serif; font-weight: 600;
-  box-shadow: 0 5px 15px rgba(79, 195, 247, 0.2); z-index: 5; position: relative;
+  box-shadow: 0 5px 15px rgba(79, 195, 247, 0.2);
 }
 
-/* RODAPÉ */
+/* ASSINATURA */
 .ryu-footer {
-  padding: 30px; text-align: center; background: #fff;
-  border-top: 2px solid var(--sky-blue-light); position: relative; z-index: 11;
+  padding: 30px; text-align: center; background: var(--sky-white);
+  border-top: 1px solid var(--sky-border); position: relative; z-index: 11;
 }
 .ryu-signature::after {
   content: 'Takahashi Ryuuji';
   font-family: 'Pinyon Script', cursive;
   font-size: 3.5em; color: var(--sky-deep);
   font-weight: 400;
-  text-shadow: 2px 2px 4px rgba(255,255,255,0.8), 0 0 20px rgba(79, 195, 247, 0.4);
+  text-shadow: 1px 1px 2px #fff, 0 0 15px rgba(79, 195, 247, 0.3);
 }
 
 @media (max-width: 600px) {
-  .ryu-container { padding: 0 35px; } /* Mantém as laterais visíveis mas menores */
-  .ryu-header, .ryu-content, .ryu-stats { padding: 25px 15px; }
+  .ryu-container { padding: 0 35px; }
+  .ryu-header, .ryu-content, .ryu-stats, .ryu-extras { padding-left: 15px; padding-right: 15px; margin-left: 0; margin-right: 0; }
   .ryu-extras { flex-direction: column; gap: 10px; text-align: center; border-radius: 10px; }
   .jjk-dossier-status-item { grid-template-columns: 1fr; gap: 5px; text-align: center; }
   .jjk-dossier-status-label, .jjk-dossier-status-value { text-align: center; }
