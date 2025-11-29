@@ -1,4 +1,4 @@
-/* --- TEMPLATE: TAKAHASHI RYUUJI v6 (FINAL) --- */
+/* --- TEMPLATE: TAKAHASHI RYUUJI v7 (BIGGER CLOUDS) --- */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800&family=Cinzel:wght@700&family=Pinyon+Script&display=swap');
 
 :root {
@@ -62,10 +62,10 @@
   text-transform: uppercase; letter-spacing: 3px; margin-top: 5px; font-weight: 700;
 }
 
-/* --- GALERIA DE 12 NUVENS (ESPAÇADA) --- */
+/* --- GALERIA DE 12 NUVENS (MAIORES & REAJUSTADAS) --- */
 .ryu-cloud-gallery {
   position: relative;
-  height: 550px; /* Altura maior para espalhar */
+  height: 600px; /* Aumentado para 600px para dar respiro às nuvens maiores */
   margin-bottom: 20px;
   overflow: hidden;
   z-index: 1;
@@ -81,19 +81,19 @@
   opacity: 0.95;
 }
 
-/* Posicionamento Espalhado */
-.c1 { width: 200px; height: 140px; top: 30px; left: 10px; z-index: 3; animation-delay: 0s; }
-.c2 { width: 180px; height: 130px; top: 20px; right: 30px; z-index: 2; animation-delay: 1.5s; }
-.c3 { width: 230px; height: 160px; top: 130px; left: 25%; z-index: 5; animation-delay: 0.5s; }
-.c4 { width: 190px; height: 140px; top: 180px; left: -10px; z-index: 4; animation-delay: 2s; }
-.c5 { width: 160px; height: 120px; top: 220px; right: 15px; z-index: 3; animation-delay: 1s; }
-.c6 { width: 240px; height: 180px; top: 280px; right: 50%; transform: translateX(50%); z-index: 6; animation-delay: 2.5s; }
-.c7 { width: 150px; height: 110px; top: 5px; left: 45%; z-index: 1; animation-delay: 0.8s; }
-.c8 { width: 180px; height: 130px; bottom: 50px; left: 10px; z-index: 7; animation-delay: 1.8s; }
-.c9 { width: 170px; height: 125px; top: 90px; right: 10px; z-index: 2; animation-delay: 3s; }
-.c10 { width: 200px; height: 150px; bottom: 20px; right: 80px; z-index: 4; animation-delay: 0.2s; }
-.c11 { width: 140px; height: 100px; top: 250px; left: 60%; z-index: 3; animation-delay: 2.2s; }
-.c12 { width: 210px; height: 160px; bottom: -20px; left: 30%; z-index: 8; animation-delay: 1.2s; }
+/* Posicionamento Reajustado para Nuvens Maiores */
+.c1 { width: 250px; height: 175px; top: 20px; left: -30px; z-index: 3; animation-delay: 0s; }
+.c2 { width: 225px; height: 160px; top: 10px; right: 20px; z-index: 2; animation-delay: 1.5s; }
+.c3 { width: 280px; height: 200px; top: 150px; left: 20%; z-index: 5; animation-delay: 0.5s; }
+.c4 { width: 240px; height: 175px; top: 220px; left: -40px; z-index: 4; animation-delay: 2s; }
+.c5 { width: 200px; height: 150px; top: 260px; right: 10px; z-index: 3; animation-delay: 1s; }
+.c6 { width: 300px; height: 220px; top: 300px; right: 48%; transform: translateX(50%); z-index: 6; animation-delay: 2.5s; }
+.c7 { width: 190px; height: 140px; top: 0px; left: 42%; z-index: 1; animation-delay: 0.8s; }
+.c8 { width: 225px; height: 160px; bottom: 60px; left: 20px; z-index: 7; animation-delay: 1.8s; }
+.c9 { width: 210px; height: 155px; top: 110px; right: -10px; z-index: 2; animation-delay: 3s; }
+.c10{ width: 250px; height: 185px; bottom: 30px; right: 90px; z-index: 4; animation-delay: 0.2s; }
+.c11{ width: 180px; height: 130px; top: 280px; left: 65%; z-index: 3; animation-delay: 2.2s; }
+.c12{ width: 260px; height: 200px; bottom: -30px; left: 25%; z-index: 8; animation-delay: 1.2s; }
 
 /* STATUS */
 .ryu-stats {
@@ -118,7 +118,7 @@
 /* CONTEÚDO */
 .ryu-content {
   padding: 30px 40px; 
-  font-size: 1.25em; /* Fonte Aumentada */
+  font-size: 1.25em;
   line-height: 1.9;
   color: var(--sky-navy); text-align: justify; position: relative; z-index: 5;
   background: rgba(255, 255, 255, 0.7);
@@ -144,7 +144,7 @@
 }
 .ryu-signature::after {
   content: 'Takahashi Ryuuji'; font-family: 'Pinyon Script', cursive; 
-  font-size: 2.5em; /* Assinatura Reduzida */
+  font-size: 2.5em;
   color: var(--sky-deep); font-weight: 400; text-shadow: 1px 1px 2px #fff, 0 0 15px rgba(79, 195, 247, 0.3);
 }
 
@@ -154,5 +154,5 @@
   .ryu-extras { flex-direction: column; gap: 10px; text-align: center; border-radius: 10px; }
   .jjk-dossier-status-item { grid-template-columns: 1fr; gap: 5px; text-align: center; }
   .jjk-dossier-status-label, .jjk-dossier-status-value { text-align: center; }
-  .ryu-cloud-gallery { height: 350px; }
+  .ryu-cloud-gallery { height: 450px; } /* Aumentado no mobile também */
 }
