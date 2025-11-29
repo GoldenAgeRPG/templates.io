@@ -1,53 +1,55 @@
-/* --- TEMPLATE: CRYSTAL MEMORY (HONKAI INSPIRED) --- */
+/* --- TEMPLATE: CRYSTAL MEMORY (PINK VARIANT) --- */
 
 :root {
-  --crys-bg-dark: #0a0b1a; /* Fundo muito escuro */
-  --crys-indigo: #1a1f4c; /* Azul índigo base */
-  --crys-purple: #6a00ff; /* Roxo vibrante */
-  --crys-cyan: #00f7ff; /* Ciano elétrico para luzes */
-  --crys-text: #e1e6ff; /* Texto claro azulado */
-  --crys-glass: rgba(20, 25, 60, 0.6); /* Efeito de vidro */
+  --crys-bg-dark: #1a0a16;   /* Fundo Roxo Escuro quase preto */
+  --crys-base: #4a004e;      /* Roxo Base */
+  --crys-pink: #ff66cc;      /* Rosa Hot Pink (Principal) */
+  --crys-light: #ffccff;     /* Rosa Claro (Brilho) */
+  --crys-glass: rgba(40, 10, 35, 0.6); /* Vidro Roxo */
+  --crys-text: #ffeefc;      /* Texto Branco Rosado */
 }
 
-/* Animação de flutuar suave para o símbolo */
+/* Animação do Símbolo */
 @keyframes crystal-float {
-  0%, 100% { transform: translateY(0px); filter: drop-shadow(0 0 10px var(--crys-cyan)); }
-  50% { transform: translateY(-5px); filter: drop-shadow(0 0 20px var(--crys-cyan)); }
+  0%, 100% { transform: translateY(0px); filter: drop-shadow(0 0 5px var(--crys-pink)); }
+  50% { transform: translateY(-5px); filter: drop-shadow(0 0 15px var(--crys-pink)); }
 }
 
-/* CONTAINER PRINCIPAL */
+@keyframes pink-pulse {
+  0% { opacity: 0.8; }
+  100% { opacity: 1; box-shadow: 0 0 10px var(--crys-pink); }
+}
+
+/* CONTAINER */
 .crystal-container {
   position: relative;
   max-width: 750px;
   margin: 40px auto;
-  /* Fundo degradê complexo */
-  background: linear-gradient(135deg, var(--crys-bg-dark), var(--crys-indigo));
+  background: linear-gradient(135deg, var(--crys-bg-dark), var(--crys-base));
   color: var(--crys-text);
   font-family: 'Raleway', sans-serif;
   overflow: hidden;
-  /* Borda brilhante externa */
+  /* Bordas Rosa */
   box-shadow: 
-    0 0 20px rgba(0, 247, 255, 0.2), /* Luz Ciano */
-    0 0 0 2px rgba(106, 0, 255, 0.5) inset; /* Borda interna Roxa */
-    /* Recorte nos cantos para parecer uma joia */
+    0 0 20px rgba(255, 102, 204, 0.3), 
+    0 0 0 2px rgba(255, 102, 204, 0.4) inset;
   clip-path: polygon(5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 0% 5%);
-  padding: 4px; /* Espaço para a borda interna */
+  padding: 4px;
 }
 
-/* Wrapper interno para o efeito de vidro */
 .crystal-inner-wrapper {
    background: var(--crys-glass);
-   backdrop-filter: blur(10px); /* O efeito de vidro fosco */
-   -webkit-backdrop-filter: blur(10px);
+   backdrop-filter: blur(8px);
+   -webkit-backdrop-filter: blur(8px);
    clip-path: polygon(5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 0% 5%);
    height: 100%;
 }
 
-/* --- FRAGMENTOS DECORATIVOS (SHARDS) --- */
+/* DECORAÇÃO DE FUNDO */
 .crystal-shard {
   position: absolute;
-  background: linear-gradient(to top, var(--crys-purple), transparent);
-  opacity: 0.3;
+  background: linear-gradient(to top, var(--crys-pink), transparent);
+  opacity: 0.2;
   z-index: 0;
   pointer-events: none;
 }
@@ -59,115 +61,137 @@
 .shard-2 {
   width: 80px; height: 250px; bottom: -30px; right: -10px;
   transform: rotate(-25deg);
-  background: linear-gradient(to bottom, var(--crys-cyan), transparent);
+  background: linear-gradient(to bottom, var(--crys-light), transparent);
   clip-path: polygon(50% 100%, 0% 0%, 100% 0%);
 }
 
-/* --- CABEÇALHO --- */
+/* HEADER */
 .crystal-header {
   display: flex;
   align-items: center;
   padding: 30px;
   position: relative;
   z-index: 2;
-  border-bottom: 2px solid rgba(0, 247, 255, 0.3);
-  background: linear-gradient(90deg, rgba(106, 0, 255, 0.2) 0%, transparent 100%);
+  border-bottom: 2px solid rgba(255, 102, 204, 0.3);
+  background: linear-gradient(90deg, rgba(74, 0, 78, 0.4) 0%, transparent 100%);
 }
 
-/* Símbolo */
-.crystal-symbol-wrapper {
-  flex-shrink: 0;
-  margin-right: 25px;
-}
-.crystal-symbol-img {
+/* SÍMBOLO (Agora no CSS) */
+.crystal-symbol-box {
   width: 80px;
-  height: auto;
+  height: 80px;
+  margin-right: 25px;
+  flex-shrink: 0;
+  /* Imagem definida aqui */
+  background-image: url('https://i.imgur.com/QAvLIFV.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
   animation: crystal-float 4s ease-in-out infinite;
 }
 
-/* Títulos */
-.crystal-title-box {
-  flex-grow: 1;
-}
+.crystal-title-box { flex-grow: 1; }
 .crystal-title {
   font-family: 'Cinzel Decorative', cursive;
-  font-size: 2.2em;
-  margin: 0;
-  color: #fff;
+  font-size: 2.2em; margin: 0; color: #fff;
   text-transform: uppercase;
-  text-shadow: 0 0 10px var(--crys-cyan);
-  letter-spacing: 2px;
-  line-height: 1.1;
+  text-shadow: 0 0 10px var(--crys-pink);
+  letter-spacing: 2px; line-height: 1.1;
 }
 .crystal-subtitle {
   font-family: 'Raleway', sans-serif;
-  font-size: 1em;
-  color: var(--crys-cyan);
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  margin-top: 5px;
-  font-weight: 700;
+  font-size: 1em; color: var(--crys-pink);
+  text-transform: uppercase; letter-spacing: 3px;
+  margin-top: 5px; font-weight: 700;
 }
 
-/* --- CONTEÚDO --- */
+/* --- STATUS BARS (Estilo Cristalino) --- */
+.crystal-stats {
+  padding: 0 40px; margin-top: 20px;
+  display: flex; flex-direction: column; gap: 10px;
+  position: relative; z-index: 2;
+}
+
+/* Scoping para isolar as barras */
+.crystal-container .jjk-dossier-status-item {
+  display: grid; grid-template-columns: 40px 1fr 80px; align-items: center; gap: 10px;
+  margin: 0; padding: 0; background: transparent; border: none;
+}
+
+.crystal-container .jjk-dossier-status-label {
+  font-family: 'Cinzel Decorative', cursive; font-size: 0.9em; 
+  color: var(--crys-light) !important;
+  text-align: right; background: none; border: none; padding: 0;
+}
+
+.crystal-container .jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 12px; 
+  background: rgba(0,0,0,0.5); /* Fundo da calha escuro */
+  border: 1px solid var(--crys-pink);
+  transform: skewX(-20deg); /* Inclinação estilo cristal */
+  overflow: hidden; border-radius: 0; box-shadow: none; margin: 0;
+}
+
+.crystal-container .jjk-dossier-status-bar { 
+  width: 100%; height: 100%; background: transparent; border: none; margin: 0; padding: 0;
+}
+.crystal-container .jjk-dossier-status-bar-fill { 
+  height: 100%; transition: width 0.2s ease; border-radius: 0;
+}
+
+/* Cores das Barras */
+.crystal-container .jjk-dossier-hp-fill {
+  background: linear-gradient(90deg, var(--crys-pink), #ff0066) !important;
+  box-shadow: 0 0 5px var(--crys-pink);
+}
+.crystal-container .jjk-dossier-ea-fill {
+  background: linear-gradient(90deg, var(--crys-light), var(--crys-pink)) !important;
+  animation: pink-pulse 1s infinite alternate;
+}
+
+.crystal-container .jjk-dossier-status-value {
+  font-family: 'Raleway', sans-serif; font-size: 0.8em; font-weight: 700;
+  color: var(--crys-pink) !important; text-align: right; 
+  white-space: nowrap; background: none; border: none;
+}
+
+/* CONTEÚDO */
 .crystal-content {
-  padding: 40px 50px;
-  font-size: 1.1em;
-  line-height: 1.7;
-  text-align: justify;
-  position: relative;
-  z-index: 2;
+  padding: 30px 50px;
+  font-size: 1.1em; line-height: 1.7; text-align: justify;
+  position: relative; z-index: 2;
 }
-
-/* Estilização de Texto */
 .crystal-content b, .crystal-content strong {
-  color: var(--crys-cyan);
-  font-weight: 700;
-  text-shadow: 0 0 5px rgba(0, 247, 255, 0.4);
+  color: var(--crys-pink); font-weight: 700;
+  text-shadow: 0 0 5px rgba(255, 102, 204, 0.4);
 }
 .crystal-content i, .crystal-content em {
-  color: #bbaaff;
-  font-family: 'Cinzel Decorative', cursive;
-  font-size: 0.95em;
+  color: var(--crys-light);
+  font-family: 'Cinzel Decorative', cursive; font-size: 0.95em;
 }
 
-/* --- RODAPÉ & ASSINATURA --- */
+/* RODAPÉ & ASSINATURA */
 .crystal-footer {
-  padding: 20px 50px;
-  text-align: right;
-  position: relative;
-  z-index: 2;
-  border-top: 1px solid rgba(106, 0, 255, 0.3);
-  background: linear-gradient(90deg, transparent 0%, rgba(106, 0, 255, 0.1) 100%);
+  padding: 20px 50px; text-align: right;
+  position: relative; z-index: 2;
+  border-top: 1px solid rgba(255, 102, 204, 0.3);
+  background: linear-gradient(90deg, transparent 0%, rgba(74, 0, 78, 0.2) 100%);
 }
 
 .crystal-signature {
-  font-family: 'Cinzel Decorative', cursive;
-  font-size: 1.2em;
-  color: var(--crys-cyan);
-  letter-spacing: 1px;
+  font-family: 'Cinzel Decorative', cursive; font-size: 1.2em;
+  color: var(--crys-pink); letter-spacing: 1px;
 }
-
-/* NOME TRAVADO NO CSS */
 .crystal-signature::after {
   content: 'Nome a Definir ♦';
-  color: var(--crys-cyan);
-  text-shadow: 0 0 5px var(--crys-purple);
+  color: var(--crys-pink);
+  text-shadow: 0 0 5px var(--crys-base);
 }
 
-/* --- RESPONSIVO --- */
+/* Responsivo */
 @media (max-width: 600px) {
-  .crystal-header {
-    flex-direction: column;
-    text-align: center;
-    padding: 20px;
-  }
-  .crystal-symbol-wrapper {
-    margin-right: 0;
-    margin-bottom: 15px;
-  }
-  .crystal-content, .crystal-footer {
-    padding: 30px 20px;
-  }
+  .crystal-header { flex-direction: column; text-align: center; padding: 20px; }
+  .crystal-symbol-box { margin-right: 0; margin-bottom: 15px; }
+  .crystal-content, .crystal-footer, .crystal-stats { padding: 30px 20px; }
   .crystal-shard { display: none; }
 }
