@@ -1,173 +1,189 @@
-/* --- TEMPLATE: UKEZINHO (CRYSTAL MEMORY - FACETED) --- */
+/* --- TEMPLATE: UKEZINHO (HARMONIOUS CRYSTAL - BLUE/PURPLE) --- */
 
 :root {
-  --uke-bg: #1a0a16;        /* Fundo escuro */
-  --uke-primary: #ff66cc;   /* Rosa Principal */
-  --uke-secondary: #6a00ff; /* Roxo Profundo */
-  --uke-light: #ffeefc;     /* Texto Claro */
-  --uke-glass: rgba(40, 10, 35, 0.7); /* Efeito Vidro */
+  --uke-deep: #0f1126;      /* Fundo Azul Quase Preto */
+  --uke-accent: #00f2ff;    /* Ciano Neon (Luz) */
+  --uke-secondary: #7b2cbf; /* Roxo Real */
+  --uke-glass: rgba(15, 17, 38, 0.7); /* Vidro Escuro */
+  --uke-text: #e0e6ff;      /* Texto Branco Azulado */
 }
 
-/* Animação de Flutuação da Logo */
-@keyframes crystal-float {
-  0%, 100% { transform: translateY(0); filter: drop-shadow(0 0 5px var(--uke-primary)); }
-  50% { transform: translateY(-5px); filter: drop-shadow(0 0 15px var(--uke-primary)); }
+/* Animação Suave da Logo */
+@keyframes crystal-pulse {
+  0% { filter: drop-shadow(0 0 2px var(--uke-accent)); }
+  50% { filter: drop-shadow(0 0 8px var(--uke-accent)); }
+  100% { filter: drop-shadow(0 0 2px var(--uke-accent)); }
 }
 
-/* CONTAINER PRINCIPAL (Com Textura Facetada) */
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* CONTAINER PRINCIPAL */
 .ukezinho-container {
   box-sizing: border-box; max-width: 720px; width: 95%; margin: 40px auto;
   
-  /* Textura de Cristal (Facetas) */
-  background-color: var(--uke-bg);
+  /* Textura de Cristal Suave */
+  background-color: var(--uke-deep);
   background-image: 
-    /* Luzes Diagonais */
-    linear-gradient(125deg, rgba(255, 102, 204, 0.1) 0%, transparent 40%, rgba(255, 102, 204, 0.05) 60%),
-    linear-gradient(215deg, rgba(106, 0, 255, 0.15) 0%, transparent 50%),
-    /* Arestas Cruzadas (A malha do cristal) */
-    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 40px),
-    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 40px),
-    /* Fundo Base */
-    linear-gradient(180deg, rgba(26, 10, 22, 0.9), #2a0033);
-    
-  background-attachment: fixed; /* Efeito de profundidade ao rolar */
-  background-size: cover;
-
-  /* Borda brilhante e Clip-path */
-  border: 1px solid rgba(255, 102, 204, 0.5);
+    linear-gradient(135deg, rgba(123, 44, 191, 0.1) 0%, transparent 40%),
+    linear-gradient(225deg, rgba(0, 242, 255, 0.1) 0%, transparent 40%),
+    /* Facetas sutis */
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 60px);
+  
+  /* Borda Fina e Brilhante (Harmonia) */
+  border: 1px solid rgba(0, 242, 255, 0.3);
   box-shadow: 
-    0 0 20px rgba(255, 102, 204, 0.2), 
-    inset 0 0 30px rgba(106, 0, 255, 0.1);
+    0 0 15px rgba(0, 242, 255, 0.1),
+    inset 0 0 40px rgba(123, 44, 191, 0.1);
     
-  color: var(--uke-light); 
+  color: var(--uke-text); 
   font-family: 'Raleway', sans-serif;
   position: relative; padding: 0; overflow: hidden;
-  clip-path: polygon(2% 0, 98% 0, 100% 2%, 100% 98%, 98% 100%, 2% 100%, 0 98%, 0 2%);
+  
+  /* Canto chanfrado sutil */
+  clip-path: polygon(
+    20px 0, 100% 0, 
+    100% calc(100% - 20px), calc(100% - 20px) 100%, 
+    0 100%, 0 20px
+  );
 }
 .ukezinho-container * { box-sizing: border-box; }
 
 /* HEADER */
 .ukezinho-header {
-  padding: 20px 30px;
-  background: linear-gradient(90deg, rgba(106, 0, 255, 0.3) 0%, transparent 100%);
-  border-bottom: 1px solid var(--uke-primary);
-  display: flex; align-items: center; gap: 20px;
+  padding: 25px 40px;
+  /* Gradiente suave em vez de cor sólida */
+  background: linear-gradient(90deg, rgba(123, 44, 191, 0.2) 0%, transparent 100%);
+  border-bottom: 1px solid rgba(0, 242, 255, 0.2);
+  display: flex; align-items: center; gap: 25px;
 }
 
 /* LOGO INJETADA VIA CSS */
 .ukezinho-header::before {
   content: '';
-  display: block; width: 70px; height: 70px;
+  display: block; width: 60px; height: 60px;
   background-image: url('https://i.imgur.com/QAvLIFV.png');
   background-size: contain; background-repeat: no-repeat; background-position: center;
-  animation: crystal-float 4s ease-in-out infinite;
+  animation: crystal-pulse 3s infinite;
   flex-shrink: 0;
 }
 
 .ukezinho-title-wrapper { display: flex; flex-direction: column; }
 
 .ukezinho-title {
-  font-family: 'Cinzel Decorative', cursive; font-size: 2em; color: #fff;
+  font-family: 'Cinzel Decorative', cursive; font-size: 2.2em; color: #fff;
   text-transform: uppercase; margin: 0; 
-  text-shadow: 0 0 10px var(--uke-primary); line-height: 1;
+  text-shadow: 0 0 10px rgba(0, 242, 255, 0.5); 
+  line-height: 1.1; letter-spacing: 1px;
 }
 .ukezinho-subtitle {
-  font-family: 'Raleway', sans-serif; font-size: 0.9em; color: var(--uke-primary);
-  text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; font-weight: 700;
+  font-family: 'Raleway', sans-serif; font-size: 0.85em; color: var(--uke-accent);
+  text-transform: uppercase; letter-spacing: 3px; margin-top: 5px; font-weight: 600;
 }
 
 /* IMAGEM */
 .ukezinho-image-frame {
-  width: 100%; height: 300px; position: relative;
-  border-bottom: 1px solid var(--uke-primary);
+  width: 100%; height: 320px; position: relative;
+  border-bottom: 1px solid rgba(0, 242, 255, 0.2);
   background: #000;
 }
 .ukezinho-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  opacity: 0.9;
+  /* Máscara suave na parte inferior da imagem */
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
 }
 
-/* STATUS (ISOLAMENTO DO SCRIPT) */
+/* STATUS */
 .ukezinho-stats {
-  padding: 15px 30px; background: rgba(0,0,0,0.3);
-  display: flex; flex-direction: column; gap: 10px;
-  border-bottom: 1px dashed rgba(255, 102, 204, 0.3);
+  padding: 20px 40px; 
+  display: flex; flex-direction: column; gap: 12px;
+  position: relative;
+  /* Efeito de brilho sutil no fundo */
+  background: radial-gradient(circle at center, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
 }
 
-/* Scoping: Só afeta jjk-dossier dentro do ukezinho-container */
 .ukezinho-container .jjk-dossier-status-item {
-  display: grid; grid-template-columns: 40px 1fr 80px; align-items: center; gap: 10px;
+  display: grid; grid-template-columns: 40px 1fr 80px; align-items: center; gap: 15px;
   margin: 0; padding: 0; background: transparent; border: none;
 }
 
 .ukezinho-container .jjk-dossier-status-label {
-  font-family: 'Cinzel Decorative', cursive; font-size: 0.8em; 
-  color: var(--uke-primary) !important; text-align: right;
+  font-family: 'Cinzel Decorative', cursive; font-size: 0.9em; 
+  color: var(--uke-accent) !important; text-align: right;
+  text-shadow: 0 0 5px rgba(0, 242, 255, 0.5);
 }
 
+/* Wrapper da barra - Tubo de vidro */
 .ukezinho-container .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 10px; background: rgba(0,0,0,0.5);
-  border: 1px solid var(--uke-secondary);
-  transform: skewX(-20deg); 
-  overflow: hidden; border-radius: 0; margin: 0;
+  width: 100%; height: 8px; 
+  background: rgba(0,0,0,0.4);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px; /* Arredondado = Harmonioso */
+  overflow: hidden; margin: 0; box-shadow: inset 0 0 5px #000;
+  transform: none; /* Sem skew brutalista */
 }
 
 .ukezinho-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; margin: 0; padding: 0; }
-.ukezinho-container .jjk-dossier-status-bar-fill { height: 100%; transition: width 0.2s ease; border-radius: 0; }
+.ukezinho-container .jjk-dossier-status-bar-fill { height: 100%; transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1); border-radius: 10px; }
 
-/* Cores das Barras (Sobrescreve original) */
+/* Cores das Barras */
 .ukezinho-container .jjk-dossier-hp-fill {
-  background: linear-gradient(90deg, var(--uke-secondary), var(--uke-primary)) !important;
-  box-shadow: 0 0 5px var(--uke-primary);
+  background: linear-gradient(90deg, var(--uke-secondary), #c77dff) !important;
+  box-shadow: 0 0 10px var(--uke-secondary);
 }
 .ukezinho-container .jjk-dossier-ea-fill {
-  background: linear-gradient(90deg, #fff, var(--uke-primary)) !important;
+  background: linear-gradient(90deg, var(--uke-accent), #0099ff) !important;
+  box-shadow: 0 0 10px var(--uke-accent);
 }
 
 .ukezinho-container .jjk-dossier-status-value {
-  font-family: 'Raleway', sans-serif; font-size: 0.8em; color: #fff !important; 
-  text-align: right; white-space: nowrap;
+  font-family: 'Raleway', sans-serif; font-size: 0.8em; color: rgba(255,255,255,0.8) !important; 
+  text-align: right; white-space: nowrap; font-weight: 300;
 }
 
 /* CONTEÚDO */
 .ukezinho-content {
-  padding: 30px; font-size: 1.1em; line-height: 1.6; color: var(--uke-light);
-  text-align: justify; background: var(--uke-glass);
-  backdrop-filter: blur(5px);
+  padding: 30px 40px; font-size: 1.1em; line-height: 1.8; color: var(--uke-text);
+  text-align: justify; 
+  background: rgba(255, 255, 255, 0.02); /* Muito sutil */
+  border-top: 1px solid rgba(255,255,255,0.05);
 }
 .ukezinho-content b {
-  color: var(--uke-primary); font-weight: 700;
-  text-shadow: 0 0 5px rgba(255, 102, 204, 0.3);
+  color: var(--uke-accent); font-weight: 600;
 }
 .ukezinho-content i {
-  color: #dcbdfc; font-family: 'Cinzel Decorative', cursive; font-size: 0.95em;
+  color: #bfa2db; font-family: 'Cinzel Decorative', cursive; font-size: 0.95em;
 }
 
 /* EXTRAS */
 .ukezinho-extras {
-  margin: 0 30px 20px 30px; padding: 15px; 
-  background: rgba(106, 0, 255, 0.1); 
-  border: 1px solid var(--uke-secondary);
-  color: var(--uke-light); font-size: 0.9em;
+  margin: 0 40px 20px 40px; padding: 15px 20px; 
+  background: rgba(15, 17, 38, 0.6); 
+  border: 1px solid rgba(123, 44, 191, 0.3);
+  border-radius: 4px;
+  color: var(--uke-text); font-size: 0.9em;
 }
 
 /* RODAPÉ */
 .ukezinho-footer {
-  text-align: right; padding: 15px 30px; 
-  background: linear-gradient(90deg, transparent, rgba(106, 0, 255, 0.2));
-  border-top: 1px solid var(--uke-primary);
+  text-align: right; padding: 15px 40px; 
+  background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.05));
+  border-top: 1px solid rgba(0, 242, 255, 0.2);
 }
 
-/* Assinatura Travada */
+/* Assinatura */
 .ukezinho-signature::after {
   content: 'Nome a Definir ♦';
-  font-family: 'Cinzel Decorative', cursive; font-size: 1.2em; 
-  color: var(--uke-primary); text-transform: uppercase; letter-spacing: 1px;
-  text-shadow: 0 0 5px var(--uke-secondary);
+  font-family: 'Cinzel Decorative', cursive; font-size: 1.1em; 
+  color: var(--uke-secondary); text-transform: uppercase; letter-spacing: 1px;
+  text-shadow: 0 0 5px rgba(123, 44, 191, 0.5);
 }
 
 /* Responsivo */
 @media (max-width: 600px) {
   .ukezinho-header { flex-direction: column; text-align: center; }
-  .ukezinho-content, .ukezinho-stats, .ukezinho-extras { padding-left: 15px; padding-right: 15px; }
+  .ukezinho-content, .ukezinho-stats, .ukezinho-extras { padding-left: 20px; padding-right: 20px; }
 }
