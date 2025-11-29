@@ -173,7 +173,7 @@
 
 /* Assinatura */
 .ukezinho-signature::after {
-  content: 'Nome a Definir ♦';
+  content: 'Tsukiyo Shonin ♦';
   font-family: 'Cinzel Decorative', cursive; font-size: 1.1em; 
   color: var(--uke-purple); text-transform: uppercase; letter-spacing: 1px;
 }
