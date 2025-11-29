@@ -1,108 +1,97 @@
-/* --- TEMPLATE: UKEZINHO (HARMONIOUS CRYSTAL - BLUE/PURPLE) --- */
+/* --- TEMPLATE: UKEZINHO (SOFT PINK CRYSTAL) --- */
 
 :root {
-  --uke-deep: #0f1126;      /* Fundo Azul Quase Preto */
-  --uke-accent: #00f2ff;    /* Ciano Neon (Luz) */
-  --uke-secondary: #7b2cbf; /* Roxo Real */
-  --uke-glass: rgba(15, 17, 38, 0.7); /* Vidro Escuro */
-  --uke-text: #e0e6ff;      /* Texto Branco Azulado */
+  --uke-bg-soft: #f8e1f4;   /* Rosa Claro Pastel Fundo */
+  --uke-pink: #ff99cc;      /* Rosa Médio (Destaque) */
+  --uke-purple: #c4a7e7;    /* Lilás Suave */
+  --uke-cyan: #aefeff;      /* Ciano Pálido (Brilho) */
+  --uke-text: #5a3a5a;      /* Texto Roxo Escuro (Legibilidade) */
+  --uke-glass-light: rgba(255, 240, 250, 0.7); /* Vidro Claro */
 }
 
-/* Animação Suave da Logo */
-@keyframes crystal-pulse {
-  0% { filter: drop-shadow(0 0 2px var(--uke-accent)); }
-  50% { filter: drop-shadow(0 0 8px var(--uke-accent)); }
-  100% { filter: drop-shadow(0 0 2px var(--uke-accent)); }
+/* Animação de Brilho Iridescente Suave */
+@keyframes soft-shimmer {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
-}
-
-/* CONTAINER PRINCIPAL */
+/* CONTAINER PRINCIPAL (Cristal Rosa Suave) */
 .ukezinho-container {
   box-sizing: border-box; max-width: 720px; width: 95%; margin: 40px auto;
   
-  /* Textura de Cristal Suave */
-  background-color: var(--uke-deep);
+  /* Fundo Base Suave */
+  background-color: var(--uke-bg-soft);
+  /* Gradiente Iridescente inspirado na imagem */
   background-image: 
-    linear-gradient(135deg, rgba(123, 44, 191, 0.1) 0%, transparent 40%),
-    linear-gradient(225deg, rgba(0, 242, 255, 0.1) 0%, transparent 40%),
-    /* Facetas sutis */
-    repeating-linear-gradient(45deg, rgba(255,255,255,0.01) 0px, rgba(255,255,255,0.01) 1px, transparent 1px, transparent 60px);
+    linear-gradient(120deg, rgba(255, 153, 204, 0.2), rgba(196, 167, 231, 0.2), rgba(174, 254, 255, 0.2)),
+    radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.6) 0%, transparent 70%);
+  background-size: 200% 200%;
+  animation: soft-shimmer 10s ease infinite;
   
-  /* Borda Fina e Brilhante (Harmonia) */
-  border: 1px solid rgba(0, 242, 255, 0.3);
+  /* Borda e Sombra Suaves (Sem brutalismo) */
+  border: 1px solid rgba(255, 153, 204, 0.4);
+  border-radius: 15px; /* Cantos arredondados = Harmonia */
   box-shadow: 
-    0 0 15px rgba(0, 242, 255, 0.1),
-    inset 0 0 40px rgba(123, 44, 191, 0.1);
+    0 10px 30px rgba(255, 153, 204, 0.3), /* Glow Rosa */
+    inset 0 0 60px rgba(255, 255, 255, 0.5); /* Luz Interna */
     
   color: var(--uke-text); 
   font-family: 'Raleway', sans-serif;
   position: relative; padding: 0; overflow: hidden;
-  
-  /* Canto chanfrado sutil */
-  clip-path: polygon(
-    20px 0, 100% 0, 
-    100% calc(100% - 20px), calc(100% - 20px) 100%, 
-    0 100%, 0 20px
-  );
 }
 .ukezinho-container * { box-sizing: border-box; }
 
 /* HEADER */
 .ukezinho-header {
   padding: 25px 40px;
-  /* Gradiente suave em vez de cor sólida */
-  background: linear-gradient(90deg, rgba(123, 44, 191, 0.2) 0%, transparent 100%);
-  border-bottom: 1px solid rgba(0, 242, 255, 0.2);
+  /* Gradiente Rosa Transparente */
+  background: linear-gradient(to right, rgba(255, 153, 204, 0.3), rgba(255, 255, 255, 0.1));
+  border-bottom: 1px solid rgba(255, 153, 204, 0.3);
   display: flex; align-items: center; gap: 25px;
 }
 
-/* LOGO INJETADA VIA CSS */
+/* LOGO (Injetada) */
 .ukezinho-header::before {
   content: '';
-  display: block; width: 60px; height: 60px;
+  display: block; width: 65px; height: 65px;
   background-image: url('https://i.imgur.com/QAvLIFV.png');
   background-size: contain; background-repeat: no-repeat; background-position: center;
-  animation: crystal-pulse 3s infinite;
+  /* Filtro para deixar a logo branca com brilho rosa */
+  filter: brightness(1.2) drop-shadow(0 0 8px var(--uke-pink));
   flex-shrink: 0;
 }
 
 .ukezinho-title-wrapper { display: flex; flex-direction: column; }
 
 .ukezinho-title {
-  font-family: 'Cinzel Decorative', cursive; font-size: 2.2em; color: #fff;
+  font-family: 'Cinzel Decorative', cursive; font-size: 2.2em; color: #6b4b6b;
   text-transform: uppercase; margin: 0; 
-  text-shadow: 0 0 10px rgba(0, 242, 255, 0.5); 
+  text-shadow: 0 0 10px rgba(255, 153, 204, 0.6);
   line-height: 1.1; letter-spacing: 1px;
 }
 .ukezinho-subtitle {
-  font-family: 'Raleway', sans-serif; font-size: 0.85em; color: var(--uke-accent);
-  text-transform: uppercase; letter-spacing: 3px; margin-top: 5px; font-weight: 600;
+  font-family: 'Raleway', sans-serif; font-size: 0.9em; color: var(--uke-pink);
+  text-transform: uppercase; letter-spacing: 3px; margin-top: 5px; font-weight: 700;
 }
 
 /* IMAGEM */
 .ukezinho-image-frame {
   width: 100%; height: 320px; position: relative;
-  border-bottom: 1px solid rgba(0, 242, 255, 0.2);
-  background: #000;
+  border-bottom: 1px solid rgba(255, 153, 204, 0.3);
+  background: #fff;
+  box-shadow: 0 5px 15px rgba(255, 153, 204, 0.2);
 }
 .ukezinho-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  /* Máscara suave na parte inferior da imagem */
-  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  opacity: 0.95;
 }
 
-/* STATUS */
+/* STATUS (Harmonioso) */
 .ukezinho-stats {
   padding: 20px 40px; 
-  display: flex; flex-direction: column; gap: 12px;
-  position: relative;
-  /* Efeito de brilho sutil no fundo */
-  background: radial-gradient(circle at center, rgba(0, 242, 255, 0.05) 0%, transparent 70%);
+  display: flex; flex-direction: column; gap: 15px;
+  background: rgba(255, 255, 255, 0.3); /* Fundo claro */
 }
 
 .ukezinho-container .jjk-dossier-status-item {
@@ -112,78 +101,79 @@
 
 .ukezinho-container .jjk-dossier-status-label {
   font-family: 'Cinzel Decorative', cursive; font-size: 0.9em; 
-  color: var(--uke-accent) !important; text-align: right;
-  text-shadow: 0 0 5px rgba(0, 242, 255, 0.5);
+  color: var(--uke-pink) !important; text-align: right;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
 }
 
-/* Wrapper da barra - Tubo de vidro */
+/* Wrapper da barra - Suave e Arredondado */
 .ukezinho-container .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 8px; 
-  background: rgba(0,0,0,0.4);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 10px; /* Arredondado = Harmonioso */
-  overflow: hidden; margin: 0; box-shadow: inset 0 0 5px #000;
-  transform: none; /* Sem skew brutalista */
+  width: 100%; height: 10px; 
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(255, 153, 204, 0.3);
+  border-radius: 20px; /* Bem redondo */
+  overflow: hidden; margin: 0; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+  transform: none;
 }
 
 .ukezinho-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; margin: 0; padding: 0; }
-.ukezinho-container .jjk-dossier-status-bar-fill { height: 100%; transition: width 0.4s cubic-bezier(0.25, 0.1, 0.25, 1); border-radius: 10px; }
+.ukezinho-container .jjk-dossier-status-bar-fill { height: 100%; transition: width 0.4s ease; border-radius: 20px; }
 
-/* Cores das Barras */
+/* Cores das Barras (Rosa e Ciano Suave) */
 .ukezinho-container .jjk-dossier-hp-fill {
-  background: linear-gradient(90deg, var(--uke-secondary), #c77dff) !important;
-  box-shadow: 0 0 10px var(--uke-secondary);
+  background: linear-gradient(90deg, var(--uke-pink), #ffb3db) !important;
+  box-shadow: 0 0 8px var(--uke-pink);
 }
 .ukezinho-container .jjk-dossier-ea-fill {
-  background: linear-gradient(90deg, var(--uke-accent), #0099ff) !important;
-  box-shadow: 0 0 10px var(--uke-accent);
+  background: linear-gradient(90deg, var(--uke-cyan), #d0ffff) !important;
+  box-shadow: 0 0 8px var(--uke-cyan);
 }
 
 .ukezinho-container .jjk-dossier-status-value {
-  font-family: 'Raleway', sans-serif; font-size: 0.8em; color: rgba(255,255,255,0.8) !important; 
-  text-align: right; white-space: nowrap; font-weight: 300;
+  font-family: 'Raleway', sans-serif; font-size: 0.85em; color: var(--uke-text) !important; 
+  text-align: right; white-space: nowrap; font-weight: 600;
 }
 
 /* CONTEÚDO */
 .ukezinho-content {
   padding: 30px 40px; font-size: 1.1em; line-height: 1.8; color: var(--uke-text);
   text-align: justify; 
-  background: rgba(255, 255, 255, 0.02); /* Muito sutil */
-  border-top: 1px solid rgba(255,255,255,0.05);
+  background: var(--uke-glass-light); /* Vidro claro */
+  border-top: 1px solid rgba(255, 153, 204, 0.2);
 }
 .ukezinho-content b {
-  color: var(--uke-accent); font-weight: 600;
+  color: var(--uke-pink); font-weight: 700;
 }
 .ukezinho-content i {
-  color: #bfa2db; font-family: 'Cinzel Decorative', cursive; font-size: 0.95em;
+  color: var(--uke-purple); font-family: 'Cinzel Decorative', cursive; font-size: 0.95em;
 }
 
 /* EXTRAS */
 .ukezinho-extras {
-  margin: 0 40px 20px 40px; padding: 15px 20px; 
-  background: rgba(15, 17, 38, 0.6); 
-  border: 1px solid rgba(123, 44, 191, 0.3);
-  border-radius: 4px;
-  color: var(--uke-text); font-size: 0.9em;
+  margin: 0 40px 20px 40px; padding: 15px 25px; 
+  background: rgba(255, 255, 255, 0.5); 
+  border: 1px solid rgba(255, 153, 204, 0.4);
+  border-radius: 10px;
+  color: var(--uke-text); font-size: 0.95em;
+  box-shadow: 0 5px 10px rgba(255, 153, 204, 0.1);
 }
 
 /* RODAPÉ */
 .ukezinho-footer {
-  text-align: right; padding: 15px 40px; 
-  background: linear-gradient(90deg, transparent, rgba(0, 242, 255, 0.05));
-  border-top: 1px solid rgba(0, 242, 255, 0.2);
+  text-align: right; padding: 20px 40px; 
+  background: linear-gradient(to left, rgba(255, 153, 204, 0.2), transparent);
+  border-top: 1px solid rgba(255, 153, 204, 0.3);
 }
 
 /* Assinatura */
 .ukezinho-signature::after {
   content: 'Nome a Definir ♦';
   font-family: 'Cinzel Decorative', cursive; font-size: 1.1em; 
-  color: var(--uke-secondary); text-transform: uppercase; letter-spacing: 1px;
-  text-shadow: 0 0 5px rgba(123, 44, 191, 0.5);
+  color: var(--uke-pink); text-transform: uppercase; letter-spacing: 1px;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
 }
 
 /* Responsivo */
 @media (max-width: 600px) {
-  .ukezinho-header { flex-direction: column; text-align: center; }
-  .ukezinho-content, .ukezinho-stats, .ukezinho-extras { padding-left: 20px; padding-right: 20px; }
+  .ukezinho-header { flex-direction: column; text-align: center; gap: 15px; }
+  .ukezinho-content, .ukezinho-stats, .ukezinho-extras { padding-left: 25px; padding-right: 25px; }
 }
