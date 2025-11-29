@@ -1,4 +1,4 @@
-/* --- TEMPLATE: TAKAHASHI RYUUJI v5 (12 CLOUDS CHAOS) --- */
+/* --- TEMPLATE: TAKAHASHI RYUUJI v6 (FINAL) --- */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;800&family=Cinzel:wght@700&family=Pinyon+Script&display=swap');
 
 :root {
@@ -8,26 +8,16 @@
   --sky-blue: #4fc3f7;
   --sky-deep: #0277bd;
   --sky-navy: #002147;
-  /* Novas Cores de Status */
-  --sky-hp-light: #73b4d1; /* Azul Pálido (HP) */
+  --sky-hp-light: #e1f5fe;
   --sky-hp-dark: #81d4fa;
-  --sky-ea-light: #0288d1; /* Azul Profundo (EA) */
+  --sky-ea-light: #0288d1;
   --sky-ea-dark: #01579b;
 }
 
 /* Animações */
-@keyframes cloud-rise {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 -70px; }
-}
-@keyframes wind-pulse {
-  0%, 100% { box-shadow: 0 0 20px rgba(2, 119, 189, 0.1); border-color: var(--sky-blue-light); }
-  50% { box-shadow: 0 0 40px rgba(79, 195, 247, 0.3); border-color: var(--sky-blue); }
-}
-@keyframes cloud-bob {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-8px); }
-}
+@keyframes cloud-rise { 0% { background-position: 0 0; } 100% { background-position: 0 -70px; } }
+@keyframes wind-pulse { 0%, 100% { box-shadow: 0 0 20px rgba(2, 119, 189, 0.1); border-color: var(--sky-blue-light); } 50% { box-shadow: 0 0 40px rgba(79, 195, 247, 0.3); border-color: var(--sky-blue); } }
+@keyframes cloud-bob { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
 
 /* CONTAINER */
 .ryu-container {
@@ -72,10 +62,10 @@
   text-transform: uppercase; letter-spacing: 3px; margin-top: 5px; font-weight: 700;
 }
 
-/* --- GALERIA DE 12 NUVENS (CAOS) --- */
+/* --- GALERIA DE 12 NUVENS (ESPAÇADA) --- */
 .ryu-cloud-gallery {
   position: relative;
-  height: 450px; /* Altura aumentada para caber o caos */
+  height: 550px; /* Altura maior para espalhar */
   margin-bottom: 20px;
   overflow: hidden;
   z-index: 1;
@@ -83,7 +73,6 @@
 
 .ryu-cloud-img {
   position: absolute; object-fit: cover;
-  /* Máscara de Nuvem */
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17,19C19.76,19 22,16.76 22,14C22,11.24 19.76,9 17,9V9C16.97,6.33 14.73,4.17 12.03,4.25C9.75,4.32 7.77,5.92 7.24,8.12C4.69,8.28 2.5,10.5 2.5,13.25C2.5,16.15 4.7,18.55 7.55,18.75L7.5,19C7.5,19 17,19 17,19Z'/%3E%3C/svg%3E");
   mask-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M17,19C19.76,19 22,16.76 22,14C22,11.24 19.76,9 17,9V9C16.97,6.33 14.73,4.17 12.03,4.25C9.75,4.32 7.77,5.92 7.24,8.12C4.69,8.28 2.5,10.5 2.5,13.25C2.5,16.15 4.7,18.55 7.55,18.75L7.5,19C7.5,19 17,19 17,19Z'/%3E%3C/svg%3E");
   -webkit-mask-size: 100% 100%; mask-size: 100% 100%; -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
@@ -92,22 +81,21 @@
   opacity: 0.95;
 }
 
-/* Posicionamento Caótico das 12 Nuvens */
-.c1 { width: 220px; height: 160px; top: 20px; left: -20px; z-index: 3; animation-delay: 0s; }
-.c2 { width: 180px; height: 130px; top: 10px; right: 40px; z-index: 2; animation-delay: 1.5s; }
-.c3 { width: 250px; height: 180px; top: 100px; left: 30%; z-index: 5; animation-delay: 0.5s; }
-.c4 { width: 200px; height: 150px; bottom: 40px; left: 10px; z-index: 4; animation-delay: 2s; }
-.c5 { width: 160px; height: 120px; bottom: 80px; right: 20px; z-index: 3; animation-delay: 1s; }
-.c6 { width: 280px; height: 200px; top: 180px; right: -30px; z-index: 6; animation-delay: 2.5s; }
+/* Posicionamento Espalhado */
+.c1 { width: 200px; height: 140px; top: 30px; left: 10px; z-index: 3; animation-delay: 0s; }
+.c2 { width: 180px; height: 130px; top: 20px; right: 30px; z-index: 2; animation-delay: 1.5s; }
+.c3 { width: 230px; height: 160px; top: 130px; left: 25%; z-index: 5; animation-delay: 0.5s; }
+.c4 { width: 190px; height: 140px; top: 180px; left: -10px; z-index: 4; animation-delay: 2s; }
+.c5 { width: 160px; height: 120px; top: 220px; right: 15px; z-index: 3; animation-delay: 1s; }
+.c6 { width: 240px; height: 180px; top: 280px; right: 50%; transform: translateX(50%); z-index: 6; animation-delay: 2.5s; }
 .c7 { width: 150px; height: 110px; top: 5px; left: 45%; z-index: 1; animation-delay: 0.8s; }
-.c8 { width: 190px; height: 140px; bottom: 10px; left: 40%; z-index: 7; animation-delay: 1.8s; }
-.c9 { width: 170px; height: 125px; top: 150px; left: 10px; z-index: 2; animation-delay: 3s; }
-.c10 { width: 210px; height: 155px; bottom: 120px; right: 100px; z-index: 4; animation-delay: 0.2s; }
-.c11 { width: 140px; height: 100px; top: 60px; right: -10px; z-index: 3; animation-delay: 2.2s; }
-.c12 { width: 230px; height: 170px; bottom: -10px; right: 20%; z-index: 8; animation-delay: 1.2s; }
+.c8 { width: 180px; height: 130px; bottom: 50px; left: 10px; z-index: 7; animation-delay: 1.8s; }
+.c9 { width: 170px; height: 125px; top: 90px; right: 10px; z-index: 2; animation-delay: 3s; }
+.c10 { width: 200px; height: 150px; bottom: 20px; right: 80px; z-index: 4; animation-delay: 0.2s; }
+.c11 { width: 140px; height: 100px; top: 250px; left: 60%; z-index: 3; animation-delay: 2.2s; }
+.c12 { width: 210px; height: 160px; bottom: -20px; left: 30%; z-index: 8; animation-delay: 1.2s; }
 
-
-/* STATUS (Novas Cores) */
+/* STATUS */
 .ryu-stats {
   padding: 20px 40px; display: flex; flex-direction: column; gap: 15px;
   background: rgba(255, 255, 255, 0.8); position: relative; z-index: 5;
@@ -116,36 +104,22 @@
 .jjk-dossier-status-item { display: grid; grid-template-columns: 60px 1fr 80px; align-items: center; gap: 15px; }
 .jjk-dossier-status-label { font-family: 'Montserrat', sans-serif; font-weight: 800; font-size: 0.85em; text-align: right; letter-spacing: 0.5px; }
 .jjk-dossier-status-value { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.9em; text-align: right; }
-
-/* Labels Colors */
 .jjk-dossier-status-item:first-child .jjk-dossier-status-label { color: var(--sky-hp-dark); }
 .jjk-dossier-status-item:last-child .jjk-dossier-status-label { color: var(--sky-ea-dark); }
-
 .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 14px; background: var(--sky-bg);
-  border-radius: 14px; overflow: hidden; border: 2px solid #fff;
-  box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+  width: 100%; height: 14px; background: var(--sky-bg); border-radius: 14px; overflow: hidden; border: 2px solid #fff; box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
 }
 .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
-
-/* HP: Azul Pálido/Fraco */
-.jjk-dossier-hp-fill {
-  height: 100%; background: linear-gradient(90deg, var(--sky-hp-light), var(--sky-hp-dark));
-  border-radius: 14px; box-shadow: 0 0 10px var(--sky-hp-light) inset; transition: width 0.5s ease;
-}
-/* EA: Azul Forte/Profundo */
-.jjk-dossier-ea-fill {
-  height: 100%; background: linear-gradient(90deg, var(--sky-ea-light), var(--sky-ea-dark));
-  border-radius: 14px; box-shadow: 0 0 10px var(--sky-ea-light) inset; transition: width 0.5s ease;
-}
-/* Values Colors */
+.jjk-dossier-hp-fill { height: 100%; background: linear-gradient(90deg, var(--sky-hp-light), var(--sky-hp-dark)); border-radius: 14px; box-shadow: 0 0 10px var(--sky-hp-light) inset; transition: width 0.5s ease; }
+.jjk-dossier-ea-fill { height: 100%; background: linear-gradient(90deg, var(--sky-ea-light), var(--sky-ea-dark)); border-radius: 14px; box-shadow: 0 0 10px var(--sky-ea-light) inset; transition: width 0.5s ease; }
 .jjk-dossier-status-item:first-child .jjk-dossier-status-value { color: var(--sky-hp-dark); }
 .jjk-dossier-status-item:last-child .jjk-dossier-status-value { color: var(--sky-ea-dark); }
 
-
-/* CONTEÚDO & EXTRAS */
+/* CONTEÚDO */
 .ryu-content {
-  padding: 30px 40px; font-size: 1.15em; line-height: 1.9;
+  padding: 30px 40px; 
+  font-size: 1.25em; /* Fonte Aumentada */
+  line-height: 1.9;
   color: var(--sky-navy); text-align: justify; position: relative; z-index: 5;
   background: rgba(255, 255, 255, 0.7);
   border-top: 1px solid var(--sky-blue-light); border-bottom: 1px solid var(--sky-blue-light);
@@ -154,6 +128,7 @@
 .ryu-content b { color: var(--sky-deep); font-weight: 800; }
 .ryu-content i { color: var(--sky-blue); font-style: italic; font-weight: 600; }
 
+/* EXTRAS */
 .ryu-extras {
   margin: 20px 40px 30px 40px; padding: 15px 25px;
   background: var(--sky-mist); border: 2px solid var(--sky-blue);
@@ -168,7 +143,8 @@
   border-top: 1px solid var(--sky-border); position: relative; z-index: 11;
 }
 .ryu-signature::after {
-  content: 'Takahashi Ryuuji'; font-family: 'Pinyon Script', cursive; font-size: 3.5em;
+  content: 'Takahashi Ryuuji'; font-family: 'Pinyon Script', cursive; 
+  font-size: 2.5em; /* Assinatura Reduzida */
   color: var(--sky-deep); font-weight: 400; text-shadow: 1px 1px 2px #fff, 0 0 15px rgba(79, 195, 247, 0.3);
 }
 
@@ -178,5 +154,5 @@
   .ryu-extras { flex-direction: column; gap: 10px; text-align: center; border-radius: 10px; }
   .jjk-dossier-status-item { grid-template-columns: 1fr; gap: 5px; text-align: center; }
   .jjk-dossier-status-label, .jjk-dossier-status-value { text-align: center; }
-  .ryu-cloud-gallery { height: 300px; } /* Altura menor no mobile */
+  .ryu-cloud-gallery { height: 350px; }
 }
