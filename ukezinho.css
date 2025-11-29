@@ -1,4 +1,4 @@
-/* --- TEMPLATE: UKEZINHO (CRYSTAL MEMORY) --- */
+/* --- TEMPLATE: UKEZINHO (CRYSTAL MEMORY - FACETED) --- */
 
 :root {
   --uke-bg: #1a0a16;        /* Fundo escuro */
@@ -14,17 +14,34 @@
   50% { transform: translateY(-5px); filter: drop-shadow(0 0 15px var(--uke-primary)); }
 }
 
-/* CONTAINER PRINCIPAL */
+/* CONTAINER PRINCIPAL (Com Textura Facetada) */
 .ukezinho-container {
   box-sizing: border-box; max-width: 720px; width: 95%; margin: 40px auto;
-  background: linear-gradient(135deg, var(--uke-bg), #2a0033);
-  /* Borda brilhante e Clip-path para formato de cristal */
-  border: 1px solid var(--uke-primary);
-  box-shadow: 0 0 20px rgba(255, 102, 204, 0.2);
+  
+  /* Textura de Cristal (Facetas) */
+  background-color: var(--uke-bg);
+  background-image: 
+    /* Luzes Diagonais */
+    linear-gradient(125deg, rgba(255, 102, 204, 0.1) 0%, transparent 40%, rgba(255, 102, 204, 0.05) 60%),
+    linear-gradient(215deg, rgba(106, 0, 255, 0.15) 0%, transparent 50%),
+    /* Arestas Cruzadas (A malha do cristal) */
+    repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 40px),
+    repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0px, rgba(255, 255, 255, 0.03) 1px, transparent 1px, transparent 40px),
+    /* Fundo Base */
+    linear-gradient(180deg, rgba(26, 10, 22, 0.9), #2a0033);
+    
+  background-attachment: fixed; /* Efeito de profundidade ao rolar */
+  background-size: cover;
+
+  /* Borda brilhante e Clip-path */
+  border: 1px solid rgba(255, 102, 204, 0.5);
+  box-shadow: 
+    0 0 20px rgba(255, 102, 204, 0.2), 
+    inset 0 0 30px rgba(106, 0, 255, 0.1);
+    
   color: var(--uke-light); 
   font-family: 'Raleway', sans-serif;
   position: relative; padding: 0; overflow: hidden;
-  /* Recorte nos cantos */
   clip-path: polygon(2% 0, 98% 0, 100% 2%, 100% 98%, 98% 100%, 2% 100%, 0 98%, 0 2%);
 }
 .ukezinho-container * { box-sizing: border-box; }
@@ -77,6 +94,7 @@
   border-bottom: 1px dashed rgba(255, 102, 204, 0.3);
 }
 
+/* Scoping: Só afeta jjk-dossier dentro do ukezinho-container */
 .ukezinho-container .jjk-dossier-status-item {
   display: grid; grid-template-columns: 40px 1fr 80px; align-items: center; gap: 10px;
   margin: 0; padding: 0; background: transparent; border: none;
@@ -90,14 +108,14 @@
 .ukezinho-container .jjk-dossier-status-bar-wrapper {
   width: 100%; height: 10px; background: rgba(0,0,0,0.5);
   border: 1px solid var(--uke-secondary);
-  transform: skewX(-20deg); /* Inclinação Cristalina */
+  transform: skewX(-20deg); 
   overflow: hidden; border-radius: 0; margin: 0;
 }
 
 .ukezinho-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; margin: 0; padding: 0; }
 .ukezinho-container .jjk-dossier-status-bar-fill { height: 100%; transition: width 0.2s ease; border-radius: 0; }
 
-/* Cores das Barras */
+/* Cores das Barras (Sobrescreve original) */
 .ukezinho-container .jjk-dossier-hp-fill {
   background: linear-gradient(90deg, var(--uke-secondary), var(--uke-primary)) !important;
   box-shadow: 0 0 5px var(--uke-primary);
@@ -140,6 +158,7 @@
   border-top: 1px solid var(--uke-primary);
 }
 
+/* Assinatura Travada */
 .ukezinho-signature::after {
   content: 'Nome a Definir ♦';
   font-family: 'Cinzel Decorative', cursive; font-size: 1.2em; 
