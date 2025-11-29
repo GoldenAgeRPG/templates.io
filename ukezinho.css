@@ -1,43 +1,44 @@
-/* --- TEMPLATE: UKEZINHO (MEDIUM PINK CRYSTAL) --- */
+/* --- TEMPLATE: UKEZINHO (FACETED 3D CRYSTAL - FINAL COLORS) --- */
 
 :root {
-  --uke-bg-base: #e0b0d5;   /* Rosa Orquídea (Mais saturado, menos branco) */
-  --uke-pink: #d147a3;      /* Rosa Choque (Detalhes) */
+  /* PALETA TRAVADA */
+  --uke-bg-base: #e0b0d5;   /* Rosa Orquídea Base */
+  --uke-pink: #d147a3;      /* Rosa Choque */
   --uke-purple: #915faa;    /* Roxo Médio */
-  --uke-cyan: #70d6ff;      /* Ciano (Pequenos brilhos) */
-  --uke-text: #4a1a4a;      /* Texto Roxo Escuro (Alto contraste para leitura) */
-  
-  /* Vidro mais leitoso para garantir leitura */
-  --uke-glass-read: rgba(255, 255, 255, 0.65); 
-}
-
-/* Animação de Iridescência */
-@keyframes crystal-shimmer {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  --uke-cyan: #70d6ff;      /* Ciano */
+  --uke-text: #4a1a4a;      /* Texto Roxo Escuro */
+  --uke-glass-read: rgba(255, 255, 255, 0.65); /* Vidro Leitoso */
 }
 
 /* CONTAINER PRINCIPAL */
 .ukezinho-container {
   box-sizing: border-box; max-width: 720px; width: 95%; margin: 40px auto;
   
-  /* Fundo Rosa Definido (Não é mais branco lavado) */
+  /* COR BASE (Mantida) */
   background-color: var(--uke-bg-base);
+  
+  /* NOVA TEXTURA DE FACETAS 3D (Simulada com Gradientes) */
   background-image: 
-    linear-gradient(135deg, rgba(209, 71, 163, 0.2) 0%, transparent 50%),
-    linear-gradient(225deg, rgba(145, 95, 170, 0.2) 0%, transparent 50%),
-    /* Textura de facetas sutis */
-    repeating-linear-gradient(45deg, rgba(255,255,255,0.1) 0px, rgba(255,255,255,0.1) 1px, transparent 1px, transparent 40px);
+    /* Camada 1: Facetas de Luz Principal (Branco Transparente) */
+    linear-gradient(115deg, rgba(255,255,255,0.4) 0%, transparent 25%, transparent 75%, rgba(255,255,255,0.3) 100%),
+    /* Camada 2: Facetas de Sombra (Roxo Transparente) - Cortes abruptos */
+    linear-gradient(210deg, transparent 0%, transparent 40%, rgba(145, 95, 170, 0.4) 40%, rgba(145, 95, 170, 0.1) 60%, transparent 60%),
+    /* Camada 3: Cortes Transversais de Luz */
+    linear-gradient(60deg, transparent 0%, transparent 55%, rgba(255,255,255,0.3) 55%, transparent 56%),
+    /* Camada 4: Profundidade Adicional */
+    linear-gradient(310deg, rgba(145, 95, 170, 0.3) 0%, transparent 30%, transparent 80%, rgba(255,255,255,0.2) 100%),
+    /* Camada 5: As linhas finas originais (Reduzidas para não poluir) */
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.1) 0px, transparent 1px, transparent 60px);
   
-  background-attachment: fixed;
+  background-attachment: fixed; /* Dá profundidade ao rolar */
+  background-size: cover;
   
-  /* Borda suave */
+  /* Borda e Sombra */
   border: 1px solid rgba(255, 255, 255, 0.5);
   border-radius: 15px;
   box-shadow: 
-    0 10px 25px rgba(209, 71, 163, 0.25),
-    inset 0 0 40px rgba(255, 255, 255, 0.3);
+    0 15px 35px rgba(209, 71, 163, 0.3),
+    inset 0 0 60px rgba(255, 255, 255, 0.4);
     
   color: var(--uke-text); 
   font-family: 'Raleway', sans-serif;
@@ -45,24 +46,23 @@
 }
 .ukezinho-container * { box-sizing: border-box; }
 
-/* HEADER */
+/* HEADER (Ícone Perfeito Mantido) */
 .ukezinho-header {
   padding: 25px 40px;
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.2), transparent);
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.25), transparent);
   border-bottom: 1px solid rgba(255, 255, 255, 0.3);
   display: flex; align-items: center; gap: 20px;
 }
 
-/* LOGO INTEGRADA (Harmonia) */
 .ukezinho-header::before {
   content: '';
   display: block; width: 70px; height: 70px;
   background-image: url('https://i.imgur.com/QAvLIFV.png');
   background-size: contain; background-repeat: no-repeat; background-position: center;
   
-  /* Fusão com o fundo rosa */
+  /* Integração do Ícone (NÃO MEXER) */
   opacity: 0.8; 
-  mix-blend-mode: overlay; /* O segredo da integração */
+  mix-blend-mode: overlay; 
   filter: drop-shadow(0 0 2px rgba(255,255,255,0.5));
   
   flex-shrink: 0;
@@ -89,7 +89,6 @@
 }
 .ukezinho-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  /* Suaviza a parte de baixo da imagem */
   mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 90%, transparent 100%);
 }
@@ -98,8 +97,7 @@
 .ukezinho-stats {
   padding: 20px 40px; 
   display: flex; flex-direction: column; gap: 15px;
-  /* Fundo levemente branco para destacar as barras */
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.25);
 }
 
 .ukezinho-container .jjk-dossier-status-item {
@@ -143,10 +141,9 @@
 .ukezinho-content {
   padding: 30px 40px; font-size: 1.1em; line-height: 1.8; color: var(--uke-text);
   text-align: justify; 
-  /* Fundo mais opaco para garantir leitura sem perder a cor */
   background: var(--uke-glass-read);
   border-top: 1px solid rgba(255, 255, 255, 0.4);
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(8px); /* Aumentei o blur para destacar do fundo facetado */
 }
 .ukezinho-content b {
   color: var(--uke-pink); font-weight: 800;
@@ -159,7 +156,7 @@
 /* EXTRAS */
 .ukezinho-extras {
   margin: 0 40px 20px 40px; padding: 15px 25px; 
-  background: rgba(255, 255, 255, 0.6); 
+  background: rgba(255, 255, 255, 0.65); 
   border: 1px solid rgba(145, 95, 170, 0.3);
   border-radius: 8px;
   color: var(--uke-text); font-size: 0.95em;
@@ -168,7 +165,7 @@
 /* RODAPÉ */
 .ukezinho-footer {
   text-align: right; padding: 20px 40px; 
-  background: linear-gradient(to left, rgba(255, 255, 255, 0.3), transparent);
+  background: linear-gradient(to left, rgba(255, 255, 255, 0.35), transparent);
   border-top: 1px solid rgba(255, 255, 255, 0.4);
 }
 
