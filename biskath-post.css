@@ -1,73 +1,97 @@
-/* --- TEMPLATE: SPIRITUAL DREAD v2 (LIQUID DRIP & ISOLATED STATS) --- */
-/* Arquivo: biskath-post.css */
-
+/* --- TEMPLATE: SPIRITUAL DREAD v3 (VISCOUS LIQUID & SPECTRAL FRAME) --- */
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&family=Cinzel:wght@400;700&display=swap');
 
 :root {
-  /* PALETA TÉCNICA (MANTIDA) */
-  --dr-black: #050505;        /* Preto Absoluto (Base) */
-  --dr-dark-grey: #0a0a0a;    /* Cinza Muito Escuro (Blocos) */
-  --dr-blue-deep: #0b1e2f;    /* Azul Petróleo Escuro */
-  --dr-blue-mist: #1c2c3a;    /* Azul Bruma Acinzentado */
-  --dr-blue-fade: #1a3b52;    /* Azul Esmaecido */
-  --dr-text: #b0b0b0;         /* Cinza Leitura */
-  --dr-border: rgba(28, 44, 58, 0.3); /* Borda Sutil */
-  --dr-liquid: #081420;       /* Cor do líquido viscoso */
+  --dr-black: #050505;        
+  --dr-dark-grey: #0a0a0a;    
+  --dr-blue-deep: #0b1e2f;    
+  --dr-blue-mist: #1c2c3a;    
+  --dr-blue-fade: #1a3b52;    
+  --dr-text: #b0b0b0;         
+  --dr-border: rgba(28, 44, 58, 0.3);
 }
 
-/* --- ANIMAÇÃO DO LÍQUIDO VISCOSO --- */
-@keyframes viscous-drip {
-  0% { background-position: 0 -50px; opacity: 0; }
-  20% { opacity: 0.8; }
-  80% { opacity: 0.6; }
-  100% { background-position: 0 150px; opacity: 0; }
+/* --- ANIMAÇÕES --- */
+
+/* Gotejamento Viscoso (Estica e Cai) */
+@keyframes ooze-drop {
+  0% { transform: translateY(0) scaleY(1); }
+  40% { transform: translateY(10px) scaleY(1.2); } /* Acumula */
+  60% { transform: translateY(20px) scaleY(1.5); } /* Estica (Viscosidade) */
+  80% { transform: translateY(120px) scaleY(0.5); opacity: 1; } /* Cai rápido */
+  100% { transform: translateY(150px) scaleY(0.2); opacity: 0; } /* Desaparece */
+}
+
+/* Flutuação da Borda Fantasma */
+@keyframes ghost-float {
+  0%, 100% { transform: translate(5px, 5px); opacity: 0.5; }
+  50% { transform: translate(8px, 8px); opacity: 0.8; }
 }
 
 /* --- CONTAINER PRINCIPAL --- */
 .dread-container {
   box-sizing: border-box; max-width: 720px; width: 95%; margin: 60px auto;
-  
   background-color: var(--dr-black);
   color: var(--dr-text);
-  font-family: 'Inter', sans-serif;
-  font-weight: 300;
-  
+  font-family: 'Inter', sans-serif; font-weight: 300;
   border: 1px solid var(--dr-border);
   position: relative; 
-  overflow: hidden; /* Mantém o líquido dentro */
+  /* Overflow HIDDEN importante para cortar as gotas quando caírem muito */
+  overflow: hidden; 
   box-shadow: 0 20px 50px #000;
-  
-  padding: 40px;
+  padding: 50px 40px 40px; /* Mais padding no topo para o líquido */
   display: flex; flex-direction: column; gap: 30px;
 }
-/* Reset global para garantir isolamento */
 .dread-container * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* LÍQUIDO ESCURO PINGANDO (Pseudo-elemento no topo) */
-.dread-container::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0;
-  height: 100px; z-index: 10; pointer-events: none;
-  /* SVG de gotas escorrendo */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L100,0 L100,20 C80,40 90,60 70,80 C60,90 50,70 40,80 C30,90 20,50 10,60 C0,70 10,30 0,20 Z' fill='%23081420'/%3E%3C/svg%3E");
-  background-size: 50px 100px;
-  background-repeat: repeat-x;
-  opacity: 0.7;
-  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));
-  animation: viscous-drip 8s linear infinite;
-}
-
-
-/* Textura de Grão (MANTIDA) */
+/* Textura de Fundo (Mantida) */
 .dread-noise {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
   opacity: 0.05;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
 }
-/* Vignette (MANTIDA) */
 .dread-container::after {
   content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
   background: radial-gradient(circle at 50% 0%, rgba(11, 30, 47, 0.15), transparent 60%),
               radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0.8), transparent 50%);
+}
+
+/* --- SISTEMA DE LÍQUIDO VISCOSO (NOVO) --- */
+.dread-goo-system {
+  position: absolute; top: -10px; left: 0; width: 100%; height: 150px;
+  pointer-events: none; z-index: 5;
+  /* O FILTRO MÁGICO: Mistura os elementos pretos criando viscosidade */
+  filter: contrast(20); 
+  background: transparent;
+  mix-blend-mode: multiply; /* Para integrar melhor ao fundo escuro se necessário */
+}
+
+/* Base do líquido (Teto) */
+.dread-goo-base {
+  position: absolute; top: 0; left: 0; right: 0; height: 30px;
+  background: black; /* Deve ser preto absoluto para o contraste funcionar */
+  /* Borrar a base para ela se fundir com as gotas */
+  filter: blur(8px);
+}
+
+/* Gotas Individuais */
+.dread-drop {
+  position: absolute; top: 0; background: black;
+  border-radius: 50%;
+  filter: blur(8px); /* Blur alto + Contraste alto do pai = GOSMA LÍQUIDA */
+}
+
+.d1 {
+  left: 20%; width: 30px; height: 30px;
+  animation: ooze-drop 6s infinite ease-in;
+}
+.d2 {
+  left: 50%; width: 40px; height: 40px;
+  animation: ooze-drop 8s infinite 2s ease-in;
+}
+.d3 {
+  left: 80%; width: 25px; height: 25px;
+  animation: ooze-drop 5s infinite 1s ease-in;
 }
 
 
@@ -79,7 +103,7 @@
 }
 .dread-title {
   font-family: 'Cinzel', serif; font-weight: 400; font-size: 2em; 
-  color: #d0d0d0; text-transform: uppercase; margin: 0; letter-spacing: 2px;
+  color: #d0d0d0; text-transform: uppercase; letter-spacing: 2px;
   text-shadow: 0 4px 10px rgba(0,0,0,0.8);
 }
 .dread-subtitle {
@@ -88,34 +112,47 @@
 }
 
 
-/* --- IMAGEM (FORMA ORGÂNICA) --- */
+/* --- MOLDURA ESPECTRAL (NOVO BANNER) --- */
+.dread-frame-wrapper {
+  position: relative; z-index: 2;
+  width: 100%; height: 380px;
+  margin: 10px 0;
+}
+
+/* A Borda Fantasma (Traseira) */
+.dread-ghost-border {
+  position: absolute; inset: 0;
+  border: 1px solid var(--dr-blue-fade);
+  box-shadow: 0 0 15px var(--dr-blue-deep);
+  z-index: 1;
+  /* Animação de flutuação independente */
+  animation: ghost-float 4s infinite alternate ease-in-out;
+}
+
+/* A Imagem Principal (Frente) */
 .dread-image-frame {
-  width: 100%; height: 380px; position: relative; z-index: 2;
+  width: 100%; height: 100%; position: relative; z-index: 2;
   background: #000;
-  
-  /* MUDANÇA: Clip-path para forma irregular/desgastada */
-  clip-path: polygon(2% 0%, 99% 1%, 100% 96%, 97% 100%, 1% 98%, 0% 3%);
-  /* Filtro de sombra para dar volume à forma cortada */
-  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
-  
-  border: none; /* Remove borda sólida */
+  border: 1px solid rgba(255,255,255,0.1); /* Borda física sutil */
+  /* Sombra interna para profundidade */
+  box-shadow: inset 0 0 30px #000; 
 }
 
 .dread-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  filter: grayscale(0.6) sepia(0.2) hue-rotate(180deg) contrast(0.9) brightness(0.8);
+  filter: grayscale(0.7) sepia(0.2) hue-rotate(180deg) contrast(0.9) brightness(0.8);
   transition: filter 1s ease;
 }
 .dread-overlay {
   position: absolute; inset: 0; pointer-events: none;
-  background: var(--dr-blue-deep); opacity: 0.2; mix-blend-mode: overlay;
+  background: var(--dr-blue-deep); opacity: 0.15; mix-blend-mode: overlay;
 }
 .dread-container:hover .dread-image-frame img {
   filter: grayscale(0.4) sepia(0.1) hue-rotate(180deg) contrast(1.0) brightness(0.9);
 }
 
 
-/* --- STATUS (ISOLADOS E SEM QUEBRA DE LINHA) --- */
+/* --- STATUS (ISOLAMENTO TOTAL) --- */
 .dread-stats {
   background: var(--dr-dark-grey);
   border: 1px solid var(--dr-border);
@@ -124,40 +161,34 @@
   position: relative; z-index: 2;
 }
 
-/* Seletor específico para isolar o grid */
+/* Grid Específico e Isolado */
 .dread-container .jjk-dossier-status-item {
   display: grid; 
-  grid-template-columns: 40px 1fr 70px; /* Aumentado para 70px para segurança */
+  grid-template-columns: 40px 1fr 70px; /* Coluna fixa para números */
   align-items: center; gap: 20px;
-  border: none; background: transparent; margin: 0; padding: 0; /* Resets de segurança */
+  border: none; background: transparent;
 }
 
 .dread-container .jjk-dossier-status-label { 
   font-family: 'Cinzel', serif; font-size: 0.8em; color: var(--dr-blue-fade);
   text-align: right; letter-spacing: 1px;
-  margin: 0; padding: 0;
 }
 
-/* AQUI ESTÁ A CORREÇÃO PRINCIPAL PARA OS NÚMEROS */
+/* Correção de quebra de linha */
 .dread-container .jjk-dossier-status-value { 
   font-family: 'Inter', sans-serif; font-size: 0.85em; color: #888; 
   text-align: right; font-weight: 300;
-  /* Impede quebra de linha */
-  white-space: nowrap; 
-  /* Garante que não vaze se for muito grande (corta com ...) */
-  overflow: hidden; text-overflow: ellipsis;
-  margin: 0; padding: 0;
+  white-space: nowrap; /* IMPEDE QUEBRA DE LINHA */
 }
 
-/* Barras Frias */
+/* Barras */
 .dread-container .jjk-dossier-status-bar-wrapper {
   width: 100%; height: 4px; background: #151515;
-  border-radius: 0; overflow: hidden; border: none; margin: 0;
+  border-radius: 0; overflow: hidden; border: none;
 }
-.dread-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; margin: 0; padding: 0;}
-.dread-container .jjk-dossier-status-bar-fill { height: 100%; border-radius: 0; margin: 0; }
+.dread-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
+.dread-container .jjk-dossier-status-bar-fill { height: 100%; border-radius: 0; }
 
-/* Cores das Barras */
 .dread-container .jjk-dossier-hp-fill { background: #5e2a2a; }
 .dread-container .jjk-dossier-ea-fill { background: var(--dr-blue-fade); }
 
@@ -203,6 +234,5 @@
 @media (max-width: 600px) {
   .dread-container { width: 100%; margin: 20px auto; border: none; padding: 20px; }
   .dread-stats { padding: 15px; }
-  /* Garante que os status não quebrem no mobile */
-  .dread-container .jjk-dossier-status-item { grid-template-columns: 40px 1fr 65px; gap: 10px; }
+  .dread-frame-wrapper { height: 250px; }
 }
