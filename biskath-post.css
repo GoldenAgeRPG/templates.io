@@ -1,4 +1,4 @@
-/* --- TEMPLATE: SPIRITUAL DREAD vFINAL (LEFT VEIN + ISOLATED) --- */
+/* --- TEMPLATE: SPIRITUAL DREAD v3 (FINAL - ISOLATED STATUS) --- */
 /* Arquivo: biskath-post.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&family=Cinzel:wght@400;700&display=swap');
@@ -30,12 +30,6 @@
   50% { transform: translate(8px, 8px); opacity: 0.8; }
 }
 
-/* Fluxo da Veia Lateral (NOVO) */
-@keyframes vein-flow {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 0% 200%; }
-}
-
 /* --- CONTAINER PRINCIPAL --- */
 .dread-container {
   box-sizing: border-box; max-width: 720px; width: 95%; margin: 60px auto;
@@ -63,36 +57,26 @@
               radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0.8), transparent 50%);
 }
 
-/* --- ANIMAÇÃO LATERAL ESQUERDA (VEIA AMALDIÇOADA) --- */
-.dread-left-vein {
-  position: absolute; top: 0; bottom: 0; left: 0; width: 4px; z-index: 10;
-  background: linear-gradient(to bottom, 
-    transparent 0%, 
-    var(--dr-blue-deep) 20%, 
-    var(--dr-blue-fade) 50%, 
-    var(--dr-blue-deep) 80%, 
-    transparent 100%
-  );
-  background-size: 100% 200%;
-  opacity: 0.6;
-  box-shadow: 0 0 10px rgba(28, 44, 58, 0.2); /* Brilho fosco muito sutil */
-  animation: vein-flow 8s linear infinite;
-}
-
 /* --- SISTEMA DE LÍQUIDO VISCOSO --- */
 .dread-goo-system {
   position: absolute; top: -10px; left: 0; width: 100%; height: 150px;
   pointer-events: none; z-index: 5;
-  filter: contrast(20); background: transparent; mix-blend-mode: multiply; 
+  filter: contrast(20); 
+  background: transparent;
+  mix-blend-mode: multiply; 
 }
+
 .dread-goo-base {
   position: absolute; top: 0; left: 0; right: 0; height: 30px;
   background: black; filter: blur(8px);
 }
+
 .dread-drop {
   position: absolute; top: 0; background: black;
-  border-radius: 50%; filter: blur(8px); 
+  border-radius: 50%;
+  filter: blur(8px); 
 }
+
 .d1 { left: 20%; width: 30px; height: 30px; animation: ooze-drop 6s infinite ease-in; }
 .d2 { left: 50%; width: 40px; height: 40px; animation: ooze-drop 8s infinite 2s ease-in; }
 .d3 { left: 80%; width: 25px; height: 25px; animation: ooze-drop 5s infinite 1s ease-in; }
@@ -106,7 +90,7 @@
 }
 .dread-title {
   font-family: 'Cinzel', serif; font-weight: 400; font-size: 2em; 
-  color: #d0d0d0; text-transform: uppercase; margin: 0; letter-spacing: 2px;
+  color: #d0d0d0; text-transform: uppercase; letter-spacing: 2px;
   text-shadow: 0 4px 10px rgba(0,0,0,0.8);
 }
 .dread-subtitle {
@@ -117,8 +101,11 @@
 
 /* --- MOLDURA ESPECTRAL --- */
 .dread-frame-wrapper {
-  position: relative; z-index: 2; width: 100%; height: 380px; margin: 10px 0;
+  position: relative; z-index: 2;
+  width: 100%; height: 380px;
+  margin: 10px 0;
 }
+
 .dread-ghost-border {
   position: absolute; inset: 0;
   border: 1px solid var(--dr-blue-fade);
@@ -126,12 +113,14 @@
   z-index: 1;
   animation: ghost-float 4s infinite alternate ease-in-out;
 }
+
 .dread-image-frame {
   width: 100%; height: 100%; position: relative; z-index: 2;
   background: #000;
   border: 1px solid rgba(255,255,255,0.1); 
   box-shadow: inset 0 0 30px #000; 
 }
+
 .dread-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
   filter: grayscale(0.7) sepia(0.2) hue-rotate(180deg) contrast(0.9) brightness(0.8);
@@ -160,7 +149,7 @@
   display: grid; 
   grid-template-columns: 40px 1fr 70px; /* Coluna fixa para números */
   align-items: center; gap: 20px;
-  /* Resets */
+  /* Resets para evitar herança */
   border: none; background: transparent; margin: 0; padding: 0; 
   min-height: 0; width: 100%;
 }
@@ -168,7 +157,7 @@
 /* Labels */
 .dread-container .jjk-dossier-status-label { 
   font-family: 'Cinzel', serif; font-size: 0.8em; 
-  color: var(--dr-blue-fade) !important;
+  color: var(--dr-blue-fade) !important; /* Força a cor */
   text-align: right; letter-spacing: 1px;
   background: transparent; border: none; margin: 0; padding: 0;
   line-height: normal;
@@ -177,7 +166,7 @@
 /* Valores Numéricos (Sem quebra de linha) */
 .dread-container .jjk-dossier-status-value { 
   font-family: 'Inter', sans-serif; font-size: 0.85em; 
-  color: #888 !important; 
+  color: #888 !important; /* Força a cor */
   text-align: right; font-weight: 300;
   white-space: nowrap; /* IMPEDE QUEBRA DE LINHA */
   background: transparent; border: none; margin: 0; padding: 0;
@@ -198,7 +187,7 @@
 }
 
 /* Cores das Barras (Forçadas) */
-.dread-container .jjk-dossier-status-bar-fill { height: 100%; border-radius: 0; border: none; margin: 0; padding: 0; }
+.dread-container .jjk-dossier-status-bar-fill { height: 100%; border-radius: 0; border: none; margin: 0; }
 .dread-container .jjk-dossier-hp-fill { background: #5e2a2a !important; box-shadow: none !important; }
 .dread-container .jjk-dossier-ea-fill { background: var(--dr-blue-fade) !important; box-shadow: none !important; }
 
@@ -227,7 +216,7 @@
   margin-bottom: 10px; letter-spacing: 2px;
 }
 
-/* --- RODAPÉ (Sem efeito de caixa) --- */
+/* --- RODAPÉ --- */
 .dread-footer {
   padding: 30px 0 10px; text-align: center;
   border-top: 1px solid var(--dr-border);
