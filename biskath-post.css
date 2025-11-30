@@ -1,236 +1,210 @@
-/* --- TEMPLATE: CURSED MANIPULATION (HIROTO GOJO) --- */
+/* --- TEMPLATE: SPIRIT MANIPULATION (BLUE MATTE) --- */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Spectral:wght@400;700&display=swap');
 
 :root {
-  --c-bg: #050505;        /* Preto Profundo */
-  --c-panel: #0b0013;     /* Roxo Quase Preto */
-  --c-toxic: #6b1aff;     /* Roxo Venenoso */
-  --c-yellow: #f5e37a;    /* Amarelo Amaldiçoado */
-  --c-border: #3a1470;    /* Roxo Queimado */
-  --c-text: #e5e5e5;      /* Cinza Morto */
-  --c-glitch: #00ff00;    /* Verde Glitch */
+  --sp-bg: #080a10;       /* Preto Azulado Profundo */
+  --sp-panel: #0f121a;    /* Painel Cinza Azulado */
+  --sp-blue-dark: #1c2a3a; /* Azul Petróleo Escuro (Matte) */
+  --sp-blue-ghost: #3a506b; /* Azul Fantasma (Desaturado) */
+  --sp-bone: #c0c5ce;     /* Cor de Osso (Texto) */
+  --sp-border: #2a3b4d;   /* Borda Azul Morto */
 }
 
 /* --- ANIMAÇÕES --- */
 
-/* Rotação trêmula do Crânio */
-@keyframes skull-spin {
-  0% { transform: rotate(0deg) scale(1); }
-  25% { transform: rotate(90deg) scale(0.95); }
-  50% { transform: rotate(180deg) scale(1); }
-  75% { transform: rotate(270deg) scale(1.05); }
-  100% { transform: rotate(360deg) scale(1); }
+/* Animação Lateral: Fluxo de Espíritos */
+@keyframes spirit-rise {
+  0% { background-position: 0 0; opacity: 0.3; }
+  50% { opacity: 0.6; }
+  100% { background-position: 0 -100px; opacity: 0.3; }
 }
 
-/* Miasma (Fumaça de fundo) */
-@keyframes miasma-flow {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 200% 200%; }
+/* Animação: Respiração do Container */
+@keyframes ghost-breath {
+  0% { box-shadow: 0 0 20px rgba(0,0,0,0.8); border-color: var(--sp-blue-dark); }
+  50% { box-shadow: 0 0 30px rgba(58, 80, 107, 0.15); border-color: var(--sp-blue-ghost); }
+  100% { box-shadow: 0 0 20px rgba(0,0,0,0.8); border-color: var(--sp-blue-dark); }
 }
 
-/* Pulso de Veia (Barras) */
-@keyframes vein-pulse {
-  0% { opacity: 0.8; box-shadow: 0 0 5px var(--c-toxic); }
-  50% { opacity: 1; box-shadow: 0 0 15px var(--c-toxic); }
-  100% { opacity: 0.8; box-shadow: 0 0 5px var(--c-toxic); }
+/* Névoa de Fundo */
+@keyframes fog-move {
+  0% { transform: translateX(-10%); opacity: 0.2; }
+  50% { transform: translateX(10%); opacity: 0.4; }
+  100% { transform: translateX(-10%); opacity: 0.2; }
 }
 
-/* Glitch na Assinatura */
-@keyframes text-glitch {
-  0% { text-shadow: 2px 0 var(--c-toxic), -2px 0 var(--c-yellow); }
-  25% { text-shadow: -2px 0 var(--c-toxic), 2px 0 var(--c-yellow); }
-  50% { text-shadow: 2px 0 var(--c-glitch), -2px 0 var(--c-toxic); }
-  75% { text-shadow: -2px 0 var(--c-glitch), 2px 0 var(--c-toxic); }
-  100% { text-shadow: 2px 0 var(--c-toxic), -2px 0 var(--c-yellow); }
-}
-
-/* --- CONTAINER PRINCIPAL --- */
-.curse-container {
-  box-sizing: border-box; max-width: 720px; width: 95%; margin: 40px auto;
-  background-color: var(--c-bg);
+/* --- CONTAINER --- */
+.spirit-container {
+  box-sizing: border-box; max-width: 750px; width: 95%; margin: 40px auto;
   
-  /* Textura de Piche/Ruído */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  background-color: var(--sp-bg);
+  /* Textura de Ruído Sutil para ficar Matte (Fosco) */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.07'/%3E%3C/svg%3E");
   
-  border: 2px solid var(--c-border);
-  /* Borda irregular simulada com sombra */
-  box-shadow: 
-    0 0 0 4px #000, 
-    0 0 20px var(--c-toxic);
-    
-  color: var(--c-text);
-  font-family: 'Roboto Mono', monospace;
-  position: relative; padding: 0; overflow: hidden;
-  clip-path: polygon(0 2%, 2% 0, 98% 0, 100% 2%, 100% 98%, 98% 100%, 2% 100%, 0 98%);
+  border: 1px solid var(--sp-border);
+  position: relative; 
+  box-shadow: 0 20px 60px #000;
+  overflow: hidden;
+  color: var(--sp-bone);
+  font-family: 'Spectral', serif;
+  
+  /* Animação de respiração lenta */
+  animation: ghost-breath 6s infinite ease-in-out;
 }
-.curse-container * { box-sizing: border-box; }
+.spirit-container * { box-sizing: border-box; }
 
-/* Efeito de Miasma atrás de tudo */
-.curse-miasma {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(circle at 50% 50%, rgba(107, 26, 255, 0.1), transparent 70%);
-  animation: miasma-flow 10s linear infinite;
+/* DECORAÇÃO LATERAL (Fluxo de Espíritos) */
+.spirit-container::before, .spirit-container::after {
+  content: ''; position: absolute; top: 0; bottom: 0; width: 40px;
+  /* Gradiente que simula fumaça/almas subindo */
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    var(--sp-blue-dark) 10px,
+    transparent 40px,
+    var(--sp-blue-ghost) 80px,
+    transparent 120px
+  );
+  mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+  
+  opacity: 0.3; z-index: 0;
+  animation: spirit-rise 10s linear infinite;
+}
+.spirit-container::before { left: 0; border-right: 1px solid rgba(255,255,255,0.05); }
+.spirit-container::after { right: 0; border-left: 1px solid rgba(255,255,255,0.05); }
+
+/* Névoa Interna */
+.spirit-fog {
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(58, 80, 107, 0.1), transparent 80%);
+  animation: fog-move 15s ease-in-out infinite;
   pointer-events: none; z-index: 0;
 }
 
-/* --- CABEÇALHO --- */
-.curse-header {
-  display: flex; align-items: center; gap: 20px;
-  padding: 30px;
-  background: linear-gradient(180deg, var(--c-panel) 0%, transparent 100%);
-  border-bottom: 2px solid var(--c-border);
+/* --- HEADER --- */
+.spirit-header {
+  text-align: center; padding: 40px 20px; 
+  border-bottom: 1px solid var(--sp-border);
   position: relative; z-index: 2;
+  background: linear-gradient(to bottom, rgba(28, 42, 58, 0.2), transparent);
 }
 
-/* Ícone (Orbe/Crânio) */
-.curse-icon-box {
-  width: 70px; height: 70px; flex-shrink: 0;
-  /* Imagem de Orbe Amaldiçoada (Exemplo genérico escuro/espiral) */
-  background-image: url('https://i.imgur.com/3Z6S9gX.png'); 
-  background-size: cover; background-position: center;
-  border-radius: 50%;
-  border: 2px solid var(--c-toxic);
-  box-shadow: 0 0 15px var(--c-toxic);
-  animation: skull-spin 8s linear infinite;
+.spirit-title {
+  font-family: 'Cinzel', serif; font-weight: 700; font-size: 2.2em; 
+  color: #e0e5eb; /* Branco Osso */
+  text-transform: uppercase; margin: 0; letter-spacing: 4px; 
+  text-shadow: 0 5px 10px rgba(0,0,0,0.8);
 }
-
-.curse-title-box { display: flex; flex-direction: column; }
-
-.curse-title {
-  font-family: 'Nosifer', cursive; /* Fonte "derretida/assustadora" */
-  font-size: 2em; color: var(--c-text);
-  margin: 0; text-transform: uppercase;
-  text-shadow: 3px 3px 0 #000;
-}
-
-.curse-subtitle {
-  font-family: 'Roboto Mono', monospace;
-  font-size: 0.8em; color: var(--c-yellow);
-  text-transform: uppercase; letter-spacing: 2px;
-  margin-top: 5px; opacity: 0.8;
+.spirit-subtitle {
+  font-family: 'Spectral', serif; font-size: 0.9em; color: var(--sp-blue-ghost);
+  text-transform: uppercase; letter-spacing: 3px; margin-top: 5px;
+  font-weight: 700;
 }
 
 /* --- IMAGEM --- */
-.curse-image-frame {
-  width: 100%; height: 350px; position: relative;
-  background: #000;
-  border-top: 1px solid #000;
-  border-bottom: 4px solid var(--c-border);
-  z-index: 2;
-  /* Máscara irregular (rasgada) */
-  clip-path: polygon(0 0, 100% 0, 100% 95%, 90% 100%, 80% 95%, 60% 98%, 40% 94%, 20% 99%, 0 95%);
+.spirit-image-frame {
+  width: 100%; height: 350px; position: relative; margin: 0;
+  border-top: 1px solid #000; border-bottom: 1px solid var(--sp-border);
+  z-index: 2; overflow: hidden;
 }
-
-.curse-image-frame img {
+.spirit-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  filter: sepia(0.2) contrast(1.2);
-  transition: all 0.3s ease;
+  filter: desaturate(0.4) contrast(1.1) brightness(0.9); /* Look cinematográfico */
+  transition: transform 5s ease;
+}
+.spirit-image-frame:hover img { transform: scale(1.05); }
+
+/* Overlay escuro para integrar a imagem */
+.spirit-image-frame::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, transparent 70%, var(--sp-bg));
+  pointer-events: none;
 }
 
-/* Efeito Glitch ao passar o mouse */
-.curse-image-frame:hover img {
-  filter: sepia(0.5) hue-rotate(90deg) contrast(1.4);
-  transform: translate(-2px, 2px);
-}
-
-/* --- STATUS (ISOLADOS) --- */
-.curse-stats {
-  padding: 20px 30px;
-  display: flex; flex-direction: column; gap: 15px;
-  background: rgba(0,0,0,0.6);
+/* --- STATUS --- */
+.spirit-stats {
+  padding: 20px 50px; display: flex; flex-direction: column; gap: 15px; 
   position: relative; z-index: 2;
+  background: rgba(8, 10, 16, 0.8);
 }
 
-/* Scoping */
-.curse-container .jjk-dossier-status-item {
-  display: grid; grid-template-columns: 40px 1fr 80px; align-items: center; gap: 10px;
-  margin: 0; padding: 0; background: transparent; border: none;
+.jjk-dossier-status-item {
+  display: grid; grid-template-columns: 50px 1fr 60px; align-items: center; gap: 15px;
 }
 
-.curse-container .jjk-dossier-status-label {
-  font-family: 'Creepster', cursive; /* Fonte pontuda */
-  font-size: 1.1em; color: var(--c-yellow) !important;
-  text-align: right; text-shadow: 2px 2px 0 #000;
+/* Labels e Valores */
+.jjk-dossier-status-label { 
+  font-family: 'Cinzel', serif; font-size: 0.8em; color: var(--sp-blue-ghost); 
+  text-align: right; letter-spacing: 1px;
+}
+.jjk-dossier-status-value { 
+  font-family: 'Spectral', serif; font-size: 0.9em; color: #fff; 
+  text-align: right; opacity: 0.7;
 }
 
-.curse-container .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 15px; background: #111;
-  border: 1px solid #333;
-  border-radius: 2px; overflow: hidden; margin: 0;
-  box-shadow: inset 0 0 5px #000;
+/* Barras (Tubo Escuro) */
+.jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 6px; background: #000; 
+  border: 1px solid var(--sp-border);
+  border-radius: 0; overflow: hidden;
 }
 
-.curse-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; margin: 0; padding: 0; }
-.curse-container .jjk-dossier-status-bar-fill { height: 100%; transition: width 0.2s ease; border-radius: 0; }
+.jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
 
-/* HP (Roxo -> Preto) */
-.curse-container .jjk-dossier-hp-fill {
-  background: linear-gradient(90deg, var(--c-toxic), #240046) !important;
-  animation: vein-pulse 2s infinite;
+/* Cores das Barras (Azul Fosco) */
+.jjk-dossier-hp-fill { 
+  height: 100%; background: #4a6fa5; 
+  box-shadow: 0 0 5px rgba(74, 111, 165, 0.3); transition: width 0.5s ease; 
 }
-
-/* EA (Verde Doentio -> Amarelo) */
-.curse-container .jjk-dossier-ea-fill {
-  background: linear-gradient(90deg, #4caf50, var(--c-yellow)) !important;
-  box-shadow: 0 0 10px #4caf50;
-}
-
-.curse-container .jjk-dossier-status-value {
-  font-family: 'Roboto Mono', monospace; font-size: 0.8em; color: #fff !important;
-  text-align: right; white-space: nowrap;
+.jjk-dossier-ea-fill { 
+  height: 100%; background: #2f455c; 
+  box-shadow: 0 0 5px rgba(47, 69, 92, 0.3); transition: width 0.5s ease; 
 }
 
 /* --- CONTEÚDO --- */
-.curse-content {
-  padding: 30px; font-size: 1.1em; line-height: 1.6; color: var(--c-text);
-  text-align: justify;
-  background: var(--c-panel);
-  position: relative; z-index: 2;
-  /* Textura de espiral sutil */
-  background-image: repeating-radial-gradient(circle at center, transparent 0, transparent 20px, rgba(107, 26, 255, 0.03) 21px);
+.spirit-content {
+  padding: 30px 50px; font-size: 1.15em; line-height: 1.9; color: var(--sp-bone);
+  text-align: justify; position: relative; z-index: 2;
 }
 
-.curse-content b {
-  color: var(--c-yellow); font-weight: 700;
-  text-shadow: 0 0 3px rgba(245, 227, 122, 0.5);
+.spirit-content b { 
+  color: #fff; text-shadow: 0 0 10px rgba(58, 80, 107, 0.5); 
+}
+.spirit-content i { 
+  color: var(--sp-blue-ghost); font-family: 'Cinzel', serif; font-size: 0.9em; 
 }
 
-.curse-content i {
-  color: var(--c-toxic); font-weight: bold;
-}
-
-/* --- EXTRAS / ARCHIVE --- */
-.curse-extras {
-  margin: 0 30px 30px 30px; padding: 15px;
-  background: #1a1a1a;
-  border: 1px dashed var(--c-border);
-  color: var(--c-text); font-family: 'Roboto Mono', monospace; font-size: 0.9em;
-  position: relative; z-index: 2;
-  /* Aparência rasgada nas laterais */
-  clip-path: polygon(0 0, 100% 0, 98% 50%, 100% 100%, 0 100%, 2% 50%);
-}
-
-.curse-extras::before {
-  content: 'CURSED ARCHIVE'; display: block;
-  font-family: 'Nosifer', cursive; color: var(--c-border);
-  font-size: 0.8em; margin-bottom: 10px; border-bottom: 1px solid #333;
-}
-
-/* --- RODAPÉ & ASSINATURA --- */
-.curse-footer {
-  padding: 20px 30px; text-align: right;
-  background: #000;
-  border-top: 3px solid var(--c-toxic);
+/* --- EXTRAS --- */
+.spirit-extras {
+  margin: 0 50px 30px 50px; padding: 15px;
+  background: rgba(28, 42, 58, 0.2);
+  border-left: 2px solid var(--sp-blue-ghost);
+  color: var(--sp-bone); font-family: 'Spectral', serif; font-size: 0.95em;
   position: relative; z-index: 2;
 }
 
-/* Assinatura "Hiroto Gojo" com Glitch */
-.curse-signature::after {
-  content: 'Hiroto Gojo'; /* NOME FIXADO AQUI */
-  font-family: 'Nosifer', cursive;
-  font-size: 1.8em;
-  color: var(--c-text);
+/* --- RODAPÉ --- */
+.spirit-footer {
+  padding: 25px; text-align: center; background: #040508;
+  border-top: 1px solid var(--sp-border); 
+  position: relative; z-index: 2;
+}
+
+.spirit-signature::after {
+  content: 'Hiroto Gojo'; 
+  font-family: 'Cinzel', serif; font-size: 1.4em;
+  color: var(--sp-blue-ghost); letter-spacing: 3px; font-weight: 700;
   text-transform: uppercase;
-  position: relative;
-  display: inline-block;
-  animation: text-glitch 3s infinite alternate-reverse;
+  /* Efeito de fumaça no texto */
+  filter: blur(0.4px);
+  text-shadow: 0 0 10px rgba(58, 80, 107, 0.5);
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .spirit-container { padding: 0; }
+  .spirit-container::before, .spirit-container::after { width: 15px; }
+  .spirit-header, .spirit-content, .spirit-stats { padding: 20px 30px; }
 }
