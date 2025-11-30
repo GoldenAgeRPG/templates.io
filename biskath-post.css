@@ -1,240 +1,190 @@
-/* --- TEMPLATE: SPIRIT MANIPULATION (v5 - MANGA PANELS & DARK ENERGY) --- */
-/* Arquivo: biskath-post-v5.css */
+/* --- TEMPLATE: SPIRITUAL DREAD (NO NEON, NO TECH) --- */
+/* Arquivo: biskath-post.css */
 
-@import url('https://fonts.googleapis.com/css2?family=Nosifer&family=Noto+Serif+JP:wght@400;700;900&family=Philosopher:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&family=Cinzel:wght@400;700&display=swap');
 
 :root {
-  --sp-ink: #080808;          /* Preto Profundo */
-  --sp-paper: #f4f4f4;        /* Branco Papel */
-  --sp-gray: #1a1a1a;         /* Cinza Quase Preto */
-  --sp-ghost-blue: #5d7285;   /* Azul Morto (Dessaturado) */
-  --sp-blood: #8a0000;        /* Sangue Coagulado (Detalhes) */
-  --sp-panel-shadow: 6px 6px 0 rgba(0,0,0,0.15); /* Sombra dura dos painéis */
+  /* PALETA TÉCNICA (Solicitada) */
+  --dr-black: #050505;        /* Preto Absoluto (Base) */
+  --dr-dark-grey: #0a0a0a;    /* Cinza Muito Escuro (Blocos) */
+  --dr-blue-deep: #0b1e2f;    /* Azul Petróleo Escuro */
+  --dr-blue-mist: #1c2c3a;    /* Azul Bruma Acinzentado */
+  --dr-blue-fade: #1a3b52;    /* Azul Esmaecido */
+  --dr-text: #b0b0b0;         /* Cinza Leitura */
+  --dr-border: rgba(28, 44, 58, 0.3); /* Borda Sutil */
 }
 
-/* --- ANIMAÇÕES --- */
-
-/* Fundo de Tinta (Lento e Constante) */
-@keyframes ink-crawl {
-  0% { background-position: 0 0; }
-  100% { background-position: 200px 200px; }
-}
-
-/* Terror Sutil na Imagem */
-@keyframes subtle-horror {
-  0% { transform: scale(1); filter: contrast(1.1) grayscale(0.8) blur(0px); }
-  50% { transform: scale(1.02); filter: contrast(1.2) grayscale(1) blur(0.5px); }
-  100% { transform: scale(1); filter: contrast(1.1) grayscale(0.8) blur(0px); }
-}
-
-/* PARTÍCULAS DE ENERGIA ESCURA SUBINDO */
-@keyframes dark-ash-rise {
-  0% { transform: translateY(0) scale(0.8); opacity: 0; }
-  10% { opacity: 0.6; }
-  100% { transform: translateY(-400px) scale(1.2); opacity: 0; }
-}
-
-/* --- CONTAINER PRINCIPAL (A PÁGINA) --- */
-.spirit-container {
+/* --- CONTAINER PRINCIPAL --- */
+.dread-container {
   box-sizing: border-box; max-width: 720px; width: 95%; margin: 60px auto;
-  background-color: var(--sp-paper); /* Fundo da página */
-  position: relative; 
-  overflow: hidden; /* Mantém as partículas dentro da página */
-  color: var(--sp-ink);
-  font-family: 'Noto Serif JP', serif;
-  border: 4px solid var(--sp-ink); /* Borda grossa da página */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
-  padding: 20px; /* Margem interna da página */
   
-  display: flex; flex-direction: column;
-  gap: 20px; /* Espaço entre os painéis (Gutter) */
+  background-color: var(--dr-black);
+  color: var(--dr-text);
+  font-family: 'Inter', sans-serif;
+  font-weight: 300; /* Fonte fina para tensão */
+  
+  border: 1px solid var(--dr-border);
+  position: relative; 
+  box-shadow: 0 20px 50px #000; /* Sombra pesada e difusa */
+  
+  /* Layout com espaçamento largo (Sensação de Vazio) */
+  padding: 40px;
+  display: flex; flex-direction: column; gap: 30px;
 }
-.spirit-container * { box-sizing: border-box; }
+.dread-container * { box-sizing: border-box; }
 
-/* --- CAMADAS DE PARTÍCULAS DE ENERGIA ESCURA --- */
-.spirit-container::before, .spirit-container::after {
-  content: ''; position: absolute; top: 100%; left: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: 10;
-  background-repeat: repeat;
-}
-/* Camada 1: Partículas menores e mais lentas */
-.spirit-container::before {
-  background-image: radial-gradient(circle, var(--sp-ink) 2px, transparent 4px);
-  background-size: 40px 60px;
-  background-position: 10px 30px;
-  opacity: 0.4;
-  animation: dark-ash-rise 15s linear infinite;
-}
-/* Camada 2: Partículas maiores e mais rápidas */
-.spirit-container::after {
-  background-image: radial-gradient(circle, var(--sp-ink) 3px, transparent 6px);
-  background-size: 70px 110px;
-  background-position: 40px 10px;
-  opacity: 0.5;
-  animation: dark-ash-rise 10s linear infinite 2s; /* Delay para desencontro */
+/* Textura de Grão (Filme Analógico/Sujeira) */
+.dread-noise {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
 }
 
-
-/* --- FUNDO ANIMADO (Textura da Página) --- */
-.spirit-ink-bg {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  pointer-events: none; z-index: 0; mix-blend-mode: multiply;
-}
-.layer-1 {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.1'/%3E%3C/svg%3E");
-  opacity: 0.1;
-}
-.layer-2 {
-  background-image: radial-gradient(circle, #000 1px, transparent 1px);
-  background-size: 10px 10px; opacity: 0.05;
-  animation: ink-crawl 60s linear infinite;
-}
-
-/* --- ESTILO GERAL DOS PAINÉIS DE MANGÁ --- */
-/* Aplica a estrutura de quadro a todas as seções */
-.spirit-header, .spirit-image-wrapper, .spirit-stats, .spirit-content, .spirit-extras, .spirit-footer {
-    border: 3px solid var(--sp-ink);
-    background: var(--sp-paper);
-    position: relative; z-index: 2;
-    box-shadow: var(--sp-panel-shadow);
-    transition: transform 0.2s;
-}
-/* Efeito sutil de hover nos painéis */
-.spirit-container > div:hover {
-    transform: translate(-1px, -1px);
-    box-shadow: 7px 7px 0 rgba(0,0,0,0.2);
+/* Manchas de "Tinta Seca" no fundo (Vignette) */
+.dread-container::after {
+  content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background: radial-gradient(circle at 50% 0%, rgba(11, 30, 47, 0.15), transparent 60%),
+              radial-gradient(circle at 100% 100%, rgba(0, 0, 0, 0.8), transparent 50%);
 }
 
 
-/* --- PAINEL 1: HEADER (SELO) --- */
-.spirit-header {
-  padding: 20px;
-  display: flex; justify-content: center;
-  background: var(--sp-ink); /* Invertido para destaque */
-  border: 3px solid var(--sp-ink);
+/* --- HEADER --- */
+.dread-header {
+  text-align: center; position: relative; z-index: 2;
+  border-bottom: 1px solid var(--dr-border);
+  padding-bottom: 20px;
 }
 
-.header-seal-box {
-  background: var(--sp-paper);
-  color: var(--sp-ink);
-  padding: 15px 30px;
-  transform: rotate(-1deg);
-  border: 2px solid var(--sp-ink);
-  text-align: center;
-  /* Cantos cortados estilo ofuda */
-  clip-path: polygon(5% 0, 100% 0, 100% 90%, 95% 100%, 0 100%, 0 10%);
+.dread-title {
+  font-family: 'Cinzel', serif; /* Fonte Ritualística */
+  font-weight: 400; font-size: 2em; 
+  color: #d0d0d0; /* Quase branco, sem brilho */
+  text-transform: uppercase; margin: 0; letter-spacing: 2px;
+  /* Sombra sólida escura, nada de neon */
+  text-shadow: 0 4px 10px rgba(0,0,0,0.8);
 }
 
-.spirit-title {
-  font-family: 'Noto Serif JP', serif; font-weight: 900;
-  font-size: 1.8em; text-transform: uppercase; margin: 0; letter-spacing: 2px;
-  border-bottom: 2px solid var(--sp-blood);
-  display: inline-block; padding-bottom: 5px;
+.dread-subtitle {
+  font-family: 'Inter', sans-serif; font-size: 0.75em; 
+  color: var(--dr-blue-fade);
+  text-transform: uppercase; letter-spacing: 4px; margin-top: 10px;
+  font-weight: 400;
 }
 
-.spirit-subtitle {
-  font-family: 'Nosifer', cursive; font-size: 0.8em; color: var(--sp-ink);
-  text-transform: uppercase; margin-top: 8px; opacity: 0.8;
+
+/* --- IMAGEM --- */
+.dread-image-frame {
+  width: 100%; height: 380px; position: relative; z-index: 2;
+  border: 1px solid var(--dr-border);
+  background: #000;
 }
 
-/* --- PAINEL 2: IMAGEM --- */
-.spirit-image-wrapper {
-    margin: 0; /* Remove margens antigas */
-    overflow: hidden;
-    height: 380px;
-    padding: 5px; /* Moldura interna branca */
-}
-.spirit-image-frame {
-  width: 100%; height: 100%; position: relative; border: 2px solid var(--sp-ink); overflow: hidden;
-}
-.spirit-image-frame img {
+.dread-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  animation: subtle-horror 8s infinite alternate ease-in-out;
+  /* Filtro Frio e Dessaturado (Atmosfera Morta) */
+  filter: grayscale(0.6) sepia(0.2) hue-rotate(180deg) contrast(0.9) brightness(0.8);
+  transition: filter 1s ease;
 }
 
-/* Screentone Overlay */
-.spirit-screentone {
-  position: absolute; inset: 5px; pointer-events: none; z-index: 5;
-  background-image: radial-gradient(circle, #000 1px, transparent 1px);
-  background-size: 4px 4px; opacity: 0.3; mix-blend-mode: multiply;
+/* Overlay para uniformizar tons (Azul Petróleo Escuro) */
+.dread-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background: var(--dr-blue-deep);
+  opacity: 0.2; mix-blend-mode: overlay;
 }
 
-/* --- PAINEL 3: STATUS --- */
-.spirit-stats {
-  padding: 20px 30px; display: flex; flex-direction: column; gap: 20px; 
+/* Interação sutil: imagem "acorda" levemente */
+.dread-container:hover .dread-image-frame img {
+  filter: grayscale(0.4) sepia(0.1) hue-rotate(180deg) contrast(1.0) brightness(0.9);
+}
+
+
+/* --- STATUS --- */
+.dread-stats {
+  background: var(--dr-dark-grey); /* Bloco escuro sutil */
+  border: 1px solid var(--dr-border);
+  padding: 20px 30px;
+  display: flex; flex-direction: column; gap: 20px; 
+  position: relative; z-index: 2;
 }
 
 .jjk-dossier-status-item {
-  display: grid; grid-template-columns: 50px 1fr 70px; align-items: center; gap: 15px;
+  display: grid; grid-template-columns: 40px 1fr 60px; align-items: center; gap: 20px;
 }
 
 .jjk-dossier-status-label { 
-  font-family: 'Nosifer', cursive; font-size: 1em; color: var(--sp-ink);
+  font-family: 'Cinzel', serif; font-size: 0.8em; color: var(--dr-blue-fade);
   text-align: right; letter-spacing: 1px;
 }
 .jjk-dossier-status-value { 
-  font-family: 'Noto Serif JP', serif; font-size: 1.1em; color: var(--sp-ink);
-  text-align: right; font-weight: 900;
+  font-family: 'Inter', sans-serif; font-size: 0.85em; color: #888; 
+  text-align: right; font-weight: 300;
 }
 
+/* Barras Frias e Foscas */
 .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 14px; background: var(--sp-paper);
-  border: 2px solid var(--sp-ink);
-  box-shadow: inset 2px 2px 0 rgba(0,0,0,0.1);
+  width: 100%; height: 4px; /* Barra fina e elegante */
+  background: #151515;
+  border-radius: 0; overflow: hidden;
 }
 .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
-.jjk-dossier-status-bar-fill { height: 100%; border-right: 2px solid var(--sp-ink); }
 
-/* Cores Hachuradas Estilo Mangá */
+/* Cores Dessaturadas (Nada de Neon) */
 .jjk-dossier-hp-fill { 
-    background: repeating-linear-gradient(-45deg, var(--sp-blood), var(--sp-blood) 3px, var(--sp-paper) 3px, var(--sp-paper) 5px);
+    background: #5e2a2a; /* Vermelho Sangue Seco/Escuro */
 }
 .jjk-dossier-ea-fill { 
-    background: repeating-linear-gradient(-45deg, var(--sp-ghost-blue), var(--sp-ghost-blue) 3px, var(--sp-paper) 3px, var(--sp-paper) 5px);
+    background: var(--dr-blue-fade); /* Azul Esmaecido */
 }
 
-/* --- PAINEL 4: CONTEÚDO --- */
-.spirit-content {
-  padding: 30px 40px; font-size: 1.15em; line-height: 1.8; 
-  text-align: justify;
+
+/* --- CONTEÚDO --- */
+.dread-content {
+  padding: 10px 20px; font-size: 1.05em; line-height: 1.8; 
+  text-align: justify; position: relative; z-index: 2;
+  color: #a0a0a0;
 }
 
-.spirit-content b { 
-  font-weight: 900; color: var(--sp-blood);
-  text-transform: uppercase; font-family: 'Nosifer', cursive; font-size: 0.9em;
+.dread-content b { 
+  font-weight: 700; color: #d0d0d0;
 }
-.spirit-content i { 
-  font-family: 'Noto Serif JP', serif; font-weight: 700;
-  background: var(--sp-ink); color: var(--sp-paper); padding: 2px 5px;
-}
-
-/* --- PAINEL 5: EXTRAS --- */
-.spirit-extras {
-  margin: 0 30px; padding: 20px; /* Margem lateral para parecer uma nota colada */
-  transform: rotate(-1deg);
-}
-.spirit-extras::before {
-  content: 'ARQUIVO'; display: block; font-family: 'Nosifer', cursive; 
-  color: var(--sp-ink); font-size: 1.3em; margin-bottom: 10px; border-bottom: 2px solid var(--sp-ink);
+.dread-content i { 
+  font-family: 'Crimson Pro', serif; font-size: 1.1em;
+  color: var(--dr-blue-fade);
 }
 
-/* --- PAINEL 6: ASSINATURA --- */
-.spirit-footer {
-  padding: 30px; text-align: center;
-  background: var(--sp-ink); color: var(--sp-paper);
+/* --- EXTRAS (Selos/Arquivo) --- */
+.dread-extras {
+  margin: 0 20px; padding: 20px;
+  background: var(--dr-dark-grey);
+  border-left: 1px solid var(--dr-blue-mist);
+  position: relative; z-index: 2;
+  font-size: 0.9em;
 }
 
-.spirit-signature::after {
+.dread-extras::before {
+  content: 'REGISTRO'; display: block; 
+  font-family: 'Cinzel', serif; font-size: 0.8em; color: var(--dr-blue-mist);
+  margin-bottom: 10px; letter-spacing: 2px;
+}
+
+
+/* --- RODAPÉ & ASSINATURA --- */
+.dread-footer {
+  padding: 30px 0 10px; text-align: center;
+  border-top: 1px solid var(--dr-border);
+  position: relative; z-index: 2;
+}
+
+.dread-signature::after {
   content: 'Hiroto Gojo'; 
-  font-family: 'Nosifer', cursive; font-size: 2em;
-  color: var(--sp-paper); letter-spacing: 2px; text-transform: uppercase;
-  display: block;
-  text-shadow: 3px 3px 0 var(--sp-blood);
+  font-family: 'Crimson Pro', serif; font-style: italic;
+  font-size: 1.8em; color: var(--dr-text);
+  opacity: 0.6; letter-spacing: 1px;
 }
 
 /* Responsivo */
 @media (max-width: 600px) {
-  .spirit-container { width: 98%; margin: 20px auto; padding: 10px; gap: 15px; }
-  .spirit-header, .spirit-content, .spirit-stats, .spirit-footer { padding: 20px; }
-  .spirit-extras { margin: 0 10px; }
+  .dread-container { width: 100%; margin: 20px auto; border: none; padding: 20px; }
+  .dread-stats { padding: 15px; }
 }
