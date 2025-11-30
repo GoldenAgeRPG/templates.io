@@ -1,4 +1,4 @@
-/* --- TEMPLATE: SPIRITUAL DREAD v3 (FINAL - ISOLATED STATUS) --- */
+/* --- TEMPLATE: SPIRITUAL DREAD v3 (FINAL - ISOLATED STATUS + VOID FOOTER) --- */
 /* Arquivo: biskath-post.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&family=Cinzel:wght@400;700&display=swap');
@@ -28,6 +28,12 @@
 @keyframes ghost-float {
   0%, 100% { transform: translate(5px, 5px); opacity: 0.5; }
   50% { transform: translate(8px, 8px); opacity: 0.8; }
+}
+
+/* NOVO: Pulso do Vazio no Rodapé */
+@keyframes void-pulse {
+  0% { opacity: 0.6; transform: translateY(0) scale(1); }
+  100% { opacity: 1; transform: translateY(-10px) scale(1.05); }
 }
 
 /* --- CONTAINER PRINCIPAL --- */
@@ -216,17 +222,32 @@
   margin-bottom: 10px; letter-spacing: 2px;
 }
 
-/* --- RODAPÉ --- */
+/* --- RODAPÉ (COM EFEITO DE VAZIO) --- */
 .dread-footer {
-  padding: 30px 0 10px; text-align: center;
+  padding: 50px 0 20px; /* Aumentei o padding superior para o efeito */
+  text-align: center;
   border-top: 1px solid var(--dr-border);
   position: relative; z-index: 2;
+  overflow: hidden; /* Contém o efeito de vazio */
 }
+
+/* Efeito de Vazio/Escuridão Rastejante */
+.dread-footer::before {
+  content: ''; position: absolute; inset: 0; z-index: -1;
+  /* Gradiente profundo do preto para o transparente */
+  background: linear-gradient(to top, #000 0%, rgba(5,5,5,0.9) 40%, transparent 100%);
+  /* Animação de respiração lenta do abismo */
+  animation: void-pulse 8s ease-in-out infinite alternate;
+}
+
 .dread-signature::after {
   content: 'Hiroto Gojo'; 
   font-family: 'Crimson Pro', serif; font-style: italic;
   font-size: 1.8em; color: var(--dr-text);
-  opacity: 0.6; letter-spacing: 1px;
+  opacity: 0.7; /* Leve aumento de opacidade para contraste */
+  letter-spacing: 1px;
+  /* Sombra sutil para garantir leitura sobre o vazio */
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
 /* Responsivo */
