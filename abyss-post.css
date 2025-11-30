@@ -1,169 +1,215 @@
-/* --- TEMPLATE: ABYSS WALKER (SPIRIT MANIPULATION) --- */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Spectral:wght@400;600&display=swap');
+/* --- TEMPLATE: SPIRIT MANIPULATION (THE CURSED PARADE) --- */
+@import url('https://fonts.googleapis.com/css2?family=Creepster&family=Cinzel+Decorative:wght@700&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap');
 
 :root {
-  --abyss-bg: #05080a;
-  --abyss-panel: #0a0f14;
-  --abyss-blue: #4a6fa5;     /* Azul Gelo Escuro */
-  --abyss-ice: #a8d8ea;      /* Ciano Pálido */
-  --abyss-spirit: #1e2a38;   /* Cor das Esferas */
-  --abyss-text: #cfd8dc;
-  --abyss-border: #2c3e50;
+  --csm-bg: #08050a;
+  --csm-panel: #110a16;
+  --csm-purple: #6a0dad;    /* Roxo Profundo */
+  --csm-neon: #b300ff;      /* Roxo Neon */
+  --csm-sick: #ccff00;      /* Verde/Amarelo Doentio */
+  --csm-dark: #1a051a;
+  --csm-text: #dcdcdc;
 }
 
-/* Animação: Névoa Espiritual */
-@keyframes spirit-fog {
+/* Animação: Névoa de Espíritos (Fundo) */
+@keyframes spirit-smoke {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
 }
 
-/* Animação: Pulso da Esfera */
-@keyframes orb-pulse {
-  0%, 100% { box-shadow: 0 0 10px var(--abyss-blue); }
-  50% { box-shadow: 0 0 25px var(--abyss-ice); }
+/* Animação: Espiral Uzumaki */
+@keyframes uzumaki-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Animação: Pulsação Viscosa */
+@keyframes slime-pulse {
+  0%, 100% { box-shadow: 0 0 10px var(--csm-neon), inset 0 0 20px rgba(0,0,0,0.8); }
+  50% { box-shadow: 0 0 25px var(--csm-neon), inset 0 0 5px rgba(0,0,0,0.5); }
 }
 
 /* CONTAINER PRINCIPAL */
-.abyss-container {
+.csm-container {
   box-sizing: border-box;
   max-width: 750px;
   width: 95%;
   margin: 40px auto;
-  background-color: var(--abyss-bg);
+  background-color: var(--csm-bg);
   
-  /* Fundo de Névoa */
-  background-image: linear-gradient(120deg, #05080a 30%, #0f1b26 50%, #05080a 70%);
-  background-size: 200% 200%;
-  animation: spirit-fog 10s ease infinite;
+  /* Fundo: Névoa de Almas (Gradiente Complexo Animado) */
+  background-image: 
+    repeating-radial-gradient(circle at 50% 50%, transparent 0, rgba(0,0,0,0.8) 3px, transparent 10px),
+    linear-gradient(120deg, #0f0518, #240b36, #0f0518);
+  background-size: 100% 100%, 400% 400%;
   
-  border: 1px solid var(--abyss-border);
-  border-top: 4px solid var(--abyss-blue);
-  border-radius: 4px;
+  /* Borda de Energia Instável */
+  border: 2px solid var(--csm-purple);
+  border-radius: 8px 8px 40px 40px; /* Base arredondada como um caldeirão/portal */
+  box-shadow: 0 0 40px rgba(106, 13, 173, 0.3);
   
-  color: var(--abyss-text);
-  font-family: 'Lora', serif;
+  color: var(--csm-text);
+  font-family: 'Spectral', serif;
   position: relative;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
   padding: 0;
   overflow: hidden;
+  
+  animation: spirit-smoke 15s ease infinite;
 }
-.abyss-container * { box-sizing: border-box; }
+.csm-container * { box-sizing: border-box; }
 
-/* Detalhe Lateral (Fluxo de Almas) */
-.abyss-container::before {
-  content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 4px;
-  background: linear-gradient(to bottom, var(--abyss-bg), var(--abyss-ice), var(--abyss-bg));
-  opacity: 0.5;
+/* Efeito de "Gosma" escorrendo no topo (SVG Mask ou Border trick) */
+.csm-container::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 10px;
+  background: var(--csm-neon);
+  box-shadow: 0 0 20px var(--csm-neon);
+  z-index: 10; opacity: 0.7;
 }
 
 /* --- CABEÇALHO --- */
-.abyss-header {
-  text-align: center; padding: 40px 20px;
-  border-bottom: 1px solid var(--abyss-border);
+.csm-header {
+  padding: 40px 20px; text-align: center;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+  border-bottom: 1px solid var(--csm-purple);
   position: relative;
-  background: radial-gradient(circle at top, rgba(74, 111, 165, 0.1), transparent 70%);
+  z-index: 2;
 }
 
-/* Ícone Esfera Espiritual */
-.abyss-orb {
-  width: 40px; height: 40px; margin: 0 auto 15px;
-  background: radial-gradient(circle at 30% 30%, #fff, var(--abyss-ice), var(--abyss-blue), #000);
-  border-radius: 50%;
-  box-shadow: 0 0 15px var(--abyss-blue);
-  animation: orb-pulse 3s infinite;
+/* A Espiral (Uzumaki) */
+.csm-uzumaki {
+  width: 80px; height: 80px; margin: 0 auto 15px;
+  opacity: 0.8; filter: drop-shadow(0 0 10px var(--csm-neon));
+  animation: uzumaki-spin 20s linear infinite;
+}
+.csm-uzumaki path { fill: var(--csm-text); }
+
+.csm-title {
+  font-family: 'Cinzel Decorative', cursive; font-size: 2.5em;
+  color: #fff; margin: 0; letter-spacing: 2px;
+  text-shadow: 0 0 10px var(--csm-neon);
 }
 
-.abyss-title {
-  font-family: 'Cinzel', serif; font-size: 2.2em; color: var(--abyss-ice);
-  text-transform: uppercase; margin: 0; letter-spacing: 2px;
-  text-shadow: 0 0 10px rgba(168, 216, 234, 0.3);
-}
-.abyss-subtitle {
-  font-family: 'Spectral', serif; font-size: 0.9em; color: var(--abyss-blue);
-  text-transform: uppercase; letter-spacing: 4px; margin-top: 5px;
+.csm-subtitle {
+  font-family: 'Creepster', cursive; font-size: 1.1em;
+  color: var(--csm-sick); margin-top: 5px; text-transform: uppercase;
+  letter-spacing: 3px; opacity: 0.9;
 }
 
-/* --- IMAGEM (Moldura Fria) --- */
-.abyss-image-frame {
+/* --- IMAGEM (O Portal) --- */
+.csm-image-frame {
   width: 100%; height: 350px; position: relative;
-  border-top: 1px solid var(--abyss-border);
-  border-bottom: 1px solid var(--abyss-border);
   background: #000;
-  margin: 20px 0;
+  /* Mascara ovalada nas bordas para parecer um portal */
+  -webkit-mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
+  mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
+  margin: 10px 0;
 }
-.abyss-image-frame img {
+.csm-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  /* Filtro Gelado: Azulado e Baixa Saturação */
-  filter: contrast(1.1) sepia(0.2) hue-rotate(180deg) saturate(0.8);
-  transition: 0.5s;
+  filter: contrast(1.2) saturate(0.8) hue-rotate(-10deg);
+  transition: transform 5s ease;
 }
-/* Overlay de Névoa na Imagem */
-.abyss-image-frame::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to top, var(--abyss-bg), transparent 80%);
-  pointer-events: none;
+/* Efeito de Zoom lento constante (Inquietante) */
+.csm-container:hover .csm-image-frame img { transform: scale(1.1); }
+
+/* --- STATUS (Viscosos) --- */
+.csm-stats {
+  padding: 20px 40px; display: flex; flex-direction: column; gap: 15px;
+  position: relative; z-index: 2;
+  background: rgba(17, 10, 22, 0.8);
+  border-top: 1px solid var(--csm-purple);
+  border-bottom: 1px solid var(--csm-purple);
 }
 
-/* --- STATUS (Minimalista e Frio) --- */
-.abyss-stats {
-  padding: 10px 40px; display: flex; flex-direction: column; gap: 15px;
-  position: relative;
-}
 .jjk-dossier-status-item {
-  display: grid; grid-template-columns: 40px 1fr 80px; align-items: center; gap: 15px;
+  display: flex; align-items: center; justify-content: space-between; gap: 15px; margin-bottom: 5px; width: 100%;
 }
+
 .jjk-dossier-status-label {
-  font-family: 'Cinzel', serif; font-weight: 700;
-  color: var(--abyss-blue); font-size: 0.8em; text-align: right;
+  font-family: 'Creepster', cursive; color: var(--csm-sick);
+  font-size: 1.1em; width: 50px; text-align: right;
 }
+
 .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 6px; background: #111;
-  border-radius: 2px; overflow: hidden;
+  flex-grow: 1; height: 14px; background: #0a050a;
+  border: 1px solid var(--csm-purple);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: inset 0 0 5px #000;
 }
 .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
 
-/* HP: Azul Escuro */
+/* HP: Sangue Escuro e Roxo */
 .jjk-dossier-hp-fill {
-  height: 100%; background: var(--abyss-blue);
-  box-shadow: 0 0 5px var(--abyss-blue); transition: width 0.5s ease;
+  height: 100%;
+  background: linear-gradient(90deg, #3e0000, #800080);
+  border-radius: 20px;
+  box-shadow: 0 0 8px #800080;
+  transition: width 0.5s ease;
 }
-/* EA: Ciano Pálido (Almas) */
+
+/* EA: Ectoplasma Verde/Amarelo */
 .jjk-dossier-ea-fill {
-  height: 100%; background: var(--abyss-ice);
-  box-shadow: 0 0 8px var(--abyss-ice); transition: width 0.5s ease;
+  height: 100%;
+  background: linear-gradient(90deg, #2e7d32, var(--csm-sick));
+  border-radius: 20px;
+  box-shadow: 0 0 8px var(--csm-sick);
+  transition: width 0.5s ease;
 }
+
 .jjk-dossier-status-value {
-  font-family: 'Spectral', serif; font-weight: 600; font-size: 0.85em;
-  color: var(--abyss-text); text-align: right;
+  font-family: 'Cinzel Decorative', cursive; font-weight: 700;
+  color: #fff; min-width: 80px; text-align: right; font-size: 0.9em;
 }
+
 
 /* --- CONTEÚDO --- */
-.abyss-content {
+.csm-content {
   padding: 30px 40px; font-size: 1.1em; line-height: 1.8;
-  color: var(--abyss-text); text-align: justify; position: relative;
-  border-left: 1px solid rgba(74, 111, 165, 0.2);
-  margin: 10px 20px;
+  color: #ccc; text-align: justify; position: relative; z-index: 2;
+  /* Fundo manchado */
+  background: radial-gradient(circle at top right, rgba(106, 13, 173, 0.1), transparent 50%);
 }
-.abyss-content b { color: var(--abyss-ice); font-weight: 700; text-shadow: 0 0 5px rgba(168, 216, 234, 0.3); }
-.abyss-content i { color: var(--abyss-blue); font-style: italic; font-family: 'Spectral', serif; }
 
-/* --- EXTRAS (Lista de Espíritos) --- */
-.abyss-extras {
-  margin: 0 40px 30px 40px; padding: 15px;
-  background: rgba(74, 111, 165, 0.05);
-  border-top: 1px solid var(--abyss-blue);
-  border-bottom: 1px solid var(--abyss-blue);
-  font-size: 0.9em; color: var(--abyss-dim);
-  font-family: 'Spectral', serif; text-align: center;
+.csm-content b {
+  color: var(--csm-sick); font-weight: normal; font-family: 'Creepster', cursive; font-size: 1.1em; letter-spacing: 1px;
 }
-.abyss-extras::before {
-  content: 'ARSENAL ESPIRITUAL'; display: block;
-  font-family: 'Cinzel', serif; font-size: 0.7em; color: var(--abyss-blue);
-  margin-bottom: 5px; letter-spacing: 2px;
+.csm-content i {
+  color: var(--csm-neon); font-style: italic; font-weight: 700; text-shadow: 0 0 5px var(--csm-purple);
 }
+
+/* --- EXTRAS (O Contrato) --- */
+.csm-extras {
+  margin: 0 40px 30px 40px; padding: 20px;
+  background: #050205; border: 1px dashed var(--csm-purple);
+  color: var(--csm-text); font-family: 'Spectral', serif; font-size: 0.9em;
+  text-align: center; position: relative; z-index: 2;
+}
+
+.csm-extras::before {
+  content: 'SPIRIT LOG'; display: block;
+  font-family: 'Cinzel Decorative', cursive; color: var(--csm-neon);
+  font-size: 0.8em; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px;
+}
+
+/* --- ASSINATURA --- */
+.csm-footer {
+  padding: 20px; text-align: center; background: #020102;
+  border-top: 3px solid var(--csm-purple); position: relative; z-index: 2;
+}
+.csm-signature::after {
+  content: 'Mestre das Maldições'; /* Fallback */
+  font-family: 'Cinzel Decorative', cursive; font-size: 1.5em;
+  background: linear-gradient(to right, var(--csm-sick), var(--csm-neon));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 5px var(--csm-purple)); font-weight: 900;
+}
+
+/* Assinatura do Jogador (Admin) */
+.csm-signature.p-geto::after { content: 'SUGURU GETO'; }
+.csm-signature.p-kenjaku::after { content: 'KENJAKU'; }
 
 @media (max-width: 600px) {
-  .abyss-header { padding: 30px 15px; }
-  .abyss-content, .abyss-stats, .abyss-extras { padding-left: 20px; padding-right: 20px; }
+  .csm-header { padding: 30px 15px; }
+  .csm-content, .csm-stats, .csm-extras { padding-left: 20px; padding-right: 20px; }
 }
