@@ -1,210 +1,237 @@
-/* --- TEMPLATE: SPIRIT MANIPULATION (BLUE MATTE) --- */
+/* --- TEMPLATE: SPIRIT MANIPULATION (HORROR BLUE v2) --- */
+/* Arquivo: biskath-post.css */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Spectral:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nosifer&family=Philosopher:ital,wght@0,400;0,700;1,400&display=swap');
 
 :root {
-  --sp-bg: #080a10;       /* Preto Azulado Profundo */
-  --sp-panel: #0f121a;    /* Painel Cinza Azulado */
-  --sp-blue-dark: #1c2a3a; /* Azul Petróleo Escuro (Matte) */
-  --sp-blue-ghost: #3a506b; /* Azul Fantasma (Desaturado) */
-  --sp-bone: #c0c5ce;     /* Cor de Osso (Texto) */
-  --sp-border: #2a3b4d;   /* Borda Azul Morto */
+  --sp-bg: #020305;         /* Preto quase absoluto */
+  --sp-dark-blue: #0a0f18;  /* Azul Petróleo Morto */
+  --sp-ghost: #546a7b;      /* Azul Fantasma Pálido */
+  --sp-glow: #2b3d52;       /* Brilho Fosco */
+  --sp-text: #c0c5ce;       /* Cinza Osso */
+  --sp-accent: #1e2833;     /* Detalhes Escuros */
 }
 
 /* --- ANIMAÇÕES --- */
 
-/* Animação Lateral: Fluxo de Espíritos */
-@keyframes spirit-rise {
-  0% { background-position: 0 0; opacity: 0.3; }
-  50% { opacity: 0.6; }
-  100% { background-position: 0 -100px; opacity: 0.3; }
+/* Névoa Infinita (Sem saltos) */
+@keyframes fog-loop {
+  0% { background-position: 0 0; }
+  100% { background-position: 1000px 0; } /* Move horizontalmente */
 }
 
-/* Animação: Respiração do Container */
-@keyframes ghost-breath {
-  0% { box-shadow: 0 0 20px rgba(0,0,0,0.8); border-color: var(--sp-blue-dark); }
-  50% { box-shadow: 0 0 30px rgba(58, 80, 107, 0.15); border-color: var(--sp-blue-ghost); }
-  100% { box-shadow: 0 0 20px rgba(0,0,0,0.8); border-color: var(--sp-blue-dark); }
+/* Glitch de Terror na Imagem */
+@keyframes horror-glitch {
+  0% { transform: translate(0,0); filter: hue-rotate(180deg) contrast(1.2) blur(0px); }
+  92% { transform: translate(0,0); filter: hue-rotate(180deg) contrast(1.2) blur(0px); }
+  93% { transform: translate(-2px, 1px); filter: hue-rotate(150deg) contrast(2) blur(1px); opacity: 0.8; }
+  94% { transform: translate(2px, -1px); filter: invert(0.2) hue-rotate(200deg); opacity: 0.9; }
+  95% { transform: translate(0,0); filter: hue-rotate(180deg) contrast(1.2) blur(0px); }
+  98% { transform: scale(1.02) translate(1px, 0); filter: hue-rotate(210deg) brightness(1.5); }
+  100% { transform: translate(0,0); filter: hue-rotate(180deg) contrast(1.2) blur(0px); }
 }
 
-/* Névoa de Fundo */
-@keyframes fog-move {
-  0% { transform: translateX(-10%); opacity: 0.2; }
-  50% { transform: translateX(10%); opacity: 0.4; }
-  100% { transform: translateX(-10%); opacity: 0.2; }
+/* Pulso da "Caixa" */
+@keyframes box-breathe {
+  0%, 100% { box-shadow: 0 0 20px rgba(0,0,0,0.9); border-color: #1a2634; }
+  50% { box-shadow: 0 0 40px rgba(43, 61, 82, 0.3); border-color: #3e566f; }
 }
 
-/* --- CONTAINER --- */
+/* --- CONTAINER PRINCIPAL --- */
 .spirit-container {
-  box-sizing: border-box; max-width: 750px; width: 95%; margin: 40px auto;
+  box-sizing: border-box; max-width: 720px; width: 95%; margin: 40px auto;
   
   background-color: var(--sp-bg);
-  /* Textura de Ruído Sutil para ficar Matte (Fosco) */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.07'/%3E%3C/svg%3E");
-  
-  border: 1px solid var(--sp-border);
+  border: 1px solid var(--sp-accent);
   position: relative; 
   box-shadow: 0 20px 60px #000;
   overflow: hidden;
-  color: var(--sp-bone);
-  font-family: 'Spectral', serif;
+  color: var(--sp-text);
+  font-family: 'Philosopher', sans-serif; /* Fonte mística para leitura */
   
-  /* Animação de respiração lenta */
-  animation: ghost-breath 6s infinite ease-in-out;
+  /* Quebrando a forma de caixa */
+  clip-path: polygon(
+    0 0, 100% 0, 
+    100% 95%, 95% 100%, 
+    5% 100%, 0 95%
+  );
+  
+  animation: box-breathe 5s infinite ease-in-out;
 }
 .spirit-container * { box-sizing: border-box; }
 
-/* DECORAÇÃO LATERAL (Fluxo de Espíritos) */
-.spirit-container::before, .spirit-container::after {
-  content: ''; position: absolute; top: 0; bottom: 0; width: 40px;
-  /* Gradiente que simula fumaça/almas subindo */
-  background: repeating-linear-gradient(
-    0deg,
-    transparent 0px,
-    var(--sp-blue-dark) 10px,
-    transparent 40px,
-    var(--sp-blue-ghost) 80px,
-    transparent 120px
-  );
-  mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
-  -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
-  
-  opacity: 0.3; z-index: 0;
-  animation: spirit-rise 10s linear infinite;
-}
-.spirit-container::before { left: 0; border-right: 1px solid rgba(255,255,255,0.05); }
-.spirit-container::after { right: 0; border-left: 1px solid rgba(255,255,255,0.05); }
-
-/* Névoa Interna */
-.spirit-fog {
-  position: absolute; inset: 0;
-  background: radial-gradient(circle at 50% 50%, rgba(58, 80, 107, 0.1), transparent 80%);
-  animation: fog-move 15s ease-in-out infinite;
+/* --- NÉVOA DE FUNDO (CAMADAS) --- */
+.spirit-fog-layer {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
   pointer-events: none; z-index: 0;
+  background-repeat: repeat-x;
+  background-size: 1000px 100%; /* Tamanho fixo para o loop perfeito */
+}
+
+/* Camada 1: Fumaça Lenta */
+.layer-1 {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.01' numOctaves='5' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.2'/%3E%3C/svg%3E");
+  opacity: 0.3;
+  animation: fog-loop 40s linear infinite;
+}
+
+/* Camada 2: Ruído Rápido (Interferência) */
+.layer-2 {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
+  opacity: 0.1;
+  animation: fog-loop 2s steps(4) infinite; /* Efeito estático de TV */
 }
 
 /* --- HEADER --- */
 .spirit-header {
-  text-align: center; padding: 40px 20px; 
-  border-bottom: 1px solid var(--sp-border);
+  text-align: center; padding: 50px 20px 30px; 
+  border-bottom: 1px solid var(--sp-accent);
   position: relative; z-index: 2;
-  background: linear-gradient(to bottom, rgba(28, 42, 58, 0.2), transparent);
+  background: radial-gradient(at top, rgba(43, 61, 82, 0.2), transparent 70%);
 }
 
 .spirit-title {
-  font-family: 'Cinzel', serif; font-weight: 700; font-size: 2.2em; 
-  color: #e0e5eb; /* Branco Osso */
-  text-transform: uppercase; margin: 0; letter-spacing: 4px; 
-  text-shadow: 0 5px 10px rgba(0,0,0,0.8);
-}
-.spirit-subtitle {
-  font-family: 'Spectral', serif; font-size: 0.9em; color: var(--sp-blue-ghost);
-  text-transform: uppercase; letter-spacing: 3px; margin-top: 5px;
-  font-weight: 700;
+  font-family: 'Nosifer', cursive; /* Fonte de Terror */
+  font-size: 2em; 
+  color: #e0e5eb; 
+  text-transform: uppercase; margin: 0; 
+  text-shadow: 0 5px 10px #000;
+  letter-spacing: 1px;
 }
 
-/* --- IMAGEM --- */
-.spirit-image-frame {
-  width: 100%; height: 350px; position: relative; margin: 0;
-  border-top: 1px solid #000; border-bottom: 1px solid var(--sp-border);
-  z-index: 2; overflow: hidden;
+.spirit-subtitle {
+  font-family: 'Philosopher', sans-serif; font-size: 1em; color: var(--sp-ghost);
+  text-transform: uppercase; letter-spacing: 4px; margin-top: 10px;
+  font-weight: 700; border-top: 1px solid var(--sp-accent); display: inline-block; padding-top: 5px;
 }
+
+/* --- IMAGEM DE TERROR --- */
+.spirit-image-frame {
+  width: 100%; height: 380px; position: relative; margin: 0;
+  border-top: 1px solid #000; border-bottom: 4px solid var(--sp-dark-blue);
+  z-index: 2; overflow: hidden;
+  background: #000;
+}
+
 .spirit-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  filter: desaturate(0.4) contrast(1.1) brightness(0.9); /* Look cinematográfico */
-  transition: transform 5s ease;
+  /* FILTRO DE TERROR: Azulado, Alto Contraste, Escuro */
+  filter: hue-rotate(180deg) contrast(1.2) saturate(0.8);
+  /* Animação de Glitch */
+  animation: horror-glitch 4s infinite;
 }
-.spirit-image-frame:hover img { transform: scale(1.05); }
 
-/* Overlay escuro para integrar a imagem */
+/* Overlay de TV Antiga/Estática */
+.spirit-static-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0,0,0,0.2) 0px,
+    rgba(0,0,0,0.2) 2px,
+    transparent 2px,
+    transparent 4px
+  );
+  background-size: 100% 4px;
+  opacity: 0.5;
+}
+
+/* Sombra interna na imagem */
 .spirit-image-frame::after {
   content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to bottom, transparent 70%, var(--sp-bg));
-  pointer-events: none;
+  box-shadow: inset 0 0 50px #000; pointer-events: none;
 }
 
 /* --- STATUS --- */
 .spirit-stats {
-  padding: 20px 50px; display: flex; flex-direction: column; gap: 15px; 
+  padding: 20px 40px; display: flex; flex-direction: column; gap: 20px; 
   position: relative; z-index: 2;
-  background: rgba(8, 10, 16, 0.8);
+  background: rgba(5, 7, 10, 0.9);
+  border-bottom: 1px solid var(--sp-accent);
 }
 
 .jjk-dossier-status-item {
   display: grid; grid-template-columns: 50px 1fr 60px; align-items: center; gap: 15px;
 }
 
-/* Labels e Valores */
 .jjk-dossier-status-label { 
-  font-family: 'Cinzel', serif; font-size: 0.8em; color: var(--sp-blue-ghost); 
-  text-align: right; letter-spacing: 1px;
+  font-family: 'Nosifer', cursive; font-size: 0.9em; color: var(--sp-ghost); 
+  text-align: right; letter-spacing: 1px; opacity: 0.7;
 }
 .jjk-dossier-status-value { 
-  font-family: 'Spectral', serif; font-size: 0.9em; color: #fff; 
-  text-align: right; opacity: 0.7;
+  font-family: 'Philosopher', serif; font-size: 1em; color: #fff; 
+  text-align: right; opacity: 0.8; font-weight: bold;
 }
 
-/* Barras (Tubo Escuro) */
+/* Barras */
 .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 6px; background: #000; 
-  border: 1px solid var(--sp-border);
-  border-radius: 0; overflow: hidden;
+  width: 100%; height: 8px; background: #000; 
+  border: 1px solid #222;
+  border-radius: 4px; overflow: hidden;
 }
 
 .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
 
-/* Cores das Barras (Azul Fosco) */
+/* Cores das Barras (Azul Espectral e Roxo Morte) */
 .jjk-dossier-hp-fill { 
-  height: 100%; background: #4a6fa5; 
-  box-shadow: 0 0 5px rgba(74, 111, 165, 0.3); transition: width 0.5s ease; 
+  background: linear-gradient(90deg, #1f2f42, #4a6fa5); 
+  box-shadow: 0 0 10px rgba(74, 111, 165, 0.2); 
 }
 .jjk-dossier-ea-fill { 
-  height: 100%; background: #2f455c; 
-  box-shadow: 0 0 5px rgba(47, 69, 92, 0.3); transition: width 0.5s ease; 
+  background: linear-gradient(90deg, #111, #3a506b); 
+  box-shadow: 0 0 10px rgba(58, 80, 107, 0.2); 
 }
 
 /* --- CONTEÚDO --- */
 .spirit-content {
-  padding: 30px 50px; font-size: 1.15em; line-height: 1.9; color: var(--sp-bone);
+  padding: 40px 50px; font-size: 1.1em; line-height: 1.8; color: var(--sp-text);
   text-align: justify; position: relative; z-index: 2;
+  background: transparent;
 }
 
 .spirit-content b { 
-  color: #fff; text-shadow: 0 0 10px rgba(58, 80, 107, 0.5); 
+  color: #fff; font-family: 'Nosifer', cursive; font-size: 0.9em; font-weight: normal;
+  text-shadow: 0 0 5px rgba(255,255,255,0.3);
 }
 .spirit-content i { 
-  color: var(--sp-blue-ghost); font-family: 'Cinzel', serif; font-size: 0.9em; 
+  color: var(--sp-ghost); border-bottom: 1px solid var(--sp-accent);
 }
 
 /* --- EXTRAS --- */
 .spirit-extras {
-  margin: 0 50px 30px 50px; padding: 15px;
-  background: rgba(28, 42, 58, 0.2);
-  border-left: 2px solid var(--sp-blue-ghost);
-  color: var(--sp-bone); font-family: 'Spectral', serif; font-size: 0.95em;
+  margin: 0 50px 30px 50px; padding: 20px;
+  background: rgba(10, 15, 24, 0.4);
+  border: 1px solid var(--sp-accent);
+  color: var(--sp-text); font-family: 'Philosopher', serif;
   position: relative; z-index: 2;
+  /* Visual de Papel Queimado */
+  clip-path: polygon(2% 0, 100% 0, 100% 95%, 98% 100%, 0 100%, 0 5%);
+}
+
+.spirit-extras::before {
+  content: 'GRIMÓRIO'; display: block; font-family: 'Nosifer', cursive; 
+  color: var(--sp-ghost); font-size: 1.2em; margin-bottom: 10px; opacity: 0.5;
 }
 
 /* --- RODAPÉ --- */
 .spirit-footer {
-  padding: 25px; text-align: center; background: #040508;
-  border-top: 1px solid var(--sp-border); 
+  padding: 30px; text-align: center; background: #010101;
+  border-top: 1px solid var(--sp-accent); 
   position: relative; z-index: 2;
 }
 
 .spirit-signature::after {
   content: 'Hiroto Gojo'; 
-  font-family: 'Cinzel', serif; font-size: 1.4em;
-  color: var(--sp-blue-ghost); letter-spacing: 3px; font-weight: 700;
+  font-family: 'Nosifer', cursive; font-size: 1.6em;
+  color: var(--sp-ghost); letter-spacing: 2px;
   text-transform: uppercase;
-  /* Efeito de fumaça no texto */
-  filter: blur(0.4px);
-  text-shadow: 0 0 10px rgba(58, 80, 107, 0.5);
+  /* Efeito de fumaça e mancha */
+  text-shadow: 2px 2px 0px #000, 0 0 15px rgba(84, 106, 123, 0.4);
+  opacity: 0.8;
 }
 
 /* Responsivo */
 @media (max-width: 600px) {
-  .spirit-container { padding: 0; }
-  .spirit-container::before, .spirit-container::after { width: 15px; }
-  .spirit-header, .spirit-content, .spirit-stats { padding: 20px 30px; }
+  .spirit-container { padding: 0; width: 100%; border: none; }
+  .spirit-header, .spirit-content, .spirit-stats { padding: 20px 25px; }
+  .spirit-extras { margin: 0 25px 30px; }
 }
