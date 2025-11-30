@@ -1,0 +1,169 @@
+/* --- TEMPLATE: ABYSS WALKER (SPIRIT MANIPULATION) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,600;1,400&family=Spectral:wght@400;600&display=swap');
+
+:root {
+  --abyss-bg: #05080a;
+  --abyss-panel: #0a0f14;
+  --abyss-blue: #4a6fa5;     /* Azul Gelo Escuro */
+  --abyss-ice: #a8d8ea;      /* Ciano Pálido */
+  --abyss-spirit: #1e2a38;   /* Cor das Esferas */
+  --abyss-text: #cfd8dc;
+  --abyss-border: #2c3e50;
+}
+
+/* Animação: Névoa Espiritual */
+@keyframes spirit-fog {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Animação: Pulso da Esfera */
+@keyframes orb-pulse {
+  0%, 100% { box-shadow: 0 0 10px var(--abyss-blue); }
+  50% { box-shadow: 0 0 25px var(--abyss-ice); }
+}
+
+/* CONTAINER PRINCIPAL */
+.abyss-container {
+  box-sizing: border-box;
+  max-width: 750px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--abyss-bg);
+  
+  /* Fundo de Névoa */
+  background-image: linear-gradient(120deg, #05080a 30%, #0f1b26 50%, #05080a 70%);
+  background-size: 200% 200%;
+  animation: spirit-fog 10s ease infinite;
+  
+  border: 1px solid var(--abyss-border);
+  border-top: 4px solid var(--abyss-blue);
+  border-radius: 4px;
+  
+  color: var(--abyss-text);
+  font-family: 'Lora', serif;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+  padding: 0;
+  overflow: hidden;
+}
+.abyss-container * { box-sizing: border-box; }
+
+/* Detalhe Lateral (Fluxo de Almas) */
+.abyss-container::before {
+  content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 4px;
+  background: linear-gradient(to bottom, var(--abyss-bg), var(--abyss-ice), var(--abyss-bg));
+  opacity: 0.5;
+}
+
+/* --- CABEÇALHO --- */
+.abyss-header {
+  text-align: center; padding: 40px 20px;
+  border-bottom: 1px solid var(--abyss-border);
+  position: relative;
+  background: radial-gradient(circle at top, rgba(74, 111, 165, 0.1), transparent 70%);
+}
+
+/* Ícone Esfera Espiritual */
+.abyss-orb {
+  width: 40px; height: 40px; margin: 0 auto 15px;
+  background: radial-gradient(circle at 30% 30%, #fff, var(--abyss-ice), var(--abyss-blue), #000);
+  border-radius: 50%;
+  box-shadow: 0 0 15px var(--abyss-blue);
+  animation: orb-pulse 3s infinite;
+}
+
+.abyss-title {
+  font-family: 'Cinzel', serif; font-size: 2.2em; color: var(--abyss-ice);
+  text-transform: uppercase; margin: 0; letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(168, 216, 234, 0.3);
+}
+.abyss-subtitle {
+  font-family: 'Spectral', serif; font-size: 0.9em; color: var(--abyss-blue);
+  text-transform: uppercase; letter-spacing: 4px; margin-top: 5px;
+}
+
+/* --- IMAGEM (Moldura Fria) --- */
+.abyss-image-frame {
+  width: 100%; height: 350px; position: relative;
+  border-top: 1px solid var(--abyss-border);
+  border-bottom: 1px solid var(--abyss-border);
+  background: #000;
+  margin: 20px 0;
+}
+.abyss-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  /* Filtro Gelado: Azulado e Baixa Saturação */
+  filter: contrast(1.1) sepia(0.2) hue-rotate(180deg) saturate(0.8);
+  transition: 0.5s;
+}
+/* Overlay de Névoa na Imagem */
+.abyss-image-frame::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--abyss-bg), transparent 80%);
+  pointer-events: none;
+}
+
+/* --- STATUS (Minimalista e Frio) --- */
+.abyss-stats {
+  padding: 10px 40px; display: flex; flex-direction: column; gap: 15px;
+  position: relative;
+}
+.jjk-dossier-status-item {
+  display: grid; grid-template-columns: 40px 1fr 80px; align-items: center; gap: 15px;
+}
+.jjk-dossier-status-label {
+  font-family: 'Cinzel', serif; font-weight: 700;
+  color: var(--abyss-blue); font-size: 0.8em; text-align: right;
+}
+.jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 6px; background: #111;
+  border-radius: 2px; overflow: hidden;
+}
+.jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
+
+/* HP: Azul Escuro */
+.jjk-dossier-hp-fill {
+  height: 100%; background: var(--abyss-blue);
+  box-shadow: 0 0 5px var(--abyss-blue); transition: width 0.5s ease;
+}
+/* EA: Ciano Pálido (Almas) */
+.jjk-dossier-ea-fill {
+  height: 100%; background: var(--abyss-ice);
+  box-shadow: 0 0 8px var(--abyss-ice); transition: width 0.5s ease;
+}
+.jjk-dossier-status-value {
+  font-family: 'Spectral', serif; font-weight: 600; font-size: 0.85em;
+  color: var(--abyss-text); text-align: right;
+}
+
+/* --- CONTEÚDO --- */
+.abyss-content {
+  padding: 30px 40px; font-size: 1.1em; line-height: 1.8;
+  color: var(--abyss-text); text-align: justify; position: relative;
+  border-left: 1px solid rgba(74, 111, 165, 0.2);
+  margin: 10px 20px;
+}
+.abyss-content b { color: var(--abyss-ice); font-weight: 700; text-shadow: 0 0 5px rgba(168, 216, 234, 0.3); }
+.abyss-content i { color: var(--abyss-blue); font-style: italic; font-family: 'Spectral', serif; }
+
+/* --- EXTRAS (Lista de Espíritos) --- */
+.abyss-extras {
+  margin: 0 40px 30px 40px; padding: 15px;
+  background: rgba(74, 111, 165, 0.05);
+  border-top: 1px solid var(--abyss-blue);
+  border-bottom: 1px solid var(--abyss-blue);
+  font-size: 0.9em; color: var(--abyss-dim);
+  font-family: 'Spectral', serif; text-align: center;
+}
+.abyss-extras::before {
+  content: 'ARSENAL ESPIRITUAL'; display: block;
+  font-family: 'Cinzel', serif; font-size: 0.7em; color: var(--abyss-blue);
+  margin-bottom: 5px; letter-spacing: 2px;
+}
+
+@media (max-width: 600px) {
+  .abyss-header { padding: 30px 15px; }
+  .abyss-content, .abyss-stats, .abyss-extras { padding-left: 20px; padding-right: 20px; }
+}
