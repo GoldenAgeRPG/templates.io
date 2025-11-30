@@ -1,10 +1,10 @@
-/* --- TEMPLATE: SPIRITUAL DREAD (NO NEON, NO TECH) --- */
+/* --- TEMPLATE: SPIRITUAL DREAD v2 (LIQUID DRIP & ISOLATED STATS) --- */
 /* Arquivo: biskath-post.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&family=Cinzel:wght@400;700&display=swap');
 
 :root {
-  /* PALETA TÉCNICA (Solicitada) */
+  /* PALETA TÉCNICA (MANTIDA) */
   --dr-black: #050505;        /* Preto Absoluto (Base) */
   --dr-dark-grey: #0a0a0a;    /* Cinza Muito Escuro (Blocos) */
   --dr-blue-deep: #0b1e2f;    /* Azul Petróleo Escuro */
@@ -12,6 +12,15 @@
   --dr-blue-fade: #1a3b52;    /* Azul Esmaecido */
   --dr-text: #b0b0b0;         /* Cinza Leitura */
   --dr-border: rgba(28, 44, 58, 0.3); /* Borda Sutil */
+  --dr-liquid: #081420;       /* Cor do líquido viscoso */
+}
+
+/* --- ANIMAÇÃO DO LÍQUIDO VISCOSO --- */
+@keyframes viscous-drip {
+  0% { background-position: 0 -50px; opacity: 0; }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.6; }
+  100% { background-position: 0 150px; opacity: 0; }
 }
 
 /* --- CONTAINER PRINCIPAL --- */
@@ -21,26 +30,40 @@
   background-color: var(--dr-black);
   color: var(--dr-text);
   font-family: 'Inter', sans-serif;
-  font-weight: 300; /* Fonte fina para tensão */
+  font-weight: 300;
   
   border: 1px solid var(--dr-border);
   position: relative; 
-  box-shadow: 0 20px 50px #000; /* Sombra pesada e difusa */
+  overflow: hidden; /* Mantém o líquido dentro */
+  box-shadow: 0 20px 50px #000;
   
-  /* Layout com espaçamento largo (Sensação de Vazio) */
   padding: 40px;
   display: flex; flex-direction: column; gap: 30px;
 }
-.dread-container * { box-sizing: border-box; }
+/* Reset global para garantir isolamento */
+.dread-container * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* Textura de Grão (Filme Analógico/Sujeira) */
+/* LÍQUIDO ESCURO PINGANDO (Pseudo-elemento no topo) */
+.dread-container::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0;
+  height: 100px; z-index: 10; pointer-events: none;
+  /* SVG de gotas escorrendo */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,0 L100,0 L100,20 C80,40 90,60 70,80 C60,90 50,70 40,80 C30,90 20,50 10,60 C0,70 10,30 0,20 Z' fill='%23081420'/%3E%3C/svg%3E");
+  background-size: 50px 100px;
+  background-repeat: repeat-x;
+  opacity: 0.7;
+  filter: drop-shadow(0 2px 5px rgba(0,0,0,0.8));
+  animation: viscous-drip 8s linear infinite;
+}
+
+
+/* Textura de Grão (MANTIDA) */
 .dread-noise {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
   opacity: 0.05;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
 }
-
-/* Manchas de "Tinta Seca" no fundo (Vignette) */
+/* Vignette (MANTIDA) */
 .dread-container::after {
   content: ''; position: absolute; inset: 0; pointer-events: none; z-index: 1;
   background: radial-gradient(circle at 50% 0%, rgba(11, 30, 47, 0.15), transparent 60%),
@@ -54,88 +77,89 @@
   border-bottom: 1px solid var(--dr-border);
   padding-bottom: 20px;
 }
-
 .dread-title {
-  font-family: 'Cinzel', serif; /* Fonte Ritualística */
-  font-weight: 400; font-size: 2em; 
-  color: #d0d0d0; /* Quase branco, sem brilho */
-  text-transform: uppercase; margin: 0; letter-spacing: 2px;
-  /* Sombra sólida escura, nada de neon */
+  font-family: 'Cinzel', serif; font-weight: 400; font-size: 2em; 
+  color: #d0d0d0; text-transform: uppercase; margin: 0; letter-spacing: 2px;
   text-shadow: 0 4px 10px rgba(0,0,0,0.8);
 }
-
 .dread-subtitle {
-  font-family: 'Inter', sans-serif; font-size: 0.75em; 
-  color: var(--dr-blue-fade);
-  text-transform: uppercase; letter-spacing: 4px; margin-top: 10px;
-  font-weight: 400;
+  font-family: 'Inter', sans-serif; font-size: 0.75em; color: var(--dr-blue-fade);
+  text-transform: uppercase; letter-spacing: 4px; margin-top: 10px; font-weight: 400;
 }
 
 
-/* --- IMAGEM --- */
+/* --- IMAGEM (FORMA ORGÂNICA) --- */
 .dread-image-frame {
   width: 100%; height: 380px; position: relative; z-index: 2;
-  border: 1px solid var(--dr-border);
   background: #000;
+  
+  /* MUDANÇA: Clip-path para forma irregular/desgastada */
+  clip-path: polygon(2% 0%, 99% 1%, 100% 96%, 97% 100%, 1% 98%, 0% 3%);
+  /* Filtro de sombra para dar volume à forma cortada */
+  filter: drop-shadow(0 10px 20px rgba(0,0,0,0.5));
+  
+  border: none; /* Remove borda sólida */
 }
 
 .dread-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  /* Filtro Frio e Dessaturado (Atmosfera Morta) */
   filter: grayscale(0.6) sepia(0.2) hue-rotate(180deg) contrast(0.9) brightness(0.8);
   transition: filter 1s ease;
 }
-
-/* Overlay para uniformizar tons (Azul Petróleo Escuro) */
 .dread-overlay {
   position: absolute; inset: 0; pointer-events: none;
-  background: var(--dr-blue-deep);
-  opacity: 0.2; mix-blend-mode: overlay;
+  background: var(--dr-blue-deep); opacity: 0.2; mix-blend-mode: overlay;
 }
-
-/* Interação sutil: imagem "acorda" levemente */
 .dread-container:hover .dread-image-frame img {
   filter: grayscale(0.4) sepia(0.1) hue-rotate(180deg) contrast(1.0) brightness(0.9);
 }
 
 
-/* --- STATUS --- */
+/* --- STATUS (ISOLADOS E SEM QUEBRA DE LINHA) --- */
 .dread-stats {
-  background: var(--dr-dark-grey); /* Bloco escuro sutil */
+  background: var(--dr-dark-grey);
   border: 1px solid var(--dr-border);
   padding: 20px 30px;
   display: flex; flex-direction: column; gap: 20px; 
   position: relative; z-index: 2;
 }
 
-.jjk-dossier-status-item {
-  display: grid; grid-template-columns: 40px 1fr 60px; align-items: center; gap: 20px;
+/* Seletor específico para isolar o grid */
+.dread-container .jjk-dossier-status-item {
+  display: grid; 
+  grid-template-columns: 40px 1fr 70px; /* Aumentado para 70px para segurança */
+  align-items: center; gap: 20px;
+  border: none; background: transparent; margin: 0; padding: 0; /* Resets de segurança */
 }
 
-.jjk-dossier-status-label { 
+.dread-container .jjk-dossier-status-label { 
   font-family: 'Cinzel', serif; font-size: 0.8em; color: var(--dr-blue-fade);
   text-align: right; letter-spacing: 1px;
+  margin: 0; padding: 0;
 }
-.jjk-dossier-status-value { 
+
+/* AQUI ESTÁ A CORREÇÃO PRINCIPAL PARA OS NÚMEROS */
+.dread-container .jjk-dossier-status-value { 
   font-family: 'Inter', sans-serif; font-size: 0.85em; color: #888; 
   text-align: right; font-weight: 300;
+  /* Impede quebra de linha */
+  white-space: nowrap; 
+  /* Garante que não vaze se for muito grande (corta com ...) */
+  overflow: hidden; text-overflow: ellipsis;
+  margin: 0; padding: 0;
 }
 
-/* Barras Frias e Foscas */
-.jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 4px; /* Barra fina e elegante */
-  background: #151515;
-  border-radius: 0; overflow: hidden;
+/* Barras Frias */
+.dread-container .jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 4px; background: #151515;
+  border-radius: 0; overflow: hidden; border: none; margin: 0;
 }
-.jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
+.dread-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; margin: 0; padding: 0;}
+.dread-container .jjk-dossier-status-bar-fill { height: 100%; border-radius: 0; margin: 0; }
 
-/* Cores Dessaturadas (Nada de Neon) */
-.jjk-dossier-hp-fill { 
-    background: #5e2a2a; /* Vermelho Sangue Seco/Escuro */
-}
-.jjk-dossier-ea-fill { 
-    background: var(--dr-blue-fade); /* Azul Esmaecido */
-}
+/* Cores das Barras */
+.dread-container .jjk-dossier-hp-fill { background: #5e2a2a; }
+.dread-container .jjk-dossier-ea-fill { background: var(--dr-blue-fade); }
 
 
 /* --- CONTEÚDO --- */
@@ -144,38 +168,30 @@
   text-align: justify; position: relative; z-index: 2;
   color: #a0a0a0;
 }
-
-.dread-content b { 
-  font-weight: 700; color: #d0d0d0;
-}
+.dread-content b { font-weight: 700; color: #d0d0d0; }
 .dread-content i { 
-  font-family: 'Crimson Pro', serif; font-size: 1.1em;
-  color: var(--dr-blue-fade);
+  font-family: 'Crimson Pro', serif; font-size: 1.1em; color: var(--dr-blue-fade);
 }
 
-/* --- EXTRAS (Selos/Arquivo) --- */
+/* --- EXTRAS --- */
 .dread-extras {
   margin: 0 20px; padding: 20px;
   background: var(--dr-dark-grey);
   border-left: 1px solid var(--dr-blue-mist);
-  position: relative; z-index: 2;
-  font-size: 0.9em;
+  position: relative; z-index: 2; font-size: 0.9em;
 }
-
 .dread-extras::before {
   content: 'REGISTRO'; display: block; 
   font-family: 'Cinzel', serif; font-size: 0.8em; color: var(--dr-blue-mist);
   margin-bottom: 10px; letter-spacing: 2px;
 }
 
-
-/* --- RODAPÉ & ASSINATURA --- */
+/* --- RODAPÉ --- */
 .dread-footer {
   padding: 30px 0 10px; text-align: center;
   border-top: 1px solid var(--dr-border);
   position: relative; z-index: 2;
 }
-
 .dread-signature::after {
   content: 'Hiroto Gojo'; 
   font-family: 'Crimson Pro', serif; font-style: italic;
@@ -187,4 +203,6 @@
 @media (max-width: 600px) {
   .dread-container { width: 100%; margin: 20px auto; border: none; padding: 20px; }
   .dread-stats { padding: 15px; }
+  /* Garante que os status não quebrem no mobile */
+  .dread-container .jjk-dossier-status-item { grid-template-columns: 40px 1fr 65px; gap: 10px; }
 }
