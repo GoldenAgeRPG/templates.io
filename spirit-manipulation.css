@@ -1,18 +1,18 @@
-/* --- TEMPLATE: SPIRIT MANIPULATION (THE CURSED PARADE) --- */
+/* --- TEMPLATE: HIROTO GOJO (FROZEN SPIRITS) --- */
 @import url('https://fonts.googleapis.com/css2?family=Creepster&family=Cinzel+Decorative:wght@700&family=Spectral:ital,wght@0,400;0,600;1,400&display=swap');
 
 :root {
-  --csm-bg: #08050a;
-  --csm-panel: #110a16;
-  --csm-purple: #6a0dad;    /* Roxo Profundo */
-  --csm-neon: #b300ff;      /* Roxo Neon */
-  --csm-sick: #ccff00;      /* Verde/Amarelo Doentio */
-  --csm-dark: #1a051a;
-  --csm-text: #dcdcdc;
+  --bis-bg: #020305;
+  --bis-panel: #05080c;
+  --bis-blue: #0044ff;      /* Azul Profundo */
+  --bis-ice: #00f3ff;       /* Ciano Gelo/Espectral */
+  --bis-dark-blue: #001133;
+  --bis-text: #e0f7fa;
+  --bis-border: #1c2e4a;
 }
 
-/* Animação: Névoa de Espíritos (Fundo) */
-@keyframes spirit-smoke {
+/* Animação: Névoa Espiritual Fria */
+@keyframes spirit-fog {
   0% { background-position: 0% 50%; }
   50% { background-position: 100% 50%; }
   100% { background-position: 0% 50%; }
@@ -21,105 +21,107 @@
 /* Animação: Espiral Uzumaki */
 @keyframes uzumaki-spin {
   0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+  100% { transform: rotate(-360deg); } /* Gira ao contrário (Frio) */
 }
 
-/* Animação: Pulsação Viscosa */
-@keyframes slime-pulse {
-  0%, 100% { box-shadow: 0 0 10px var(--csm-neon), inset 0 0 20px rgba(0,0,0,0.8); }
-  50% { box-shadow: 0 0 25px var(--csm-neon), inset 0 0 5px rgba(0,0,0,0.5); }
+/* Animação: Pulso de Gelo */
+@keyframes ice-pulse {
+  0%, 100% { box-shadow: 0 0 10px var(--bis-ice), inset 0 0 20px rgba(0,0,0,0.8); border-color: var(--bis-blue); }
+  50% { box-shadow: 0 0 25px var(--bis-blue), inset 0 0 5px rgba(0,0,0,0.5); border-color: var(--bis-ice); }
 }
 
 /* CONTAINER PRINCIPAL */
-.csm-container {
+.biskath-container {
   box-sizing: border-box;
   max-width: 750px;
   width: 95%;
   margin: 40px auto;
-  background-color: var(--csm-bg);
+  background-color: var(--bis-bg);
   
-  /* Fundo: Névoa de Almas (Gradiente Complexo Animado) */
+  /* Fundo: Névoa Congelada */
   background-image: 
-    repeating-radial-gradient(circle at 50% 50%, transparent 0, rgba(0,0,0,0.8) 3px, transparent 10px),
-    linear-gradient(120deg, #0f0518, #240b36, #0f0518);
+    repeating-radial-gradient(circle at 50% 50%, transparent 0, rgba(0, 10, 20, 0.8) 2px, transparent 8px),
+    linear-gradient(120deg, #020305, #0a1525, #020305);
   background-size: 100% 100%, 400% 400%;
   
-  /* Borda de Energia Instável */
-  border: 2px solid var(--csm-purple);
-  border-radius: 8px 8px 40px 40px; /* Base arredondada como um caldeirão/portal */
-  box-shadow: 0 0 40px rgba(106, 13, 173, 0.3);
+  /* Borda de Gelo Negro */
+  border: 2px solid var(--bis-blue);
+  border-radius: 8px 8px 40px 40px;
+  box-shadow: 0 0 40px rgba(0, 68, 255, 0.2);
   
-  color: var(--csm-text);
+  color: var(--bis-text);
   font-family: 'Spectral', serif;
   position: relative;
   padding: 0;
   overflow: hidden;
   
-  animation: spirit-smoke 15s ease infinite;
+  animation: spirit-fog 15s ease infinite;
 }
-.csm-container * { box-sizing: border-box; }
+.biskath-container * { box-sizing: border-box; }
 
-/* Efeito de "Gosma" escorrendo no topo (SVG Mask ou Border trick) */
-.csm-container::before {
-  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 10px;
-  background: var(--csm-neon);
-  box-shadow: 0 0 20px var(--csm-neon);
-  z-index: 10; opacity: 0.7;
+/* Gosma/Gelo escorrendo no topo */
+.biskath-container::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 8px;
+  background: var(--bis-ice);
+  box-shadow: 0 0 20px var(--bis-ice);
+  z-index: 10; opacity: 0.6;
 }
 
 /* --- CABEÇALHO --- */
-.csm-header {
+.biskath-header {
   padding: 40px 20px; text-align: center;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-  border-bottom: 1px solid var(--csm-purple);
+  background: linear-gradient(to bottom, rgba(0,5,15,0.95), transparent);
+  border-bottom: 1px solid var(--bis-blue);
   position: relative;
   z-index: 2;
 }
 
-/* A Espiral (Uzumaki) */
-.csm-uzumaki {
+/* A Espiral (Uzumaki Azul) */
+.biskath-uzumaki {
   width: 80px; height: 80px; margin: 0 auto 15px;
-  opacity: 0.8; filter: drop-shadow(0 0 10px var(--csm-neon));
-  animation: uzumaki-spin 20s linear infinite;
+  opacity: 0.9; filter: drop-shadow(0 0 10px var(--bis-blue));
+  animation: uzumaki-spin 25s linear infinite;
 }
-.csm-uzumaki path { fill: var(--csm-text); }
+.biskath-uzumaki path { fill: var(--bis-text); }
 
-.csm-title {
+.biskath-title {
   font-family: 'Cinzel Decorative', cursive; font-size: 2.5em;
   color: #fff; margin: 0; letter-spacing: 2px;
-  text-shadow: 0 0 10px var(--csm-neon);
+  text-shadow: 0 0 15px var(--bis-ice);
 }
 
-.csm-subtitle {
+.biskath-subtitle {
   font-family: 'Creepster', cursive; font-size: 1.1em;
-  color: var(--csm-sick); margin-top: 5px; text-transform: uppercase;
-  letter-spacing: 3px; opacity: 0.9;
+  color: var(--bis-ice); margin-top: 5px; text-transform: uppercase;
+  letter-spacing: 3px; opacity: 0.8;
 }
 
-/* --- IMAGEM (O Portal) --- */
-.csm-image-frame {
+/* --- IMAGEM --- */
+.biskath-image-frame {
   width: 100%; height: 350px; position: relative;
   background: #000;
-  /* Mascara ovalada nas bordas para parecer um portal */
+  /* Mascara ovalada (Portal) */
   -webkit-mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
   mask-image: radial-gradient(ellipse at center, black 60%, transparent 100%);
   margin: 10px 0;
+  border-top: 1px solid rgba(0, 243, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 243, 255, 0.1);
 }
-.csm-image-frame img {
+.biskath-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  filter: contrast(1.2) saturate(0.8) hue-rotate(-10deg);
+  /* Filtro Frio/Morto */
+  filter: contrast(1.2) saturate(0.5) hue-rotate(190deg) brightness(0.9);
   transition: transform 5s ease;
 }
-/* Efeito de Zoom lento constante (Inquietante) */
-.csm-container:hover .csm-image-frame img { transform: scale(1.1); }
+.biskath-container:hover .biskath-image-frame img { transform: scale(1.05); filter: contrast(1.2) saturate(0.8) hue-rotate(190deg); }
 
-/* --- STATUS (Viscosos) --- */
-.csm-stats {
+/* --- STATUS (Frio) --- */
+.biskath-stats {
   padding: 20px 40px; display: flex; flex-direction: column; gap: 15px;
   position: relative; z-index: 2;
-  background: rgba(17, 10, 22, 0.8);
-  border-top: 1px solid var(--csm-purple);
-  border-bottom: 1px solid var(--csm-purple);
+  background: rgba(2, 5, 10, 0.8);
+  border-top: 1px solid var(--bis-blue);
+  border-bottom: 1px solid var(--bis-blue);
 }
 
 .jjk-dossier-status-item {
@@ -127,33 +129,33 @@
 }
 
 .jjk-dossier-status-label {
-  font-family: 'Creepster', cursive; color: var(--csm-sick);
+  font-family: 'Creepster', cursive; color: var(--bis-ice);
   font-size: 1.1em; width: 50px; text-align: right;
 }
 
 .jjk-dossier-status-bar-wrapper {
-  flex-grow: 1; height: 14px; background: #0a050a;
-  border: 1px solid var(--csm-purple);
+  flex-grow: 1; height: 14px; background: #020305;
+  border: 1px solid var(--bis-blue);
   border-radius: 20px; overflow: hidden;
   box-shadow: inset 0 0 5px #000;
 }
 .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
 
-/* HP: Sangue Escuro e Roxo */
+/* HP: Azul Profundo (Sangue Congelado) */
 .jjk-dossier-hp-fill {
   height: 100%;
-  background: linear-gradient(90deg, #3e0000, #800080);
+  background: linear-gradient(90deg, #001133, #0044ff);
   border-radius: 20px;
-  box-shadow: 0 0 8px #800080;
+  box-shadow: 0 0 8px var(--bis-blue);
   transition: width 0.5s ease;
 }
 
-/* EA: Ectoplasma Verde/Amarelo */
+/* EA: Ciano Espectral */
 .jjk-dossier-ea-fill {
   height: 100%;
-  background: linear-gradient(90deg, #2e7d32, var(--csm-sick));
+  background: linear-gradient(90deg, #006064, var(--bis-ice));
   border-radius: 20px;
-  box-shadow: 0 0 8px var(--csm-sick);
+  box-shadow: 0 0 8px var(--bis-ice);
   transition: width 0.5s ease;
 }
 
@@ -162,54 +164,53 @@
   color: #fff; min-width: 80px; text-align: right; font-size: 0.9em;
 }
 
-
 /* --- CONTEÚDO --- */
-.csm-content {
+.biskath-content {
   padding: 30px 40px; font-size: 1.1em; line-height: 1.8;
-  color: #ccc; text-align: justify; position: relative; z-index: 2;
-  /* Fundo manchado */
-  background: radial-gradient(circle at top right, rgba(106, 13, 173, 0.1), transparent 50%);
+  color: var(--bis-text); text-align: justify; position: relative; z-index: 2;
+  background: radial-gradient(circle at top right, rgba(0, 68, 255, 0.1), transparent 60%);
 }
 
-.csm-content b {
-  color: var(--csm-sick); font-weight: normal; font-family: 'Creepster', cursive; font-size: 1.1em; letter-spacing: 1px;
+.biskath-content b {
+  color: var(--bis-ice); font-weight: normal; font-family: 'Creepster', cursive; font-size: 1.1em; letter-spacing: 1px;
+  text-shadow: 0 0 5px var(--bis-blue);
 }
-.csm-content i {
-  color: var(--csm-neon); font-style: italic; font-weight: 700; text-shadow: 0 0 5px var(--csm-purple);
+.biskath-content i {
+  color: var(--bis-blue); font-style: italic; font-weight: 700; 
 }
 
-/* --- EXTRAS (O Contrato) --- */
-.csm-extras {
+/* --- EXTRAS (Grimório) --- */
+.biskath-extras {
   margin: 0 40px 30px 40px; padding: 20px;
-  background: #050205; border: 1px dashed var(--csm-purple);
-  color: var(--csm-text); font-family: 'Spectral', serif; font-size: 0.9em;
+  background: #030407; border: 1px dashed var(--bis-blue);
+  color: #8baec2; font-family: 'Spectral', serif; font-size: 0.9em;
   text-align: center; position: relative; z-index: 2;
 }
 
-.csm-extras::before {
+.biskath-extras::before {
   content: 'SPIRIT LOG'; display: block;
-  font-family: 'Cinzel Decorative', cursive; color: var(--csm-neon);
-  font-size: 0.8em; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px;
+  font-family: 'Cinzel Decorative', cursive; color: var(--bis-ice);
+  font-size: 0.8em; margin-bottom: 10px; border-bottom: 1px solid #2c3e50; padding-bottom: 5px;
 }
 
-/* --- ASSINATURA --- */
-.csm-footer {
-  padding: 20px; text-align: center; background: #020102;
-  border-top: 3px solid var(--csm-purple); position: relative; z-index: 2;
+/* --- RODAPÉ --- */
+.biskath-footer {
+  padding: 20px; text-align: center; background: #020203;
+  border-top: 3px solid var(--bis-blue); position: relative; z-index: 2;
 }
-.csm-signature::after {
-  content: 'Mestre das Maldições'; /* Fallback */
-  font-family: 'Cinzel Decorative', cursive; font-size: 1.5em;
-  background: linear-gradient(to right, var(--csm-sick), var(--csm-neon));
+
+/* ASSINATURA ESTILIZADA */
+.biskath-signature::after {
+  content: 'HIROTO GOJO';
+  font-family: 'Cinzel Decorative', cursive; font-size: 1.8em;
+  /* Gradiente Metálico Azulado */
+  background: linear-gradient(to right, var(--bis-ice), #fff, var(--bis-blue));
   -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 5px var(--csm-purple)); font-weight: 900;
+  filter: drop-shadow(0 0 8px var(--bis-blue)); font-weight: 900;
+  letter-spacing: 2px;
 }
-
-/* Assinatura do Jogador (Admin) */
-.csm-signature.p-geto::after { content: 'SUGURU GETO'; }
-.csm-signature.p-kenjaku::after { content: 'KENJAKU'; }
 
 @media (max-width: 600px) {
-  .csm-header { padding: 30px 15px; }
-  .csm-content, .csm-stats, .csm-extras { padding-left: 20px; padding-right: 20px; }
+  .biskath-header { padding: 30px 15px; }
+  .biskath-content, .biskath-stats, .biskath-extras { padding-left: 20px; padding-right: 20px; }
 }
