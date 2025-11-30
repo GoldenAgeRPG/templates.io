@@ -1,4 +1,4 @@
-/* --- TEMPLATE: SPIRITUAL DREAD v3 (FINAL - ISOLATED STATUS) --- */
+/* --- TEMPLATE: SPIRITUAL DREAD vFINAL (BUDDHIST FRAME EDITION) --- */
 /* Arquivo: biskath-post.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&family=Cinzel:wght@400;700&display=swap');
@@ -11,6 +11,8 @@
   --dr-blue-fade: #1a3b52;    
   --dr-text: #b0b0b0;         
   --dr-border: rgba(28, 44, 58, 0.3);
+  /* Nova cor para a moldura espiritual */
+  --dr-buddhist-gold: #8a7b5c; 
 }
 
 /* --- ANIMAÇÕES --- */
@@ -30,16 +32,24 @@
   50% { transform: translate(8px, 8px); opacity: 0.8; }
 }
 
-/* --- CONTAINER PRINCIPAL --- */
+/* --- CONTAINER PRINCIPAL (COM MOLDURA ESPIRITUAL) --- */
 .dread-container {
   box-sizing: border-box; max-width: 720px; width: 95%; margin: 60px auto;
   background-color: var(--dr-black);
   color: var(--dr-text);
   font-family: 'Inter', sans-serif; font-weight: 300;
+  
+  /* Borda Interna (Original) */
   border: 1px solid var(--dr-border);
+  
+  /* MOLDURA BUDISTA EXTERNA (Adicionada via Sombra Sólida) */
+  box-shadow: 
+    0 0 0 6px var(--dr-black),       /* Espaço negativo (Separador) */
+    0 0 0 8px var(--dr-buddhist-gold), /* A Moldura de Ouro Envelhecido */
+    0 20px 60px #000;                /* Sombra de profundidade (Original intensificada) */
+
   position: relative; 
   overflow: hidden; 
-  box-shadow: 0 20px 50px #000;
   padding: 50px 40px 40px; 
   display: flex; flex-direction: column; gap: 30px;
 }
@@ -187,7 +197,7 @@
 }
 
 /* Cores das Barras (Forçadas) */
-.dread-container .jjk-dossier-status-bar-fill { height: 100%; border-radius: 0; border: none; margin: 0; }
+.dread-container .jjk-dossier-status-bar-fill { height: 100%; border-radius: 0; border: none; margin: 0; padding: 0; }
 .dread-container .jjk-dossier-hp-fill { background: #5e2a2a !important; box-shadow: none !important; }
 .dread-container .jjk-dossier-ea-fill { background: var(--dr-blue-fade) !important; box-shadow: none !important; }
 
