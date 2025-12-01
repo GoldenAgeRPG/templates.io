@@ -1,19 +1,26 @@
-/* --- TEMPLATE: FESTIVAL DO SOLSTÍCIO (NATAL DARK) --- */
-@import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Cinzel:wght@700&family=Roboto+Mono:wght@400;700&display=swap');
+/* --- TEMPLATE: FESTIVAL DO SOLSTÍCIO (FROZEN SILVER THEME) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@400;700&family=Roboto+Mono:wght@400;700&display=swap');
 
 :root {
-  --xmas-bg: #050a05;       /* Verde Quase Preto */
-  --xmas-panel: #0f1a10;    /* Painel Verde Escuro */
-  --xmas-red: #b71c1c;      /* Vermelho Sangue */
-  --xmas-gold: #ffb300;     /* Ouro */
-  --xmas-text: #e8f5e9;     /* Branco Gelo */
-  --xmas-border: #2e7d32;   /* Verde Borda */
+  --xmas-bg: #020502;       /* Verde-Preto Profundo */
+  --xmas-panel: #08120a;    /* Painel Interno Escuro */
+  --xmas-ice: #4dd0e1;      /* Ciano Gelo (Destaque Principal) */
+  --xmas-silver: #cfd8dc;   /* Prata (Texto e Títulos) */
+  --xmas-text: #eceff1;     /* Branco Gelo (Texto Comum) */
+  --xmas-border: #37474f;   /* Azul Petróleo Escuro (Bordas) */
+  --xmas-glow: rgba(77, 208, 225, 0.25); /* Brilho gelado suave */
 }
 
-/* Animação: Neve Caindo */
+/* Animação: Neve Caindo (Mais suave) */
 @keyframes snow-fall {
   0% { background-position: 0 0, 0 0; }
   100% { background-position: 50px 100px, 20px 200px; }
+}
+
+/* Animação: Brilho Gélido nas bordas */
+@keyframes ice-shimmer {
+  0%, 100% { border-color: var(--xmas-ice); box-shadow: 0 0 20px var(--xmas-glow); }
+  50% { border-color: #80deea; box-shadow: 0 0 40px var(--xmas-glow), inset 0 0 10px var(--xmas-glow); }
 }
 
 .xmas-container {
@@ -23,20 +30,22 @@
   margin: 30px auto;
   background-color: var(--xmas-bg);
   
-  /* Fundo de Neve */
+  /* Fundo de Neve Sutil */
   background-image: 
-    radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
-    radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+    radial-gradient(rgba(255,255,255,0.15) 1px, transparent 1px),
+    radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
   background-size: 30px 30px, 50px 50px;
-  animation: snow-fall 20s linear infinite;
+  animation: snow-fall 25s linear infinite;
   
-  border: 2px solid var(--xmas-red);
-  border-top: 6px solid var(--xmas-red);
+  /* Bordas de Gelo */
+  border: 2px solid var(--xmas-ice);
+  border-top: 4px solid var(--xmas-ice);
   border-radius: 8px;
-  box-shadow: 0 0 30px rgba(0,20,0,0.8);
+  box-shadow: 0 0 30px rgba(0,0,0,0.9);
   font-family: 'Roboto Mono', monospace;
   color: var(--xmas-text);
   overflow: hidden;
+  animation: ice-shimmer 5s infinite ease-in-out;
 }
 
 .xmas-container * { box-sizing: border-box; }
@@ -44,50 +53,50 @@
 /* CABEÇALHO */
 .xmas-header {
   text-align: center; padding: 40px 20px;
-  background: linear-gradient(180deg, rgba(20,0,0,0.9), rgba(5,10,5,0.8));
-  border-bottom: 2px solid var(--xmas-gold);
+  background: linear-gradient(180deg, rgba(5,15,10,0.95), rgba(2,5,2,0.8));
+  border-bottom: 1px solid var(--xmas-border);
   position: relative;
 }
 
 .xmas-icon {
-  font-size: 3em; color: var(--xmas-red); margin-bottom: 10px;
-  filter: drop-shadow(0 0 10px rgba(255,0,0,0.5));
+  font-size: 3em; color: var(--xmas-ice); margin-bottom: 10px;
+  filter: drop-shadow(0 0 15px var(--xmas-glow));
 }
 
 .xmas-title {
-  font-family: 'Mountains of Christmas', cursive;
-  font-size: 3em; color: var(--xmas-gold); margin: 0;
-  text-shadow: 2px 2px 0 #000; letter-spacing: 2px;
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.8em; color: var(--xmas-silver); margin: 0;
+  text-shadow: 0 0 10px rgba(207, 216, 220, 0.3); letter-spacing: 1px;
 }
 
 .xmas-subtitle {
-  font-family: 'Cinzel', serif; font-size: 0.9em; color: var(--xmas-text);
-  text-transform: uppercase; letter-spacing: 4px; margin-top: 5px; opacity: 0.8;
+  font-family: 'Cinzel', serif; font-size: 0.9em; color: var(--xmas-ice);
+  text-transform: uppercase; letter-spacing: 4px; margin-top: 5px; opacity: 0.9;
 }
 
 /* CORPO */
-.xmas-body { padding: 30px; background: rgba(0,0,0,0.6); }
+.xmas-body { padding: 30px; background: rgba(2, 5, 2, 0.7); }
 
 .xmas-section-title {
-  font-family: 'Cinzel', serif; font-size: 1.4em; color: var(--xmas-red);
+  font-family: 'Cinzel', serif; font-size: 1.4em; color: var(--xmas-silver);
   border-bottom: 1px solid var(--xmas-border); padding-bottom: 10px; margin-bottom: 20px;
-  text-transform: uppercase;
+  text-transform: uppercase; letter-spacing: 1px;
 }
 
-.xmas-text { font-size: 0.9em; line-height: 1.6; margin-bottom: 20px; color: #ccc; }
+.xmas-text { font-size: 0.9em; line-height: 1.7; margin-bottom: 20px; color: #b0bec5; }
 
 /* REGRAS */
 .xmas-rules {
-  background: rgba(20, 40, 20, 0.4);
+  background: rgba(38, 50, 56, 0.3); /* Azul Petróleo muito transparente */
   border: 1px solid var(--xmas-border);
-  border-left: 4px solid var(--xmas-gold);
+  border-left: 4px solid var(--xmas-ice);
   padding: 15px; border-radius: 4px;
   margin-bottom: 30px;
 }
 .xmas-rules ul { list-style: none; padding: 0; margin: 0; }
 .xmas-rules li { margin-bottom: 8px; font-size: 0.85em; }
-.xmas-rules strong { color: var(--xmas-gold); }
-.xmas-warning { color: var(--xmas-red); font-weight: bold; text-transform: uppercase; font-size: 0.8em; margin-top: 10px; display: block; }
+.xmas-rules strong { color: var(--xmas-ice); }
+.xmas-warning { color: #ff8a80; /* Vermelho claro suave para alerta */ font-weight: bold; text-transform: uppercase; font-size: 0.8em; margin-top: 10px; display: block; }
 
 /* GRID DE ITENS */
 .xmas-grid {
@@ -97,29 +106,35 @@
 
 .xmas-item {
   display: grid; grid-template-columns: 40px 1fr auto;
-  background: rgba(255,255,255,0.05);
-  padding: 8px 15px; border-radius: 4px;
+  background: rgba(255,255,255,0.03);
+  padding: 8px 15px; border-radius: 2px;
   align-items: center; transition: 0.2s;
-  border: 1px solid transparent;
+  border: 1px solid var(--xmas-border);
 }
-.xmas-item:hover { background: rgba(255,255,255,0.1); border-color: var(--xmas-gold); }
+.xmas-item:hover { background: rgba(77, 208, 225, 0.05); border-color: var(--xmas-ice); }
 
-.num { color: var(--xmas-gold); font-weight: bold; font-family: 'Cinzel'; }
-.name { color: #fff; font-weight: bold; }
-.type { color: #888; font-size: 0.9em; text-transform: uppercase; }
+.num { color: var(--xmas-silver); font-weight: bold; font-family: 'Cinzel'; opacity: 0.7; }
+.name { color: var(--xmas-text); font-weight: 600; }
+.type { color: #78909c; font-size: 0.85em; text-transform: uppercase; }
 
-/* Cores de Raridade */
-.rare { border: 1px solid #a4c639; background: rgba(164, 198, 57, 0.1); }
+/* Cores de Raridade (Ajustadas para o tema frio) */
+.rare { border-color: #a4c639; background: rgba(164, 198, 57, 0.05); }
 .rare .type { color: #a4c639; }
 
-.epic { border: 1px solid #c52020; background: rgba(197, 32, 32, 0.1); }
-.epic .type { color: #c52020; }
+.epic { border-color: #e57373; background: rgba(229, 115, 115, 0.05); }
+.epic .type { color: #e57373; }
 
-.legend { border: 1px solid #7c4dff; background: rgba(124, 77, 255, 0.1); }
-.legend .type { color: #7c4dff; }
+.legend { border-color: #9575cd; background: rgba(149, 117, 205, 0.05); }
+.legend .type { color: #9575cd; }
 
-.mythic { border: 1px solid gold; background: linear-gradient(90deg, rgba(255,215,0,0.1), rgba(255,215,0,0.2)); }
-.mythic .num, .mythic .name, .mythic .type { color: gold; text-shadow: 0 0 5px rgba(255,215,0,0.5); }
+/* Mítico agora é Diamante/Platina */
+.mythic {
+  border-color: var(--xmas-ice);
+  background: linear-gradient(90deg, rgba(77, 208, 225, 0.1), rgba(207, 216, 220, 0.1));
+  box-shadow: inset 0 0 10px rgba(77, 208, 225, 0.2);
+}
+.mythic .num, .mythic .name { color: var(--xmas-ice); text-shadow: 0 0 8px var(--xmas-glow); }
+.mythic .type { color: var(--xmas-silver); }
 
 /* GLOSSÁRIO */
 .glossary-grid {
@@ -127,11 +142,12 @@
   gap: 15px; margin-top: 20px;
 }
 .glossary-item {
-  background: #0a0f0a; border: 1px solid var(--xmas-border);
+  background: rgba(8, 18, 10, 0.6); border: 1px solid var(--xmas-border);
   padding: 15px; border-radius: 4px; font-size: 0.8em;
 }
-.g-name { color: var(--xmas-gold); font-weight: bold; margin-bottom: 5px; display: block; font-size: 1.1em; }
-.g-desc { color: #aaa; line-height: 1.4; }
+.g-name { color: var(--xmas-silver); font-weight: bold; margin-bottom: 5px; display: block; font-size: 1.1em; font-family: 'Cinzel', serif; }
+.g-desc { color: #b0bec5; line-height: 1.4; }
+.glossary-item:hover { border-color: var(--xmas-ice); }
 
 @media (max-width: 600px) {
   .xmas-item { grid-template-columns: 30px 1fr; gap: 5px; }
