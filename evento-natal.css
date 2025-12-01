@@ -1,0 +1,140 @@
+/* --- TEMPLATE: FESTIVAL DO SOLSTÍCIO (NATAL DARK) --- */
+@import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Cinzel:wght@700&family=Roboto+Mono:wght@400;700&display=swap');
+
+:root {
+  --xmas-bg: #050a05;       /* Verde Quase Preto */
+  --xmas-panel: #0f1a10;    /* Painel Verde Escuro */
+  --xmas-red: #b71c1c;      /* Vermelho Sangue */
+  --xmas-gold: #ffb300;     /* Ouro */
+  --xmas-text: #e8f5e9;     /* Branco Gelo */
+  --xmas-border: #2e7d32;   /* Verde Borda */
+}
+
+/* Animação: Neve Caindo */
+@keyframes snow-fall {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 50px 100px, 20px 200px; }
+}
+
+.xmas-container {
+  box-sizing: border-box;
+  max-width: 850px;
+  width: 95%;
+  margin: 30px auto;
+  background-color: var(--xmas-bg);
+  
+  /* Fundo de Neve */
+  background-image: 
+    radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px),
+    radial-gradient(rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 30px 30px, 50px 50px;
+  animation: snow-fall 20s linear infinite;
+  
+  border: 2px solid var(--xmas-red);
+  border-top: 6px solid var(--xmas-red);
+  border-radius: 8px;
+  box-shadow: 0 0 30px rgba(0,20,0,0.8);
+  font-family: 'Roboto Mono', monospace;
+  color: var(--xmas-text);
+  overflow: hidden;
+}
+
+.xmas-container * { box-sizing: border-box; }
+
+/* CABEÇALHO */
+.xmas-header {
+  text-align: center; padding: 40px 20px;
+  background: linear-gradient(180deg, rgba(20,0,0,0.9), rgba(5,10,5,0.8));
+  border-bottom: 2px solid var(--xmas-gold);
+  position: relative;
+}
+
+.xmas-icon {
+  font-size: 3em; color: var(--xmas-red); margin-bottom: 10px;
+  filter: drop-shadow(0 0 10px rgba(255,0,0,0.5));
+}
+
+.xmas-title {
+  font-family: 'Mountains of Christmas', cursive;
+  font-size: 3em; color: var(--xmas-gold); margin: 0;
+  text-shadow: 2px 2px 0 #000; letter-spacing: 2px;
+}
+
+.xmas-subtitle {
+  font-family: 'Cinzel', serif; font-size: 0.9em; color: var(--xmas-text);
+  text-transform: uppercase; letter-spacing: 4px; margin-top: 5px; opacity: 0.8;
+}
+
+/* CORPO */
+.xmas-body { padding: 30px; background: rgba(0,0,0,0.6); }
+
+.xmas-section-title {
+  font-family: 'Cinzel', serif; font-size: 1.4em; color: var(--xmas-red);
+  border-bottom: 1px solid var(--xmas-border); padding-bottom: 10px; margin-bottom: 20px;
+  text-transform: uppercase;
+}
+
+.xmas-text { font-size: 0.9em; line-height: 1.6; margin-bottom: 20px; color: #ccc; }
+
+/* REGRAS */
+.xmas-rules {
+  background: rgba(20, 40, 20, 0.4);
+  border: 1px solid var(--xmas-border);
+  border-left: 4px solid var(--xmas-gold);
+  padding: 15px; border-radius: 4px;
+  margin-bottom: 30px;
+}
+.xmas-rules ul { list-style: none; padding: 0; margin: 0; }
+.xmas-rules li { margin-bottom: 8px; font-size: 0.85em; }
+.xmas-rules strong { color: var(--xmas-gold); }
+.xmas-warning { color: var(--xmas-red); font-weight: bold; text-transform: uppercase; font-size: 0.8em; margin-top: 10px; display: block; }
+
+/* GRID DE ITENS */
+.xmas-grid {
+  display: grid; grid-template-columns: 1fr; gap: 5px;
+  font-size: 0.8em;
+}
+
+.xmas-item {
+  display: grid; grid-template-columns: 40px 1fr auto;
+  background: rgba(255,255,255,0.05);
+  padding: 8px 15px; border-radius: 4px;
+  align-items: center; transition: 0.2s;
+  border: 1px solid transparent;
+}
+.xmas-item:hover { background: rgba(255,255,255,0.1); border-color: var(--xmas-gold); }
+
+.num { color: var(--xmas-gold); font-weight: bold; font-family: 'Cinzel'; }
+.name { color: #fff; font-weight: bold; }
+.type { color: #888; font-size: 0.9em; text-transform: uppercase; }
+
+/* Cores de Raridade */
+.rare { border: 1px solid #a4c639; background: rgba(164, 198, 57, 0.1); }
+.rare .type { color: #a4c639; }
+
+.epic { border: 1px solid #c52020; background: rgba(197, 32, 32, 0.1); }
+.epic .type { color: #c52020; }
+
+.legend { border: 1px solid #7c4dff; background: rgba(124, 77, 255, 0.1); }
+.legend .type { color: #7c4dff; }
+
+.mythic { border: 1px solid gold; background: linear-gradient(90deg, rgba(255,215,0,0.1), rgba(255,215,0,0.2)); }
+.mythic .num, .mythic .name, .mythic .type { color: gold; text-shadow: 0 0 5px rgba(255,215,0,0.5); }
+
+/* GLOSSÁRIO */
+.glossary-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 15px; margin-top: 20px;
+}
+.glossary-item {
+  background: #0a0f0a; border: 1px solid var(--xmas-border);
+  padding: 15px; border-radius: 4px; font-size: 0.8em;
+}
+.g-name { color: var(--xmas-gold); font-weight: bold; margin-bottom: 5px; display: block; font-size: 1.1em; }
+.g-desc { color: #aaa; line-height: 1.4; }
+
+@media (max-width: 600px) {
+  .xmas-item { grid-template-columns: 30px 1fr; gap: 5px; }
+  .type { grid-column: 2; font-size: 0.7em; }
+  .glossary-grid { grid-template-columns: 1fr; }
+}
