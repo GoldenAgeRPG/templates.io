@@ -168,7 +168,7 @@
 /* NOMES (ADMIN) */
 .player-name.p-ayaka::after   { content: "AYAKA GOJO"; }
 .player-name.p-kuren::after  { content: "KUREN SHIN"; }
-.player-name.p-sukuna::after  { content: "RYOMEN SUKUNA"; }
+.player-name.p-ryuuji::after  { content: "TAKAHASHI RYUUJI"; }
 
 @media (max-width: 600px) {
   .cine-container { border-left: 15px solid #000; border-right: 15px solid #000; }
