@@ -1,0 +1,239 @@
+/* --- TEMPLATE: YUTA/RIKA (MIMICRY & CURSE) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Rubik+Glitch&family=Spectral:ital,wght@0,300;0,600;1,300&display=swap');
+
+:root {
+  --cp-dark: #0b0e14;       /* Fundo Escuro (Uniforme preto/azul) */
+  --cp-white: #e8e8e8;      /* Branco Sujo (Uniforme Yuta) */
+  --cp-red: #8a0000;        /* Vermelho Rika */
+  --cp-accent: #5e6b7f;     /* Cinza Azulado */
+  --cp-silver: #c0c0c0;     /* Prata do Anel */
+}
+
+/* --- ANIMAÇÕES --- */
+
+/* Scanline descendo (Efeito de Cópia) */
+@keyframes copy-scan {
+  0% { transform: translateY(-100%); opacity: 0; }
+  50% { opacity: 1; }
+  100% { transform: translateY(100%); opacity: 0; }
+}
+
+/* Glitch na Borda/Imagem */
+@keyframes static-glitch {
+  0% { clip-path: inset(0 0 0 0); }
+  5% { clip-path: inset(10% 0 85% 0); transform: translateX(-2px); }
+  10% { clip-path: inset(80% 0 5% 0); transform: translateX(2px); }
+  15% { clip-path: inset(0 0 0 0); transform: translateX(0); }
+  100% { clip-path: inset(0 0 0 0); }
+}
+
+/* Pulso do Anel/Amor */
+@keyframes love-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(192, 192, 192, 0.4); }
+  70% { box-shadow: 0 0 0 10px rgba(192, 192, 192, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(192, 192, 192, 0); }
+}
+
+/* --- CONTAINER PRINCIPAL --- */
+.copy-container {
+  box-sizing: border-box; max-width: 720px; width: 95%; margin: 60px auto;
+  background-color: var(--cp-dark);
+  color: var(--cp-white);
+  font-family: 'Spectral', serif;
+  
+  /* Borda Dupla: Externa Prata (Anel), Interna Escura */
+  border: 1px solid var(--cp-accent);
+  outline: 4px solid var(--cp-dark);
+  box-shadow: 
+    0 0 0 5px var(--cp-silver), /* O "Anel" em volta do post */
+    0 20px 50px #000;
+    
+  position: relative; overflow: hidden;
+  padding: 0;
+}
+.copy-container * { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Fundo: Sombras de Rika */
+.copy-shadow-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(circle at 10% 90%, rgba(138, 0, 0, 0.15), transparent 60%),
+              radial-gradient(circle at 90% 10%, rgba(255, 255, 255, 0.05), transparent 60%);
+  filter: contrast(1.2);
+}
+
+/* Scanline (Cópia) */
+.copy-scanline {
+  position: absolute; top: 0; left: 0; right: 0; height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.05), transparent);
+  z-index: 1; pointer-events: none;
+  animation: copy-scan 4s linear infinite;
+  background-size: 100% 200%;
+}
+
+/* --- HEADER --- */
+.copy-header {
+  position: relative; z-index: 2;
+  padding: 40px 30px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.05), transparent);
+  border-bottom: 1px solid var(--cp-accent);
+  display: flex; justify-content: space-between; align-items: center;
+}
+
+.copy-title {
+  font-family: 'Cinzel', serif; font-size: 2.2em; 
+  color: var(--cp-white); margin: 0; text-transform: uppercase;
+  text-shadow: 0 0 10px rgba(255,255,255,0.3);
+}
+.copy-subtitle {
+  font-family: 'Rubik Glitch', cursive; font-size: 1.1em; 
+  color: var(--cp-red); margin-top: 5px; letter-spacing: 2px;
+}
+
+/* Ícone do Anel */
+.copy-ring-icon {
+  width: 40px; height: 40px;
+  border: 3px solid var(--cp-silver);
+  border-radius: 50%;
+  box-shadow: 0 0 15px var(--cp-silver);
+  animation: love-pulse 2s infinite;
+  position: relative;
+}
+/* Diamante do anel */
+.copy-ring-icon::after {
+  content: ''; position: absolute; top: -5px; left: 50%; transform: translateX(-50%) rotate(45deg);
+  width: 8px; height: 8px; background: var(--cp-white);
+  box-shadow: 0 0 10px #fff;
+}
+
+/* --- IMAGEM --- */
+.copy-image-wrapper {
+  position: relative; z-index: 2;
+  width: 100%; height: 350px;
+  background: #000;
+  border-bottom: 4px solid var(--cp-red); /* Presença da Rika */
+}
+
+.copy-image-frame {
+  width: 100%; height: 100%; position: relative; overflow: hidden;
+}
+
+.copy-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  filter: grayscale(0.5) contrast(1.1);
+  transition: filter 0.5s;
+}
+.copy-container:hover .copy-image-frame img {
+  filter: grayscale(0) contrast(1.2);
+}
+
+/* Glitch Overlay */
+.copy-glitch-overlay {
+  position: absolute; inset: 0; pointer-events: none;
+  background: transparent;
+  mix-blend-mode: color-dodge;
+  opacity: 0.3;
+  animation: static-glitch 3s infinite steps(2);
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.8);
+}
+
+/* --- STATUS (ISOLAMENTO) --- */
+.copy-stats {
+  padding: 25px 40px; display: flex; flex-direction: column; gap: 20px; 
+  position: relative; z-index: 2;
+  background: rgba(0, 0, 0, 0.4);
+  border-bottom: 1px solid var(--cp-accent);
+}
+
+.copy-container .jjk-dossier-status-item {
+  display: grid; grid-template-columns: 50px 1fr 70px; align-items: center; gap: 15px;
+  border: none; background: transparent; padding: 0; margin: 0;
+}
+
+/* Labels: Fonte Glitch para parecer dados copiados */
+.copy-container .jjk-dossier-status-label { 
+  font-family: 'Rubik Glitch', cursive; font-size: 1.2em; 
+  color: var(--cp-white) !important;
+  text-align: right; letter-spacing: 1px;
+  border: none; margin: 0;
+}
+
+.copy-container .jjk-dossier-status-value { 
+  font-family: 'Cinzel', serif; font-size: 0.9em; 
+  color: var(--cp-silver) !important;
+  text-align: right; font-weight: 700; white-space: nowrap;
+  border: none; margin: 0;
+}
+
+/* Barras */
+.copy-container .jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 10px; 
+  background: #111 !important;
+  border: 1px solid var(--cp-accent);
+  transform: skewX(-20deg); /* Estilo Tecnológico/Cópia */
+  overflow: hidden; border-radius: 0;
+}
+.copy-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; margin: 0; padding: 0;}
+.copy-container .jjk-dossier-status-bar-fill { height: 100%; border-radius: 0; border: none; margin: 0; }
+
+/* HP (RIKA - Vermelho Instável) */
+.copy-container .jjk-dossier-hp-fill { 
+  background: linear-gradient(90deg, #330000, var(--cp-red)) !important; 
+  box-shadow: 0 0 10px var(--cp-red);
+}
+/* EA (YUTA - Branco Puro) */
+.copy-container .jjk-dossier-ea-fill { 
+  background: var(--cp-white) !important; 
+  box-shadow: 0 0 10px var(--cp-white);
+}
+
+/* --- CONTEÚDO --- */
+.copy-content {
+  padding: 40px; font-size: 1.1em; line-height: 1.8; 
+  text-align: justify; position: relative; z-index: 2;
+  color: #ccc;
+}
+
+.copy-content b { 
+  color: var(--cp-white); font-family: 'Cinzel', serif;
+  text-shadow: 0 0 5px rgba(255,255,255,0.5);
+}
+.copy-content i { 
+  color: var(--cp-red); font-style: italic; font-weight: 600;
+}
+
+/* --- EXTRAS --- */
+.copy-extras {
+  margin: 0 40px 30px 40px; padding: 20px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px dashed var(--cp-white);
+  position: relative; z-index: 2; font-size: 0.9em;
+}
+.copy-extras::before {
+  content: 'COPIED DATA'; display: block; 
+  font-family: 'Rubik Glitch', cursive; font-size: 1.2em; color: var(--cp-white);
+  margin-bottom: 10px; letter-spacing: 1px;
+}
+
+/* --- RODAPÉ --- */
+.copy-footer {
+  padding: 30px 0; text-align: center;
+  border-top: 1px solid var(--cp-accent);
+  position: relative; z-index: 2;
+  background: linear-gradient(to top, rgba(138, 0, 0, 0.1), transparent);
+}
+
+.copy-signature::after {
+  content: 'Yuta Okkotsu'; 
+  font-family: 'Cinzel', serif; font-weight: 700;
+  font-size: 1.8em; color: var(--cp-white);
+  letter-spacing: 3px; text-transform: uppercase;
+  /* Sombra vermelha representando a Rika atrás dele */
+  text-shadow: 3px 3px 0 var(--cp-red);
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .copy-container { width: 100%; margin: 20px auto; border-width: 2px; }
+  .copy-header, .copy-content, .copy-stats { padding: 20px; }
+  .copy-container .jjk-dossier-status-item { grid-template-columns: 40px 1fr 65px; gap: 10px; }
+}
