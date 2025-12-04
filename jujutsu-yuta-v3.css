@@ -1,0 +1,281 @@
+/* --- TEMPLATE: YUTA OKKOTSU v3 (CINEMATIC CURSED MANGA) --- */
+/* Arquivo: jujutsu-yuta-v3.css */
+
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Noto+Serif+JP:wght@300;400;700&family=Teko:wght@300;600&display=swap');
+
+:root {
+  --y3-black: #050505;
+  --y3-panel: #0f0f0f;
+  --y3-white: #f0f0f0;
+  --y3-red: #8f0000;       /* Vermelho Rika Profundo */
+  --y3-red-glow: #ff0000;  /* Vermelho Brilho */
+  --y3-gray: #1f1f1f;
+  --y3-text: #bfbfbf;
+}
+
+/* --- ANIMAÇÕES DE ALTA QUALIDADE --- */
+
+/* 1. Film Grain (Ruído de Cinema) */
+@keyframes film-grain {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-5%, -5%); }
+  20% { transform: translate(-10%, 5%); }
+  30% { transform: translate(5%, -10%); }
+  40% { transform: translate(-5%, 15%); }
+  50% { transform: translate(-10%, 5%); }
+  60% { transform: translate(15%, 0); }
+  70% { transform: translate(0, 10%); }
+  80% { transform: translate(-15%, 0); }
+  90% { transform: translate(10%, 5%); }
+}
+
+/* 2. Scanline (Varredura de Cópia) */
+@keyframes scan-down {
+  0% { top: -10%; opacity: 0; }
+  10% { opacity: 1; box-shadow: 0 0 10px rgba(255,255,255,0.5); }
+  90% { opacity: 1; box-shadow: 0 0 10px rgba(255,255,255,0.5); }
+  100% { top: 110%; opacity: 0; }
+}
+
+/* 3. RGB Shift (Distorção na Imagem) */
+@keyframes rgb-shift {
+  0% { transform: translate(0); opacity: 0; }
+  5% { transform: translate(2px, 0); opacity: 0.5; }
+  10% { transform: translate(-2px, 0); opacity: 0; }
+  100% { transform: translate(0); opacity: 0; }
+}
+
+/* 4. Fluxo de Energia nas Barras */
+@keyframes bar-flow {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 0; }
+}
+
+/* 5. Pulso da Borda (Respiração da Rika) */
+@keyframes border-breathe {
+  0%, 100% { border-color: var(--y3-white); box-shadow: 0 0 10px rgba(255,255,255,0.1); }
+  50% { border-color: var(--y3-red); box-shadow: 0 0 25px rgba(143, 0, 0, 0.4); }
+}
+
+/* --- CONTAINER PRINCIPAL --- */
+.yuta-v3-container {
+  box-sizing: border-box; max-width: 720px; width: 95%; margin: 60px auto;
+  background-color: var(--y3-black);
+  color: var(--y3-text);
+  font-family: 'Noto Serif JP', serif;
+  
+  /* Borda que respira entre Branco (Yuta) e Vermelho (Rika) */
+  border: 2px solid var(--y3-white);
+  box-shadow: 0 20px 60px #000;
+  
+  position: relative; overflow: hidden;
+  padding: 0; display: flex; flex-direction: column;
+  
+  animation: border-breathe 6s infinite ease-in-out;
+}
+.yuta-v3-container * { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* --- BACKGROUND: FILM GRAIN --- */
+.yuta-v3-grain {
+  position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  opacity: 0.05;
+  animation: film-grain 8s steps(10) infinite;
+  pointer-events: none; z-index: 0;
+}
+
+/* --- SCANLINE (CÓPIA) --- */
+.yuta-v3-scanline {
+  position: absolute; left: 0; width: 100%; height: 2px;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.8), transparent);
+  z-index: 10; pointer-events: none;
+  animation: scan-down 6s ease-in-out infinite 2s; /* Delay inicial */
+}
+
+/* --- HEADER --- */
+.yuta-v3-header {
+  position: relative; z-index: 2; padding: 50px 30px 30px; text-align: center;
+  background: linear-gradient(to bottom, rgba(5,5,5,0.9), transparent);
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.yuta-v3-title {
+  font-family: 'Cinzel', serif; font-weight: 900; font-size: 3em; 
+  color: var(--y3-white); margin: 0; text-transform: uppercase;
+  letter-spacing: 4px; line-height: 1;
+  position: relative; display: inline-block;
+}
+
+/* Glitch no Título */
+.yuta-v3-title::before, .yuta-v3-title::after {
+  content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8;
+}
+.yuta-v3-title::before {
+  color: #0ff; z-index: -1; animation: rgb-shift 3s infinite reverse;
+}
+.yuta-v3-title::after {
+  color: #f00; z-index: -2; animation: rgb-shift 4s infinite;
+}
+
+.yuta-v3-subtitle {
+  font-family: 'Teko', sans-serif; font-size: 1.2em; 
+  color: var(--y3-red); text-transform: uppercase; letter-spacing: 6px;
+  margin-bottom: 5px;
+}
+
+.yuta-v3-deco-line {
+  width: 2px; height: 30px; background: var(--y3-white); margin: 20px auto 0;
+}
+
+/* --- IMAGEM COM RGB SPLIT --- */
+.yuta-v3-image-wrapper {
+  position: relative; z-index: 2; padding: 20px; display: flex; justify-content: center;
+}
+
+.yuta-v3-image-frame {
+  width: 100%; height: 400px; position: relative; 
+  background: #000;
+  border: 1px solid var(--y3-white);
+  /* Sombra interna para fundir a imagem */
+  box-shadow: inset 0 0 50px #000;
+  overflow: hidden;
+}
+
+.yuta-v3-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center;
+  filter: contrast(1.2) grayscale(1);
+  position: relative; z-index: 2;
+}
+
+/* Camadas de Glitch */
+.glitch-layer {
+  position: absolute; inset: 0; background-image: url('https://i.pinimg.com/1200x/8e/3b/50/8e3b502bc30cfda0e8896df525cfe7fb.jpg'); /* Mesma imagem */
+  background-size: cover; background-position: center;
+  mix-blend-mode: screen; opacity: 0; pointer-events: none; z-index: 3;
+}
+.glitch-layer.red {
+  filter: grayscale(1) drop-shadow(4px 0 0 red);
+  animation: rgb-shift 5s infinite steps(2) 0.5s;
+}
+.glitch-layer.cyan {
+  filter: grayscale(1) drop-shadow(-4px 0 0 cyan);
+  animation: rgb-shift 4s infinite steps(2);
+}
+
+/* --- STATUS (ISOLADOS & ANIMADOS) --- */
+.yuta-v3-stats {
+  padding: 20px 50px; 
+  display: flex; flex-direction: column; gap: 20px; 
+  position: relative; z-index: 2;
+  background: var(--y3-panel);
+  border-top: 1px solid #333; border-bottom: 1px solid #333;
+}
+
+.yuta-v3-container .jjk-dossier-status-item {
+  display: grid; grid-template-columns: 40px 1fr 70px; align-items: center; gap: 15px;
+  background: transparent; border: none; margin: 0; padding: 0;
+}
+
+/* Labels */
+.yuta-v3-container .jjk-dossier-status-label { 
+  font-family: 'Teko', sans-serif; font-weight: 600; font-size: 1.4em; 
+  color: var(--y3-white) !important; text-align: right; letter-spacing: 1px;
+  line-height: 1;
+  background: transparent; border: none; margin: 0; padding: 0;
+}
+
+/* Valores */
+.yuta-v3-container .jjk-dossier-status-value { 
+  font-family: 'Teko', sans-serif; font-size: 1.2em; 
+  color: var(--y3-red) !important; text-align: right; white-space: nowrap;
+  background: transparent; border: none; margin: 0; padding: 0;
+}
+
+/* Barras Wrapper */
+.yuta-v3-container .jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 10px; 
+  background: #000 !important; border: 1px solid var(--y3-gray);
+  margin: 0; padding: 0; overflow: hidden;
+}
+
+.yuta-v3-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; margin: 0; padding: 0; }
+.yuta-v3-container .jjk-dossier-status-bar-fill { height: 100%; border: none; margin: 0; }
+
+/* HP: Listras Vermelhas Animadas */
+.yuta-v3-container .jjk-dossier-hp-fill { 
+  background: repeating-linear-gradient(
+    45deg, 
+    var(--y3-red), 
+    var(--y3-red) 10px, 
+    #3d0000 10px, 
+    #3d0000 20px
+  ) !important;
+  background-size: 200% 100%;
+  animation: bar-flow 2s linear infinite;
+  box-shadow: 0 0 10px var(--y3-red) !important;
+}
+
+/* EA: Listras Brancas Animadas */
+.yuta-v3-container .jjk-dossier-ea-fill { 
+  background: repeating-linear-gradient(
+    45deg, 
+    var(--y3-white), 
+    var(--y3-white) 10px, 
+    #555 10px, 
+    #555 20px
+  ) !important;
+  background-size: 200% 100%;
+  animation: bar-flow 2s linear infinite reverse;
+  box-shadow: 0 0 10px var(--y3-white) !important;
+}
+
+
+/* --- CONTEÚDO --- */
+.yuta-v3-content {
+  padding: 40px 50px; font-size: 1.1em; line-height: 1.8; 
+  text-align: justify; position: relative; z-index: 2; color: #ccc;
+  background: var(--y3-black);
+}
+
+.yuta-v3-content b { 
+  color: var(--y3-white); font-family: 'Cinzel', serif; font-weight: 700;
+  text-shadow: 0 0 5px rgba(255,255,255,0.5);
+}
+.yuta-v3-content i { 
+  color: var(--y3-red); font-weight: 700; font-family: 'Noto Serif JP', serif;
+}
+
+/* --- EXTRAS --- */
+.yuta-v3-extras {
+  margin: 0 50px 30px 50px; padding: 20px;
+  background: rgba(255, 255, 255, 0.02); 
+  border: 1px solid var(--y3-gray);
+  border-left: 3px solid var(--y3-red);
+  position: relative; z-index: 2; font-size: 0.9em;
+}
+.yuta-v3-extras::before {
+  content: 'DADOS COPIADOS'; display: block; 
+  font-family: 'Teko', sans-serif; font-weight: 600; font-size: 1.4em; color: var(--y3-white);
+  margin-bottom: 10px; letter-spacing: 1px;
+}
+
+/* --- RODAPÉ --- */
+.yuta-v3-footer {
+  padding: 30px 0; text-align: center;
+  border-top: 1px solid var(--y3-white); 
+  position: relative; z-index: 2; background: var(--y3-black);
+}
+
+.yuta-v3-signature::after {
+  content: 'Mikhail Volkovich Romanov'; 
+  font-family: 'Cinzel', serif; font-weight: 900; font-size: 1.5em; color: var(--y3-white);
+  letter-spacing: 2px; text-transform: uppercase;
+  text-shadow: 2px 2px 0 var(--y3-red);
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .yuta-v3-container { width: 100%; margin: 20px auto; border-width: 1px; }
+  .yuta-v3-content, .yuta-v3-stats, .yuta-v3-extras { padding-left: 25px; padding-right: 25px; margin-left: 10px; margin-right: 10px; }
+  .yuta-v3-container .jjk-dossier-status-item { grid-template-columns: 40px 1fr 65px; gap: 10px; }
+}
