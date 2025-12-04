@@ -1,0 +1,167 @@
+/* --- TEMPLATE: SOUKJU BLUEPRINT (ADMINISTRATIVE) --- */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Teko:wght@300;600&display=swap');
+
+:root {
+  --sk-bg: #0b1016;       /* Fundo Azul Técnico Profundo */
+  --sk-panel: #131a24;    /* Painel Interno */
+  --sk-cyan: #00f0ff;     /* Ciano Neon (Destaque) */
+  --sk-dim: #4a5a6b;      /* Linhas Apagadas */
+  --sk-text: #c0dceb;     /* Texto Claro */
+  --sk-grid: rgba(0, 240, 255, 0.05);
+}
+
+/* CONTAINER PRINCIPAL */
+.soukju-blueprint-container {
+  box-sizing: border-box; max-width: 750px; width: 95%; margin: 40px auto;
+  background-color: var(--sk-bg);
+  /* Padrão de Papel Milimetrado (Blueprint) */
+  background-image: 
+    linear-gradient(var(--sk-grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--sk-grid) 1px, transparent 1px);
+  background-size: 20px 20px;
+  
+  border: 1px solid var(--sk-dim);
+  color: var(--sk-text);
+  font-family: 'Share Tech Mono', monospace;
+  padding: 30px;
+  position: relative;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+.soukju-blueprint-container * { box-sizing: border-box; }
+
+/* Borda Decorativa nos Cantos */
+.soukju-blueprint-container::before {
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  border: 2px solid var(--sk-cyan);
+  clip-path: polygon(
+    0 20px, 20px 0, 100% 0, 100% 20px, 
+    100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 calc(100% - 20px)
+  );
+  opacity: 0.3;
+}
+
+/* HEADER */
+.soukju-header {
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 2px solid var(--sk-dim);
+  padding-bottom: 15px; margin-bottom: 25px;
+}
+
+.soukju-meta {
+  display: flex; flex-direction: column; font-size: 0.8em; color: var(--sk-dim);
+}
+.soukju-value { color: var(--sk-cyan); font-weight: bold; letter-spacing: 1px; }
+
+.soukju-title-box { text-align: center; flex-grow: 1; margin: 0 20px; }
+.soukju-project-name {
+  font-family: 'Teko', sans-serif; font-size: 2.2em; color: #fff; margin: 0;
+  line-height: 1; letter-spacing: 2px; text-transform: uppercase;
+}
+.soukju-project-id { font-size: 0.8em; color: var(--sk-dim); letter-spacing: 1px; }
+
+.soukju-grade-stamp {
+  border: 2px solid var(--sk-cyan); color: var(--sk-cyan);
+  padding: 5px 15px; font-weight: bold; font-size: 1.2em;
+  transform: rotate(-5deg); text-align: center;
+  box-shadow: 0 0 10px rgba(0,240,255,0.2);
+}
+
+/* GRID PRINCIPAL (IMAGEM + STATS) */
+.soukju-main-grid {
+  display: grid; grid-template-columns: 250px 1fr; gap: 20px; margin-bottom: 25px;
+}
+
+/* IMAGEM */
+.soukju-visual-frame {
+  height: 250px; background: #000; border: 1px solid var(--sk-dim);
+  position: relative; overflow: hidden;
+}
+.soukju-visual-frame img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(1) contrast(1.2) sepia(0.2) hue-rotate(180deg); /* Look azulado */
+  opacity: 0.8;
+}
+.soukju-scanlines {
+  position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(0deg, rgba(0,240,255,0.05) 0px, rgba(0,240,255,0.05) 1px, transparent 1px, transparent 4px);
+}
+
+/* PAINEL DE SPECS */
+.soukju-specs-panel {
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.soukju-spec-row {
+  display: flex; justify-content: space-between; align-items: center;
+  background: var(--sk-panel); padding: 8px 15px;
+  border-left: 3px solid var(--sk-dim);
+}
+.spec-label { font-size: 0.8em; color: var(--sk-dim); }
+.spec-data { font-size: 1.1em; color: #fff; font-weight: bold; }
+
+/* SISTEMA DE SLOTS */
+.soukju-slot-system {
+  margin-top: auto; background: rgba(0,240,255,0.05); padding: 15px;
+  border: 1px solid rgba(0,240,255,0.2);
+}
+.slot-header {
+  display: flex; justify-content: space-between; font-size: 0.8em; margin-bottom: 5px;
+  color: var(--sk-cyan);
+}
+.slot-bar-container {
+  display: flex; gap: 5px; height: 15px;
+}
+.slot-block {
+  flex: 1; background: #222; border: 1px solid #444;
+}
+.slot-block.active {
+  background: var(--sk-cyan); box-shadow: 0 0 5px var(--sk-cyan); border-color: #fff;
+}
+.slot-block.empty {
+  background: rgba(0,0,0,0.5); opacity: 0.3;
+}
+
+/* LISTA DE MÓDULOS */
+.soukju-modules-list {
+  background: var(--sk-panel); border: 1px solid var(--sk-dim);
+  padding: 20px; margin-bottom: 25px;
+}
+.module-header {
+  border-bottom: 1px dashed var(--sk-dim); padding-bottom: 10px; margin-bottom: 15px;
+  color: var(--sk-cyan); font-weight: bold; letter-spacing: 1px;
+}
+
+.module-item {
+  display: flex; gap: 15px; margin-bottom: 15px; padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.module-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.module-icon {
+  width: 40px; height: 40px; background: #000; border: 1px solid var(--sk-dim);
+  display: flex; justify-content: center; align-items: center; font-size: 1.2em;
+}
+.module-info { flex: 1; }
+.module-name { color: #fff; font-weight: bold; display: block; margin-bottom: 2px; }
+.module-cost { font-size: 0.75em; color: var(--sk-cyan); float: right; }
+.module-desc { font-size: 0.9em; color: #8a9bb0; line-height: 1.4; }
+
+/* NOTAS */
+.soukju-notes {
+  border: 1px solid rgba(255, 166, 0, 0.3); background: rgba(255, 166, 0, 0.05);
+  padding: 15px; font-size: 0.9em; color: #dcb;
+}
+.notes-label { color: orange; font-weight: bold; margin-bottom: 5px; }
+
+/* RODAPÉ */
+.soukju-footer {
+  margin-top: 20px; text-align: right; font-size: 0.7em; color: var(--sk-dim);
+  letter-spacing: 2px;
+}
+
+/* RESPONSIVO */
+@media (max-width: 600px) {
+  .soukju-main-grid { grid-template-columns: 1fr; }
+  .soukju-visual-frame { height: 200px; }
+  .soukju-header { flex-direction: column; text-align: center; gap: 10px; }
+}
