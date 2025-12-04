@@ -1,0 +1,236 @@
+/* --- TEMPLATE: THE AMALGAM (MIKHAIL) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Rubik+Glitch&family=Spectral:ital,wght@0,300;0,600;1,300&display=swap');
+
+:root {
+  --ama-dark: #0a0505;      /* Preto Avermelhado */
+  --ama-flesh: #4a1a1a;     /* Carne Escura */
+  --ama-blood: #8a0000;     /* Vermelho Sangue */
+  --ama-bone: #e0e0e0;      /* Branco Osso */
+  --ama-cursed: #240b36;    /* Roxo Maldição */
+  --ama-text: #ccc;
+}
+
+/* --- ANIMAÇÕES --- */
+
+/* Respiração da Carne (Fundo) */
+@keyframes flesh-pulse {
+  0% { background-size: 100% 100%; opacity: 0.3; }
+  50% { background-size: 110% 110%; opacity: 0.5; }
+  100% { background-size: 100% 100%; opacity: 0.3; }
+}
+
+/* Batimento Cardíaco Irregular */
+@keyframes irregular-beat {
+  0% { transform: scale(1); }
+  5% { transform: scale(1.02); }
+  10% { transform: scale(1); }
+  15% { transform: scale(1.02); }
+  50% { transform: scale(1); }
+  100% { transform: scale(1); }
+}
+
+/* Glitch de Cópia */
+@keyframes mimicry-glitch {
+  0% { clip-path: inset(0 0 0 0); transform: translate(0); }
+  95% { clip-path: inset(0 0 0 0); transform: translate(0); }
+  96% { clip-path: inset(20% 0 50% 0); transform: translate(-2px, 2px); }
+  97% { clip-path: inset(10% 0 60% 0); transform: translate(2px, -2px); }
+  98% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, 0); }
+  100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+}
+
+/* --- CONTAINER PRINCIPAL --- */
+.amalgam-container {
+  box-sizing: border-box; max-width: 720px; width: 95%; margin: 60px auto;
+  background-color: var(--ama-dark);
+  color: var(--ama-text);
+  font-family: 'Spectral', serif;
+  
+  /* Borda Orgânica/Irregular */
+  border: 2px solid var(--ama-flesh);
+  border-radius: 4px;
+  box-shadow: 
+    0 0 0 5px #000, 
+    0 0 20px var(--ama-blood);
+    
+  position: relative; overflow: hidden;
+  padding: 0;
+  display: flex; flex-direction: column;
+}
+.amalgam-container * { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* Fundo Texturizado (Amálgama) */
+.amalgam-flesh-bg {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  /* Mistura de texturas orgânicas */
+  background-image: 
+    radial-gradient(circle at 30% 20%, var(--ama-flesh), transparent 40%),
+    radial-gradient(circle at 80% 80%, var(--ama-cursed), transparent 40%),
+    repeating-linear-gradient(45deg, rgba(0,0,0,0.1) 0px, rgba(0,0,0,0.1) 2px, transparent 2px, transparent 4px);
+  
+  filter: contrast(1.5) blur(1px);
+  animation: flesh-pulse 8s infinite ease-in-out;
+}
+
+/* --- HEADER (Centralizado) --- */
+.amalgam-header {
+  position: relative; z-index: 2;
+  padding: 40px 20px;
+  text-align: center; /* CENTRALIZADO */
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+  border-bottom: 1px solid var(--ama-flesh);
+}
+
+.amalgam-title {
+  font-family: 'Cinzel', serif; font-size: 2.5em; 
+  color: var(--ama-bone); margin: 0; text-transform: uppercase;
+  text-shadow: 0 0 10px var(--ama-blood);
+  letter-spacing: 2px;
+}
+.amalgam-subtitle {
+  font-family: 'Rubik Glitch', cursive; font-size: 1em; 
+  color: var(--ama-blood); margin-top: 5px; letter-spacing: 4px;
+}
+
+/* --- IMAGEM --- */
+.amalgam-image-wrapper {
+  position: relative; z-index: 2;
+  padding: 20px;
+  display: flex; justify-content: center;
+}
+
+.amalgam-image-frame {
+  width: 100%; height: 350px; 
+  position: relative; 
+  /* Forma recortada/biológica */
+  clip-path: polygon(2% 0, 98% 0, 100% 90%, 95% 100%, 5% 100%, 0 90%);
+  background: #000;
+  box-shadow: 0 0 20px rgba(138, 0, 0, 0.3);
+  animation: irregular-beat 6s infinite; /* Imagem "viva" */
+}
+
+.amalgam-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  filter: contrast(1.1) saturate(0.8);
+}
+
+/* Glitch Overlay */
+.amalgam-glitch {
+  position: absolute; inset: 0; pointer-events: none;
+  background: transparent;
+  box-shadow: inset 0 0 50px #000;
+  animation: mimicry-glitch 4s infinite;
+  mix-blend-mode: overlay;
+  background-image: linear-gradient(rgba(255, 0, 0, 0.1) 1px, transparent 1px);
+  background-size: 100% 3px;
+}
+
+/* --- STATUS (ISOLADOS & AMÁLGAMA) --- */
+.amalgam-stats {
+  padding: 20px 40px; display: flex; flex-direction: column; gap: 15px; 
+  position: relative; z-index: 2;
+  background: rgba(10, 5, 5, 0.8);
+  border-top: 1px solid var(--ama-flesh);
+  border-bottom: 1px solid var(--ama-flesh);
+}
+
+.amalgam-container .jjk-dossier-status-item {
+  display: grid; grid-template-columns: 40px 1fr 70px; align-items: center; gap: 15px;
+  background: transparent; border: none; margin: 0; padding: 0;
+}
+
+/* Labels */
+.amalgam-container .jjk-dossier-status-label { 
+  font-family: 'Rubik Glitch', cursive; font-size: 1em; 
+  color: var(--ama-bone) !important;
+  text-align: right; letter-spacing: 1px;
+  background: transparent; border: none; margin: 0; padding: 0;
+}
+
+/* Valores */
+.amalgam-container .jjk-dossier-status-value { 
+  font-family: 'Cinzel', serif; font-size: 0.9em; 
+  color: var(--ama-blood) !important; font-weight: 700;
+  text-align: right; white-space: nowrap;
+  background: transparent; border: none; margin: 0; padding: 0;
+}
+
+/* Barras Wrapper (Aspecto de Veia Escura) */
+.amalgam-container .jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 8px; 
+  background: #1a0505 !important;
+  border-radius: 4px; overflow: hidden; border: 1px solid #330000;
+  margin: 0; padding: 0;
+  box-shadow: inset 0 0 5px #000;
+}
+
+.amalgam-container .jjk-dossier-status-bar { 
+  width: 100%; height: 100%; background: transparent; border: none; margin: 0; padding: 0; 
+}
+
+.amalgam-container .jjk-dossier-status-bar-fill { height: 100%; border-radius: 4px; border: none; margin: 0; }
+
+/* HP: Carne Viva */
+.amalgam-container .jjk-dossier-hp-fill { 
+  background: linear-gradient(90deg, var(--ama-blood), var(--ama-flesh)) !important; 
+  box-shadow: 0 0 10px var(--ama-blood) !important;
+}
+/* EA: Energia Corrompida */
+.amalgam-container .jjk-dossier-ea-fill { 
+  background: linear-gradient(90deg, var(--ama-cursed), #6b1aff) !important; 
+  box-shadow: 0 0 10px var(--ama-cursed) !important;
+}
+
+
+/* --- CONTEÚDO --- */
+.amalgam-content {
+  padding: 30px 40px; font-size: 1.1em; line-height: 1.8; 
+  text-align: justify; position: relative; z-index: 2;
+  color: #bbb;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.5), transparent);
+}
+
+.amalgam-content b { 
+  color: var(--ama-bone); font-family: 'Cinzel', serif;
+  text-shadow: 0 0 5px rgba(255,255,255,0.3);
+}
+.amalgam-content i { 
+  color: var(--ama-blood); font-weight: 600;
+}
+
+/* --- EXTRAS --- */
+.amalgam-extras {
+  margin: 0 40px 30px 40px; padding: 20px;
+  background: rgba(36, 11, 54, 0.1); /* Roxo muito sutil */
+  border: 1px dashed var(--ama-flesh);
+  position: relative; z-index: 2; font-size: 0.9em;
+}
+.amalgam-extras::before {
+  content: 'DADOS CORROMPIDOS'; display: block; 
+  font-family: 'Rubik Glitch', cursive; font-size: 1.1em; color: var(--ama-flesh);
+  margin-bottom: 10px; letter-spacing: 1px;
+}
+
+/* --- RODAPÉ --- */
+.amalgam-footer {
+  padding: 30px 0; text-align: center;
+  border-top: 2px solid var(--ama-blood);
+  position: relative; z-index: 2;
+  background: #000;
+}
+
+.amalgam-signature::after {
+  content: 'Mikhail Volkovich Romanov'; 
+  font-family: 'Cinzel', serif; font-weight: 700;
+  font-size: 1.5em; color: var(--ama-bone);
+  letter-spacing: 2px; text-transform: uppercase;
+  /* Efeito de Fusão na assinatura */
+  text-shadow: 2px 2px 0 var(--ama-blood), -1px -1px 0 var(--ama-cursed);
+}
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .amalgam-container { width: 100%; margin: 20px auto; border-width: 1px; }
+  .amalgam-content, .amalgam-stats { padding: 20px; }
+  .amalgam-container .jjk-dossier-status-item { grid-template-columns: 40px 1fr 65px; gap: 10px; }
+}
