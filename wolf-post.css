@@ -218,7 +218,7 @@
 }
 .amalgam-signature::after {
   content: 'Mikhail Volkovich Romanov'; 
-  font-family: 'Kaushan Script', serif; font-weight: 700; font-size: 1.5em; color: var(--ama-bone);
+  font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.5em; color: var(--ama-bone);
   letter-spacing: 2px; text-transform: uppercase;
   text-shadow: 2px 2px 0 var(--ama-blood), -1px -1px 0 var(--ama-cursed);
 }
