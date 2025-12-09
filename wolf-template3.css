@@ -1,34 +1,33 @@
-/* --- TEMPLATE: WOLF TEMPLATE 3.1 (NO SVG + PURE BLACK DARK MODE) --- */
+/* --- TEMPLATE: WOLF TEMPLATE 3.2 (STATUS JS FIX + DARK MODE) --- */
 /* Arquivo: wolf-template3.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Rubik+Glitch&family=Spectral:ital,wght@0,300;0,600;1,300&display=swap');
 
 :root {
   /* === TEMA CLARO (PADRÃO) === */
-  --wolf-bg: #ffffff;       /* Fundo Principal */
-  --wolf-bg-secondary: #f9f9f9; /* Fundo de caixas (extras/status) */
-  --wolf-gold: #c5a059;     /* Ouro Metálico */
-  --wolf-dark-gold: #7a602e; /* Ouro Escuro para texto/detalhes */
-  --wolf-black: #080808;    /* Cor de destaque forte (Texto principal/Bordas) */
-  --wolf-text: #1a1a1a;     /* Cor do texto corrido */
-  --wolf-accent: #f4f4f4;   /* Cor de acento sutil para gradientes claros */
-  --wolf-shadow: rgba(0, 0, 0, 0.15); /* Cor da sombra externa */
-  --wolf-image-outline: #080808; /* Cor da borda grossa da imagem */
+  --wolf-bg: #ffffff;       
+  --wolf-bg-secondary: #f9f9f9; 
+  --wolf-gold: #c5a059;     
+  --wolf-dark-gold: #7a602e; 
+  --wolf-black: #080808;    
+  --wolf-text: #1a1a1a;     
+  --wolf-accent: #f4f4f4;   
+  --wolf-shadow: rgba(0, 0, 0, 0.15); 
+  --wolf-image-outline: #080808; 
 }
 
-/* === TEMA ESCURO (ATIVADO PELA CLASSE .wolf-dark-mode) === */
+/* === TEMA ESCURO (PRETO ABSOLUTO) === */
 .amalgam-container.wolf-dark-mode {
-  --wolf-bg: #000000;       /* Fundo PRETO PURO */
-  --wolf-bg-secondary: #000000; /* Caixas também PRETO PURO */
-  --wolf-gold: #d4af37;     /* Ouro um pouco mais vibrante para contraste */
+  --wolf-bg: #000000;       
+  --wolf-bg-secondary: #000000; 
+  --wolf-gold: #d4af37;     
   --wolf-dark-gold: #a88b45; 
-  --wolf-black: #e0e0e0;    /* O "Preto" vira Branco/Cinza claro para texto */
-  --wolf-text: #cccccc;     /* Texto corrido cinza claro */
-  --wolf-accent: #111111;   /* Acento muito sutil para textura */
-  --wolf-shadow: rgba(0, 0, 0, 0.9); /* Sombra quase invisível no fundo preto */
-  --wolf-image-outline: #222222; /* Borda da imagem cinza chumbo */
+  --wolf-black: #e0e0e0;    
+  --wolf-text: #cccccc;     
+  --wolf-accent: #111111;   
+  --wolf-shadow: rgba(0, 0, 0, 0.9); 
+  --wolf-image-outline: #222222; 
 }
-
 
 /* --- ANIMAÇÕES --- */
 @keyframes chain-shimmer {
@@ -66,12 +65,10 @@
 /* --- FUNDO ADAPTÁVEL --- */
 .amalgam-flesh-bg {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  /* Gradiente que usa as variáveis para mudar de claro para escuro */
   background-image: 
     radial-gradient(circle at 50% 30%, var(--wolf-bg) 40%, var(--wolf-bg-secondary) 80%, var(--wolf-accent) 100%),
     repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(197, 160, 89, 0.05) 50px);
-  background-size: 100% 100%;
-  opacity: 1;
+  background-size: 100% 100%; opacity: 1;
   transition: background-image 0.3s ease;
 }
 
@@ -86,14 +83,13 @@
 .amalgam-side-left { left: 6px; animation: chain-shimmer 8s linear infinite; }
 .amalgam-side-right { right: 6px; animation: chain-shimmer 8s linear infinite reverse; }
 
-/* --- HEADER (SVG REMOVIDO) --- */
+/* --- HEADER --- */
 .amalgam-header {
   position: relative; z-index: 2;
   padding: 60px 20px 30px 20px; text-align: center;
   background: linear-gradient(to bottom, var(--wolf-bg), transparent);
   border-bottom: 2px solid var(--wolf-gold);
 }
-
 .amalgam-title {
   position: relative; z-index: 2;
   font-family: 'Cinzel', serif; font-size: 2.8em; 
@@ -116,15 +112,14 @@
   width: 100%; height: 350px; position: relative; 
   background: #000;
   border: 1px solid var(--wolf-gold);
-  outline: 4px solid var(--wolf-image-outline); /* Usa a variável adaptável */
+  outline: 4px solid var(--wolf-image-outline);
   outline-offset: 0px;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
   animation: succubus-breath 6s infinite ease-in-out;
 }
 .amalgam-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: center;
-  filter: saturate(0.8) contrast(1.15); 
-  transition: 0.5s;
+  filter: saturate(0.8) contrast(1.15); transition: 0.5s;
 }
 .amalgam-image-frame:hover img { filter: saturate(1) contrast(1); }
 
@@ -136,12 +131,11 @@
   background-size: 100% 4px; opacity: 0.2;
 }
 
-/* --- STATUS --- */
+/* --- STATUS (CORRIGIDO PARA O JS) --- */
 .amalgam-stats {
   padding: 20px 60px; 
   display: flex; flex-direction: column; gap: 15px; 
   position: relative; z-index: 2;
-  /* Fundo adaptável */
   background: var(--wolf-bg-secondary);
   border-top: 1px solid var(--wolf-gold); border-bottom: 1px solid var(--wolf-gold);
   transition: background-color 0.3s ease;
@@ -158,11 +152,30 @@
   font-family: 'Cinzel', serif; font-size: 0.9em; 
   color: var(--wolf-dark-gold) !important; font-weight: 700; text-align: right; white-space: nowrap;
 }
+
+/* WRAPPER (Moldura da barra) */
 .amalgam-container .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 5px; 
-  background: rgba(0,0,0,0.1) !important; border-radius: 0px; overflow: hidden; border: 1px solid var(--wolf-gold);
+  width: 100%; height: 6px; 
+  background: rgba(0,0,0,0.1) !important; 
+  border-radius: 0px; 
+  overflow: hidden; 
+  border: 1px solid var(--wolf-gold);
 }
-.amalgam-container .jjk-dossier-status-bar-fill { height: 100%; border-radius: 0; border: none; margin: 0; }
+
+/* BARRA INTERMEDIÁRIA (Essencial para o JS) */
+.amalgam-container .jjk-dossier-status-bar {
+  width: 100%; height: 100%; 
+  display: block; /* Garante que ela ocupe espaço */
+  background: transparent; border: none; margin: 0; padding: 0;
+}
+
+/* FILL (Onde o JS aplica a largura/cor) */
+.amalgam-container .jjk-dossier-status-bar-fill { 
+  height: 100%; border-radius: 0; border: none; margin: 0; 
+  display: block; /* Garante visibilidade */
+}
+
+/* Cores das Barras */
 .amalgam-container .jjk-dossier-hp-fill { 
   background: linear-gradient(90deg, var(--wolf-dark-gold), var(--wolf-gold)) !important; 
   box-shadow: 0 0 8px rgba(212, 175, 55, 0.4) !important;
@@ -186,7 +199,6 @@
 /* --- EXTRAS --- */
 .amalgam-extras {
   margin: 0 60px 30px 60px; padding: 25px;
-  /* Fundo adaptável */
   background: var(--wolf-bg-secondary);
   border: 1px solid var(--wolf-gold);
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
