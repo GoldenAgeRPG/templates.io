@@ -1,41 +1,34 @@
-/* --- TEMPLATE: WOLF TEMPLATE 2 (WHITE/GOLD/BLACK) --- */
+/* --- TEMPLATE: WOLF TEMPLATE 2 (NO BG ANIMATION) --- */
 /* Arquivo: wolf-template2.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Rubik+Glitch&family=Spectral:ital,wght@0,300;0,600;1,300&display=swap');
 
 :root {
   /* Paleta Nobre: Branco, Dourado e Preto */
-  --wolf-bg: #fcfcfc;       /* Fundo quase branco */
-  --wolf-gold: #d4af37;     /* Dourado Metálico */
-  --wolf-dark-gold: #8a6d1f;/* Dourado Escuro para sombras/texto */
-  --wolf-black: #111;       /* Preto Profundo */
-  --wolf-text: #2a2a2a;     /* Cinza escuro para leitura */
-  --wolf-accent: #f0f0f0;   /* Cinza muito claro para detalhes */
+  --wolf-bg: #fcfcfc;       
+  --wolf-gold: #d4af37;     
+  --wolf-dark-gold: #8a6d1f;
+  --wolf-black: #111;       
+  --wolf-text: #2a2a2a;     
+  --wolf-accent: #f0f0f0;   
 }
 
-/* --- ANIMAÇÕES (Re-tematizadas para Luz/Brilho) --- */
+/* --- ANIMAÇÕES --- */
 
-/* Pulso Divino (Fundo) - Suave e luminoso */
-@keyframes light-pulse {
-  0% { background-position: 0% 50%; opacity: 0.4; }
-  50% { background-position: 100% 50%; opacity: 0.7; }
-  100% { background-position: 0% 50%; opacity: 0.4; }
-}
-
-/* Fluxo Dourado (Laterais) */
+/* Fluxo Dourado (Laterais) - MANTIDA */
 @keyframes gold-flow {
   0% { background-position: 0 0; }
   100% { background-position: 0 200%; }
 }
 
-/* Batimento/Respiração da Imagem */
+/* Batimento/Respiração da Imagem - MANTIDA */
 @keyframes subtle-breath {
   0% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
   50% { transform: scale(1.01); box-shadow: 0 0 25px rgba(212, 175, 55, 0.5); }
   100% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
 }
 
-/* Glitch "Estático" (Preto e Branco) */
+/* Glitch "Estático" (Preto e Branco) - MANTIDA */
 @keyframes static-glitch {
   0% { clip-path: inset(0 0 0 0); transform: translate(0); }
   96% { clip-path: inset(20% 0 50% 0); transform: translate(-2px, 0); filter: invert(0); }
@@ -52,10 +45,9 @@
   
   border: 1px solid var(--wolf-gold);
   border-radius: 2px;
-  /* Sombra externa elegante em vez de glow de sangue */
   box-shadow: 
     0 0 0 5px var(--wolf-black), 
-    0 0 40px rgba(212, 175, 55, 0.15); /* Glow dourado suave */
+    0 0 40px rgba(212, 175, 55, 0.15);
     
   position: relative; overflow: hidden;
   padding: 0; display: flex; flex-direction: column;
@@ -63,15 +55,15 @@
 .amalgam-container * { box-sizing: border-box; margin: 0; padding: 0; }
 
 /* --- FUNDO (Mármore/Luz) --- */
-/* Mantendo a classe .amalgam-flesh-bg para compatibilidade HTML, mas visual novo */
 .amalgam-flesh-bg {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  /* Textura estática elegante */
   background-image: 
     repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212, 175, 55, 0.05) 10px, rgba(212, 175, 55, 0.05) 20px),
     radial-gradient(circle at 50% 50%, #fff, var(--wolf-accent));
-  background-size: 200% 200%;
+  background-size: 100% 100%; /* Tamanho fixo */
   opacity: 1;
-  animation: light-pulse 10s infinite ease-in-out;
+  /* Animação removida conforme pedido */
 }
 
 /* --- LATERAIS (Fios de Ouro) --- */
@@ -100,7 +92,6 @@
 .amalgam-title {
   font-family: 'Cinzel', serif; font-size: 2.5em; 
   color: var(--wolf-black); margin: 0; text-transform: uppercase;
-  /* Sombra dura dourada */
   text-shadow: 2px 2px 0px rgba(212, 175, 55, 0.4); 
   letter-spacing: 2px;
 }
@@ -118,7 +109,6 @@
   width: 100%; height: 350px; position: relative; 
   background: #000;
 
-  /* Moldura Dupla: Preto e Dourado */
   border: 4px solid var(--wolf-black);
   outline: 2px solid var(--wolf-gold);
   outline-offset: -8px;
@@ -129,12 +119,10 @@
 
 .amalgam-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: center;
-  /* Preto e branco com alto contraste fica ótimo nessa paleta */
   filter: grayscale(1) contrast(1.1); 
   transition: 0.5s;
 }
 
-/* Efeito hover opcional na imagem: volta a ter cor */
 .amalgam-image-frame:hover img { filter: grayscale(0.5); }
 
 .amalgam-glitch {
@@ -151,7 +139,7 @@
   padding: 20px 50px; 
   display: flex; flex-direction: column; gap: 15px; 
   position: relative; z-index: 2;
-  background: #fdfdfd; /* Fundo sólido para ler bem */
+  background: #fdfdfd; 
   border-top: 1px solid var(--wolf-gold); border-bottom: 1px solid var(--wolf-gold);
 }
 .amalgam-container .jjk-dossier-status-item {
@@ -187,21 +175,19 @@
 .amalgam-content {
   padding: 30px 50px; font-size: 1.1em; line-height: 1.8; 
   text-align: justify; position: relative; z-index: 2; 
-  color: var(--wolf-text); /* Texto escuro */
+  color: var(--wolf-text); 
   background: transparent;
 }
 
-/* NEGRITO AJUSTADO (0.85em) e Dourado Escuro */
+/* NEGRITO AJUSTADO (0.85em) */
 .amalgam-content b,
 .amalgam-content strong { 
   color: var(--wolf-dark-gold); 
   font-family: 'Cinzel', serif; 
   font-weight: 700;
-  /* Sem text-shadow branco, pois o fundo já é branco */
   font-size: 0.85em; 
 }
 
-/* Itálico em Preto */
 .amalgam-content i { color: var(--wolf-black); font-weight: 600; }
 
 /* --- EXTRAS --- */
@@ -222,12 +208,12 @@
 .amalgam-footer {
   padding: 30px 0; text-align: center;
   border-top: 1px solid var(--wolf-gold); position: relative; z-index: 2; 
-  background: var(--wolf-black); /* Rodapé preto para fechar o contraste */
+  background: var(--wolf-black); 
 }
 .amalgam-signature::after {
   content: 'Mikhail Volkovich Romanov'; 
   font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.5em; 
-  color: var(--wolf-gold); /* Assinatura Dourada no fundo preto */
+  color: var(--wolf-gold); 
   letter-spacing: 2px; text-transform: uppercase;
 }
 
