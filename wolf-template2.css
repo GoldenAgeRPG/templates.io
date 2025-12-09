@@ -1,38 +1,38 @@
-/* --- TEMPLATE: WOLF TEMPLATE 2.1 (REFINED FOOTER) --- */
+/* --- TEMPLATE: WOLF TEMPLATE 2.2 (ALBEDO THEME) --- */
 /* Arquivo: wolf-template2.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Rubik+Glitch&family=Spectral:ital,wght@0,300;0,600;1,300&display=swap');
 
 :root {
-  /* Paleta Nobre: Branco, Dourado e Preto */
-  --wolf-bg: #fcfcfc;       
-  --wolf-gold: #d4af37;     
-  --wolf-dark-gold: #8a6d1f;
-  --wolf-black: #111;       
-  --wolf-text: #2a2a2a;     
-  --wolf-accent: #f0f0f0;   
+  /* Paleta Albedo: Branco Puro, Preto Profundo, Ouro Pálido */
+  --wolf-bg: #ffffff;       
+  --wolf-gold: #c5a059;     /* Ouro mais metálico/pálido */
+  --wolf-dark-gold: #7a602e;
+  --wolf-black: #080808;    /* Preto quase absoluto */
+  --wolf-text: #1a1a1a;     
+  --wolf-accent: #f4f4f4;   
 }
 
 /* --- ANIMAÇÕES --- */
 
-/* Fluxo Dourado (Laterais) */
-@keyframes gold-flow {
+/* Fluxo das Correntes (Laterais) */
+@keyframes chain-shimmer {
   0% { background-position: 0 0; }
   100% { background-position: 0 200%; }
 }
 
-/* Batimento/Respiração da Imagem */
-@keyframes subtle-breath {
-  0% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
-  50% { transform: scale(1.01); box-shadow: 0 0 25px rgba(212, 175, 55, 0.5); }
-  100% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+/* Respiração da Súcubo (Imagem) */
+@keyframes succubus-breath {
+  0% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); }
+  50% { transform: scale(1.005); box-shadow: 0 0 35px rgba(0, 0, 0, 0.8); }
+  100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); }
 }
 
-/* Glitch "Estático" (Preto e Branco) */
+/* Glitch "Estático" (Discreto) */
 @keyframes static-glitch {
   0% { clip-path: inset(0 0 0 0); transform: translate(0); }
-  96% { clip-path: inset(20% 0 50% 0); transform: translate(-2px, 0); filter: invert(0); }
-  98% { clip-path: inset(80% 0 5% 0); transform: translate(2px, 0); filter: invert(1); }
+  96% { clip-path: inset(20% 0 50% 0); transform: translate(-1px, 0); filter: invert(0); }
+  98% { clip-path: inset(80% 0 5% 0); transform: translate(1px, 0); filter: invert(1); }
   100% { clip-path: inset(0 0 0 0); transform: translate(0); }
 }
 
@@ -43,101 +43,114 @@
   color: var(--wolf-text);
   font-family: 'Spectral', serif;
   
-  border: 1px solid var(--wolf-gold);
+  /* Borda dupla para elegância */
+  border: 4px double var(--wolf-gold); 
   border-radius: 2px;
+  
+  /* Sombra externa refinada */
   box-shadow: 
-    0 0 0 5px var(--wolf-black), 
-    0 0 40px rgba(212, 175, 55, 0.15);
+    0 0 0 1px var(--wolf-black), /* Linha fina preta externa */
+    0 10px 40px rgba(0, 0, 0, 0.15); /* Sombra suave de elevação */
     
   position: relative; overflow: hidden;
   padding: 0; display: flex; flex-direction: column;
 }
 .amalgam-container * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* --- FUNDO (Mármore/Luz - ESTÁTICO) --- */
+/* --- FUNDO (Tecido/Mármore - ESTÁTICO) --- */
 .amalgam-flesh-bg {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  /* Gradiente radial para focar no centro (divindade) com bordas levemente escuras */
   background-image: 
-    repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212, 175, 55, 0.05) 10px, rgba(212, 175, 55, 0.05) 20px),
-    radial-gradient(circle at 50% 50%, #fff, var(--wolf-accent));
+    radial-gradient(circle at 50% 30%, #ffffff 40%, #f0f0f0 80%, #e0e0e0 100%),
+    repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(197, 160, 89, 0.05) 50px);
   background-size: 100% 100%;
   opacity: 1;
 }
 
-/* --- LATERAIS (Fios de Ouro) --- */
+/* --- LATERAIS (Correntes/Detalhes Dourados) --- */
 .amalgam-side-left, .amalgam-side-right {
-  position: absolute; top: 0; bottom: 0; width: 6px; z-index: 1; pointer-events: none;
-  background-image: linear-gradient(to bottom, var(--wolf-gold), #fff, var(--wolf-gold), #fff);
-  background-size: 100% 200%;
-  box-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+  position: absolute; top: 0; bottom: 0; width: 8px; z-index: 1; pointer-events: none;
+  /* Gradiente metálico imitando ouro */
+  background-image: linear-gradient(to bottom, var(--wolf-gold), #fff8e0, var(--wolf-gold), #8a6d1f);
+  background-size: 100% 300%;
+  border-left: 1px solid rgba(0,0,0,0.1);
+  border-right: 1px solid rgba(0,0,0,0.1);
 }
 .amalgam-side-left {
-  left: 6px; border-right: 1px solid var(--wolf-dark-gold);
-  animation: gold-flow 6s linear infinite;
+  left: 6px; 
+  animation: chain-shimmer 8s linear infinite;
 }
 .amalgam-side-right {
-  right: 6px; border-left: 1px solid var(--wolf-dark-gold);
-  animation: gold-flow 6s linear infinite reverse;
+  right: 6px; 
+  animation: chain-shimmer 8s linear infinite reverse;
 }
 
 /* --- HEADER --- */
 .amalgam-header {
   position: relative; z-index: 2;
-  padding: 40px 20px; text-align: center;
-  background: linear-gradient(to bottom, #fff, transparent);
-  border-bottom: 1px solid var(--wolf-gold);
+  padding: 50px 20px 30px 20px; text-align: center;
+  /* Fundo degradê sutil vindo do topo */
+  background: linear-gradient(to bottom, #ffffff, rgba(255,255,255,0));
+  border-bottom: 2px solid var(--wolf-gold);
 }
 .amalgam-title {
-  font-family: 'Cinzel', serif; font-size: 2.5em; 
+  font-family: 'Cinzel', serif; font-size: 2.8em; 
   color: var(--wolf-black); margin: 0; text-transform: uppercase;
-  text-shadow: 2px 2px 0px rgba(212, 175, 55, 0.4); 
-  letter-spacing: 2px;
+  /* Sombra elegante e fina */
+  text-shadow: 1px 1px 0px var(--wolf-gold); 
+  letter-spacing: 4px; font-weight: 700;
 }
 .amalgam-subtitle {
-  font-family: 'Rubik Glitch', cursive; font-size: 1em; 
-  color: var(--wolf-dark-gold); margin-top: 5px; letter-spacing: 4px;
+  font-family: 'Rubik Glitch', cursive; font-size: 0.9em; 
+  color: var(--wolf-dark-gold); margin-top: 8px; letter-spacing: 6px;
+  text-transform: uppercase;
 }
 
 /* --- IMAGEM --- */
 .amalgam-image-wrapper {
-  position: relative; z-index: 2; padding: 25px; display: flex; justify-content: center;
+  position: relative; z-index: 2; padding: 30px; display: flex; justify-content: center;
 }
 
 .amalgam-image-frame {
   width: 100%; height: 350px; position: relative; 
   background: #000;
 
-  border: 4px solid var(--wolf-black);
-  outline: 2px solid var(--wolf-gold);
-  outline-offset: -8px;
+  /* Moldura inspirada na armadura negra dela */
+  border: 1px solid var(--wolf-gold);
+  outline: 4px solid var(--wolf-black); /* Borda grossa preta */
+  outline-offset: 0px;
   
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-  animation: subtle-breath 8s infinite ease-in-out;
+  /* Sombra "Asas Negras" */
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+  animation: succubus-breath 6s infinite ease-in-out;
 }
 
 .amalgam-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: center;
-  filter: grayscale(1) contrast(1.1); 
+  /* Leve desaturação para elegância, contraste alto */
+  filter: saturate(0.8) contrast(1.15); 
   transition: 0.5s;
 }
 
-.amalgam-image-frame:hover img { filter: grayscale(0.5); }
+.amalgam-image-frame:hover img { filter: saturate(1) contrast(1); }
 
 .amalgam-glitch {
   position: absolute; inset: 0; pointer-events: none; background: transparent;
-  box-shadow: inset 0 0 40px rgba(0,0,0,0.5); 
-  animation: static-glitch 5s infinite; mix-blend-mode: exclusion;
-  background-image: repeating-linear-gradient(transparent, transparent 2px, rgba(255, 255, 255, 0.1) 3px);
+  /* Vinheta interna escura */
+  box-shadow: inset 0 0 50px rgba(0,0,0,0.6); 
+  animation: static-glitch 6s infinite; mix-blend-mode: exclusion;
+  background-image: repeating-linear-gradient(transparent, transparent 2px, rgba(255, 255, 255, 0.05) 3px);
   background-size: 100% 4px;
-  opacity: 0.3;
+  opacity: 0.2;
 }
 
 /* --- STATUS --- */
 .amalgam-stats {
-  padding: 20px 50px; 
+  padding: 20px 60px; 
   display: flex; flex-direction: column; gap: 15px; 
   position: relative; z-index: 2;
-  background: #fdfdfd; 
+  background: rgba(255, 255, 255, 0.95); 
   border-top: 1px solid var(--wolf-gold); border-bottom: 1px solid var(--wolf-gold);
 }
 .amalgam-container .jjk-dossier-status-item {
@@ -153,25 +166,25 @@
   color: var(--wolf-dark-gold) !important; font-weight: 700; text-align: right; white-space: nowrap;
 }
 .amalgam-container .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 6px; 
-  background: #e0e0e0 !important; border-radius: 0px; overflow: hidden; border: 1px solid #ccc;
+  width: 100%; height: 5px; 
+  background: #eee !important; border-radius: 0px; overflow: hidden; border: 1px solid #ccc;
 }
 .amalgam-container .jjk-dossier-status-bar-fill { height: 100%; border-radius: 0; border: none; margin: 0; }
 
-/* HP em Ouro */
+/* HP em Ouro Metálico */
 .amalgam-container .jjk-dossier-hp-fill { 
-  background: linear-gradient(90deg, #bfa048, #ffd700) !important; 
-  box-shadow: 0 0 5px var(--wolf-gold) !important;
+  background: linear-gradient(90deg, #8a6d1f, #d4af37, #f9e29c) !important; 
+  box-shadow: 0 0 8px rgba(212, 175, 55, 0.4) !important;
 }
-/* EA em Preto/Cinza */
+/* EA em Preto Absoluto */
 .amalgam-container .jjk-dossier-ea-fill { 
-  background: linear-gradient(90deg, #333, #000) !important; 
+  background: linear-gradient(90deg, #111, #444) !important; 
   box-shadow: none !important;
 }
 
 /* --- CONTEÚDO --- */
 .amalgam-content {
-  padding: 30px 50px; font-size: 1.1em; line-height: 1.8; 
+  padding: 30px 60px; font-size: 1.1em; line-height: 1.9; 
   text-align: justify; position: relative; z-index: 2; 
   color: var(--wolf-text); 
   background: transparent;
@@ -180,19 +193,25 @@
 /* NEGRITO AJUSTADO (0.85em) */
 .amalgam-content b,
 .amalgam-content strong { 
-  color: var(--wolf-dark-gold); 
+  color: var(--wolf-black); /* Preto forte para destaque no branco */
   font-family: 'Cinzel', serif; 
   font-weight: 700;
   font-size: 0.85em; 
+  letter-spacing: 0.5px;
 }
 
-.amalgam-content i { color: var(--wolf-black); font-weight: 600; }
+.amalgam-content i { 
+  color: var(--wolf-dark-gold); 
+  font-weight: 600; 
+}
 
 /* --- EXTRAS --- */
 .amalgam-extras {
-  margin: 0 50px 30px 50px; padding: 20px;
-  background: #f5f5f5; 
+  margin: 0 60px 30px 60px; padding: 25px;
+  background: #f9f9f9; 
   border: 1px solid var(--wolf-gold);
+  /* Cantos cortados (clip-path) para dar um ar mais agressivo/gótico */
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
   position: relative; z-index: 2; font-size: 0.9em;
   color: #555;
 }
@@ -202,27 +221,27 @@
   margin-bottom: 10px; letter-spacing: 1px;
 }
 
-/* --- RODAPÉ (REFORMULADO) --- */
+/* --- RODAPÉ --- */
 .amalgam-footer {
-  padding: 40px 0 30px 0; /* Mais espaço para respiro */
+  padding: 40px 0 30px 0; 
   text-align: center;
   position: relative; z-index: 2; 
-  background: transparent; /* Remove o fundo preto */
-  /* Borda superior mais discreta para separar */
-  border-top: 1px solid rgba(212, 175, 55, 0.4);
+  background: transparent; 
+  /* Linha fina e elegante separando */
+  border-top: 1px solid rgba(0, 0, 0, 0.1); 
 }
 
 .amalgam-signature::after {
-  content: 'Mikhail Volkovich'; /* Nome Atualizado */
-  font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.6em; 
-  color: var(--wolf-black); /* Cor escura para contrastar com o fundo claro */
-  letter-spacing: 2px; text-transform: uppercase;
-  /* Sombra dourada sutil em vez de borda pesada */
-  text-shadow: 2px 2px 0px rgba(212, 175, 55, 0.3);
+  content: 'Mikhail Volkovich';
+  font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.7em; 
+  color: var(--wolf-black); 
+  letter-spacing: 3px; text-transform: uppercase;
+  /* Sombra preta leve para destacar do fundo branco */
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
 }
 
 @media (max-width: 600px) {
-  .amalgam-container { width: 100%; margin: 20px auto; border-width: 1px; }
-  .amalgam-content, .amalgam-stats, .amalgam-extras { padding-left: 30px; padding-right: 30px; margin-left: 10px; margin-right: 10px; }
-  .amalgam-container .jjk-dossier-status-item { grid-template-columns: 40px 1fr 65px; gap: 10px; }
+  .amalgam-container { width: 100%; margin: 20px auto; border-width: 2px; }
+  .amalgam-content, .amalgam-stats, .amalgam-extras { padding-left: 25px; padding-right: 25px; margin-left: 5px; margin-right: 5px; }
+  .amalgam-container .jjk-dossier-status-item { grid-template-columns: 35px 1fr 60px; gap: 8px; }
 }
