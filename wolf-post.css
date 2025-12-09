@@ -206,7 +206,7 @@
   position: relative; z-index: 2; font-size: 0.9em;
 }
 .amalgam-extras::before {
-  content: 'DADOS CORROMPIDOS'; display: block; 
+  content: 'CONSIDERAÇÕES'; display: block; 
   font-family: 'Rubik Glitch', cursive; font-size: 1.1em; color: var(--ama-flesh);
   margin-bottom: 10px; letter-spacing: 1px;
 }
