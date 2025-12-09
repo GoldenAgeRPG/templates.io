@@ -1,4 +1,4 @@
-/* --- TEMPLATE: WOLF TEMPLATE 2 (NO BG ANIMATION) --- */
+/* --- TEMPLATE: WOLF TEMPLATE 2.1 (REFINED FOOTER) --- */
 /* Arquivo: wolf-template2.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Rubik+Glitch&family=Spectral:ital,wght@0,300;0,600;1,300&display=swap');
@@ -15,20 +15,20 @@
 
 /* --- ANIMAÇÕES --- */
 
-/* Fluxo Dourado (Laterais) - MANTIDA */
+/* Fluxo Dourado (Laterais) */
 @keyframes gold-flow {
   0% { background-position: 0 0; }
   100% { background-position: 0 200%; }
 }
 
-/* Batimento/Respiração da Imagem - MANTIDA */
+/* Batimento/Respiração da Imagem */
 @keyframes subtle-breath {
   0% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
   50% { transform: scale(1.01); box-shadow: 0 0 25px rgba(212, 175, 55, 0.5); }
   100% { transform: scale(1); box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
 }
 
-/* Glitch "Estático" (Preto e Branco) - MANTIDA */
+/* Glitch "Estático" (Preto e Branco) */
 @keyframes static-glitch {
   0% { clip-path: inset(0 0 0 0); transform: translate(0); }
   96% { clip-path: inset(20% 0 50% 0); transform: translate(-2px, 0); filter: invert(0); }
@@ -54,16 +54,14 @@
 }
 .amalgam-container * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* --- FUNDO (Mármore/Luz) --- */
+/* --- FUNDO (Mármore/Luz - ESTÁTICO) --- */
 .amalgam-flesh-bg {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  /* Textura estática elegante */
   background-image: 
     repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(212, 175, 55, 0.05) 10px, rgba(212, 175, 55, 0.05) 20px),
     radial-gradient(circle at 50% 50%, #fff, var(--wolf-accent));
-  background-size: 100% 100%; /* Tamanho fixo */
+  background-size: 100% 100%;
   opacity: 1;
-  /* Animação removida conforme pedido */
 }
 
 /* --- LATERAIS (Fios de Ouro) --- */
@@ -204,17 +202,23 @@
   margin-bottom: 10px; letter-spacing: 1px;
 }
 
-/* --- RODAPÉ --- */
+/* --- RODAPÉ (REFORMULADO) --- */
 .amalgam-footer {
-  padding: 30px 0; text-align: center;
-  border-top: 1px solid var(--wolf-gold); position: relative; z-index: 2; 
-  background: var(--wolf-black); 
+  padding: 40px 0 30px 0; /* Mais espaço para respiro */
+  text-align: center;
+  position: relative; z-index: 2; 
+  background: transparent; /* Remove o fundo preto */
+  /* Borda superior mais discreta para separar */
+  border-top: 1px solid rgba(212, 175, 55, 0.4);
 }
+
 .amalgam-signature::after {
-  content: 'Mikhail Volkovich Romanov'; 
-  font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.5em; 
-  color: var(--wolf-gold); 
+  content: 'Mikhail Volkovich'; /* Nome Atualizado */
+  font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.6em; 
+  color: var(--wolf-black); /* Cor escura para contrastar com o fundo claro */
   letter-spacing: 2px; text-transform: uppercase;
+  /* Sombra dourada sutil em vez de borda pesada */
+  text-shadow: 2px 2px 0px rgba(212, 175, 55, 0.3);
 }
 
 @media (max-width: 600px) {
