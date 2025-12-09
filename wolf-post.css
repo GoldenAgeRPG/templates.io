@@ -1,4 +1,4 @@
-/* --- TEMPLATE: THE AMALGAM v2.2 (BOLD FIX) --- */
+/* --- TEMPLATE: THE AMALGAM v2.3 (SIZE MATCH FIX) --- */
 /* Arquivo: amalgam-post.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Rubik+Glitch&family=Spectral:ital,wght@0,300;0,600;1,300&display=swap');
@@ -123,12 +123,12 @@
   width: 100%; height: 350px; position: relative; 
   background: #000;
 
-  /* MUDANÇA: Borda orgânica de "corrupção" em vez de corte seco */
+  /* Borda orgânica de "corrupção" */
   border-width: 6px;
   border-style: solid;
   border-image: linear-gradient(to bottom, var(--ama-blood), var(--ama-dark), var(--ama-cursed)) 1;
   
-  /* MUDANÇA: Sombra interna pesada para mesclar as bordas da imagem */
+  /* Sombra interna pesada para mesclar as bordas da imagem */
   box-shadow: inset 0 0 40px #000, 0 0 20px rgba(0,0,0,0.5);
 
   animation: irregular-beat 6s infinite;
@@ -195,13 +195,13 @@
   background: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent);
 }
 
-/* EDIÇÃO: Ajuste para funcionar com [b] e não aumentar fonte */
+/* EDIÇÃO: 0.85em para igualar visualmente a Cinzel com o texto Spectral */
 .amalgam-content b,
 .amalgam-content strong { 
   color: var(--ama-bone); 
   font-family: 'Cinzel', serif; 
   text-shadow: 0 0 5px rgba(255,255,255,0.3);
-  font-size: 1em; /* Garante que o tamanho não mude */
+  font-size: 0.85em; 
 }
 
 .amalgam-content i { color: var(--ama-blood); font-weight: 600; }
