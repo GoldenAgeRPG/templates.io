@@ -1,34 +1,44 @@
-/* --- TEMPLATE: WOLF TEMPLATE 2.3 (ALBEDO THEME + WINGS + BOLD FIX) --- */
-/* Arquivo: wolf-template2.css */
+/* --- TEMPLATE: WOLF TEMPLATE 3.0 (CROW WINGS + DARK MODE SWITCH) --- */
+/* Arquivo: wolf-template3.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Rubik+Glitch&family=Spectral:ital,wght@0,300;0,600;1,300&display=swap');
 
 :root {
-  /* Paleta Albedo: Branco Puro, Preto Profundo, Ouro Pálido */
-  --wolf-bg: #ffffff;       
-  --wolf-gold: #c5a059;     /* Ouro mais metálico/pálido */
-  --wolf-dark-gold: #7a602e;
-  --wolf-black: #080808;    /* Preto quase absoluto */
-  --wolf-text: #1a1a1a;     
-  --wolf-accent: #f4f4f4;   
+  /* === TEMA CLARO (PADRÃO) === */
+  --wolf-bg: #ffffff;       /* Fundo Principal */
+  --wolf-bg-secondary: #f9f9f9; /* Fundo de caixas (extras/status) */
+  --wolf-gold: #c5a059;     /* Ouro Metálico */
+  --wolf-dark-gold: #7a602e; /* Ouro Escuro para texto/detalhes */
+  --wolf-black: #080808;    /* Cor de destaque forte (Texto principal/Bordas) */
+  --wolf-text: #1a1a1a;     /* Cor do texto corrido */
+  --wolf-accent: #f4f4f4;   /* Cor de acento sutil para gradientes claros */
+  --wolf-shadow: rgba(0, 0, 0, 0.15); /* Cor da sombra externa */
+  --wolf-image-outline: #080808; /* Cor da borda grossa da imagem */
 }
+
+/* === TEMA ESCURO (ATIVADO PELA CLASSE .wolf-dark-mode) === */
+.amalgam-container.wolf-dark-mode {
+  --wolf-bg: #111111;       /* Fundo Preto */
+  --wolf-bg-secondary: #1a1a1a; /* Caixas levemente mais claras que o fundo */
+  --wolf-gold: #d4af37;     /* Ouro um pouco mais vibrante para contraste */
+  --wolf-dark-gold: #a88b45; 
+  --wolf-black: #e0e0e0;    /* O "Preto" vira Branco/Cinza claro para texto */
+  --wolf-text: #cccccc;     /* Texto corrido cinza claro */
+  --wolf-accent: #222222;   /* Acento escuro */
+  --wolf-shadow: rgba(0, 0, 0, 0.8); /* Sombra mais pesada para fundos escuros */
+  --wolf-image-outline: #333333; /* Borda da imagem cinza chumbo */
+}
+
 
 /* --- ANIMAÇÕES --- */
-
-/* Fluxo das Correntes (Laterais) */
 @keyframes chain-shimmer {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 200%; }
+  0% { background-position: 0 0; } 100% { background-position: 0 200%; }
 }
-
-/* Respiração da Súcubo (Imagem) */
 @keyframes succubus-breath {
   0% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); }
   50% { transform: scale(1.005); box-shadow: 0 0 35px rgba(0, 0, 0, 0.8); }
   100% { transform: scale(1); box-shadow: 0 0 20px rgba(0, 0, 0, 0.6); }
 }
-
-/* Glitch "Estático" (Discreto) */
 @keyframes static-glitch {
   0% { clip-path: inset(0 0 0 0); transform: translate(0); }
   96% { clip-path: inset(20% 0 50% 0); transform: translate(-1px, 0); filter: invert(0); }
@@ -42,73 +52,66 @@
   background-color: var(--wolf-bg);
   color: var(--wolf-text);
   font-family: 'Spectral', serif;
-  
-  /* Borda dupla para elegância */
   border: 4px double var(--wolf-gold); 
   border-radius: 2px;
-  
-  /* Sombra externa refinada */
   box-shadow: 
-    0 0 0 1px var(--wolf-black), /* Linha fina preta externa */
-    0 10px 40px rgba(0, 0, 0, 0.15); /* Sombra suave de elevação */
-    
+    0 0 0 1px var(--wolf-black),
+    0 10px 40px var(--wolf-shadow);
   position: relative; overflow: hidden;
   padding: 0; display: flex; flex-direction: column;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 .amalgam-container * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* --- FUNDO (Tecido/Mármore - ESTÁTICO) --- */
+/* --- FUNDO ADAPTÁVEL --- */
 .amalgam-flesh-bg {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  /* Gradiente radial para focar no centro com bordas levemente escuras */
+  /* Gradiente que usa as variáveis para mudar de claro para escuro */
   background-image: 
-    radial-gradient(circle at 50% 30%, #ffffff 40%, #f0f0f0 80%, #e0e0e0 100%),
+    radial-gradient(circle at 50% 30%, var(--wolf-bg) 40%, var(--wolf-bg-secondary) 80%, var(--wolf-accent) 100%),
     repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(197, 160, 89, 0.05) 50px);
   background-size: 100% 100%;
   opacity: 1;
+  transition: background-image 0.3s ease;
 }
 
-/* --- LATERAIS (Correntes/Detalhes Dourados) --- */
+/* --- LATERAIS --- */
 .amalgam-side-left, .amalgam-side-right {
   position: absolute; top: 0; bottom: 0; width: 8px; z-index: 1; pointer-events: none;
-  /* Gradiente metálico imitando ouro */
-  background-image: linear-gradient(to bottom, var(--wolf-gold), #fff8e0, var(--wolf-gold), #8a6d1f);
+  background-image: linear-gradient(to bottom, var(--wolf-gold), var(--wolf-accent), var(--wolf-gold), var(--wolf-dark-gold));
   background-size: 100% 300%;
   border-left: 1px solid rgba(0,0,0,0.1);
   border-right: 1px solid rgba(0,0,0,0.1);
 }
-.amalgam-side-left {
-  left: 6px; 
-  animation: chain-shimmer 8s linear infinite;
-}
-.amalgam-side-right {
-  right: 6px; 
-  animation: chain-shimmer 8s linear infinite reverse;
-}
+.amalgam-side-left { left: 6px; animation: chain-shimmer 8s linear infinite; }
+.amalgam-side-right { right: 6px; animation: chain-shimmer 8s linear infinite reverse; }
 
 /* --- HEADER --- */
 .amalgam-header {
   position: relative; z-index: 2;
-  padding: 50px 20px 30px 20px; text-align: center;
-  /* Fundo degradê sutil vindo do topo */
-  background: linear-gradient(to bottom, #ffffff, rgba(255,255,255,0));
+  padding: 60px 20px 30px 20px; text-align: center;
+  background: linear-gradient(to bottom, var(--wolf-bg), transparent);
   border-bottom: 2px solid var(--wolf-gold);
 }
 
-/* POSICIONAMENTO DO SVG DAS ASAS */
-.albedo-wings-svg {
+/* POSICIONAMENTO DO NOVO SVG DE ASAS DE CORVO */
+.wolf-wings-svg {
   position: absolute;
-  top: 0; 
+  top: 5px; 
   left: 50%; 
-  transform: translateX(-50%) translateY(-30%); /* Centraliza e sobe um pouco */
-  width: 280px; 
+  transform: translateX(-50%); 
+  width: 320px; /* Um pouco mais largas */
   height: auto;
   z-index: 0; /* Atrás do título */
   pointer-events: none;
+  opacity: 0.9;
 }
+/* No modo escuro, as asas ficam um pouco mais sutis */
+.wolf-dark-mode .wolf-wings-svg { opacity: 0.7; }
+
 
 .amalgam-title {
-  position: relative; z-index: 2; /* Garante que o texto fique sobre as asas */
+  position: relative; z-index: 2;
   font-family: 'Cinzel', serif; font-size: 2.8em; 
   color: var(--wolf-black); margin: 0; text-transform: uppercase;
   text-shadow: 1px 1px 0px var(--wolf-gold); 
@@ -125,38 +128,28 @@
 .amalgam-image-wrapper {
   position: relative; z-index: 2; padding: 30px; display: flex; justify-content: center;
 }
-
 .amalgam-image-frame {
   width: 100%; height: 350px; position: relative; 
   background: #000;
-
-  /* Moldura inspirada na armadura negra */
   border: 1px solid var(--wolf-gold);
-  outline: 4px solid var(--wolf-black); 
+  outline: 4px solid var(--wolf-image-outline); /* Usa a variável adaptável */
   outline-offset: 0px;
-  
-  /* Sombra "Asas Negras" */
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
   animation: succubus-breath 6s infinite ease-in-out;
 }
-
 .amalgam-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: center;
-  /* Leve desaturação para elegância */
   filter: saturate(0.8) contrast(1.15); 
   transition: 0.5s;
 }
-
 .amalgam-image-frame:hover img { filter: saturate(1) contrast(1); }
 
 .amalgam-glitch {
   position: absolute; inset: 0; pointer-events: none; background: transparent;
-  /* Vinheta interna escura */
   box-shadow: inset 0 0 50px rgba(0,0,0,0.6); 
   animation: static-glitch 6s infinite; mix-blend-mode: exclusion;
   background-image: repeating-linear-gradient(transparent, transparent 2px, rgba(255, 255, 255, 0.05) 3px);
-  background-size: 100% 4px;
-  opacity: 0.2;
+  background-size: 100% 4px; opacity: 0.2;
 }
 
 /* --- STATUS --- */
@@ -164,8 +157,10 @@
   padding: 20px 60px; 
   display: flex; flex-direction: column; gap: 15px; 
   position: relative; z-index: 2;
-  background: rgba(255, 255, 255, 0.95); 
+  /* Fundo adaptável */
+  background: var(--wolf-bg-secondary);
   border-top: 1px solid var(--wolf-gold); border-bottom: 1px solid var(--wolf-gold);
+  transition: background-color 0.3s ease;
 }
 .amalgam-container .jjk-dossier-status-item {
   display: grid; grid-template-columns: 40px 1fr 70px; align-items: center; gap: 15px;
@@ -181,55 +176,39 @@
 }
 .amalgam-container .jjk-dossier-status-bar-wrapper {
   width: 100%; height: 5px; 
-  background: #eee !important; border-radius: 0px; overflow: hidden; border: 1px solid #ccc;
+  background: rgba(0,0,0,0.1) !important; border-radius: 0px; overflow: hidden; border: 1px solid var(--wolf-gold);
 }
 .amalgam-container .jjk-dossier-status-bar-fill { height: 100%; border-radius: 0; border: none; margin: 0; }
-
-/* HP em Ouro Metálico */
 .amalgam-container .jjk-dossier-hp-fill { 
-  background: linear-gradient(90deg, #8a6d1f, #d4af37, #f9e29c) !important; 
+  background: linear-gradient(90deg, var(--wolf-dark-gold), var(--wolf-gold)) !important; 
   box-shadow: 0 0 8px rgba(212, 175, 55, 0.4) !important;
 }
-/* EA em Preto Absoluto */
 .amalgam-container .jjk-dossier-ea-fill { 
-  background: linear-gradient(90deg, #111, #444) !important; 
-  box-shadow: none !important;
+  background: linear-gradient(90deg, #111, #444) !important; box-shadow: none !important;
 }
 
 /* --- CONTEÚDO --- */
 .amalgam-content {
   padding: 30px 60px; font-size: 1.1em; line-height: 1.9; 
   text-align: justify; position: relative; z-index: 2; 
-  color: var(--wolf-text); 
-  background: transparent;
+  color: var(--wolf-text); background: transparent;
 }
-
-/* --- CORREÇÃO DO NEGRITO --- */
-.amalgam-content b,
-.amalgam-content strong { 
-  color: var(--wolf-black); 
-  /* Voltamos para Spectral para permitir minúsculas */
-  font-family: 'Spectral', serif; 
-  font-weight: 700;
-  font-size: 1em; 
-  letter-spacing: 0;
-  text-transform: none;
+.amalgam-content b, .amalgam-content strong { 
+  color: var(--wolf-black); font-family: 'Spectral', serif; 
+  font-weight: 700; font-size: 1em; letter-spacing: 0; text-transform: none;
 }
-
-.amalgam-content i { 
-  color: var(--wolf-dark-gold); 
-  font-weight: 600; 
-}
+.amalgam-content i { color: var(--wolf-dark-gold); font-weight: 600; }
 
 /* --- EXTRAS --- */
 .amalgam-extras {
   margin: 0 60px 30px 60px; padding: 25px;
-  background: #f9f9f9; 
+  /* Fundo adaptável */
+  background: var(--wolf-bg-secondary);
   border: 1px solid var(--wolf-gold);
-  /* Cantos cortados para estética gótica */
   clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%);
   position: relative; z-index: 2; font-size: 0.9em;
-  color: #555;
+  color: var(--wolf-text); opacity: 0.8;
+  transition: background-color 0.3s ease;
 }
 .amalgam-extras::before {
   content: 'CONSIDERAÇÕES'; display: block; 
@@ -239,19 +218,16 @@
 
 /* --- RODAPÉ --- */
 .amalgam-footer {
-  padding: 40px 0 30px 0; 
-  text-align: center;
-  position: relative; z-index: 2; 
-  background: transparent; 
-  border-top: 1px solid rgba(0, 0, 0, 0.1); 
+  padding: 40px 0 30px 0; text-align: center;
+  position: relative; z-index: 2; background: transparent; 
+  border-top: 1px solid var(--wolf-gold); opacity: 0.5;
 }
-
 .amalgam-signature::after {
   content: 'Mikhail Volkovich';
   font-family: 'Cinzel', serif; font-weight: 700; font-size: 1.7em; 
   color: var(--wolf-black); 
   letter-spacing: 3px; text-transform: uppercase;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
 }
 
 @media (max-width: 600px) {
