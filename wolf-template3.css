@@ -1,4 +1,4 @@
-/* --- TEMPLATE: WOLF TEMPLATE 3.0 (CROW WINGS + DARK MODE SWITCH) --- */
+/* --- TEMPLATE: WOLF TEMPLATE 3.1 (NO SVG + PURE BLACK DARK MODE) --- */
 /* Arquivo: wolf-template3.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Rubik+Glitch&family=Spectral:ital,wght@0,300;0,600;1,300&display=swap');
@@ -18,15 +18,15 @@
 
 /* === TEMA ESCURO (ATIVADO PELA CLASSE .wolf-dark-mode) === */
 .amalgam-container.wolf-dark-mode {
-  --wolf-bg: #111111;       /* Fundo Preto */
-  --wolf-bg-secondary: #1a1a1a; /* Caixas levemente mais claras que o fundo */
+  --wolf-bg: #000000;       /* Fundo PRETO PURO */
+  --wolf-bg-secondary: #000000; /* Caixas também PRETO PURO */
   --wolf-gold: #d4af37;     /* Ouro um pouco mais vibrante para contraste */
   --wolf-dark-gold: #a88b45; 
   --wolf-black: #e0e0e0;    /* O "Preto" vira Branco/Cinza claro para texto */
   --wolf-text: #cccccc;     /* Texto corrido cinza claro */
-  --wolf-accent: #222222;   /* Acento escuro */
-  --wolf-shadow: rgba(0, 0, 0, 0.8); /* Sombra mais pesada para fundos escuros */
-  --wolf-image-outline: #333333; /* Borda da imagem cinza chumbo */
+  --wolf-accent: #111111;   /* Acento muito sutil para textura */
+  --wolf-shadow: rgba(0, 0, 0, 0.9); /* Sombra quase invisível no fundo preto */
+  --wolf-image-outline: #222222; /* Borda da imagem cinza chumbo */
 }
 
 
@@ -86,29 +86,13 @@
 .amalgam-side-left { left: 6px; animation: chain-shimmer 8s linear infinite; }
 .amalgam-side-right { right: 6px; animation: chain-shimmer 8s linear infinite reverse; }
 
-/* --- HEADER --- */
+/* --- HEADER (SVG REMOVIDO) --- */
 .amalgam-header {
   position: relative; z-index: 2;
   padding: 60px 20px 30px 20px; text-align: center;
   background: linear-gradient(to bottom, var(--wolf-bg), transparent);
   border-bottom: 2px solid var(--wolf-gold);
 }
-
-/* POSICIONAMENTO DO NOVO SVG DE ASAS DE CORVO */
-.wolf-wings-svg {
-  position: absolute;
-  top: 5px; 
-  left: 50%; 
-  transform: translateX(-50%); 
-  width: 320px; /* Um pouco mais largas */
-  height: auto;
-  z-index: 0; /* Atrás do título */
-  pointer-events: none;
-  opacity: 0.9;
-}
-/* No modo escuro, as asas ficam um pouco mais sutis */
-.wolf-dark-mode .wolf-wings-svg { opacity: 0.7; }
-
 
 .amalgam-title {
   position: relative; z-index: 2;
