@@ -1,4 +1,4 @@
-/* --- TEMPLATE: COMEDIANTE (Hazu) v2.1 (Animated Bars) --- */
+/* --- TEMPLATE: COMEDIANTE (TAKABA) v2.2 (Signature Boost) --- */
 @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Permanent+Marker&display=swap');
 
 /* Escopamento */
@@ -37,7 +37,7 @@
   50% { transform: translateY(-5px) rotate(1deg); }
 }
 
-/* [NOVO] Animação das Listras da Barra (Efeito Barbearia) */
+/* Animação das Listras da Barra */
 @keyframes comic-stripe-move {
   0% { background-position: 0 0; }
   100% { background-position: 50px 0; }
@@ -63,22 +63,34 @@
   overflow: visible;
 }
 
-/* --- ASSINATURA INJETADA (NÃO EDITÁVEL) --- */
+/* --- [MODIFICADO] ASSINATURA COM DESTAQUE POP-ART --- */
 .comic-container::after {
   content: "Nan Hazu";
   display: block;
   width: 100%;
   text-align: right;
   font-family: 'Permanent Marker', cursive;
-  font-size: 1.4em;
+  
+  /* Aumentado drasticamente */
+  font-size: 2.5em; 
   color: var(--comic-yellow);
-  opacity: 0.7;
-  padding-right: 20px;
-  padding-bottom: 15px;
-  margin-top: 10px;
-  transform: rotate(-1deg);
-  pointer-events: none; /* Impede seleção */
-  text-shadow: 2px 2px 0 #000;
+  
+  /* Totalmente visível */
+  opacity: 1; 
+  
+  padding-right: 30px;
+  padding-bottom: 20px;
+  margin-top: 15px;
+  transform: rotate(-2deg);
+  pointer-events: none;
+  
+  /* Sombra Dupla para efeito 3D/Pop */
+  text-shadow: 
+    3px 3px 0 #000,
+    6px 6px 0 var(--comic-pink);
+    
+  letter-spacing: 2px;
+  z-index: 10;
 }
 
 .comic-container * { box-sizing: border-box; }
@@ -148,7 +160,7 @@
 }
 .comic-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
 
-/* [ATUALIZADO] HP: Rosa Listrado Animado */
+/* HP */
 .comic-container .jjk-dossier-hp-fill {
   height: 100%;
   background: repeating-linear-gradient(
@@ -158,14 +170,13 @@
     #ff69b4 10px,
     #ff69b4 20px
   );
-  background-size: 28px 28px; /* Trava o tamanho do padrão para o loop */
+  background-size: 28px 28px;
   border-right: 3px solid #fff;
   transition: width 0.5s ease;
-  /* Animação de movimento */
   animation: comic-stripe-move 1s linear infinite;
 }
 
-/* [ATUALIZADO] EA: Ciano Listrado Animado (Reverso) */
+/* EA */
 .comic-container .jjk-dossier-ea-fill {
   height: 100%;
   background: repeating-linear-gradient(
@@ -178,7 +189,6 @@
   background-size: 28px 28px;
   border-right: 3px solid #fff;
   transition: width 0.5s ease;
-  /* Animação ao contrário para contraste */
   animation: comic-stripe-move 1s linear infinite reverse;
 }
 
