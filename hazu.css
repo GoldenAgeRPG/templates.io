@@ -1,0 +1,224 @@
+/* --- TEMPLATE: COMEDIANTE (Hazu) v2.1 (Animated Bars) --- */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Permanent+Marker&display=swap');
+
+/* Escopamento */
+.comic-container {
+  --comic-bg: #1a1625;
+  --comic-paper: #fffbf0;
+  --comic-yellow: #ffcc00;
+  --comic-cyan: #00e5ff;
+  --comic-pink: #ff0090;
+  --comic-black: #111111;
+  --comic-halftone: rgba(255, 255, 255, 0.05);
+}
+
+/* Animação de Fundo (Retículas movendo) */
+@keyframes halftone-move {
+  0% { background-position: 0 0; }
+  100% { background-position: 20px 20px; }
+}
+
+/* Ícone Rindo */
+@keyframes comic-wiggle {
+  0%, 100% { transform: rotate(15deg) scale(1); }
+  50% { transform: rotate(5deg) scale(1.1); }
+}
+
+/* Tag Pulsante */
+@keyframes sticker-pulse {
+  0% { transform: rotate(-10deg) scale(1); }
+  50% { transform: rotate(-10deg) scale(1.1); }
+  100% { transform: rotate(-10deg) scale(1); }
+}
+
+/* Flutuação da Caixa de Extras */
+@keyframes comic-float {
+  0%, 100% { transform: translateY(0) rotate(-1deg); }
+  50% { transform: translateY(-5px) rotate(1deg); }
+}
+
+/* [NOVO] Animação das Listras da Barra (Efeito Barbearia) */
+@keyframes comic-stripe-move {
+  0% { background-position: 0 0; }
+  100% { background-position: 50px 0; }
+}
+
+/* CONTAINER PRINCIPAL */
+.comic-container {
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--comic-bg);
+  background-image: radial-gradient(var(--comic-halftone) 20%, transparent 20%);
+  background-size: 10px 10px;
+  animation: halftone-move 20s linear infinite;
+  border: 4px solid var(--comic-black);
+  box-shadow: 10px 10px 0 var(--comic-yellow);
+  border-radius: 0;
+  color: var(--comic-paper);
+  font-family: 'Comic Neue', cursive;
+  position: relative;
+  padding: 0;
+  overflow: visible;
+}
+
+/* --- ASSINATURA INJETADA (NÃO EDITÁVEL) --- */
+.comic-container::after {
+  content: "Nan Hazu";
+  display: block;
+  width: 100%;
+  text-align: right;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1.4em;
+  color: var(--comic-yellow);
+  opacity: 0.7;
+  padding-right: 20px;
+  padding-bottom: 15px;
+  margin-top: 10px;
+  transform: rotate(-1deg);
+  pointer-events: none; /* Impede seleção */
+  text-shadow: 2px 2px 0 #000;
+}
+
+.comic-container * { box-sizing: border-box; }
+
+/* --- CABEÇALHO --- */
+.comic-container .comic-header {
+  background: var(--comic-yellow);
+  padding: 20px;
+  border-bottom: 4px solid var(--comic-black);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transform: skewY(-2deg);
+  margin-top: 10px;
+  box-shadow: 0 5px 0 rgba(0,0,0,0.2);
+}
+
+.comic-container .comic-icon {
+  width: 60px; height: 60px;
+  filter: drop-shadow(3px 3px 0 #000);
+  animation: comic-wiggle 2s ease-in-out infinite;
+}
+.comic-container .comic-icon path { fill: var(--comic-pink); }
+
+.comic-container .comic-title {
+  font-family: 'Bangers', cursive;
+  font-size: 2.8em; color: var(--comic-black); margin: 0;
+  text-transform: uppercase; letter-spacing: 1px; text-shadow: 2px 2px 0 #fff; line-height: 1;
+}
+
+.comic-container .comic-subtitle {
+  font-family: 'Permanent Marker', cursive; color: var(--comic-black); font-size: 0.9em;
+  opacity: 0.8; transform: rotate(2deg); margin-top: 5px;
+}
+
+/* --- IMAGEM --- */
+.comic-container .comic-image-frame {
+  width: 95%; height: 350px; margin: 20px auto;
+  border: 4px solid var(--comic-black); background: #fff; position: relative;
+  box-shadow: 5px 5px 0 var(--comic-pink);
+}
+.comic-container .comic-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  filter: contrast(1.2) saturate(1.3);
+}
+.comic-container .comic-image-frame::after {
+  content: 'AO VIVO!'; position: absolute; top: -10px; left: -10px;
+  background: var(--comic-pink); color: #fff; font-family: 'Bangers', cursive;
+  padding: 5px 10px; border: 2px solid var(--comic-black);
+  transform: rotate(-10deg); box-shadow: 3px 3px 0 #000;
+  animation: sticker-pulse 1.5s infinite;
+}
+
+/* --- BARRAS DE STATUS --- */
+.comic-container .comic-stats {
+  padding: 10px 25px; display: flex; flex-direction: column; gap: 15px; margin-bottom: 20px;
+}
+.comic-container .jjk-dossier-status-item { display: flex; align-items: center; gap: 10px; }
+.comic-container .jjk-dossier-status-label {
+  font-family: 'Bangers', cursive; font-size: 1.2em; color: var(--comic-yellow);
+  text-shadow: 2px 2px 0 #000; width: 40px;
+}
+.comic-container .jjk-dossier-status-bar-wrapper {
+  flex-grow: 1; position: relative; height: 20px;
+  background: #000; border: 2px solid #fff; border-radius: 10px;
+  overflow: hidden; transform: skewX(-10deg);
+}
+.comic-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
+
+/* [ATUALIZADO] HP: Rosa Listrado Animado */
+.comic-container .jjk-dossier-hp-fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--comic-pink),
+    var(--comic-pink) 10px,
+    #ff69b4 10px,
+    #ff69b4 20px
+  );
+  background-size: 28px 28px; /* Trava o tamanho do padrão para o loop */
+  border-right: 3px solid #fff;
+  transition: width 0.5s ease;
+  /* Animação de movimento */
+  animation: comic-stripe-move 1s linear infinite;
+}
+
+/* [ATUALIZADO] EA: Ciano Listrado Animado (Reverso) */
+.comic-container .jjk-dossier-ea-fill {
+  height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    var(--comic-cyan),
+    var(--comic-cyan) 10px,
+    #00bcd4 10px,
+    #00bcd4 20px
+  );
+  background-size: 28px 28px;
+  border-right: 3px solid #fff;
+  transition: width 0.5s ease;
+  /* Animação ao contrário para contraste */
+  animation: comic-stripe-move 1s linear infinite reverse;
+}
+
+.comic-container .jjk-dossier-status-value {
+  position: absolute; right: 10px; top: 50%; transform: translateY(-50%) skewX(10deg);
+  font-family: 'Bangers', cursive; color: #fff; font-size: 0.9em;
+  text-shadow: 1px 1px 0 #000; z-index: 5; left: auto;
+}
+
+/* --- CONTEÚDO --- */
+.comic-container .comic-content {
+  background: var(--comic-paper); color: #000; padding: 25px; margin: 20px;
+  border-radius: 20px; border: 4px solid var(--comic-black);
+  font-size: 1.1em; line-height: 1.6; text-align: justify; position: relative;
+  box-shadow: 5px 5px 0 rgba(0,0,0,0.5);
+}
+.comic-container .comic-content::before {
+  content: ''; position: absolute; top: -20px; left: 40px;
+  border-left: 20px solid transparent; border-right: 20px solid transparent; border-bottom: 20px solid var(--comic-black);
+}
+.comic-container .comic-content::after {
+  content: ''; position: absolute; top: -14px; left: 44px;
+  border-left: 16px solid transparent; border-right: 16px solid transparent; border-bottom: 16px solid var(--comic-paper);
+}
+.comic-container .comic-content b { font-family: 'Bangers', cursive; font-size: 1.1em; letter-spacing: 1px; color: var(--comic-pink); }
+.comic-container .comic-content i { font-weight: 700; background-color: var(--comic-yellow); padding: 0 4px; }
+
+/* --- EXTRAS --- */
+.comic-container .comic-extras {
+  margin: 0 20px 20px 20px; padding: 15px; background: var(--comic-cyan);
+  border: 3px solid var(--comic-black); color: var(--comic-black);
+  font-family: 'Bangers', cursive; font-size: 1em; letter-spacing: 1px;
+  animation: comic-float 4s ease-in-out infinite;
+}
+.comic-container .comic-extras::before {
+  content: 'NOTA DO EDITOR:'; display: block; font-size: 0.8em; text-decoration: underline; margin-bottom: 5px;
+}
+
+@media (max-width: 600px) {
+  .comic-container .comic-header { flex-direction: column; text-align: center; transform: none; }
+  .comic-container .comic-title { font-size: 2em; }
+  .comic-container .comic-content { margin: 10px; padding: 15px; }
+}
