@@ -1,244 +1,198 @@
-/* --- TEMPLATE: RYOMEN SUKUNA (TATSU) --- */
-/* Arquivo: tatsu.css */
+/* --- TEMPLATE: MALEVOLENT SHRINE (ADAM MYERS) --- */
+/* Baseado na estrutura Wolf Template, adaptado para Dark/Gore */
 
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Noto+Serif+JP:wght@300;400;700&family=Rock+Salt&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Nosifer&family=Spectral:ital,wght@0,300;0,600;1,300&display=swap');
 
 :root {
-  --ts-black: #020202;          /* Preto Quase Absoluto */
-  --ts-dark-red: #3d0000;       /* Vermelho Sangue Seco (Fundo) */
-  --ts-blood-red: #8a0000;      /* Vermelho Sangue Principal */
-  --ts-bright-red: #ff0000;     /* Vermelho Energia/Destaque */
-  --ts-text: #bfbfbf;           /* Cinza Claro (Legibilidade) */
-  --ts-border-jagged: polygon(0 0, 100% 0, 98% 10%, 100% 20%, 95% 30%, 100% 40%, 98% 50%, 100% 60%, 95% 70%, 100% 80%, 98% 90%, 100% 100%, 0 100%, 2% 90%, 0 80%, 5% 70%, 0 60%, 2% 50%, 0 40%, 5% 30%, 0 20%, 2% 10%);
+  /* === PALETA SANTUÁRIO MALEVOLENTE === */
+  --shrine-bg: #050505;        /* Preto quase absoluto */
+  --shrine-bg-secondary: #0a0000; /* Preto avermelhado muito escuro */
+  --shrine-blood: #8a0000;     /* Vermelho Sangue Escuro */
+  --shrine-blood-bright: #ff0000; /* Vermelho Vivo para brilhos */
+  --shrine-bone: #b8b8b8;      /* Cor de osso/cinza */
+  --shrine-text: #a3a3a3;      /* Texto cinza claro para leitura */
+  --shrine-shadow: rgba(0, 0, 0, 0.95);
 }
 
-/* --- ANIMAÇÕES AGRESSIVAS --- */
-
-/* Pulso Malévolo (Container) - Respiração pesada */
-@keyframes evil-pulse {
-  0%, 100% { box-shadow: 0 0 30px rgba(138, 0, 0, 0.3); border-color: var(--ts-blood-red); }
-  50% { box-shadow: 0 0 60px rgba(255, 0, 0, 0.5); border-color: var(--ts-bright-red); }
+/* --- ANIMAÇÕES --- */
+@keyframes blood-pulse {
+  0% { box-shadow: 0 0 5px var(--shrine-blood-bright); border-color: var(--shrine-blood); }
+  50% { box-shadow: 0 0 20px var(--shrine-blood); border-color: #500000; }
+  100% { box-shadow: 0 0 5px var(--shrine-blood-bright); border-color: var(--shrine-blood); }
 }
 
-/* Fluxo de Sangue (Barras) */
-@keyframes blood-flow {
-  0% { background-position: 0% 50%; }
-  100% { background-position: 200% 50%; }
-}
-
-/* Tremor de Corte (Imagem/Glitch) */
-@keyframes slash-twitch {
-  0%, 100% { transform: translate(0, 0); opacity: 0.2; }
-  98% { transform: translate(0, 0); opacity: 0.2; }
-  99% { transform: translate(-3px, 2px) skewX(5deg); opacity: 0.5; filter: brightness(2); }
+@keyframes cleave-slide {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100%; }
 }
 
 /* --- CONTAINER PRINCIPAL --- */
-.tatsu-container {
-  box-sizing: border-box; max-width: 750px; width: 95%; margin: 60px auto;
-  background-color: var(--ts-black);
-  color: var(--ts-text);
-  font-family: 'Noto Serif JP', serif;
-  
-  /* Borda Grossa e Agressiva */
-  border: 4px solid var(--ts-blood-red);
-  /* Sombra Vermelha Pesada */
-  box-shadow: 0 0 40px rgba(138, 0, 0, 0.5);
-    
+.malevolent-container {
+  box-sizing: border-box; max-width: 720px; width: 95%; margin: 60px auto;
+  background-color: var(--shrine-bg);
+  color: var(--shrine-text);
+  font-family: 'Spectral', serif;
+  border: 3px solid var(--shrine-blood);
+  border-top: 5px solid var(--shrine-blood);
+  box-shadow: 
+    0 0 0 1px #000,
+    0 0 30px rgba(138, 0, 0, 0.3); /* Brilho vermelho difuso */
   position: relative; overflow: hidden;
   padding: 0; display: flex; flex-direction: column;
-  
-  animation: evil-pulse 6s infinite ease-in-out;
 }
-.tatsu-container * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* --- FUNDO TEXTURIZADO (SANGUE E GRUNGE) --- */
-.tatsu-bg-texture {
+.malevolent-container * { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* --- FUNDO ATMOSFÉRICO --- */
+.malevolent-bg-layer {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  /* Textura de mancha de sangue escuro e ruído */
   background-image: 
-    radial-gradient(circle at 50% 30%, transparent 0%, var(--ts-black) 80%),
-    linear-gradient(to bottom, rgba(61, 0, 0, 0.3), transparent),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.1' fill='%23ff0000'/%3E%3C/svg%3E");
-  opacity: 0.8; mix-blend-mode: multiply;
+    radial-gradient(circle at 50% 20%, #200000 0%, var(--shrine-bg) 70%),
+    repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(138, 0, 0, 0.05) 11px);
+  opacity: 1;
 }
 
-/* --- HEADER (ESTILO SANTUÁRIO) --- */
-.tatsu-header {
+/* --- LATERAIS (Representando os cortes) --- */
+.malevolent-side-left, .malevolent-side-right {
+  position: absolute; top: 0; bottom: 0; width: 4px; z-index: 1; pointer-events: none;
+  background: var(--shrine-blood);
+  box-shadow: 0 0 10px var(--shrine-blood);
+}
+.malevolent-side-left { left: 10px; }
+.malevolent-side-right { right: 10px; }
+
+/* --- HEADER --- */
+.malevolent-header {
   position: relative; z-index: 2;
-  padding: 50px 20px 30px; text-align: center;
-  background: linear-gradient(to bottom, rgba(20,0,0,0.9), transparent);
-  border-bottom: 3px solid var(--ts-blood-red);
-  /* Forma do telhado do santuário */
-  clip-path: polygon(0 15%, 50% 0, 100% 15%, 100% 100%, 0 100%);
-  margin-top: -10px; padding-top: 60px;
+  padding: 50px 20px 20px 20px; text-align: center;
+  border-bottom: 2px solid var(--shrine-blood);
+  background: linear-gradient(to bottom, #000, transparent);
 }
 
-/* Ornamento superior (Chifres/Telhado) */
-.tatsu-header-ornament {
-    position: absolute; top: 0; left: 0; right: 0; height: 20px;
-    background: var(--ts-blood-red);
-    clip-path: polygon(0 100%, 50% 0, 100% 100%, 80% 100%, 50% 30%, 20% 100%);
+.malevolent-title {
+  position: relative; z-index: 2;
+  font-family: 'Cinzel', serif; font-size: 3em; 
+  color: var(--shrine-blood-bright); margin: 0; text-transform: uppercase;
+  text-shadow: 0px 0px 10px var(--shrine-blood); 
+  letter-spacing: 5px; font-weight: 900;
 }
 
-.tatsu-title {
-  font-family: 'Cinzel Decorative', serif; font-weight: 900; font-size: 3.5em; 
-  color: var(--ts-blood-red); margin: 0; text-transform: uppercase;
-  /* Efeito de texto sangrando */
-  text-shadow: 0 0 10px var(--ts-bright-red), 3px 3px 0 #000;
-  letter-spacing: 3px; line-height: 1;
-}
-.tatsu-subtitle {
-  font-family: 'Cinzel Decorative', serif; font-size: 1.1em; 
-  color: var(--ts-text); margin-top: 15px; letter-spacing: 5px; text-transform: uppercase;
-  border-top: 1px solid var(--ts-blood-red); display: inline-block; padding-top: 10px;
+.malevolent-subtitle {
+  position: relative; z-index: 2;
+  font-family: 'Cinzel', serif; font-size: 0.8em; 
+  color: var(--shrine-bone); margin-top: 5px; letter-spacing: 8px;
+  text-transform: uppercase; opacity: 0.7;
 }
 
-/* --- IMAGEM (MOLDURA AGRESSIVA) --- */
-.tatsu-image-wrapper {
-  position: relative; z-index: 2; padding: 30px; display: flex; justify-content: center;
-  background: linear-gradient(to bottom, transparent, rgba(61,0,0,0.3), transparent);
+/* --- IMAGEM --- */
+.malevolent-image-wrapper {
+  position: relative; z-index: 2; padding: 40px; display: flex; justify-content: center;
 }
 
-.tatsu-image-frame {
-  width: 100%; height: 400px; position: relative; 
+.malevolent-image-frame {
+  width: 100%; height: 350px; position: relative; 
   background: #000;
-  /* Borda interna vermelha brilhante */
-  border: 2px solid var(--ts-bright-red);
-  box-shadow: 0 0 30px rgba(255, 0, 0, 0.3);
-  /* Recorte agressivo e irregular nas laterais */
-  clip-path: var(--ts-border-jagged);
-  overflow: hidden;
+  border: 2px solid var(--shrine-blood);
+  outline: 1px solid #000;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+  /* Animação de pulsação vermelha */
+  animation: blood-pulse 4s infinite ease-in-out;
 }
 
-.tatsu-image-frame img {
-  width: 100%; height: 100%; object-fit: cover; object-position: center;
-  filter: contrast(1.3) grayscale(0.5) sepia(0.2) hue-rotate(-50deg); /* Tom avermelhado sombrio */
+.malevolent-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top;
+  filter: contrast(1.2) grayscale(0.3); /* Deixa a imagem mais dark */
+  transition: 0.5s;
 }
+.malevolent-image-frame:hover img { filter: contrast(1.1) grayscale(0); }
 
-/* Overlay de Corte/Slash */
-.tatsu-slash-overlay {
-  position: absolute; inset: 0; pointer-events: none;
-  background: linear-gradient(45deg, transparent 48%, var(--ts-bright-red) 50%, transparent 52%);
-  background-size: 200% 200%;
-  opacity: 0.2;
-  mix-blend-mode: color-dodge;
-  animation: slash-twitch 3s infinite;
-}
-
-/* --- STATUS (SANGUE FLUINDO) --- */
-.tatsu-stats {
-  padding: 30px 50px; 
-  display: flex; flex-direction: column; gap: 20px; 
+/* --- STATUS (Mantendo compatibilidade JS) --- */
+.malevolent-stats {
+  padding: 20px 50px; 
+  display: flex; flex-direction: column; gap: 15px; 
   position: relative; z-index: 2;
-  background: rgba(10, 0, 0, 0.8);
-  border-top: 3px solid var(--ts-blood-red);
-  border-bottom: 3px solid var(--ts-blood-red);
-  /* Bordas denteadas */
-  clip-path: polygon(0 5%, 100% 0, 100% 95%, 0 100%);
+  background: var(--shrine-bg-secondary);
+  border-top: 1px solid var(--shrine-blood); 
+  border-bottom: 1px solid var(--shrine-blood);
 }
 
-.tatsu-container .jjk-dossier-status-item {
-  display: grid; grid-template-columns: 50px 1fr 100px; align-items: center; gap: 15px;
+.malevolent-container .jjk-dossier-status-item {
+  display: grid; grid-template-columns: 40px 1fr 70px; align-items: center; gap: 15px;
   background: transparent; border: none; margin: 0; padding: 0;
 }
 
-/* Labels */
-.tatsu-container .jjk-dossier-status-label { 
-  font-family: 'Cinzel Decorative', serif; font-weight: 900; font-size: 1.2em; 
-  color: var(--ts-bright-red) !important; text-align: right; letter-spacing: 1px;
-  background: transparent; border: none; margin: 0; padding: 0;
+.malevolent-container .jjk-dossier-status-label { 
+  font-family: 'Nosifer', cursive; font-size: 0.9em; /* Fonte gore */
+  color: var(--shrine-blood-bright) !important; text-align: right; letter-spacing: 1px;
 }
 
-/* Valores */
-.tatsu-container .jjk-dossier-status-value { 
-  font-family: 'Cinzel Decorative', serif; font-size: 0.9em; 
-  color: var(--ts-text) !important; text-align: right; white-space: nowrap;
-  background: transparent; border: none; margin: 0; padding: 0;
+.malevolent-container .jjk-dossier-status-value { 
+  font-family: 'Cinzel', serif; font-size: 0.9em; 
+  color: var(--shrine-bone) !important; font-weight: 700; text-align: right;
 }
 
-/* Barras Wrapper */
-.tatsu-container .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 14px; 
-  background: #1a0000 !important; border: 2px solid var(--ts-blood-red);
-  margin: 0; padding: 0; overflow: hidden;
-  box-shadow: inset 0 0 10px #000;
+/* Wrapper da barra */
+.malevolent-container .jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 8px; 
+  background: #1a1a1a !important; 
+  border: 1px solid #333;
 }
 
-.tatsu-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; margin: 0; padding: 0; }
-.tatsu-container .jjk-dossier-status-bar-fill { height: 100%; border: none; margin: 0; }
+/* JS Hooks - NÃO ALTERAR NOMES */
+.malevolent-container .jjk-dossier-status-bar { width: 100%; height: 100%; display: block; }
+.malevolent-container .jjk-dossier-status-bar-fill { height: 100%; display: block; }
 
-/* HP & EA: Textura de Sangue Fluindo */
-.tatsu-blood-fill, .tatsu-cursed-fill {
-  background: repeating-linear-gradient(
-    90deg,
-    var(--ts-blood-red),
-    var(--ts-blood-red) 10px,
-    var(--ts-bright-red) 20px,
-    var(--ts-blood-red) 30px
-  ) !important;
-  background-size: 200% 100%;
-  animation: blood-flow 3s linear infinite;
-  box-shadow: 0 0 15px var(--ts-bright-red);
+/* Cores das Barras Customizadas */
+.malevolent-container .jjk-dossier-hp-fill { 
+  background: linear-gradient(90deg, #300000, #ff0000) !important; 
+  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4) !important;
 }
-
+.malevolent-container .jjk-dossier-ea-fill { 
+  background: linear-gradient(90deg, #050505, #444) !important; 
+  border-right: 2px solid var(--shrine-bone);
+}
 
 /* --- CONTEÚDO --- */
-.tatsu-content {
-  padding: 40px 50px; font-size: 1.1em; line-height: 1.8; 
-  text-align: justify; position: relative; z-index: 2; color: var(--ts-text);
-  background: transparent;
+.malevolent-content {
+  padding: 40px 50px; font-size: 1.1em; line-height: 1.9; 
+  text-align: justify; position: relative; z-index: 2; 
+  color: #bfbfbf; background: transparent;
 }
 
-.tatsu-content b { 
-  color: var(--ts-bright-red); font-family: 'Cinzel Decorative', serif; font-weight: 700;
+.malevolent-content b, .malevolent-content strong { 
+  color: var(--shrine-blood-bright); font-family: 'Cinzel', serif; 
+  font-weight: 700;
 }
-.tatsu-content i { 
-  color: #fff; font-style: italic;
-}
-.tatsu-quote {
-    font-family: 'Cinzel Decorative', serif; color: var(--ts-bright-red);
-    font-size: 1.3em; text-align: center; margin: 30px 0;
-    border-top: 2px solid var(--ts-blood-red); border-bottom: 2px solid var(--ts-blood-red);
-    padding: 15px 0;
+.malevolent-content i { color: var(--shrine-bone); font-style: italic; opacity: 0.8; }
+
+/* --- EXTRAS/SPOILER --- */
+.malevolent-extras {
+  margin: 0 50px 30px 50px; padding: 20px;
+  background: #080000;
+  border: 1px solid var(--shrine-blood);
+  position: relative; z-index: 2; font-size: 0.9em;
+  color: var(--shrine-text);
 }
 
-/* --- EXTRAS --- */
-.tatsu-extras {
-  margin: 0 50px 30px 50px; padding: 25px;
-  background: rgba(61, 0, 0, 0.2);
-  border: 2px solid var(--ts-blood-red);
-  /* Borda denteada/rasgada */
-  clip-path: var(--ts-border-jagged);
-  position: relative; z-index: 2; font-size: 0.9em; color: var(--ts-text);
-}
-.tatsu-extras::before {
-  content: 'DOMÍNIO'; display: block; 
-  font-family: 'Cinzel Decorative', serif; font-weight: 900; font-size: 1.2em; color: var(--ts-bright-red);
-  margin-bottom: 15px; letter-spacing: 2px; text-align: center;
+/* --- RODAPÉ/ASSINATURA --- */
+.malevolent-footer {
+  padding: 30px 0 40px 0; text-align: center;
+  position: relative; z-index: 2; background: transparent; 
+  border-top: 1px solid var(--shrine-blood);
 }
 
-/* --- RODAPÉ (ASSINATURA ARRANHADA) --- */
-.tatsu-footer {
-  padding: 40px 0 30px; text-align: center;
-  border-top: 4px solid var(--ts-blood-red);
-  position: relative; z-index: 2; background: var(--ts-black);
-  clip-path: polygon(0 20%, 100% 0, 100% 100%, 0 100%);
+.malevolent-signature::after {
+  content: 'Adam Myers'; /* NOME SOLICITADO */
+  font-family: 'Nosifer', cursive; /* Fonte Gore */
+  font-size: 1.8em; 
+  color: var(--shrine-blood); 
+  letter-spacing: 2px; text-transform: uppercase;
+  text-shadow: 0 0 5px rgba(0,0,0,1);
+  filter: drop-shadow(0 0 2px var(--shrine-blood-bright));
 }
 
-.tatsu-signature::after {
-  content: 'Adam Myers'; 
-  font-family: 'Rock Salt', cursive; /* Fonte estilo escrita à mão agressiva */
-  font-size: 2em; color: var(--ts-bright-red);
-  text-shadow: 2px 2px 4px #000, 0 0 10px var(--ts-blood-red);
-  transform: rotate(-2deg); display: inline-block;
-}
-
-/* Responsivo */
 @media (max-width: 600px) {
-  .tatsu-container { width: 100%; margin: 20px auto; border-width: 2px; }
-  .tatsu-content, .tatsu-stats, .tatsu-extras { padding-left: 25px; padding-right: 25px; margin-left: 10px; margin-right: 10px; }
-  .tatsu-container .jjk-dossier-status-item { grid-template-columns: 40px 1fr 80px; gap: 10px; }
-  .tatsu-header { clip-path: none; padding-top: 30px; }
-  .tatsu-header-ornament { display: none; }
+  .malevolent-container { width: 100%; border-width: 1px; }
+  .malevolent-content, .malevolent-stats, .malevolent-extras { padding-left: 20px; padding-right: 20px; }
+  .malevolent-title { font-size: 2em; }
 }
