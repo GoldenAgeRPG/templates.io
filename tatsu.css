@@ -1,5 +1,5 @@
-/* --- TEMPLATE: MALEVOLENT SHRINE V3 (GOTHIC CUTS) --- */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Nosifer&family=Spectral:ital,wght@0,300;0,600;1,300&display=swap');
+/* --- TEMPLATE: MALEVOLENT SHRINE V3.5 (FINAL FIX) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Nosifer&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap');
 
 :root {
   /* Paleta Noguchi & Dark */
@@ -7,22 +7,29 @@
   --shrine-panel: #101010;
   --shrine-red-deep: #2b0307;  /* Vermelho quase preto */
   --shrine-red-mid: #51080d;   /* Vermelho sangue seco */
-  --shrine-red-pop: #75020f;   /* Vermelho vivo */
+  --shrine-red-pop: #75020f;   /* Vermelho vivo (Foco) */
   --shrine-bone: #b0b0b0;
   --shrine-text: #a8a8a8;
 }
 
 /* --- ANIMAÇÕES --- */
-@keyframes shrine-breathe {
-  0% { box-shadow: 0 0 15px rgba(117, 2, 15, 0.1); border-color: var(--shrine-red-mid); }
-  50% { box-shadow: 0 0 25px rgba(117, 2, 15, 0.4); border-color: var(--shrine-red-pop); }
-  100% { box-shadow: 0 0 15px rgba(117, 2, 15, 0.1); border-color: var(--shrine-red-mid); }
+@keyframes cleave-flash {
+  0% { opacity: 0; transform: scaleX(0.1) rotate(45deg); }
+  10% { opacity: 0.6; transform: scaleX(1) rotate(45deg); }
+  20% { opacity: 0; transform: scaleX(1.2) rotate(45deg); }
+  100% { opacity: 0; }
 }
 
-@keyframes slash-glow {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+@keyframes cleave-flash-reverse {
+  0% { opacity: 0; transform: scaleX(0.1) rotate(-25deg); }
+  15% { opacity: 0.4; transform: scaleX(1) rotate(-25deg); }
+  30% { opacity: 0; transform: scaleX(1.2) rotate(-25deg); }
+  100% { opacity: 0; }
+}
+
+@keyframes text-aura-pulse {
+  0%, 100% { box-shadow: inset 30px 0 40px -10px rgba(0,0,0,0.9), inset -30px 0 40px -10px rgba(0,0,0,0.9); }
+  50% { box-shadow: inset 40px 0 60px -10px rgba(43, 3, 7, 0.6), inset -40px 0 60px -10px rgba(43, 3, 7, 0.6); }
 }
 
 /* --- CONTAINER --- */
@@ -31,166 +38,193 @@
   background-color: var(--shrine-black);
   color: var(--shrine-text);
   font-family: 'Spectral', serif;
-  /* Borda dupla simulando arquitetura */
-  border: 4px double var(--shrine-red-mid);
-  box-shadow: 0 0 40px #000;
+  border: 3px solid var(--shrine-red-deep);
+  outline: 1px solid var(--shrine-red-mid);
+  box-shadow: 0 0 50px #000;
   position: relative; overflow: hidden;
   padding: 0;
 }
-
 .malevolent-v3-container * { box-sizing: border-box; }
 
 /* Textura de Fundo */
 .malevolent-v3-bg {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background-image: linear-gradient(to bottom, rgba(5,5,5,0.8), var(--shrine-black)),
+  background-image: linear-gradient(to bottom, rgba(5,5,5,0.9), var(--shrine-black)),
                     url('https://www.transparenttextures.com/patterns/dark-matter.png');
-  opacity: 0.6;
+  opacity: 0.4;
 }
 
-/* --- HEADER (Estilo Torii/Santuário) --- */
+/* Efeito de Cortes (Overlay) */
+.malevolent-slashes {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden;
+}
+.malevolent-slashes::before, .malevolent-slashes::after {
+  content: ''; position: absolute; width: 150%; height: 2px;
+  background: var(--shrine-red-mid); box-shadow: 0 0 5px var(--shrine-red-pop);
+  top: 30%; left: -25%; opacity: 0;
+}
+.malevolent-slashes::before { animation: cleave-flash 7s infinite linear; top: 40%; }
+.malevolent-slashes::after { animation: cleave-flash-reverse 11s infinite linear; top: 60%; animation-delay: 2s; }
+
+
+/* --- HEADER --- */
 .malevolent-v3-header {
   position: relative; z-index: 2;
   text-align: center; padding: 50px 20px 30px;
   background: linear-gradient(to bottom, var(--shrine-red-deep), transparent);
-  border-bottom: 1px solid var(--shrine-red-mid);
+  border-bottom: 1px solid var(--shrine-red-deep);
 }
 
 .malevolent-v3-title {
   font-family: 'Cinzel', serif; font-size: 3em; font-weight: 900;
   color: var(--shrine-bone);
   text-shadow: 0 2px 0 var(--shrine-red-deep);
-  letter-spacing: 2px; margin: 0;
+  letter-spacing: 2px; margin: 0; line-height: 1;
   text-transform: uppercase;
 }
 
 .malevolent-v3-subtitle {
   font-family: 'Nosifer', cursive; font-size: 1.2em;
-  color: var(--shrine-red-pop); margin-top: 5px;
-  filter: drop-shadow(0 0 5px var(--shrine-red-mid));
+  color: var(--shrine-red-pop); margin-top: 10px;
+  filter: drop-shadow(0 0 5px var(--shrine-red-deep));
 }
 
-/* --- IMAGEM (Com recorte poligonal) --- */
+/* --- IMAGEM --- */
 .malevolent-v3-image-wrapper {
   padding: 30px; position: relative; z-index: 2;
   display: flex; justify-content: center;
 }
-
 .malevolent-v3-frame {
-  width: 100%; height: 350px;
-  position: relative;
-  /* Recorte para parecer "cortado" nas pontas */
-  clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
-  border: 2px solid var(--shrine-red-mid); /* Fallback */
+  width: 100%; height: 350px; position: relative;
+  /* Clip Path para formas pontiagudas (Shrine) */
+  clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
   background: var(--shrine-black);
+  border: 2px solid var(--shrine-red-mid); /* Fallback */
 }
-
-/* Borda falsa para o clip-path (truque de CSS) */
-.malevolent-v3-frame::after {
-  content: ''; position: absolute; inset: 0; z-index: 3;
-  box-shadow: inset 0 0 0 3px var(--shrine-red-mid);
-  pointer-events: none;
+.malevolent-v3-frame::after { /* Borda Falsa sobre o clip-path */
+  content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
+  background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.8));
 }
-
 .malevolent-v3-frame img {
-  width: 100%; height: 100%; object-fit: cover;
-  filter: contrast(1.1) saturate(0.8);
+  width: 100%; height: 100%; object-fit: cover; object-position: top;
+  filter: contrast(1.2) saturate(0.7);
   transition: transform 0.5s ease;
 }
-.malevolent-v3-frame:hover img { transform: scale(1.05); }
+.malevolent-v3-frame:hover img { transform: scale(1.05); filter: contrast(1.2) saturate(1); }
 
 
-/* --- STATUS (REFEITOS E ESTILIZADOS) --- */
+/* --- STATUS (CORRIGIDO) --- */
 .malevolent-v3-stats {
   position: relative; z-index: 2;
-  background: linear-gradient(90deg, transparent, var(--shrine-panel), transparent);
-  padding: 20px 50px;
+  background: #080808;
+  padding: 20px 40px;
   border-top: 1px solid var(--shrine-red-deep);
   border-bottom: 1px solid var(--shrine-red-deep);
   display: flex; flex-direction: column; gap: 15px;
 }
 
 .malevolent-v3-container .jjk-dossier-status-item {
-  display: grid; grid-template-columns: 30px 1fr 60px; 
+  display: grid; 
+  /* FIX 1: Coluna de valor com tamanho do conteúdo para não quebrar linha */
+  grid-template-columns: 35px 1fr min-content; 
   align-items: center; gap: 15px;
+  margin: 0; padding: 0; border: none; background: transparent;
 }
 
 .malevolent-v3-container .jjk-dossier-status-label {
-  font-family: 'Cinzel', serif; font-weight: 700; color: var(--shrine-bone);
-  text-align: right; font-size: 0.85em;
-}
-
-.malevolent-v3-container .jjk-dossier-status-value {
-  font-family: 'Spectral', serif; font-weight: 700; color: var(--shrine-red-pop);
+  font-family: 'Cinzel', serif; font-weight: 700; color: var(--shrine-bone) !important;
   text-align: right; font-size: 0.9em;
 }
 
-/* O Wrapper da barra - Fundo escuro */
+.malevolent-v3-container .jjk-dossier-status-value {
+  font-family: 'Spectral', serif; font-weight: 700; color: var(--shrine-red-pop) !important;
+  text-align: right; font-size: 1.1em;
+  white-space: nowrap; /* FIX 1: Impede quebra de linha */
+}
+
+/* Wrapper da barra */
 .malevolent-v3-container .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 8px;
-  background: #000;
-  border: 1px solid var(--shrine-red-mid);
-  box-shadow: inset 0 0 5px #000;
-  transform: skewX(-15deg); /* Dá um estilo de "corte" rápido */
+  width: 100%; height: 6px;
+  background: #111 !important;
+  border: 1px solid var(--shrine-red-deep);
+  border-radius: 0; overflow: hidden;
+}
+.malevolent-v3-container .jjk-dossier-status-bar { 
+  display: block; width: 100%; height: 100%; padding: 0; margin: 0; background: transparent;
 }
 
-/* O Preenchimento (Fill) - JS Target */
+/* FIX 2: O JS injeta width aqui. Removemos width:100% fixo */
 .malevolent-v3-container .jjk-dossier-status-bar-fill {
-  height: 100%; display: block;
-  transition: width 0.5s ease-in-out;
+  height: 100%; display: block; border: none;
+  transition: width 0.6s ease-out;
 }
 
-/* Cores específicas */
+/* Cores */
 .malevolent-v3-container .jjk-dossier-hp-fill {
-  background: linear-gradient(90deg, var(--shrine-red-deep), var(--shrine-red-pop));
+  background: linear-gradient(90deg, var(--shrine-red-deep), var(--shrine-red-pop)) !important;
   box-shadow: 0 0 10px var(--shrine-red-mid);
 }
-
 .malevolent-v3-container .jjk-dossier-ea-fill {
-  background: linear-gradient(90deg, #111, #555);
+  background: linear-gradient(90deg, #111, #444) !important;
   border-right: 2px solid var(--shrine-bone);
 }
 
 
-/* --- CONTEÚDO --- */
+/* --- CONTEÚDO (CORRIGIDO) --- */
 .malevolent-v3-content {
   position: relative; z-index: 2; padding: 40px 50px;
-  text-align: justify; line-height: 1.8; font-size: 1.05em;
+  text-align: justify; line-height: 1.9; font-size: 1.1em;
   background: transparent;
+  /* FIX 5: Aura maligna nas laterais da caixa de texto */
+  animation: text-aura-pulse 6s infinite ease-in-out;
 }
-.malevolent-v3-content b { color: var(--shrine-red-pop); font-family: 'Cinzel', serif; }
-.malevolent-v3-content i { color: var(--shrine-bone); }
 
-/* --- EXTRAS/CONSIDERAÇÕES --- */
+/* FIX 3: Negrito e Itálico */
+.malevolent-v3-content b, .malevolent-v3-content strong { 
+  color: var(--shrine-red-pop); 
+  font-family: 'Cinzel', serif; /* Fonte diferenciada */
+  font-weight: 700; 
+  font-size: 0.9em; /* Compensa a fonte Cinzel ser grande */
+  text-transform: uppercase;
+}
+.malevolent-v3-content i, .malevolent-v3-content em { 
+  color: var(--shrine-bone); 
+  font-family: 'Spectral', serif;
+  font-style: italic !important;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+
+/* --- EXTRAS --- */
 .malevolent-v3-extras {
-  margin: 0 50px 30px; padding: 15px; position: relative; z-index: 2;
+  margin: 0 50px 30px; padding: 20px; position: relative; z-index: 2;
   border: 1px solid var(--shrine-red-deep);
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.8);
   font-size: 0.9em; color: #888;
 }
 .malevolent-v3-extras::before {
-  content: 'RITUAL NOTES'; display: block;
+  content: 'NOTAS DO RITUAL'; display: block;
   font-family: 'Cinzel', serif; color: var(--shrine-red-mid);
-  font-size: 0.8em; margin-bottom: 5px; border-bottom: 1px solid #222;
+  font-size: 0.8em; margin-bottom: 10px; border-bottom: 1px solid #222;
 }
 
 /* --- FOOTER --- */
 .malevolent-v3-footer {
   text-align: center; padding: 30px; position: relative; z-index: 2;
-  border-top: 1px solid var(--shrine-red-mid);
+  border-top: 1px solid var(--shrine-red-deep);
   background: linear-gradient(to top, var(--shrine-red-deep), transparent);
 }
-
 .malevolent-v3-signature::after {
   content: 'Adam Myers';
-  font-family: 'Nosifer', cursive; font-size: 2em;
+  font-family: 'Nosifer', cursive; font-size: 1.8em;
   color: var(--shrine-red-pop);
-  text-shadow: 2px 2px 0px #000;
-  letter-spacing: 2px;
+  text-shadow: 2px 2px 0px #000; letter-spacing: 2px;
 }
 
-/* Mobile */
 @media (max-width: 600px) {
-  .malevolent-v3-container { width: 100%; border-width: 2px; }
+  .malevolent-v3-container { width: 100%; border-width: 1px; }
   .malevolent-v3-content, .malevolent-v3-stats, .malevolent-v3-extras { padding-left: 20px; padding-right: 20px; }
+  /* Ajuste mobile para não quebrar */
+  .malevolent-v3-container .jjk-dossier-status-item { grid-template-columns: 30px 1fr min-content; gap: 8px; }
 }
