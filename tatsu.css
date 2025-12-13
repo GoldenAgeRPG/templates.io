@@ -1,50 +1,5 @@
 <link href="https://goldenagerpg.github.io/templates.io/tatsu.css" rel="stylesheet" type="text/css">
 
-<style>
-/* --- SOBRESREVENDO/ADICIONANDO O BANNER NOVO --- */
-.jjk-banner-novo {
-    width: 100%;
-    height: 300px; /* Altura do novo banner */
-    background-image: url('https://i.imgur.com/SEU_BANNER_NOVO.png'); /* INSIRA O LINK DA IMAGEM AQUI */
-    background-size: cover;
-    background-position: center;
-    border-bottom: 3px solid #8b0000;
-    margin-bottom: 20px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-    position: relative;
-    z-index: 5;
-}
-
-/* --- AJUSTE DE GLITCH (CORTES) --- */
-/* Sobrescrevendo ou adicionando a animação ao container principal */
-.malevolent-v5-container {
-    /* Animação de corte ultra rápida e frequente */
-    animation: rapid-cut 2s infinite steps(1); 
-}
-
-@keyframes rapid-cut {
-    0% { clip-path: inset(0 0 0 0); transform: translate(0); }
-    /* Maior parte do tempo normal (0 a 85%) */
-    85% { clip-path: inset(0 0 0 0); transform: translate(0); }
-    
-    /* Sequência de cortes frenéticos no final do loop */
-    86% { clip-path: inset(20% 0 50% 0); transform: translate(-5px, 2px); }
-    87% { clip-path: inset(10% 0 60% 0); transform: translate(5px, -2px); }
-    88% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, 2px); }
-    89% { clip-path: inset(0 0 0 0); transform: translate(0); }
-    90% { clip-path: inset(40% 0 40% 0); transform: translate(2px, -2px); }
-    91% { clip-path: inset(0 0 0 0); transform: translate(0); }
-    92% { clip-path: inset(50% 0 10% 0); transform: translate(-5px, 0); }
-    93% { clip-path: inset(0 0 0 0); transform: translate(0); }
-    100% { clip-path: inset(0 0 0 0); transform: translate(0); }
-}
-
-/* Removendo a imagem antiga para dar lugar ao banner novo, caso o CSS original force algo */
-.malevolent-v5-image-wrapper {
-    display: none !important; 
-}
-</style>
-
 <div class="malevolent-v5-container jjk-dossier-container">
   
   <div class="malevolent-v5-bg"></div>
@@ -63,7 +18,11 @@
     <div class="malevolent-v5-subtitle">Malevolent Shrine</div>
   </div>
 
-  <div class="jjk-banner-novo"></div>
+  <div class="malevolent-v5-image-wrapper">
+    <div class="malevolent-v5-frame">
+      <img src="https://i.pinimg.com/1200x/e7/be/a1/e7bea133ed1537386e717f3929d4f888.jpg" alt="Adam Myers">
+    </div>
+  </div>
 
   <div class="malevolent-v5-stats">
     
@@ -94,12 +53,12 @@
     <br><br>
     <b>"Dismantle."</b> 
     <br><br>
-    O banner acima segue o novo padrão visual solicitado. As animações de corte (glitch) no container inteiro foram aceleradas.
+    A moldura da imagem agora pulsa com um efeito de sangramento, como se a realidade estivesse ferida ao redor do usuário do santuário. [i]Os cortes e a aura lateral continuam ativos.[/i]
   </div>
 
   <div class="malevolent-v5-extras">
     [spoiler="Considerações"]
-    - Template finalizado com ajustes de banner e velocidade de glitch.
+    - Template finalizado com ajustes de fonte e moldura.
     [/spoiler]
   </div>
 
