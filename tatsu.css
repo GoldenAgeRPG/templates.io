@@ -1,252 +1,286 @@
-/* --- TEMPLATE: MALEVOLENT SHRINE V5.1 (FINAL REFINED) --- */
-/* Adicionada fonte Zhi Mang Xing para estilo JJK */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Zhi+Mang+Xing&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap');
+/* --- TEMPLATE: MALEVOLENT SHRINE V6 (RIFT & CHAOS) --- */
+@import url('https://fonts.googleapis.com/css2?family=Metal+Mania&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap');
 
 :root {
-  /* Paleta Noguchi & Dark */
   --shrine-black: #050505;
-  --shrine-panel: #101010;
-  --shrine-red-deep: #2b0307;  /* Vermelho quase preto */
-  --shrine-red-mid: #51080d;   /* Vermelho sangue seco */
-  --shrine-red-pop: #75020f;   /* Vermelho vivo */
-  --shrine-bone: #b0b0b0;
+  --shrine-panel: #0a0a0a;
+  --shrine-red-deep: #2b0307;
+  --shrine-red-mid: #51080d;
+  --shrine-red-pop: #8a0000; /* Vermelho mais vivo para os cortes */
+  --shrine-bone: #c0c0c0;
   --shrine-text: #a8a8a8;
 }
 
-/* --- ANIMAÇÕES GERAIS --- */
+/* --- ANIMAÇÕES DE CORTE (DIREÇÃO E RITMO) --- */
 
-/* Cortes: Rápidos e Retos (Diagonal) */
-@keyframes cleave-strike {
-  0% { width: 0; opacity: 0; left: 0; }
-  10% { width: 150%; opacity: 1; left: -25%; }
-  20% { width: 150%; opacity: 0; left: -25%; }
-  100% { width: 0; opacity: 0; left: 0; }
+/* Corte da Esquerda para Direita */
+@keyframes slash-lr {
+  0% { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); opacity: 0; }
+  20% { opacity: 1; }
+  50% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); opacity: 0; }
+  100% { opacity: 0; }
 }
 
-/* Energia Ascendente (Fumaça/Aura Lateral) */
-@keyframes aura-rise {
-  0% { background-position: 0 100%; opacity: 0.3; }
-  50% { opacity: 0.7; }
-  100% { background-position: 0 0; opacity: 0.3; }
+/* Corte da Direita para Esquerda (NOVO) */
+@keyframes slash-rl {
+  0% { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0; }
+  20% { opacity: 1; }
+  50% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); opacity: 0; }
+  100% { opacity: 0; }
 }
 
-/* Efeito de Sangramento na Moldura (NOVO) */
-@keyframes shrine-bleed {
-  0%, 100% { filter: drop-shadow(0 0 5px var(--shrine-red-mid)) drop-shadow(0 0 8px var(--shrine-red-deep)); }
-  50% { filter: drop-shadow(0 0 15px var(--shrine-red-pop)) drop-shadow(0 0 25px var(--shrine-red-mid)); }
+/* Efeito de "Tremor" na Fenda da Imagem */
+@keyframes rift-pulse {
+  0%, 100% { transform: translate(0, 0); filter: drop-shadow(0 0 5px var(--shrine-red-deep)); }
+  25% { transform: translate(-1px, 1px); filter: drop-shadow(0 0 10px var(--shrine-red-mid)); }
+  75% { transform: translate(1px, -1px); filter: drop-shadow(0 0 10px var(--shrine-red-mid)); }
 }
 
-/* --- CONTAINER PRINCIPAL --- */
-.malevolent-v5-container {
-  max-width: 700px; width: 95%; margin: 60px auto;
+/* Energia Lateral */
+@keyframes aura-flow {
+  0% { background-position: 0 100%; }
+  100% { background-position: 0 0; }
+}
+
+/* --- CONTAINER --- */
+.malevolent-v6-container {
+  max-width: 720px; width: 95%; margin: 60px auto;
   background-color: var(--shrine-black);
   color: var(--shrine-text);
   font-family: 'Spectral', serif;
-  border: 3px solid var(--shrine-red-deep);
-  box-shadow: 0 0 60px #000;
+  border: 1px solid var(--shrine-red-deep);
+  box-shadow: 0 0 70px #000;
   position: relative; overflow: hidden;
   padding: 0;
 }
-.malevolent-v5-container * { box-sizing: border-box; }
+.malevolent-v6-container * { box-sizing: border-box; }
 
-/* Textura de Fundo */
-.malevolent-v5-bg {
+/* Fundo */
+.malevolent-v6-bg {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background-image: linear-gradient(to bottom, rgba(5,5,5,0.95), var(--shrine-black)),
-                    url('https://www.transparenttextures.com/patterns/dark-matter.png');
-  opacity: 0.4;
+  background: radial-gradient(circle at center, transparent 0%, #000 90%),
+              url('https://www.transparenttextures.com/patterns/dark-matter.png');
+  opacity: 0.5;
 }
 
-/* --- ENERGIA LATERAL (FLUXO ASCENDENTE) --- */
-.malevolent-aura-left, .malevolent-aura-right {
-  position: absolute; top: 0; bottom: 0; width: 8px; z-index: 5;
-  background: repeating-linear-gradient(to top, 
-    transparent 0%, 
-    var(--shrine-red-deep) 20%, 
-    var(--shrine-red-mid) 40%, 
-    transparent 60%
-  );
-  background-size: 100% 200px;
-  animation: aura-rise 4s linear infinite;
-  filter: blur(4px);
+/* --- AURA LATERAL --- */
+.malevolent-side-energy {
+  position: absolute; top: 0; bottom: 0; width: 6px; z-index: 5;
+  background: linear-gradient(to top, var(--shrine-black), var(--shrine-red-mid), var(--shrine-black));
+  background-size: 100% 200%;
+  animation: aura-flow 3s linear infinite;
+  box-shadow: 0 0 10px var(--shrine-red-deep);
 }
-.malevolent-aura-left { left: 0; }
-.malevolent-aura-right { right: 0; }
+.energy-left { left: 0; border-right: 1px solid rgba(255,255,255,0.1); }
+.energy-right { right: 0; border-left: 1px solid rgba(255,255,255,0.1); }
 
+/* --- SISTEMA DE CORTES (SLASHES) --- */
+.slash-overlay {
+  position: absolute; inset: 0; pointer-events: none; z-index: 10; overflow: hidden;
+}
 
-/* --- CAMADA DE CORTES (SLASHES) --- */
-.malevolent-slash-layer {
-  position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden;
+.slash-mark {
+  position: absolute; background: var(--shrine-red-pop);
+  box-shadow: 0 0 8px var(--shrine-red-pop);
+  height: 1px; width: 100%; opacity: 0;
 }
-.slash-instance {
-  position: absolute; height: 1px; background: var(--shrine-red-pop);
-  box-shadow: 0 0 5px var(--shrine-red-pop), 0 0 10px var(--shrine-red-mid);
-  opacity: 0; transform-origin: left;
+
+/* Variação 1: Superior, Esq->Dir, Lento */
+.s-1 {
+  top: 20%; left: 0; transform: rotate(15deg) scale(1.2);
+  height: 2px;
+  animation: slash-lr 7s infinite ease-out;
 }
-/* Corte 1: Diagonal Baixo (-35 graus) */
-.slash-1 {
-  top: 30%; left: -20%; width: 150%; transform: rotate(-35deg);
-  animation: cleave-strike 4s infinite ease-out;
+/* Variação 2: Meio, Dir->Esq, Rápido */
+.s-2 {
+  top: 50%; left: 0; transform: rotate(-10deg) scale(1.2);
+  height: 1px;
+  animation: slash-rl 4s infinite ease-out 1s; /* Delay */
 }
-/* Corte 2: Diagonal Cima (20 graus) */
-.slash-2 {
-  top: 60%; left: -20%; width: 150%; transform: rotate(20deg);
-  animation: cleave-strike 5.3s infinite ease-out 1.5s;
+/* Variação 3: Inferior, Esq->Dir, Médio */
+.s-3 {
+  top: 80%; left: 0; transform: rotate(5deg) scale(1.2);
+  height: 2px;
+  animation: slash-lr 5s infinite ease-out 2.5s;
 }
-/* Corte 3: Verticalizado/Agressivo (60 graus) */
-.slash-3 {
-  top: 10%; left: -20%; width: 150%; transform: rotate(60deg);
-  animation: cleave-strike 7.1s infinite ease-out 0.5s;
+/* Variação 4: Cruzado Vertical, Dir->Esq, Rápido */
+.s-4 {
+  top: 30%; left: 0; transform: rotate(-45deg) scale(1.5);
+  height: 1px;
+  animation: slash-rl 11s infinite ease-out; /* Primo alto para aleatoriedade */
+}
+/* Variação 5: Cruzado Reverso, Esq->Dir */
+.s-5 {
+  top: 60%; left: 0; transform: rotate(45deg) scale(1.5);
+  height: 1px;
+  animation: slash-lr 9s infinite ease-out 0.5s;
 }
 
 
 /* --- HEADER --- */
-.malevolent-v5-header {
+.malevolent-v6-header {
   position: relative; z-index: 2;
-  text-align: center; padding: 50px 20px 30px;
-  background: linear-gradient(to bottom, var(--shrine-red-deep), transparent);
-  border-bottom: 1px solid var(--shrine-red-deep);
-  margin: 0 15px;
+  text-align: center; padding: 60px 20px 20px;
+  border-bottom: 2px solid var(--shrine-red-deep);
+  background: linear-gradient(to bottom, rgba(10,0,0,0.8), transparent);
 }
 
-.malevolent-v5-title {
-  font-family: 'Cinzel', serif; font-size: 3em; font-weight: 900;
+.malevolent-v6-title {
+  font-family: 'Metal Mania', cursive; /* FONTE NOVA */
+  font-size: 3.5em; /* Tamanho ajustado para impacto */
   color: var(--shrine-bone);
-  text-shadow: 0 2px 0 var(--shrine-red-deep);
-  letter-spacing: 2px; margin: 0; line-height: 1;
+  text-shadow: 3px 3px 0px #000;
+  letter-spacing: 4px; line-height: 0.9;
   text-transform: uppercase;
+  margin-bottom: 5px;
 }
 
-.malevolent-v5-subtitle {
-  font-family: 'Zhi Mang Xing', cursive; /* NOVA FONTE ESTILO JJK */
-  font-size: 1.8em; /* Tamanho aumentado para legibilidade */
-  color: var(--shrine-red-pop); margin-top: 5px;
-  filter: drop-shadow(0 0 8px var(--shrine-red-deep));
-  letter-spacing: 2px;
+.malevolent-v6-subtitle {
+  font-family: 'Spectral', serif;
+  font-size: 1em; text-transform: uppercase; letter-spacing: 6px;
+  color: var(--shrine-red-pop); font-weight: 700;
+  text-shadow: 0 0 10px var(--shrine-red-mid);
 }
 
-/* --- IMAGEM (MOLDURA COM EFEITO MELHORADO) --- */
-.malevolent-v5-image-wrapper {
-  padding: 30px; position: relative; z-index: 2;
+/* --- BANNER "RIFT" (Fenda) --- */
+.malevolent-v6-image-wrapper {
+  padding: 40px; position: relative; z-index: 2;
   display: flex; justify-content: center;
 }
 
-.malevolent-v5-frame {
-  width: 100%; height: 350px; position: relative;
-  /* Recorte poligonal mantido */
-  clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
-  background: var(--shrine-black);
-  /* Borda sólida removida, substituída pela animação de sangramento */
-  animation: shrine-bleed 4s infinite ease-in-out; 
+/* Moldura Externa (Fundo da Fenda) */
+.rift-frame-outer {
+  position: relative; width: 100%; height: 320px;
+  /* Formato irregular e agressivo */
+  clip-path: polygon(
+    0% 0%, 100% 0%, 100% 85%, 90% 100%, 
+    60% 95%, 40% 100%, 10% 90%, 0% 100%
+  );
+  background: var(--shrine-red-deep);
+  padding: 4px; /* Espessura da borda falsa */
+  animation: rift-pulse 6s infinite ease-in-out;
 }
 
-.malevolent-v5-frame img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top;
-  filter: contrast(1.2) saturate(0.7);
-  transition: transform 0.5s ease;
-  /* Contorno interno sutil para definir a borda da imagem */
-  outline: 1px solid rgba(117, 2, 15, 0.4); outline-offset: -1px;
+/* Moldura Interna (A Imagem) */
+.rift-frame-inner {
+  width: 100%; height: 100%;
+  background: #000;
+  /* Recorte interno levemente diferente para criar borda variável */
+  clip-path: polygon(
+    0% 0%, 100% 0%, 100% 84%, 90% 99%, 
+    60% 94%, 40% 99%, 10% 89%, 0% 99%
+  );
+  position: relative;
 }
-.malevolent-v5-frame:hover img { transform: scale(1.05); filter: contrast(1.2) saturate(1); }
+
+.rift-frame-inner img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top;
+  filter: grayscale(0.4) contrast(1.2) brightness(0.8);
+  transition: 0.5s;
+}
+.rift-frame-outer:hover img {
+  filter: grayscale(0) contrast(1.1) brightness(1);
+  transform: scale(1.02);
+}
+
+/* Risco sobre a imagem (Overlay) */
+.rift-scratch {
+  position: absolute; inset: 0; pointer-events: none; z-index: 3;
+  background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.5) 11px);
+  opacity: 0.3;
+}
+
 
 /* --- STATUS --- */
-.malevolent-v5-stats {
+.malevolent-v6-stats {
   position: relative; z-index: 2;
-  background: #080808;
-  padding: 20px 40px;
+  padding: 20px 50px;
+  background: rgba(10, 10, 10, 0.6);
   border-top: 1px solid var(--shrine-red-deep);
-  border-bottom: 1px solid var(--shrine-red-deep);
   display: flex; flex-direction: column; gap: 15px;
-  margin: 0 15px;
 }
 
-.malevolent-v5-container .jjk-dossier-status-item {
+.malevolent-v6-container .jjk-dossier-status-item {
   display: grid; 
-  grid-template-columns: 35px 1fr min-content; 
+  grid-template-columns: 40px 1fr min-content; 
   align-items: center; gap: 15px;
   margin: 0; padding: 0; border: none; background: transparent;
 }
 
-.malevolent-v5-container .jjk-dossier-status-label {
-  font-family: 'Cinzel', serif; font-weight: 700; color: var(--shrine-bone) !important;
-  text-align: right; font-size: 0.9em;
+.malevolent-v6-container .jjk-dossier-status-label {
+  font-family: 'Metal Mania', cursive; /* Fonte do Título */
+  color: var(--shrine-bone) !important;
+  font-size: 1.1em; letter-spacing: 1px; text-align: right;
 }
 
-.malevolent-v5-container .jjk-dossier-status-value {
+.malevolent-v6-container .jjk-dossier-status-value {
   font-family: 'Spectral', serif; font-weight: 700; color: var(--shrine-red-pop) !important;
-  text-align: right; font-size: 1.1em; white-space: nowrap;
+  text-align: right; font-size: 1.2em; white-space: nowrap;
 }
 
-.malevolent-v5-container .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 6px;
-  background: #111 !important;
-  border: 1px solid var(--shrine-red-deep);
-  border-radius: 0; overflow: hidden;
+.malevolent-v6-container .jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 8px;
+  background: #000 !important;
+  border: 1px solid #333;
+  transform: skewX(-20deg); /* Inclinação agressiva */
 }
-.malevolent-v5-container .jjk-dossier-status-bar { display: block; width: 100%; height: 100%; }
-.malevolent-v5-container .jjk-dossier-status-bar-fill { height: 100%; display: block; transition: width 0.6s ease-out; }
+.malevolent-v6-container .jjk-dossier-status-bar { display: block; width: 100%; height: 100%; }
+.malevolent-v6-container .jjk-dossier-status-bar-fill { height: 100%; display: block; transition: width 0.6s ease-out; }
 
-.malevolent-v5-container .jjk-dossier-hp-fill {
-  background: linear-gradient(90deg, var(--shrine-red-deep), var(--shrine-red-pop)) !important;
-  box-shadow: 0 0 8px var(--shrine-red-mid);
+.malevolent-v6-container .jjk-dossier-hp-fill {
+  background: linear-gradient(90deg, #400000, var(--shrine-red-pop)) !important;
 }
-.malevolent-v5-container .jjk-dossier-ea-fill {
+.malevolent-v6-container .jjk-dossier-ea-fill {
   background: linear-gradient(90deg, #111, #444) !important;
   border-right: 2px solid var(--shrine-bone);
 }
 
 /* --- CONTEÚDO --- */
-.malevolent-v5-content {
+.malevolent-v6-content {
   position: relative; z-index: 2; padding: 40px 50px;
-  text-align: justify; line-height: 1.9; font-size: 1.1em;
+  text-align: justify; line-height: 1.8; font-size: 1.1em;
   background: transparent;
-  margin: 0 10px;
 }
 
-.malevolent-v5-content b, .malevolent-v5-content strong { 
+.malevolent-v6-content b, .malevolent-v6-content strong { 
   color: var(--shrine-red-pop); 
-  font-family: 'Spectral', serif; 
-  font-weight: 700; 
+  font-family: 'Metal Mania', cursive; /* Destaque com a fonte do tema */
+  font-weight: 400; font-size: 1.1em; letter-spacing: 1px;
   text-transform: none !important;
 }
-.malevolent-v5-content i, .malevolent-v5-content em { 
+.malevolent-v6-content i, .malevolent-v6-content em { 
   color: var(--shrine-red-mid); 
   font-family: 'Spectral', serif;
-  font-style: italic !important;
-  font-weight: 600;
+  font-style: italic !important; font-weight: 600;
+  text-decoration: underline wavy rgba(138, 0, 0, 0.3); /* Sublinhado sutil */
 }
 
-/* --- EXTRAS --- */
-.malevolent-v5-extras {
+/* --- EXTRAS & FOOTER --- */
+.malevolent-v6-extras {
   margin: 0 50px 30px; padding: 20px; position: relative; z-index: 2;
-  border: 1px solid var(--shrine-red-deep);
-  background: rgba(0,0,0,0.8);
+  border-left: 3px solid var(--shrine-red-deep);
+  background: linear-gradient(to right, rgba(20,0,0,0.5), transparent);
   font-size: 0.9em; color: #888;
 }
-.malevolent-v5-extras::before {
-  content: 'NOTAS DO RITUAL'; display: block;
-  font-family: 'Cinzel', serif; color: var(--shrine-red-mid);
-  font-size: 0.8em; margin-bottom: 10px; border-bottom: 1px solid #222;
+
+.malevolent-v6-footer {
+  text-align: center; padding: 40px 0; position: relative; z-index: 2;
+  border-top: 1px solid var(--shrine-red-deep);
+  background: linear-gradient(to top, rgba(10,0,0,0.8), transparent);
 }
 
-/* --- FOOTER --- */
-.malevolent-v5-footer {
-  text-align: center; padding: 30px; position: relative; z-index: 2;
-  border-top: 1px solid var(--shrine-red-deep);
-  background: linear-gradient(to top, var(--shrine-red-deep), transparent);
-  margin: 0 15px;
-}
-.malevolent-v5-signature::after {
+.malevolent-v6-signature::after {
   content: 'Adam Myers';
-  font-family: 'Zhi Mang Xing', cursive; /* NOVA FONTE ESTILO JJK */
-  font-size: 2.5em;
+  font-family: 'Metal Mania', cursive;
+  font-size: 2.2em;
   color: var(--shrine-red-pop);
-  text-shadow: 2px 2px 8px var(--shrine-red-deep); 
+  text-shadow: 0 0 10px rgba(0,0,0,1); 
   letter-spacing: 2px;
 }
 
 @media (max-width: 600px) {
-  .malevolent-v5-container { width: 100%; border-width: 1px; }
-  .malevolent-v5-content, .malevolent-v5-stats, .malevolent-v5-extras { padding-left: 20px; padding-right: 20px; }
-  .malevolent-v5-container .jjk-dossier-status-item { grid-template-columns: 30px 1fr min-content; gap: 8px; }
+  .malevolent-v6-container { width: 100%; border: none; border-top: 2px solid var(--shrine-red-deep); }
+  .malevolent-v6-content, .malevolent-v6-stats, .malevolent-v6-extras { padding-left: 20px; padding-right: 20px; }
+  .malevolent-v6-container .jjk-dossier-status-item { grid-template-columns: 30px 1fr min-content; gap: 8px; }
+  .malevolent-v6-title { font-size: 2.5em; }
 }
