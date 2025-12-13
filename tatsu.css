@@ -1,133 +1,110 @@
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://goldenagerpg.github.io/templates.io/tatsu.css" rel="stylesheet" type="text/css">
 
 <style>
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
-    background: #050505;
-}
-::-webkit-scrollbar-thumb {
-    background: #8b0000;
-}
-::selection {
-    background: #8b0000;
-    color: #fff;
-}
-
-.jjk-full-template {
-    width: 650px;
-    margin: 0 auto;
-    background-color: #0d0d0d;
-    border: 1px solid #222;
-    box-shadow: 0 0 20px rgba(0,0,0,0.9);
-    position: relative;
-    overflow: hidden;
-    color: #bfbfbf;
-    font-family: 'Verdana', sans-serif;
-    font-size: 13px;
-    line-height: 1.7;
-    text-align: justify;
-    animation: glitch-anim 0.25s infinite linear alternate-reverse;
-}
-
-.jjk-banner {
+/* --- SOBRESREVENDO/ADICIONANDO O BANNER NOVO --- */
+.jjk-banner-novo {
     width: 100%;
-    height: 320px;
-    background-image: url('https://i.imgur.com/placehold.png');
-    background-position: center;
+    height: 300px; /* Altura do novo banner */
+    background-image: url('https://i.imgur.com/SEU_BANNER_NOVO.png'); /* INSIRA O LINK DA IMAGEM AQUI */
     background-size: cover;
-    border-bottom: 4px solid #8b0000;
-    position: relative;
-    z-index: 2;
-}
-
-.jjk-body {
-    padding: 60px;
+    background-position: center;
+    border-bottom: 3px solid #8b0000;
+    margin-bottom: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
     position: relative;
     z-index: 5;
 }
 
-.jjk-body strong, .jjk-body b {
-    color: #8b0000;
-    font-weight: bold;
+/* --- AJUSTE DE GLITCH (CORTES) --- */
+/* Sobrescrevendo ou adicionando a animação ao container principal */
+.malevolent-v5-container {
+    /* Animação de corte ultra rápida e frequente */
+    animation: rapid-cut 2s infinite steps(1); 
 }
 
-.jjk-body em, .jjk-body i {
-    color: #fff;
-    font-family: 'Georgia', serif;
-    font-style: italic;
-    letter-spacing: 0px;
-}
-
-.jjk-body h1, .jjk-body h2, .jjk-body h3 {
-    font-family: 'Cinzel', serif;
-    color: #fff;
-    text-transform: uppercase;
-    border-bottom: 1px solid #8b0000;
-    padding-bottom: 5px;
-    margin-bottom: 15px;
-    font-weight: normal;
-    letter-spacing: 2px;
-}
-
-.jjk-body blockquote {
-    border-left: 3px solid #8b0000;
-    background: #111;
-    margin: 20px 0;
-    padding: 15px;
-    font-style: italic;
-    color: #999;
-}
-
-.jjk-body a {
-    color: #8b0000;
-    text-decoration: none;
-    transition: 0.3s;
-}
-.jjk-body a:hover {
-    color: #fff;
-    letter-spacing: 1px;
-}
-
-.side-line {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    width: 1px;
-    background: #8b0000;
-    opacity: 0.3;
-    z-index: 1;
-}
-.side-left { left: 15px; }
-.side-right { right: 15px; }
-
-@keyframes glitch-anim {
+@keyframes rapid-cut {
     0% { clip-path: inset(0 0 0 0); transform: translate(0); }
-    10% { clip-path: inset(0 0 0 0); transform: translate(0); }
-    11% { clip-path: inset(10% 0 85% 0); transform: translate(-3px, 1px); }
-    12% { clip-path: inset(85% 0 5% 0); transform: translate(3px, -1px); }
-    13% { clip-path: inset(0 0 0 0); transform: translate(0); }
-    50% { clip-path: inset(0 0 0 0); transform: translate(0); }
-    51% { clip-path: inset(40% 0 40% 0); transform: translate(2px, -2px); }
-    52% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    /* Maior parte do tempo normal (0 a 85%) */
+    85% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    
+    /* Sequência de cortes frenéticos no final do loop */
+    86% { clip-path: inset(20% 0 50% 0); transform: translate(-5px, 2px); }
+    87% { clip-path: inset(10% 0 60% 0); transform: translate(5px, -2px); }
+    88% { clip-path: inset(80% 0 5% 0); transform: translate(-2px, 2px); }
+    89% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    90% { clip-path: inset(40% 0 40% 0); transform: translate(2px, -2px); }
+    91% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    92% { clip-path: inset(50% 0 10% 0); transform: translate(-5px, 0); }
+    93% { clip-path: inset(0 0 0 0); transform: translate(0); }
     100% { clip-path: inset(0 0 0 0); transform: translate(0); }
+}
+
+/* Removendo a imagem antiga para dar lugar ao banner novo, caso o CSS original force algo */
+.malevolent-v5-image-wrapper {
+    display: none !important; 
 }
 </style>
 
-<div class="jjk-full-template">
-    <div class="jjk-banner"></div>
+<div class="malevolent-v5-container jjk-dossier-container">
+  
+  <div class="malevolent-v5-bg"></div>
+  
+  <div class="malevolent-aura-left"></div>
+  <div class="malevolent-aura-right"></div>
+  
+  <div class="malevolent-slash-layer">
+      <div class="slash-instance slash-1"></div>
+      <div class="slash-instance slash-2"></div>
+      <div class="slash-instance slash-3"></div>
+  </div>
+
+  <div class="malevolent-v5-header">
+    <h1 class="malevolent-v5-title">RYOMEN</h1>
+    <div class="malevolent-v5-subtitle">Malevolent Shrine</div>
+  </div>
+
+  <div class="jjk-banner-novo"></div>
+
+  <div class="malevolent-v5-stats">
     
-    <div class="side-line side-left"></div>
-    <div class="side-line side-right"></div>
-    
-    <div class="jjk-body">
-        <h1>Título do Tópico</h1>
-        <p>Aqui está o texto completo. O <strong>negrito</strong> está padrão e o <em>itálico</em> também. A estrutura de scrollbars, titulos e blockquotes foi restaurada.</p>
-        
-        <blockquote>
-            Exemplo de citação ou fala de personagem restaurada ao estilo antigo.
-        </blockquote>
-        
-        <p>Mais texto para testar o scroll e o espaçamento geral do container antigo com o banner novo.</p>
+    <div class="jjk-dossier-status-item">
+      <span class="jjk-dossier-status-label">HP</span>
+      <div class="jjk-dossier-status-bar-wrapper">
+        <div class="jjk-dossier-status-bar">
+           <div class="jjk-dossier-status-bar-fill jjk-dossier-hp-fill"></div>
+        </div>
+      </div>
+      <span class="jjk-dossier-status-value">2000/2000</span>
     </div>
+
+    <div class="jjk-dossier-status-item">
+      <span class="jjk-dossier-status-label">EA</span>
+      <div class="jjk-dossier-status-bar-wrapper">
+        <div class="jjk-dossier-status-bar">
+           <div class="jjk-dossier-status-bar-fill jjk-dossier-ea-fill"></div>
+        </div>
+      </div>
+      <span class="jjk-dossier-status-value">5000/5000</span>
+    </div>
+
+  </div>
+
+  <div class="malevolent-v5-content">
+    A nova fonte no subtítulo e na assinatura traz a agressividade das pinceladas de Jujutsu Kaisen, mantendo a legibilidade.
+    <br><br>
+    <b>"Dismantle."</b> 
+    <br><br>
+    O banner acima segue o novo padrão visual solicitado. As animações de corte (glitch) no container inteiro foram aceleradas.
+  </div>
+
+  <div class="malevolent-v5-extras">
+    [spoiler="Considerações"]
+    - Template finalizado com ajustes de banner e velocidade de glitch.
+    [/spoiler]
+  </div>
+
+  <div class="malevolent-v5-footer">
+    <div class="malevolent-v5-signature"></div>
+  </div>
+
 </div>
