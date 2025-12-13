@@ -231,3 +231,20 @@
   .amalgam-content, .amalgam-stats, .amalgam-extras { padding-left: 25px; padding-right: 25px; margin-left: 5px; margin-right: 5px; }
   .amalgam-container .jjk-dossier-status-item { grid-template-columns: 35px 1fr 60px; gap: 8px; }
 }
+
+/* --- OVERRIDE: CORES DAS BARRAS NO MODO ESCURO --- */
+
+/* Cor da Barra de HP (Vida) no Modo Escuro */
+.amalgam-container.wolf-dark-mode .jjk-dossier-hp-fill { 
+  /* Edite as cores hexadecimais abaixo (Cor Inicial, Cor Final) */
+  background: linear-gradient(90deg, #8b0000, #ff0000) !important; 
+  /* Opcional: Cor do brilho ao redor */
+  box-shadow: 0 0 8px rgba(255, 0, 0, 0.4) !important;
+}
+
+/* Cor da Barra de EA (Energia/Stamina) no Modo Escuro */
+.amalgam-container.wolf-dark-mode .jjk-dossier-ea-fill { 
+  /* Edite as cores hexadecimais abaixo. Sugestão: Azul ou Roxo para contrastar com preto */
+  background: linear-gradient(90deg, #003366, #00ccff) !important; 
+  box-shadow: 0 0 8px rgba(0, 204, 255, 0.4) !important;
+}
