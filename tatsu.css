@@ -1,198 +1,161 @@
-/* --- TEMPLATE: MALEVOLENT SHRINE (ADAM MYERS) --- */
-/* Baseado na estrutura Wolf Template, adaptado para Dark/Gore */
-
+/* --- TEMPLATE: MALEVOLENT SHRINE REDUX (DARKER & UNIQUE) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Nosifer&family=Spectral:ital,wght@0,300;0,600;1,300&display=swap');
 
 :root {
-  /* === PALETA SANTUÁRIO MALEVOLENTE === */
-  --shrine-bg: #050505;        /* Preto quase absoluto */
-  --shrine-bg-secondary: #0a0000; /* Preto avermelhado muito escuro */
-  --shrine-blood: #8a0000;     /* Vermelho Sangue Escuro */
-  --shrine-blood-bright: #ff0000; /* Vermelho Vivo para brilhos */
-  --shrine-bone: #b8b8b8;      /* Cor de osso/cinza */
-  --shrine-text: #a3a3a3;      /* Texto cinza claro para leitura */
-  --shrine-shadow: rgba(0, 0, 0, 0.95);
+  /* --- PALETA DE CORES (Baseada na Imagem) --- */
+  --shrine-bg-main: #000000;         /* Preto Absoluto */
+  --shrine-bg-panel: #19171b;        /* Preto/Cinza muito escuro */
+  --shrine-red-darkest: #2b0307;     /* Vermelho Quase Preto */
+  --shrine-red-medium: #51080d;      /* Vermelho Sangue Escuro */
+  --shrine-red-bright: #75020f;      /* Vermelho Vivo (Acento) */
+  --shrine-text-color: #c0c0c0;      /* Cinza Claro para texto */
+  --shrine-accent-color: #808080;    /* Cinza Médio para detalhes */
 }
 
-/* --- ANIMAÇÕES --- */
-@keyframes blood-pulse {
-  0% { box-shadow: 0 0 5px var(--shrine-blood-bright); border-color: var(--shrine-blood); }
-  50% { box-shadow: 0 0 20px var(--shrine-blood); border-color: #500000; }
-  100% { box-shadow: 0 0 5px var(--shrine-blood-bright); border-color: var(--shrine-blood); }
+/* --- NOVAS ANIMAÇÕES --- */
+@keyframes ominous-glow {
+  0%, 100% { box-shadow: inset 0 0 20px var(--shrine-bg-main); }
+  50% { box-shadow: inset 0 0 40px var(--shrine-red-darkest); }
 }
 
-@keyframes cleave-slide {
-  0% { background-position: 0 0; }
-  100% { background-position: 0 100%; }
+@keyframes text-flicker {
+  0%, 10%, 20%, 100% { opacity: 1; text-shadow: 0 0 10px var(--shrine-red-medium); }
+  15% { opacity: 0.6; text-shadow: none; }
 }
 
 /* --- CONTAINER PRINCIPAL --- */
-.malevolent-container {
-  box-sizing: border-box; max-width: 720px; width: 95%; margin: 60px auto;
-  background-color: var(--shrine-bg);
-  color: var(--shrine-text);
+.malevolent-redux-container {
+  box-sizing: border-box; max-width: 750px; width: 95%; margin: 50px auto;
+  background-color: var(--shrine-bg-main);
+  color: var(--shrine-text-color);
   font-family: 'Spectral', serif;
-  border: 3px solid var(--shrine-blood);
-  border-top: 5px solid var(--shrine-blood);
-  box-shadow: 
-    0 0 0 1px #000,
-    0 0 30px rgba(138, 0, 0, 0.3); /* Brilho vermelho difuso */
+  border: 1px solid var(--shrine-bg-panel);
+  box-shadow: 0 0 50px rgba(0, 0, 0, 1);
   position: relative; overflow: hidden;
-  padding: 0; display: flex; flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  padding: 30px;
 }
 
-.malevolent-container * { box-sizing: border-box; margin: 0; padding: 0; }
+.malevolent-redux-container * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* --- FUNDO ATMOSFÉRICO --- */
-.malevolent-bg-layer {
+/* --- FUNDO E ATMOSFERA --- */
+.malevolent-bg-overlay {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background-image: 
-    radial-gradient(circle at 50% 20%, #200000 0%, var(--shrine-bg) 70%),
-    repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(138, 0, 0, 0.05) 11px);
-  opacity: 1;
+  background: radial-gradient(circle at center, transparent 0%, var(--shrine-bg-main) 90%);
+  opacity: 0.8;
 }
 
-/* --- LATERAIS (Representando os cortes) --- */
-.malevolent-side-left, .malevolent-side-right {
-  position: absolute; top: 0; bottom: 0; width: 4px; z-index: 1; pointer-events: none;
-  background: var(--shrine-blood);
-  box-shadow: 0 0 10px var(--shrine-blood);
+/* --- HEADER ÚNICO --- */
+.malevolent-header-redux {
+  text-align: center; position: relative; z-index: 2;
+  border-bottom: 2px solid var(--shrine-red-darkest);
+  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
-.malevolent-side-left { left: 10px; }
-.malevolent-side-right { right: 10px; }
 
-/* --- HEADER --- */
-.malevolent-header {
+.malevolent-title-redux {
+  font-family: 'Nosifer', cursive; font-size: 2.5em;
+  color: var(--shrine-red-bright); text-transform: uppercase;
+  letter-spacing: 2px; margin-bottom: 5px;
+  animation: text-flicker 5s infinite backwards;
+}
+
+.malevolent-subtitle-redux {
+  font-family: 'Cinzel', serif; font-size: 0.9em;
+  color: var(--shrine-accent-color); letter-spacing: 4px;
+  text-transform: uppercase;
+}
+
+/* --- LAYOUT CENTRAL (Imagem + Status) --- */
+.malevolent-split-layout {
+  display: grid; grid-template-columns: 2fr 1fr; gap: 25px;
   position: relative; z-index: 2;
-  padding: 50px 20px 20px 20px; text-align: center;
-  border-bottom: 2px solid var(--shrine-blood);
-  background: linear-gradient(to bottom, #000, transparent);
 }
 
-.malevolent-title {
-  position: relative; z-index: 2;
-  font-family: 'Cinzel', serif; font-size: 3em; 
-  color: var(--shrine-blood-bright); margin: 0; text-transform: uppercase;
-  text-shadow: 0px 0px 10px var(--shrine-blood); 
-  letter-spacing: 5px; font-weight: 900;
-}
-
-.malevolent-subtitle {
-  position: relative; z-index: 2;
-  font-family: 'Cinzel', serif; font-size: 0.8em; 
-  color: var(--shrine-bone); margin-top: 5px; letter-spacing: 8px;
-  text-transform: uppercase; opacity: 0.7;
-}
-
-/* --- IMAGEM --- */
-.malevolent-image-wrapper {
-  position: relative; z-index: 2; padding: 40px; display: flex; justify-content: center;
-}
-
-.malevolent-image-frame {
-  width: 100%; height: 350px; position: relative; 
+/* Imagem */
+.malevolent-image-frame-redux {
+  height: 300px; position: relative; overflow: hidden;
+  border: 3px solid var(--shrine-bg-panel);
   background: #000;
-  border: 2px solid var(--shrine-blood);
-  outline: 1px solid #000;
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
-  /* Animação de pulsação vermelha */
-  animation: blood-pulse 4s infinite ease-in-out;
+  animation: ominous-glow 4s infinite ease-in-out;
 }
-
-.malevolent-image-frame img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top;
-  filter: contrast(1.2) grayscale(0.3); /* Deixa a imagem mais dark */
+.malevolent-image-frame-redux img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(0.6) contrast(1.2) brightness(0.8);
   transition: 0.5s;
 }
-.malevolent-image-frame:hover img { filter: contrast(1.1) grayscale(0); }
-
-/* --- STATUS (Mantendo compatibilidade JS) --- */
-.malevolent-stats {
-  padding: 20px 50px; 
-  display: flex; flex-direction: column; gap: 15px; 
-  position: relative; z-index: 2;
-  background: var(--shrine-bg-secondary);
-  border-top: 1px solid var(--shrine-blood); 
-  border-bottom: 1px solid var(--shrine-blood);
+.malevolent-image-frame-redux:hover img {
+  filter: grayscale(0) contrast(1.1) brightness(1);
 }
 
-.malevolent-container .jjk-dossier-status-item {
-  display: grid; grid-template-columns: 40px 1fr 70px; align-items: center; gap: 15px;
-  background: transparent; border: none; margin: 0; padding: 0;
+/* Painel de Status Redesenhado */
+.malevolent-stats-panel {
+  display: flex; flex-direction: column; justify-content: center; gap: 20px;
+  padding: 20px;
+  background: var(--shrine-bg-panel);
+  border-left: 2px solid var(--shrine-red-darkest);
 }
 
-.malevolent-container .jjk-dossier-status-label { 
-  font-family: 'Nosifer', cursive; font-size: 0.9em; /* Fonte gore */
-  color: var(--shrine-blood-bright) !important; text-align: right; letter-spacing: 1px;
+.malevolent-stat-block {
+  display: flex; flex-direction: column; gap: 5px;
 }
 
-.malevolent-container .jjk-dossier-status-value { 
-  font-family: 'Cinzel', serif; font-size: 0.9em; 
-  color: var(--shrine-bone) !important; font-weight: 700; text-align: right;
+.malevolent-stat-label {
+  font-family: 'Cinzel', serif; font-size: 0.8em;
+  color: var(--shrine-red-medium); letter-spacing: 1px;
+}
+.malevolent-stat-value {
+  font-family: 'Spectral', serif; font-size: 1.1em; font-weight: 700;
+  color: var(--shrine-text-color);
 }
 
-/* Wrapper da barra */
-.malevolent-container .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 8px; 
-  background: #1a1a1a !important; 
-  border: 1px solid #333;
+/* Barras de Status (Compatíveis com JS) */
+.malevolent-bar-wrapper {
+  width: 100%; height: 6px; background: #0a0a0a;
+  border: 1px solid #222; margin-top: 5px;
 }
+.malevolent-bar-fill { height: 100%; display: block; }
 
-/* JS Hooks - NÃO ALTERAR NOMES */
-.malevolent-container .jjk-dossier-status-bar { width: 100%; height: 100%; display: block; }
-.malevolent-container .jjk-dossier-status-bar-fill { height: 100%; display: block; }
+.hp-fill-redux { background: linear-gradient(to right, var(--shrine-red-darkest), var(--shrine-red-medium)); }
+.ea-fill-redux { background: linear-gradient(to right, #111, #333); border-right: 2px solid var(--shrine-red-darkest); }
 
-/* Cores das Barras Customizadas */
-.malevolent-container .jjk-dossier-hp-fill { 
-  background: linear-gradient(90deg, #300000, #ff0000) !important; 
-  box-shadow: 0 0 10px rgba(255, 0, 0, 0.4) !important;
-}
-.malevolent-container .jjk-dossier-ea-fill { 
-  background: linear-gradient(90deg, #050505, #444) !important; 
-  border-right: 2px solid var(--shrine-bone);
-}
 
 /* --- CONTEÚDO --- */
-.malevolent-content {
-  padding: 40px 50px; font-size: 1.1em; line-height: 1.9; 
-  text-align: justify; position: relative; z-index: 2; 
-  color: #bfbfbf; background: transparent;
+.malevolent-content-redux {
+  position: relative; z-index: 2; padding: 10px;
+  font-size: 1.05em; line-height: 1.8; text-align: justify;
+  background: transparent;
+  border-top: 1px solid var(--shrine-bg-panel);
+  padding-top: 30px;
+}
+.malevolent-content-redux b { color: var(--shrine-red-bright); font-family: 'Cinzel', serif; }
+.malevolent-content-redux i { color: var(--shrine-accent-color); }
+
+/* --- EXTRAS --- */
+.malevolent-extras-redux {
+  position: relative; z-index: 2;
+  background: var(--shrine-bg-panel);
+  padding: 15px; font-size: 0.9em;
+  border: 1px solid var(--shrine-red-darkest);
 }
 
-.malevolent-content b, .malevolent-content strong { 
-  color: var(--shrine-blood-bright); font-family: 'Cinzel', serif; 
-  font-weight: 700;
+/* --- FOOTER & ASSINATURA --- */
+.malevolent-footer-redux {
+  text-align: right; padding-top: 20px;
+  border-top: 2px solid var(--shrine-red-darkest);
+  position: relative; z-index: 2;
 }
-.malevolent-content i { color: var(--shrine-bone); font-style: italic; opacity: 0.8; }
-
-/* --- EXTRAS/SPOILER --- */
-.malevolent-extras {
-  margin: 0 50px 30px 50px; padding: 20px;
-  background: #080000;
-  border: 1px solid var(--shrine-blood);
-  position: relative; z-index: 2; font-size: 0.9em;
-  color: var(--shrine-text);
+.malevolent-signature-redux {
+  font-family: 'Nosifer', cursive; font-size: 1.5em;
+  color: var(--shrine-red-medium);
+  text-shadow: 0 0 5px #000;
 }
 
-/* --- RODAPÉ/ASSINATURA --- */
-.malevolent-footer {
-  padding: 30px 0 40px 0; text-align: center;
-  position: relative; z-index: 2; background: transparent; 
-  border-top: 1px solid var(--shrine-blood);
-}
-
-.malevolent-signature::after {
-  content: 'Adam Myers'; /* NOME SOLICITADO */
-  font-family: 'Nosifer', cursive; /* Fonte Gore */
-  font-size: 1.8em; 
-  color: var(--shrine-blood); 
-  letter-spacing: 2px; text-transform: uppercase;
-  text-shadow: 0 0 5px rgba(0,0,0,1);
-  filter: drop-shadow(0 0 2px var(--shrine-blood-bright));
-}
-
-@media (max-width: 600px) {
-  .malevolent-container { width: 100%; border-width: 1px; }
-  .malevolent-content, .malevolent-stats, .malevolent-extras { padding-left: 20px; padding-right: 20px; }
-  .malevolent-title { font-size: 2em; }
+/* --- RESPONSIVO --- */
+@media (max-width: 650px) {
+  .malevolent-split-layout { grid-template-columns: 1fr; }
+  .malevolent-image-frame-redux { height: 250px; }
+  .malevolent-stats-panel { border-left: none; border-top: 2px solid var(--shrine-red-darkest); }
 }
