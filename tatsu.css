@@ -117,7 +117,7 @@
 
 .malevolent-v5-title {
   font-family: 'Cinzel Decorative', serif; /* NOVA FONTE */
-  font-size: 3.2em; font-weight: 900;
+  font-size: 2.2em; font-weight: 900;
   color: var(--shrine-bone);
   text-shadow: 0 2px 0 var(--shrine-red-deep);
   letter-spacing: 1px; margin: 0; line-height: 1;
@@ -229,7 +229,7 @@
   font-size: 0.9em; color: #888;
 }
 .malevolent-v5-extras::before {
-  content: 'NOTAS DO RITUAL'; display: block;
+  content: 'Kitchen'; display: block;
   font-family: 'Cinzel Decorative', serif; color: var(--shrine-red-mid);
   font-size: 0.8em; margin-bottom: 10px; border-bottom: 1px solid #222;
 }
