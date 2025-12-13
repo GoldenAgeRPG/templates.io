@@ -249,26 +249,45 @@
   box-shadow: 0 0 8px rgba(0, 204, 255, 0.4) !important;
 }
 
-/* --- CORREÇÃO DE CITAÇÕES (QUOTE) --- */
-.amalgam-container blockquote {
+/* --- CORREÇÃO DE CITAÇÕES (NUCLEAR) --- */
+
+/* 1. Estiliza a caixa principal do Quote e Code */
+.amalgam-container blockquote,
+.amalgam-container .quote,
+.amalgam-container .codebox, 
+.amalgam-container dl.codebox {
     background-color: var(--wolf-bg-secondary) !important;
+    background-image: none !important; /* Remove imagens de fundo padrão */
     color: var(--wolf-text) !important;
     border: 1px solid var(--wolf-gold) !important;
-    border-left: 4px solid var(--wolf-dark-gold) !important; /* Detalhe lateral */
-    padding: 15px;
-    margin: 15px 0;
+    border-left: 4px solid var(--wolf-dark-gold) !important;
+    border-radius: 0 !important; /* Remove bordas arredondadas padrão */
     box-shadow: none !important;
-    font-family: 'Spectral', serif;
-    font-size: 0.95em;
+    padding: 15px !important;
+    margin: 15px 0 !important;
+    font-family: 'Spectral', serif !important;
+    font-size: 0.95em !important;
 }
 
-/* Opcional: Se houver um título/autor na citação (ex: Fulano escreveu:) */
+/* 2. LIMPEZA INTERNA (Crucial) */
+/* Isso força qualquer texto ou caixa DENTRO da citação a ficar transparente e usar a cor correta */
+.amalgam-container blockquote *,
+.amalgam-container .quote *,
+.amalgam-container .codebox * {
+    background-color: transparent !important; /* Remove fundos pretos internos */
+    color: inherit !important; /* Força o texto a usar a cor da caixa pai */
+    border: none !important; /* Remove bordas internas estranhas */
+    text-shadow: none !important;
+}
+
+/* 3. Títulos de Citação (Ex: Fulano disse:) */
 .amalgam-container blockquote cite,
-.amalgam-container blockquote .author {
+.amalgam-container .quote cite,
+.amalgam-container .codebox dt {
     color: var(--wolf-dark-gold) !important;
-    font-weight: bold;
-    font-style: normal;
-    display: block;
-    margin-bottom: 5px;
-    font-family: 'Cinzel', serif;
+    font-family: 'Cinzel', serif !important;
+    font-weight: 700 !important;
+    display: block !important;
+    margin-bottom: 5px !important;
+    border-bottom: 1px solid rgba(0,0,0,0.1) !important; /* Separador sutil */
 }
