@@ -1,26 +1,28 @@
-/* --- TEMPLATE: TATSU (SUKUNA - MALEVOLENT VER.) --- */
-@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Rock+Salt&display=swap');
+/* --- TEMPLATE: TATSU (CALAMITY VER.) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Rubik+Glitch&family=Spectral:ital,wght@0,300;0,600;1,300&display=swap');
 
 .tatsu-container {
-  /* Paleta Sombria e Régia */
-  --t-bg: #0a0a0a;
-  --t-panel: #111111;
-  --t-blood-dark: #3a0000;
-  --t-blood: #6a0404;      /* Sangue Coagulado */
-  --t-blood-light: #a31e1e;
-  --t-text: #d1d1d1;
-  --t-gold: #c5a059;       /* Detalhe dourado envelhecido (Realeza) */
+  /* Variáveis de Terror Elegante */
+  --t-bg: #050505;
+  --t-card: #0a0a0a;
+  --t-blood: #4a0a0a;      /* Vermelho Sangue Seco */
+  --t-accent: #800000;     /* Vermelho Profundo */
+  --t-text: #b0b0b0;       /* Cinza Osso */
+  --t-gold: #8a7a58;       /* Ouro Envelhecido (Realeza) */
   
   box-sizing: border-box;
-  max-width: 700px;
+  max-width: 650px;
   width: 95%;
   margin: 40px auto;
+  
   background-color: var(--t-bg);
-  /* Textura de ruído sutil no fundo */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
-  border: 1px solid #333;
-  box-shadow: 0 20px 50px -10px #000;
-  font-family: 'Cormorant Garamond', serif;
+  /* Textura sutil de ruído para tirar o aspecto digital */
+  background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("https://www.transparenttextures.com/patterns/stardust.png");
+  
+  border: 1px solid #1a1a1a;
+  box-shadow: 0 30px 60px -15px #000;
+  
+  font-family: 'Spectral', serif;
   color: var(--t-text);
   position: relative;
   padding: 0;
@@ -29,170 +31,156 @@
 
 .tatsu-container * { box-sizing: border-box; }
 
-/* --- ASSINATURA: ADAM MYERS --- */
+/* --- ASSINATURA: ADAM MYERS (Estilo Gravação/Risco) --- */
 .tatsu-container::after {
   content: "Adam Myers";
   display: block;
   text-align: right;
-  font-family: 'Rock Salt', cursive; /* Estilo rasurado/agressivo */
-  font-size: 1.2em;
-  color: #555; /* Cinza escuro, discreto mas ameaçador */
-  padding: 15px 30px 20px 0;
+  font-family: 'Spectral', serif;
+  font-style: italic;
+  font-size: 0.9em;
+  color: #333;
+  padding: 0 20px 15px 0;
   margin-top: 20px;
-  opacity: 0.6;
+  letter-spacing: 3px;
+  text-transform: uppercase;
   pointer-events: none;
-  transform: rotate(-2deg);
-  text-shadow: 1px 1px 2px #000;
+  opacity: 0.5;
+  border-top: 1px solid #111;
+  padding-top: 10px;
 }
 
 /* --- CABEÇALHO --- */
 .tatsu-header {
-  padding: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  border-bottom: 4px solid var(--t-blood);
-  background: linear-gradient(to bottom, #000, #1a0505);
+  padding: 40px 20px 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--t-blood);
   position: relative;
 }
 
-.tatsu-main-title {
-  font-family: 'UnifrakturMaguntia', cursive; /* Fonte Gótica */
-  color: var(--t-text);
-  font-size: 2.8em;
+/* Marcações Geométricas (Tatuagens do Sukuna) */
+.tatsu-header::before, .tatsu-header::after {
+  content: ''; position: absolute; width: 1px; height: 30px;
+  background: var(--t-accent); top: 0;
+}
+.tatsu-header::before { left: 50%; transform: translateX(-15px); }
+.tatsu-header::after { right: 50%; transform: translateX(15px); }
+
+.tatsu-title {
+  font-family: 'Cinzel', serif;
+  font-size: 2.5em;
+  color: #e0e0e0;
   margin: 0;
-  line-height: 0.9;
-  text-shadow: 4px 4px 0px #000;
-  letter-spacing: 1px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-shadow: 0 5px 15px rgba(0,0,0,0.8);
 }
 
 .tatsu-subtitle {
-  font-family: 'Cormorant Garamond', serif;
-  color: var(--t-blood-light);
-  font-size: 1.1em;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+  font-family: 'Rubik Glitch', cursive; /* Toque de Caos/Maldição */
+  color: var(--t-accent);
+  font-size: 1.2em;
   margin-top: 5px;
-}
-
-.tatsu-icon {
-  width: 40px; height: 40px; fill: var(--t-blood);
   opacity: 0.8;
-  filter: drop-shadow(0 0 5px var(--t-blood-dark));
 }
 
 /* --- IMAGEM --- */
-.tatsu-image-box {
-  width: 100%; height: 350px;
-  position: relative;
-  border-bottom: 1px solid var(--t-blood-dark);
-}
-.tatsu-image-box img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top;
-  filter: grayscale(0.8) contrast(1.2); /* Desaturado e alto contraste */
-}
-.tatsu-vignette {
-  position: absolute; inset: 0;
-  background: radial-gradient(transparent 50%, rgba(0,0,0,0.9) 100%);
-  pointer-events: none;
-}
-.tatsu-border-overlay {
-  position: absolute; bottom: 0; left: 0; width: 100%; height: 4px;
-  background: var(--t-blood);
-  box-shadow: 0 0 15px var(--t-blood);
-}
-
-/* --- STATS --- */
-.tatsu-stats {
-  padding: 25px 30px;
-  background: #0d0d0d;
-  display: flex; flex-direction: column; gap: 20px;
-  border-top: 1px solid #222;
-}
-
-.tatsu-stat-row { display: flex; align-items: center; gap: 20px; }
-
-.tatsu-label {
-  font-family: 'UnifrakturMaguntia', cursive; 
-  font-size: 1.5em; color: var(--t-text);
-  width: 30px; line-height: 1;
-}
-
-.tatsu-bar-bg {
-  flex-grow: 1; height: 6px; 
-  background: #222;
+.tatsu-image-frame {
+  width: 100%;
+  height: 400px; /* Imagem bem vertical e imponente */
   position: relative;
   overflow: hidden;
+  filter: grayscale(0.4) contrast(1.1);
+  border-bottom: 1px solid #111;
 }
 
-.tatsu-bar-fill { 
-  height: 100%; width: 100%; 
-  transition: width 0.5s;
-  position: relative;
+.tatsu-image-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  /* Zoom lento e ameaçador */
+  animation: slow-menace 20s infinite alternate;
 }
 
-/* Efeito de barra simples e brutal */
-.hp-fill { background: var(--t-blood-light); box-shadow: 0 0 10px var(--t-blood-dark); }
-.ea-fill { background: #4a4a4a; box-shadow: 0 0 10px #000; }
-
-.tatsu-value {
-  font-family: 'Cormorant Garamond', serif; 
-  font-weight: 700; color: #888; font-size: 1.1em;
+@keyframes slow-menace {
+  from { transform: scale(1); }
+  to { transform: scale(1.1); }
 }
+
+.tatsu-glitch-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--t-bg) 5%, transparent 40%);
+  pointer-events: none;
+}
+
+/* --- STATS (Minimalista e Frio) --- */
+.tatsu-stats {
+  display: flex;
+  background: #080808;
+  border-bottom: 1px solid #1a1a1a;
+}
+.tatsu-stat-col {
+  flex: 1;
+  padding: 15px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border-right: 1px solid #1a1a1a;
+}
+.tatsu-stat-col:last-child { border-right: none; }
+
+.tatsu-lbl {
+  font-family: 'Cinzel', serif;
+  font-size: 0.8em; color: #555; margin-bottom: 5px;
+}
+.tatsu-val {
+  font-family: 'Rubik Glitch', cursive;
+  font-size: 1.1em; color: var(--t-text); margin-top: 5px;
+}
+
+.tatsu-bar {
+  width: 100%; height: 2px; background: #222; position: relative;
+}
+.tatsu-fill { height: 100%; width: 100%; }
+.hp-fill { background: var(--t-accent); box-shadow: 0 0 10px var(--t-blood); }
+.ea-fill { background: #333; }
 
 /* --- CONTEÚDO --- */
 .tatsu-content {
-  background: var(--t-bg);
-  padding: 10px 40px 30px 40px;
-  font-size: 1.3em; 
-  line-height: 1.6; 
+  padding: 40px 30px;
+  font-size: 1.1em;
+  line-height: 1.8;
   text-align: justify;
   color: #ccc;
 }
 
-.tatsu-content b { 
-  color: var(--t-blood-light); 
-  font-weight: 700; 
-  font-family: 'UnifrakturMaguntia', cursive; /* Negrito em gótico */
-  font-size: 1.1em;
-  letter-spacing: 0.5px;
+/* Negrito ameaçador */
+.tatsu-content b {
+  color: var(--t-accent);
+  font-weight: 600;
+  font-family: 'Cinzel', serif;
 }
 
-/* Diálogo destacado */
-.tatsu-dialogue {
+/* Citação destacada */
+.tatsu-quote {
+  border-left: 2px solid var(--t-accent);
+  padding-left: 20px;
+  margin: 30px 0;
   color: #fff;
-  border-left: 3px solid var(--t-blood);
-  padding-left: 15px;
-  margin: 20px 0;
   font-style: italic;
-  font-size: 1.1em;
+  font-family: 'Spectral', serif;
+  font-size: 1.2em;
+  background: linear-gradient(90deg, rgba(128,0,0,0.1), transparent);
 }
 
-/* --- EXTRAS --- */
-.tatsu-extras {
-  margin: 0 40px 20px 40px;
-  border: 1px solid var(--t-blood-dark);
-  background: #0f0505;
-  padding: 0;
+/* --- FOOTER INFO --- */
+.tatsu-footer-info {
+  display: flex; justify-content: center; gap: 15px;
+  padding-bottom: 10px;
 }
-
-.tatsu-extra-header {
-  background: var(--t-blood-dark);
-  color: #aaa;
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-size: 0.9em;
-  padding: 8px 15px;
-  text-align: center;
+.info-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7em;
+  color: #444;
+  border: 1px solid #222;
+  padding: 4px 10px;
+  letter-spacing: 1px;
 }
-
-.tatsu-extra-body {
-  padding: 15px;
-  font-size: 1em;
-  color: #999;
-}
-
-.tatsu-extras b { color: var(--t-text); font-family: 'Cormorant Garamond', serif; }
