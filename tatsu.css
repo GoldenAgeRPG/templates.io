@@ -1,286 +1,133 @@
-/* --- TEMPLATE: MALEVOLENT SHRINE V6 (RIFT & CHAOS) --- */
-@import url('https://fonts.googleapis.com/css2?family=Metal+Mania&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap');
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
 
-:root {
-  --shrine-black: #050505;
-  --shrine-panel: #0a0a0a;
-  --shrine-red-deep: #2b0307;
-  --shrine-red-mid: #51080d;
-  --shrine-red-pop: #8a0000; /* Vermelho mais vivo para os cortes */
-  --shrine-bone: #c0c0c0;
-  --shrine-text: #a8a8a8;
+<style>
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+    background: #050505;
 }
-
-/* --- ANIMAÇÕES DE CORTE (DIREÇÃO E RITMO) --- */
-
-/* Corte da Esquerda para Direita */
-@keyframes slash-lr {
-  0% { clip-path: polygon(0 0, 0 0, 0 100%, 0 100%); opacity: 0; }
-  20% { opacity: 1; }
-  50% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); opacity: 0; }
-  100% { opacity: 0; }
+::-webkit-scrollbar-thumb {
+    background: #8b0000;
+}
+::selection {
+    background: #8b0000;
+    color: #fff;
 }
 
-/* Corte da Direita para Esquerda (NOVO) */
-@keyframes slash-rl {
-  0% { clip-path: polygon(100% 0, 100% 0, 100% 100%, 100% 100%); opacity: 0; }
-  20% { opacity: 1; }
-  50% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); opacity: 0; }
-  100% { opacity: 0; }
+.jjk-full-template {
+    width: 650px;
+    margin: 0 auto;
+    background-color: #0d0d0d;
+    border: 1px solid #222;
+    box-shadow: 0 0 20px rgba(0,0,0,0.9);
+    position: relative;
+    overflow: hidden;
+    color: #bfbfbf;
+    font-family: 'Verdana', sans-serif;
+    font-size: 13px;
+    line-height: 1.7;
+    text-align: justify;
+    animation: glitch-anim 0.25s infinite linear alternate-reverse;
 }
 
-/* Efeito de "Tremor" na Fenda da Imagem */
-@keyframes rift-pulse {
-  0%, 100% { transform: translate(0, 0); filter: drop-shadow(0 0 5px var(--shrine-red-deep)); }
-  25% { transform: translate(-1px, 1px); filter: drop-shadow(0 0 10px var(--shrine-red-mid)); }
-  75% { transform: translate(1px, -1px); filter: drop-shadow(0 0 10px var(--shrine-red-mid)); }
+.jjk-banner {
+    width: 100%;
+    height: 320px;
+    background-image: url('https://i.imgur.com/placehold.png');
+    background-position: center;
+    background-size: cover;
+    border-bottom: 4px solid #8b0000;
+    position: relative;
+    z-index: 2;
 }
 
-/* Energia Lateral */
-@keyframes aura-flow {
-  0% { background-position: 0 100%; }
-  100% { background-position: 0 0; }
+.jjk-body {
+    padding: 60px;
+    position: relative;
+    z-index: 5;
 }
 
-/* --- CONTAINER --- */
-.malevolent-v6-container {
-  max-width: 720px; width: 95%; margin: 60px auto;
-  background-color: var(--shrine-black);
-  color: var(--shrine-text);
-  font-family: 'Spectral', serif;
-  border: 1px solid var(--shrine-red-deep);
-  box-shadow: 0 0 70px #000;
-  position: relative; overflow: hidden;
-  padding: 0;
-}
-.malevolent-v6-container * { box-sizing: border-box; }
-
-/* Fundo */
-.malevolent-v6-bg {
-  position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background: radial-gradient(circle at center, transparent 0%, #000 90%),
-              url('https://www.transparenttextures.com/patterns/dark-matter.png');
-  opacity: 0.5;
+.jjk-body strong, .jjk-body b {
+    color: #8b0000;
+    font-weight: bold;
 }
 
-/* --- AURA LATERAL --- */
-.malevolent-side-energy {
-  position: absolute; top: 0; bottom: 0; width: 6px; z-index: 5;
-  background: linear-gradient(to top, var(--shrine-black), var(--shrine-red-mid), var(--shrine-black));
-  background-size: 100% 200%;
-  animation: aura-flow 3s linear infinite;
-  box-shadow: 0 0 10px var(--shrine-red-deep);
-}
-.energy-left { left: 0; border-right: 1px solid rgba(255,255,255,0.1); }
-.energy-right { right: 0; border-left: 1px solid rgba(255,255,255,0.1); }
-
-/* --- SISTEMA DE CORTES (SLASHES) --- */
-.slash-overlay {
-  position: absolute; inset: 0; pointer-events: none; z-index: 10; overflow: hidden;
+.jjk-body em, .jjk-body i {
+    color: #fff;
+    font-family: 'Georgia', serif;
+    font-style: italic;
+    letter-spacing: 0px;
 }
 
-.slash-mark {
-  position: absolute; background: var(--shrine-red-pop);
-  box-shadow: 0 0 8px var(--shrine-red-pop);
-  height: 1px; width: 100%; opacity: 0;
+.jjk-body h1, .jjk-body h2, .jjk-body h3 {
+    font-family: 'Cinzel', serif;
+    color: #fff;
+    text-transform: uppercase;
+    border-bottom: 1px solid #8b0000;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    font-weight: normal;
+    letter-spacing: 2px;
 }
 
-/* Variação 1: Superior, Esq->Dir, Lento */
-.s-1 {
-  top: 20%; left: 0; transform: rotate(15deg) scale(1.2);
-  height: 2px;
-  animation: slash-lr 7s infinite ease-out;
-}
-/* Variação 2: Meio, Dir->Esq, Rápido */
-.s-2 {
-  top: 50%; left: 0; transform: rotate(-10deg) scale(1.2);
-  height: 1px;
-  animation: slash-rl 4s infinite ease-out 1s; /* Delay */
-}
-/* Variação 3: Inferior, Esq->Dir, Médio */
-.s-3 {
-  top: 80%; left: 0; transform: rotate(5deg) scale(1.2);
-  height: 2px;
-  animation: slash-lr 5s infinite ease-out 2.5s;
-}
-/* Variação 4: Cruzado Vertical, Dir->Esq, Rápido */
-.s-4 {
-  top: 30%; left: 0; transform: rotate(-45deg) scale(1.5);
-  height: 1px;
-  animation: slash-rl 11s infinite ease-out; /* Primo alto para aleatoriedade */
-}
-/* Variação 5: Cruzado Reverso, Esq->Dir */
-.s-5 {
-  top: 60%; left: 0; transform: rotate(45deg) scale(1.5);
-  height: 1px;
-  animation: slash-lr 9s infinite ease-out 0.5s;
+.jjk-body blockquote {
+    border-left: 3px solid #8b0000;
+    background: #111;
+    margin: 20px 0;
+    padding: 15px;
+    font-style: italic;
+    color: #999;
 }
 
-
-/* --- HEADER --- */
-.malevolent-v6-header {
-  position: relative; z-index: 2;
-  text-align: center; padding: 60px 20px 20px;
-  border-bottom: 2px solid var(--shrine-red-deep);
-  background: linear-gradient(to bottom, rgba(10,0,0,0.8), transparent);
+.jjk-body a {
+    color: #8b0000;
+    text-decoration: none;
+    transition: 0.3s;
+}
+.jjk-body a:hover {
+    color: #fff;
+    letter-spacing: 1px;
 }
 
-.malevolent-v6-title {
-  font-family: 'Metal Mania', cursive; /* FONTE NOVA */
-  font-size: 3.5em; /* Tamanho ajustado para impacto */
-  color: var(--shrine-bone);
-  text-shadow: 3px 3px 0px #000;
-  letter-spacing: 4px; line-height: 0.9;
-  text-transform: uppercase;
-  margin-bottom: 5px;
+.side-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: #8b0000;
+    opacity: 0.3;
+    z-index: 1;
 }
+.side-left { left: 15px; }
+.side-right { right: 15px; }
 
-.malevolent-v6-subtitle {
-  font-family: 'Spectral', serif;
-  font-size: 1em; text-transform: uppercase; letter-spacing: 6px;
-  color: var(--shrine-red-pop); font-weight: 700;
-  text-shadow: 0 0 10px var(--shrine-red-mid);
+@keyframes glitch-anim {
+    0% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    10% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    11% { clip-path: inset(10% 0 85% 0); transform: translate(-3px, 1px); }
+    12% { clip-path: inset(85% 0 5% 0); transform: translate(3px, -1px); }
+    13% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    50% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    51% { clip-path: inset(40% 0 40% 0); transform: translate(2px, -2px); }
+    52% { clip-path: inset(0 0 0 0); transform: translate(0); }
+    100% { clip-path: inset(0 0 0 0); transform: translate(0); }
 }
+</style>
 
-/* --- BANNER "RIFT" (Fenda) --- */
-.malevolent-v6-image-wrapper {
-  padding: 40px; position: relative; z-index: 2;
-  display: flex; justify-content: center;
-}
-
-/* Moldura Externa (Fundo da Fenda) */
-.rift-frame-outer {
-  position: relative; width: 100%; height: 320px;
-  /* Formato irregular e agressivo */
-  clip-path: polygon(
-    0% 0%, 100% 0%, 100% 85%, 90% 100%, 
-    60% 95%, 40% 100%, 10% 90%, 0% 100%
-  );
-  background: var(--shrine-red-deep);
-  padding: 4px; /* Espessura da borda falsa */
-  animation: rift-pulse 6s infinite ease-in-out;
-}
-
-/* Moldura Interna (A Imagem) */
-.rift-frame-inner {
-  width: 100%; height: 100%;
-  background: #000;
-  /* Recorte interno levemente diferente para criar borda variável */
-  clip-path: polygon(
-    0% 0%, 100% 0%, 100% 84%, 90% 99%, 
-    60% 94%, 40% 99%, 10% 89%, 0% 99%
-  );
-  position: relative;
-}
-
-.rift-frame-inner img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top;
-  filter: grayscale(0.4) contrast(1.2) brightness(0.8);
-  transition: 0.5s;
-}
-.rift-frame-outer:hover img {
-  filter: grayscale(0) contrast(1.1) brightness(1);
-  transform: scale(1.02);
-}
-
-/* Risco sobre a imagem (Overlay) */
-.rift-scratch {
-  position: absolute; inset: 0; pointer-events: none; z-index: 3;
-  background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0,0,0,0.5) 11px);
-  opacity: 0.3;
-}
-
-
-/* --- STATUS --- */
-.malevolent-v6-stats {
-  position: relative; z-index: 2;
-  padding: 20px 50px;
-  background: rgba(10, 10, 10, 0.6);
-  border-top: 1px solid var(--shrine-red-deep);
-  display: flex; flex-direction: column; gap: 15px;
-}
-
-.malevolent-v6-container .jjk-dossier-status-item {
-  display: grid; 
-  grid-template-columns: 40px 1fr min-content; 
-  align-items: center; gap: 15px;
-  margin: 0; padding: 0; border: none; background: transparent;
-}
-
-.malevolent-v6-container .jjk-dossier-status-label {
-  font-family: 'Metal Mania', cursive; /* Fonte do Título */
-  color: var(--shrine-bone) !important;
-  font-size: 1.1em; letter-spacing: 1px; text-align: right;
-}
-
-.malevolent-v6-container .jjk-dossier-status-value {
-  font-family: 'Spectral', serif; font-weight: 700; color: var(--shrine-red-pop) !important;
-  text-align: right; font-size: 1.2em; white-space: nowrap;
-}
-
-.malevolent-v6-container .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 8px;
-  background: #000 !important;
-  border: 1px solid #333;
-  transform: skewX(-20deg); /* Inclinação agressiva */
-}
-.malevolent-v6-container .jjk-dossier-status-bar { display: block; width: 100%; height: 100%; }
-.malevolent-v6-container .jjk-dossier-status-bar-fill { height: 100%; display: block; transition: width 0.6s ease-out; }
-
-.malevolent-v6-container .jjk-dossier-hp-fill {
-  background: linear-gradient(90deg, #400000, var(--shrine-red-pop)) !important;
-}
-.malevolent-v6-container .jjk-dossier-ea-fill {
-  background: linear-gradient(90deg, #111, #444) !important;
-  border-right: 2px solid var(--shrine-bone);
-}
-
-/* --- CONTEÚDO --- */
-.malevolent-v6-content {
-  position: relative; z-index: 2; padding: 40px 50px;
-  text-align: justify; line-height: 1.8; font-size: 1.1em;
-  background: transparent;
-}
-
-.malevolent-v6-content b, .malevolent-v6-content strong { 
-  color: var(--shrine-red-pop); 
-  font-family: 'Metal Mania', cursive; /* Destaque com a fonte do tema */
-  font-weight: 400; font-size: 1.1em; letter-spacing: 1px;
-  text-transform: none !important;
-}
-.malevolent-v6-content i, .malevolent-v6-content em { 
-  color: var(--shrine-red-mid); 
-  font-family: 'Spectral', serif;
-  font-style: italic !important; font-weight: 600;
-  text-decoration: underline wavy rgba(138, 0, 0, 0.3); /* Sublinhado sutil */
-}
-
-/* --- EXTRAS & FOOTER --- */
-.malevolent-v6-extras {
-  margin: 0 50px 30px; padding: 20px; position: relative; z-index: 2;
-  border-left: 3px solid var(--shrine-red-deep);
-  background: linear-gradient(to right, rgba(20,0,0,0.5), transparent);
-  font-size: 0.9em; color: #888;
-}
-
-.malevolent-v6-footer {
-  text-align: center; padding: 40px 0; position: relative; z-index: 2;
-  border-top: 1px solid var(--shrine-red-deep);
-  background: linear-gradient(to top, rgba(10,0,0,0.8), transparent);
-}
-
-.malevolent-v6-signature::after {
-  content: 'Adam Myers';
-  font-family: 'Metal Mania', cursive;
-  font-size: 2.2em;
-  color: var(--shrine-red-pop);
-  text-shadow: 0 0 10px rgba(0,0,0,1); 
-  letter-spacing: 2px;
-}
-
-@media (max-width: 600px) {
-  .malevolent-v6-container { width: 100%; border: none; border-top: 2px solid var(--shrine-red-deep); }
-  .malevolent-v6-content, .malevolent-v6-stats, .malevolent-v6-extras { padding-left: 20px; padding-right: 20px; }
-  .malevolent-v6-container .jjk-dossier-status-item { grid-template-columns: 30px 1fr min-content; gap: 8px; }
-  .malevolent-v6-title { font-size: 2.5em; }
-}
+<div class="jjk-full-template">
+    <div class="jjk-banner"></div>
+    
+    <div class="side-line side-left"></div>
+    <div class="side-line side-right"></div>
+    
+    <div class="jjk-body">
+        <h1>Título do Tópico</h1>
+        <p>Aqui está o texto completo. O <strong>negrito</strong> está padrão e o <em>itálico</em> também. A estrutura de scrollbars, titulos e blockquotes foi restaurada.</p>
+        
+        <blockquote>
+            Exemplo de citação ou fala de personagem restaurada ao estilo antigo.
+        </blockquote>
+        
+        <p>Mais texto para testar o scroll e o espaçamento geral do container antigo com o banner novo.</p>
+    </div>
+</div>
