@@ -1,5 +1,5 @@
-/* --- TEMPLATE: MALEVOLENT SHRINE V3.5 (FINAL FIX) --- */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Nosifer&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&display=swap');
+/* --- TEMPLATE: MALEVOLENT SHRINE V4 (FINAL REFINED) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Nosifer&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap');
 
 :root {
   /* Paleta Noguchi & Dark */
@@ -7,75 +7,102 @@
   --shrine-panel: #101010;
   --shrine-red-deep: #2b0307;  /* Vermelho quase preto */
   --shrine-red-mid: #51080d;   /* Vermelho sangue seco */
-  --shrine-red-pop: #75020f;   /* Vermelho vivo (Foco) */
+  --shrine-red-pop: #75020f;   /* Vermelho vivo */
   --shrine-bone: #b0b0b0;
   --shrine-text: #a8a8a8;
 }
 
 /* --- ANIMAÇÕES --- */
-@keyframes cleave-flash {
-  0% { opacity: 0; transform: scaleX(0.1) rotate(45deg); }
-  10% { opacity: 0.6; transform: scaleX(1) rotate(45deg); }
-  20% { opacity: 0; transform: scaleX(1.2) rotate(45deg); }
-  100% { opacity: 0; }
+
+/* Cortes: Esticam sem girar */
+@keyframes slash-stretch {
+  0% { transform: scaleX(0); opacity: 0; }
+  10% { transform: scaleX(1); opacity: 0.8; }
+  30% { transform: scaleX(1); opacity: 0; }
+  100% { transform: scaleX(0); opacity: 0; }
 }
 
-@keyframes cleave-flash-reverse {
-  0% { opacity: 0; transform: scaleX(0.1) rotate(-25deg); }
-  15% { opacity: 0.4; transform: scaleX(1) rotate(-25deg); }
-  30% { opacity: 0; transform: scaleX(1.2) rotate(-25deg); }
-  100% { opacity: 0; }
-}
-
-@keyframes text-aura-pulse {
-  0%, 100% { box-shadow: inset 30px 0 40px -10px rgba(0,0,0,0.9), inset -30px 0 40px -10px rgba(0,0,0,0.9); }
-  50% { box-shadow: inset 40px 0 60px -10px rgba(43, 3, 7, 0.6), inset -40px 0 60px -10px rgba(43, 3, 7, 0.6); }
+/* Energia Ascendente: Fluxo constante para cima */
+@keyframes energy-flow-up {
+  0% { background-position: 0 100%; }
+  100% { background-position: 0 0; }
 }
 
 /* --- CONTAINER --- */
-.malevolent-v3-container {
+.malevolent-v4-container {
   max-width: 700px; width: 95%; margin: 60px auto;
   background-color: var(--shrine-black);
   color: var(--shrine-text);
   font-family: 'Spectral', serif;
   border: 3px solid var(--shrine-red-deep);
-  outline: 1px solid var(--shrine-red-mid);
-  box-shadow: 0 0 50px #000;
+  box-shadow: 0 0 60px #000;
   position: relative; overflow: hidden;
   padding: 0;
 }
-.malevolent-v3-container * { box-sizing: border-box; }
+.malevolent-v4-container * { box-sizing: border-box; }
 
 /* Textura de Fundo */
-.malevolent-v3-bg {
+.malevolent-v4-bg {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background-image: linear-gradient(to bottom, rgba(5,5,5,0.9), var(--shrine-black)),
+  background-image: linear-gradient(to bottom, rgba(5,5,5,0.95), var(--shrine-black)),
                     url('https://www.transparenttextures.com/patterns/dark-matter.png');
   opacity: 0.4;
 }
 
-/* Efeito de Cortes (Overlay) */
+/* --- ENERGIA NAS LATERAIS (FLUXO ASCENDENTE) --- */
+.malevolent-energy-left, .malevolent-energy-right {
+  position: absolute; top: 0; bottom: 0; width: 4px; z-index: 5;
+  background: linear-gradient(to top, 
+    var(--shrine-black) 0%, 
+    var(--shrine-red-mid) 20%, 
+    var(--shrine-red-pop) 50%, 
+    var(--shrine-red-mid) 80%, 
+    var(--shrine-black) 100%
+  );
+  background-size: 100% 200%; /* Permite o scroll da textura */
+  animation: energy-flow-up 3s linear infinite;
+  opacity: 0.7;
+  box-shadow: 0 0 15px var(--shrine-red-deep);
+}
+.malevolent-energy-left { left: 5px; border-right: 1px solid rgba(0,0,0,0.5); }
+.malevolent-energy-right { right: 5px; border-left: 1px solid rgba(0,0,0,0.5); }
+
+
+/* --- CAMADA DE CORTES (SLASHES) --- */
 .malevolent-slashes {
   position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden;
 }
 .malevolent-slashes::before, .malevolent-slashes::after {
-  content: ''; position: absolute; width: 150%; height: 2px;
-  background: var(--shrine-red-mid); box-shadow: 0 0 5px var(--shrine-red-pop);
-  top: 30%; left: -25%; opacity: 0;
+  content: ''; position: absolute; height: 1px; width: 120%;
+  background: var(--shrine-red-pop);
+  box-shadow: 0 0 8px var(--shrine-red-pop);
+  opacity: 0;
 }
-.malevolent-slashes::before { animation: cleave-flash 7s infinite linear; top: 40%; }
-.malevolent-slashes::after { animation: cleave-flash-reverse 11s infinite linear; top: 60%; animation-delay: 2s; }
-
+/* Corte 1: Diagonal descendo */
+.malevolent-slashes::before { 
+  top: 30%; left: -10%; 
+  transform-origin: left;
+  transform: rotate(15deg); /* Angulo fixo */
+  animation: slash-stretch 6s infinite ease-out; /* Sem rotação na animação */
+}
+/* Corte 2: Diagonal subindo (delay) */
+.malevolent-slashes::after { 
+  top: 60%; left: -10%; 
+  transform-origin: left;
+  transform: rotate(-10deg); /* Angulo fixo */
+  animation: slash-stretch 8s infinite ease-out 2s; /* Sem rotação na animação */
+}
 
 /* --- HEADER --- */
-.malevolent-v3-header {
+.malevolent-v4-header {
   position: relative; z-index: 2;
   text-align: center; padding: 50px 20px 30px;
   background: linear-gradient(to bottom, var(--shrine-red-deep), transparent);
   border-bottom: 1px solid var(--shrine-red-deep);
+  margin: 0 15px; /* Espaço para a energia lateral */
 }
 
-.malevolent-v3-title {
+.malevolent-v4-title {
   font-family: 'Cinzel', serif; font-size: 3em; font-weight: 900;
   color: var(--shrine-bone);
   text-shadow: 0 2px 0 var(--shrine-red-deep);
@@ -83,139 +110,119 @@
   text-transform: uppercase;
 }
 
-.malevolent-v3-subtitle {
+.malevolent-v4-subtitle {
   font-family: 'Nosifer', cursive; font-size: 1.2em;
   color: var(--shrine-red-pop); margin-top: 10px;
   filter: drop-shadow(0 0 5px var(--shrine-red-deep));
 }
 
 /* --- IMAGEM --- */
-.malevolent-v3-image-wrapper {
+.malevolent-v4-image-wrapper {
   padding: 30px; position: relative; z-index: 2;
   display: flex; justify-content: center;
 }
-.malevolent-v3-frame {
+.malevolent-v4-frame {
   width: 100%; height: 350px; position: relative;
-  /* Clip Path para formas pontiagudas (Shrine) */
   clip-path: polygon(20% 0%, 80% 0%, 100% 20%, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0% 20%);
   background: var(--shrine-black);
-  border: 2px solid var(--shrine-red-mid); /* Fallback */
+  border: 1px solid var(--shrine-red-mid);
 }
-.malevolent-v3-frame::after { /* Borda Falsa sobre o clip-path */
-  content: ''; position: absolute; inset: 0; z-index: 3; pointer-events: none;
-  background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.8));
-}
-.malevolent-v3-frame img {
+.malevolent-v4-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: top;
   filter: contrast(1.2) saturate(0.7);
   transition: transform 0.5s ease;
 }
-.malevolent-v3-frame:hover img { transform: scale(1.05); filter: contrast(1.2) saturate(1); }
+.malevolent-v4-frame:hover img { transform: scale(1.05); filter: contrast(1.2) saturate(1); }
 
-
-/* --- STATUS (CORRIGIDO) --- */
-.malevolent-v3-stats {
+/* --- STATUS --- */
+.malevolent-v4-stats {
   position: relative; z-index: 2;
   background: #080808;
   padding: 20px 40px;
   border-top: 1px solid var(--shrine-red-deep);
   border-bottom: 1px solid var(--shrine-red-deep);
   display: flex; flex-direction: column; gap: 15px;
+  margin: 0 15px;
 }
 
-.malevolent-v3-container .jjk-dossier-status-item {
+.malevolent-v4-container .jjk-dossier-status-item {
   display: grid; 
-  /* FIX 1: Coluna de valor com tamanho do conteúdo para não quebrar linha */
   grid-template-columns: 35px 1fr min-content; 
   align-items: center; gap: 15px;
   margin: 0; padding: 0; border: none; background: transparent;
 }
 
-.malevolent-v3-container .jjk-dossier-status-label {
+.malevolent-v4-container .jjk-dossier-status-label {
   font-family: 'Cinzel', serif; font-weight: 700; color: var(--shrine-bone) !important;
   text-align: right; font-size: 0.9em;
 }
 
-.malevolent-v3-container .jjk-dossier-status-value {
+.malevolent-v4-container .jjk-dossier-status-value {
   font-family: 'Spectral', serif; font-weight: 700; color: var(--shrine-red-pop) !important;
-  text-align: right; font-size: 1.1em;
-  white-space: nowrap; /* FIX 1: Impede quebra de linha */
+  text-align: right; font-size: 1.1em; white-space: nowrap;
 }
 
-/* Wrapper da barra */
-.malevolent-v3-container .jjk-dossier-status-bar-wrapper {
+.malevolent-v4-container .jjk-dossier-status-bar-wrapper {
   width: 100%; height: 6px;
   background: #111 !important;
   border: 1px solid var(--shrine-red-deep);
   border-radius: 0; overflow: hidden;
 }
-.malevolent-v3-container .jjk-dossier-status-bar { 
-  display: block; width: 100%; height: 100%; padding: 0; margin: 0; background: transparent;
-}
+.malevolent-v4-container .jjk-dossier-status-bar { display: block; width: 100%; height: 100%; }
+.malevolent-v4-container .jjk-dossier-status-bar-fill { height: 100%; display: block; transition: width 0.6s ease-out; }
 
-/* FIX 2: O JS injeta width aqui. Removemos width:100% fixo */
-.malevolent-v3-container .jjk-dossier-status-bar-fill {
-  height: 100%; display: block; border: none;
-  transition: width 0.6s ease-out;
-}
-
-/* Cores */
-.malevolent-v3-container .jjk-dossier-hp-fill {
+.malevolent-v4-container .jjk-dossier-hp-fill {
   background: linear-gradient(90deg, var(--shrine-red-deep), var(--shrine-red-pop)) !important;
-  box-shadow: 0 0 10px var(--shrine-red-mid);
+  box-shadow: 0 0 8px var(--shrine-red-mid);
 }
-.malevolent-v3-container .jjk-dossier-ea-fill {
+.malevolent-v4-container .jjk-dossier-ea-fill {
   background: linear-gradient(90deg, #111, #444) !important;
   border-right: 2px solid var(--shrine-bone);
 }
 
-
-/* --- CONTEÚDO (CORRIGIDO) --- */
-.malevolent-v3-content {
+/* --- CONTEÚDO (TEXTO) --- */
+.malevolent-v4-content {
   position: relative; z-index: 2; padding: 40px 50px;
   text-align: justify; line-height: 1.9; font-size: 1.1em;
   background: transparent;
-  /* FIX 5: Aura maligna nas laterais da caixa de texto */
-  animation: text-aura-pulse 6s infinite ease-in-out;
+  margin: 0 10px; /* Margem para não encostar na energia */
 }
 
-/* FIX 3: Negrito e Itálico */
-.malevolent-v3-content b, .malevolent-v3-content strong { 
+/* FIX: Negrito sem maiúscula e Itálico com cor */
+.malevolent-v4-content b, .malevolent-v4-content strong { 
   color: var(--shrine-red-pop); 
-  font-family: 'Cinzel', serif; /* Fonte diferenciada */
+  font-family: 'Spectral', serif; /* Fonte padrão para evitar All-Caps */
   font-weight: 700; 
-  font-size: 0.9em; /* Compensa a fonte Cinzel ser grande */
-  text-transform: uppercase;
+  text-transform: none !important; /* Força escrita normal */
 }
-.malevolent-v3-content i, .malevolent-v3-content em { 
-  color: var(--shrine-bone); 
+.malevolent-v4-content i, .malevolent-v4-content em { 
+  color: var(--shrine-red-mid); /* Cor de destaque */
   font-family: 'Spectral', serif;
   font-style: italic !important;
-  font-weight: 400;
-  opacity: 0.8;
+  font-weight: 600;
 }
 
-
 /* --- EXTRAS --- */
-.malevolent-v3-extras {
+.malevolent-v4-extras {
   margin: 0 50px 30px; padding: 20px; position: relative; z-index: 2;
   border: 1px solid var(--shrine-red-deep);
   background: rgba(0,0,0,0.8);
   font-size: 0.9em; color: #888;
 }
-.malevolent-v3-extras::before {
+.malevolent-v4-extras::before {
   content: 'NOTAS DO RITUAL'; display: block;
   font-family: 'Cinzel', serif; color: var(--shrine-red-mid);
   font-size: 0.8em; margin-bottom: 10px; border-bottom: 1px solid #222;
 }
 
 /* --- FOOTER --- */
-.malevolent-v3-footer {
+.malevolent-v4-footer {
   text-align: center; padding: 30px; position: relative; z-index: 2;
   border-top: 1px solid var(--shrine-red-deep);
   background: linear-gradient(to top, var(--shrine-red-deep), transparent);
+  margin: 0 15px;
 }
-.malevolent-v3-signature::after {
+.malevolent-v4-signature::after {
   content: 'Adam Myers';
   font-family: 'Nosifer', cursive; font-size: 1.8em;
   color: var(--shrine-red-pop);
@@ -223,8 +230,7 @@
 }
 
 @media (max-width: 600px) {
-  .malevolent-v3-container { width: 100%; border-width: 1px; }
-  .malevolent-v3-content, .malevolent-v3-stats, .malevolent-v3-extras { padding-left: 20px; padding-right: 20px; }
-  /* Ajuste mobile para não quebrar */
-  .malevolent-v3-container .jjk-dossier-status-item { grid-template-columns: 30px 1fr min-content; gap: 8px; }
+  .malevolent-v4-container { width: 100%; border-width: 1px; }
+  .malevolent-v4-content, .malevolent-v4-stats, .malevolent-v4-extras { padding-left: 20px; padding-right: 20px; }
+  .malevolent-v4-container .jjk-dossier-status-item { grid-template-columns: 30px 1fr min-content; gap: 8px; }
 }
