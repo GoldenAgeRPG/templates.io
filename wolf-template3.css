@@ -248,3 +248,27 @@
   background: linear-gradient(90deg, #003366, #00ccff) !important; 
   box-shadow: 0 0 8px rgba(0, 204, 255, 0.4) !important;
 }
+
+/* --- CORREÇÃO DE CITAÇÕES (QUOTE) --- */
+.amalgam-container blockquote {
+    background-color: var(--wolf-bg-secondary) !important;
+    color: var(--wolf-text) !important;
+    border: 1px solid var(--wolf-gold) !important;
+    border-left: 4px solid var(--wolf-dark-gold) !important; /* Detalhe lateral */
+    padding: 15px;
+    margin: 15px 0;
+    box-shadow: none !important;
+    font-family: 'Spectral', serif;
+    font-size: 0.95em;
+}
+
+/* Opcional: Se houver um título/autor na citação (ex: Fulano escreveu:) */
+.amalgam-container blockquote cite,
+.amalgam-container blockquote .author {
+    color: var(--wolf-dark-gold) !important;
+    font-weight: bold;
+    font-style: normal;
+    display: block;
+    margin-bottom: 5px;
+    font-family: 'Cinzel', serif;
+}
