@@ -1,28 +1,32 @@
-/* --- TEMPLATE: TATSU (CALAMITY VER.) --- */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Rubik+Glitch&family=Spectral:ital,wght@0,300;0,600;1,300&display=swap');
+/* --- TEMPLATE: TATSU (SUKUNA - PALETTE ACCURATE) --- */
+@import url('https://fonts.googleapis.com/css2?family=UnifrakturMaguntia&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Rock+Salt&display=swap');
 
 .tatsu-container {
-  /* Variáveis de Terror Elegante */
-  --t-bg: #050505;
-  --t-card: #0a0a0a;
-  --t-blood: #4a0a0a;      /* Vermelho Sangue Seco */
-  --t-accent: #800000;     /* Vermelho Profundo */
-  --t-text: #b0b0b0;       /* Cinza Osso */
-  --t-gold: #8a7a58;       /* Ouro Envelhecido (Realeza) */
+  /* PALETA DE CORES (Extraída da imagem enviada) */
+  --t-base: #19171b;      /* Preto/Cinza Escuro Fundo */
+  --t-vivid: #75020f;     /* Vermelho Vivo */
+  --t-dark: #51080d;      /* Vermelho Escuro */
+  --t-deep: #2b0307;      /* Vermelho Profundo (Quase preto) */
+  --t-text: #e0e0e0;      /* Texto Claro */
   
   box-sizing: border-box;
   max-width: 650px;
   width: 95%;
   margin: 40px auto;
   
-  background-color: var(--t-bg);
-  /* Textura sutil de ruído para tirar o aspecto digital */
-  background-image: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url("https://www.transparenttextures.com/patterns/stardust.png");
+  /* FUNDO COMPOSTO: Cor Base + Imagem do Templo (Blend Mode) */
+  background-color: var(--t-base);
+  background-image: 
+    linear-gradient(to bottom, rgba(25, 23, 27, 0.9), rgba(25, 23, 27, 0.85)),
+    url('https://i.pinimg.com/1200x/8d/e4/9f/8de49f8b4a7424c2f9ca742edf479e02.jpg'); 
+  background-size: cover;
+  background-position: center top;
+  background-blend-mode: multiply; /* Mistura a cor com a imagem para ficar sombrio */
   
-  border: 1px solid #1a1a1a;
-  box-shadow: 0 30px 60px -15px #000;
+  border: 1px solid var(--t-dark);
+  box-shadow: 0 20px 50px -10px #000;
   
-  font-family: 'Spectral', serif;
+  font-family: 'Crimson Text', serif;
   color: var(--t-text);
   position: relative;
   padding: 0;
@@ -31,156 +35,150 @@
 
 .tatsu-container * { box-sizing: border-box; }
 
-/* --- ASSINATURA: ADAM MYERS (Estilo Gravação/Risco) --- */
+/* --- ASSINATURA: ADAM MYERS --- */
 .tatsu-container::after {
   content: "Adam Myers";
   display: block;
   text-align: right;
-  font-family: 'Spectral', serif;
-  font-style: italic;
-  font-size: 0.9em;
-  color: #333;
-  padding: 0 20px 15px 0;
-  margin-top: 20px;
-  letter-spacing: 3px;
-  text-transform: uppercase;
+  font-family: 'Rock Salt', cursive;
+  font-size: 1.1em;
+  color: var(--t-dark); /* Cor escura da paleta */
+  padding: 0 20px 20px 0;
+  margin-top: 0;
+  letter-spacing: 2px;
+  opacity: 0.8;
   pointer-events: none;
-  opacity: 0.5;
-  border-top: 1px solid #111;
-  padding-top: 10px;
+  text-shadow: 1px 1px 0 #000;
 }
 
 /* --- CABEÇALHO --- */
 .tatsu-header {
-  padding: 40px 20px 20px;
+  padding: 30px 20px;
   text-align: center;
-  border-bottom: 1px solid var(--t-blood);
+  border-bottom: 3px solid var(--t-vivid);
+  background: linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(43, 3, 7, 0.6));
   position: relative;
 }
 
-/* Marcações Geométricas (Tatuagens do Sukuna) */
-.tatsu-header::before, .tatsu-header::after {
-  content: ''; position: absolute; width: 1px; height: 30px;
-  background: var(--t-accent); top: 0;
-}
-.tatsu-header::before { left: 50%; transform: translateX(-15px); }
-.tatsu-header::after { right: 50%; transform: translateX(15px); }
-
 .tatsu-title {
-  font-family: 'Cinzel', serif;
-  font-size: 2.5em;
-  color: #e0e0e0;
+  font-family: 'UnifrakturMaguntia', cursive; /* Fonte Gótica Ameaçadora */
+  font-size: 3em;
+  color: var(--t-vivid);
   margin: 0;
-  font-weight: 700;
+  line-height: 0.9;
+  text-shadow: 3px 3px 5px #000;
   letter-spacing: 2px;
-  text-shadow: 0 5px 15px rgba(0,0,0,0.8);
 }
 
 .tatsu-subtitle {
-  font-family: 'Rubik Glitch', cursive; /* Toque de Caos/Maldição */
-  color: var(--t-accent);
+  font-family: 'UnifrakturMaguntia', cursive;
+  color: var(--t-text);
   font-size: 1.2em;
   margin-top: 5px;
-  opacity: 0.8;
+  opacity: 0.7;
+  letter-spacing: 1px;
 }
 
 /* --- IMAGEM --- */
 .tatsu-image-frame {
   width: 100%;
-  height: 400px; /* Imagem bem vertical e imponente */
+  height: 380px;
   position: relative;
+  border-bottom: 1px solid var(--t-deep);
   overflow: hidden;
-  filter: grayscale(0.4) contrast(1.1);
-  border-bottom: 1px solid #111;
 }
 
 .tatsu-image-frame img {
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: top center;
-  /* Zoom lento e ameaçador */
-  animation: slow-menace 20s infinite alternate;
-}
-
-@keyframes slow-menace {
-  from { transform: scale(1); }
-  to { transform: scale(1.1); }
+  filter: contrast(1.1) saturate(0.9);
 }
 
 .tatsu-glitch-overlay {
   position: absolute; inset: 0;
-  background: linear-gradient(to top, var(--t-bg) 5%, transparent 40%);
+  background: linear-gradient(to top, var(--t-base) 0%, transparent 30%);
   pointer-events: none;
 }
 
-/* --- STATS (Minimalista e Frio) --- */
+/* --- STATS --- */
 .tatsu-stats {
-  display: flex;
-  background: #080808;
-  border-bottom: 1px solid #1a1a1a;
-}
-.tatsu-stat-col {
-  flex: 1;
-  padding: 15px;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  border-right: 1px solid #1a1a1a;
-}
-.tatsu-stat-col:last-child { border-right: none; }
-
-.tatsu-lbl {
-  font-family: 'Cinzel', serif;
-  font-size: 0.8em; color: #555; margin-bottom: 5px;
-}
-.tatsu-val {
-  font-family: 'Rubik Glitch', cursive;
-  font-size: 1.1em; color: var(--t-text); margin-top: 5px;
+  padding: 20px 30px;
+  background: rgba(10, 10, 10, 0.6);
+  border-bottom: 1px solid var(--t-dark);
+  display: flex; flex-direction: column; gap: 15px;
 }
 
-.tatsu-bar {
-  width: 100%; height: 2px; background: #222; position: relative;
+.tatsu-stat-row { display: flex; align-items: center; gap: 15px; }
+
+.tatsu-label {
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: 1.4em; color: var(--t-vivid);
+  width: 35px; line-height: 1;
 }
-.tatsu-fill { height: 100%; width: 100%; }
-.hp-fill { background: var(--t-accent); box-shadow: 0 0 10px var(--t-blood); }
-.ea-fill { background: #333; }
+
+.tatsu-bar-bg {
+  flex-grow: 1; height: 8px; background: #000;
+  border: 1px solid var(--t-dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.tatsu-bar-fill { height: 100%; width: 100%; transition: width 0.5s; }
+.hp-fill { background: var(--t-vivid); box-shadow: 0 0 10px var(--t-vivid); }
+.ea-fill { background: var(--t-deep); border-right: 1px solid #444; }
+
+.tatsu-value {
+  font-family: 'UnifrakturMaguntia', cursive;
+  color: #ccc; font-size: 1.1em;
+}
 
 /* --- CONTEÚDO --- */
 .tatsu-content {
-  padding: 40px 30px;
-  font-size: 1.1em;
-  line-height: 1.8;
-  text-align: justify;
-  color: #ccc;
-}
-
-/* Negrito ameaçador */
-.tatsu-content b {
-  color: var(--t-accent);
-  font-weight: 600;
-  font-family: 'Cinzel', serif;
-}
-
-/* Citação destacada */
-.tatsu-quote {
-  border-left: 2px solid var(--t-accent);
-  padding-left: 20px;
-  margin: 30px 0;
-  color: #fff;
-  font-style: italic;
-  font-family: 'Spectral', serif;
+  padding: 30px 40px;
   font-size: 1.2em;
-  background: linear-gradient(90deg, rgba(128,0,0,0.1), transparent);
+  line-height: 1.7;
+  text-align: justify;
+  color: var(--t-text);
+  /* Fundo sutilmente escuro para leitura sobre a imagem do templo */
+  background: rgba(25, 23, 27, 0.9); 
+  margin: 20px;
+  border: 1px solid var(--t-deep);
+}
+
+/* Negrito em Vermelho Gótico */
+.tatsu-content b {
+  color: var(--t-vivid);
+  font-weight: normal;
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: 1.1em;
+  letter-spacing: 0.5px;
+}
+
+/* Citação */
+.tatsu-quote {
+  border-left: 3px solid var(--t-vivid);
+  padding: 10px 20px;
+  margin: 25px 0;
+  color: #fff;
+  background: linear-gradient(90deg, var(--t-deep), transparent);
+  font-style: italic;
+  font-family: 'Crimson Text', serif;
 }
 
 /* --- FOOTER INFO --- */
 .tatsu-footer-info {
-  display: flex; justify-content: center; gap: 15px;
-  padding-bottom: 10px;
+  display: flex; justify-content: center; gap: 10px;
+  padding: 0 20px 20px 20px;
+  flex-wrap: wrap;
 }
-.info-tag {
-  font-family: 'Cinzel', serif;
-  font-size: 0.7em;
-  color: #444;
-  border: 1px solid #222;
-  padding: 4px 10px;
+
+.tatsu-tag {
+  font-family: 'UnifrakturMaguntia', cursive;
+  font-size: 0.9em;
+  color: var(--t-text);
+  background: var(--t-deep);
+  border: 1px solid var(--t-dark);
+  padding: 5px 12px;
   letter-spacing: 1px;
 }
