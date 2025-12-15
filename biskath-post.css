@@ -1,4 +1,4 @@
-/* --- TEMPLATE: SPIRITUAL DREAD v3 (FINAL - ISOLATED STATUS) --- */
+/* --- TEMPLATE: SPIRITUAL DREAD v3.1 (FINAL - ISOLATED STATUS) --- */
 /* Arquivo: biskath-post.css */
 
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400&family=Cinzel:wght@400;700&display=swap');
@@ -135,7 +135,7 @@
 }
 
 
-/* --- STATUS (ISOLAMENTO TOTAL BLINDADO) --- */
+/* --- STATUS (ISOLAMENTO TOTAL BLINDADO - V3.1) --- */
 .dread-stats {
   background: var(--dr-dark-grey);
   border: 1px solid var(--dr-border);
@@ -144,37 +144,36 @@
   position: relative; z-index: 2;
 }
 
-/* Grid Específico e Isolado */
-.dread-container .jjk-dossier-status-item {
-  display: grid; 
-  grid-template-columns: 40px 1fr 70px; /* Coluna fixa para números */
+/* Grid Específico e Isolado - Adicionado seletor pai .dread-stats */
+.dread-container .dread-stats .jjk-dossier-status-item {
+  display: grid !important; 
+  grid-template-columns: 40px 1fr 70px !important; /* Coluna fixa para números */
   align-items: center; gap: 20px;
-  /* Resets para evitar herança */
   border: none; background: transparent; margin: 0; padding: 0; 
   min-height: 0; width: 100%;
 }
 
 /* Labels */
-.dread-container .jjk-dossier-status-label { 
+.dread-container .dread-stats .jjk-dossier-status-label { 
   font-family: 'Cinzel', serif; font-size: 0.8em; 
-  color: var(--dr-blue-fade) !important; /* Força a cor */
+  color: var(--dr-blue-fade) !important; 
   text-align: right; letter-spacing: 1px;
   background: transparent; border: none; margin: 0; padding: 0;
   line-height: normal;
 }
 
-/* Valores Numéricos (Sem quebra de linha) */
-.dread-container .jjk-dossier-status-value { 
+/* Valores Numéricos */
+.dread-container .dread-stats .jjk-dossier-status-value { 
   font-family: 'Inter', sans-serif; font-size: 0.85em; 
-  color: #888 !important; /* Força a cor */
+  color: #888 !important; 
   text-align: right; font-weight: 300;
-  white-space: nowrap; /* IMPEDE QUEBRA DE LINHA */
+  white-space: nowrap; 
   background: transparent; border: none; margin: 0; padding: 0;
   line-height: normal;
 }
 
 /* Barras Wrapper */
-.dread-container .jjk-dossier-status-bar-wrapper {
+.dread-container .dread-stats .jjk-dossier-status-bar-wrapper {
   width: 100%; height: 4px; 
   background: #151515 !important;
   border-radius: 0; overflow: hidden; border: none; margin: 0; padding: 0;
@@ -182,14 +181,14 @@
 }
 
 /* Barras Internas */
-.dread-container .jjk-dossier-status-bar { 
-  width: 100%; height: 100%; background: transparent; border: none; margin: 0; padding: 0; 
+.dread-container .dread-stats .jjk-dossier-status-bar { 
+  width: 100%; height: 100%; background: transparent; border: none; margin: 0; padding: 0; display: block;
 }
 
-/* Cores das Barras (Forçadas) */
-.dread-container .jjk-dossier-status-bar-fill { height: 100%; border-radius: 0; border: none; margin: 0; }
-.dread-container .jjk-dossier-hp-fill { background: #5e2a2a !important; box-shadow: none !important; }
-.dread-container .jjk-dossier-ea-fill { background: var(--dr-blue-fade) !important; box-shadow: none !important; }
+/* Cores das Barras */
+.dread-container .dread-stats .jjk-dossier-status-bar-fill { height: 100%; border-radius: 0; border: none; margin: 0; display: block; }
+.dread-container .dread-stats .jjk-dossier-hp-fill { background: #5e2a2a !important; box-shadow: none !important; }
+.dread-container .dread-stats .jjk-dossier-ea-fill { background: var(--dr-blue-fade) !important; box-shadow: none !important; }
 
 
 /* --- CONTEÚDO --- */
@@ -234,5 +233,5 @@
   .dread-container { width: 100%; margin: 20px auto; border: none; padding: 20px; }
   .dread-stats { padding: 15px; }
   .dread-frame-wrapper { height: 250px; }
-  .dread-container .jjk-dossier-status-item { grid-template-columns: 40px 1fr 65px; gap: 10px; }
+  .dread-container .dread-stats .jjk-dossier-status-item { grid-template-columns: 40px 1fr 65px !important; gap: 10px; }
 }
