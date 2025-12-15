@@ -1,4 +1,4 @@
-/* --- TEMPLATE: MALEVOLENT SHRINE V5.2 (REFIT) --- */
+/* --- TEMPLATE: MALEVOLENT SHRINE V5.2 (REFIT - ISOLATED) --- */
 /* Fontes Atualizadas: Cinzel Decorative (Título) e Kaushan Script (Pincelada Legível) */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Kaushan+Script&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap');
 
@@ -154,7 +154,7 @@
 }
 .malevolent-v5-frame:hover img { transform: scale(1.05); filter: contrast(1.2) saturate(1); }
 
-/* --- STATUS --- */
+/* --- STATUS (ISOLAMENTO REFORÇADO) --- */
 .malevolent-v5-stats {
   position: relative; z-index: 2;
   background: #080808;
@@ -165,40 +165,47 @@
   margin: 0 15px;
 }
 
-.malevolent-v5-container .jjk-dossier-status-item {
-  display: grid; 
-  grid-template-columns: 35px 1fr min-content; 
+/* Adicionado .malevolent-v5-stats na cadeia para evitar conflito com Dread */
+.malevolent-v5-container .malevolent-v5-stats .jjk-dossier-status-item {
+  display: grid !important; 
+  grid-template-columns: 35px 1fr min-content !important; 
   align-items: center; gap: 15px;
   margin: 0; padding: 0; border: none; background: transparent;
+  width: 100%;
 }
 
-.malevolent-v5-container .jjk-dossier-status-label {
+.malevolent-v5-container .malevolent-v5-stats .jjk-dossier-status-label {
   font-family: 'Cinzel Decorative', serif; font-weight: 700; color: var(--shrine-bone) !important;
   text-align: right; font-size: 0.9em;
+  background: transparent; border: none; margin: 0; padding: 0;
 }
 
-.malevolent-v5-container .jjk-dossier-status-value {
+.malevolent-v5-container .malevolent-v5-stats .jjk-dossier-status-value {
   font-family: 'Spectral', serif; font-weight: 700; color: var(--shrine-red-pop) !important;
   text-align: right; font-size: 1.1em; white-space: nowrap;
+  background: transparent; border: none; margin: 0; padding: 0;
 }
 
-.malevolent-v5-container .jjk-dossier-status-bar-wrapper {
+.malevolent-v5-container .malevolent-v5-stats .jjk-dossier-status-bar-wrapper {
   width: 100%; height: 6px;
   background: #111 !important;
   border: 1px solid var(--shrine-red-deep);
   border-radius: 0; overflow: hidden;
+  margin: 0; padding: 0;
 }
-.malevolent-v5-container .jjk-dossier-status-bar { display: block; width: 100%; height: 100%; }
-.malevolent-v5-container .jjk-dossier-status-bar-fill { height: 100%; display: block; transition: width 0.6s ease-out; }
 
-.malevolent-v5-container .jjk-dossier-hp-fill {
+.malevolent-v5-container .malevolent-v5-stats .jjk-dossier-status-bar { display: block; width: 100%; height: 100%; margin: 0; padding: 0; background: transparent; border: none; }
+.malevolent-v5-container .malevolent-v5-stats .jjk-dossier-status-bar-fill { height: 100%; display: block; transition: width 0.6s ease-out; border: none; margin: 0; }
+
+.malevolent-v5-container .malevolent-v5-stats .jjk-dossier-hp-fill {
   background: linear-gradient(90deg, var(--shrine-red-deep), var(--shrine-red-pop)) !important;
   box-shadow: 0 0 8px var(--shrine-red-mid);
 }
-.malevolent-v5-container .jjk-dossier-ea-fill {
+.malevolent-v5-container .malevolent-v5-stats .jjk-dossier-ea-fill {
   background: linear-gradient(90deg, #111, #444) !important;
   border-right: 2px solid var(--shrine-bone);
 }
+
 
 /* --- CONTEÚDO --- */
 .malevolent-v5-content {
@@ -253,5 +260,5 @@
 @media (max-width: 600px) {
   .malevolent-v5-container { width: 100%; border-width: 1px; }
   .malevolent-v5-content, .malevolent-v5-stats, .malevolent-v5-extras { padding-left: 20px; padding-right: 20px; }
-  .malevolent-v5-container .jjk-dossier-status-item { grid-template-columns: 30px 1fr min-content; gap: 8px; }
+  .malevolent-v5-container .malevolent-v5-stats .jjk-dossier-status-item { grid-template-columns: 30px 1fr min-content !important; gap: 8px; }
 }
