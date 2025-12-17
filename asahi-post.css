@@ -1,95 +1,95 @@
-/* --- TEMPLATE: ASAHI INOUE (SMARTPHONE VERSION) --- */
+/* --- TEMPLATE: ASAHI INOUE (NO IMAGE / PURE CSS) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+SC:wght@400;700&family=Mate+SC&family=Great+Vibes&display=swap');
 
 :root {
-  /* Paleta Roxa */
   --asahi-bg: #050208;
-  --asahi-light: #e0aaff;      /* Roxo Luz */
-  --asahi-main: #9d4edd;       /* Roxo Médio */
-  --asahi-dark: #240046;       /* Roxo Escuro */
-  --asahi-contrast: #ff0055;   /* Magenta (HP) */
-  --asahi-text: #f3e5f5;       
+  --asahi-light: #e0aaff;
+  --asahi-main: #9d4edd;
+  --asahi-dark: #240046;
+  --asahi-contrast: #ff0055;
+  --asahi-text: #f3e5f5;
 }
 
-/* Animação: Voo Horizontal Suave (Direita) */
-@keyframes fly-right {
-  0% { background-position: 0 0; }
-  100% { background-position: 400px 0; } /* 400px é a largura do bloco do corvo */
+/* Animação: Voo Lento dos Pássaros (CSS Puro) */
+@keyframes fly-drift {
+  0% { background-position: 0% 50%; opacity: 0; }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.8; }
+  100% { background-position: 100% 60%; opacity: 0; }
 }
 
-/* Animação: Voo Horizontal Suave (Esquerda) */
-@keyframes fly-left {
-  0% { background-position: 0 0; }
-  100% { background-position: -400px 0; }
-}
-
-/* Animação: Pulso da Borda do Celular */
+/* Pulso da Borda do Celular */
 @keyframes phone-pulse {
-  0%, 100% { box-shadow: 0 0 0 2px #0f0f12, 0 10px 30px rgba(0,0,0,0.8); border-color: #0f0f12; }
-  50% { box-shadow: 0 0 0 2px var(--asahi-main), 0 15px 40px rgba(157, 78, 221, 0.3); border-color: #1a0b2e; }
+  0%, 100% { box-shadow: 0 0 0 2px #0f0f12, 0 10px 30px rgba(0,0,0,0.8); }
+  50% { box-shadow: 0 0 0 2px var(--asahi-main), 0 15px 40px rgba(157, 78, 221, 0.3); }
 }
 
-/* CONTAINER PRINCIPAL (CELULAR) */
 .asahi-container {
   box-sizing: border-box;
-  max-width: 420px; /* Largura de celular */
+  max-width: 420px;
   width: 95%;
   margin: 40px auto;
   
   background-color: var(--asahi-bg);
+  /* Degradê profundo */
   background-image: linear-gradient(180deg, #150824 0%, #050208 40%, #050208 100%);
   
-  /* Borda grossa estilo celular */
   border: 12px solid #08080a;
   border-radius: 40px;
-  
-  /* Outline para o brilho roxo externo */
   outline: 1px solid transparent; 
   
   padding: 0;
   position: relative;
   color: var(--asahi-text);
   font-family: 'Mate SC', serif;
-  overflow: hidden; /* Corta tudo que sair das bordas redondas */
+  overflow: hidden;
   
   animation: phone-pulse 4s infinite ease-in-out;
 }
 .asahi-container * { box-sizing: border-box; }
 
-/* --- FAIXAS DE CORVOS (ESPAÇADOS) --- */
-
-/* Faixa Topo: Voando para a Direita */
-.asahi-container::before {
-  content: ''; position: absolute; 
-  top: 15px; left: 0; right: 0; height: 50px;
+/* --- CROW FLOCK (CSS PURO - SEM IMAGENS) --- */
+/* Criamos uma forma de "V" curvada usando bordas e border-radius */
+.asahi-container::before, .asahi-container::after {
+  content: ''; position: absolute;
+  width: 6px; height: 3px; /* Tamanho do pássaro */
   
-  /* SVG AJUSTADO: width='200' cria muito espaço entre um corvo e outro */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='50' viewBox='0 0 200 50'%3E%3Cimage href='https://i.imgur.com/Qw3UpPH.png' width='40' height='40' x='80' y='5' /%3E%3C/svg%3E");
+  /* A COR DO PÁSSARO É DEFINIDA NA BORDA */
+  border-top: 2px solid var(--asahi-main);
+  border-left: 2px solid var(--asahi-main);
   
-  /* Filtro Roxo */
-  filter: invert(1) sepia(1) hue-rotate(230deg) saturate(5) brightness(1.2) opacity(0.5);
+  /* Transforma o quadrado em um "V" */
+  border-radius: 30%;
+  transform: rotate(45deg);
   
-  background-size: 200px 50px; /* Tamanho do bloco de repetição */
-  background-repeat: repeat-x;
-  z-index: 1; pointer-events: none;
-  animation: fly-right 12s linear infinite;
+  /* BOX-SHADOW: AQUI CLONAMOS O PÁSSARO VÁRIAS VEZES */
+  /* Cada linha abaixo é um pássaro em uma posição diferente (x, y) */
+  box-shadow: 
+    20px 40px 0 var(--asahi-dark),
+    50px 10px 0 var(--asahi-light),
+    90px 80px 0 var(--asahi-main),
+    140px 30px 0 var(--asahi-dark),
+    200px 90px 0 var(--asahi-light),
+    250px 20px 0 var(--asahi-main),
+    300px 60px 0 var(--asahi-dark);
+    
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 1;
 }
 
-/* Faixa Rodapé: Voando para a Esquerda */
+/* Camada 1: Topo, movendo para direita */
+.asahi-container::before {
+  top: 20px; left: 0; right: 0; height: 100px;
+  animation: fly-drift 20s linear infinite;
+}
+
+/* Camada 2: Rodapé, movendo para esquerda (espelhado) */
 .asahi-container::after {
-  content: ''; position: absolute; 
-  bottom: 15px; left: 0; right: 0; height: 50px;
-  
-  /* Mesmo SVG espaçado */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='50' viewBox='0 0 200 50'%3E%3Cimage href='https://i.imgur.com/Qw3UpPH.png' width='40' height='40' x='80' y='5' /%3E%3C/svg%3E");
-  
-  filter: invert(1) sepia(1) hue-rotate(230deg) saturate(5) brightness(1.2) opacity(0.5);
-  
-  background-size: 200px 50px;
-  background-repeat: repeat-x;
-  transform: scaleX(-1); /* Espelha o voo */
-  z-index: 1; pointer-events: none;
-  animation: fly-left 15s linear infinite;
+  bottom: 40px; left: 0; right: 0; height: 100px;
+  transform: scaleX(-1) rotate(45deg); /* Espelha o movimento */
+  animation: fly-drift 25s linear infinite reverse;
+  opacity: 0.4;
 }
 
 /* HEADER */
@@ -118,13 +118,13 @@
   width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
   filter: contrast(1.1) saturate(1.1);
 }
-.asahi-image-frame::after { /* Névoa na base da foto */
+.asahi-image-frame::after { 
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(to top, var(--asahi-bg) 0%, transparent 40%);
   pointer-events: none;
 }
 
-/* STATUS (Horizontal Compacto) */
+/* STATUS */
 .asahi-stats {
   padding: 15px 20px; display: flex; justify-content: space-between; gap: 10px;
   background: rgba(255, 255, 255, 0.02);
@@ -160,7 +160,7 @@
   position: relative; z-index: 2; display: flex; gap: 10px; justify-content: center;
 }
 
-/* RODAPÉ & ASSINATURA */
+/* RODAPÉ */
 .asahi-footer {
   padding: 30px 20px 50px; text-align: center; 
   position: relative; z-index: 2;
