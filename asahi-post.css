@@ -1,4 +1,4 @@
-/* --- TEMPLATE: ASAHI INOUE (FINAL VERSION  --- */
+/* --- TEMPLATE: ASAHI INOUE (FINAL VERSION - DOUBLE FRAME) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+SC:wght@400;700&family=Mate+SC&family=Great+Vibes&display=swap');
 
 :root {
@@ -44,7 +44,6 @@
 .asahi-header {
   text-align: center; padding: 50px 20px 30px; 
   position: relative; z-index: 2;
-  /* border-bottom removido pois a nova borda do banner já faz a separação */
   overflow: hidden; 
 }
 
@@ -57,8 +56,8 @@
   
   background-image: url('https://i.pinimg.com/736x/71/5d/c8/715dc815c6804c7686ddf0ddc716ecf2.jpg');
   
-  background-size: cover;
-  background-position: center 25%;
+  background-size: cover; /* Preenche tudo */
+  background-position: center 25%; /* Foco no topo (rosto) */
   background-repeat: no-repeat;
   
   filter: grayscale(100%) sepia(100%) hue-rotate(230deg) saturate(500%) brightness(0.8) contrast(1.2);
@@ -79,46 +78,52 @@
   text-shadow: 0 0 5px rgba(0,0,0,0.8);
 }
 
-/* --- IMAGEM DO BANNER COM BORDA CHANFRADA --- */
+/* --- IMAGEM DO BANNER (MOLDURA DUPLA ELEGANTE) --- */
 .asahi-image-frame {
   width: 100%; height: 350px;
   position: relative; 
-  margin: 0 0 15px 0; /* Adicionado margem inferior para não colar nos status */
-  
-  /* Configuração da Borda Grossa e Chanfrada */
-  border-style: solid;
-  border-width: 8px; /* Espessura da moldura */
-  
-  /* O Truque do Chanfro: Cores diferentes para cada lado para simular luz 3D */
-  /* Ordem: Topo, Direita, Base, Esquerda */
-  border-color: rgba(224, 170, 255, 0.5)  /* Topo mais claro (luz) */
-                rgba(157, 78, 221, 0.3)   /* Laterais médias */
-                rgba(36, 0, 70, 0.7)      /* Base mais escura (sombra) */
-                rgba(157, 78, 221, 0.3);  /* Laterais médias */
+  margin: 0 0 20px 0; /* Espaço embaixo */
 
-  /* Sombra externa para destacar a moldura do fundo */
-  box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+  /* 1. O PADDING cria a "espessura" da moldura (8px) */
+  padding: 8px;
+  
+  /* 2. Cor de fundo da moldura (diferente da imagem e do template) */
+  background-color: #0e0514; 
+  
+  /* 3. Borda Externa Fina (Ouro/Roxo Claro) */
+  border-top: 1px solid var(--asahi-light);
+  border-bottom: 1px solid var(--asahi-light);
+  
+  /* Sombra para destacar a moldura do fundo */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.6);
 
-  overflow: hidden; z-index: 2;
+  z-index: 2;
 }
+
 .asahi-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
   filter: contrast(1.1) saturate(1.1);
-  /* Pequeno ajuste para a imagem não ficar "atrás" da borda transparente */
-  position: relative; z-index: -1; 
+  display: block;
+  
+  /* 4. Borda Interna Fina (Roxo Escuro) colada na imagem */
+  border: 1px solid var(--asahi-main);
 }
+
 .asahi-image-frame::after { 
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to top, var(--asahi-bg) 0%, transparent 40%);
+  /* Overlay suave sobre a imagem */
+  content: ''; position: absolute; inset: 8px; /* Respeita o padding */
+  background: linear-gradient(to top, var(--asahi-bg) 0%, transparent 30%);
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
+
 
 /* STATUS */
 .asahi-stats {
   padding: 15px 40px; display: flex; justify-content: space-between; gap: 40px;
   background: rgba(255, 255, 255, 0.02);
   border-bottom: 1px solid rgba(157, 78, 221, 0.1);
+  border-top: 1px solid rgba(157, 78, 221, 0.1); /* Linha extra para fechar o bloco */
   position: relative; z-index: 2;
 }
 .asahi-status-item {
