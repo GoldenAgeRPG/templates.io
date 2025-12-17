@@ -1,189 +1,182 @@
-/* --- TEMPLATE: ASAHI INOUE (FINAL PNG VERSION) --- */
+/* --- TEMPLATE: ASAHI INOUE (CROSS-FLIGHT VERSION) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+SC:wght@400;700&family=Mate+SC&family=Great+Vibes&display=swap');
 
 :root {
   /* Paleta Roxa */
-  --asahi-bg: #050208;         /* Fundo quase preto */
-  --asahi-panel: #150a20;      
-  --asahi-light: #e0aaff;      /* Roxo Luz (Lilás) */
-  --asahi-main: #9d4edd;       /* Roxo Principal (Ametista) */
-  --asahi-dark: #3c096c;       /* Roxo Profundo */
-  --asahi-contrast: #ff0055;   /* Magenta (HP) */
+  --asahi-bg: #050208;
+  --asahi-light: #e0aaff;      /* Roxo Luz */
+  --asahi-main: #9d4edd;       /* Roxo Médio */
+  --asahi-dark: #240046;       /* Roxo Escuro */
+  --asahi-contrast: #ff0055;   /* Magenta */
   --asahi-text: #f3e5f5;       
 }
 
-/* Animação: Queda Suave dos Corvos */
-@keyframes crow-fall {
-  0% { background-position: center 0px; opacity: 0; }
-  20% { opacity: 0.8; }
-  80% { opacity: 0.8; }
-  100% { background-position: center 150px; opacity: 0; }
+/* NOVA ANIMAÇÃO: Voo Horizontal (Esquerda -> Direita) */
+@keyframes fly-right {
+  0% { background-position: 0 0; }
+  100% { background-position: 600px 0; } /* Ajuste a distância para velocidade */
 }
 
-/* Animação: Pulso Etéreo */
-@keyframes violet-pulse {
-  0%, 100% { box-shadow: 0 0 15px rgba(157, 78, 221, 0.1); border-color: var(--asahi-main); }
-  50% { box-shadow: 0 0 30px rgba(224, 170, 255, 0.2); border-color: var(--asahi-light); }
+/* NOVA ANIMAÇÃO: Voo Horizontal Inverso (Direita -> Esquerda) */
+@keyframes fly-left {
+  0% { background-position: 0 0; }
+  100% { background-position: -600px 0; }
+}
+
+/* Pulso da Borda */
+@keyframes container-pulse {
+  0%, 100% { box-shadow: 0 0 20px rgba(5, 2, 8, 1); border-color: var(--asahi-dark); }
+  50% { box-shadow: 0 0 35px rgba(60, 9, 108, 0.4); border-color: var(--asahi-main); }
 }
 
 /* CONTAINER PRINCIPAL */
 .asahi-container {
   box-sizing: border-box;
-  max-width: 750px;
+  max-width: 800px; /* Mais largo, já que tiramos as laterais */
   width: 95%;
   margin: 40px auto;
   background-color: var(--asahi-bg);
-  background-image: radial-gradient(circle at 50% 30%, #240046 0%, #050208 85%);
+  /* Degradê mais sutil */
+  background-image: linear-gradient(180deg, #0a0510 0%, #1a0b2e 50%, #0a0510 100%);
   
-  border: 1px solid var(--asahi-main);
-  padding: 0 50px; /* Espaço lateral para os corvos não ficarem em cima do texto */
+  border-top: 2px solid var(--asahi-main);
+  border-bottom: 2px solid var(--asahi-main);
+  border-left: none; /* Sem bordas laterais */
+  border-right: none;
+  
+  padding: 0; /* Sem padding lateral excessivo */
   position: relative;
-  
   color: var(--asahi-text);
   font-family: 'Mate SC', serif;
-  box-shadow: 0 20px 60px #000;
+  box-shadow: 0 20px 50px #000;
   overflow: hidden;
-  animation: violet-pulse 6s infinite ease-in-out;
+  animation: container-pulse 5s infinite ease-in-out;
 }
 .asahi-container * { box-sizing: border-box; }
 
-/* --- CORVOS LATERAIS (ESPAÇADOS) --- */
-.asahi-container::before, .asahi-container::after {
-  content: ''; position: absolute; top: 0; bottom: 0; width: 45px;
+/* --- NOVOS CORVOS (TOPO E RODAPÉ) --- */
+
+/* Faixa de Corvos no Topo (Voando para a Direita) */
+.asahi-container::before {
+  content: ''; position: absolute; 
+  top: 0; left: 0; right: 0; height: 50px;
   
-  /* TRUQUE DO ESPAÇAMENTO: */
-  /* Criamos um SVG 'virtual' onde a altura (height='100') é maior que o corvo (height='40') */
-  /* Isso cria um espaço vazio de 60px entre cada repetição automaticamente */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='45' height='100' viewBox='0 0 45 100'%3E%3Cimage href='https://i.imgur.com/Qw3UpPH.png' width='40' height='40' x='2' y='30' /%3E%3C/svg%3E");
+  /* Usando o truque do SVG para espaçamento horizontal */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='50' viewBox='0 0 100 50'%3E%3Cimage href='https://i.imgur.com/Qw3UpPH.png' width='40' height='40' x='10' y='5' transform='rotate(90 30 25)' /%3E%3C/svg%3E");
   
-  /* Filtros para colorir o corvo preto de roxo */
-  filter: invert(1) sepia(1) hue-rotate(230deg) saturate(5) brightness(1.2) drop-shadow(0 0 5px var(--asahi-main));
+  /* Rotação de 90 graus no SVG acima para o corvo "voar" deitado, 
+     ou usamos o filtro para colorir. Como o PNG está em pé, vamos manter simples: */
+  /* Nota: O PNG original é um corvo pousado/diagonal. Para voo horizontal perfeito, o ideal seria outro PNG, 
+     mas vamos adaptar este com rotação no CSS se necessário ou usar como está para "revoada" */
+     
+  background-image: url('https://i.imgur.com/Qw3UpPH.png');
+  filter: invert(1) sepia(1) hue-rotate(230deg) saturate(5) brightness(1.2) opacity(0.4);
   
-  background-size: 45px auto; 
-  background-repeat: repeat-y;
-  background-position: center top;
-  opacity: 0.8; 
-  z-index: 10;
-  animation: crow-fall 10s linear infinite;
-  pointer-events: none;
+  background-size: 35px auto;
+  background-repeat: repeat-x; /* Repete na horizontal */
+  opacity: 0.6; z-index: 0;
+  animation: fly-right 15s linear infinite;
 }
 
-.asahi-container::before { left: 0px; border-right: 1px solid rgba(157, 78, 221, 0.1); }
-.asahi-container::after { right: 0px; border-left: 1px solid rgba(157, 78, 221, 0.1); transform: scaleX(-1); }
+/* Faixa de Corvos no Rodapé (Voando para a Esquerda) */
+.asahi-container::after {
+  content: ''; position: absolute; 
+  bottom: 0; left: 0; right: 0; height: 50px;
+  
+  background-image: url('https://i.imgur.com/Qw3UpPH.png');
+  filter: invert(1) sepia(1) hue-rotate(230deg) saturate(5) brightness(1.2) opacity(0.4);
+  
+  background-size: 35px auto;
+  background-repeat: repeat-x;
+  transform: scaleX(-1); /* Espelha para olhar para o outro lado */
+  opacity: 0.6; z-index: 0;
+  animation: fly-left 18s linear infinite;
+}
 
 /* HEADER */
 .asahi-header {
-  text-align: center; padding: 40px 20px; border-bottom: 1px solid var(--asahi-main);
-  background: linear-gradient(to bottom, rgba(60, 9, 108, 0.2), transparent);
+  text-align: center; padding: 60px 20px 30px; 
+  position: relative; z-index: 2;
 }
-.asahi-icon-wrapper {
-  width: 40px; height: 40px; margin: 0 auto 10px;
-  color: var(--asahi-light); filter: drop-shadow(0 0 8px var(--asahi-main));
-}
-.asahi-icon-wrapper svg { width: 100%; height: 100%; fill: currentColor; }
 
 .asahi-title {
-  font-family: 'Cinzel', serif; font-weight: 700; font-size: 2.2em; color: var(--asahi-light);
-  text-transform: uppercase; margin: 0; letter-spacing: 3px; 
-  text-shadow: 0 0 10px rgba(157, 78, 221, 0.8);
+  font-family: 'Cinzel', serif; font-weight: 700; font-size: 2.5em; color: var(--asahi-light);
+  text-transform: uppercase; letter-spacing: 5px; margin: 0;
+  text-shadow: 0 0 15px rgba(157, 78, 221, 0.6);
 }
 .asahi-subtitle {
-  font-family: 'Cormorant SC', serif; font-size: 1.1em; color: var(--asahi-main);
-  text-transform: uppercase; letter-spacing: 2px; margin-top: 5px; opacity: 0.9;
+  font-family: 'Cormorant SC', serif; font-size: 1em; color: var(--asahi-main);
+  letter-spacing: 3px; margin-top: 5px; border-top: 1px solid var(--asahi-dark);
+  display: inline-block; padding-top: 5px;
 }
 
-/* IMAGEM (BANNER) */
+/* IMAGEM E NÉVOA */
 .asahi-image-frame {
-  width: 100%; height: 350px; position: relative; margin: 25px 0;
-  border: 1px solid var(--asahi-main); padding: 4px; 
-  background: rgba(60, 9, 108, 0.1);
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  width: 100%; height: 350px; position: relative; margin: 0;
+  border-top: 1px solid var(--asahi-main);
+  border-bottom: 1px solid var(--asahi-main);
+  overflow: hidden;
 }
 .asahi-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
   filter: contrast(1.1) saturate(1.1);
+  transition: transform 3s;
+}
+/* Efeito de Névoa Roxa sobre a imagem */
+.asahi-image-frame::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, var(--asahi-bg) 5%, rgba(157, 78, 221, 0.1) 50%, transparent 100%);
+  pointer-events: none;
 }
 
-/* STATUS */
+/* STATUS (Agora centralizados e mais discretos) */
 .asahi-stats {
-  padding: 10px 20px; display: flex; flex-direction: column; gap: 15px;
+  padding: 20px 40px; display: flex; justify-content: center; gap: 30px;
+  background: rgba(0,0,0,0.3); border-bottom: 1px solid rgba(157, 78, 221, 0.1);
+  position: relative; z-index: 2;
 }
 .asahi-status-item {
-  display: grid; grid-template-columns: 40px 1fr 80px; align-items: center; gap: 15px;
+  display: flex; flex-direction: column; align-items: center; width: 45%;
 }
 .asahi-status-bar-wrapper {
-  width: 100%; height: 6px; background: #000; border: 1px solid var(--asahi-dark);
-  border-radius: 2px; overflow: hidden;
+  width: 100%; height: 4px; background: #000; margin: 5px 0;
 }
 .asahi-status-bar { width: 100%; height: 100%; }
+.asahi-status-label { font-size: 0.8em; color: #888; font-family: 'Cinzel', serif; }
+.asahi-status-value { font-size: 0.9em; font-weight: bold; }
 
-/* Labels e Cores */
-.asahi-status-item:first-child .asahi-status-label,
-.asahi-status-item:first-child .asahi-status-value { color: var(--asahi-contrast); text-shadow: 0 0 5px var(--asahi-contrast); }
-
-.asahi-status-item:last-child .asahi-status-label,
-.asahi-status-item:last-child .asahi-status-value { color: var(--asahi-light); text-shadow: 0 0 5px var(--asahi-light); }
-
-.asahi-status-label { font-family: 'Cinzel', serif; font-weight: 700; font-size: 0.8em; text-align: right; }
-.asahi-status-value { font-family: 'Cormorant SC', serif; font-weight: 700; font-size: 0.9em; text-align: right; }
-
+.asahi-hp-val { color: var(--asahi-contrast); }
+.asahi-ea-val { color: var(--asahi-light); }
 .asahi-hp-fill { height: 100%; background: var(--asahi-contrast); box-shadow: 0 0 10px var(--asahi-contrast); }
 .asahi-ea-fill { height: 100%; background: var(--asahi-light); box-shadow: 0 0 10px var(--asahi-light); }
 
 /* CONTEÚDO */
 .asahi-content {
-  padding: 30px 20px; font-size: 1.1em; line-height: 1.9; color: #dcd6e0;
-  text-align: justify; 
-  border-top: 1px solid rgba(157, 78, 221, 0.2);
-  border-bottom: 1px solid rgba(157, 78, 221, 0.2); margin: 15px 0;
+  padding: 40px 50px; font-size: 1.15em; line-height: 1.9; color: #dcd6e0;
+  text-align: justify; position: relative; z-index: 2;
 }
 .asahi-content b { color: var(--asahi-light); font-weight: 700; }
-.asahi-content i { color: var(--asahi-main); font-style: italic; }
 
 /* EXTRAS */
 .asahi-extras {
-  padding: 15px; background: rgba(60, 9, 108, 0.05);
-  border: 1px solid rgba(157, 78, 221, 0.2); margin: 0 20px 20px;
-  font-size: 0.85em; color: var(--asahi-light); font-family: 'Cormorant SC', serif;
-  display: flex; justify-content: center; gap: 20px; text-transform: uppercase;
+  padding: 10px 50px; text-align: center;
+  font-family: 'Cormorant SC', serif; color: var(--asahi-main); font-size: 0.9em;
+  position: relative; z-index: 2;
 }
 
-/* RODAPÉ & ASSINATURA ESTILIZADA */
+/* RODAPÉ & ASSINATURA */
 .asahi-footer {
-  padding: 40px 20px; text-align: center; 
-  background: linear-gradient(to top, #020204, transparent);
-  position: relative; z-index: 11;
+  padding: 40px 20px 60px; text-align: center; 
+  position: relative; z-index: 2;
 }
-
-.asahi-signature {
-  position: relative;
-  display: inline-block;
-  padding: 10px 40px;
-}
-
 .asahi-signature::after {
   content: 'Asahi Inoue'; 
-  font-family: 'Great Vibes', cursive; /* Fonte Manuscrita Estilizada */
-  font-size: 2.8em;
-  color: var(--asahi-light);
-  font-weight: 400;
-  letter-spacing: 2px;
-  text-shadow: 
-    0 0 5px #fff,
-    0 0 15px var(--asahi-main),
-    0 0 25px var(--asahi-dark);
-    
-  border-bottom: 2px solid var(--asahi-main);
-  border-top: 2px solid var(--asahi-main);
-  padding: 5px 0;
-  display: block;
-  transform: rotate(-3deg); 
+  font-family: 'Great Vibes', cursive; font-size: 3em; color: var(--asahi-light);
+  text-shadow: 0 0 10px var(--asahi-main);
 }
 
 @media (max-width: 600px) {
-  .asahi-container { padding: 0 30px; }
-  .asahi-container::before, .asahi-container::after { width: 30px; background-size: 25px; }
-  .asahi-header, .asahi-content { padding: 20px 5px; }
-  .asahi-extras { flex-direction: column; text-align: center; }
-  .asahi-signature::after { font-size: 2em; }
+  .asahi-content { padding: 30px 20px; }
+  .asahi-stats { flex-direction: column; gap: 15px; }
+  .asahi-status-item { width: 100%; }
 }
