@@ -1,4 +1,4 @@
-/* --- TEMPLATE: ASAHI INOUE (WIDE TECH VERSION) --- */
+/* --- TEMPLATE: ASAHI INOUE (WIDE TECH + PURPLE CROW) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+SC:wght@400;700&family=Mate+SC&family=Great+Vibes&display=swap');
 
 :root {
@@ -16,19 +16,18 @@
   50% { box-shadow: 0 0 0 2px var(--asahi-main), 0 15px 50px rgba(157, 78, 221, 0.2); border-color: #1a0b2e; }
 }
 
-/* CONTAINER PRINCIPAL (LARGURA ORIGINAL) */
+/* CONTAINER PRINCIPAL */
 .asahi-container {
   box-sizing: border-box;
-  max-width: 750px; /* Largura restaurada */
+  max-width: 750px;
   width: 95%;
   margin: 40px auto;
   
   background-color: var(--asahi-bg);
   background-image: linear-gradient(180deg, #150824 0%, #050208 30%, #050208 100%);
   
-  /* Borda estilo Tech/Tablet */
   border: 4px solid #08080a;
-  border-radius: 15px; /* Arredondamento mais suave para tela larga */
+  border-radius: 15px;
   outline: 1px solid transparent; 
   
   padding: 0;
@@ -40,6 +39,25 @@
   animation: tech-pulse 5s infinite ease-in-out;
 }
 .asahi-container * { box-sizing: border-box; }
+
+/* --- DECORAÇÃO DO CORVO (Borda Inferior Esquerda) --- */
+.asahi-container::before {
+  content: ''; position: absolute;
+  bottom: 0; left: 0;
+  width: 450px; height: 450px; /* Tamanho para ocupar o canto */
+  background-image: url('https://i.pinimg.com/736x/45/15/d7/4515d7a1ac8e72a7324d4a6eb6780d8a.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom left;
+
+  /* FILTROS: Transforma a imagem colorida em tons de Roxo Escuro e vibrante */
+  filter: grayscale(100%) sepia(100%) hue-rotate(230deg) saturate(500%) brightness(0.7) contrast(1.5);
+  
+  opacity: 0.6; /* Translúcido */
+  z-index: 1; /* Fica atrás do texto */
+  pointer-events: none;
+  mix-blend-mode: lighten; /* Funde a imagem com o fundo escuro */
+}
 
 /* HEADER */
 .asahi-header {
@@ -57,12 +75,12 @@
   letter-spacing: 2px; margin-top: 5px; opacity: 0.8;
 }
 
-/* IMAGEM */
+/* IMAGEM DO BANNER */
 .asahi-image-frame {
-  width: 100%; height: 350px; /* Altura maior para acompanhar a largura */
+  width: 100%; height: 350px;
   position: relative; margin: 0;
   border-bottom: 1px solid var(--asahi-main);
-  overflow: hidden;
+  overflow: hidden; z-index: 2;
 }
 .asahi-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
@@ -79,6 +97,7 @@
   padding: 15px 40px; display: flex; justify-content: space-between; gap: 40px;
   background: rgba(255, 255, 255, 0.02);
   border-bottom: 1px solid rgba(157, 78, 221, 0.1);
+  position: relative; z-index: 2;
 }
 .asahi-status-item {
   display: flex; flex-direction: column; width: 50%;
@@ -108,12 +127,12 @@
 
 /* SEPARADOR */
 .asahi-separator {
-    height: 1px; width: 80%; margin: 0 auto;
+    height: 1px; width: 80%; margin: 0 auto; position: relative; z-index: 2;
     background: linear-gradient(90deg, transparent, var(--asahi-main), transparent);
     opacity: 0.5;
 }
 
-/* EXTRAS (UNIFICADO) */
+/* EXTRAS */
 .asahi-extras {
   padding: 20px 50px; text-align: center;
   font-family: 'Cormorant SC', serif; color: var(--asahi-main); font-size: 1em;
@@ -136,4 +155,5 @@
   .asahi-content, .asahi-extras { padding: 20px; }
   .asahi-stats { flex-direction: column; gap: 15px; }
   .asahi-status-item { width: 100%; }
+  .asahi-container::before { width: 300px; height: 300px; opacity: 0.4; } /* Reduz o corvo no mobile */
 }
