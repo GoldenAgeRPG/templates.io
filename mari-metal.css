@@ -1,4 +1,4 @@
-/* --- TEMPLATE: MARI EL-MELLOI (MERCURY RISING v8 - FLUID FIX) --- */
+/* --- TEMPLATE: MARI EL-MELLOI (MERCURY RISING v8 - ISOLATED FIX) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Montserrat:wght@300;400;600&family=Pinyon+Script&display=swap');
 
 :root {
@@ -12,10 +12,9 @@
 
 /* --- ANIMAÇÕES --- */
 
-/* [CORRIGIDO] Loop Infinito de Background (Sem Stutter) */
 @keyframes wave-scroll-right {
   0% { background-position: 0 bottom; }
-  100% { background-position: 1200px bottom; } /* Deve casar com o width do background-size */
+  100% { background-position: 1200px bottom; }
 }
 @keyframes wave-scroll-left {
   0% { background-position: 0 bottom; }
@@ -105,37 +104,94 @@
 }
 .mari-container:hover .mari-image-frame img { filter: grayscale(0.2) contrast(1.1); }
 
-/* STATUS ISOLADOS */
+/* --- STATUS ISOLADOS E BLINDADOS (CORREÇÃO DE BUG) --- */
 .mari-stats {
-  padding: 20px 30px; display: flex; flex-direction: column; gap: 15px;
-  background: #141414; border-bottom: 1px solid var(--metal-chrome-dark);
+  padding: 20px 30px; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 15px;
+  background: #141414; 
+  border-bottom: 1px solid var(--metal-chrome-dark);
 }
+
+/* Força o layout Grid e reseta posicionamento externo */
 .mari-container .jjk-dossier-status-item { 
-  display: grid; grid-template-columns: 50px 1fr 80px; align-items: center; gap: 15px; 
+  display: grid !important; 
+  grid-template-columns: 50px 1fr 80px !important; 
+  align-items: center !important; 
+  gap: 15px !important; 
+  position: relative !important; 
+  background: transparent !important;
+  border: none !important;
+  margin: 0 !important;
+  width: 100% !important;
 }
+
 .mari-container .jjk-dossier-status-label {
-  font-family: 'Cinzel Decorative', cursive; font-weight: 700;
-  color: var(--metal-chrome-light) !important; font-size: 0.9em; text-align: right;
+  font-family: 'Cinzel Decorative', cursive; 
+  font-weight: 700;
+  color: var(--metal-chrome-light) !important; 
+  font-size: 0.9em; 
+  text-align: right;
+  position: static !important;
+  margin: 0 !important;
 }
+
 .mari-container .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 12px; background: #000;
-  border-radius: 10px; overflow: hidden; border: 1px solid var(--metal-chrome-dark);
+  width: 100% !important; 
+  height: 12px !important; 
+  background: #000;
+  border-radius: 10px; 
+  overflow: hidden; 
+  border: 1px solid var(--metal-chrome-dark);
   box-shadow: inset 0 2px 5px #000;
+  position: relative !important;
+  display: block !important;
+  margin: 0 !important;
 }
-.mari-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
-.mari-container .jjk-dossier-hp-fill, .mari-container .jjk-dossier-ea-fill {
+
+.mari-container .jjk-dossier-status-bar { 
+  width: 100%; 
+  height: 100%; 
+  background: transparent; 
+  border: none; 
+}
+
+.mari-container .jjk-dossier-hp-fill, 
+.mari-container .jjk-dossier-ea-fill {
   height: 100%;
   background: linear-gradient(90deg, var(--metal-chrome-dark), var(--metal-chrome-light), var(--metal-chrome-mid));
-  border-radius: 10px; box-shadow: 0 0 10px var(--metal-chrome-light);
-  transition: width 0.5s ease; position: relative; overflow: hidden;
+  border-radius: 10px; 
+  box-shadow: 0 0 10px var(--metal-chrome-light);
+  transition: width 0.5s ease; 
+  position: relative; 
+  overflow: hidden;
+  display: block !important;
 }
-.mari-container .jjk-dossier-hp-fill::after, .mari-container .jjk-dossier-ea-fill::after {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%;
+
+.mari-container .jjk-dossier-hp-fill::after, 
+.mari-container .jjk-dossier-ea-fill::after {
+  content: ''; 
+  position: absolute; 
+  top: 0; left: 0; right: 0; height: 50%;
   background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
 }
+
+/* Correção crítica para evitar que o número flutue na tela */
 .mari-container .jjk-dossier-status-value {
-  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.9em;
-  color: var(--metal-chrome-light) !important; text-align: right;
+  position: static !important; 
+  float: none !important;
+  transform: none !important;
+  display: block !important;
+  margin: 0 !important;
+  width: auto !important;
+  inset: auto !important;
+  
+  font-family: 'Montserrat', sans-serif; 
+  font-weight: 700; 
+  font-size: 0.9em;
+  color: var(--metal-chrome-light) !important; 
+  text-align: right !important;
 }
 
 /* CONTEÚDO */
@@ -154,13 +210,12 @@
   text-align: center; font-size: 0.9em; box-shadow: inset 0 0 20px #000;
 }
 
-/* --- RODAPÉ & PISCINA DE METAL (CORRIGIDO) --- */
+/* --- RODAPÉ & PISCINA DE METAL --- */
 .mari-footer-pool {
   grid-column: 1 / -1; position: relative; height: 120px; background: #0a0a0a;
   overflow: hidden; border-top: 3px solid var(--metal-chrome-dark); margin-top: auto;
 }
 
-/* Container de Onda: O segredo é background-repeat */
 .metal-wave {
   position: absolute; bottom: 0; left: 0; 
   width: 100%; height: 100%;
@@ -168,9 +223,7 @@
   background-position: 0 bottom;
 }
 
-/* SVGs Senoidais Perfeitos para Loop */
 .wave1 {
-  /* 1200px é o tamanho do ciclo. A animação vai de 0 a 1200px */
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='50%25' y1='0%25' x2='50%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23e8e8e8'/%3E%3Cstop offset='100%25' stop-color='%23a0a0a0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0,60 Q300,0 600,60 T1200,60 V120 H0 Z' fill='url(%23a)' opacity='0.8'/%3E%3C/svg%3E");
   background-size: 1200px 100%;
   animation: wave-scroll-right 8s linear infinite; z-index: 3;
