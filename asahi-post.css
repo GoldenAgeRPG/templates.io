@@ -1,4 +1,4 @@
-/* --- TEMPLATE: ASAHI INOUE (WIDE TECH + PURPLE CROW - FIX v2) --- */
+/* --- TEMPLATE: ASAHI INOUE (FINAL FIX - FOOTER CROW) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+SC:wght@400;700&family=Mate+SC&family=Great+Vibes&display=swap');
 
 :root {
@@ -30,35 +30,15 @@
   border-radius: 15px;
   outline: 1px solid transparent; 
   
-  padding: 0 0 20px 0; /* Adicionado padding inferior */
+  padding: 0 0 20px 0;
   position: relative;
   color: var(--asahi-text);
   font-family: 'Mate SC', serif;
-  /* overflow: hidden;  <-- REMOVIDO PARA O CONTEÚDO NÃO VAZAR */
   
   animation: tech-pulse 5s infinite ease-in-out;
-  z-index: 0; /* Define um contexto de empilhamento */
+  z-index: 0;
 }
 .asahi-container * { box-sizing: border-box; }
-
-/* --- DECORAÇÃO DO CORVO (CORRIGIDO) --- */
-.asahi-container::before {
-  content: ''; position: absolute;
-  bottom: 0; left: 0;
-  width: 450px; height: 450px;
-  background-image: url('https://i.pinimg.com/736x/45/15/d7/4515d7a1ac8e72a7324d4a6eb6780d8a.jpg');
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: bottom left;
-
-  /* Filtros e Mistura */
-  filter: grayscale(100%) sepia(100%) hue-rotate(230deg) saturate(500%) brightness(0.7) contrast(1.5);
-  mix-blend-mode: lighten;
-  
-  opacity: 0.6;
-  z-index: -1; /* <-- MUDANÇA IMPORTANTE: Joga a imagem para trás de tudo */
-  pointer-events: none;
-}
 
 /* HEADER */
 .asahi-header {
@@ -133,29 +113,54 @@
     opacity: 0.5;
 }
 
-/* EXTRAS (CORRIGIDO) */
+/* EXTRAS */
 .asahi-extras {
   padding: 20px 50px; text-align: center;
   font-family: 'Cormorant SC', serif; color: var(--asahi-main); font-size: 1em;
-  /* position: relative; <-- Removido para evitar conflito */
   z-index: 2;
 }
 
-/* RODAPÉ */
+/* RODAPÉ & IMAGEM DE FUNDO (CORRIGIDO) */
 .asahi-footer {
-  padding: 20px 20px 40px; text-align: center; 
-  position: relative; z-index: 2;
+  padding: 40px 20px 40px; /* Aumentei o padding superior para dar espaço à imagem */
+  text-align: center; 
+  position: relative; /* Necessário para posicionar a imagem de fundo */
+  z-index: 2;
+  overflow: hidden; /* Garante que a imagem não vaze do rodapé */
 }
+
+.asahi-footer::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%; /* Ocupa todo o rodapé */
+  
+  background-image: url('https://i.pinimg.com/736x/45/15/d7/4515d7a1ac8e72a7324d4a6eb6780d8a.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  /* Gira a imagem em 180 graus */
+  transform: rotate(180deg);
+  
+  /* Filtros para colorir as partes brancas de roxo e ajustar a imagem */
+  filter: grayscale(100%) sepia(100%) hue-rotate(230deg) saturate(500%) brightness(0.8) contrast(1.2);
+  
+  opacity: 0.4; /* Deixa a imagem mais sutil */
+  z-index: -1; /* Fica atrás da assinatura */
+  pointer-events: none;
+}
+
 .asahi-signature::after {
   content: 'Asahi Inoue'; 
   font-family: 'Great Vibes', cursive; font-size: 3em; color: var(--asahi-light);
   text-shadow: 0 0 10px var(--asahi-main);
   display: block; transform: rotate(-2deg);
+  position: relative; /* Garante que o texto fique sobre a imagem de fundo */
 }
 
 @media (max-width: 600px) {
   .asahi-content, .asahi-extras { padding: 20px; }
   .asahi-stats { flex-direction: column; gap: 15px; }
   .asahi-status-item { width: 100%; }
-  .asahi-container::before { width: 300px; height: 300px; opacity: 0.4; }
 }
