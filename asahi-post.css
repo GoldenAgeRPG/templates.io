@@ -47,16 +47,26 @@
 }
 .asahi-container * { box-sizing: border-box; }
 
-/* Corvos Laterais (Bordas Animadas) - VERSÃO CORRIGIDA */
+/* Corvos Laterais (Bordas Animadas) - VERSÃO FINAL COM PNG */
 .asahi-container::before, .asahi-container::after {
-  content: ''; position: absolute; top: 0; bottom: 0; width: 30px;
-  /* SVG ajustado: Agora tem o formato de "V" com corpo, parecendo uma silhueta de pássaro */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='60' viewBox='0 0 30 60'%3E%3Cpath d='M2,20 Q8,12 15,20 Q22,12 28,20 L15,30 Z' fill='%233c096c' opacity='0.7'/%3E%3Cpath d='M5,45 Q10,38 15,45 Q20,38 25,45 L15,52 Z' fill='%239d4edd' opacity='0.9'/%3E%3C/svg%3E");
-  background-repeat: repeat-y; opacity: 0.8; z-index: 10;
-  animation: crow-fall 8s linear infinite;
+  content: ''; position: absolute; top: 0; bottom: 0; width: 35px; /* Largura ajustada */
+  
+  /* Imagem do Corvo (image_1.png) convertida para Base64 */
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAGUExURQAAAAAAAKVnuc8AAAACdFJOU/8A5bcwSgAAAAlwSFlzAAAOwwAADsMBx2+oZAAAAqdJREFUeNrt2clu4zgQhWFR1C3q/39xX2xLsiRKIiXG4D00i0E8g0ACh69fL/B/Kj8EIIAABCCAAAQggAAEEIAAAhCAAAIQgAAEEIAAAhCAAAIQgAAEEIAAAhCAAAIQgAAEEIAAAhCAAAIQgAAEEIAAAhCAAAIQgAAEEIAAAhCAAAIQgAAEEIAAAhBAAAIQgAAEEIAAAhCAAAIQgAAEEIAAAhCAAAIQgAAEEIAAAhCAAAIQgAD/G4BeP9T4d4BWP1j7R4B2f2CtHwF6/sGaXwG6/tHaXwE6/8EaXwE2/IO1vQJs+gdrewXY9g/W9gqw8R+s8RVg6z9Y4yvA5n+wxlfAASiAAiiAAiiAAiiAAiiAAiiAAiiAAiiAAiiAAiiAAiiAAiiAAiiAAiiAAijAAQ7gAAc4gAMc4AAHOMA/A7y/v784/rMAf+r4rwG++vivAL/aX93/7wD393+1/4sA1/b39v8KcGn/b//PAtzX//P+bwLc3v/b/ksB1vrv7f8kwE3/z/23Apz77+2XAtT7b+2XAoz6X+3XAtT5X+3XAgz9t/aLAdf+2/sVwKn/3n4tQLP/Xv+jAGv/vf43AY7+e/3vAoz9b+3XAjz67/U/CvDov9c/BXDov9f/IMCp/17/swCP/nv9jwI8+u/1Pwlw7H9rvxZg7L/XXwU4+u/1vwsw9r+1Xwu49b+9Xwpw7L+1Xwuw9r+1Xwpw7r+1Xws49X+2/1LAof/e/osA9/6f7f8YcO2/tV8LcO+/tf9TwLX/5/6LAbf+e/ulAIf+v/ZfCrj1/7f9EwFO/d/tFwK2/m/2DwH3/m/2TwG2/m/2TwEc+q/2DwEH/4d9Abj4P+wLwMX/YV8ALv4P+wJw8X/YF4CL/8O+AITgN0t+BPB6vV6v1+v1er1er9fr9Xq9Xq/X6/V6vV6v1+v1er1er9fr9Xq9Xq/X6/V6vV6v1+v1er1er/ef6xeR/lC54jP8YAAAAABJRU5ErkJggg==");
+  
+  /* Filtro para colorir o corvo preto com os tons de roxo do template */
+  /* O filtro inverte a cor (para branco), colore de sépia e depois aplica a rotação de matiz para roxo */
+  filter: invert(1) sepia(1) hue-rotate(230deg) saturate(4) brightness(0.7);
+  
+  background-size: 30px auto; /* Tamanho do corvo */
+  background-repeat: repeat-y;
+  background-position: center top;
+  opacity: 0.6; z-index: 10;
+  /* Animação de queda mais lenta e suave */
+  animation: crow-fall 12s linear infinite;
 }
 .asahi-container::before { left: 5px; border-right: 1px solid rgba(157, 78, 221, 0.1); }
-.asahi-container::after { right: 5px; border-left: 1px solid rgba(157, 78, 221, 0.1); }
+.asahi-container::after { right: 5px; border-left: 1px solid rgba(157, 78, 221, 0.1); transform: scaleX(-1); /* Espelha o corvo da direita */ }
 
 /* HEADER */
 .asahi-header {
