@@ -47,29 +47,29 @@
 }
 .asahi-container * { box-sizing: border-box; }
 
-/* --- CORVOS LATERAIS (PNG FINAL) --- */
+/* --- CORVOS LATERAIS (ESPAÇADOS) --- */
 .asahi-container::before, .asahi-container::after {
   content: ''; position: absolute; top: 0; bottom: 0; width: 45px;
   
-  /* Usando a imagem PNG fornecida */
-  background-image: url('https://i.imgur.com/Qw3UpPH.png');
+  /* TRUQUE DO ESPAÇAMENTO: */
+  /* Criamos um SVG 'virtual' onde a altura (height='100') é maior que o corvo (height='40') */
+  /* Isso cria um espaço vazio de 60px entre cada repetição automaticamente */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='45' height='100' viewBox='0 0 45 100'%3E%3Cimage href='https://i.imgur.com/Qw3UpPH.png' width='40' height='40' x='2' y='30' /%3E%3C/svg%3E");
   
-  /* MÁGICA DO CSS: Filtros para transformar o PNG preto em Roxo Brilhante */
-  /* Inverte para branco -> aplica tom sépia -> rotaciona a cor para roxo -> satura */
+  /* Filtros para colorir o corvo preto de roxo */
   filter: invert(1) sepia(1) hue-rotate(230deg) saturate(5) brightness(1.2) drop-shadow(0 0 5px var(--asahi-main));
   
-  background-size: 35px auto; /* Tamanho do corvo */
+  background-size: 45px auto; 
   background-repeat: repeat-y;
   background-position: center top;
   opacity: 0.8; 
   z-index: 10;
-  animation: crow-fall 10s linear infinite; /* Animação mais lenta e fluida */
+  animation: crow-fall 10s linear infinite;
   pointer-events: none;
 }
-.asahi-container::before { left: 0px; border-right: 1px solid rgba(157, 78, 221, 0.1); }
-/* O after usa transform: scaleX(-1) para espelhar o corvo do lado direito */
-.asahi-container::after { right: 0px; border-left: 1px solid rgba(157, 78, 221, 0.1); transform: scaleX(-1); }
 
+.asahi-container::before { left: 0px; border-right: 1px solid rgba(157, 78, 221, 0.1); }
+.asahi-container::after { right: 0px; border-left: 1px solid rgba(157, 78, 221, 0.1); transform: scaleX(-1); }
 
 /* HEADER */
 .asahi-header {
