@@ -1,4 +1,4 @@
-/* --- TEMPLATE: ASAHI INOUE  --- */
+/* --- TEMPLATE: ASAHI INOUE (FINAL VERSION - HEADER FILL FIX) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+SC:wght@400;700&family=Mate+SC&family=Great+Vibes&display=swap');
 
 :root {
@@ -48,7 +48,7 @@
   overflow: hidden; 
 }
 
-/* HEADER BACKGROUND IMAGE (AJUSTADO PARA CABER) */
+/* HEADER BACKGROUND IMAGE (PREENCHENDO TUDO) */
 .asahi-header::before {
   content: '';
   position: absolute;
@@ -57,10 +57,11 @@
   
   background-image: url('https://i.pinimg.com/736x/71/5d/c8/715dc815c6804c7686ddf0ddc716ecf2.jpg');
   
-  /* MUDANÇA AQUI: 'contain' força a imagem a caber inteira */
-  background-size: contain;
-  background-position: center top; /* Centraliza e alinha ao topo */
-  background-repeat: no-repeat; /* Não repete */
+  /* VOLTANDO PARA COVER PARA PREENCHER TUDO */
+  background-size: cover;
+  /* AJUSTANDO O FOCO: Centralizado na horizontal, e 25% do topo na vertical (foco no rosto/corvos) */
+  background-position: center 25%;
+  background-repeat: no-repeat;
   
   /* Filtros de coloração roxa */
   filter: grayscale(100%) sepia(100%) hue-rotate(230deg) saturate(500%) brightness(0.8) contrast(1.2);
