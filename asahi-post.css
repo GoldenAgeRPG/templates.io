@@ -1,4 +1,4 @@
-/* --- TEMPLATE: ASAHI INOUE --- */
+/* --- TEMPLATE: ASAHI INOUE  --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+SC:wght@400;700&family=Mate+SC&family=Great+Vibes&display=swap');
 
 :root {
@@ -42,18 +42,41 @@
 
 /* HEADER */
 .asahi-header {
-  text-align: center; padding: 40px 20px 20px; 
+  text-align: center; padding: 50px 20px 30px; /* Padding ajustado para a nova imagem */
   position: relative; z-index: 2;
   border-bottom: 1px solid rgba(157, 78, 221, 0.1);
+  overflow: hidden; /* Garante que a imagem não vaze */
 }
+
+/* HEADER BACKGROUND IMAGE (NOVO) */
+.asahi-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  
+  background-image: url('https://i.pinimg.com/736x/71/5d/c8/715dc815c6804c7686ddf0ddc716ecf2.jpg');
+  background-size: cover;
+  background-position: center 30%; /* Ajuste para focar melhor no rosto/corvos */
+  background-repeat: no-repeat;
+  
+  /* Mesmos filtros do rodapé para colorir de roxo */
+  filter: grayscale(100%) sepia(100%) hue-rotate(230deg) saturate(500%) brightness(0.8) contrast(1.2);
+  
+  opacity: 0.3; /* Opacidade baixa para não brigar com o texto do título */
+  z-index: -1; /* Fica atrás do texto */
+  pointer-events: none;
+}
+
 .asahi-title {
   font-family: 'Cinzel', serif; font-weight: 700; font-size: 2.2em; color: var(--asahi-light);
   text-transform: uppercase; letter-spacing: 4px; margin: 0;
-  text-shadow: 0 0 15px rgba(157, 78, 221, 0.6);
+  text-shadow: 0 0 15px rgba(157, 78, 221, 0.8); /* Sombra reforçada para leitura */
 }
 .asahi-subtitle {
   font-family: 'Cormorant SC', serif; font-size: 1em; color: var(--asahi-main);
-  letter-spacing: 2px; margin-top: 5px; opacity: 0.8;
+  letter-spacing: 2px; margin-top: 5px; opacity: 0.9;
+  text-shadow: 0 0 5px rgba(0,0,0,0.8); /* Sombra para leitura */
 }
 
 /* IMAGEM DO BANNER */
@@ -114,10 +137,10 @@
     opacity: 0.5;
 }
 
-/* EXTRAS (CORRIGIDO: ALINHAMENTO JUSTIFICADO) */
+/* EXTRAS (JUSTIFICADO) */
 .asahi-extras {
   padding: 20px 50px; 
-  text-align: justify; /* Alinhamento corrigido para não centralizar */
+  text-align: justify; 
   font-family: 'Cormorant SC', serif; color: var(--asahi-main); font-size: 1em;
   z-index: 2;
 }
