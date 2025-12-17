@@ -1,4 +1,4 @@
-/* --- TEMPLATE: ASAHI INOUE (FINAL VERSION - HEADER FILL FIX) --- */
+/* --- TEMPLATE: ASAHI INOUE (FINAL VERSION  --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+SC:wght@400;700&family=Mate+SC&family=Great+Vibes&display=swap');
 
 :root {
@@ -44,11 +44,11 @@
 .asahi-header {
   text-align: center; padding: 50px 20px 30px; 
   position: relative; z-index: 2;
-  border-bottom: 1px solid rgba(157, 78, 221, 0.1);
+  /* border-bottom removido pois a nova borda do banner já faz a separação */
   overflow: hidden; 
 }
 
-/* HEADER BACKGROUND IMAGE (PREENCHENDO TUDO) */
+/* HEADER BACKGROUND IMAGE */
 .asahi-header::before {
   content: '';
   position: absolute;
@@ -57,13 +57,10 @@
   
   background-image: url('https://i.pinimg.com/736x/71/5d/c8/715dc815c6804c7686ddf0ddc716ecf2.jpg');
   
-  /* VOLTANDO PARA COVER PARA PREENCHER TUDO */
   background-size: cover;
-  /* AJUSTANDO O FOCO: Centralizado na horizontal, e 25% do topo na vertical (foco no rosto/corvos) */
   background-position: center 25%;
   background-repeat: no-repeat;
   
-  /* Filtros de coloração roxa */
   filter: grayscale(100%) sepia(100%) hue-rotate(230deg) saturate(500%) brightness(0.8) contrast(1.2);
   
   opacity: 0.3; 
@@ -82,21 +79,39 @@
   text-shadow: 0 0 5px rgba(0,0,0,0.8);
 }
 
-/* IMAGEM DO BANNER */
+/* --- IMAGEM DO BANNER COM BORDA CHANFRADA --- */
 .asahi-image-frame {
   width: 100%; height: 350px;
-  position: relative; margin: 0;
-  border-bottom: 1px solid var(--asahi-main);
+  position: relative; 
+  margin: 0 0 15px 0; /* Adicionado margem inferior para não colar nos status */
+  
+  /* Configuração da Borda Grossa e Chanfrada */
+  border-style: solid;
+  border-width: 8px; /* Espessura da moldura */
+  
+  /* O Truque do Chanfro: Cores diferentes para cada lado para simular luz 3D */
+  /* Ordem: Topo, Direita, Base, Esquerda */
+  border-color: rgba(224, 170, 255, 0.5)  /* Topo mais claro (luz) */
+                rgba(157, 78, 221, 0.3)   /* Laterais médias */
+                rgba(36, 0, 70, 0.7)      /* Base mais escura (sombra) */
+                rgba(157, 78, 221, 0.3);  /* Laterais médias */
+
+  /* Sombra externa para destacar a moldura do fundo */
+  box-shadow: 0 10px 25px rgba(0,0,0,0.7);
+
   overflow: hidden; z-index: 2;
 }
 .asahi-image-frame img {
   width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
   filter: contrast(1.1) saturate(1.1);
+  /* Pequeno ajuste para a imagem não ficar "atrás" da borda transparente */
+  position: relative; z-index: -1; 
 }
 .asahi-image-frame::after { 
   content: ''; position: absolute; inset: 0;
   background: linear-gradient(to top, var(--asahi-bg) 0%, transparent 40%);
   pointer-events: none;
+  z-index: 0;
 }
 
 /* STATUS */
