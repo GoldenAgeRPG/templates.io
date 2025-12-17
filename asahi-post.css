@@ -1,4 +1,4 @@
-/* --- TEMPLATE: ASAHI INOUE  --- */
+/* --- TEMPLATE: ASAHI INOUE (FINAL FOOTER FIX - CORRECT ORIENTATION) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+SC:wght@400;700&family=Mate+SC&family=Great+Vibes&display=swap');
 
 :root {
@@ -120,7 +120,7 @@
   z-index: 2;
 }
 
-/* RODAPÉ & IMAGEM DE FUNDO (ATUALIZADA) */
+/* RODAPÉ & IMAGEM DE FUNDO (ORIENTAÇÃO CORRIGIDA) */
 .asahi-footer {
   padding: 40px 20px 40px;
   text-align: center; 
@@ -135,15 +135,14 @@
   top: 0; left: 0;
   width: 100%; height: 100%;
   
-  /* Nova imagem P&B inserida aqui */
   background-image: url('https://i.pinimg.com/736x/28/40/4c/28404c2eab9ad4b3a04a76f3c9c1545e.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  transform: rotate(180deg);
+  /* transform: rotate(180deg);  <-- REMOVIDO */
   
-  /* Filtros mantidos para colorir as partes claras de roxo */
+  /* Filtros para colorir de roxo */
   filter: grayscale(100%) sepia(100%) hue-rotate(230deg) saturate(500%) brightness(0.8) contrast(1.2);
   
   opacity: 0.4;
