@@ -1,4 +1,4 @@
-/* --- TEMPLATE: MARI EL-MELLOI (MERCURY RISING v8 - ISOLATED FIX) --- */
+/* --- TEMPLATE: MARI EL-MELLOI (MERCURY RISING v9 - NUCLEAR FIX) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Montserrat:wght@300;400;600&family=Pinyon+Script&display=swap');
 
 :root {
@@ -104,7 +104,7 @@
 }
 .mari-container:hover .mari-image-frame img { filter: grayscale(0.2) contrast(1.1); }
 
-/* --- STATUS ISOLADOS E BLINDADOS (CORREÇÃO DE BUG) --- */
+/* --- STATUS ISOLADOS (CORREÇÃO AGRESSIVA) --- */
 .mari-stats {
   padding: 20px 30px; 
   display: flex; 
@@ -114,7 +114,6 @@
   border-bottom: 1px solid var(--metal-chrome-dark);
 }
 
-/* Força o layout Grid e reseta posicionamento externo */
 .mari-container .jjk-dossier-status-item { 
   display: grid !important; 
   grid-template-columns: 50px 1fr 80px !important; 
@@ -125,6 +124,7 @@
   border: none !important;
   margin: 0 !important;
   width: 100% !important;
+  min-height: auto !important;
 }
 
 .mari-container .jjk-dossier-status-label {
@@ -177,21 +177,28 @@
   background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
 }
 
-/* Correção crítica para evitar que o número flutue na tela */
+/* --- AQUI ESTÁ A CORREÇÃO AGRESSIVA --- */
+/* Resetamos top/left/right/bottom/transform/margin para anular qualquer centralização externa */
 .mari-container .jjk-dossier-status-value {
-  position: static !important; 
-  float: none !important;
-  transform: none !important;
-  display: block !important;
+  position: relative !important; /* Relative segura o elemento no fluxo do Grid */
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  transform: none !important; /* Mata o translate(-50%, -50%) se houver */
   margin: 0 !important;
+  float: none !important;
+  display: block !important;
   width: auto !important;
-  inset: auto !important;
+  height: auto !important;
   
+  /* Estilos visuais */
   font-family: 'Montserrat', sans-serif; 
   font-weight: 700; 
   font-size: 0.9em;
   color: var(--metal-chrome-light) !important; 
   text-align: right !important;
+  z-index: 1 !important;
 }
 
 /* CONTEÚDO */
