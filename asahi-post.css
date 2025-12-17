@@ -1,4 +1,4 @@
-/* --- TEMPLATE: ASAHI INOUE (WIDE TECH + PURPLE CROW) --- */
+/* --- TEMPLATE: ASAHI INOUE (WIDE TECH + PURPLE CROW - FIX v2) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+SC:wght@400;700&family=Mate+SC&family=Great+Vibes&display=swap');
 
 :root {
@@ -30,33 +30,34 @@
   border-radius: 15px;
   outline: 1px solid transparent; 
   
-  padding: 0;
+  padding: 0 0 20px 0; /* Adicionado padding inferior */
   position: relative;
   color: var(--asahi-text);
   font-family: 'Mate SC', serif;
-  overflow: hidden;
+  /* overflow: hidden;  <-- REMOVIDO PARA O CONTEÚDO NÃO VAZAR */
   
   animation: tech-pulse 5s infinite ease-in-out;
+  z-index: 0; /* Define um contexto de empilhamento */
 }
 .asahi-container * { box-sizing: border-box; }
 
-/* --- DECORAÇÃO DO CORVO (Borda Inferior Esquerda) --- */
+/* --- DECORAÇÃO DO CORVO (CORRIGIDO) --- */
 .asahi-container::before {
   content: ''; position: absolute;
   bottom: 0; left: 0;
-  width: 450px; height: 450px; /* Tamanho para ocupar o canto */
+  width: 450px; height: 450px;
   background-image: url('https://i.pinimg.com/736x/45/15/d7/4515d7a1ac8e72a7324d4a6eb6780d8a.jpg');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom left;
 
-  /* FILTROS: Transforma a imagem colorida em tons de Roxo Escuro e vibrante */
+  /* Filtros e Mistura */
   filter: grayscale(100%) sepia(100%) hue-rotate(230deg) saturate(500%) brightness(0.7) contrast(1.5);
+  mix-blend-mode: lighten;
   
-  opacity: 0.6; /* Translúcido */
-  z-index: 1; /* Fica atrás do texto */
+  opacity: 0.6;
+  z-index: -1; /* <-- MUDANÇA IMPORTANTE: Joga a imagem para trás de tudo */
   pointer-events: none;
-  mix-blend-mode: lighten; /* Funde a imagem com o fundo escuro */
 }
 
 /* HEADER */
@@ -132,11 +133,12 @@
     opacity: 0.5;
 }
 
-/* EXTRAS */
+/* EXTRAS (CORRIGIDO) */
 .asahi-extras {
   padding: 20px 50px; text-align: center;
   font-family: 'Cormorant SC', serif; color: var(--asahi-main); font-size: 1em;
-  position: relative; z-index: 2;
+  /* position: relative; <-- Removido para evitar conflito */
+  z-index: 2;
 }
 
 /* RODAPÉ */
@@ -155,5 +157,5 @@
   .asahi-content, .asahi-extras { padding: 20px; }
   .asahi-stats { flex-direction: column; gap: 15px; }
   .asahi-status-item { width: 100%; }
-  .asahi-container::before { width: 300px; height: 300px; opacity: 0.4; } /* Reduz o corvo no mobile */
+  .asahi-container::before { width: 300px; height: 300px; opacity: 0.4; }
 }
