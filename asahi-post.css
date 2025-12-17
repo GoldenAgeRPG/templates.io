@@ -1,4 +1,4 @@
-/* --- TEMPLATE: ASAHI INOUE (FINAL FIX - FOOTER CROW) --- */
+/* --- TEMPLATE: ASAHI INOUE  --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+SC:wght@400;700&family=Mate+SC&family=Great+Vibes&display=swap');
 
 :root {
@@ -120,34 +120,34 @@
   z-index: 2;
 }
 
-/* RODAPÉ & IMAGEM DE FUNDO (CORRIGIDO) */
+/* RODAPÉ & IMAGEM DE FUNDO (ATUALIZADA) */
 .asahi-footer {
-  padding: 40px 20px 40px; /* Aumentei o padding superior para dar espaço à imagem */
+  padding: 40px 20px 40px;
   text-align: center; 
-  position: relative; /* Necessário para posicionar a imagem de fundo */
+  position: relative;
   z-index: 2;
-  overflow: hidden; /* Garante que a imagem não vaze do rodapé */
+  overflow: hidden;
 }
 
 .asahi-footer::before {
   content: '';
   position: absolute;
   top: 0; left: 0;
-  width: 100%; height: 100%; /* Ocupa todo o rodapé */
+  width: 100%; height: 100%;
   
+  /* Nova imagem P&B inserida aqui */
   background-image: url('https://i.pinimg.com/736x/28/40/4c/28404c2eab9ad4b3a04a76f3c9c1545e.jpg');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
 
-  /* Gira a imagem em 180 graus */
   transform: rotate(180deg);
   
-  /* Filtros para colorir as partes brancas de roxo e ajustar a imagem */
+  /* Filtros mantidos para colorir as partes claras de roxo */
   filter: grayscale(100%) sepia(100%) hue-rotate(230deg) saturate(500%) brightness(0.8) contrast(1.2);
   
-  opacity: 0.4; /* Deixa a imagem mais sutil */
-  z-index: -1; /* Fica atrás da assinatura */
+  opacity: 0.4;
+  z-index: -1;
   pointer-events: none;
 }
 
@@ -156,7 +156,7 @@
   font-family: 'Great Vibes', cursive; font-size: 3em; color: var(--asahi-light);
   text-shadow: 0 0 10px var(--asahi-main);
   display: block; transform: rotate(-2deg);
-  position: relative; /* Garante que o texto fique sobre a imagem de fundo */
+  position: relative;
 }
 
 @media (max-width: 600px) {
