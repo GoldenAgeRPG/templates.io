@@ -1,7 +1,6 @@
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+SC:wght@400;700&family=Mate+SC&family=Great+Vibes&display=swap" rel="stylesheet">
-
-<style>
+/* --- TEMPLATE: ASAHI INOUE (FINAL VERSION - DOUBLE FRAME) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+SC:wght@400;700&family=Mate+SC&family=Great+Vibes&display=swap');
+
 :root {
   --asahi-bg: #050208;
   --asahi-light: #e0aaff;
@@ -9,19 +8,12 @@
   --asahi-dark: #240046;
   --asahi-contrast: #ff0055;
   --asahi-text: #f3e5f5;
-  --asahi-text-content: #e8e0ed;
 }
 
-/* Animação de pulso só no hover */
+/* Animação: Pulso da Borda (Tech) */
 @keyframes tech-pulse {
-  0%, 100% { 
-    box-shadow: 0 0 20px rgba(157, 78, 221, 0.3), 0 10px 40px rgba(0,0,0,0.8); 
-    border-color: #0f0f12; 
-  }
-  50% { 
-    box-shadow: 0 0 30px rgba(157, 78, 221, 0.5), 0 15px 50px rgba(157, 78, 221, 0.2); 
-    border-color: var(--asahi-main); 
-  }
+  0%, 100% { box-shadow: 0 0 0 2px #0f0f12, 0 10px 40px rgba(0,0,0,0.8); border-color: #0f0f12; }
+  50% { box-shadow: 0 0 0 2px var(--asahi-main), 0 15px 50px rgba(157, 78, 221, 0.2); border-color: #1a0b2e; }
 }
 
 /* CONTAINER PRINCIPAL */
@@ -30,222 +22,159 @@
   max-width: 750px;
   width: 95%;
   margin: 40px auto;
+  
   background-color: var(--asahi-bg);
   background-image: linear-gradient(180deg, #150824 0%, #050208 30%, #050208 100%);
+  
   border: 4px solid #08080a;
   border-radius: 15px;
+  outline: 1px solid transparent; 
+  
   padding: 0 0 20px 0;
   position: relative;
   color: var(--asahi-text);
   font-family: 'Mate SC', serif;
-  box-shadow: 0 0 20px rgba(157, 78, 221, 0.3); /* Glow estático */
-  transition: all 0.4s ease;
+  
+  animation: tech-pulse 5s infinite ease-in-out;
   z-index: 0;
 }
-
-.asahi-container:hover {
-  animation: tech-pulse 6s infinite ease-in-out;
-}
-
 .asahi-container * { box-sizing: border-box; }
 
 /* HEADER */
 .asahi-header {
-  text-align: center;
-  padding: 50px 20px 30px;
-  position: relative;
-  z-index: 2;
-  overflow: hidden;
+  text-align: center; padding: 50px 20px 30px; 
+  position: relative; z-index: 2;
+  overflow: hidden; 
 }
 
-/* Overlay escuro para destacar o título */
-.asahi-header::after {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(5, 2, 8, 0.6);
-  z-index: -1;
-}
-
+/* HEADER BACKGROUND IMAGE */
 .asahi-header::before {
   content: '';
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
+  
   background-image: url('https://i.pinimg.com/736x/71/5d/c8/715dc815c6804c7686ddf0ddc716ecf2.jpg');
-  background-size: cover;
-  background-position: center 25%;
+  
+  background-size: cover; /* Preenche tudo */
+  background-position: center 25%; /* Foco no topo (rosto) */
   background-repeat: no-repeat;
+  
   filter: grayscale(100%) sepia(100%) hue-rotate(230deg) saturate(500%) brightness(0.8) contrast(1.2);
-  opacity: 0.3;
-  z-index: -2;
+  
+  opacity: 0.3; 
+  z-index: -1; 
+  pointer-events: none;
 }
 
 .asahi-title {
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  font-size: 2.2em;
-  color: var(--asahi-light);
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  margin: 0;
+  font-family: 'Cinzel', serif; font-weight: 700; font-size: 2.2em; color: var(--asahi-light);
+  text-transform: uppercase; letter-spacing: 4px; margin: 0;
   text-shadow: 0 0 15px rgba(157, 78, 221, 0.8);
 }
-
 .asahi-subtitle {
-  font-family: 'Cormorant SC', serif;
-  font-size: 1em;
-  color: var(--asahi-main);
-  letter-spacing: 2px;
-  margin-top: 5px;
-  opacity: 0.9;
+  font-family: 'Cormorant SC', serif; font-size: 1em; color: var(--asahi-main);
+  letter-spacing: 2px; margin-top: 5px; opacity: 0.9;
   text-shadow: 0 0 5px rgba(0,0,0,0.8);
 }
 
-/* IMAGEM DO BANNER */
+/* --- IMAGEM DO BANNER (MOLDURA DUPLA ELEGANTE) --- */
 .asahi-image-frame {
-  width: 100%;
-  height: 350px;
-  position: relative;
-  margin: 0 0 15px 0;
-  border: 8px solid;
-  border-color: rgba(224, 170, 255, 0.5) rgba(157, 78, 221, 0.3) rgba(36, 0, 70, 0.7) rgba(157, 78, 221, 0.3);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.7);
-  overflow: hidden;
+  width: 100%; height: 350px;
+  position: relative; 
+  margin: 0 0 20px 0; /* Espaço embaixo */
+
+  /* 1. O PADDING cria a "espessura" da moldura (8px) */
+  padding: 8px;
+  
+  /* 2. Cor de fundo da moldura (diferente da imagem e do template) */
+  background-color: #0e0514; 
+  
+  /* 3. Borda Externa Fina (Ouro/Roxo Claro) */
+  border-top: 1px solid var(--asahi-light);
+  border-bottom: 1px solid var(--asahi-light);
+  
+  /* Sombra para destacar a moldura do fundo */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+
   z-index: 2;
 }
 
 .asahi-image-frame img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 20%;
+  width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
   filter: contrast(1.1) saturate(1.1);
-  position: relative;
-  z-index: -1;
+  display: block;
+  
+  /* 4. Borda Interna Fina (Roxo Escuro) colada na imagem */
+  border: 1px solid var(--asahi-main);
 }
 
-.asahi-image-frame::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(to top, var(--asahi-bg) 0%, transparent 40%);
+.asahi-image-frame::after { 
+  /* Overlay suave sobre a imagem */
+  content: ''; position: absolute; inset: 8px; /* Respeita o padding */
+  background: linear-gradient(to top, var(--asahi-bg) 0%, transparent 30%);
   pointer-events: none;
-  z-index: 0;
+  z-index: 1;
 }
+
 
 /* STATUS */
 .asahi-stats {
-  padding: 15px 40px;
-  display: flex;
-  justify-content: space-between;
-  gap: 40px;
+  padding: 15px 40px; display: flex; justify-content: space-between; gap: 40px;
   background: rgba(255, 255, 255, 0.02);
   border-bottom: 1px solid rgba(157, 78, 221, 0.1);
-  position: relative;
-  z-index: 2;
+  border-top: 1px solid rgba(157, 78, 221, 0.1); /* Linha extra para fechar o bloco */
+  position: relative; z-index: 2;
 }
-
 .asahi-status-item {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
+  display: flex; flex-direction: column; width: 50%;
 }
-
 .asahi-status-header {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
+    display: flex; justify-content: space-between; margin-bottom: 5px;
 }
-
 .asahi-status-bar-wrapper {
-  width: 100%;
-  height: 6px;
-  background: #000;
-  border-radius: 4px;
-  overflow: hidden;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.6);
+  width: 100%; height: 4px; background: #000; border-radius: 2px;
 }
-
-.asahi-status-bar-fill {
-  height: 100%;
-  border-radius: 4px;
-  transition: width 0.6s ease, box-shadow 0.3s ease;
-}
-
-.asahi-hp-fill {
-  background: linear-gradient(to right, var(--asahi-contrast), #c77bff);
-  box-shadow: 0 0 12px var(--asahi-contrast);
-}
-
-.asahi-ea-fill {
-  background: linear-gradient(to right, var(--asahi-light), var(--asahi-main));
-  box-shadow: 0 0 12px var(--asahi-light);
-}
-
-.asahi-status-label {
-  font-size: 0.85em;
-  color: #aaa;
-  font-family: 'Cinzel', serif;
-  letter-spacing: 1.5px;
-}
-
-.asahi-status-value {
-  font-size: 1em;
-  font-weight: bold;
-  font-family: 'Cinzel', serif;
-}
+.asahi-status-bar { width: 100%; height: 100%; }
+.asahi-status-label { font-size: 0.8em; color: #888; font-family: 'Cinzel', serif; letter-spacing: 1px;}
+.asahi-status-value { font-size: 0.9em; font-weight: bold; font-family: 'Cinzel', serif;}
 
 .asahi-hp-val { color: var(--asahi-contrast); }
 .asahi-ea-val { color: var(--asahi-light); }
+.asahi-hp-fill { height: 100%; background: var(--asahi-contrast); box-shadow: 0 0 8px var(--asahi-contrast); }
+.asahi-ea-fill { height: 100%; background: var(--asahi-light); box-shadow: 0 0 8px var(--asahi-light); }
 
 /* CONTEÚDO */
 .asahi-content {
-  padding: 40px 50px;
-  font-size: 1.1em;
-  line-height: 1.8;
-  color: var(--asahi-text-content);
-  text-align: justify;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.6);
-  position: relative;
-  z-index: 2;
+  padding: 40px 50px; font-size: 1.1em; line-height: 1.8; color: #dcd6e0;
+  text-align: justify; position: relative; z-index: 2;
 }
-
-.asahi-content b, .asahi-content strong {
-  color: var(--asahi-light);
-  font-weight: 700;
-}
-
-.asahi-content i, .asahi-content em {
-  color: var(--asahi-main);
-}
+/* Suporte a BBCode [b] e [i] */
+.asahi-content b, .asahi-content strong { color: var(--asahi-light); font-weight: 700; }
+.asahi-content i, .asahi-content em { color: var(--asahi-main); }
 
 /* SEPARADOR */
 .asahi-separator {
-  height: 1px;
-  width: 80%;
-  margin: 30px auto;
-  background: linear-gradient(90deg, transparent, var(--asahi-main), transparent);
-  opacity: 0.6;
+    height: 1px; width: 80%; margin: 0 auto; position: relative; z-index: 2;
+    background: linear-gradient(90deg, transparent, var(--asahi-main), transparent);
+    opacity: 0.5;
 }
 
-/* EXTRAS */
+/* EXTRAS (JUSTIFICADO) */
 .asahi-extras {
-  padding: 20px 50px;
-  text-align: justify;
-  font-family: 'Cormorant SC', serif;
-  color: var(--asahi-main);
-  font-size: 1em;
+  padding: 20px 50px; 
+  text-align: justify; 
+  font-family: 'Cormorant SC', serif; color: var(--asahi-main); font-size: 1em;
   z-index: 2;
 }
 
-/* RODAPÉ */
+/* RODAPÉ & IMAGEM DE FUNDO */
 .asahi-footer {
-  padding: 40px 20px;
-  text-align: center;
+  padding: 40px 20px 40px;
+  text-align: center; 
   position: relative;
-  overflow: hidden;
   z-index: 2;
+  overflow: hidden;
 }
 
 .asahi-footer::before {
@@ -253,87 +182,29 @@
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
+  
   background-image: url('https://i.pinimg.com/736x/28/40/4c/28404c2eab9ad4b3a04a76f3c9c1545e.jpg');
   background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
+  
   filter: grayscale(100%) sepia(100%) hue-rotate(230deg) saturate(500%) brightness(0.8) contrast(1.2);
+  
   opacity: 0.4;
   z-index: -1;
+  pointer-events: none;
 }
 
 .asahi-signature::after {
-  content: 'Asahi Inoue';
-  font-family: 'Great Vibes', cursive;
-  font-size: 3em;
-  color: var(--asahi-light);
+  content: 'Asahi Inoue'; 
+  font-family: 'Great Vibes', cursive; font-size: 3em; color: var(--asahi-light);
   text-shadow: 0 0 10px var(--asahi-main);
-  display: block;
-  transform: rotate(-2deg);
-  transition: text-shadow 0.4s ease;
+  display: block; transform: rotate(-2deg);
+  position: relative;
 }
 
-.asahi-signature:hover::after {
-  text-shadow: 0 0 20px var(--asahi-main);
-}
-
-/* RESPONSIVO */
 @media (max-width: 600px) {
-  .asahi-title { font-size: 1.8em; }
-  .asahi-image-frame { height: 250px; }
-  .asahi-content, .asahi-extras { padding: 20px 25px; }
-  .asahi-stats {
-    flex-direction: column;
-    gap: 20px;
-    padding: 15px 25px;
-  }
+  .asahi-content, .asahi-extras { padding: 20px; }
+  .asahi-stats { flex-direction: column; gap: 15px; }
   .asahi-status-item { width: 100%; }
-  .asahi-status-bar-wrapper { height: 8px; }
 }
-</style>
-
-<div class="asahi-container">
-  <div class="asahi-header">
-    <h1 class="asahi-title">Título do Post</h1>
-    <div class="asahi-subtitle">Local // Data // Turno</div>
-  </div>
-
-  <div class="asahi-image-frame">
-    <img src="https://i.pinimg.com/1200x/34/f7/fe/34f7fe78ff9ce86ba83c34961086c60b.jpg" alt="Asahi Inoue">
-  </div>
-
-  <div class="asahi-stats">
-    <div class="asahi-status-item">
-      <div class="asahi-status-header">
-        <span class="asahi-status-label">VITALIDADE</span>
-        <span class="asahi-status-value asahi-hp-val">1600/2000</span>
-      </div>
-      <div class="asahi-status-bar-wrapper">
-        <div class="asahi-status-bar-fill asahi-hp-fill" style="width: 80%;"></div>
-      </div>
-    </div>
-
-    <div class="asahi-status-item">
-      <div class="asahi-status-header">
-        <span class="asahi-status-label">ENERGIA</span>
-        <span class="asahi-status-value asahi-ea-val">1800/3000</span>
-      </div>
-      <div class="asahi-status-bar-wrapper">
-        <div class="asahi-status-bar-fill asahi-ea-fill" style="width: 60%;"></div>
-      </div>
-    </div>
-  </div>
-
-  <div class="asahi-content">
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque sit amet dignissim nisl. Vivamus euismod justo vitae urna porta, vel <b>ullamcorper tortor tristique</b>. <i>Aliquam</i> quis interdum nibh. Donec in dignissim libero, a tempor nulla. Praesent suscipit elit nec hendrerit vehicula. <b>Integer fringilla nec nisl eget congue.</b> Nullam ac dolor lorem. Aliquam tristique <b>condimentum</b> urna, et placerat ante. <i>Cras aliquet turpis tempor mi aliquet sollicitudin.</i>
-  </div>
-
-  <div class="asahi-separator"></div>
-
-  <div class="asahi-extras">
-    [spoiler="Informações de Combate"] AAAAAAAAAA AAAAAAAAAA AAAAAAAAAA A A A A A A A A A A A [/spoiler]
-  </div>
-
-  <div class="asahi-footer">
-    <div class="asahi-signature"></div>
-  </div>
-</div>
