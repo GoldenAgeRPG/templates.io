@@ -1,0 +1,200 @@
+/* --- TEMPLATE: HANAE OKAMI (CONTROL DEVIL THEME) --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&family=Pinyon+Script&display=swap');
+
+:root {
+  --hanae-bg: #0a0303;      /* Preto avermelhado */
+  --hanae-panel: #140505;   /* Painel */
+  --hanae-red: #d90429;     /* Vermelho Makima (Vibrante) */
+  --hanae-blood: #640d14;   /* Vermelho Sangue (Escuro) */
+  --hanae-gold: #ffb703;    /* Dourado (Olhos) */
+  --hanae-text: #edf2f4;    /* Branco Frio */
+}
+
+/* Animação: Batimento Cardíaco Lento (Ameaçador) */
+@keyframes control-pulse {
+  0% { box-shadow: 0 0 0 0 rgba(217, 4, 41, 0); border-color: #333; }
+  40% { box-shadow: 0 0 20px 0 rgba(217, 4, 41, 0.15); border-color: var(--hanae-blood); }
+  100% { box-shadow: 0 0 0 0 rgba(217, 4, 41, 0); border-color: #333; }
+}
+
+/* Animação: Rotação Lenta do Halo */
+@keyframes halo-spin {
+  0% { transform: translateX(-50%) rotate(0deg); }
+  100% { transform: translateX(-50%) rotate(360deg); }
+}
+
+/* CONTAINER PRINCIPAL */
+.hanae-container {
+  box-sizing: border-box;
+  max-width: 750px;
+  width: 95%;
+  margin: 40px auto;
+  
+  background-color: var(--hanae-bg);
+  /* Degradê sutil imitando terno/escuridão */
+  background-image: radial-gradient(circle at 50% 20%, #1a0808 0%, #050000 80%);
+  
+  border: 1px solid #333;
+  border-top: 4px solid var(--hanae-red); /* Topo vermelho marcante */
+  box-shadow: 0 20px 50px #000;
+  
+  padding: 0 0 20px 0;
+  position: relative;
+  color: var(--hanae-text);
+  font-family: 'Lato', sans-serif; /* Fonte mais limpa e moderna (Corporativa) */
+  
+  animation: control-pulse 6s infinite ease-in-out;
+  z-index: 0;
+  overflow: hidden;
+}
+.hanae-container * { box-sizing: border-box; }
+
+/* HEADER COM HALO */
+.hanae-header {
+  text-align: center; padding: 60px 20px 30px; 
+  position: relative; z-index: 2;
+  border-bottom: 1px solid rgba(217, 4, 41, 0.2);
+}
+
+/* O HALO (Auréola de Sangue/Controle) */
+.hanae-header::before {
+  content: ''; position: absolute;
+  top: -100px; left: 50%;
+  width: 400px; height: 400px;
+  
+  border: 1px solid var(--hanae-red);
+  border-radius: 50%;
+  background: transparent;
+  
+  /* Círculos concêntricos usando box-shadow */
+  box-shadow: 
+    inset 0 0 20px rgba(217, 4, 41, 0.1),
+    0 0 0 20px transparent,
+    0 0 0 21px var(--hanae-red), /* Segundo anel */
+    0 0 50px rgba(217, 4, 41, 0.1);
+    
+  opacity: 0.15; /* Sutil */
+  pointer-events: none;
+  animation: halo-spin 60s linear infinite;
+  z-index: -1;
+}
+
+.hanae-title {
+  font-family: 'Playfair Display', serif; /* Fonte elegante e autoritária */
+  font-weight: 700; font-size: 2.5em; color: var(--hanae-text);
+  text-transform: uppercase; letter-spacing: 5px; margin: 0;
+  text-shadow: 0 0 10px rgba(217, 4, 41, 0.5);
+}
+.hanae-subtitle {
+  font-family: 'Cinzel', serif; font-size: 0.9em; color: var(--hanae-gold);
+  letter-spacing: 3px; margin-top: 10px; text-transform: uppercase;
+}
+
+/* IMAGEM (MOLDURA DUPLA DE CONTROLE) */
+.hanae-image-frame {
+  width: 100%; height: 380px;
+  position: relative; margin: 0 0 20px 0;
+  
+  padding: 6px; /* Espaço entre molduras */
+  background-color: #000;
+  
+  /* Borda Externa: Vermelho Sangue */
+  border-top: 1px solid var(--hanae-red);
+  border-bottom: 1px solid var(--hanae-red);
+  
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  z-index: 2;
+}
+
+.hanae-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  filter: contrast(1.1) saturate(0.9); /* Levemente desaturado, estilo cinematográfico */
+  display: block;
+  
+  /* Borda Interna: Dourado (Olhos) */
+  border: 1px solid var(--hanae-gold);
+}
+
+/* STATUS (LIMPO E CORPORATIVO) */
+.hanae-stats {
+  padding: 10px 50px; display: flex; justify-content: space-between; gap: 40px;
+  background: rgba(255, 255, 255, 0.01);
+  border-bottom: 1px solid rgba(217, 4, 41, 0.1);
+  position: relative; z-index: 2;
+}
+.hanae-status-item {
+  display: flex; flex-direction: column; width: 50%;
+}
+.hanae-status-header {
+    display: flex; justify-content: space-between; margin-bottom: 6px;
+    font-family: 'Cinzel', serif; font-size: 0.8em; letter-spacing: 1px;
+}
+.hanae-status-bar-wrapper {
+  width: 100%; height: 2px; background: #333; /* Barra bem fina e elegante */
+}
+.hanae-status-bar-fill { height: 100%; box-shadow: 0 0 10px currentColor; }
+
+/* Cores específicas */
+.hanae-hp { color: var(--hanae-red); }
+.hanae-ea { color: var(--hanae-gold); }
+.hanae-hp-bg { background-color: var(--hanae-red); color: var(--hanae-red); }
+.hanae-ea-bg { background-color: var(--hanae-gold); color: var(--hanae-gold); }
+
+/* CONTEÚDO */
+.hanae-content {
+  padding: 40px 60px; font-size: 1.1em; line-height: 1.9; color: #ccc;
+  text-align: justify; position: relative; z-index: 2;
+}
+/* Negrito: Vermelho / Itálico: Dourado */
+.hanae-content b, .hanae-content strong { color: var(--hanae-red); font-weight: 700; }
+.hanae-content i, .hanae-content em { color: var(--hanae-gold); font-family: 'Playfair Display', serif; }
+
+/* SEPARADOR (CORRENTE ESTILIZADA) */
+.hanae-separator {
+    height: 1px; width: 60%; margin: 0 auto; position: relative; z-index: 2;
+    background: linear-gradient(90deg, transparent, var(--hanae-red), transparent);
+    opacity: 0.6;
+}
+.hanae-separator::after { /* Losango no meio */
+    content: ''; position: absolute; left: 50%; top: -3px;
+    width: 6px; height: 6px; background: var(--hanae-gold);
+    transform: translateX(-50%) rotate(45deg);
+    box-shadow: 0 0 5px var(--hanae-gold);
+}
+
+/* EXTRAS */
+.hanae-extras {
+  padding: 20px 60px; text-align: justify;
+  font-family: 'Cinzel', serif; color: var(--hanae-text); font-size: 0.9em;
+  opacity: 0.8; z-index: 2;
+}
+
+/* RODAPÉ & CORRENTES */
+.hanae-footer {
+  padding: 50px 20px 50px; text-align: center; 
+  position: relative; z-index: 2;
+}
+
+/* Imagem de Correntes no Fundo do Rodapé */
+.hanae-footer::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  /* Imagem de corrente sutil */
+  background-image: url('https://i.imgur.com/8y9T6bC.png'); 
+  background-size: 100%; background-position: center; opacity: 0.15;
+  filter: invert(1) sepia(1) saturate(5) hue-rotate(-50deg); /* Ajuste para tom avermelhado */
+  pointer-events: none; z-index: -1;
+}
+
+.hanae-signature::after {
+  content: 'Hanae Okami'; 
+  font-family: 'Pinyon Script', cursive; font-size: 3.5em; 
+  color: var(--hanae-red);
+  text-shadow: 0 0 2px #000;
+  display: block;
+}
+
+@media (max-width: 600px) {
+  .hanae-content, .hanae-extras { padding: 20px; }
+  .hanae-stats { flex-direction: column; gap: 15px; padding: 10px 20px; }
+  .hanae-status-item { width: 100%; }
+}
