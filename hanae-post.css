@@ -1,200 +1,228 @@
-/* --- TEMPLATE: HANAE OKAMI (CONTROL DEVIL THEME) --- */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cinzel:wght@400;700&family=Lato:wght@300;400;700&family=Pinyon+Script&display=swap');
+/* --- TEMPLATE: HANAE OKAMI (PUBLIC SAFETY DOSSIER) --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Courier+Prime:wght@400;700&family=Inter:wght@300;400;600&display=swap');
 
 :root {
-  --hanae-bg: #0a0303;      /* Preto avermelhado */
-  --hanae-panel: #140505;   /* Painel */
-  --hanae-red: #d90429;     /* Vermelho Makima (Vibrante) */
-  --hanae-blood: #640d14;   /* Vermelho Sangue (Escuro) */
-  --hanae-gold: #ffb703;    /* Dourado (Olhos) */
-  --hanae-text: #edf2f4;    /* Branco Frio */
+  --dossier-bg: #111111;       /* Fundo do Arquivo */
+  --dossier-paper: #1a1a1a;    /* Fundo do Papel */
+  --dossier-red: #cc0000;      /* Vermelho Controle */
+  --dossier-gold: #c5a059;     /* Dourado Olhos (Sutil) */
+  --dossier-text: #e0e0e0;     /* Texto */
+  --dossier-dim: #666666;      /* Texto Secundário */
 }
 
-/* Animação: Batimento Cardíaco Lento (Ameaçador) */
-@keyframes control-pulse {
-  0% { box-shadow: 0 0 0 0 rgba(217, 4, 41, 0); border-color: #333; }
-  40% { box-shadow: 0 0 20px 0 rgba(217, 4, 41, 0.15); border-color: var(--hanae-blood); }
-  100% { box-shadow: 0 0 0 0 rgba(217, 4, 41, 0); border-color: #333; }
-}
-
-/* Animação: Rotação Lenta do Halo */
-@keyframes halo-spin {
-  0% { transform: translateX(-50%) rotate(0deg); }
-  100% { transform: translateX(-50%) rotate(360deg); }
-}
-
-/* CONTAINER PRINCIPAL */
+/* CONTAINER: Estilo Pasta de Arquivo Confidencial */
 .hanae-container {
   box-sizing: border-box;
   max-width: 750px;
   width: 95%;
   margin: 40px auto;
   
-  background-color: var(--hanae-bg);
-  /* Degradê sutil imitando terno/escuridão */
-  background-image: radial-gradient(circle at 50% 20%, #1a0808 0%, #050000 80%);
+  background-color: var(--dossier-paper);
+  /* Textura sutil de papel escuro feita com CSS */
+  background-image: repeating-linear-gradient(
+    45deg,
+    #1a1a1a,
+    #1a1a1a 10px,
+    #1c1c1c 10px,
+    #1c1c1c 20px
+  );
   
-  border: 1px solid #333;
-  border-top: 4px solid var(--hanae-red); /* Topo vermelho marcante */
-  box-shadow: 0 20px 50px #000;
+  /* A Borda Lateral Grossa (Identidade Visual) */
+  border-left: 12px solid var(--dossier-red);
+  border-right: 1px solid #333;
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
   
-  padding: 0 0 20px 0;
+  padding: 0;
   position: relative;
-  color: var(--hanae-text);
-  font-family: 'Lato', sans-serif; /* Fonte mais limpa e moderna (Corporativa) */
-  
-  animation: control-pulse 6s infinite ease-in-out;
-  z-index: 0;
-  overflow: hidden;
+  color: var(--dossier-text);
+  font-family: 'Inter', sans-serif;
+  box-shadow: 10px 10px 0px rgba(0,0,0,0.5); /* Sombra dura, não difusa */
 }
 .hanae-container * { box-sizing: border-box; }
 
-/* HEADER COM HALO */
-.hanae-header {
-  text-align: center; padding: 60px 20px 30px; 
-  position: relative; z-index: 2;
-  border-bottom: 1px solid rgba(217, 4, 41, 0.2);
+/* MARCA D'ÁGUA "CONFIDENTIAL" (Feita com CSS Puro) */
+.hanae-container::before {
+  content: 'CONFIDENTIAL';
+  position: absolute;
+  top: 20px; right: 20px;
+  font-family: 'Courier Prime', monospace;
+  font-size: 3em;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.03); /* Quase invisível */
+  transform: rotate(-15deg);
+  pointer-events: none;
+  z-index: 0;
 }
 
-/* O HALO (Auréola de Sangue/Controle) */
-.hanae-header::before {
-  content: ''; position: absolute;
-  top: -100px; left: 50%;
-  width: 400px; height: 400px;
-  
-  border: 1px solid var(--hanae-red);
-  border-radius: 50%;
-  background: transparent;
-  
-  /* Círculos concêntricos usando box-shadow */
-  box-shadow: 
-    inset 0 0 20px rgba(217, 4, 41, 0.1),
-    0 0 0 20px transparent,
-    0 0 0 21px var(--hanae-red), /* Segundo anel */
-    0 0 50px rgba(217, 4, 41, 0.1);
-    
-  opacity: 0.15; /* Sutil */
-  pointer-events: none;
-  animation: halo-spin 60s linear infinite;
-  z-index: -1;
+/* HEADER: Estilo Relatório */
+.hanae-header {
+  padding: 40px 40px 20px 40px;
+  border-bottom: 2px solid var(--dossier-red);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Alinhado à esquerda */
+  position: relative;
+  background: linear-gradient(to right, rgba(204, 0, 0, 0.05), transparent);
+}
+
+.hanae-subtitle {
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.8em;
+  color: var(--dossier-red);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 5px;
 }
 
 .hanae-title {
-  font-family: 'Playfair Display', serif; /* Fonte elegante e autoritária */
-  font-weight: 700; font-size: 2.5em; color: var(--hanae-text);
-  text-transform: uppercase; letter-spacing: 5px; margin: 0;
-  text-shadow: 0 0 10px rgba(217, 4, 41, 0.5);
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 2.8em;
+  color: var(--dossier-text);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+  line-height: 0.9;
 }
-.hanae-subtitle {
-  font-family: 'Cinzel', serif; font-size: 0.9em; color: var(--hanae-gold);
-  letter-spacing: 3px; margin-top: 10px; text-transform: uppercase;
+.hanae-title::after {
+  content: ''; /* Ponto final vermelho */
+  display: inline-block;
+  width: 8px; height: 8px;
+  background-color: var(--dossier-red);
+  margin-left: 5px;
 }
 
-/* IMAGEM (MOLDURA DUPLA DE CONTROLE) */
+/* IMAGEM: Estilo Foto Anexada */
 .hanae-image-frame {
-  width: 100%; height: 380px;
-  position: relative; margin: 0 0 20px 0;
+  width: calc(100% - 80px); /* Menor que o container */
+  height: 300px;
+  margin: 30px auto;
+  position: relative;
   
-  padding: 6px; /* Espaço entre molduras */
-  background-color: #000;
-  
-  /* Borda Externa: Vermelho Sangue */
-  border-top: 1px solid var(--hanae-red);
-  border-bottom: 1px solid var(--hanae-red);
-  
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-  z-index: 2;
+  /* Moldura estilo foto polaroid escura */
+  border: 1px solid #444;
+  padding: 5px;
+  background: #000;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
-
 .hanae-image-frame img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  filter: contrast(1.1) saturate(0.9); /* Levemente desaturado, estilo cinematográfico */
-  display: block;
-  
-  /* Borda Interna: Dourado (Olhos) */
-  border: 1px solid var(--hanae-gold);
+  width: 100%; height: 100%; 
+  object-fit: cover; 
+  object-position: top center;
+  filter: grayscale(80%) contrast(1.2); /* Desaturado, estilo documento */
+  transition: filter 0.5s ease;
+}
+.hanae-image-frame:hover img {
+  filter: grayscale(0%) contrast(1.1); /* Cor volta ao passar o mouse */
+}
+/* Efeito de "Clipe" de papel com CSS */
+.hanae-image-frame::before {
+  content: ''; position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+  width: 40px; height: 15px;
+  background: #333;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+  z-index: 10;
 }
 
-/* STATUS (LIMPO E CORPORATIVO) */
+/* STATUS (Mantido intacto, mas reestilizado) */
 .hanae-stats {
-  padding: 10px 50px; display: flex; justify-content: space-between; gap: 40px;
-  background: rgba(255, 255, 255, 0.01);
-  border-bottom: 1px solid rgba(217, 4, 41, 0.1);
-  position: relative; z-index: 2;
+  padding: 20px 40px;
+  display: grid; 
+  grid-template-columns: 1fr 1fr; /* Lado a lado */
+  gap: 30px;
+  background: rgba(0,0,0,0.2);
+  border-top: 1px solid #333;
+  border-bottom: 1px solid #333;
 }
 .hanae-status-item {
-  display: flex; flex-direction: column; width: 50%;
+  display: flex; flex-direction: column;
 }
 .hanae-status-header {
-    display: flex; justify-content: space-between; margin-bottom: 6px;
-    font-family: 'Cinzel', serif; font-size: 0.8em; letter-spacing: 1px;
+  display: flex; justify-content: space-between;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.75em; color: var(--dossier-dim);
+  margin-bottom: 5px; text-transform: uppercase;
 }
 .hanae-status-bar-wrapper {
-  width: 100%; height: 2px; background: #333; /* Barra bem fina e elegante */
+  width: 100%; height: 6px; 
+  background: #000; 
+  border: 1px solid #333;
 }
-.hanae-status-bar-fill { height: 100%; box-shadow: 0 0 10px currentColor; }
+/* Cores dos Status */
+.hanae-hp { color: var(--dossier-red); font-weight: bold; }
+.hanae-ea { color: var(--dossier-gold); font-weight: bold; }
+.hanae-hp-bg { background-color: var(--dossier-red); }
+.hanae-ea-bg { background-color: var(--dossier-gold); }
 
-/* Cores específicas */
-.hanae-hp { color: var(--hanae-red); }
-.hanae-ea { color: var(--hanae-gold); }
-.hanae-hp-bg { background-color: var(--hanae-red); color: var(--hanae-red); }
-.hanae-ea-bg { background-color: var(--hanae-gold); color: var(--hanae-gold); }
 
-/* CONTEÚDO */
+/* CONTEÚDO: Estilo Datilografado */
 .hanae-content {
-  padding: 40px 60px; font-size: 1.1em; line-height: 1.9; color: #ccc;
-  text-align: justify; position: relative; z-index: 2;
+  padding: 40px 50px;
+  font-size: 1.05em;
+  line-height: 1.8;
+  color: #ccc;
+  text-align: justify;
 }
-/* Negrito: Vermelho / Itálico: Dourado */
-.hanae-content b, .hanae-content strong { color: var(--hanae-red); font-weight: 700; }
-.hanae-content i, .hanae-content em { color: var(--hanae-gold); font-family: 'Playfair Display', serif; }
-
-/* SEPARADOR (CORRENTE ESTILIZADA) */
-.hanae-separator {
-    height: 1px; width: 60%; margin: 0 auto; position: relative; z-index: 2;
-    background: linear-gradient(90deg, transparent, var(--hanae-red), transparent);
-    opacity: 0.6;
+.hanae-content::first-letter {
+  font-size: 3em;
+  font-family: 'Playfair Display', serif;
+  color: var(--dossier-red);
+  float: left;
+  margin-right: 10px;
+  line-height: 0.8;
 }
-.hanae-separator::after { /* Losango no meio */
-    content: ''; position: absolute; left: 50%; top: -3px;
-    width: 6px; height: 6px; background: var(--hanae-gold);
-    transform: translateX(-50%) rotate(45deg);
-    box-shadow: 0 0 5px var(--hanae-gold);
-}
+.hanae-content b { color: var(--dossier-text); background-color: var(--dossier-red); padding: 0 4px; color: #000; } /* Estilo marca-texto reverso */
+.hanae-content i { color: var(--dossier-gold); font-family: 'Playfair Display', serif; }
 
 /* EXTRAS */
 .hanae-extras {
-  padding: 20px 60px; text-align: justify;
-  font-family: 'Cinzel', serif; color: var(--hanae-text); font-size: 0.9em;
-  opacity: 0.8; z-index: 2;
+  margin: 0 40px 30px;
+  padding: 15px;
+  border: 1px dashed #444;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.85em;
+  color: var(--dossier-dim);
+  background: rgba(0,0,0,0.3);
 }
 
-/* RODAPÉ & CORRENTES */
+/* SEPARADOR CSS (Linha simples) */
+.hanae-separator {
+  height: 2px; width: 100%;
+  background: repeating-linear-gradient(90deg, #333, #333 5px, transparent 5px, transparent 10px);
+  margin: 20px 0;
+  opacity: 0.5;
+}
+
+/* RODAPÉ: Assinatura Oficial */
 .hanae-footer {
-  padding: 50px 20px 50px; text-align: center; 
-  position: relative; z-index: 2;
+  padding: 30px 40px;
+  text-align: right; /* Assinatura à direita */
+  background: #0f0f0f;
+  border-top: 4px solid var(--dossier-red);
+  position: relative;
 }
-
-/* Imagem de Correntes no Fundo do Rodapé */
-.hanae-footer::before {
-  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  /* Imagem de corrente sutil */
-  background-image: url('https://i.imgur.com/8y9T6bC.png'); 
-  background-size: 100%; background-position: center; opacity: 0.15;
-  filter: invert(1) sepia(1) saturate(5) hue-rotate(-50deg); /* Ajuste para tom avermelhado */
-  pointer-events: none; z-index: -1;
-}
-
 .hanae-signature::after {
-  content: 'Hanae Okami'; 
-  font-family: 'Pinyon Script', cursive; font-size: 3.5em; 
-  color: var(--hanae-red);
-  text-shadow: 0 0 2px #000;
+  content: 'Hanae Okami';
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-size: 2em;
+  color: var(--dossier-text);
+}
+.hanae-signature::before { /* Cargo abaixo do nome */
+  content: 'Public Safety Bureau - Div. 4';
   display: block;
+  font-family: 'Courier Prime', monospace;
+  font-size: 0.6em;
+  color: var(--dossier-red);
+  margin-top: 5px;
+  order: 2; /* CSS Flexbox trick se fosse flex, mas aqui é block normal */
 }
 
 @media (max-width: 600px) {
-  .hanae-content, .hanae-extras { padding: 20px; }
-  .hanae-stats { flex-direction: column; gap: 15px; padding: 10px 20px; }
-  .hanae-status-item { width: 100%; }
+  .hanae-container { border-left-width: 6px; }
+  .hanae-stats { grid-template-columns: 1fr; gap: 15px; }
+  .hanae-header, .hanae-content, .hanae-footer { padding: 20px; }
+  .hanae-image-frame { width: 100%; margin: 20px 0; }
 }
