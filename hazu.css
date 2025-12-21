@@ -218,17 +218,30 @@
 
 /* --- EXTRAS --- */
 .comic-container .comic-extras {
-  margin: 0 20px 20px 20px; padding: 15px; background: var(--comic-cyan);
-  border: 3px solid var(--comic-black); color: var(--comic-black);
-  font-family: 'Bangers', cursive; font-size: 1em; letter-spacing: 1px;
+  margin: 0 20px 20px 20px; 
+  padding: 15px; 
+  background: var(--comic-cyan);
+  border: 3px solid var(--comic-black); 
+  color: var(--comic-black);
+  
+  
+  font-family: 'Comic Neue', cursive; 
+  font-weight: 700; 
+  
+  font-size: 1em; 
+  letter-spacing: 0.5px; 
   animation: comic-float 4s ease-in-out infinite;
 }
-.comic-container .comic-extras::before {
-  content: 'NOTA DO EDITOR:'; display: block; font-size: 0.8em; text-decoration: underline; margin-bottom: 5px;
-}
 
-@media (max-width: 600px) {
-  .comic-container .comic-header { flex-direction: column; text-align: center; transform: none; }
-  .comic-container .comic-title { font-size: 2em; }
-  .comic-container .comic-content { margin: 10px; padding: 15px; }
+
+.comic-container .comic-extras::before {
+  content: 'NOTA DO EDITOR:'; 
+  display: block; 
+  
+ 
+  font-family: 'Bangers', cursive; 
+  
+  font-size: 1.2em; 
+  text-decoration: underline; 
+  margin-bottom: 5px;
 }
