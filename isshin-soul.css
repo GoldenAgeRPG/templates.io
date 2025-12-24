@@ -4,12 +4,17 @@
 :root {
   --isshin-bg: #050203;
   --isshin-paper: #0a0405;
-  --isshin-pink: #f72585;      /* Rosa Saturado/Vibrante */
-  --isshin-faded: #8c4b5d;     /* Rosa Seco (Contraste) */
+  
+  /* VOLTANDO AO ROSA SAKURA SUAVE */
+  --isshin-pink: #ff80a0;      
+  
+  --isshin-faded: #8c4b5d;
   --isshin-gold: #c4a055;
   --isshin-text: #e6dada;
-  --rpg-hp: #d90429;
-  --rpg-ea: #4361ee;
+  
+  /* CORES RPG MAIS SÓBRIAS (SEM NEON) */
+  --rpg-hp: #b00020;           /* Vermelho Sangue Escuro */
+  --rpg-ea: #2040b0;           /* Azul Profundo */
 }
 
 /* Animação das Flores */
@@ -19,10 +24,10 @@
   100% { top: 110%; transform: translateX(50px) rotate(360deg); opacity: 0; }
 }
 
-/* Animação da Borda (APENAS BRILHO, SEM PISCAR A COR) */
+/* Animação da Borda (Brilho Suave) */
 @keyframes soul-breathe {
-  0%, 100% { box-shadow: 0 0 15px rgba(247, 37, 133, 0.1); }
-  50% { box-shadow: 0 0 50px rgba(247, 37, 133, 0.5); }
+  0%, 100% { box-shadow: 0 0 15px rgba(255, 128, 160, 0.05); }
+  50% { box-shadow: 0 0 40px rgba(255, 128, 160, 0.2); }
 }
 
 /* CONTAINER PRINCIPAL */
@@ -36,7 +41,7 @@
   background-color: var(--isshin-bg);
   background-image: radial-gradient(circle at 50% 30%, #1a0a0d 0%, #000000 80%);
   
-  /* Borda Torii (Cor Fixa Magenta) */
+  /* Borda Torii */
   border: 8px solid var(--isshin-pink);
   border-bottom-width: 12px;
   
@@ -45,7 +50,6 @@
   box-shadow: 0 30px 60px #000;
   
   overflow: visible;
-  /* Animação só do brilho */
   animation: soul-breathe 6s infinite ease-in-out;
 }
 .isshin-container * { box-sizing: border-box; }
@@ -61,27 +65,22 @@
   position: absolute;
   color: var(--isshin-pink);
   font-size: 20px; line-height: 1; user-select: none;
-  text-shadow: 0 0 5px rgba(247, 37, 133, 0.6);
+  text-shadow: 0 0 5px rgba(255, 128, 160, 0.4);
   animation-name: sakura-drop;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
 }
 .sakura-particle.faded { color: var(--isshin-faded); text-shadow: none; }
 
-/* TOPO DO TORII (CORRIGIDO: MAGENTA E SEM PISCAR) */
+/* TOPO DO TORII */
 .isshin-container::before {
   content: '❀';
   display: flex; align-items: center; justify-content: center;
-  font-size: 24px;
-  color: var(--isshin-bg); /* Flor escura para contraste */
+  font-size: 24px; color: var(--isshin-bg);
   text-shadow: 0 1px 1px rgba(255,255,255,0.3);
-  
   position: absolute;
   top: -40px; left: -15px; right: -15px; height: 40px;
-  
-  /* Cor de Fundo Magenta Saturada */
   background: var(--isshin-pink);
-  
   border-radius: 50% 50% 0 0 / 20px 20px 0 0;
   box-shadow: 0 10px 20px rgba(0,0,0,0.8);
   z-index: 10;
@@ -98,7 +97,6 @@
   opacity: 0.7;
 }
 
-/* TÍTULO PRINCIPAL */
 .isshin-title {
   font-family: 'Zen Old Mincho', serif;
   font-weight: 900;
@@ -109,11 +107,14 @@
   margin: 0; line-height: 1;
   text-shadow: 2px 2px 0px #000;
 }
+
+/* SUBTÍTULO (FONTE KAUSHAN AGORA) */
 .isshin-subtitle {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1em; color: var(--isshin-gold);
-  letter-spacing: 4px; margin-top: 10px; text-transform: uppercase;
-  font-weight: 700;
+  font-family: 'Kaushan Script', cursive; /* Mudado conforme pedido */
+  font-size: 1.2em; /* Levemente maior para ler melhor essa fonte */
+  color: var(--isshin-gold);
+  letter-spacing: 1px; margin-top: 10px; 
+  opacity: 0.9;
 }
 
 /* SISTEMA DUAL */
@@ -139,7 +140,7 @@
   width: 90px; height: 90px;
   border: 2px solid var(--isshin-pink);
   border-radius: 50%; padding: 3px;
-  box-shadow: 0 0 15px rgba(247, 37, 133, 0.4);
+  box-shadow: 0 0 15px rgba(255, 128, 160, 0.2);
 }
 .active-avatar img {
   width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
@@ -147,14 +148,23 @@
 }
 .active-bars { flex-grow: 1; display: flex; flex-direction: column; gap: 12px; }
 
-/* BARRAS ATIVAS (CORES RPG) */
+/* BARRAS ATIVAS (LIMPAS, SEM GLOW EXCESSIVO) */
 .isshin-bar-row { display: flex; align-items: center; gap: 15px; }
 .isshin-bar-track { flex-grow: 1; height: 12px; background: #000; border: 1px solid #333; }
-.label-hp { width: 30px; font-weight: bold; color: var(--rpg-hp); font-size: 0.9em; font-family: 'Zen Old Mincho', serif; }
-.isshin-hp-fill { height: 100%; background: var(--rpg-hp); box-shadow: 0 0 10px var(--rpg-hp); }
-.label-ea { width: 30px; font-weight: bold; color: var(--rpg-ea); font-size: 0.9em; font-family: 'Zen Old Mincho', serif; }
-.isshin-ea-fill { height: 100%; background: var(--rpg-ea); box-shadow: 0 0 10px var(--rpg-ea); }
+
+/* Labels sem cor (Branco/Cinza) */
+.label-hp, .label-ea { 
+  width: 30px; font-weight: bold; 
+  color: var(--isshin-text); opacity: 0.8; /* Cor neutra */
+  font-size: 0.9em; font-family: 'Zen Old Mincho', serif; 
+}
+
+/* Fills Sóbrios (Sem box-shadow forte) */
+.isshin-hp-fill { height: 100%; background: var(--rpg-hp); }
+.isshin-ea-fill { height: 100%; background: var(--rpg-ea); }
+
 .isshin-bar-val { width: 80px; text-align: right; font-size: 0.85em; color: var(--isshin-text); }
+
 
 /* CONTEÚDO */
 .isshin-content {
@@ -214,12 +224,13 @@
 .passive-hp-fill { height: 100%; background: var(--rpg-hp); } 
 .passive-ea-fill { height: 100%; background: var(--rpg-ea); }
 
-/* ASSINATURA TRAVADA */
+/* ASSINATURA TRAVADA (MENOR E DISCRETA) */
 .isshin-signature { position: absolute; bottom: 25px; left: 40px; }
 .isshin-signature::after {
   content: 'Isshin Kyoraku';
   font-family: 'Zen Old Mincho', serif;
-  font-weight: 700; font-size: 2.2em; 
+  font-weight: 700; 
+  font-size: 1.5em; /* Reduzido de 2.2em para 1.5em */
   color: var(--isshin-pink);
   text-shadow: 2px 2px 0px #000;
   text-transform: uppercase; letter-spacing: 1px;
@@ -236,31 +247,15 @@
 .passive-avatar:hover { filter: grayscale(0%) brightness(1); }
 .passive-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
 
-/* --- MOBILE FIX (CORREÇÃO DE ORDEM NO CELULAR) --- */
+/* MOBILE FIX */
 @media (max-width: 600px) {
   .isshin-container { margin-top: 50px; border-width: 4px; }
   .isshin-container::before { height: 30px; top: -30px; left: -5px; right: -5px; border-bottom-width: 4px; }
   
-  /* Reordenamento do Rodapé para evitar sobreposição */
-  .isshin-footer {
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-      gap: 20px;
-  }
-  .passive-info {
-      order: 1; /* Info primeiro */
-      text-align: center; align-items: center;
-  }
-  .passive-avatar {
-      order: 2; /* Avatar segundo */
-  }
-  .isshin-signature {
-      position: relative; /* Tira da posição absoluta */
-      bottom: auto; left: auto;
-      margin-top: 10px;
-      order: 3; /* Assinatura por último */
-  }
+  .isshin-footer { flex-direction: column; align-items: center; text-align: center; gap: 20px; }
+  .passive-info { order: 1; text-align: center; align-items: center; }
+  .passive-avatar { order: 2; }
+  .isshin-signature { position: relative; bottom: auto; left: auto; margin-top: 10px; order: 3; }
   
   .passive-bars-container { width: 100%; max-width: 200px; }
   .passive-bar-row { justify-content: center; }
