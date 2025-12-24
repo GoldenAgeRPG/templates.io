@@ -1,96 +1,81 @@
-/* --- TEMPLATE: ISSHIN & O-HANA (FINAL VERSION - REAL TEXT PARTICLES) --- */
+/* --- TEMPLATE: ISSHIN & O-HANA (FINAL TORII FIXED) --- */
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Sawarabi+Mincho&display=swap');
 
 :root {
-  --isshin-bg: #050203;        /* Preto quase absoluto */
-  --isshin-paper: #0a0405;     /* Papel muito escuro */
-  --isshin-pink: #ff80a0;      /* Rosa Sakura Vibrante */
-  --isshin-faded: #8c4b5d;     /* Rosa Seco (Sangue/Velho) */
-  --isshin-gold: #c4a055;      /* Ouro Envelhecido (Kintsugi) */
-  --isshin-text: #e6dada;      /* Branco Papel de Arroz */
+  --isshin-bg: #050203;
+  --isshin-paper: #0a0405;
+  --isshin-pink: #ff80a0;
+  --isshin-faded: #8c4b5d;
+  --isshin-gold: #c4a055;
+  --isshin-text: #e6dada;
 }
 
-/* Animação: Partículas Caindo (Descendo e girando suavemente) */
-@keyframes sakura-fall-particles {
-  0% {
-    top: -200px; /* Começa bem acima da tela */
-    transform: translateX(0px) rotate(0deg);
-    opacity: 0;
-  }
-  5% { opacity: 1; } /* Aparece suavemente */
-  90% { opacity: 1; }
-  100% {
-    top: 100%; /* Termina no final do container */
-    transform: translateX(60px) rotate(360deg); /* Deriva para direita e gira */
-    opacity: 0; /* Desaparece no fim */
-  }
+/* Animação das Flores (Definida no CSS, controlada pelo JS) */
+@keyframes sakura-drop {
+  0% { top: -10%; transform: translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { top: 110%; transform: translateX(50px) rotate(360deg); opacity: 0; }
 }
 
-/* Animação: Respiração da Alma (Bordas) */
+/* Animação da Borda */
 @keyframes soul-breathe {
   0%, 100% { box-shadow: 0 0 10px rgba(255, 128, 160, 0.05); border-color: var(--isshin-faded); }
   50% { box-shadow: 0 0 30px rgba(255, 128, 160, 0.2); border-color: var(--isshin-pink); }
 }
 
-/* CONTAINER PRINCIPAL (TORII FRAME) */
+/* CONTAINER PRINCIPAL */
 .isshin-container {
   box-sizing: border-box;
   max-width: 750px;
   width: 95%;
   margin: 60px auto;
+  position: relative;
   
   background-color: var(--isshin-bg);
-  /* Fundo escuro limpo */
   background-image: radial-gradient(circle at 50% 30%, #1a0a0d 0%, #000000 80%);
   
-  /* MOLDURA TORII */
+  /* Borda Torii */
   border: 8px solid var(--isshin-faded);
   border-bottom-width: 12px;
   
-  padding: 0;
-  position: relative;
   color: var(--isshin-text);
   font-family: 'Sawarabi Mincho', serif;
   box-shadow: 0 30px 60px #000;
   
-  /* IMPORTANTE: overflow: hidden AQUI corta as partículas quando chegam no fim */
-  overflow: hidden;
+  /* IMPORTANTE: Visible para o teto aparecer */
+  overflow: visible;
   
   animation: soul-breathe 8s infinite ease-in-out;
 }
 .isshin-container * { box-sizing: border-box; }
 
-/* --- EFEITO DE PARTÍCULAS (CORRIGIDO - TÉCNICA BOX-SHADOW) --- */
-.isshin-container::after {
-  content: '❀'; /* O caractere de texto real */
+/* CAMADA DAS FLORES (O JS vai jogar as flores aqui dentro) */
+.isshin-sakura-layer {
   position: absolute;
-  /* Posição inicial do "mestre" invisível */
-  top: -200px; 
-  left: 50%; 
-  font-size: 24px;
-  color: transparent; /* O mestre é invisível */
-  text-shadow: none;
-  pointer-events: none; 
-  z-index: 1; /* Atrás do texto */
-  
-  /* A MÁGICA: Criando as flores usando sombras coloridas do caractere */
-  /* Formato: Offset-X | Offset-Y | Blur | Cor */
-  box-shadow: 
-    -320px 300px 0 var(--isshin-pink),   /* Flor 1 (Rosa) */
-    280px 500px 0 var(--isshin-faded),   /* Flor 2 (Seca) */
-    -150px 750px 0 var(--isshin-pink),   /* Flor 3 (Rosa) */
-    350px 950px 0 var(--isshin-faded),   /* Flor 4 (Seca) */
-    0px 1200px 0 var(--isshin-pink),     /* Flor 5 (Rosa) */
-    -200px 1450px 0 var(--isshin-faded); /* Flor 6 (Seca) */
-    
-  /* Animação longa e linear */
-  animation: sakura-fall-particles 25s linear infinite;
+  top: 0; left: 0; width: 100%; height: 100%;
+  overflow: hidden; /* Isso segura as flores dentro do quadrado */
+  pointer-events: none;
+  z-index: 1;
 }
 
-/* TOPO DO TORII (Kasagi + Brasão) */
-/* IMPORTANTE: Z-index alto para ficar FORA do overflow:hidden */
+/* ESTILO DA PARTÍCULA DE FLOR (Gerada pelo JS) */
+.sakura-particle {
+  position: absolute;
+  color: var(--isshin-pink);
+  font-size: 20px;
+  line-height: 1;
+  user-select: none;
+  text-shadow: 0 0 5px rgba(255, 128, 160, 0.5);
+  animation-name: sakura-drop;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+.sakura-particle.faded { color: var(--isshin-faded); text-shadow: none; }
+
+
+/* TOPO DO TORII (Restaurado) */
 .isshin-container::before {
-  content: '❀'; /* Brasão */
+  content: '❀';
   display: flex; align-items: center; justify-content: center;
   font-size: 24px; color: var(--isshin-bg);
   text-shadow: 0 1px 1px rgba(255,255,255,0.3);
@@ -102,7 +87,7 @@
   border-bottom: 8px solid var(--isshin-pink);
   border-radius: 50% 50% 0 0 / 20px 20px 0 0;
   box-shadow: 0 10px 20px rgba(0,0,0,0.8);
-  z-index: 10; 
+  z-index: 10;
 }
 
 /* HEADER */
@@ -110,7 +95,6 @@
   text-align: center; padding: 60px 20px 30px;
   position: relative; z-index: 2;
 }
-/* Linha Suave Header */
 .isshin-header::after {
   content: ''; position: absolute; bottom: 0; left: 10%; right: 10%; height: 1px;
   background: linear-gradient(90deg, transparent, var(--isshin-faded), transparent);
@@ -130,7 +114,7 @@
   font-style: italic;
 }
 
-/* ÁREA DE STATUS DUPLA */
+/* SISTEMA DUAL */
 .isshin-dual-system {
   padding: 30px 40px;
   background: rgba(0,0,0,0.6);
@@ -138,13 +122,11 @@
   display: flex; flex-direction: column; gap: 30px;
 }
 
-/* --- PERFIL ATIVO --- */
 .isshin-active-soul {
   display: flex; align-items: center; gap: 25px;
   padding-bottom: 25px;
   position: relative;
 }
-/* Linha Suave Kintsugi */
 .isshin-active-soul::after {
   content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 1px;
   background: linear-gradient(90deg, transparent, var(--isshin-faded), var(--isshin-gold), var(--isshin-faded), transparent);
@@ -163,13 +145,11 @@
 }
 .active-bars { flex-grow: 1; display: flex; flex-direction: column; gap: 12px; }
 
-/* Barras Ativas */
 .isshin-bar-row { display: flex; align-items: center; gap: 15px; }
 .isshin-bar-label { width: 30px; font-weight: bold; color: var(--isshin-pink); font-size: 0.8em; }
 .isshin-bar-track { flex-grow: 1; height: 10px; background: #000; border: 1px solid var(--isshin-faded); }
 .isshin-bar-fill { height: 100%; background: var(--isshin-pink); box-shadow: 0 0 10px var(--isshin-pink); }
 .isshin-bar-val { width: 80px; text-align: right; font-size: 0.85em; color: var(--isshin-text); }
-
 
 /* CONTEÚDO */
 .isshin-content {
@@ -183,11 +163,10 @@
   font-family: 'Kaushan Script', cursive; font-size: 2.5em; color: var(--isshin-pink);
   float: left; margin-right: 5px; line-height: 0.8;
 }
-/* Estilo BBCode: Negrito e Itálico */
 .isshin-content b, .isshin-content strong { color: var(--isshin-pink); font-weight: 700; }
 .isshin-content i, .isshin-content em { color: var(--isshin-gold); font-family: 'Cormorant Garamond', serif; font-style: italic; letter-spacing: 0.5px; text-shadow: 0 0 2px rgba(196, 160, 85, 0.3); }
 
-/* --- EXTRAS (CONSIDERAÇÕES) --- */
+/* EXTRAS */
 .isshin-extras {
   margin: 0 40px 30px;
   padding: 20px;
@@ -197,7 +176,6 @@
   font-size: 0.9em;
   position: relative; z-index: 2;
   text-align: justify;
-  
   border: 1px solid rgba(140, 75, 93, 0.3);
   border-left: 2px solid var(--isshin-pink);
   box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
@@ -207,7 +185,6 @@
   font-family: 'Kaushan Script', cursive; 
   color: var(--isshin-gold); 
   margin-bottom: 15px;
-  
   background-image: linear-gradient(90deg, var(--isshin-faded), transparent);
   background-size: 100% 1px;
   background-position: bottom;
@@ -215,14 +192,13 @@
   padding-bottom: 5px;
 }
 
-/* RODAPÉ & PASSIVO */
+/* RODAPÉ */
 .isshin-footer {
   background: #020101;
   padding: 25px 40px;
   position: relative; z-index: 2;
   display: flex; align-items: center; justify-content: flex-end; gap: 25px;
 }
-/* Linha Suave Rodapé (Glow Rosa) */
 .isshin-footer::before {
   content: ''; position: absolute; top: 0; left: 5%; right: 5%; height: 1px;
   background: linear-gradient(90deg, transparent, var(--isshin-pink), transparent);
@@ -233,23 +209,12 @@
 .passive-info { text-align: right; opacity: 0.8; display: flex; flex-direction: column; gap: 2px; }
 .passive-name { font-family: 'Kaushan Script', cursive; font-size: 1.4em; color: var(--isshin-gold); line-height: 1; }
 
-/* BARRAS PASSIVAS */
-.passive-bars-container {
-  width: 180px;
-  display: flex; flex-direction: column; gap: 6px; margin-top: 8px;
-}
-.passive-bar-row {
-  display: flex; align-items: center; justify-content: flex-end; gap: 8px;
-  font-size: 0.7em; color: #888; font-family: sans-serif;
-  white-space: nowrap; /* IMPEDE QUEBRA DE LINHA */
-}
-.passive-bar-track {
-  width: 100%; height: 5px; background: #222; border: 1px solid #444; position: relative;
-}
+.passive-bars-container { width: 180px; display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.passive-bar-row { display: flex; align-items: center; justify-content: flex-end; gap: 8px; font-size: 0.7em; color: #888; font-family: sans-serif; white-space: nowrap; }
+.passive-bar-track { width: 100%; height: 5px; background: #222; border: 1px solid #444; position: relative; }
 .passive-hp-fill { height: 100%; background: var(--isshin-faded); }
 .passive-ea-fill { height: 100%; background: var(--isshin-gold); }
 
-/* ASSINATURA TRAVADA */
 .isshin-signature { position: absolute; bottom: 25px; left: 40px; }
 .isshin-signature::after {
   content: 'Isshin Kyoraku';
