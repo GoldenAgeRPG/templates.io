@@ -129,37 +129,62 @@
 }
 .isshin-content b { color: var(--isshin-pink); }
 
-/* --- PERFIL REPRIMIDO (RODAPÉ / PASSIVO) --- */
+/* --- ISSHIN: RODAPÉ, BARRAS PASSIVAS E ASSINATURA --- */
+
 .isshin-footer {
   background: #080203;
   padding: 20px 40px;
   border-top: 2px solid var(--isshin-faded);
   position: relative; z-index: 2;
-  
-  /* Layout para a alma reprimida */
-  display: flex; align-items: center; justify-content: flex-end; gap: 15px;
+  display: flex; align-items: center; justify-content: flex-end; gap: 20px;
 }
 
-.passive-info { text-align: right; opacity: 0.6; }
+/* Info da Alma Passiva */
+.passive-info { text-align: right; opacity: 0.6; display: flex; flex-direction: column; gap: 5px; }
 .passive-name { font-family: 'Kaushan Script', cursive; font-size: 1.2em; color: var(--isshin-gold); }
 .passive-status { font-size: 0.7em; color: #888; text-transform: uppercase; letter-spacing: 1px; }
 
-/* Barrinhas pequenas para a alma reprimida */
-.passive-mini-bars { width: 100px; height: 4px; background: #333; margin-top: 5px; margin-left: auto; }
-.passive-hp { width: 100%; height: 100%; background: var(--isshin-faded); }
+/* CONTAINER DAS BARRAS PASSIVAS (NOVO) */
+.passive-bars-container {
+  width: 120px; display: flex; flex-direction: column; gap: 4px; margin-top: 5px;
+}
+.passive-bar-row {
+  display: flex; align-items: center; justify-content: flex-end; gap: 5px;
+  font-size: 0.6em; color: #666; font-family: sans-serif;
+}
+.passive-bar-track {
+  width: 100%; height: 3px; background: #333; border: 1px solid #444; position: relative;
+}
+.passive-hp-fill { height: 100%; background: var(--isshin-faded); }
+.passive-ea-fill { height: 100%; background: var(--isshin-gold); }
 
+/* ASSINATURA TRAVADA (NO CSS) */
+.isshin-signature {
+  position: absolute; bottom: 20px; left: 40px; /* Canto esquerdo */
+}
+.isshin-signature::after {
+  content: 'Isshin Kyoraku'; /* NOME FIXO AQUI */
+  font-family: 'Kaushan Script', cursive; 
+  font-size: 2.5em; 
+  color: var(--isshin-pink);
+  text-shadow: 2px 2px 0px #000;
+  transform: rotate(-5deg);
+  display: block;
+}
+
+/* AVATAR PASSIVO */
 .passive-avatar {
-  width: 50px; height: 50px; /* Menor que o ativo */
+  width: 60px; height: 60px;
   border: 1px solid var(--isshin-faded);
-  border-radius: 5px; /* Quadrado arredondado para diferenciar */
-  filter: grayscale(100%) brightness(0.6); /* Apagado/Cinza */
+  border-radius: 5px;
+  filter: grayscale(100%) brightness(0.6);
   transition: all 0.3s;
 }
-.passive-avatar:hover { filter: grayscale(0%) brightness(1); } /* Acende ao passar o mouse */
+.passive-avatar:hover { filter: grayscale(0%) brightness(1); }
 .passive-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
 
 @media (max-width: 600px) {
-  .isshin-content { padding: 20px; }
-  .isshin-active-soul { flex-direction: column; text-align: center; }
-  .isshin-bar-row { width: 100%; }
+  .isshin-footer { flex-direction: column; align-items: center; text-align: center; }
+  .isshin-signature { position: relative; bottom: auto; left: auto; margin-bottom: 20px; }
+  .passive-info { text-align: center; align-items: center; }
 }
