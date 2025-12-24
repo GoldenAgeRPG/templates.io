@@ -5,16 +5,18 @@
   --isshin-bg: #050203;
   --isshin-paper: #0a0405;
   
-  /* VOLTANDO AO ROSA SAKURA SUAVE */
-  --isshin-pink: #ff80a0;      
+  /* NOVA COR: Rosa Cerejeira Intenso (Mais vivo, sem ser neon) */
+  --isshin-pink: #ff5e94;      
   
-  --isshin-faded: #8c4b5d;
+  /* Ajuste leve na cor de contraste para combinar */
+  --isshin-faded: #9e4a6b;
+  
   --isshin-gold: #c4a055;
   --isshin-text: #e6dada;
   
-  /* CORES RPG MAIS SÓBRIAS (SEM NEON) */
-  --rpg-hp: #b00020;           /* Vermelho Sangue Escuro */
-  --rpg-ea: #2040b0;           /* Azul Profundo */
+  /* CORES RPG SÓBRIAS */
+  --rpg-hp: #b00020;
+  --rpg-ea: #2040b0;
 }
 
 /* Animação das Flores */
@@ -24,10 +26,10 @@
   100% { top: 110%; transform: translateX(50px) rotate(360deg); opacity: 0; }
 }
 
-/* Animação da Borda (Brilho Suave) */
+/* Animação da Borda (Brilho Suave com a nova cor) */
 @keyframes soul-breathe {
-  0%, 100% { box-shadow: 0 0 15px rgba(255, 128, 160, 0.05); }
-  50% { box-shadow: 0 0 40px rgba(255, 128, 160, 0.2); }
+  0%, 100% { box-shadow: 0 0 15px rgba(255, 94, 148, 0.05); }
+  50% { box-shadow: 0 0 40px rgba(255, 94, 148, 0.25); }
 }
 
 /* CONTAINER PRINCIPAL */
@@ -65,7 +67,7 @@
   position: absolute;
   color: var(--isshin-pink);
   font-size: 20px; line-height: 1; user-select: none;
-  text-shadow: 0 0 5px rgba(255, 128, 160, 0.4);
+  text-shadow: 0 0 5px rgba(255, 94, 148, 0.4); /* Sombra com a nova cor */
   animation-name: sakura-drop;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
@@ -108,10 +110,10 @@
   text-shadow: 2px 2px 0px #000;
 }
 
-/* SUBTÍTULO (FONTE KAUSHAN AGORA) */
+/* SUBTÍTULO */
 .isshin-subtitle {
-  font-family: 'Kaushan Script', cursive; /* Mudado conforme pedido */
-  font-size: 1.2em; /* Levemente maior para ler melhor essa fonte */
+  font-family: 'Kaushan Script', cursive;
+  font-size: 1.2em; 
   color: var(--isshin-gold);
   letter-spacing: 1px; margin-top: 10px; 
   opacity: 0.9;
@@ -140,7 +142,7 @@
   width: 90px; height: 90px;
   border: 2px solid var(--isshin-pink);
   border-radius: 50%; padding: 3px;
-  box-shadow: 0 0 15px rgba(255, 128, 160, 0.2);
+  box-shadow: 0 0 15px rgba(255, 94, 148, 0.2); /* Sombra com a nova cor */
 }
 .active-avatar img {
   width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
@@ -148,21 +150,16 @@
 }
 .active-bars { flex-grow: 1; display: flex; flex-direction: column; gap: 12px; }
 
-/* BARRAS ATIVAS (LIMPAS, SEM GLOW EXCESSIVO) */
+/* BARRAS ATIVAS */
 .isshin-bar-row { display: flex; align-items: center; gap: 15px; }
 .isshin-bar-track { flex-grow: 1; height: 12px; background: #000; border: 1px solid #333; }
-
-/* Labels sem cor (Branco/Cinza) */
 .label-hp, .label-ea { 
   width: 30px; font-weight: bold; 
-  color: var(--isshin-text); opacity: 0.8; /* Cor neutra */
+  color: var(--isshin-text); opacity: 0.8;
   font-size: 0.9em; font-family: 'Zen Old Mincho', serif; 
 }
-
-/* Fills Sóbrios (Sem box-shadow forte) */
 .isshin-hp-fill { height: 100%; background: var(--rpg-hp); }
 .isshin-ea-fill { height: 100%; background: var(--rpg-ea); }
-
 .isshin-bar-val { width: 80px; text-align: right; font-size: 0.85em; color: var(--isshin-text); }
 
 
@@ -224,13 +221,13 @@
 .passive-hp-fill { height: 100%; background: var(--rpg-hp); } 
 .passive-ea-fill { height: 100%; background: var(--rpg-ea); }
 
-/* ASSINATURA TRAVADA (MENOR E DISCRETA) */
+/* ASSINATURA TRAVADA (DISCRETA) */
 .isshin-signature { position: absolute; bottom: 25px; left: 40px; }
 .isshin-signature::after {
   content: 'Isshin Kyoraku';
   font-family: 'Zen Old Mincho', serif;
   font-weight: 700; 
-  font-size: 1.5em; /* Reduzido de 2.2em para 1.5em */
+  font-size: 1.5em;
   color: var(--isshin-pink);
   text-shadow: 2px 2px 0px #000;
   text-transform: uppercase; letter-spacing: 1px;
