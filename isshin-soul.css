@@ -1,0 +1,165 @@
+/* --- TEMPLATE: ISSHIN & O-HANA (DUAL SOUL) --- */
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Sawarabi+Mincho&display=swap');
+
+:root {
+  --isshin-bg: #12080a;        /* Preto avermelhado profundo */
+  --isshin-paper: #1f0e11;     /* Tom de papel escuro */
+  --isshin-pink: #ff80a0;      /* Rosa Sakura Vibrante */
+  --isshin-faded: #8c4b5d;     /* Rosa Seco (Sangue/Velho) */
+  --isshin-gold: #c4a055;      /* Ouro Envelhecido (Kintsugi) */
+  --isshin-text: #e6dada;      /* Branco Papel de Arroz */
+}
+
+/* Animação: Pétalas de Cerejeira Caindo */
+@keyframes sakura-fall {
+  0% { top: -10%; transform: translateX(0) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.8; }
+  100% { top: 100%; transform: translateX(50px) rotate(180deg); opacity: 0; }
+}
+
+/* Animação: Respiração da Alma (Bordas) */
+@keyframes soul-breathe {
+  0%, 100% { box-shadow: 0 0 10px rgba(255, 128, 160, 0.1); border-color: var(--isshin-faded); }
+  50% { box-shadow: 0 0 25px rgba(255, 128, 160, 0.3); border-color: var(--isshin-pink); }
+}
+
+/* CONTAINER PRINCIPAL */
+.isshin-container {
+  box-sizing: border-box;
+  max-width: 750px;
+  width: 95%;
+  margin: 40px auto;
+  
+  background-color: var(--isshin-bg);
+  /* Textura sutil estilo Kimono/Washi */
+  background-image: 
+      radial-gradient(circle at 50% 50%, #1f0e11 0%, #0a0304 100%);
+  
+  /* Borda Dupla (Estilo Moldura Tradicional) */
+  border: 1px solid var(--isshin-faded);
+  outline: 6px solid #0a0304;
+  outline-offset: -12px;
+  
+  padding: 0;
+  position: relative;
+  color: var(--isshin-text);
+  font-family: 'Sawarabi Mincho', serif; /* Fonte estilo Japonês */
+  box-shadow: 0 20px 50px #000;
+  overflow: hidden;
+  
+  animation: soul-breathe 8s infinite ease-in-out;
+}
+.isshin-container * { box-sizing: border-box; }
+
+/* PÉTALAS DE FUNDO (CSS Puro) */
+.isshin-container::before, .isshin-container::after {
+  content: '❀'; position: absolute; font-size: 20px; color: var(--isshin-pink);
+  opacity: 0; pointer-events: none; z-index: 0;
+  text-shadow: 0 0 5px var(--isshin-pink);
+}
+.isshin-container::before { left: 10%; animation: sakura-fall 10s linear infinite; }
+.isshin-container::after { left: 80%; animation: sakura-fall 14s linear infinite 2s; font-size: 15px; }
+
+/* HEADER */
+.isshin-header {
+  text-align: center; padding: 50px 20px 20px;
+  position: relative; z-index: 2;
+  border-bottom: 2px solid var(--isshin-faded);
+}
+.isshin-title {
+  font-family: 'Kaushan Script', cursive; /* Estilo Pincelada */
+  font-size: 3em; color: var(--isshin-pink);
+  margin: 0; line-height: 0.8;
+  text-shadow: 2px 2px 0px #000;
+}
+.isshin-subtitle {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1em; color: var(--isshin-gold);
+  letter-spacing: 3px; margin-top: 10px; text-transform: uppercase;
+  font-style: italic;
+}
+
+/* ÁREA DE STATUS DUPLA */
+.isshin-dual-system {
+  padding: 20px 40px;
+  background: rgba(0,0,0,0.3);
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 30px;
+}
+
+/* --- PERFIL ATIVO (DOMINANTE) --- */
+.isshin-active-soul {
+  display: flex; align-items: center; gap: 20px;
+  border-bottom: 1px dashed var(--isshin-faded);
+  padding-bottom: 20px;
+}
+.active-avatar {
+  width: 90px; height: 90px;
+  border: 2px solid var(--isshin-pink);
+  border-radius: 50%; /* Círculo */
+  padding: 3px;
+  /* Efeito de brilho na alma ativa */
+  box-shadow: 0 0 15px rgba(255, 128, 160, 0.4);
+}
+.active-avatar img {
+  width: 100%; height: 100%; object-fit: cover; border-radius: 50%;
+  filter: sepia(0.2) contrast(1.1);
+}
+.active-bars { flex-grow: 1; display: flex; flex-direction: column; gap: 8px; }
+
+/* Barras Ativas */
+.isshin-bar-row { display: flex; align-items: center; gap: 10px; }
+.isshin-bar-label { width: 30px; font-weight: bold; color: var(--isshin-pink); font-size: 0.8em; }
+.isshin-bar-track { flex-grow: 1; height: 8px; background: #000; border: 1px solid var(--isshin-faded); }
+.isshin-bar-fill { height: 100%; background: var(--isshin-pink); box-shadow: 0 0 10px var(--isshin-pink); }
+.isshin-bar-val { width: 70px; text-align: right; font-size: 0.8em; color: var(--isshin-text); }
+
+
+/* CONTEÚDO */
+.isshin-content {
+  padding: 40px 50px;
+  font-size: 1.15em; line-height: 1.8;
+  color: #dcd6e0; text-align: justify;
+  font-family: 'Cormorant Garamond', serif;
+  position: relative; z-index: 2;
+}
+.isshin-content::first-letter {
+  font-family: 'Kaushan Script', cursive; font-size: 2.5em; color: var(--isshin-pink);
+  float: left; margin-right: 5px; line-height: 0.8;
+}
+.isshin-content b { color: var(--isshin-pink); }
+
+/* --- PERFIL REPRIMIDO (RODAPÉ / PASSIVO) --- */
+.isshin-footer {
+  background: #080203;
+  padding: 20px 40px;
+  border-top: 2px solid var(--isshin-faded);
+  position: relative; z-index: 2;
+  
+  /* Layout para a alma reprimida */
+  display: flex; align-items: center; justify-content: flex-end; gap: 15px;
+}
+
+.passive-info { text-align: right; opacity: 0.6; }
+.passive-name { font-family: 'Kaushan Script', cursive; font-size: 1.2em; color: var(--isshin-gold); }
+.passive-status { font-size: 0.7em; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+
+/* Barrinhas pequenas para a alma reprimida */
+.passive-mini-bars { width: 100px; height: 4px; background: #333; margin-top: 5px; margin-left: auto; }
+.passive-hp { width: 100%; height: 100%; background: var(--isshin-faded); }
+
+.passive-avatar {
+  width: 50px; height: 50px; /* Menor que o ativo */
+  border: 1px solid var(--isshin-faded);
+  border-radius: 5px; /* Quadrado arredondado para diferenciar */
+  filter: grayscale(100%) brightness(0.6); /* Apagado/Cinza */
+  transition: all 0.3s;
+}
+.passive-avatar:hover { filter: grayscale(0%) brightness(1); } /* Acende ao passar o mouse */
+.passive-avatar img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
+
+@media (max-width: 600px) {
+  .isshin-content { padding: 20px; }
+  .isshin-active-soul { flex-direction: column; text-align: center; }
+  .isshin-bar-row { width: 100%; }
+}
