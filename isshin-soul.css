@@ -1,4 +1,4 @@
-/* --- TEMPLATE: ISSHIN & O-HANA (FINAL VERSION - RANDOM SAKURA RAIN) --- */
+/* --- TEMPLATE: ISSHIN & O-HANA --- */
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Sawarabi+Mincho&display=swap');
 
 :root {
@@ -8,22 +8,18 @@
   --isshin-faded: #8c4b5d;     /* Rosa Seco (Sangue/Velho) */
   --isshin-gold: #c4a055;      /* Ouro Envelhecido (Kintsugi) */
   --isshin-text: #e6dada;      /* Branco Papel de Arroz */
-  /* SVG da Pétala para reuso */
-  --petal-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff80a0' d='M12 2C8 2 8 8 8 8s-6 0-6 4c0 3 4 6 4 6s2 4 6 4 4-4 6-4 6-3 6-6c0-4-6-4-6-4s0-6-4-6z'/%3E%3C/svg%3E");
+  
+  /* NOVOS SVGs: Usando o caractere ❀ como imagem de fundo */
+  /* Versão Rosa Vibrante */
+  --flower-pink-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='24' fill='%23ff80a0'%3E❀%3C/text%3E%3C/svg%3E");
+  /* Versão Rosa Seco (Menor) */
+  --flower-faded-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='16' fill='%238c4b5d'%3E❀%3C/text%3E%3C/svg%3E");
 }
 
-/* Animação: Chuva Complexa e Aleatória */
-@keyframes sakura-rain-complex {
-  100% {
-    /* Move cada camada para baixo (e um pouco para a direita para vento) até sair da tela */
-    background-position: 
-      calc(10% + 100px) 800px,  /* 1 */
-      calc(30% + 150px) 900px,  /* 2 */
-      calc(60% + 80px) 850px,   /* 3 */
-      calc(80% + 120px) 950px,  /* 4 */
-      calc(20% + 90px) 820px,   /* 5 */
-      calc(50% + 130px) 880px;  /* 6 */
-  }
+/* Animação: Chuva de Pétalas (Background Scrolling) */
+@keyframes sakura-rain {
+  0% { background-position: 0 0, 0 0; }
+  100% { background-position: 500px 1000px, 400px 800px; }
 }
 
 /* Animação: Respiração da Alma (Bordas) */
@@ -40,7 +36,6 @@
   margin: 60px auto;
   
   background-color: var(--isshin-bg);
-  /* Fundo original escuro restaurado */
   background-image: radial-gradient(circle at 50% 30%, #1a0a0d 0%, #000000 80%);
   
   /* MOLDURA TORII */
@@ -52,49 +47,28 @@
   color: var(--isshin-text);
   font-family: 'Sawarabi Mincho', serif;
   box-shadow: 0 30px 60px #000;
-  overflow: visible;
+  overflow: visible; /* Permite o topo do Torii sair */
   
   animation: soul-breathe 8s infinite ease-in-out;
 }
 .isshin-container * { box-sizing: border-box; }
 
-/* EFEITO DE CHUVA DE PÉTALAS (Complexo e Aleatório) */
+/* EFEITO DE CHUVA DE PÉTALAS (USANDO O ÍCONE ❀) */
 .isshin-container::after {
   content: ''; position: absolute; inset: 0;
   pointer-events: none; z-index: 1;
-  opacity: 0.6; /* Visibilidade das pétalas */
+  opacity: 0.4;
   
-  /* 6 camadas da mesma pétala */
-  background-image: 
-    var(--petal-svg), var(--petal-svg), var(--petal-svg),
-    var(--petal-svg), var(--petal-svg), var(--petal-svg);
-    
-  /* Posições iniciais espalhadas (fora da tela no topo) */
-  background-position: 
-    10% -50px,  /* 1 (Esquerda) */
-    30% -150px, /* 2 */
-    60% -80px,  /* 3 */
-    80% -200px, /* 4 (Direita) */
-    20% -100px, /* 5 */
-    50% -30px;  /* 6 (Centro) */
-    
-  /* Tamanhos variados para dar profundidade */
-  background-size: 
-    20px 20px,  /* 1 (Médio) */
-    15px 15px,  /* 2 (Pequeno/Longe) */
-    25px 25px,  /* 3 (Grande/Perto) */
-    18px 18px,  /* 4 */
-    12px 12px,  /* 5 (Muito pequeno) */
-    22px 22px;  /* 6 */
-    
-  background-repeat: no-repeat;
-  /* Animação longa e linear para queda suave */
-  animation: sakura-rain-complex 20s linear infinite;
+  /* Usando as novas variáveis que contêm o caractere ❀ */
+  background-image: var(--flower-pink-svg), var(--flower-faded-svg);
+  
+  background-size: 300px 300px, 200px 200px;
+  animation: sakura-rain 40s linear infinite;
 }
 
 /* TOPO DO TORII (Kasagi + Brasão) */
 .isshin-container::before {
-  content: '❀'; /* Brasão */
+  content: '❀'; /* O mesmo caractere usado na chuva */
   display: flex; align-items: center; justify-content: center;
   font-size: 24px; color: var(--isshin-bg);
   text-shadow: 0 1px 1px rgba(255,255,255,0.3);
