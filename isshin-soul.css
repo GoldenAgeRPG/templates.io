@@ -1,4 +1,4 @@
-/* --- TEMPLATE: ISSHIN & O-HANA --- */
+/* --- TEMPLATE: ISSHIN & O-HANA (FINAL VERSION - REAL TEXT PARTICLES) --- */
 @import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400&family=Sawarabi+Mincho&display=swap');
 
 :root {
@@ -13,15 +13,15 @@
 /* Animação: Partículas Caindo (Descendo e girando suavemente) */
 @keyframes sakura-fall-particles {
   0% {
-    top: -15%; /* Começa fora da tela em cima */
+    top: -200px; /* Começa bem acima da tela */
     transform: translateX(0px) rotate(0deg);
     opacity: 0;
   }
-  10% { opacity: 0.8; } /* Aparece rápido */
-  90% { opacity: 0.8; } /* Mantém visível durante a queda */
+  5% { opacity: 1; } /* Aparece suavemente */
+  90% { opacity: 1; }
   100% {
-    top: 115%; /* Termina fora da tela embaixo */
-    transform: translateX(40px) rotate(360deg); /* Deriva para direita e gira */
+    top: 100%; /* Termina no final do container */
+    transform: translateX(60px) rotate(360deg); /* Deriva para direita e gira */
     opacity: 0; /* Desaparece no fim */
   }
 }
@@ -40,7 +40,7 @@
   margin: 60px auto;
   
   background-color: var(--isshin-bg);
-  /* Fundo original escuro e limpo restaurado */
+  /* Fundo escuro limpo */
   background-image: radial-gradient(circle at 50% 30%, #1a0a0d 0%, #000000 80%);
   
   /* MOLDURA TORII */
@@ -53,39 +53,42 @@
   font-family: 'Sawarabi Mincho', serif;
   box-shadow: 0 30px 60px #000;
   
-  /* IMPORTANTE: overflow: hidden aqui corta as partículas quando saem do template */
+  /* IMPORTANTE: overflow: hidden AQUI corta as partículas quando chegam no fim */
   overflow: hidden;
   
   animation: soul-breathe 8s infinite ease-in-out;
 }
 .isshin-container * { box-sizing: border-box; }
 
-/* --- EFEITO DE PARTÍCULAS (CHUVA ESPARSA) --- */
+/* --- EFEITO DE PARTÍCULAS (CORRIGIDO - TÉCNICA BOX-SHADOW) --- */
 .isshin-container::after {
-  content: '❀'; /* O caractere da flor */
+  content: '❀'; /* O caractere de texto real */
   position: absolute;
-  /* Posição inicial do elemento "mestre" (invisível) */
-  top: -15%; 
+  /* Posição inicial do "mestre" invisível */
+  top: -200px; 
   left: 50%; 
-  font-size: 22px;
-  color: transparent; /* O elemento principal é invisível, só as sombras aparecem */
+  font-size: 24px;
+  color: transparent; /* O mestre é invisível */
+  text-shadow: none;
   pointer-events: none; 
-  z-index: 1; /* Fica na frente do fundo, atrás do texto */
+  z-index: 1; /* Atrás do texto */
   
-  /* A MÁGICA: Criando múltiplas flores usando sombras (box-shadow) */
-  /* Formato: offset-X offset-Y blur cor */
+  /* A MÁGICA: Criando as flores usando sombras coloridas do caractere */
+  /* Formato: Offset-X | Offset-Y | Blur | Cor */
   box-shadow: 
-    -250px 100px 0 var(--isshin-pink),   /* Flor 1: Esquerda alta, Rosa */
-    200px 250px 0 var(--isshin-faded),   /* Flor 2: Direita média, Seca */
-    -100px 400px 0 var(--isshin-pink),   /* Flor 3: Centro-esq baixa, Rosa */
-    300px 550px 0 var(--isshin-faded),   /* Flor 4: Direita baixa, Seca */
-    50px 700px 0 var(--isshin-pink);     /* Flor 5: Centro muito baixa, Rosa */
+    -320px 300px 0 var(--isshin-pink),   /* Flor 1 (Rosa) */
+    280px 500px 0 var(--isshin-faded),   /* Flor 2 (Seca) */
+    -150px 750px 0 var(--isshin-pink),   /* Flor 3 (Rosa) */
+    350px 950px 0 var(--isshin-faded),   /* Flor 4 (Seca) */
+    0px 1200px 0 var(--isshin-pink),     /* Flor 5 (Rosa) */
+    -200px 1450px 0 var(--isshin-faded); /* Flor 6 (Seca) */
     
-  /* Animação longa e suave (25 segundos para cair tudo) */
+  /* Animação longa e linear */
   animation: sakura-fall-particles 25s linear infinite;
 }
 
-/* TOPO DO TORII (Kasagi + Brasão) - Precisa de z-index alto para ficar sobre o overflow:hidden */
+/* TOPO DO TORII (Kasagi + Brasão) */
+/* IMPORTANTE: Z-index alto para ficar FORA do overflow:hidden */
 .isshin-container::before {
   content: '❀'; /* Brasão */
   display: flex; align-items: center; justify-content: center;
@@ -99,7 +102,7 @@
   border-bottom: 8px solid var(--isshin-pink);
   border-radius: 50% 50% 0 0 / 20px 20px 0 0;
   box-shadow: 0 10px 20px rgba(0,0,0,0.8);
-  z-index: 10; /* Z-index alto para garantir que apareça fora do container */
+  z-index: 10; 
 }
 
 /* HEADER */
