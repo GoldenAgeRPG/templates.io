@@ -10,24 +10,24 @@
   --hue: 180;
 }
 
-/* --- ESTRUTURA PRINCIPAL --- */
 .jjk-main-wrapper {
   display: flex;
-  gap: 15px;
+  gap: 0; /* Espaço removido */
   max-width: 1000px;
   margin: 40px auto;
   align-items: stretch;
   justify-content: center;
-  --dynamic-color: hsla(var(--hue), 90%, 50%, 1);
 }
 
 .jjk-player-side {
   flex: 0 0 320px;
   height: 600px;
   position: relative;
-  border-radius: 15px;
+  /* Arredondamento apenas na esquerda e remoção da borda direita */
+  border-radius: 15px 0 0 15px;
   overflow: hidden;
   border: 4px solid var(--art-cyan);
+  border-right: none; 
   animation: rainbow-border 4s infinite linear;
   cursor: pointer;
   background: #000;
@@ -53,13 +53,13 @@
   pointer-events: none;
 }
 
-/* --- COLUNA DE TEXTO --- */
 .jjk-template-side {
   flex: 1;
   height: 600px;
   background: var(--art-bg);
   border: 4px solid var(--art-cyan);
-  border-radius: 15px;
+  /* Arredondamento apenas na direita */
+  border-radius: 0 15px 15px 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -93,7 +93,6 @@
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.5' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.08'/%3E%3C/svg%3E");
 }
 
-/* Scrollbar */
 .jjk-scroll-area::-webkit-scrollbar { width: 8px; }
 .jjk-scroll-area::-webkit-scrollbar-track { background: #f0f0f0; }
 .jjk-scroll-area::-webkit-scrollbar-thumb { 
@@ -101,7 +100,6 @@
   border-radius: 10px;
 }
 
-/* Status Bars */
 .jjk-status-container { margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px; }
 .jjk-dossier-status-item { display: grid; grid-template-columns: 35px 1fr 70px; align-items: center; gap: 8px; }
 .jjk-dossier-status-label { font-family: 'Permanent Marker', cursive; font-size: 0.9em; }
@@ -137,5 +135,6 @@
 
 @media (max-width: 850px) {
   .jjk-main-wrapper { flex-direction: column; align-items: center; }
-  .jjk-template-side { width: 320px; }
+  .jjk-player-side { border-radius: 15px 15px 0 0; border-right: 4px solid var(--art-cyan); border-bottom: none; }
+  .jjk-template-side { width: 320px; border-radius: 0 0 15px 15px; }
 }
