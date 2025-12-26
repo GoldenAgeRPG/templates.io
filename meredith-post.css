@@ -11,20 +11,14 @@
     --mz-accent-glow: rgba(255, 26, 26, 0.3);
 }
 
-/* CONTAINER PRINCIPAL */
+/* CONTAINER */
 .mz-post-container {
-    max-width: 720px;
-    margin: 20px auto;
-    background-color: var(--mz-bg);
-    border: 1px solid #222;
+    max-width: 720px; margin: 20px auto;
+    background-color: var(--mz-bg); border: 1px solid #222;
     box-shadow: 0 0 50px rgba(0,0,0,0.8);
-    font-family: 'Montserrat', sans-serif;
-    color: var(--mz-text);
-    position: relative;
-    overflow: hidden;
+    font-family: 'Montserrat', sans-serif; color: var(--mz-text);
+    position: relative; overflow: hidden;
 }
-
-/* Faixa lateral (Sangue) */
 .mz-post-container::before {
     content: ''; position: absolute; top: 0; left: 0;
     width: 4px; height: 100%;
@@ -32,120 +26,92 @@
     z-index: 2;
 }
 
-/* --- CABEÇALHO --- */
+/* HEADER */
 .mz-header {
-    height: 220px;
-    position: relative;
+    height: 220px; position: relative;
     display: flex; align-items: flex-end; justify-content: flex-end;
-    padding: 20px;
-    border-bottom: 2px solid var(--mz-blood);
+    padding: 20px; border-bottom: 2px solid var(--mz-blood);
     overflow: hidden;
 }
-
-/* BANNER */
 .mz-header-bg {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background-image: url('https://i.imgur.com/rN76FYb.png');
-    background-size: cover; background-position: center;
-    z-index: 0;
+    background-size: cover; background-position: center; z-index: 0;
 }
 .mz-header-bg::after {
     content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: linear-gradient(to bottom, rgba(138, 0, 0, 0.6), rgba(10, 10, 10, 0.9));
     mix-blend-mode: multiply;
 }
-
-/* TÍTULOS */
 .mz-titles-box {
-    position: absolute; bottom: 30px; left: 30px;
-    z-index: 5;
+    position: absolute; bottom: 30px; left: 30px; z-index: 5;
     text-shadow: 0 2px 5px rgba(0,0,0,0.8);
 }
 .mz-main-title {
     font-family: 'Cinzel Decorative', cursive; color: var(--mz-blood-bright);
-    font-size: 2em; line-height: 1em;
-    text-transform: uppercase; letter-spacing: 2px;
+    font-size: 2em; line-height: 1em; text-transform: uppercase; letter-spacing: 2px;
 }
 .mz-sub-title {
     font-family: 'Montserrat', sans-serif; color: #ccc;
-    font-size: 0.85em; text-transform: uppercase; letter-spacing: 4px;
-    margin-left: 2px; opacity: 0.8;
+    font-size: 0.85em; text-transform: uppercase; letter-spacing: 4px; margin-left: 2px; opacity: 0.8;
 }
 
-/* --- KANJI DA SOMBRA (SELO) --- */
+/* KANJI (POSICIONADO MAIS ACIMA) */
 .mz-avatar-box {
     width: 110px; height: 110px;
     background: #000;
     border: 2px solid var(--mz-blood-bright);
     transform: rotate(45deg);
     display: flex; justify-content: center; align-items: center;
-    margin-right: 30px; margin-bottom: -55px;
+    margin-right: 30px; 
+    
+    /* ALTERAÇÃO AQUI: De -55px para -25px para subir o losango */
+    margin-bottom: -25px; 
+    
     position: relative; z-index: 10;
     box-shadow: 0 0 25px var(--mz-blood);
     box-shadow: inset 0 0 20px var(--mz-blood);
 }
-
 .mz-symbol {
-    font-family: 'Noto Serif JP', serif;
-    font-size: 4em;
-    color: var(--mz-blood-bright);
-    transform: rotate(-45deg);
-    text-shadow: 0 0 10px var(--mz-blood-bright);
-    line-height: 1;
-    margin-bottom: 5px; 
-    margin-right: 5px;
+    font-family: 'Noto Serif JP', serif; font-size: 4em; color: var(--mz-blood-bright);
+    transform: rotate(-45deg); text-shadow: 0 0 10px var(--mz-blood-bright);
+    line-height: 1; margin-bottom: 5px; margin-right: 5px;
 }
 
-/* --- CONTEÚDO DO POST --- */
+/* CONTEÚDO */
 .mz-content {
     padding: 70px 40px 30px 40px;
     background: var(--mz-bg);
-    font-size: 0.95em; line-height: 1.8;
-    color: #ccc; text-align: justify;
+    font-size: 0.95em; line-height: 1.8; color: #ccc; text-align: justify;
 }
-
-/* BBCODE */
 .mz-content b, .mz-content strong { color: var(--mz-blood-bright); font-weight: 600; }
 .mz-content i, .mz-content em { color: #888; }
 .mz-content u { text-decoration: none; border-bottom: 1px solid var(--mz-blood); }
 
-/* --- CONSIDERAÇÕES --- */
+/* NOTAS */
 .mz-notes-container {
-    margin: 20px 40px 40px 40px;
-    position: relative;
-    border: 1px solid #333;
-    background: var(--mz-note-bg);
-    background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
-    background-size: 10px 10px;
+    margin: 20px 40px 40px 40px; position: relative;
+    border: 1px solid #333; background: var(--mz-note-bg);
+    background-image: radial-gradient(#1a1a1a 1px, transparent 1px); background-size: 10px 10px;
 }
 .mz-notes-container::before {
-    content: "Nas Sombras";
-    position: absolute; top: -12px; left: 20px;
+    content: "Nas Sombras"; position: absolute; top: -12px; left: 20px;
     background: var(--mz-blood); color: #fff;
-    font-family: 'Cinzel Decorative', cursive;
-    font-size: 0.8em; text-transform: uppercase; letter-spacing: 1px;
-    padding: 4px 15px; border: 1px solid var(--mz-blood-bright);
-    box-shadow: 0 0 10px var(--mz-blood);
+    font-family: 'Cinzel Decorative', cursive; font-size: 0.8em; text-transform: uppercase; letter-spacing: 1px;
+    padding: 4px 15px; border: 1px solid var(--mz-blood-bright); box-shadow: 0 0 10px var(--mz-blood);
 }
 .mz-notes-content {
-    padding: 25px 20px 15px 20px;
-    font-size: 0.85em; color: #999; line-height: 1.6;
-    border-left: 3px solid var(--mz-blood);
+    padding: 25px 20px 15px 20px; font-size: 0.85em; color: #999; line-height: 1.6; border-left: 3px solid var(--mz-blood);
 }
-
-/* BBCODE NAS NOTAS */
 .mz-notes-content b, .mz-notes-content strong { color: var(--mz-blood-bright); font-weight: bold; }
 .mz-notes-content i, .mz-notes-content em { color: #666; font-style: italic; }
 .mz-notes-content u { text-decoration: none; border-bottom: 1px dashed var(--mz-blood-bright); color: #ccc; }
 
-/* --- DECK DE SOMBRAS (Flex Wrap para suportar 10 itens) --- */
+/* DECK */
 .mz-shadows-deck {
     background: #000; padding: 20px; border-top: 1px solid #222;
-    display: flex; gap: 15px; justify-content: center;
-    flex-wrap: wrap; /* Importante: Se tiver 10 itens e a tela for pequena, eles se ajustam */
+    display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;
 }
-
-/* CARD INDIVIDUAL */
 .mz-card {
     width: 45px; height: 45px; border-radius: 50%;
     background: #1a1a1a; border: 1px solid #333;
@@ -153,17 +119,12 @@
     display: flex; justify-content: center; align-items: center;
 }
 .mz-card-icon {
-    width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
-    opacity: 0.4; filter: grayscale(100%); transition: 0.4s;
+    width: 100%; height: 100%; border-radius: 50%; object-fit: cover; opacity: 0.4; filter: grayscale(100%); transition: 0.4s;
 }
-
-/* POPUP (STATUS) */
 .mz-card-stats {
-    position: absolute; bottom: 55px; left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    width: 130px; background: rgba(10,10,10,0.95);
-    border: 1px solid var(--mz-blood); padding: 8px; border-radius: 4px;
-    opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 100; text-align: center;
+    position: absolute; bottom: 55px; left: 50%; transform: translateX(-50%) translateY(10px);
+    width: 130px; background: rgba(10,10,10,0.95); border: 1px solid var(--mz-blood);
+    padding: 8px; border-radius: 4px; opacity: 0; pointer-events: none; transition: all 0.3s ease; z-index: 100; text-align: center;
     box-shadow: 0 5px 15px rgba(0,0,0,0.8);
 }
 .mz-card-stats::after {
@@ -178,11 +139,10 @@
 .mz-card:hover .mz-card-icon { opacity: 1; filter: grayscale(0%); }
 .mz-card:hover .mz-card-stats { opacity: 1; transform: translateX(-50%) translateY(0); }
 
-/* --- ASSINATURA --- */
+/* ASSINATURA */
 .mz-signature { text-align: right; padding: 5px 20px 15px 0; background: #000; }
 .mz-signature::after {
-    content: "Meredith Zenin"; font-family: 'Cinzel Decorative', cursive;
-    font-size: 1.8em; color: #222; text-transform: uppercase; letter-spacing: 2px;
+    content: "Meredith Zenin"; font-family: 'Cinzel Decorative', cursive; font-size: 1.8em; color: #222; text-transform: uppercase; letter-spacing: 2px;
     transition: 0.5s; text-shadow: 0 0 5px rgba(138, 0, 0, 0.2); 
     background: linear-gradient(to right, #333, #666); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
 }
