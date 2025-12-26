@@ -7,11 +7,12 @@
     --mz-blood-bright: #ff1a1a;
     --mz-shadow: #000000;
     --mz-text: #e0e0e0;
+    --mz-note-text: #888;
 }
 
 /* CONTAINER PRINCIPAL */
 .mz-post-container {
-    max-width: 650px;
+    max-width: 720px; /* Aumentado um pouco a largura */
     margin: 20px auto;
     background-color: var(--mz-bg);
     border: 1px solid #222;
@@ -22,7 +23,7 @@
     overflow: hidden;
 }
 
-/* Faixa lateral decorativa (Sangue/Sombra) */
+/* Faixa lateral decorativa */
 .mz-post-container::before {
     content: '';
     position: absolute;
@@ -34,16 +35,28 @@
 
 /* --- CABEÇALHO --- */
 .mz-header {
-    height: 180px;
+    height: 160px;
     background-image: linear-gradient(to top, var(--mz-bg), transparent), 
-                      url('https://i.pinimg.com/originals/24/02/76/24027666952458421876807850556108.gif'); /* Gif de fumaça/sombra */
+                      url('https://i.pinimg.com/originals/24/02/76/24027666952458421876807850556108.gif');
     background-size: cover;
     background-position: center;
     position: relative;
     display: flex;
     align-items: flex-end;
+    justify-content: flex-end; /* Avatar agora na direita/fim */
     padding: 20px;
-    border-bottom: 2px solid var(--mz-blood);
+    border-bottom: 1px solid #333;
+}
+
+/* Subtítulo decorativo no header */
+.mz-header-title {
+    position: absolute;
+    bottom: 20px; left: 30px;
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--mz-blood);
+    opacity: 0.5;
+    font-size: 1.5em;
+    z-index: 1;
 }
 
 /* Avatar Hexagonal */
@@ -51,10 +64,10 @@
     width: 100px; height: 100px;
     background: var(--mz-panel);
     border: 2px solid var(--mz-blood);
-    transform: rotate(45deg); /* Losango */
+    transform: rotate(45deg);
     overflow: hidden;
-    margin-left: 20px;
-    margin-bottom: -40px; /* Sobrepõe o conteúdo */
+    margin-right: 20px; /* Ajuste de margem */
+    margin-bottom: -40px;
     position: relative;
     z-index: 10;
     box-shadow: 0 0 20px var(--mz-blood);
@@ -63,166 +76,130 @@
 .mz-avatar {
     width: 140%; height: 140%;
     object-fit: cover;
-    transform: rotate(-45deg) translateY(-20px) translateX(-5px); /* Desvira a imagem */
-}
-
-/* Nome (Injetado pelo CSS) */
-.mz-name-plate {
-    margin-left: 40px;
-    margin-bottom: 5px;
-    text-shadow: 0 0 10px #000;
-}
-
-.mz-name-plate::after {
-    content: "Meredith Zenin"; /* NOME AQUI */
-    font-family: 'Cinzel Decorative', cursive;
-    font-size: 2em;
-    color: #fff;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    background: linear-gradient(to bottom, #fff, var(--mz-text));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-.mz-subtitle {
-    font-size: 0.7em;
-    color: var(--mz-blood-bright);
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    margin-top: -5px;
-    opacity: 0.8;
+    transform: rotate(-45deg) translateY(-20px) translateX(-5px);
 }
 
 /* --- CONTEÚDO DO POST --- */
 .mz-content {
-    padding: 50px 40px 30px 40px;
+    padding: 50px 40px 20px 40px;
     background: var(--mz-bg);
     font-size: 0.95em;
     line-height: 1.8;
     color: #ccc;
     text-align: justify;
-    position: relative;
+    min-height: 200px;
 }
 
-/* Detalhe de aspas ou fala */
 .mz-content b { color: var(--mz-blood-bright); }
-.mz-content i { color: #888; }
+.mz-content i { color: #aaa; }
 
-/* --- ÁREA DAS SOMBRAS (O Diferencial) --- */
+/* --- CONSIDERAÇÕES (Campo Separado) --- */
+.mz-notes {
+    margin: 10px 40px 30px 40px;
+    padding: 15px;
+    background: #0f0f0f;
+    border-left: 3px solid #333;
+    font-size: 0.85em;
+    color: var(--mz-note-text);
+    font-style: italic;
+}
+
+.mz-notes strong {
+    color: var(--mz-blood);
+    text-transform: uppercase;
+    font-size: 0.9em;
+    display: block;
+    margin-bottom: 5px;
+    font-family: 'Cinzel Decorative', cursive;
+}
+
+/* --- ÁREA DAS SOMBRAS (Deck) --- */
 .mz-shadows-deck {
     background: #000;
-    padding: 15px 20px;
-    border-top: 1px solid var(--mz-blood);
+    padding: 20px 20px;
+    border-top: 1px solid #222;
     display: flex;
-    gap: 10px;
+    gap: 15px;
     align-items: center;
     justify-content: center;
     position: relative;
 }
 
-/* Título pequeno do deck */
-.mz-deck-label {
-    position: absolute;
-    top: -10px;
-    background: var(--mz-blood);
-    color: #fff;
-    font-size: 0.6em;
-    padding: 2px 10px;
-    text-transform: uppercase;
-    font-weight: bold;
-    letter-spacing: 1px;
-    clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%);
-}
-
 /* CARD DA SOMBRA */
 .mz-card {
-    width: 50px;
-    height: 50px;
+    width: 45px; height: 45px;
     border-radius: 50%;
     background: #1a1a1a;
     border: 1px solid #333;
     position: relative;
     cursor: pointer;
     transition: all 0.4s ease;
-    overflow: visible; /* Necessário para o popup sair */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: flex; justify-content: center; align-items: center;
 }
 
-/* Ícone da sombra (inativo/pequeno) */
 .mz-card-icon {
     width: 100%; height: 100%;
     border-radius: 50%;
     object-fit: cover;
-    opacity: 0.5;
+    opacity: 0.4;
     filter: grayscale(100%);
     transition: 0.4s;
 }
 
-/* --- O POPUP DE STATUS (HOVER) --- */
+/* POPUP DE STATUS */
 .mz-card-stats {
     position: absolute;
-    bottom: 60px; /* Fica acima do card */
-    left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    width: 140px;
-    background: rgba(0,0,0,0.9);
+    bottom: 55px; left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    width: 130px;
+    background: rgba(10,10,10,0.95);
     border: 1px solid var(--mz-blood);
-    padding: 10px;
+    padding: 8px;
     border-radius: 4px;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 100;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(138, 0, 0, 0.3);
+    opacity: 0; pointer-events: none;
+    transition: all 0.3s ease;
+    z-index: 100; text-align: center;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.8);
 }
-
-/* Triângulo do popup */
 .mz-card-stats::after {
-    content: '';
-    position: absolute;
-    bottom: -6px; left: 50%;
+    content: ''; position: absolute; bottom: -5px; left: 50%;
     transform: translateX(-50%) rotate(45deg);
-    width: 10px; height: 10px;
-    background: var(--mz-blood);
-    z-index: -1;
+    width: 8px; height: 8px; background: var(--mz-blood);
 }
 
-/* Conteúdo do Status */
-.mz-cs-name {
-    display: block;
+.mz-cs-name { display: block; font-family: 'Cinzel Decorative'; color: var(--mz-blood-bright); font-size: 0.75em; border-bottom: 1px solid #333; margin-bottom: 4px; }
+.mz-cs-val { display: flex; justify-content: space-between; font-size: 0.7em; color: #888; font-family: monospace; }
+.mz-cs-val span { font-weight: bold; color: #ddd; }
+
+.mz-card:hover { border-color: var(--mz-blood-bright); transform: translateY(-3px); }
+.mz-card:hover .mz-card-icon { opacity: 1; filter: grayscale(0%); }
+.mz-card:hover .mz-card-stats { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* --- ASSINATURA NO RODAPÉ (CSS INJECT) --- */
+.mz-signature {
+    text-align: right;
+    padding: 5px 20px 15px 0;
+    background: #000;
+}
+
+.mz-signature::after {
+    content: "Meredith Zenin"; /* NOME FIXO NO CSS */
     font-family: 'Cinzel Decorative', cursive;
-    color: var(--mz-blood-bright);
-    font-size: 0.8em;
-    border-bottom: 1px solid #333;
-    padding-bottom: 2px;
-    margin-bottom: 5px;
-}
-.mz-cs-val {
-    display: flex;
-    justify-content: space-between;
-    font-size: 0.7em;
-    color: #ccc;
-    font-family: monospace;
-}
-.mz-cs-val span { font-weight: bold; color: #fff; }
-
-/* --- AÇÃO HOVER --- */
-.mz-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--mz-blood-bright);
-    box-shadow: 0 0 15px var(--mz-blood);
+    font-size: 1.8em;
+    color: #222;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 0.5s;
+    /* Efeito de brilho fraco e maligno */
+    text-shadow: 0 0 5px rgba(138, 0, 0, 0.2); 
+    background: linear-gradient(to right, #333, #666);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.mz-card:hover .mz-card-icon {
-    opacity: 1;
-    filter: grayscale(0%);
-}
-
-.mz-card:hover .mz-card-stats {
-    opacity: 1;
-    transform: translateX(-50%) translateY(0);
+.mz-post-container:hover .mz-signature::after {
+    background: linear-gradient(to right, var(--mz-blood), var(--mz-blood-bright));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 15px rgba(255, 0, 0, 0.4);
 }
