@@ -65,8 +65,8 @@
     display: flex; justify-content: center; align-items: center;
     margin-right: 30px; 
     
-    /* ALTERAÇÃO AQUI: De -55px para -25px para subir o losango */
-    margin-bottom: -25px; 
+    /* altura */
+    margin-bottom: -10px; 
     
     position: relative; z-index: 10;
     box-shadow: 0 0 25px var(--mz-blood);
