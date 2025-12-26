@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Montserrat:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700&display=swap');
 
 :root {
     --mz-bg: #0a0a0a;
@@ -71,31 +72,28 @@
     margin-left: 2px; opacity: 0.8;
 }
 
-/* --- NOVO OBJETO: SELO/KANJI (Substitui o Avatar) --- */
+/* --- KANJI DA SOMBRA (SELO) --- */
 .mz-avatar-box {
     width: 110px; height: 110px;
-    background: #000; /* Fundo preto total para contraste */
+    background: #000;
     border: 2px solid var(--mz-blood-bright);
     transform: rotate(45deg);
-    
-    /* Centralização Flexbox para o Kanji */
     display: flex; justify-content: center; align-items: center;
-    
     margin-right: 30px; margin-bottom: -55px;
     position: relative; z-index: 10;
     box-shadow: 0 0 25px var(--mz-blood);
-    box-shadow: inset 0 0 20px var(--mz-blood); /* Brilho interno */
+    box-shadow: inset 0 0 20px var(--mz-blood);
 }
 
 .mz-symbol {
-    font-family: 'MS Mincho', 'Hiragino Mincho ProN', serif; /* Fontes padrão japonesas */
+    font-family: 'Noto Serif JP', serif;
     font-size: 4em;
     color: var(--mz-blood-bright);
-    transform: rotate(-45deg); /* Desvira o texto */
+    transform: rotate(-45deg);
     text-shadow: 0 0 10px var(--mz-blood-bright);
     line-height: 1;
-    margin-bottom: 5px; /* Pequeno ajuste ótico */
-    margin-right: 5px;  /* Pequeno ajuste ótico */
+    margin-bottom: 5px; 
+    margin-right: 5px;
 }
 
 /* --- CONTEÚDO DO POST --- */
@@ -105,8 +103,11 @@
     font-size: 0.95em; line-height: 1.8;
     color: #ccc; text-align: justify;
 }
-.mz-content b { color: var(--mz-blood-bright); font-weight: 600; }
-.mz-content i { color: #aaa; }
+
+/* BBCODE */
+.mz-content b, .mz-content strong { color: var(--mz-blood-bright); font-weight: 600; }
+.mz-content i, .mz-content em { color: #888; }
+.mz-content u { text-decoration: none; border-bottom: 1px solid var(--mz-blood); }
 
 /* --- CONSIDERAÇÕES --- */
 .mz-notes-container {
@@ -131,15 +132,20 @@
     font-size: 0.85em; color: #999; line-height: 1.6;
     border-left: 3px solid var(--mz-blood);
 }
-.mz-notes-content b { color: var(--mz-blood-bright); font-weight: bold; }
-.mz-notes-content i { color: #bbb; font-style: italic; }
-.mz-notes-content u { text-decoration: none; border-bottom: 1px dashed var(--mz-blood-bright); }
 
-/* --- DECK DE SOMBRAS --- */
+/* BBCODE NAS NOTAS */
+.mz-notes-content b, .mz-notes-content strong { color: var(--mz-blood-bright); font-weight: bold; }
+.mz-notes-content i, .mz-notes-content em { color: #666; font-style: italic; }
+.mz-notes-content u { text-decoration: none; border-bottom: 1px dashed var(--mz-blood-bright); color: #ccc; }
+
+/* --- DECK DE SOMBRAS (Flex Wrap para suportar 10 itens) --- */
 .mz-shadows-deck {
     background: #000; padding: 20px; border-top: 1px solid #222;
     display: flex; gap: 15px; justify-content: center;
+    flex-wrap: wrap; /* Importante: Se tiver 10 itens e a tela for pequena, eles se ajustam */
 }
+
+/* CARD INDIVIDUAL */
 .mz-card {
     width: 45px; height: 45px; border-radius: 50%;
     background: #1a1a1a; border: 1px solid #333;
@@ -150,6 +156,8 @@
     width: 100%; height: 100%; border-radius: 50%; object-fit: cover;
     opacity: 0.4; filter: grayscale(100%); transition: 0.4s;
 }
+
+/* POPUP (STATUS) */
 .mz-card-stats {
     position: absolute; bottom: 55px; left: 50%;
     transform: translateX(-50%) translateY(10px);
