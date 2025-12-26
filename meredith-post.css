@@ -63,7 +63,7 @@
     border: 2px solid var(--mz-blood-bright);
     transform: rotate(45deg);
     display: flex; justify-content: center; align-items: center;
-    margin-right: 0px; 
+    margin-right: 1px; 
     
     /* altura */
     margin-bottom: 40px; 
