@@ -71,7 +71,7 @@
     margin-left: 2px; opacity: 0.8;
 }
 
-/* AVATAR CENTRALIZADO (CORREÇÃO) */
+/* AVATAR CENTRALIZADO (CORREÇÃO DE PREENCHIMENTO) */
 .mz-avatar-box {
     width: 110px; height: 110px;
     background: var(--mz-panel);
@@ -86,8 +86,8 @@
 .mz-avatar {
     position: absolute;
     top: 50%; left: 50%;
-    /* Aumenta a imagem para cobrir as pontas do losango */
-    width: 142%; height: 142%; 
+    /* AUMENTADO PARA 160% PARA GARANTIR PREENCHIMENTO TOTAL */
+    width: 160%; height: 160%; 
     object-fit: cover;
     /* Centraliza absolutamente e desvira a rotação */
     transform: translate(-50%, -50%) rotate(-45deg);
