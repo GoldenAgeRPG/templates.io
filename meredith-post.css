@@ -33,7 +33,7 @@
 
 /* --- CABEÇALHO (BANNER + TÍTULOS) --- */
 .mz-header {
-    height: 220px; /* Altura aumentada para o banner */
+    height: 220px;
     position: relative;
     display: flex; align-items: flex-end; justify-content: flex-end;
     padding: 20px;
@@ -41,17 +41,17 @@
     overflow: hidden;
 }
 
-/* BANNER COM EFEITO "BANHO DE SANGUE" */
+/* BANNER COM EFEITO */
 .mz-header-bg {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background-image: url('https://i.imgur.com/rN76FYb.png');
     background-size: cover; background-position: center;
     z-index: 0;
 }
-.mz-header-bg::after { /* O efeito vermelho */
+.mz-header-bg::after {
     content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: linear-gradient(to bottom, rgba(138, 0, 0, 0.6), rgba(10, 10, 10, 0.9));
-    mix-blend-mode: multiply; /* Efeito de fusão */
+    mix-blend-mode: multiply;
 }
 
 /* TÍTULOS NO HEADER */
@@ -71,23 +71,26 @@
     margin-left: 2px; opacity: 0.8;
 }
 
-/* AVATAR CENTRALIZADO */
+/* AVATAR CENTRALIZADO (CORREÇÃO) */
 .mz-avatar-box {
     width: 110px; height: 110px;
     background: var(--mz-panel);
     border: 2px solid var(--mz-blood-bright);
-    transform: rotate(45deg);
+    transform: rotate(45deg); /* Cria o losango */
     overflow: hidden;
-    margin-right: 30px; margin-bottom: -55px; /* Posicionamento */
+    margin-right: 30px; margin-bottom: -55px;
     position: relative; z-index: 10;
     box-shadow: 0 0 25px var(--mz-blood);
 }
 
 .mz-avatar {
-    width: 140%; height: 140%;
+    position: absolute;
+    top: 50%; left: 50%;
+    /* Aumenta a imagem para cobrir as pontas do losango */
+    width: 142%; height: 142%; 
     object-fit: cover;
-    /* AJUSTE FINO DA CENTRALIZAÇÃO */
-    transform: rotate(-45deg) translateY(-18px) translateX(-4px) scale(1.1);
+    /* Centraliza absolutamente e desvira a rotação */
+    transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 /* --- CONTEÚDO DO POST --- */
@@ -100,40 +103,29 @@
 .mz-content b { color: var(--mz-blood-bright); font-weight: 600; }
 .mz-content i { color: #aaa; }
 
-/* --- CONSIDERAÇÕES MODERNAS ("NAS SOMBRAS") --- */
+/* --- CONSIDERAÇÕES MODERNAS --- */
 .mz-notes-container {
     margin: 20px 40px 40px 40px;
     position: relative;
     border: 1px solid #333;
     background: var(--mz-note-bg);
-    /* Textura sutil de fundo */
     background-image: radial-gradient(#1a1a1a 1px, transparent 1px);
     background-size: 10px 10px;
 }
-
-/* Faixa do Título "Nas Sombras" */
 .mz-notes-container::before {
-    content: "Nas Sombras"; /* Título Injetado */
+    content: "Nas Sombras";
     position: absolute; top: -12px; left: 20px;
-    background: var(--mz-blood);
-    color: #fff;
+    background: var(--mz-blood); color: #fff;
     font-family: 'Cinzel Decorative', cursive;
     font-size: 0.8em; text-transform: uppercase; letter-spacing: 1px;
-    padding: 4px 15px;
-    border: 1px solid var(--mz-blood-bright);
+    padding: 4px 15px; border: 1px solid var(--mz-blood-bright);
     box-shadow: 0 0 10px var(--mz-blood);
 }
-
-/* Conteúdo das Notas */
 .mz-notes-content {
     padding: 25px 20px 15px 20px;
-    font-size: 0.85em;
-    color: #999;
-    line-height: 1.6;
+    font-size: 0.85em; color: #999; line-height: 1.6;
     border-left: 3px solid var(--mz-blood);
 }
-
-/* ESTILOS DE BBCODE NAS NOTAS */
 .mz-notes-content b { color: var(--mz-blood-bright); font-weight: bold; }
 .mz-notes-content i { color: #bbb; font-style: italic; }
 .mz-notes-content u { text-decoration: none; border-bottom: 1px dashed var(--mz-blood-bright); }
@@ -143,7 +135,6 @@
     background: #000; padding: 20px; border-top: 1px solid #222;
     display: flex; gap: 15px; justify-content: center;
 }
-
 .mz-card {
     width: 45px; height: 45px; border-radius: 50%;
     background: #1a1a1a; border: 1px solid #333;
