@@ -1,158 +1,228 @@
-/* --- TEMPLATE: MEREDITH / BRAWLER vFINAL --- */
-@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Russo+One&family=Koulen&family=Roboto:wght@400;700&family=Audiowide&family=Teko:wght@600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Montserrat:wght@300;400;600&display=swap');
 
 :root {
-  --brawl-bg: #0a0c10;
-  --brawl-denim: #2c3e50;
-  --brawl-yellow: #ffea00;
-  --brawl-red: #d50000;
-  --brawl-white: #f0f0f0;
-  --brawl-dark: #000000;
+    --mz-bg: #0a0a0a;
+    --mz-panel: #141414;
+    --mz-blood: #8a0000;
+    --mz-blood-bright: #ff1a1a;
+    --mz-shadow: #000000;
+    --mz-text: #e0e0e0;
 }
 
-@keyframes power-surge {
-  0% { background-position: 0 0; }
-  100% { background-position: 100px 0; }
+/* CONTAINER PRINCIPAL */
+.mz-post-container {
+    max-width: 650px;
+    margin: 20px auto;
+    background-color: var(--mz-bg);
+    border: 1px solid #222;
+    box-shadow: 0 0 50px rgba(0,0,0,0.8);
+    font-family: 'Montserrat', sans-serif;
+    color: var(--mz-text);
+    position: relative;
+    overflow: hidden;
 }
 
-/* CONTAINER */
-.brawler-container {
-  box-sizing: border-box; max-width: 720px; width: 95%; margin: 40px auto;
-  background-color: var(--brawl-bg);
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.08'/%3E%3C/svg%3E");
-  border: 4px solid var(--brawl-dark); border-bottom: 8px solid var(--brawl-denim);
-  color: var(--brawl-white); font-family: 'Roboto', sans-serif;
-  position: relative; box-shadow: 10px 10px 0 rgba(0,0,0,0.8); padding: 0; overflow: hidden;
-}
-.brawler-container * { box-sizing: border-box; }
-
-/* Faixa Lateral */
-.brawler-container::before {
-  content: ''; position: absolute; top: 0; bottom: 0; left: 0; width: 30px;
-  background: repeating-linear-gradient(-45deg, #111, #111 10px, #eee 10px, #eee 20px);
-  border-right: 3px solid #000; z-index: 10;
+/* Faixa lateral decorativa (Sangue/Sombra) */
+.mz-post-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(to bottom, var(--mz-blood), #000, var(--mz-blood));
+    z-index: 2;
 }
 
-/* HEADER */
-.brawler-header {
-  padding: 30px 20px 30px 50px;
-  background: linear-gradient(135deg, var(--brawl-denim) 60%, var(--brawl-dark) 100%);
-  border-bottom: 4px solid var(--brawl-yellow);
-  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%); position: relative; z-index: 2;
-  display: flex; justify-content: space-between; align-items: center;
+/* --- CABEÇALHO --- */
+.mz-header {
+    height: 180px;
+    background-image: linear-gradient(to top, var(--mz-bg), transparent), 
+                      url('https://i.pinimg.com/originals/24/02/76/24027666952458421876807850556108.gif'); /* Gif de fumaça/sombra */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    padding: 20px;
+    border-bottom: 2px solid var(--mz-blood);
 }
 
-.brawler-title {
-  font-family: 'Black Ops One', cursive; font-size: 2.5em; color: #fff;
-  text-transform: uppercase; margin: 0; text-shadow: 4px 4px 0 #000;
-  line-height: 1; transform: skewX(-10deg);
-}
-.brawler-subtitle {
-  font-family: 'Koulen', sans-serif; font-size: 1.4em; color: var(--brawl-yellow);
-  text-transform: uppercase; margin-top: 5px; transform: skewX(-10deg); text-shadow: 2px 2px 0 #000;
-}
-
-/* IMAGEM */
-.brawler-image-frame {
-  width: 100%; height: 350px; position: relative; background: #000;
-  border-bottom: 4px solid var(--brawl-dark); margin-top: -20px; z-index: 1;
-}
-.brawler-image-frame img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top center;
-  filter: contrast(1.2) saturate(1.1);
-}
-.brawler-image-frame::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to right, rgba(0,0,0,0.6) 0%, transparent 30%); pointer-events: none;
+/* Avatar Hexagonal */
+.mz-avatar-box {
+    width: 100px; height: 100px;
+    background: var(--mz-panel);
+    border: 2px solid var(--mz-blood);
+    transform: rotate(45deg); /* Losango */
+    overflow: hidden;
+    margin-left: 20px;
+    margin-bottom: -40px; /* Sobrepõe o conteúdo */
+    position: relative;
+    z-index: 10;
+    box-shadow: 0 0 20px var(--mz-blood);
 }
 
-/* --- STATUS ISOLADOS (Scoping) --- */
-.brawler-stats {
-  padding: 20px 30px 20px 50px; display: flex; flex-direction: column; gap: 15px;
-  background: rgba(0,0,0,0.5); position: relative; z-index: 2; border-bottom: 2px dashed #555;
+.mz-avatar {
+    width: 140%; height: 140%;
+    object-fit: cover;
+    transform: rotate(-45deg) translateY(-20px) translateX(-5px); /* Desvira a imagem */
 }
 
-.brawler-container .jjk-dossier-status-item {
-  display: grid; grid-template-columns: 50px 1fr 80px; align-items: center; gap: 10px;
-  margin: 0; padding: 0; background: transparent; border: none;
+/* Nome (Injetado pelo CSS) */
+.mz-name-plate {
+    margin-left: 40px;
+    margin-bottom: 5px;
+    text-shadow: 0 0 10px #000;
 }
 
-.brawler-container .jjk-dossier-status-label {
-  font-family: 'Russo One', sans-serif; font-size: 1em; 
-  color: var(--brawl-white) !important;
-  text-align: right; text-shadow: 2px 2px 0 #000; transform: skewX(-10deg);
-  background: none; border: none; padding: 0;
+.mz-name-plate::after {
+    content: "Meredith Zenin"; /* NOME AQUI */
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: 2em;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    background: linear-gradient(to bottom, #fff, var(--mz-text));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
 
-.brawler-container .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 20px; background: #333; border: 3px solid #000;
-  transform: skewX(-15deg); overflow: hidden; border-radius: 0;
-  box-shadow: none; margin: 0;
+.mz-subtitle {
+    font-size: 0.7em;
+    color: var(--mz-blood-bright);
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    margin-top: -5px;
+    opacity: 0.8;
 }
 
-.brawler-container .jjk-dossier-status-bar { 
-  width: 100%; height: 100%; background: transparent; border: none; margin: 0; padding: 0;
+/* --- CONTEÚDO DO POST --- */
+.mz-content {
+    padding: 50px 40px 30px 40px;
+    background: var(--mz-bg);
+    font-size: 0.95em;
+    line-height: 1.8;
+    color: #ccc;
+    text-align: justify;
+    position: relative;
 }
 
-.brawler-container .jjk-dossier-status-bar-fill { 
-  height: 100%; transition: width 0.2s ease; border-radius: 0;
+/* Detalhe de aspas ou fala */
+.mz-content b { color: var(--mz-blood-bright); }
+.mz-content i { color: #888; }
+
+/* --- ÁREA DAS SOMBRAS (O Diferencial) --- */
+.mz-shadows-deck {
+    background: #000;
+    padding: 15px 20px;
+    border-top: 1px solid var(--mz-blood);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
 }
 
-.brawler-container .jjk-dossier-hp-fill {
-  background: var(--brawl-red) !important;
-  box-shadow: inset 0 5px 0 rgba(255,255,255,0.2);
+/* Título pequeno do deck */
+.mz-deck-label {
+    position: absolute;
+    top: -10px;
+    background: var(--mz-blood);
+    color: #fff;
+    font-size: 0.6em;
+    padding: 2px 10px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 1px;
+    clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%);
 }
 
-.brawler-container .jjk-dossier-ea-fill {
-  background: repeating-linear-gradient(90deg, var(--brawl-yellow), var(--brawl-yellow) 10px, #ff9100 10px, #ff9100 20px) !important;
-  animation: power-surge 0.5s linear infinite; box-shadow: 0 0 10px var(--brawl-yellow);
+/* CARD DA SOMBRA */
+.mz-card {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    overflow: visible; /* Necessário para o popup sair */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.brawler-container .jjk-dossier-status-value {
-  font-family: 'Black Ops One', cursive; font-size: 0.8em;
-  color: var(--brawl-yellow) !important; text-align: right; transform: skewX(-10deg);
-  white-space: nowrap; background: none; border: none;
+/* Ícone da sombra (inativo/pequeno) */
+.mz-card-icon {
+    width: 100%; height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    opacity: 0.5;
+    filter: grayscale(100%);
+    transition: 0.4s;
 }
 
-/* CONTEÚDO */
-.brawler-content {
-  padding: 30px 30px 30px 50px; font-size: 1.1em; line-height: 1.6; color: #ddd;
-  text-align: justify; background: transparent; position: relative; z-index: 2;
-}
-.brawler-content b {
-  color: var(--brawl-yellow); font-family: 'Russo One', sans-serif; text-transform: uppercase;
-  background: #000; padding: 0 5px; transform: skewX(-10deg); display: inline-block;
-}
-.brawler-content i { color: var(--brawl-red); font-weight: 700; border-bottom: 2px solid var(--brawl-red); }
-
-/* EXTRAS / INVENTÁRIO */
-.brawler-extras {
-  margin: 0 30px 30px 50px; padding: 15px; background: #111; border: 2px solid var(--brawl-red);
-  color: var(--brawl-white); font-family: 'Koulen', sans-serif; font-size: 1.1em;
-  text-transform: uppercase; letter-spacing: 1px; position: relative; z-index: 2;
-  clip-path: polygon(0 0, 100% 0, 98% 90%, 2% 100%);
-}
-.brawler-extras::before {
-  content: 'FIGHT RECORD'; display: block; font-family: 'Black Ops One'; color: var(--brawl-red);
-  font-size: 0.8em; margin-bottom: 10px; border-bottom: 1px dashed #555;
+/* --- O POPUP DE STATUS (HOVER) --- */
+.mz-card-stats {
+    position: absolute;
+    bottom: 60px; /* Fica acima do card */
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    width: 140px;
+    background: rgba(0,0,0,0.9);
+    border: 1px solid var(--mz-blood);
+    padding: 10px;
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    z-index: 100;
+    text-align: center;
+    box-shadow: 0 5px 15px rgba(138, 0, 0, 0.3);
 }
 
-/* RODAPÉ & ASSINATURA */
-.brawler-footer {
-  text-align: right; padding: 15px 30px; background: var(--brawl-dark);
-  border-top: 4px solid var(--brawl-yellow); position: relative; z-index: 5;
+/* Triângulo do popup */
+.mz-card-stats::after {
+    content: '';
+    position: absolute;
+    bottom: -6px; left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px; height: 10px;
+    background: var(--mz-blood);
+    z-index: -1;
 }
 
-.brawler-signature::after {
-  content: 'Meredith Scholz'; /* NOME FIXADO AQUI */
-  font-family: 'Russo One', sans-serif; font-size: 1.5em; color: #fff;
-  text-transform: uppercase; letter-spacing: 2px;
-  text-shadow: 3px 3px 0 var(--brawl-red), -1px -1px 0 var(--brawl-denim);
-  transform: rotate(-2deg); display: inline-block;
+/* Conteúdo do Status */
+.mz-cs-name {
+    display: block;
+    font-family: 'Cinzel Decorative', cursive;
+    color: var(--mz-blood-bright);
+    font-size: 0.8em;
+    border-bottom: 1px solid #333;
+    padding-bottom: 2px;
+    margin-bottom: 5px;
+}
+.mz-cs-val {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7em;
+    color: #ccc;
+    font-family: monospace;
+}
+.mz-cs-val span { font-weight: bold; color: #fff; }
+
+/* --- AÇÃO HOVER --- */
+.mz-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--mz-blood-bright);
+    box-shadow: 0 0 15px var(--mz-blood);
 }
 
-@media (max-width: 600px) {
-  .brawler-container { padding-left: 0; }
-  .brawler-container::before { width: 10px; }
-  .brawler-header, .brawler-content, .brawler-stats, .brawler-extras { padding-left: 20px; }
+.mz-card:hover .mz-card-icon {
+    opacity: 1;
+    filter: grayscale(0%);
+}
+
+.mz-card:hover .mz-card-stats {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
 }
