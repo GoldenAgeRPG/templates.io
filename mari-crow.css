@@ -1,24 +1,18 @@
-/* --- TEMPLATE: CROW'S GAMBLE --- */
+/* --- TEMPLATE: CROW'S GAMBLE (YIZHUO MING) --- */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Cinzel:wght@700&family=Nunito:wght@400;700&family=Meddon&display=swap');
 
 :root {
   --crow-bg: #050505;
   --crow-wine: #781414;
-  --crow-gold: #d4af37; /* Ouro para EA */
+  --crow-gold: #d4af37;
   --crow-text: #ccc;
   --crow-shadow: rgba(120, 20, 20, 0.3);
 }
 
-/* Animação: Flutuação de Carta Rara (Holográfica) */
+/* Animação: Flutuação Holográfica */
 @keyframes card-float {
   0%, 100% { transform: translateY(0); box-shadow: 0 0 15px var(--crow-shadow); border-color: #333; }
   50% { transform: translateY(-5px); box-shadow: 0 10px 30px var(--crow-shadow); border-color: var(--crow-wine); }
-}
-
-/* Animação: Penas Caindo (Background) */
-@keyframes feather-fall {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 20% 100%; }
 }
 
 /* CONTAINER PRINCIPAL */
@@ -29,14 +23,14 @@
   margin: 50px auto;
   background-color: var(--crow-bg);
   
-  /* Textura de fundo: Padrão de Naipes Escuros */
+  /* Textura de fundo */
   background-image: 
     radial-gradient(circle at 50% 50%, rgba(120, 20, 20, 0.05), transparent 80%),
     url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 30 C 15 30 15 20 20 15 C 25 20 25 30 20 30' fill='%23111' fill-opacity='0.4'/%3E%3C/svg%3E");
   
   border: 1px solid #222;
   
-  /* FORMATO: Carta Chanfrada (Octogonal alongado) */
+  /* Formato Carta Chanfrada */
   clip-path: polygon(
     15px 0, calc(100% - 15px) 0, 
     100% 15px, 100% calc(100% - 15px), 
@@ -56,7 +50,7 @@
 /* Overlay de Penas */
 .crow-container::before {
   content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-  background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png"); /* Textura noise sutil */
+  background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png");
   opacity: 0.2; pointer-events: none; z-index: 0;
 }
 
@@ -76,11 +70,11 @@
 }
 .crow-container:hover .crow-header img { transform: scale(1.05); }
 
-/* Caixa de Título (Fundo Sólido para Leitura) */
+/* Título */
 .crow-title-box {
   position: absolute;
   bottom: 20px; right: 0;
-  background: rgba(0, 0, 0, 0.85); /* Fundo escuro sólido */
+  background: rgba(0, 0, 0, 0.85);
   padding: 10px 30px 10px 60px;
   border-left: 4px solid var(--crow-wine);
   clip-path: polygon(20px 0, 100% 0, 100% 100%, 0% 100%);
@@ -107,7 +101,7 @@
   margin-top: 5px;
 }
 
-/* SEPARADOR MODERNO (Naipe) */
+/* SEPARADOR */
 .crow-divider {
   display: flex; align-items: center; justify-content: center;
   margin: 20px 0; gap: 10px;
@@ -142,7 +136,7 @@
 .crow-bar-bg {
   width: 100%; height: 10px;
   background: #111; border: 1px solid #333;
-  transform: skewX(-20deg); /* Barra inclinada */
+  transform: skewX(-20deg);
   overflow: hidden;
 }
 
@@ -153,15 +147,21 @@
   width: 0%; transition: width 0.5s;
 }
 .crow-ea-fill {
-  height: 100%; background: var(--crow-gold); /* DOURADO */
+  height: 100%; background: var(--crow-gold);
   box-shadow: 0 0 10px var(--crow-gold);
   width: 0%; transition: width 0.5s;
 }
 
-/* Valores */
-.crow-val {
+/* Valores (Classes específicas para JS) */
+.crow-hp-val {
   font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.9em;
   color: #fff; min-width: 80px; text-align: right;
+}
+.crow-ea-val {
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.9em;
+  color: var(--crow-gold); /* Dourado no número também */
+  min-width: 80px; text-align: right;
+  text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
 }
 
 /* CONTEÚDO */
@@ -174,7 +174,6 @@
   position: relative; z-index: 2;
 }
 
-/* BBCode simulado via CSS */
 .crow-content b, .crow-content strong {
   color: var(--crow-wine);
   font-family: 'Playfair Display', serif;
@@ -194,7 +193,7 @@
   padding: 25px;
   background: linear-gradient(135deg, #111, #080808);
   border: 1px solid #222;
-  border-left: 3px solid var(--crow-gold); /* Detalhe Dourado */
+  border-left: 3px solid var(--crow-gold);
   color: #777;
   position: relative;
   font-size: 0.9em;
@@ -212,7 +211,7 @@
   border: 1px solid #222;
 }
 
-/* ASSINATURA ESTILIZADA */
+/* ASSINATURA */
 .crow-signature {
   text-align: center;
   padding: 0 0 40px 0;
@@ -221,7 +220,7 @@
 
 .crow-signature::after {
   content: 'Yizhuo Ming';
-  font-family: 'Meddon', cursive; /* Fonte Manuscrita Realista */
+  font-family: 'Meddon', cursive;
   font-size: 2.2em;
   color: var(--crow-wine);
   text-shadow: 0 0 2px rgba(120, 20, 20, 0.5);
