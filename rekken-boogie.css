@@ -103,8 +103,18 @@
   overflow: hidden;
   border-radius: 4px;
   box-shadow: inset 0px 20px 20px -5px #050505;
-  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  mask-image: linear-gradient(to bottom, 
+    transparent 0%, 
+    black 20%, 
+    black 80%, 
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(to bottom, 
+    transparent 0%, 
+    black 20%, 
+    black 80%, 
+    transparent 100%
+  );
 }
 
 .bw-image-frame img {
