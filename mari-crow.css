@@ -1,24 +1,24 @@
 /* --- TEMPLATE: CROW'S GAMBLE --- */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@700&family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Cinzel:wght@700&family=Nunito:wght@400;700&family=Meddon&display=swap');
 
 :root {
-  --crow-bg: #020202;
-  --crow-wine: #781414; /* A cor pedida */
-  --crow-wine-glow: rgba(120, 20, 20, 0.4);
-  --crow-card: #111;
+  --crow-bg: #050505;
+  --crow-wine: #781414;
+  --crow-gold: #d4af37; /* Ouro para EA */
   --crow-text: #ccc;
+  --crow-shadow: rgba(120, 20, 20, 0.3);
 }
 
-/* Animação: Chuva de Penas/Corvos (Scroll Infinito) */
-@keyframes feather-drift {
+/* Animação: Flutuação de Carta Rara (Holográfica) */
+@keyframes card-float {
+  0%, 100% { transform: translateY(0); box-shadow: 0 0 15px var(--crow-shadow); border-color: #333; }
+  50% { transform: translateY(-5px); box-shadow: 0 10px 30px var(--crow-shadow); border-color: var(--crow-wine); }
+}
+
+/* Animação: Penas Caindo (Background) */
+@keyframes feather-fall {
   0% { background-position: 0% 0%; }
-  100% { background-position: 100% 100%; }
-}
-
-/* Animação: Pulso da Aposta */
-@keyframes gamble-pulse {
-  0%, 100% { border-color: #333; box-shadow: 0 0 10px rgba(0,0,0,0.8); }
-  50% { border-color: var(--crow-wine); box-shadow: 0 0 20px var(--crow-wine-glow); }
+  100% { background-position: 20% 100%; }
 }
 
 /* CONTAINER PRINCIPAL */
@@ -26,208 +26,210 @@
   box-sizing: border-box;
   max-width: 650px;
   width: 95%;
-  margin: 40px auto;
+  margin: 50px auto;
   background-color: var(--crow-bg);
   
-  /* Textura de Fundo (Baralho Sutil) */
-  background-image: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+  /* Textura de fundo: Padrão de Naipes Escuros */
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(120, 20, 20, 0.05), transparent 80%),
+    url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 30 C 15 30 15 20 20 15 C 25 20 25 30 20 30' fill='%23111' fill-opacity='0.4'/%3E%3C/svg%3E");
   
-  border: 1px solid #333;
-  /* Formato Carta de Baralho */
-  border-radius: 10px;
+  border: 1px solid #222;
+  
+  /* FORMATO: Carta Chanfrada (Octogonal alongado) */
+  clip-path: polygon(
+    15px 0, calc(100% - 15px) 0, 
+    100% 15px, 100% calc(100% - 15px), 
+    calc(100% - 15px) 100%, 15px 100%, 
+    0 calc(100% - 15px), 0 15px
+  );
   
   color: var(--crow-text);
   font-family: 'Nunito', sans-serif;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 30px #000;
   
-  animation: gamble-pulse 6s infinite ease-in-out;
+  animation: card-float 6s infinite ease-in-out;
 }
 .crow-container * { box-sizing: border-box; }
 
-/* EFEITO DOS CORVOS (Overlay Animado) */
+/* Overlay de Penas */
 .crow-container::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  /* Pattern de penas/corvos caindo */
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  background-size: 100px 100px;
-  opacity: 0.3;
-  pointer-events: none;
-  z-index: 0;
-  animation: feather-drift 20s linear infinite;
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url("https://www.transparenttextures.com/patterns/dark-matter.png"); /* Textura noise sutil */
+  opacity: 0.2; pointer-events: none; z-index: 0;
 }
 
 /* HEADER */
 .crow-header {
   position: relative;
   height: 280px;
-  border-bottom: 4px solid var(--crow-wine);
+  border-bottom: 2px solid var(--crow-wine);
   overflow: hidden;
   z-index: 1;
 }
 
 .crow-header img {
   width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  filter: contrast(1.2) grayscale(0.2);
+  object-fit: cover; object-position: top center;
   transition: 0.5s;
 }
-.crow-container:hover .crow-header img {
-  filter: contrast(1.1) grayscale(0);
-  transform: scale(1.05);
-}
+.crow-container:hover .crow-header img { transform: scale(1.05); }
 
-/* Título sobre a imagem */
+/* Caixa de Título (Fundo Sólido para Leitura) */
 .crow-title-box {
   position: absolute;
-  bottom: 0; right: 0;
-  background: linear-gradient(to left, #000, transparent);
-  padding: 10px 30px;
+  bottom: 20px; right: 0;
+  background: rgba(0, 0, 0, 0.85); /* Fundo escuro sólido */
+  padding: 10px 30px 10px 60px;
+  border-left: 4px solid var(--crow-wine);
+  clip-path: polygon(20px 0, 100% 0, 100% 100%, 0% 100%);
   text-align: right;
+  backdrop-filter: blur(2px);
 }
 
 .crow-title {
   font-family: 'Playfair Display', serif;
-  font-size: 2.5em;
+  font-size: 2.2em;
   color: #fff;
   margin: 0;
-  text-shadow: 2px 2px 0 var(--crow-wine);
+  text-shadow: 0 0 10px var(--crow-wine);
   font-style: italic;
+  line-height: 1;
 }
 
 .crow-subtitle {
   font-family: 'Cinzel', serif;
-  color: var(--crow-wine);
-  font-size: 0.8em;
+  color: var(--crow-gold);
+  font-size: 0.75em;
   letter-spacing: 3px;
   text-transform: uppercase;
+  margin-top: 5px;
 }
 
-/* STATUS (Classes Obrigatórias) */
+/* SEPARADOR MODERNO (Naipe) */
+.crow-divider {
+  display: flex; align-items: center; justify-content: center;
+  margin: 20px 0; gap: 10px;
+  opacity: 0.7;
+}
+.crow-divider::before, .crow-divider::after {
+  content: ''; height: 1px; width: 100px;
+  background: linear-gradient(90deg, transparent, var(--crow-wine), transparent);
+}
+.crow-divider span {
+  color: var(--crow-wine); font-size: 1.2em;
+}
+
+/* STATUS */
 .crow-stats-panel {
-  padding: 15px 30px;
-  background: #080808;
-  border-bottom: 1px solid #222;
-  position: relative;
-  z-index: 2;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  padding: 10px 40px;
+  background: rgba(10, 10, 10, 0.9);
+  position: relative; z-index: 2;
+  display: flex; flex-direction: column; gap: 10px;
+  margin-top: -5px;
 }
 
 .crow-stat-row {
-  display: grid;
-  grid-template-columns: 30px 1fr auto;
-  align-items: center;
-  gap: 15px;
+  display: grid; grid-template-columns: 30px 1fr auto;
+  align-items: center; gap: 15px;
 }
 
 .crow-label {
-  font-family: 'Cinzel', serif;
-  color: var(--crow-wine);
-  font-size: 1em;
-  font-weight: 700;
+  font-family: 'Cinzel', serif; color: var(--crow-wine); font-weight: 700;
 }
 
 .crow-bar-bg {
-  width: 100%; height: 8px;
-  background: #1a1a1a;
-  border: 1px solid #333;
-  border-radius: 2px;
+  width: 100%; height: 10px;
+  background: #111; border: 1px solid #333;
+  transform: skewX(-20deg); /* Barra inclinada */
   overflow: hidden;
 }
 
-/* Barras preenchendo */
-.jjk-dossier-hp-fill {
-  height: 100%;
-  background: var(--crow-wine); /* Cor Vinho */
+/* Cores das Barras */
+.crow-hp-fill {
+  height: 100%; background: var(--crow-wine);
   box-shadow: 0 0 10px var(--crow-wine);
+  width: 0%; transition: width 0.5s;
 }
-.jjk-dossier-ea-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #333, #666); /* Cinza Aço */
+.crow-ea-fill {
+  height: 100%; background: var(--crow-gold); /* DOURADO */
+  box-shadow: 0 0 10px var(--crow-gold);
+  width: 0%; transition: width 0.5s;
 }
 
 /* Valores */
-.jjk-dossier-status-value {
-  font-family: 'Nunito', sans-serif;
-  font-size: 0.8em;
-  color: #fff;
-  font-weight: 700;
+.crow-val {
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.9em;
+  color: #fff; min-width: 80px; text-align: right;
 }
 
 /* CONTEÚDO */
 .crow-content {
-  padding: 40px;
+  padding: 20px 50px;
   font-size: 1.1em;
   line-height: 1.8;
-  color: #bbb;
+  color: var(--crow-text);
   text-align: justify;
-  position: relative;
-  z-index: 2;
-  background: rgba(0,0,0,0.6); /* Leve fundo para ler melhor sobre as penas */
+  position: relative; z-index: 2;
 }
 
-/* Decoração Poker Face no Texto */
-.crow-content::before {
-  content: '♠';
-  position: absolute; top: 10px; left: 15px;
-  color: var(--crow-wine); font-size: 1.5em; opacity: 0.5;
-}
-.crow-content::after {
-  content: '♦';
-  position: absolute; bottom: 10px; right: 15px;
-  color: var(--crow-wine); font-size: 1.5em; opacity: 0.5;
+/* BBCode simulado via CSS */
+.crow-content b, .crow-content strong {
+  color: var(--crow-wine);
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  font-size: 1.1em;
 }
 
-/* Formatação */
-.crow-content b {
-  color: var(--crow-wine); /* Fonte em #781414 */
-  font-weight: 700;
-  font-family: 'Playfair Display', serif; /* Fonte diferenciada */
-}
-
-.crow-content i {
+.crow-content i, .crow-content em {
   color: #fff;
   font-style: italic;
-  opacity: 0.8;
+  opacity: 0.9;
 }
 
-/* Citação / Pensamento */
-.crow-quote {
-  border-left: 2px solid var(--crow-wine);
-  margin: 20px;
-  padding: 10px 20px;
-  background: rgba(120, 20, 20, 0.05);
-  font-family: 'Playfair Display', serif;
-  color: var(--crow-wine);
-  font-style: italic;
-}
-
-/* ASSINATURA INJETADA */
-.crow-signature {
-  text-align: right;
-  padding: 0 40px 30px 40px;
+/* CAMPO "ALL WIN" */
+.crow-notes {
+  margin: 10px 50px 30px 50px;
+  padding: 25px;
+  background: linear-gradient(135deg, #111, #080808);
+  border: 1px solid #222;
+  border-left: 3px solid var(--crow-gold); /* Detalhe Dourado */
+  color: #777;
   position: relative;
-  z-index: 2;
+  font-size: 0.9em;
+}
+
+.crow-notes::before {
+  content: 'ALL WIN';
+  position: absolute; top: -12px; left: 20px;
+  background: var(--crow-bg);
+  padding: 0 10px;
+  font-family: 'Cinzel', serif;
+  color: var(--crow-gold);
+  font-size: 0.9em;
+  font-weight: 700;
+  border: 1px solid #222;
+}
+
+/* ASSINATURA ESTILIZADA */
+.crow-signature {
+  text-align: center;
+  padding: 0 0 40px 0;
+  position: relative; z-index: 2;
 }
 
 .crow-signature::after {
-  content: 'Yizhuo Ming'; /* Nome Injetado */
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8em;
+  content: 'Yizhuo Ming';
+  font-family: 'Meddon', cursive; /* Fonte Manuscrita Realista */
+  font-size: 2.2em;
   color: var(--crow-wine);
-  text-shadow: 1px 1px 0 #000;
-  border-top: 1px solid #333;
+  text-shadow: 0 0 2px rgba(120, 20, 20, 0.5);
+  transform: rotate(-4deg);
   display: inline-block;
-  padding-top: 5px;
 }
 
 @media (max-width: 600px) {
-  .crow-content { padding: 20px; }
-  .crow-header { height: 200px; }
+  .crow-content, .crow-notes { padding: 20px; }
+  .crow-container { clip-path: none; border-radius: 10px; }
 }
