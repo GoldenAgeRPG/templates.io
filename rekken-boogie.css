@@ -4,21 +4,37 @@
 :root {
   --dp-bg: #050505;
   --dp-panel: #0d0d0d;
-  --dp-green: #00ff41;
+  --dp-green: #00ff41; /* Verde Neon */
+  --dp-green-dark: #004d14;
+  --dp-womb-bg: rgba(20, 5, 5, 0.8); /* Fundo orgânico escuro */
   --dp-text: #ccc;
-  --dp-border-solid: #1f1f1f;
 }
 
-/* Animação: Giro do Ícone (Horário e Constante) */
-@keyframes icon-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+/* --- ANIMAÇÕES --- */
+
+/* 1. Giro e Flutuação combinados para o ícone */
+@keyframes icon-float-spin {
+  0% { transform: rotate(0deg) translateY(0); }
+  50% { transform: rotate(180deg) translateY(-6px); }
+  100% { transform: rotate(360deg) translateY(0); }
 }
 
-/* Animação: Respiração Sutil (Muito reduzida) */
-@keyframes toxic-breathe-low {
-  0%, 100% { border-color: #1a1a1a; box-shadow: 0 0 5px rgba(0, 255, 65, 0.05); }
-  50% { border-color: #2a2a2a; box-shadow: 0 0 10px rgba(0, 255, 65, 0.15); }
+/* 2. Respiração Amaldiçoada (Container Principal) */
+@keyframes cursed-breathe {
+  0%, 100% {
+    border-color: #1a1a1a;
+    box-shadow: 0 0 10px rgba(0, 255, 65, 0.1), inset 0 0 20px #000;
+  }
+  50% {
+    border-color: var(--dp-green-dark);
+    box-shadow: 0 0 25px rgba(0, 255, 65, 0.25), inset 0 0 40px rgba(0, 20, 0, 0.5);
+  }
+}
+
+/* 3. Pulsação das Barras de Energia */
+@keyframes bar-pulse {
+  0%, 100% { box-shadow: 0 0 5px var(--dp-green); }
+  50% { box-shadow: 0 0 15px var(--dp-green); }
 }
 
 /* CONTAINER PRINCIPAL */
@@ -29,14 +45,11 @@
   margin: 50px auto;
   background-color: var(--dp-bg);
   
-  /* Textura de fundo muito sutil */
-  background-image: radial-gradient(circle at 30% 20%, #0a110a 0%, #050505 70%);
+  /* Textura de fundo sutil */
+  background-image: radial-gradient(circle at 30% 20%, #0a110a 0%, #050505 80%);
   
-  /* Borda Sólida Externa */
-  border: 3px solid #1a1a1a;
-  
-  /* Efeito de Borda Sólida Interna (Chanfrado) */
-  box-shadow: inset 0 0 0 5px var(--dp-border-solid);
+  /* BORDA DUPLA (Estilo mais antigo/rúnico) */
+  border: 4px double #1a1a1a;
   
   /* FORMATO ASSIMÉTRICO (Mantido) */
   border-radius: 40px 120px 40px 120px; 
@@ -46,8 +59,8 @@
   position: relative;
   overflow: hidden;
   
-  /* Apenas a respiração leve, sem glitch */
-  animation: toxic-breathe-low 6s infinite ease-in-out;
+  /* Animação de respiração forte */
+  animation: cursed-breathe 5s infinite ease-in-out;
 }
 .bw-container * { box-sizing: border-box; }
 
@@ -56,17 +69,17 @@
   text-align: center;
   padding: 30px 20px 15px 20px;
   position: relative;
-  /* Linha sutil abaixo do header */
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  background: linear-gradient(to bottom, rgba(0,20,0,0.2), transparent);
 }
 
-/* Ícone SWAP (Girando) */
+/* Ícone SWAP (Girando e Flutuando) */
 .bw-icon {
   width: 45px; height: 45px;
   margin-bottom: 8px;
-  filter: drop-shadow(0 0 5px var(--dp-green));
-  /* Animação de giro constante */
-  animation: icon-spin 4s linear infinite; 
+  filter: drop-shadow(0 0 8px var(--dp-green));
+  /* Animação combinada */
+  animation: icon-float-spin 5s linear infinite; 
   transform-origin: center;
 }
 .bw-icon path { fill: var(--dp-green); }
@@ -100,7 +113,6 @@
   height: 300px;
   position: relative;
   background: #000;
-  /* Máscara suave na base */
   mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
   margin-top: 10px;
@@ -113,7 +125,7 @@
 }
 .bw-container:hover .bw-image-frame img { transform: scale(1.02); }
 
-/* STATUS (Padrão Verde/Branco) */
+/* STATUS */
 .bw-stats-panel {
   padding: 10px 45px;
   display: flex;
@@ -136,37 +148,38 @@
   font-size: 1.1em;
   width: 35px;
   text-align: right;
-  text-shadow: none;
 }
 
 .bw-bar-bg {
   flex-grow: 1;
   height: 12px;
-  background: #111;
+  background: #0a0a0a;
   border-radius: 10px;
-  border: 1px solid #333;
+  border: 1px solid #222;
   overflow: hidden;
   position: relative;
+  box-shadow: inset 0 0 5px #000;
 }
 
 .bw-hp-fill, .bw-ea-fill {
   height: 100%;
   width: 0%; /* JS preenche */
   background: var(--dp-green);
-  box-shadow: 0 0 8px var(--dp-green);
+  /* Animação de pulso na barra */
+  animation: bar-pulse 3s infinite ease-in-out;
   border-radius: 10px;
   transition: width 0.6s ease;
 }
 
-/* Valores Numéricos (Branco Padrão) */
+/* Valores Numéricos (AGORA VERDES) */
 .bw-hp-val, .bw-ea-val {
   font-family: 'Nunito', sans-serif;
   font-weight: 800;
   font-size: 0.9em;
   min-width: 80px;
   text-align: right;
-  color: #fff !important; /* Branco limpo */
-  text-shadow: none;
+  color: var(--dp-green) !important; /* Verde Neon */
+  text-shadow: 0 0 5px rgba(0,255,65,0.3);
 }
 
 /* CONTEÚDO */
@@ -178,32 +191,32 @@
   text-align: justify;
 }
 
-/* Negrito (Verde) */
 .bw-content b, .bw-content strong {
   color: var(--dp-green);
   font-weight: 800;
 }
 
-/* Itálico (Branco, Fonte Normal) - CORREÇÃO */
 .bw-content i, .bw-content em {
   color: #fff;
-  font-family: 'Nunito', sans-serif; /* Mesma fonte do corpo */
+  font-family: 'Nunito', sans-serif;
   font-weight: 700;
   font-style: italic;
-  font-size: inherit; /* Tamanho igual ao resto */
-  text-transform: none; /* Sem maiúsculas forçadas */
-  letter-spacing: normal;
+  font-size: inherit;
+  text-transform: none;
 }
 
-/* SEGUNDA CAIXA (WOMB) */
+/* SEGUNDA CAIXA (WOMB - REVAMPED) */
 .bw-notes {
   margin: 10px 50px 30px 50px;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid #1f1f1f;
-  border-radius: 10px;
+  /* Fundo mais escuro e orgânico */
+  background: var(--dp-womb-bg);
+  /* Borda tracejada (selo) */
+  border: 2px dashed var(--dp-green-dark);
+  border-radius: 15px;
+  box-shadow: inset 0 0 20px #000;
   font-size: 0.9em;
-  color: #777;
+  color: #888;
   position: relative;
 }
 
@@ -213,11 +226,13 @@
   font-family: 'Permanent Marker', cursive;
   font-size: 1.1em;
   color: var(--dp-green);
-  margin-bottom: 8px;
+  margin-bottom: 10px;
   opacity: 0.8;
+  border-bottom: 1px dashed var(--dp-green-dark);
+  padding-bottom: 5px;
 }
 
-/* ASSINATURA (Menor e Discreta) */
+/* ASSINATURA */
 .bw-signature {
   text-align: right;
   padding: 0 60px 30px 60px;
@@ -227,9 +242,8 @@
 .bw-signature::after {
   content: 'REKKEN KAGAMI';
   font-family: 'Permanent Marker', cursive;
-  font-size: 1.5em; /* Reduzido de 2.5em para 1.5em */
+  font-size: 1.5em;
   color: #111;
-  /* Contorno Verde Sutil */
   text-shadow: 
     -1px -1px 0 var(--dp-green),  
      1px -1px 0 var(--dp-green),
