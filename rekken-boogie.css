@@ -1,207 +1,262 @@
 /* --- TEMPLATE: DEATH PAINTING - BOOGIE WOOGIE --- */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Permanent+Marker&family=Nunito:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Permanent+Marker&family=Nunito:wght@400;700;800&display=swap');
 
 :root {
   --dp-bg: #050505;
-  --dp-panel: #0a0a0a;
-  --dp-green: #00ff41; /* Verde Tóxico */
-  --dp-blood-dark: #1a0505;
+  --dp-panel: #0d0d0d;
+  --dp-green: #00ff41; /* Verde Neon (Toxic) */
+  --dp-green-glow: rgba(0, 255, 65, 0.4);
   --dp-text: #ccc;
-  --dp-gradient: linear-gradient(90deg, transparent, var(--dp-green), transparent);
+  
+  /* Cores dos Status conforme print */
+  --stat-hp-color: #ff3366; /* Vermelho/Rosa do HP */
+  --stat-ea-color: #ffea00; /* Amarelo da EA */
 }
 
-/* Animação: Pulsação Orgânica (como um coração/veneno) */
-@keyframes toxic-pulse {
-  0% { box-shadow: 0 0 10px rgba(0, 255, 65, 0.1); border-color: #111; }
-  50% { box-shadow: 0 0 25px rgba(0, 255, 65, 0.3); border-color: var(--dp-green); }
-  100% { box-shadow: 0 0 10px rgba(0, 255, 65, 0.1); border-color: #111; }
+/* Animação: BOOGIE WOOGIE SWAP (Simulação da CT) */
+/* O post "teleporta" lateralmente e sofre inversão rápida */
+@keyframes boogie-swap {
+  0%, 95% { transform: translateX(0); filter: invert(0); }
+  96% { transform: translateX(-10px); filter: invert(0.2); } /* Troca */
+  97% { transform: translateX(10px); filter: invert(0); } /* Rebote */
+  98% { transform: translateX(0); }
 }
 
-/* CONTAINER PRINCIPAL */
+/* Animação: Pulsação Venenosa */
+@keyframes toxic-breathe {
+  0%, 100% { box-shadow: 0 0 15px rgba(0, 255, 65, 0.1); border-color: #1a1a1a; }
+  50% { box-shadow: 0 0 30px rgba(0, 255, 65, 0.25); border-color: var(--dp-green); }
+}
+
+/* CONTAINER PRINCIPAL (Forma Orgânica) */
 .bw-container {
   box-sizing: border-box;
   max-width: 650px;
   width: 95%;
-  margin: 40px auto;
+  margin: 50px auto;
   background-color: var(--dp-bg);
   
-  /* Textura de "Mancha" Sutil */
-  background-image: radial-gradient(circle at 50% 30%, #0f1a0f 0%, #050505 80%);
+  /* Textura de fundo sutil */
+  background-image: radial-gradient(circle at 30% 20%, #0e140e 0%, #050505 70%);
   
-  border: 1px solid #111;
-  border-radius: 5px;
+  border: 2px solid #1a1a1a;
+  
+  /* FORMATO ASSIMÉTRICO (Death Painting Womb Style) */
+  /* Remove a cara de "retângulo simples" */
+  border-radius: 40px 120px 40px 120px; 
   
   color: var(--dp-text);
   font-family: 'Nunito', sans-serif;
   position: relative;
   overflow: hidden;
-  animation: toxic-pulse 5s infinite ease-in-out;
+  
+  /* Combina a pulsação com o efeito de troca */
+  animation: 
+    toxic-breathe 4s infinite ease-in-out,
+    boogie-swap 10s infinite ease-in-out; /* Troca a cada 10s */
 }
 .bw-container * { box-sizing: border-box; }
 
 /* HEADER */
 .bw-header {
   text-align: center;
-  padding: 30px 20px 10px 20px;
+  padding: 30px 20px 15px 20px;
   position: relative;
+  border-bottom: 1px solid rgba(0, 255, 65, 0.1);
 }
 
-/* Separador Gradiente (Substitui linha sólida) */
-.bw-divider {
-  height: 2px;
-  width: 80%;
-  margin: 20px auto;
-  background: var(--dp-gradient);
-  opacity: 0.5;
-  border-radius: 50%;
-}
-
-/* Ícone UNO Reverse */
+/* Ícone SWAP (Setas Ciclando) */
 .bw-icon {
-  width: 45px; height: 45px;
+  width: 50px; height: 50px;
   margin-bottom: 5px;
-  filter: drop-shadow(0 0 5px var(--dp-green));
-  opacity: 0.9;
+  filter: drop-shadow(0 0 8px var(--dp-green));
 }
 .bw-icon path { fill: var(--dp-green); }
 
 .bw-title {
   font-family: 'Cinzel', serif;
-  font-weight: 700;
-  font-size: 2em;
+  font-weight: 900;
+  font-size: 2.2em;
   color: #fff;
   text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 0 2px 5px #000;
+  letter-spacing: 1px;
   margin: 0;
+  text-shadow: 0 4px 10px #000;
+  line-height: 1;
 }
 
 .bw-subtitle {
   font-family: 'Cinzel', serif;
-  font-size: 0.8em;
+  font-size: 0.75em;
   color: var(--dp-green);
   text-transform: uppercase;
-  letter-spacing: 4px;
+  letter-spacing: 5px;
   margin-top: 5px;
-  opacity: 0.8;
+  font-weight: 700;
+  opacity: 0.9;
 }
 
-/* IMAGEM */
+/* IMAGEM (Sem Filtros PB) */
 .bw-image-frame {
   width: 100%;
-  height: 280px;
+  height: 300px;
   position: relative;
-  /* Mascara para suavizar a borda inferior da imagem */
-  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  background: #000;
+  /* Mascara orgânica na base da imagem */
+  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
 }
 
 .bw-image-frame img {
   width: 100%; height: 100%;
   object-fit: cover; object-position: top;
-  filter: grayscale(0.9) contrast(1.1);
-  transition: 0.5s;
+  /* Filtros removidos: Cores reais */
+  transition: 0.5s transform;
 }
-.bw-container:hover .bw-image-frame img { filter: grayscale(0) contrast(1.1); }
+.bw-container:hover .bw-image-frame img { transform: scale(1.05); }
 
-/* STATUS (Classes Blindadas) */
+/* STATUS (Estilo do Print) */
 .bw-stats-panel {
-  padding: 10px 40px;
+  padding: 10px 45px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
-  margin-top: -20px; /* Sobe um pouco pra cima da imagem fade */
+  gap: 12px;
+  margin-top: -25px; /* Sobe sobre a imagem */
   position: relative;
-  z-index: 2;
+  z-index: 5;
 }
 
 .bw-stat-row {
-  display: grid;
-  grid-template-columns: 30px 1fr auto;
+  display: flex;
   align-items: center;
   gap: 15px;
 }
 
 .bw-label {
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  color: var(--dp-green);
-  font-size: 0.9em;
+  font-family: 'Permanent Marker', cursive; /* Fonte estilosa para o label */
+  color: var(--dp-green); /* Label Verde */
+  font-size: 1.1em;
+  width: 35px;
+  text-align: right;
+  text-shadow: 0 0 5px var(--dp-green-glow);
 }
 
 .bw-bar-bg {
-  width: 100%; height: 6px;
+  flex-grow: 1;
+  height: 14px; /* Barra mais grossa como no print */
   background: #111;
-  border-radius: 3px;
+  border-radius: 10px;
+  border: 1px solid #222;
   overflow: hidden;
-  box-shadow: inset 0 0 5px #000;
+  position: relative;
 }
 
 .bw-hp-fill, .bw-ea-fill {
   height: 100%;
-  width: 0%; /* JS preenche isso */
-  background: var(--dp-green);
-  box-shadow: 0 0 8px var(--dp-green);
-  transition: width 0.6s ease-out;
-  border-radius: 3px;
+  width: 0%; /* JS preenche */
+  background: var(--dp-green); /* Barra Verde Neon */
+  box-shadow: 0 0 10px var(--dp-green);
+  border-radius: 10px;
+  transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
+/* Reflexo na barra (vidro) */
+.bw-bar-bg::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%;
+  background: rgba(255,255,255,0.1); border-radius: 10px 10px 0 0;
+  pointer-events: none;
+}
+
+/* Valores Numéricos (Cores específicas do Print) */
 .bw-hp-val, .bw-ea-val {
   font-family: 'Nunito', sans-serif;
-  font-weight: 700;
-  font-size: 0.85em;
-  color: #888;
-  white-space: nowrap;
+  font-weight: 800;
+  font-size: 0.9em;
+  min-width: 80px;
+  text-align: right;
 }
+
+.bw-hp-val { color: var(--stat-hp-color) !important; text-shadow: 0 0 5px rgba(255, 51, 102, 0.3); }
+.bw-ea-val { color: var(--stat-ea-color) !important; text-shadow: 0 0 5px rgba(255, 234, 0, 0.3); }
+
 
 /* CONTEÚDO */
 .bw-content {
-  padding: 20px 40px;
-  font-size: 1.05em;
-  line-height: 1.8;
+  padding: 20px 50px;
+  font-size: 1.1em;
+  line-height: 1.7;
   color: var(--dp-text);
   text-align: justify;
 }
-.bw-content b { color: var(--dp-green); font-weight: 700; }
-.bw-content i { color: #fff; font-family: 'Cinzel', serif; }
 
-/* SEGUNDA CAIXA (CONSIDERAÇÕES) */
+/* Negrito (Apenas cor) */
+.bw-content b, .bw-content strong {
+  color: var(--dp-green);
+  font-weight: 800;
+}
+
+/* Itálico (Branco, fonte diferente, SEM alterar tamanho/caixa) */
+.bw-content i, .bw-content em {
+  color: #fff;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: inherit; /* Mantém o tamanho do texto normal */
+  text-transform: none; /* Garante que não fica maiúsculo */
+  text-shadow: 0 0 2px #fff;
+}
+
+/* SEGUNDA CAIXA (WOMB) */
 .bw-notes {
-  margin: 10px 40px 30px 40px;
+  margin: 10px 50px 30px 50px;
   padding: 20px;
-  background: rgba(0, 255, 65, 0.03); /* Fundo verde muito sutil */
-  border: 1px solid #1a2a1a;
-  border-radius: 4px;
+  background: rgba(10, 20, 10, 0.5);
+  border: 1px solid #1f2f1f;
+  border-radius: 10px; /* Levemente arredondado */
   font-size: 0.9em;
-  color: #777;
+  color: #666;
   position: relative;
 }
 
-/* Label Injetado via CSS */
+/* Label WOMB Injetado */
 .bw-notes::before {
-  content: 'CONSIDERAÇÕES';
+  content: 'WOMB';
   display: block;
-  font-family: 'Cinzel', serif;
-  font-size: 0.8em;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1.1em;
   color: var(--dp-green);
-  margin-bottom: 10px;
-  border-bottom: 1px dashed #333;
-  padding-bottom: 5px;
-  letter-spacing: 1px;
+  margin-bottom: 8px;
+  opacity: 0.8;
 }
 
-/* ASSINATURA (Ajustada) */
+/* ASSINATURA (INJETADA E BLINDADA) */
+/* O jogador coloca apenas <div class="bw-signature"></div> */
 .bw-signature {
   text-align: right;
-  padding: 0 40px 30px 40px;
+  padding: 0 60px 40px 60px;
+  height: 60px; /* Garante espaço */
+}
+
+.bw-signature::after {
+  content: 'REKKEN KAGAMI'; /* Texto fixo no CSS */
   font-family: 'Permanent Marker', cursive;
-  font-size: 1.8em; /* Tamanho reduzido conforme pedido */
-  color: #222; /* Texto escuro */
+  font-size: 2.5em; /* Grande e estilo grafite */
+  color: #000;
+  /* Contorno Neon Verde */
   text-shadow: 
     -1px -1px 0 var(--dp-green),  
      1px -1px 0 var(--dp-green),
     -1px  1px 0 var(--dp-green),
-     1px  1px 0 var(--dp-green); /* Borda Neon */
-  opacity: 0.8;
-  transform: rotate(-2deg);
+     1px  1px 0 var(--dp-green),
+     0 0 15px var(--dp-green);
+  transform: rotate(-3deg);
+  display: inline-block;
+  opacity: 0.9;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .bw-container { margin: 20px auto; border-radius: 20px 60px 20px 60px; }
+  .bw-content, .bw-notes, .bw-stats-panel, .bw-signature { padding-left: 25px; padding-right: 25px; }
+  .bw-signature::after { font-size: 1.8em; }
 }
