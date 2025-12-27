@@ -1,28 +1,26 @@
 /* --- TEMPLATE: BOOGIE WOOGIE --- */
-@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Nunito:wght@400;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Permanent+Marker&family=Nunito:wght@400;800&display=swap');
 
 :root {
-  --bw-bg: #0a0a0a;
-  --bw-panel: #111;
-  --bw-green: #00ff41; /* Verde Hacker/Matrix vibrante */
-  --bw-green-dark: #003b00;
-  --bw-text: #eee;
+  --bw-bg: #080808;
+  --bw-panel: #121212;
+  --bw-green: #00ff41; /* O Verde Tóxico */
+  --bw-green-dark: #004d14;
+  --bw-text: #d1d1d1;
+  --bw-shadow: rgba(0, 255, 65, 0.2);
 }
 
-/* Animação: Glitch Suave (Sem quebrar layout) */
-@keyframes bw-glitch-text {
-  0% { text-shadow: 2px 0 var(--bw-green-dark), -2px 0 #fff; }
-  90% { text-shadow: 2px 0 var(--bw-green-dark), -2px 0 #fff; }
-  92% { text-shadow: -2px 0 var(--bw-green), 2px 0 #000; opacity: 0.8; }
-  94% { text-shadow: 2px 0 var(--bw-green), -2px 0 #000; opacity: 1; }
-  100% { text-shadow: none; }
+/* Animação: Respiração de Energia (Suave) */
+@keyframes cursed-pulse {
+  0% { box-shadow: 0 0 15px var(--bw-shadow); border-color: var(--bw-green-dark); }
+  50% { box-shadow: 0 0 30px var(--bw-shadow); border-color: var(--bw-green); }
+  100% { box-shadow: 0 0 15px var(--bw-shadow); border-color: var(--bw-green-dark); }
 }
 
-/* Animação: Scanline (Linha descendo) */
-@keyframes scanline {
-  0% { transform: translateY(-100%); opacity: 0; }
-  50% { opacity: 0.5; }
-  100% { transform: translateY(300px); opacity: 0; }
+/* Animação: Flutuação do Ícone */
+@keyframes float-icon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-5px); }
 }
 
 /* CONTAINER PRINCIPAL */
@@ -30,166 +28,194 @@
   box-sizing: border-box;
   max-width: 650px;
   width: 95%;
-  margin: 40px auto;
+  margin: 50px auto; /* Margem maior pra assinatura caber */
   background-color: var(--bw-bg);
-  /* Textura de listras diagonais (Estilo Urahara) */
+  
+  /* Textura: Listras do Chapéu (Sutil e Sombria) */
   background-image: repeating-linear-gradient(
-    -45deg,
-    #0a0a0a,
-    #0a0a0a 10px,
-    #0f0f0f 10px,
-    #0f0f0f 20px
+    45deg,
+    #080808,
+    #080808 10px,
+    #0c0c0c 10px,
+    #0c0c0c 20px
   );
   
-  border-left: 3px solid var(--bw-green);
-  border-right: 3px solid var(--bw-green);
+  border: 2px solid var(--bw-green-dark);
   
-  /* CORTE NOS CANTOS (Tira o formato quadrado) */
-  clip-path: polygon(
-    0 0, 
-    100% 0, 
-    100% calc(100% - 20px), 
-    calc(100% - 20px) 100%, 
-    20px 100%, 
-    0 calc(100% - 20px)
-  );
-
+  /* FORMATO: Assimétrico (Folha/Lâmina) - Foge do quadrado */
+  border-radius: 40px 0 40px 0;
+  
   color: var(--bw-text);
   font-family: 'Nunito', sans-serif;
   position: relative;
-  overflow: hidden;
-  box-shadow: 0 0 15px rgba(0, 255, 65, 0.1);
+  overflow: visible; /* Necessário para a assinatura sair da caixa */
+  animation: cursed-pulse 4s infinite ease-in-out;
 }
 .bw-container * { box-sizing: border-box; }
 
-/* HEADER */
+/* HEADER (Ícone + Títulos) */
 .bw-header {
-  position: relative;
-  height: 220px;
-  overflow: hidden;
-  border-bottom: 2px solid var(--bw-green);
+  text-align: center;
+  padding: 30px 20px 20px 20px;
+  background: radial-gradient(circle at top, rgba(0, 255, 65, 0.1), transparent 70%);
+  border-bottom: 1px solid var(--bw-green-dark);
+  border-radius: 38px 0 0 0;
 }
 
-.bw-header img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: top;
-  filter: grayscale(100%) contrast(1.2);
-  transition: 0.4s;
+/* Ícone no Topo (Restaurado) */
+.bw-icon-wrapper {
+  display: flex; justify-content: center; margin-bottom: 10px;
 }
-
-.bw-container:hover .bw-header img {
-  filter: grayscale(0%) contrast(1.1);
+.bw-icon {
+  width: 50px; height: 50px;
+  filter: drop-shadow(0 0 8px var(--bw-green));
+  animation: float-icon 3s infinite ease-in-out;
 }
-
-/* Título Sobreposto */
-.bw-title-overlay {
-  position: absolute;
-  bottom: 0; left: 0; width: 100%;
-  padding: 10px 20px;
-  background: linear-gradient(to top, #000 0%, transparent 100%);
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-}
+.bw-icon path { fill: var(--bw-green); }
 
 .bw-title {
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 1.8em;
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  font-size: 2em;
   color: #fff;
   text-transform: uppercase;
   margin: 0;
-  text-shadow: 0 0 5px var(--bw-green);
-  animation: bw-glitch-text 4s infinite;
+  text-shadow: 0 2px 0 var(--bw-green-dark);
+  letter-spacing: 2px;
 }
 
-/* EFEITO SCANLINE (Decorativo) */
-.bw-header::after {
-  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 10px;
-  background: var(--bw-green);
-  box-shadow: 0 0 10px var(--bw-green);
-  opacity: 0.3;
-  animation: scanline 3s infinite linear;
-  pointer-events: none;
+/* Subtítulo (Restaurado) */
+.bw-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 0.85em;
+  color: var(--bw-green);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-top: 5px;
+  font-weight: 700;
 }
 
-/* STATUS - Classes Isoladas */
+/* IMAGEM */
+.bw-image-frame {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  border-top: 1px solid var(--bw-green-dark);
+  border-bottom: 4px solid var(--bw-green);
+  overflow: hidden;
+}
+
+.bw-image-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: top;
+  filter: sepia(0.2) grayscale(0.8) contrast(1.1); /* Estilo mais "mangá sombrio" */
+  transition: 0.5s;
+}
+.bw-container:hover .bw-image-frame img {
+  filter: sepia(0) grayscale(0) contrast(1.1);
+  transform: scale(1.02);
+}
+
+/* STATUS (BLINDADO) */
 .bw-stats-panel {
-  background: #050505;
-  padding: 15px 25px;
-  border-top: 1px solid #222;
-  border-bottom: 1px solid #222;
+  padding: 20px 30px;
+  background: var(--bw-panel);
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 15px;
+  position: relative;
 }
 
 .bw-stat-row {
   display: grid;
-  /* Grid ajustado: Label | Barra | Valor (Auto para não quebrar) */
-  grid-template-columns: 35px 1fr auto; 
+  grid-template-columns: 40px 1fr auto; /* Label | Barra | Valor */
   align-items: center;
   gap: 15px;
 }
 
 .bw-label {
-  font-family: 'Share Tech Mono', monospace;
-  font-weight: bold;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
   color: var(--bw-green);
-  font-size: 1.1em;
+  font-size: 0.9em;
 }
 
-.bw-bar-container {
-  width: 100%;
-  height: 8px;
+.bw-bar-bg {
+  width: 100%; height: 10px;
   background: #222;
-  border: 1px solid #333;
-  transform: skewX(-15deg); /* Estilo itálico na barra */
+  border-radius: 10px; /* Redondo, orgânico */
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.8);
   overflow: hidden;
 }
 
 .bw-hp-fill, .bw-ea-fill {
   height: 100%;
-  width: 0%; /* JS controla isso */
-  background: var(--bw-green);
-  box-shadow: 0 0 8px var(--bw-green);
-  transition: width 0.5s ease-out;
+  width: 50%; /* JS controla */
+  background: linear-gradient(90deg, var(--bw-green-dark), var(--bw-green));
+  box-shadow: 0 0 10px var(--bw-green);
+  border-radius: 10px;
+  transition: width 0.5s ease;
 }
 
-/* Valor numérico blindado contra outros CSS */
 .bw-hp-val, .bw-ea-val {
-  font-family: 'Share Tech Mono', monospace;
+  font-family: 'Nunito', sans-serif;
+  font-weight: 800;
   font-size: 0.9em;
-  color: #fff !important; /* Força cor branca */
-  text-shadow: none !important;
-  white-space: nowrap; /* IMPEDE QUEBRA DE LINHA */
+  color: #fff !important;
+  white-space: nowrap;
 }
 
 /* CONTEÚDO */
 .bw-content {
-  padding: 30px;
-  font-size: 1.05em;
+  padding: 30px 40px;
+  font-size: 1.1em;
   line-height: 1.7;
-  color: #ccc;
+  color: var(--bw-text);
   text-align: justify;
-  background: rgba(10,10,10,0.8);
 }
 
-.bw-content b { color: var(--bw-green); text-shadow: 0 0 3px rgba(0,255,65,0.4); }
-.bw-content i { color: #fff; }
-
-/* ASSINATURA */
-.bw-signature {
-  text-align: right;
-  padding: 10px 30px 25px 30px;
-  font-family: 'Share Tech Mono', monospace;
-  font-size: 0.9em;
-  color: #444;
-}
-.bw-signature::after {
-  content: 'REKKEN KAGAMI // PROTOCOL: BOOGIE';
+.bw-content b {
   color: var(--bw-green);
+  font-weight: 800;
 }
 
+.bw-content i {
+  color: #fff;
+  font-family: 'Cinzel', serif;
+}
+
+/* ASSINATURA (FLAVOR MÁXIMO) */
+.bw-signature-area {
+  position: relative;
+  height: 60px; /* Espaço para a assinatura "vazar" */
+  background: transparent;
+  margin-top: -20px;
+}
+
+.bw-signature-text {
+  position: absolute;
+  bottom: -25px; /* Sai do container pra baixo */
+  right: 20px;
+  font-family: 'Permanent Marker', cursive;
+  font-size: 3.5em; /* Gigante */
+  color: #000;
+  /* Borda verde neon ao redor da letra preta (Estilo Sticker/Grafite) */
+  text-shadow: 
+    -1px -1px 0 var(--bw-green),  
+     1px -1px 0 var(--bw-green),
+    -1px  1px 0 var(--bw-green),
+     1px  1px 0 var(--bw-green),
+     0 0 15px var(--bw-green);
+  transform: rotate(-5deg); /* Levemente torta */
+  z-index: 10;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* Mídia Query */
 @media (max-width: 600px) {
-  .bw-container { clip-path: none; border-radius: 5px; }
+  .bw-container { margin-bottom: 60px; } /* Espaço extra mobile */
+  .bw-signature-text { font-size: 2.5em; bottom: -30px; }
+  .bw-header { padding: 20px; }
+  .bw-content { padding: 20px; }
 }
