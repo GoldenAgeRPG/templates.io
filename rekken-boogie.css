@@ -1,34 +1,27 @@
 /* --- TEMPLATE: DEATH PAINTING - BOOGIE WOOGIE --- */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Permanent+Marker&family=Nunito:wght@400;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Permanent+Marker&family=Nunito:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap');
 
 :root {
   --dp-bg: #050505;
   --dp-panel: #0d0d0d;
-  --dp-green: #00ff41; /* Verde Neon (Toxic) */
-  --dp-green-glow: rgba(0, 255, 65, 0.4);
+  --dp-green: #00ff41;
   --dp-text: #ccc;
-  
-  /* Cores dos Status conforme print */
-  --stat-hp-color: #ff3366; /* Vermelho/Rosa do HP */
-  --stat-ea-color: #ffea00; /* Amarelo da EA */
+  --dp-border-solid: #1f1f1f;
 }
 
-/* Animação: BOOGIE WOOGIE SWAP (Simulação da CT) */
-/* O post "teleporta" lateralmente e sofre inversão rápida */
-@keyframes boogie-swap {
-  0%, 95% { transform: translateX(0); filter: invert(0); }
-  96% { transform: translateX(-10px); filter: invert(0.2); } /* Troca */
-  97% { transform: translateX(10px); filter: invert(0); } /* Rebote */
-  98% { transform: translateX(0); }
+/* Animação: Giro do Ícone (Horário e Constante) */
+@keyframes icon-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
-/* Animação: Pulsação Venenosa */
-@keyframes toxic-breathe {
-  0%, 100% { box-shadow: 0 0 15px rgba(0, 255, 65, 0.1); border-color: #1a1a1a; }
-  50% { box-shadow: 0 0 30px rgba(0, 255, 65, 0.25); border-color: var(--dp-green); }
+/* Animação: Respiração Sutil (Muito reduzida) */
+@keyframes toxic-breathe-low {
+  0%, 100% { border-color: #1a1a1a; box-shadow: 0 0 5px rgba(0, 255, 65, 0.05); }
+  50% { border-color: #2a2a2a; box-shadow: 0 0 10px rgba(0, 255, 65, 0.15); }
 }
 
-/* CONTAINER PRINCIPAL (Forma Orgânica) */
+/* CONTAINER PRINCIPAL */
 .bw-container {
   box-sizing: border-box;
   max-width: 650px;
@@ -36,13 +29,16 @@
   margin: 50px auto;
   background-color: var(--dp-bg);
   
-  /* Textura de fundo sutil */
-  background-image: radial-gradient(circle at 30% 20%, #0e140e 0%, #050505 70%);
+  /* Textura de fundo muito sutil */
+  background-image: radial-gradient(circle at 30% 20%, #0a110a 0%, #050505 70%);
   
-  border: 2px solid #1a1a1a;
+  /* Borda Sólida Externa */
+  border: 3px solid #1a1a1a;
   
-  /* FORMATO ASSIMÉTRICO (Death Painting Womb Style) */
-  /* Remove a cara de "retângulo simples" */
+  /* Efeito de Borda Sólida Interna (Chanfrado) */
+  box-shadow: inset 0 0 0 5px var(--dp-border-solid);
+  
+  /* FORMATO ASSIMÉTRICO (Mantido) */
   border-radius: 40px 120px 40px 120px; 
   
   color: var(--dp-text);
@@ -50,10 +46,8 @@
   position: relative;
   overflow: hidden;
   
-  /* Combina a pulsação com o efeito de troca */
-  animation: 
-    toxic-breathe 4s infinite ease-in-out,
-    boogie-swap 10s infinite ease-in-out; /* Troca a cada 10s */
+  /* Apenas a respiração leve, sem glitch */
+  animation: toxic-breathe-low 6s infinite ease-in-out;
 }
 .bw-container * { box-sizing: border-box; }
 
@@ -62,14 +56,18 @@
   text-align: center;
   padding: 30px 20px 15px 20px;
   position: relative;
-  border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+  /* Linha sutil abaixo do header */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Ícone SWAP (Setas Ciclando) */
+/* Ícone SWAP (Girando) */
 .bw-icon {
-  width: 50px; height: 50px;
-  margin-bottom: 5px;
-  filter: drop-shadow(0 0 8px var(--dp-green));
+  width: 45px; height: 45px;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 0 5px var(--dp-green));
+  /* Animação de giro constante */
+  animation: icon-spin 4s linear infinite; 
+  transform-origin: center;
 }
 .bw-icon path { fill: var(--dp-green); }
 
@@ -81,7 +79,7 @@
   text-transform: uppercase;
   letter-spacing: 1px;
   margin: 0;
-  text-shadow: 0 4px 10px #000;
+  text-shadow: 0 2px 5px #000;
   line-height: 1;
 }
 
@@ -96,32 +94,32 @@
   opacity: 0.9;
 }
 
-/* IMAGEM (Sem Filtros PB) */
+/* IMAGEM */
 .bw-image-frame {
   width: 100%;
   height: 300px;
   position: relative;
   background: #000;
-  /* Mascara orgânica na base da imagem */
+  /* Máscara suave na base */
   mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  margin-top: 10px;
 }
 
 .bw-image-frame img {
   width: 100%; height: 100%;
   object-fit: cover; object-position: top;
-  /* Filtros removidos: Cores reais */
   transition: 0.5s transform;
 }
-.bw-container:hover .bw-image-frame img { transform: scale(1.05); }
+.bw-container:hover .bw-image-frame img { transform: scale(1.02); }
 
-/* STATUS (Estilo do Print) */
+/* STATUS (Padrão Verde/Branco) */
 .bw-stats-panel {
   padding: 10px 45px;
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-top: -25px; /* Sobe sobre a imagem */
+  margin-top: -25px;
   position: relative;
   z-index: 5;
 }
@@ -133,20 +131,20 @@
 }
 
 .bw-label {
-  font-family: 'Permanent Marker', cursive; /* Fonte estilosa para o label */
-  color: var(--dp-green); /* Label Verde */
+  font-family: 'Permanent Marker', cursive;
+  color: var(--dp-green);
   font-size: 1.1em;
   width: 35px;
   text-align: right;
-  text-shadow: 0 0 5px var(--dp-green-glow);
+  text-shadow: none;
 }
 
 .bw-bar-bg {
   flex-grow: 1;
-  height: 14px; /* Barra mais grossa como no print */
+  height: 12px;
   background: #111;
   border-radius: 10px;
-  border: 1px solid #222;
+  border: 1px solid #333;
   overflow: hidden;
   position: relative;
 }
@@ -154,31 +152,22 @@
 .bw-hp-fill, .bw-ea-fill {
   height: 100%;
   width: 0%; /* JS preenche */
-  background: var(--dp-green); /* Barra Verde Neon */
-  box-shadow: 0 0 10px var(--dp-green);
+  background: var(--dp-green);
+  box-shadow: 0 0 8px var(--dp-green);
   border-radius: 10px;
-  transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  transition: width 0.6s ease;
 }
 
-/* Reflexo na barra (vidro) */
-.bw-bar-bg::after {
-  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%;
-  background: rgba(255,255,255,0.1); border-radius: 10px 10px 0 0;
-  pointer-events: none;
-}
-
-/* Valores Numéricos (Cores específicas do Print) */
+/* Valores Numéricos (Branco Padrão) */
 .bw-hp-val, .bw-ea-val {
   font-family: 'Nunito', sans-serif;
   font-weight: 800;
   font-size: 0.9em;
   min-width: 80px;
   text-align: right;
+  color: #fff !important; /* Branco limpo */
+  text-shadow: none;
 }
-
-.bw-hp-val { color: var(--stat-hp-color) !important; text-shadow: 0 0 5px rgba(255, 51, 102, 0.3); }
-.bw-ea-val { color: var(--stat-ea-color) !important; text-shadow: 0 0 5px rgba(255, 234, 0, 0.3); }
-
 
 /* CONTEÚDO */
 .bw-content {
@@ -189,36 +178,35 @@
   text-align: justify;
 }
 
-/* Negrito (Apenas cor) */
+/* Negrito (Verde) */
 .bw-content b, .bw-content strong {
   color: var(--dp-green);
   font-weight: 800;
 }
 
-/* Itálico (Branco, fonte diferente, SEM alterar tamanho/caixa) */
+/* Itálico (Branco, Fonte Normal) - CORREÇÃO */
 .bw-content i, .bw-content em {
   color: #fff;
-  font-family: 'Cinzel', serif;
+  font-family: 'Nunito', sans-serif; /* Mesma fonte do corpo */
   font-weight: 700;
   font-style: italic;
-  font-size: inherit; /* Mantém o tamanho do texto normal */
-  text-transform: none; /* Garante que não fica maiúsculo */
-  text-shadow: 0 0 2px #fff;
+  font-size: inherit; /* Tamanho igual ao resto */
+  text-transform: none; /* Sem maiúsculas forçadas */
+  letter-spacing: normal;
 }
 
 /* SEGUNDA CAIXA (WOMB) */
 .bw-notes {
   margin: 10px 50px 30px 50px;
   padding: 20px;
-  background: rgba(10, 20, 10, 0.5);
-  border: 1px solid #1f2f1f;
-  border-radius: 10px; /* Levemente arredondado */
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid #1f1f1f;
+  border-radius: 10px;
   font-size: 0.9em;
-  color: #666;
+  color: #777;
   position: relative;
 }
 
-/* Label WOMB Injetado */
 .bw-notes::before {
   content: 'WOMB';
   display: block;
@@ -229,34 +217,31 @@
   opacity: 0.8;
 }
 
-/* ASSINATURA (INJETADA E BLINDADA) */
-/* O jogador coloca apenas <div class="bw-signature"></div> */
+/* ASSINATURA (Menor e Discreta) */
 .bw-signature {
   text-align: right;
-  padding: 0 60px 40px 60px;
-  height: 60px; /* Garante espaço */
+  padding: 0 60px 30px 60px;
+  height: auto;
 }
 
 .bw-signature::after {
-  content: 'REKKEN KAGAMI'; /* Texto fixo no CSS */
+  content: 'REKKEN KAGAMI';
   font-family: 'Permanent Marker', cursive;
-  font-size: 2.5em; /* Grande e estilo grafite */
-  color: #000;
-  /* Contorno Neon Verde */
+  font-size: 1.5em; /* Reduzido de 2.5em para 1.5em */
+  color: #111;
+  /* Contorno Verde Sutil */
   text-shadow: 
     -1px -1px 0 var(--dp-green),  
      1px -1px 0 var(--dp-green),
     -1px  1px 0 var(--dp-green),
-     1px  1px 0 var(--dp-green),
-     0 0 15px var(--dp-green);
-  transform: rotate(-3deg);
+     1px  1px 0 var(--dp-green);
+  transform: rotate(-2deg);
   display: inline-block;
-  opacity: 0.9;
+  opacity: 0.8;
 }
 
 /* Responsividade */
 @media (max-width: 600px) {
   .bw-container { margin: 20px auto; border-radius: 20px 60px 20px 60px; }
   .bw-content, .bw-notes, .bw-stats-panel, .bw-signature { padding-left: 25px; padding-right: 25px; }
-  .bw-signature::after { font-size: 1.8em; }
 }
