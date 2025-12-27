@@ -1,0 +1,166 @@
+@import url('https://fonts.googleapis.com/css2?family=Rye&family=Roboto:wght@300;400;700&display=swap');
+
+:root {
+    --crow-wine: #781414;
+    --crow-black: #050505;
+    --crow-panel: #0f0f0f;
+    --crow-text: #bfbfbf;
+}
+
+/* CONTAINER GERAL */
+.mari-crow-container {
+    max-width: 650px;
+    margin: 20px auto;
+    background-color: var(--crow-black);
+    border: 1px solid #1a1a1a;
+    border-top: 3px solid var(--crow-wine);
+    border-bottom: 3px solid var(--crow-wine);
+    font-family: 'Roboto', sans-serif;
+    color: var(--crow-text);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0,0,0,0.9);
+}
+
+/* ANIMAÇÃO DE FUNDO (CORVOS/PENAS) */
+/* Usa uma imagem transparente repetida que desce na diagonal */
+.mari-crow-bg-anim {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url('https://i.imgur.com/4q2j3E1.png'); /* Textura de penas/pássaros */
+    background-size: 400px;
+    opacity: 0.15; /* Sutil para não atrapalhar a leitura */
+    pointer-events: none;
+    z-index: 0;
+    animation: crow-fall 20s linear infinite;
+}
+
+@keyframes crow-fall {
+    0% { background-position: 0 0; }
+    100% { background-position: 100% 100%; }
+}
+
+/* HEADER COM AVATAR */
+.mari-header {
+    display: flex;
+    align-items: center;
+    padding: 30px;
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(to bottom, rgba(120, 20, 20, 0.1), transparent);
+}
+
+/* Avatar Hexagonal/Recortado */
+.mari-avatar-frame {
+    width: 100px; height: 100px;
+    flex-shrink: 0;
+    border: 2px solid var(--crow-wine);
+    /* Clip-path cria a forma geométrica agressiva */
+    clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
+    overflow: hidden;
+    margin-right: 20px;
+    transition: 0.3s;
+    background: #000;
+}
+.mari-avatar-frame img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(60%) contrast(1.2);
+    transition: 0.4s;
+}
+/* Efeito "Genjutsu" no Hover */
+.mari-crow-container:hover .mari-avatar-frame img {
+    filter: grayscale(0%) contrast(1);
+    transform: scale(1.1);
+}
+.mari-crow-container:hover .mari-avatar-frame {
+    box-shadow: 0 0 15px var(--crow-wine);
+    border-color: #ff3333;
+}
+
+/* Título */
+.mari-title-group {
+    flex-grow: 1;
+    border-bottom: 1px solid var(--crow-wine);
+    padding-bottom: 5px;
+}
+.mari-main-title {
+    font-family: 'Rye', serif; /* Fonte estilo "Wanted"/Western Dark */
+    font-size: 2em;
+    color: var(--crow-wine);
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    line-height: 0.9;
+    text-shadow: 2px 2px 0px #000;
+}
+.mari-sub-title {
+    font-size: 0.7em;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #666;
+    margin-top: 5px;
+}
+
+/* CONTEÚDO */
+.mari-content {
+    padding: 20px 40px 40px 40px;
+    position: relative;
+    z-index: 2;
+    text-align: justify;
+    line-height: 1.8;
+    font-size: 0.95em;
+    background: radial-gradient(circle at center, rgba(0,0,0,0.5), transparent);
+}
+
+/* Formatação do texto conforme pedido */
+.mari-content b, .mari-content strong {
+    color: var(--crow-wine);
+    font-weight: 700;
+}
+.mari-content i, .mari-content em {
+    color: #888;
+    font-family: serif;
+    letter-spacing: 0.5px;
+}
+/* Fala da personagem (opcional, para destacar) */
+.mari-speech {
+    color: var(--crow-wine);
+    font-family: 'Rye', serif;
+    font-size: 1.1em;
+}
+
+/* SCROLLBAR PERSONALIZADA (Webkit) */
+.mari-crow-container ::-webkit-scrollbar { width: 5px; }
+.mari-crow-container ::-webkit-scrollbar-track { background: #000; }
+.mari-crow-container ::-webkit-scrollbar-thumb { background: var(--crow-wine); }
+
+/* ASSINATURA AUTOMÁTICA */
+.mari-footer {
+    text-align: right;
+    padding: 10px 30px;
+    background: #000;
+    border-top: 1px solid #222;
+    position: relative;
+    z-index: 2;
+}
+.mari-footer::after {
+    content: "Mari Ming Onette"; /* Assinatura via CSS */
+    font-family: 'Rye', serif;
+    font-size: 1.2em;
+    color: #333;
+    text-transform: uppercase;
+    transition: 0.5s;
+    letter-spacing: 2px;
+}
+.mari-crow-container:hover .mari-footer::after {
+    color: var(--crow-wine);
+    text-shadow: 0 0 10px rgba(120, 20, 20, 0.5);
+}
+
+/* Responsividade */
+@media (max-width: 500px) {
+    .mari-header { flex-direction: column; text-align: center; }
+    .mari-avatar-frame { margin-right: 0; margin-bottom: 15px; }
+    .mari-title-group { width: 100%; }
+    .mari-content { padding: 20px; }
+}
