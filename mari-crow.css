@@ -1,167 +1,212 @@
 @import url('https://fonts.googleapis.com/css2?family=Rye&family=Roboto:wght@300;400;700&display=swap');
 
 :root {
-    --crow-wine: #781414;
-    --crow-black: #050505;
-    --crow-text: #bfbfbf;
+  --mari-bg: #0a0a0a;     /* Fundo da área de texto */
+  --mari-panel: #050505;  /* Fundo geral */
+  --mari-wine: #781414;   /* Cor de destaque */
+  --mari-text: #bfbfbf;   /* Cor do texto */
+  --pulse: 0;             /* Variável reativa do player */
 }
 
-/* CONTAINER GERAL COM IMAGEM DE FUNDO */
-.mari-crow-container {
-    max-width: 650px;
-    margin: 20px auto;
-    /* Cor de fundo de fallback */
-    background-color: var(--crow-black);
-    
-    /* --- SUA IMAGEM DE FUNDO GERAL AQUI --- */
-    /* Coloque uma imagem estilo "floresta escura", "céu vermelho", etc */
-    background-image: url('https://i.imgur.com/YOUR_BG_IMAGE_HERE.jpg'); 
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed; /* Opcional: Efeito parallax simples */
-    
-    border: 1px solid #1a1a1a;
-    border-top: 3px solid var(--crow-wine);
-    border-bottom: 3px solid var(--crow-wine);
-    font-family: 'Roboto', sans-serif;
-    color: var(--crow-text);
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0 0 30px rgba(0,0,0,0.9);
+/* --- ESTRUTURA UNIFICADA --- */
+.mari-wrapper {
+  display: flex;
+  gap: 0;
+  max-width: 900px;
+  margin: 40px auto;
+  align-items: stretch;
+  justify-content: center;
+  border-radius: 4px;
+  background: var(--mari-panel);
+  /* Sombra que pulsa em vermelho com a música */
+  box-shadow: 0 0 calc(10px + (var(--pulse) * 30px)) rgba(120, 20, 20, calc(0.2 + var(--pulse) * 0.4));
+  transition: box-shadow 0.05s linear;
+  font-family: 'Roboto', sans-serif;
+  color: var(--mari-text);
 }
 
-/* OVERLAY ESCURO (Para o texto ficar legível sobre a imagem) */
-.mari-crow-container::before {
-    content: '';
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(5, 5, 5, 0.85); /* Ajuste o 0.85 se quiser mais claro ou escuro */
-    z-index: 0;
+/* --- LADO DO PLAYER (ESQUERDA) --- */
+.mari-player-side {
+  flex: 0 0 320px;
+  height: 600px;
+  position: relative;
+  border-radius: 4px 0 0 4px;
+  overflow: hidden;
+  border: 1px solid #222;
+  border-right: none;
+  cursor: pointer;
 }
 
-/* ANIMAÇÃO DE FUNDO (CORVOS/PENAS CAINDO) */
-.mari-crow-bg-anim {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    
-    /* --- SUA TEXTURA ANIMADA AQUI --- */
-    /* Precisa ser uma imagem com fundo transparente que se repita bem (seamless) */
-    /* O link anterior estava quebrado, substitua por um funcional */
-    background-image: url('URL_DA_TEXTURA_DE_CORVOS_TRANSPARENTE.png'); 
-    
-    background-size: 500px auto; /* Ajuste o tamanho dos corvos aqui */
-    background-repeat: repeat;
-    opacity: 0.3; /* Intensidade da animação */
-    pointer-events: none;
-    z-index: 1; /* Fica acima do overlay escuro, abaixo do texto */
-    animation: crow-fall 25s linear infinite;
+/* Imagem de Fundo (Yumeko) */
+.mari-player-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://i.pinimg.com/736x/af/b1/72/afb172a159c3818610557463f8439167.jpg');
+  background-size: cover;
+  background-position: center;
+  /* A imagem pulsa e ganha cor com a batida */
+  transform: scale(calc(1.0 + (var(--pulse) * 0.05)));
+  filter: grayscale(calc(100% - (var(--pulse) * 100%))) contrast(1.2);
+  z-index: 1;
+  transition: transform 0.1s ease-out, filter 0.1s ease-out;
 }
 
-@keyframes crow-fall {
-    0% { background-position: 0 0; }
-    100% { background-position: 500px 500px; } /* Deve combinar com o background-size para um loop perfeito */
+/* Overlay de Corvos/Penas (Animação) */
+.mari-crow-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJ5eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eGZ6eCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/3o7bu3XilJ5BOiSGic/giphy.gif'); /* Gif transparente de penas/neve escura */
+  background-size: cover;
+  opacity: 0.4;
+  z-index: 2;
+  pointer-events: none;
+  mix-blend-mode: multiply;
 }
 
-/* HEADER COM AVATAR */
+/* Botão de Play Customizado */
+.mari-play-btn {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 10; backdrop-filter: blur(2px); transition: 0.5s;
+}
+.playing .mari-play-btn { opacity: 0; pointer-events: none; }
+
+.play-triangle {
+  width: 0; height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-left: 25px solid var(--mari-wine);
+  filter: drop-shadow(0 0 10px var(--mari-wine));
+}
+
+/* --- LADO DO TEXTO (DIREITA) --- */
+.mari-template-side {
+  flex: 1;
+  height: 600px;
+  background: var(--mari-bg);
+  border: 1px solid #222;
+  border-left: 3px solid var(--mari-wine); /* Divisória Vinho */
+  border-radius: 0 4px 4px 0;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Cabeçalho */
 .mari-header {
-    display: flex;
-    align-items: center;
-    padding: 30px;
-    position: relative;
-    z-index: 2; /* Texto fica acima de tudo */
-    background: linear-gradient(to bottom, rgba(120, 20, 20, 0.2), transparent);
+  background: #000;
+  padding: 20px;
+  text-align: center;
+  border-bottom: 1px solid var(--mari-wine);
+  z-index: 5;
+  background-image: radial-gradient(circle at center, #1a0505 0%, #000 100%);
 }
 
-/* Avatar Hexagonal/Recortado */
-.mari-avatar-frame {
-    width: 100px; height: 100px;
-    flex-shrink: 0;
-    border: 2px solid var(--crow-wine);
-    clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
-    overflow: hidden;
-    margin-right: 20px;
-    transition: 0.3s;
-    background: #000;
-}
-.mari-avatar-frame img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    filter: grayscale(100%) contrast(1.2) sepia(20%) hue-rotate(-50deg); /* Efeito mais dark/avermelhado */
-    transition: 0.5s ease-in-out;
-}
-/* Efeito Genjutsu no Hover */
-.mari-crow-container:hover .mari-avatar-frame img {
-    filter: grayscale(0%) contrast(1);
-    transform: scale(1.1);
-}
-.mari-crow-container:hover .mari-avatar-frame {
-    box-shadow: 0 0 20px var(--crow-wine), inset 0 0 10px var(--crow-wine);
-    border-color: #ff3333;
+.mari-title {
+  font-family: 'Rye', serif;
+  font-size: 1.8em;
+  color: var(--mari-wine);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  text-shadow: 2px 2px 0px #000;
 }
 
-/* Título */
-.mari-title-group {
-    flex-grow: 1;
-    border-bottom: 1px solid var(--crow-wine);
-    padding-bottom: 5px;
-}
-.mari-main-title {
-    font-family: 'Rye', serif;
-    font-size: 2em;
-    color: var(--crow-wine);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    line-height: 0.9;
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
-}
-.mari-sub-title {
-    font-size: 0.7em;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    color: #888;
-    margin-top: 5px;
+/* Área de Scroll */
+.mari-scroll-area {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px;
+  font-size: 0.95em;
+  line-height: 1.8;
+  text-align: justify;
+  /* Textura sutil no fundo */
+  background-image: linear-gradient(#111 1px, transparent 1px), linear-gradient(90deg, #111 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-color: var(--mari-bg);
 }
 
-/* CONTEÚDO */
-.mari-content {
-    padding: 20px 40px 40px 40px;
-    position: relative;
-    z-index: 2;
-    text-align: justify;
-    line-height: 1.8;
-    font-size: 0.95em;
-    /* Removido o background radial para focar na imagem de fundo principal */
+/* Custom Scrollbar */
+.mari-scroll-area::-webkit-scrollbar { width: 6px; }
+.mari-scroll-area::-webkit-scrollbar-track { background: #050505; }
+.mari-scroll-area::-webkit-scrollbar-thumb { background: var(--mari-wine); }
+
+/* Formatação de Texto */
+.mari-scroll-area b { color: var(--mari-wine); font-weight: 700; }
+.mari-scroll-area i { color: #888; letter-spacing: 0.5px; }
+
+/* --- BARRAS DE STATUS --- */
+.mari-status-container {
+  margin-bottom: 25px;
+  display: flex; flex-direction: column; gap: 12px;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed #333;
 }
 
-.mari-content b, .mari-content strong { color: var(--crow-wine); font-weight: 700; }
-.mari-content i, .mari-content em { color: #888; font-family: serif; letter-spacing: 0.5px; }
-.mari-speech { color: var(--crow-wine); font-family: 'Rye', serif; font-size: 1.1em; }
+.mari-status-item {
+  display: grid; grid-template-columns: 40px 1fr auto;
+  align-items: center; gap: 10px;
+}
 
-/* ASSINATURA AUTOMÁTICA */
+.mari-status-label {
+  font-family: 'Rye', serif;
+  font-size: 0.8em;
+  color: var(--mari-wine);
+}
+
+.mari-bar-bg {
+  height: 10px;
+  background: #111;
+  border: 1px solid #333;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.mari-hp-fill {
+  height: 100%; width: 100%;
+  background: linear-gradient(90deg, #500 0%, var(--mari-wine) 50%, #f00 100%);
+  box-shadow: 0 0 10px var(--mari-wine);
+}
+
+.mari-ea-fill {
+  height: 100%; width: 100%;
+  background: linear-gradient(90deg, #222 0%, #666 100%); /* Cinza/Preto para EA */
+}
+
+.mari-status-val {
+  font-size: 0.75em;
+  font-weight: bold;
+  color: #666;
+}
+
+/* --- RODAPÉ / ASSINATURA --- */
 .mari-footer {
-    text-align: right;
-    padding: 15px 30px;
-    background: rgba(0,0,0,0.8);
-    border-top: 1px solid var(--crow-wine);
-    position: relative;
-    z-index: 2;
-}
-.mari-footer::after {
-    content: "Mari Ming Onette";
-    font-family: 'Rye', serif;
-    font-size: 1.1em;
-    color: #666;
-    text-transform: uppercase;
-    transition: 0.5s;
-    letter-spacing: 2px;
-}
-.mari-crow-container:hover .mari-footer::after {
-    color: var(--crow-wine);
-    text-shadow: 0 0 10px rgba(120, 20, 20, 0.8);
+  padding: 15px 30px;
+  text-align: right;
+  background: #000;
+  border-top: 1px solid #222;
 }
 
-@media (max-width: 500px) {
-    .mari-header { flex-direction: column; text-align: center; }
-    .mari-avatar-frame { margin-right: 0; margin-bottom: 15px; }
-    .mari-title-group { width: 100%; }
-    .mari-content { padding: 20px; }
+.mari-footer::after {
+  content: 'MARI MING ONETTE';
+  font-family: 'Rye', serif;
+  font-size: 0.9em;
+  color: #333;
+  letter-spacing: 2px;
+  transition: 0.5s;
+}
+
+.mari-wrapper:hover .mari-footer::after {
+  color: var(--mari-wine);
+  text-shadow: 0 0 10px rgba(120, 20, 20, 0.6);
+}
+
+/* Responsividade */
+@media (max-width: 850px) {
+  .mari-wrapper { flex-direction: column; }
+  .mari-player-side { width: 100%; height: 250px; border-radius: 4px 4px 0 0; border: 1px solid #222; border-bottom: none; }
+  .mari-template-side { width: 100%; height: auto; border-radius: 0 0 4px 4px; border-left: 1px solid #222; border-top: 3px solid var(--mari-wine); }
+  .mari-scroll-area { max-height: 500px; }
 }
