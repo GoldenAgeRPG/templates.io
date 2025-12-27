@@ -1,26 +1,24 @@
-/* --- TEMPLATE: CROW'S GAMBIT (YIZHUO MING) --- */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Nunito:wght@400;700&family=Permanent+Marker&display=swap');
+/* --- TEMPLATE: CROW'S GAMBLE --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@700&family=Nunito:wght@400;700&display=swap');
 
 :root {
-  --crow-bg: #080808;
-  --crow-panel: #111111;
-  --crow-blood: #781414; /* A cor vinho solicitada */
-  --crow-blood-light: #a31b1b;
-  --crow-text: #e0e0e0;
-  --crow-accent: #333;
+  --crow-bg: #020202;
+  --crow-wine: #781414; /* A cor pedida */
+  --crow-wine-glow: rgba(120, 20, 20, 0.4);
+  --crow-card: #111;
+  --crow-text: #ccc;
 }
 
-/* Animação: Penas/Corvos caindo (Simulação via Gradiente) */
-@keyframes feather-fall {
+/* Animação: Chuva de Penas/Corvos (Scroll Infinito) */
+@keyframes feather-drift {
   0% { background-position: 0% 0%; }
   100% { background-position: 100% 100%; }
 }
 
-/* Animação: Pulso Sombrio */
-@keyframes dark-pulse {
-  0% { box-shadow: 0 0 10px var(--crow-blood), inset 0 0 20px rgba(0,0,0,0.8); }
-  50% { box-shadow: 0 0 25px var(--crow-blood), inset 0 0 40px rgba(0,0,0,0.5); }
-  100% { box-shadow: 0 0 10px var(--crow-blood), inset 0 0 20px rgba(0,0,0,0.8); }
+/* Animação: Pulso da Aposta */
+@keyframes gamble-pulse {
+  0%, 100% { border-color: #333; box-shadow: 0 0 10px rgba(0,0,0,0.8); }
+  50% { border-color: var(--crow-wine); box-shadow: 0 0 20px var(--crow-wine-glow); }
 }
 
 /* CONTAINER PRINCIPAL */
@@ -30,206 +28,206 @@
   width: 95%;
   margin: 40px auto;
   background-color: var(--crow-bg);
-  /* Textura de fundo sutil */
-  background-image: 
-    linear-gradient(rgba(5,5,5,0.95), rgba(5,5,5,0.95)),
-    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a1a1a' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-  border: 1px solid var(--crow-accent);
-  border-top: 5px solid var(--crow-blood);
-  border-radius: 2px;
+  
+  /* Textura de Fundo (Baralho Sutil) */
+  background-image: radial-gradient(circle at center, #0a0a0a 0%, #000 100%);
+  
+  border: 1px solid #333;
+  /* Formato Carta de Baralho */
+  border-radius: 10px;
+  
   color: var(--crow-text);
   font-family: 'Nunito', sans-serif;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  box-shadow: 0 10px 30px #000;
+  
+  animation: gamble-pulse 6s infinite ease-in-out;
 }
-
 .crow-container * { box-sizing: border-box; }
 
-/* EFEITO DE CORVOS (Overlay Animado) */
+/* EFEITO DOS CORVOS (Overlay Animado) */
 .crow-container::before {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
-  background-image: radial-gradient(circle at 50% 50%, transparent 80%, #000 120%);
+  /* Pattern de penas/corvos caindo */
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background-size: 100px 100px;
+  opacity: 0.3;
   pointer-events: none;
-  z-index: 5;
-  border: 1px solid var(--crow-blood);
-  animation: dark-pulse 4s infinite ease-in-out;
+  z-index: 0;
+  animation: feather-drift 20s linear infinite;
 }
 
-/* HEADER & IMAGEM */
+/* HEADER */
 .crow-header {
   position: relative;
-  width: 100%;
-  height: 250px; /* Altura do Banner */
+  height: 280px;
+  border-bottom: 4px solid var(--crow-wine);
   overflow: hidden;
-  border-bottom: 3px solid var(--crow-blood);
   z-index: 1;
 }
 
 .crow-header img {
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
-  object-position: top center; /* Foca no rosto da imagem */
-  filter: grayscale(80%) contrast(1.2) brightness(0.8);
-  transition: 0.5s ease;
+  object-position: top center;
+  filter: contrast(1.2) grayscale(0.2);
+  transition: 0.5s;
 }
-
 .crow-container:hover .crow-header img {
-  filter: grayscale(0%) contrast(1.1);
+  filter: contrast(1.1) grayscale(0);
   transform: scale(1.05);
 }
 
 /* Título sobre a imagem */
 .crow-title-box {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: linear-gradient(to top, rgba(120, 20, 20, 0.9), transparent);
-  padding: 40px 20px 10px 20px;
+  bottom: 0; right: 0;
+  background: linear-gradient(to left, #000, transparent);
+  padding: 10px 30px;
   text-align: right;
 }
 
 .crow-title {
-  font-family: 'Cinzel', serif;
-  font-size: 2em;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5em;
   color: #fff;
-  text-shadow: 2px 2px 0 var(--crow-blood);
-  text-transform: uppercase;
-  letter-spacing: 2px;
   margin: 0;
+  text-shadow: 2px 2px 0 var(--crow-wine);
+  font-style: italic;
 }
 
-/* STATUS (Classes Obrigatórias JJK) */
-.crow-container .art-stats {
-  background: var(--crow-panel);
-  padding: 15px 25px;
+.crow-subtitle {
+  font-family: 'Cinzel', serif;
+  color: var(--crow-wine);
+  font-size: 0.8em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* STATUS (Classes Obrigatórias) */
+.crow-stats-panel {
+  padding: 15px 30px;
+  background: #080808;
   border-bottom: 1px solid #222;
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  position: relative;
-  z-index: 2;
 }
 
-.crow-container .jjk-dossier-status-item {
+.crow-stat-row {
   display: grid;
-  grid-template-columns: 30px 1fr 70px; /* Ajuste layout */
+  grid-template-columns: 30px 1fr auto;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
 }
 
-.crow-container .jjk-dossier-status-label {
-  font-family: 'Permanent Marker', cursive;
+.crow-label {
+  font-family: 'Cinzel', serif;
+  color: var(--crow-wine);
   font-size: 1em;
-  color: var(--crow-blood);
-  text-align: center;
+  font-weight: 700;
 }
 
-.crow-container .jjk-dossier-status-bar-wrapper {
-  width: 100%;
-  height: 10px;
-  background: #222;
+.crow-bar-bg {
+  width: 100%; height: 8px;
+  background: #1a1a1a;
   border: 1px solid #333;
-  border-radius: 0; /* Estilo quadrado/agressivo */
+  border-radius: 2px;
   overflow: hidden;
 }
 
-.crow-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
-
-/* Cores das barras personalizadas */
-.crow-container .jjk-dossier-hp-fill {
+/* Barras preenchendo */
+.jjk-dossier-hp-fill {
   height: 100%;
-  background: var(--crow-blood);
-  box-shadow: 0 0 10px var(--crow-blood);
-  width: 100%; /* Isso será controlado pelo JS, mas deixamos 100% pra visualização */
+  background: var(--crow-wine); /* Cor Vinho */
+  box-shadow: 0 0 10px var(--crow-wine);
+}
+.jjk-dossier-ea-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #333, #666); /* Cinza Aço */
 }
 
-.crow-container .jjk-dossier-ea-fill {
-  height: 100%;
-  background: #444; /* Energia cinza/negra */
-  box-shadow: 0 0 5px #fff;
-  width: 100%;
-}
-
-.crow-container .jjk-dossier-status-value {
+/* Valores */
+.jjk-dossier-status-value {
   font-family: 'Nunito', sans-serif;
-  font-weight: 700;
   font-size: 0.8em;
-  color: #666;
-  text-align: right;
+  color: #fff;
+  font-weight: 700;
 }
 
-/* CONTEÚDO DO POST */
+/* CONTEÚDO */
 .crow-content {
-  padding: 40px 40px;
-  font-size: 1.05em;
+  padding: 40px;
+  font-size: 1.1em;
   line-height: 1.8;
-  color: #ccc;
+  color: #bbb;
   text-align: justify;
-  background: var(--crow-bg);
   position: relative;
   z-index: 2;
+  background: rgba(0,0,0,0.6); /* Leve fundo para ler melhor sobre as penas */
 }
 
-/* Formatação de texto rica */
+/* Decoração Poker Face no Texto */
+.crow-content::before {
+  content: '♠';
+  position: absolute; top: 10px; left: 15px;
+  color: var(--crow-wine); font-size: 1.5em; opacity: 0.5;
+}
+.crow-content::after {
+  content: '♦';
+  position: absolute; bottom: 10px; right: 15px;
+  color: var(--crow-wine); font-size: 1.5em; opacity: 0.5;
+}
+
+/* Formatação */
 .crow-content b {
-  color: var(--crow-blood);
+  color: var(--crow-wine); /* Fonte em #781414 */
   font-weight: 700;
+  font-family: 'Playfair Display', serif; /* Fonte diferenciada */
 }
 
 .crow-content i {
   color: #fff;
-  font-family: 'Playfair Display', serif; /* Se tiver disponível, ou fallback */
   font-style: italic;
+  opacity: 0.8;
 }
 
-/* Citação / Fala */
-.crow-content blockquote {
-  border-left: 3px solid var(--crow-blood);
-  margin: 20px 0;
+/* Citação / Pensamento */
+.crow-quote {
+  border-left: 2px solid var(--crow-wine);
+  margin: 20px;
   padding: 10px 20px;
   background: rgba(120, 20, 20, 0.05);
+  font-family: 'Playfair Display', serif;
+  color: var(--crow-wine);
   font-style: italic;
-  color: var(--crow-blood-light);
 }
 
 /* ASSINATURA INJETADA */
 .crow-signature {
-  background: var(--crow-panel);
-  padding: 20px 40px;
   text-align: right;
-  border-top: 1px solid var(--crow-blood);
+  padding: 0 40px 30px 40px;
   position: relative;
   z-index: 2;
 }
 
 .crow-signature::after {
-  content: 'Yizhuo Ming'; /* NOME INJETADO */
-  font-family: 'Permanent Marker', cursive;
-  font-size: 1.5em;
-  color: var(--crow-blood);
-  text-shadow: 0 0 5px rgba(120, 20, 20, 0.5);
-  display: block;
-}
-
-/* Pena decorativa animada (CSS Only) */
-.crow-decor {
-  position: absolute;
-  top: -20px; right: -20px;
-  width: 100px; height: 100px;
-  background: radial-gradient(ellipse at center, var(--crow-blood) 0%, transparent 70%);
-  opacity: 0.2;
-  border-radius: 50%;
-  filter: blur(20px);
-  z-index: 0;
-  animation: dark-pulse 3s infinite alternate;
+  content: 'Yizhuo Ming'; /* Nome Injetado */
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8em;
+  color: var(--crow-wine);
+  text-shadow: 1px 1px 0 #000;
+  border-top: 1px solid #333;
+  display: inline-block;
+  padding-top: 5px;
 }
 
 @media (max-width: 600px) {
-  .crow-header { height: 180px; }
   .crow-content { padding: 20px; }
+  .crow-header { height: 200px; }
 }
