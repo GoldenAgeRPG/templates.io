@@ -118,8 +118,8 @@
   padding: 10px 45px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
-  margin-top: -25px;
+  gap: 8px;           
+  margin-top: 5px;    
   position: relative;
   z-index: 5;
 }
