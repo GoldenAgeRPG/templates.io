@@ -101,6 +101,8 @@
   position: relative;
   overflow: hidden;
   background: transparent;
+  mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
 }
 
 .bw-image-frame::after {
@@ -108,9 +110,9 @@
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   box-shadow: 
-    inset 5px 0 0 0 var(--dp-border-solid),   /* Lateral Esquerda */
-    inset -5px 0 0 0 var(--dp-border-solid),  /* Lateral Direita */
-    inset 0px 25px 20px -5px #050505;         /* Desfoque Superior */
+    inset 5px 0 0 0 var(--dp-border-solid),
+    inset -5px 0 0 0 var(--dp-border-solid),
+    inset 0px 25px 20px -5px #050505;
   z-index: 2;
   pointer-events: none;
 }
@@ -123,8 +125,6 @@
   position: relative;
   z-index: 1;
   transition: 0.5s transform;
-  mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
 }
 
 .bw-container:hover .bw-image-frame img { 
