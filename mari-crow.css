@@ -1,232 +1,174 @@
+/* --- TEMPLATE: MARI MING --- */
 @import url('https://fonts.googleapis.com/css2?family=Rye&family=Roboto:wght@300;400;700&family=Montserrat:wght@400;600;800&display=swap');
 
 :root {
-  --mari-wine: #781414;
-  --mari-blood: #ff0033;
-  --mari-dark: #050505;
-  --mari-panel: #0a0a0a;
-  --mari-text: #cccccc;
+  /* === PALETA MARI MING === */
+  --mari-bg: #050505;        /* Fundo Principal (Preto quase absoluto) */
+  --mari-bg-sec: #0a0a0a;    /* Fundo Secundário (Status/Extras) */
+  --mari-wine: #781414;      /* Cor Principal (Vinho) */
+  --mari-blood: #ff0033;     /* Cor de Destaque (Sangue) */
+  --mari-text: #bfbfbf;      /* Texto (Cinza Claro) */
+  --mari-border: #222222;    /* Bordas sutis */
+  --mari-shadow: rgba(0, 0, 0, 0.9);
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes crow-shimmer {
+  0% { background-position: 0 0; } 100% { background-position: 0 100%; }
+}
+@keyframes blood-pulse {
+  0% { box-shadow: 0 0 20px rgba(120, 20, 20, 0.2); border-color: var(--mari-wine); }
+  50% { box-shadow: 0 0 35px rgba(255, 0, 51, 0.4); border-color: var(--mari-blood); }
+  100% { box-shadow: 0 0 20px rgba(120, 20, 20, 0.2); border-color: var(--mari-wine); }
 }
 
 /* --- CONTAINER PRINCIPAL --- */
-.mari-box {
-  display: flex;
-  max-width: 950px;
-  margin: 40px auto;
-  background: var(--mari-dark);
-  /* Sombra externa complexa para dar profundidade */
-  box-shadow: 
-    0 0 0 1px #222,
-    0 10px 30px rgba(0,0,0,0.8),
-    0 0 40px rgba(120, 20, 20, 0.2); 
-  border-radius: 2px;
-  overflow: hidden;
+.amalgam-container {
+  box-sizing: border-box; max-width: 750px; width: 95%; margin: 60px auto;
+  background-color: var(--mari-bg);
+  color: var(--mari-text);
   font-family: 'Roboto', sans-serif;
-  color: var(--mari-text);
-  position: relative;
+  border: 1px solid var(--mari-wine); 
+  border-top: 4px solid var(--mari-wine); /* Topo mais grosso */
+  border-radius: 2px;
+  box-shadow: 
+    0 0 0 1px #000,
+    0 10px 50px var(--mari-shadow);
+  position: relative; overflow: hidden;
+  padding: 0; display: flex; flex-direction: column;
+}
+.amalgam-container * { box-sizing: border-box; margin: 0; padding: 0; }
+
+/* --- FUNDO ANIMADO (CORVOS) --- */
+.amalgam-flesh-bg {
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  /* Textura de penas escuras */
+  background-image: url('https://i.imgur.com/4q2j3E1.png'); 
+  background-size: 400px;
+  opacity: 0.1;
+  animation: crow-shimmer 30s linear infinite;
 }
 
-/* Faixa decorativa no topo */
-.mari-box::before {
-  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
-  background: linear-gradient(90deg, var(--mari-wine), #000, var(--mari-wine));
-  z-index: 10;
+/* --- HEADER --- */
+.amalgam-header {
+  position: relative; z-index: 2;
+  padding: 50px 20px 30px 20px; text-align: center;
+  background: linear-gradient(to bottom, #000, transparent);
+  border-bottom: 1px solid var(--mari-wine);
+}
+.amalgam-title {
+  font-family: 'Rye', serif; font-size: 2.5em; 
+  color: var(--mari-wine); margin: 0; text-transform: uppercase;
+  text-shadow: 2px 2px 0px #000; 
+  letter-spacing: 2px; font-weight: 400;
+}
+.amalgam-subtitle {
+  font-family: 'Montserrat', sans-serif; font-size: 0.8em; 
+  color: #666; margin-top: 8px; letter-spacing: 5px;
+  text-transform: uppercase; font-weight: 700;
 }
 
-/* --- LATERAL ESQUERDA (IMAGEM) --- */
-.mari-aside {
-  flex: 0 0 350px;
-  position: relative;
-  min-height: 600px;
+/* --- IMAGEM (YUMEKO) --- */
+.amalgam-image-wrapper {
+  position: relative; z-index: 2; padding: 30px; display: flex; justify-content: center;
+}
+.amalgam-image-frame {
+  width: 100%; height: 350px; position: relative; 
   background: #000;
-  overflow: hidden;
-  border-right: 4px solid var(--mari-wine);
+  border: 1px solid var(--mari-wine);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
+  /* Clip-path para corte agressivo */
+  clip-path: polygon(5% 0, 100% 0, 100% 95%, 95% 100%, 0 100%, 0 5%);
+  animation: blood-pulse 4s infinite ease-in-out;
+}
+.amalgam-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top;
+  filter: grayscale(80%) contrast(1.2) brightness(0.9); transition: 0.5s;
+}
+.amalgam-image-frame:hover img { filter: grayscale(0%) contrast(1.1); transform: scale(1.05); }
+
+/* --- STATUS (MANTENDO ESTRUTURA PARA JS) --- */
+.amalgam-stats {
+  padding: 20px 60px; 
+  display: flex; flex-direction: column; gap: 15px; 
+  position: relative; z-index: 2;
+  background: var(--mari-bg-sec);
+  border-top: 1px solid #222; border-bottom: 1px solid #222;
+}
+.amalgam-container .jjk-dossier-status-item {
+  display: grid; grid-template-columns: 40px 1fr 60px; align-items: center; gap: 15px;
+  background: transparent; border: none; margin: 0; padding: 0;
+}
+.amalgam-container .jjk-dossier-status-label { 
+  font-family: 'Rye', serif; font-size: 0.9em; 
+  color: var(--mari-wine) !important; text-align: right;
+}
+.amalgam-container .jjk-dossier-status-value { 
+  font-family: 'Montserrat', sans-serif; font-size: 0.8em; 
+  color: #666 !important; font-weight: 700; text-align: right; white-space: nowrap;
 }
 
-.mari-bg-img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  /* Efeito na imagem: Escurecida e com contraste */
-  filter: grayscale(80%) contrast(1.2) brightness(0.8);
-  transition: 0.5s ease;
+/* Moldura da Barra */
+.amalgam-container .jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 8px; 
+  background: #111 !important; 
+  border: 1px solid #333;
+  border-radius: 0; overflow: hidden;
 }
 
-/* Efeito de "Scanlines" (Linhas de monitor) sobre a imagem */
-.mari-aside::after {
-  content: ''; position: absolute; inset: 0;
-  background: linear-gradient(to bottom, rgba(0,0,0,0) 50%, rgba(0,0,0,0.2) 50%);
-  background-size: 100% 4px;
-  pointer-events: none;
-  z-index: 2;
-  opacity: 0.6;
+/* Cores das Barras (Mari Style) */
+.amalgam-container .jjk-dossier-hp-fill { 
+  background: linear-gradient(90deg, #500, var(--mari-wine), var(--mari-blood)) !important; 
+  box-shadow: 0 0 10px var(--mari-wine) !important;
+}
+.amalgam-container .jjk-dossier-ea-fill { 
+  background: linear-gradient(90deg, #222, #555) !important; box-shadow: none !important;
 }
 
-/* Overlay de "Vignette" (Bordas escuras) */
-.mari-vignette {
-  position: absolute; inset: 0;
-  background: radial-gradient(circle at center, transparent 0%, #000 120%);
-  z-index: 3;
+/* --- CONTEÚDO --- */
+.amalgam-content {
+  padding: 30px 60px; font-size: 1em; line-height: 1.8; 
+  text-align: justify; position: relative; z-index: 2; 
+  color: var(--mari-text); background: transparent;
+}
+.amalgam-content b, .amalgam-content strong { 
+  color: var(--mari-wine); font-family: 'Montserrat', sans-serif; 
+  font-weight: 700; 
+}
+.amalgam-content i { color: #888; font-family: serif; letter-spacing: 0.5px; }
+
+/* --- EXTRAS / CONSIDERAÇÕES --- */
+.amalgam-extras {
+  margin: 0 60px 40px 60px; padding: 20px;
+  background: #0f0505; /* Fundo levemente avermelhado */
+  border: 1px solid var(--mari-wine);
+  position: relative; z-index: 2; font-size: 0.9em;
+  color: #999;
+}
+.amalgam-extras::before {
+  content: 'NOTAS'; display: block; 
+  font-family: 'Rye', serif; font-size: 1em; color: var(--mari-wine);
+  margin-bottom: 10px; border-bottom: 1px dashed #333; padding-bottom: 5px;
 }
 
-/* Interação Hover */
-.mari-box:hover .mari-bg-img {
-  filter: grayscale(0%) contrast(1.1) brightness(1);
-  transform: scale(1.05);
+/* --- RODAPÉ --- */
+.amalgam-footer {
+  padding: 20px 0; text-align: center;
+  position: relative; z-index: 2; background: #000; 
+  border-top: 1px solid var(--mari-wine);
 }
-
-/* --- LATERAL DIREITA (CONTEÚDO) --- */
-.mari-main {
-  flex: 1;
-  display: flex; flex-direction: column;
-  background: var(--mari-panel);
-  position: relative;
-}
-
-/* Textura de Ruído no fundo (Para não ficar liso) */
-.mari-main::before {
-  content: ''; position: absolute; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.05'/%3E%3C/svg%3E");
-  pointer-events: none; opacity: 0.5;
-}
-
-/* CABEÇALHO AGRESSIVO */
-.mari-header {
-  background: #000;
-  padding: 30px 40px;
-  position: relative;
-  z-index: 5;
-  border-bottom: 1px solid #222;
-  /* Corte diagonal no fundo do header */
-  clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-  background-image: linear-gradient(45deg, #000 25%, #110505 25%, #110505 50%, #000 50%, #000 75%, #110505 75%, #110505 100%);
-  background-size: 20px 20px;
-}
-
-.mari-title {
-  font-family: 'Rye', serif;
-  font-size: 2.2em;
-  color: var(--mari-text);
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 3px 3px 0px var(--mari-wine);
-  position: relative;
-  z-index: 2;
-}
-
-.mari-subtitle {
-  font-family: 'Montserrat', sans-serif;
-  font-size: 0.75em;
-  color: var(--mari-wine);
-  text-transform: uppercase;
-  letter-spacing: 5px;
-  font-weight: 800;
-  margin-top: 5px;
-}
-
-/* ÁREA DE SCROLL */
-.mari-content {
-  flex: 1;
-  overflow-y: auto;
-  padding: 30px 40px;
-  font-size: 0.95em;
-  line-height: 1.9;
-  text-align: justify;
-  z-index: 5;
-  scrollbar-width: thin;
-  scrollbar-color: var(--mari-wine) #000;
-}
-
-/* Scrollbar Webkit */
-.mari-content::-webkit-scrollbar { width: 6px; }
-.mari-content::-webkit-scrollbar-track { background: #000; }
-.mari-content::-webkit-scrollbar-thumb { background: var(--mari-wine); border-radius: 3px; }
-
-/* Estilos de Texto */
-.mari-content b, .mari-content strong {
-  color: var(--mari-wine);
-  font-weight: 700;
-  text-shadow: 0 0 10px rgba(120,20,20,0.3);
-}
-.mari-content i, .mari-content em {
-  color: #888;
-  font-family: serif;
-}
-
-/* STATUS BARS (Estilo Tech/Magic) */
-.mari-status {
-  margin-bottom: 30px;
-  display: flex; flex-direction: column; gap: 15px;
-  padding-bottom: 25px;
-  border-bottom: 1px dashed rgba(120,20,20,0.3);
-}
-
-.mari-stat-row {
-  display: flex; align-items: center; gap: 15px;
-}
-
-.mari-stat-label {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 800;
-  font-size: 0.8em;
-  color: var(--mari-wine);
-  width: 30px;
-}
-
-.mari-bar-track {
-  flex: 1;
-  height: 8px;
-  background: #111;
-  position: relative;
-  /* Corte nos cantos da barra */
-  clip-path: polygon(0 0, 100% 0, 98% 100%, 2% 100%);
-}
-
-.mari-bar-fill {
-  height: 100%;
-  background: var(--mari-wine);
-  box-shadow: 0 0 10px var(--mari-wine);
-  position: relative;
-}
-/* Brilho animado na barra */
-.mari-bar-fill::after {
-  content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 100%;
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-  transform: translateX(-100%);
-  animation: shimmer 3s infinite;
-}
-
-@keyframes shimmer { 100% { transform: translateX(100%); } }
-
-.mari-stat-val {
-  font-family: monospace;
-  font-size: 0.8em;
-  color: #666;
-}
-
-/* FOOTER */
-.mari-footer {
-  padding: 15px 40px;
-  background: #000;
-  text-align: right;
-  border-top: 1px solid #1a1a1a;
-  z-index: 5;
-}
-
-.mari-sig {
-  font-family: 'Rye', serif;
-  font-size: 0.9em;
-  color: #444;
-  text-transform: uppercase;
-  letter-spacing: 2px;
+.amalgam-signature::after {
+  content: 'Mari Ming Onette';
+  font-family: 'Rye', serif; font-size: 1.2em; 
+  color: #444; 
+  letter-spacing: 3px; text-transform: uppercase;
   transition: 0.3s;
 }
-.mari-box:hover .mari-sig { color: var(--mari-wine); text-shadow: 0 0 10px var(--mari-wine); }
+.amalgam-container:hover .amalgam-signature::after {
+  color: var(--mari-wine); text-shadow: 0 0 10px rgba(120,20,20,0.5);
+}
 
-/* RESPONSIVO */
-@media (max-width: 800px) {
-  .mari-box { flex-direction: column; }
-  .mari-aside { flex: none; height: 300px; border-right: none; border-bottom: 4px solid var(--mari-wine); }
-  .mari-header { clip-path: none; border-bottom: 4px solid var(--mari-wine); }
-  .mari-title { font-size: 1.8em; }
+@media (max-width: 600px) {
+  .amalgam-container { width: 100%; margin: 20px auto; border-width: 2px; }
+  .amalgam-content, .amalgam-stats, .amalgam-extras { padding-left: 20px; padding-right: 20px; margin-left: 0; margin-right: 0; }
 }
