@@ -15,10 +15,10 @@
   to { transform: rotate(360deg); }
 }
 
-/* Animação: Respiração Sutil (Muito reduzida) */
-@keyframes toxic-breathe-low {
-  0%, 100% { border-color: #1a1a1a; box-shadow: 0 0 5px rgba(0, 255, 65, 0.05); }
-  50% { border-color: #2a2a2a; box-shadow: 0 0 10px rgba(0, 255, 65, 0.15); }
+/* Animação: Pulsação Venenosa */
+@keyframes toxic-breathe {
+  0%, 100% { box-shadow: 0 0 15px rgba(0, 255, 65, 0.1); border-color: #1a1a1a; }
+  50% { box-shadow: 0 0 30px rgba(0, 255, 65, 0.25); border-color: var(--dp-green); }
 }
 
 /* CONTAINER PRINCIPAL */
