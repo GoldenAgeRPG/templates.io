@@ -1,230 +1,208 @@
-/* --- TEMPLATE: CROW'S GAMBLE v4 (THE PRESTIGE) --- */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,900&family=Cinzel:wght@700&family=Nunito:wght@400;700&family=Mr+Dafoe&display=swap');
+/* --- TEMPLATE: CROW'S GAMBLE --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@700&family=Nunito:wght@400;700;800&family=Mrs+Saint+Delafield&display=swap');
 
 :root {
-  --crow-bg: #030303;
+  --crow-bg: #050505;
   --crow-wine: #781414;
   --crow-gold: #d4af37;
   --crow-text: #bfbfbf;
-  --crow-panel: #0a0a0a;
 }
 
-/* Animação: Corvos Voando (Agora visíveis) */
-@keyframes crow-flight {
-  0% { background-position: -100px 0; opacity: 0; }
-  10% { opacity: 1; }
-  90% { opacity: 1; }
-  100% { background-position: 600px 0; opacity: 0; }
+/* Animação: Corvos cruzando o Header */
+@keyframes crow-pass {
+  0% { transform: translateX(-50px) translateY(10px) scale(0.8); opacity: 0; }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { transform: translateX(600px) translateY(-20px) scale(1.1); opacity: 0; }
 }
 
-/* Animação: Brilho passando no Banner */
-@keyframes sheen-pass {
-  0%, 80% { left: -100%; opacity: 0; }
-  90% { opacity: 0.2; }
-  100% { left: 100%; opacity: 0; }
+/* Animação: Pulsação de Borda (Respiração) */
+@keyframes border-breathe {
+  0%, 100% { border-color: #222; box-shadow: 0 0 15px rgba(0,0,0,0.8); }
+  50% { border-color: var(--crow-wine); box-shadow: 0 0 25px rgba(120, 20, 20, 0.2); }
 }
 
-/* CONTAINER PRINCIPAL */
-.crow-container {
+/* CONTAINER PRINCIPAL (Cartão Único) */
+.crow-card {
   box-sizing: border-box;
   max-width: 650px;
   width: 95%;
   margin: 50px auto;
   background-color: var(--crow-bg);
   
-  /* Textura de fundo sutil (Damask Escuro) */
-  background-image: radial-gradient(circle at top, #0f0505, #000);
+  /* Textura de fundo muito sutil (Noise) */
+  background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
   
+  /* Borda fina e elegante */
   border: 1px solid #222;
-  border-top: 4px solid var(--crow-wine); /* Topo Vinho */
-  border-bottom: 4px solid var(--crow-wine); /* Base Vinho */
   
-  /* Formato: Carta com corte nos cantos */
-  clip-path: polygon(
-    20px 0, 100% 0, 
-    100% calc(100% - 20px), 
-    calc(100% - 20px) 100%, 
-    0 100%, 
-    0 20px
-  );
+  /* Formato: Canto cortado apenas no topo-direito e fundo-esquerdo */
+  border-radius: 0 30px 0 30px;
   
   color: var(--crow-text);
   font-family: 'Nunito', sans-serif;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 10px 40px #000;
+  box-shadow: 0 15px 50px #000;
+  
+  animation: border-breathe 6s infinite ease-in-out;
 }
-.crow-container * { box-sizing: border-box; }
+.crow-card * { box-sizing: border-box; }
 
-/* HEADER */
+/* HEADER (Imagem + Títulos + Corvos) */
 .crow-header {
   position: relative;
-  height: 260px;
-  border-bottom: 2px solid var(--crow-wine);
-  overflow: hidden;
-  z-index: 1;
+  height: 300px;
+  /* Mascara suave na parte inferior para fundir com o corpo */
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
 }
 
 .crow-header img {
   width: 100%; height: 100%;
   object-fit: cover; object-position: top center;
-  transition: 0.5s;
+  filter: grayscale(0.4) contrast(1.1); /* Leve desaturação elegante */
+  transition: transform 0.8s ease;
 }
-.crow-container:hover .crow-header img { transform: scale(1.03); }
+.crow-card:hover .crow-header img { transform: scale(1.03); }
 
-/* Sheen Effect (Brilho Holográfico) */
-.crow-header::after {
-  content: ''; position: absolute; top: 0; left: -100%;
-  width: 60%; height: 100%;
-  background: linear-gradient(to right, transparent, rgba(255,255,255,0.3), transparent);
-  transform: skewX(-20deg); pointer-events: none;
-  animation: sheen-pass 6s infinite ease-in-out;
+/* Layer dos Corvos (Dentro do Header) */
+.crow-flock {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  pointer-events: none; overflow: hidden;
 }
 
-/* Título */
-.crow-title-box {
-  position: absolute; bottom: 20px; right: 0;
-  background: linear-gradient(to right, transparent, #000);
-  padding: 10px 40px 10px 80px;
-  text-align: right;
-  border-bottom: 1px solid var(--crow-wine);
-}
-
-.crow-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 2.2em; color: #fff; margin: 0;
-  text-shadow: 2px 2px 4px #000; font-style: italic; line-height: 1;
-}
-.crow-subtitle {
-  font-family: 'Cinzel', serif; color: var(--crow-gold); font-size: 0.75em;
-  letter-spacing: 4px; text-transform: uppercase; margin-top: 5px;
-}
-
-/* FAIXA DOS CORVOS (CROW LANE) */
-.crow-lane {
-  height: 60px;
-  width: 100%;
-  background: #080808;
-  position: relative;
-  overflow: hidden;
-  border-bottom: 1px solid #222;
-  margin-top: -1px;
-}
-
-/* O bando de corvos voando */
-.crow-lane::after {
-  content: '';
+.crow-bird {
   position: absolute;
-  top: 10px; left: 0;
-  width: 100px; height: 40px; /* Tamanho do bando */
-  /* SVG de Corvo Nítido */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 30'%3E%3Cpath fill='%23781414' d='M5,15 C10,10 15,10 20,15 C15,20 10,20 5,15 Z M25,10 C30,5 35,5 40,10 C35,15 30,15 25,10 Z'/%3E%3C/svg%3E");
-  /* Usei formas abstratas de pássaros para garantir que apareça em qualquer fundo */
-  /* Mas para ser fiel ao pedido, aqui vai um SVG de silhueta real em base64: */
-  background-image: url("data:image/svg+xml,%3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23781414' d='M10,50 Q30,20 50,50 T90,50' stroke='%23781414' stroke-width='2' fill-opacity='0'/%3E%3Cpath fill='%23333' d='M20,40 l10,-10 l10,10 z M60,30 l10,-10 l10,10 z'/%3E%3C/svg%3E"); 
-  /* Simplificando: Usando silhuetas pretas e vinhos */
-  background: url("https://img.icons8.com/ios-filled/50/781414/raven.png") no-repeat;
-  background-size: contain;
-  
-  opacity: 0.8;
-  animation: crow-flight 8s linear infinite;
-}
-/* Adicionando mais um corvo com delay */
-.crow-lane::before {
-  content: ''; position: absolute; top: 20px; left: 0;
-  width: 30px; height: 30px;
-  background: url("https://img.icons8.com/ios-filled/50/333333/raven.png") no-repeat;
-  background-size: contain;
-  opacity: 0.6;
-  animation: crow-flight 8s linear infinite;
-  animation-delay: 1s;
+  width: 40px; height: 40px;
+  background: url("https://img.icons8.com/ios-filled/50/000000/raven.png") no-repeat center/contain;
+  opacity: 0;
+  filter: drop-shadow(0 0 2px rgba(255,255,255,0.2)); /* Leve brilho para destacar no escuro */
 }
 
-/* STATUS (Fino e Moderno) */
-.crow-stats-panel {
-  padding: 10px 40px;
-  background: var(--crow-panel);
-  display: flex; flex-direction: column; gap: 8px;
+.crow-bird:nth-child(1) { top: 20%; left: 0; animation: crow-pass 12s linear infinite; animation-delay: 0s; }
+.crow-bird:nth-child(2) { top: 40%; left: 0; width: 25px; height: 25px; animation: crow-pass 15s linear infinite; animation-delay: 5s; }
+.crow-bird:nth-child(3) { top: 10%; left: 0; width: 20px; height: 20px; animation: crow-pass 10s linear infinite; animation-delay: 2s; }
+
+/* Títulos (Sobrepostos na imagem) */
+.crow-titles {
+  position: absolute; bottom: 40px; right: 20px;
+  text-align: right;
+  z-index: 2;
+}
+
+.crow-main-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5em; color: #fff;
+  font-style: italic; line-height: 0.8;
+  text-shadow: 2px 2px 10px #000;
+  margin: 0;
+}
+.crow-sub-title {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7em; color: var(--crow-gold);
+  letter-spacing: 4px; text-transform: uppercase;
+  margin-top: 5px; text-shadow: 1px 1px 5px #000;
+}
+
+/* STATUS (Minimalista e Integrado) */
+.crow-stats {
+  padding: 0 40px;
+  margin-top: -20px; /* Sobe um pouco para perto do header */
+  position: relative; z-index: 5;
+  display: flex; flex-direction: column; gap: 12px;
 }
 
 .crow-stat-row {
-  display: grid; grid-template-columns: 30px 1fr auto;
-  align-items: center; gap: 15px;
+  display: flex; align-items: center; gap: 15px;
 }
 
-.crow-label {
-  font-family: 'Cinzel', serif; color: var(--crow-wine); font-weight: 700; font-size: 0.9em;
+.crow-stat-label {
+  font-family: 'Cinzel', serif;
+  color: var(--crow-wine);
+  font-size: 0.8em; font-weight: 700; width: 25px;
 }
 
-.crow-bar-bg {
-  width: 100%; height: 5px; /* Ultra fino */
+.crow-stat-track {
+  flex-grow: 1; height: 4px;
   background: #1a1a1a;
-  overflow: hidden;
+  border-radius: 2px; overflow: hidden;
 }
 
-.crow-hp-fill { height: 100%; background: var(--crow-wine); width: 0%; transition: width 0.5s; }
-.crow-ea-fill { height: 100%; background: var(--crow-gold); width: 0%; transition: width 0.5s; }
+.crow-hp-fill { height: 100%; background: var(--crow-wine); width: 0%; transition: width 0.6s ease; box-shadow: 0 0 8px var(--crow-wine); }
+.crow-ea-fill { height: 100%; background: var(--crow-gold); width: 0%; transition: width 0.6s ease; box-shadow: 0 0 8px var(--crow-gold); }
 
-.crow-hp-val {
-  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.8em; color: #fff; min-width: 70px; text-align: right;
-}
-.crow-ea-val {
-  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.8em; color: var(--crow-gold); min-width: 70px; text-align: right;
-}
+.crow-hp-val { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.8em; color: #fff; min-width: 60px; text-align: right; }
+.crow-ea-val { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.8em; color: var(--crow-gold); min-width: 60px; text-align: right; }
 
-/* CONTEÚDO (Sem quadrado feio) */
-.crow-content {
-  margin: 30px 40px;
-  padding: 10px 25px;
-  /* O segredo: Border Left e Gradiente suave */
-  border-left: 3px solid var(--crow-wine);
-  background: linear-gradient(90deg, rgba(120, 20, 20, 0.05), transparent 80%);
-  
+/* CORPO DO TEXTO (Livre e Limpo) */
+.crow-body {
+  padding: 30px 45px;
   font-size: 1.1em;
   line-height: 1.8;
   color: var(--crow-text);
   text-align: justify;
-  min-height: 150px;
 }
 
-.crow-content b, .crow-content strong {
-  color: var(--crow-wine); font-family: 'Playfair Display', serif; font-weight: 900;
-}
-.crow-content i, .crow-content em {
-  color: #fff; font-style: italic; opacity: 0.8;
+/* Estilos de Texto BBCode */
+.crow-body b, .crow-body strong {
+  color: var(--crow-wine);
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.1em;
 }
 
-/* CAMPO "ALL WIN" (Estilo Rodapé de Ficha) */
+.crow-body i, .crow-body em {
+  color: #fff;
+  font-family: 'Playfair Display', serif; /* Fonte serifada para itálico fica mais chique */
+  font-style: italic;
+  opacity: 0.9;
+}
+
+/* Separador elegante no meio do texto (opcional) */
+.crow-hr {
+  border: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--crow-wine), transparent);
+  margin: 20px 0; opacity: 0.5;
+}
+
+/* RODAPÉ & ASSINATURA (Integrados) */
+.crow-footer {
+  margin: 0 40px 40px 40px;
+  padding-top: 20px;
+  border-top: 1px solid #1a1a1a;
+  display: flex; justify-content: space-between; align-items: flex-end;
+  position: relative;
+}
+
+/* Campo ALL WIN */
 .crow-notes {
-  margin: 0;
-  padding: 15px 40px;
-  background: #080808;
-  border-top: 1px solid #222;
-  display: flex; justify-content: space-between; align-items: center;
-  font-size: 0.85em; color: #555;
+  font-size: 0.85em; color: #666;
+  max-width: 60%;
+  font-family: 'Nunito', sans-serif;
+}
+.crow-notes span {
+  display: block; font-family: 'Cinzel', serif;
+  color: var(--crow-gold); font-size: 0.8em; margin-bottom: 5px;
 }
 
-.crow-notes-label {
-  color: var(--crow-gold); font-family: 'Cinzel', serif; font-weight: 700; letter-spacing: 1px;
-}
-
-/* ASSINATURA (Discreta e Manual) */
-.crow-signature {
-  position: absolute; bottom: 50px; right: 40px; /* Posicionada sobre o vazio */
-  pointer-events: none;
-}
-
+/* Assinatura (Injetada CSS) */
 .crow-signature::after {
   content: 'Yizhuo Ming';
-  font-family: 'Mr Dafoe', cursive; /* Fonte manual clássica */
-  font-size: 1.8em;
+  font-family: 'Mrs Saint Delafield', cursive; /* Fonte de assinatura premium */
+  font-size: 2em;
   color: var(--crow-wine);
-  opacity: 0.6;
+  text-shadow: 0 0 2px #000;
   transform: rotate(-5deg);
   display: block;
+  margin-bottom: -10px; /* Ajuste fino de posição */
 }
 
+/* Responsivo */
 @media (max-width: 600px) {
-  .crow-content { margin: 20px; padding: 10px 15px; }
-  .crow-container { clip-path: none; border-radius: 5px; }
+  .crow-card { margin: 20px auto; border-radius: 10px; }
+  .crow-header { height: 200px; }
+  .crow-stats, .crow-body, .crow-footer { padding-left: 20px; padding-right: 20px; }
+  .crow-footer { flex-direction: column; align-items: flex-end; gap: 20px; }
+  .crow-notes { max-width: 100%; text-align: right; }
 }
