@@ -103,14 +103,14 @@
   background: transparent;
 }
 
-/* Camada que força a borda e o degradê a ficarem POR CIMA da imagem */
 .bw-image-frame::after {
   content: '';
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
   box-shadow: 
-    inset 0 0 0 5px var(--dp-border-solid),
-    inset 0px 25px 20px -5px #050505;
+    inset 5px 0 0 0 var(--dp-border-solid),   /* Lateral Esquerda */
+    inset -5px 0 0 0 var(--dp-border-solid),  /* Lateral Direita */
+    inset 0px 25px 20px -5px #050505;         /* Desfoque Superior */
   z-index: 2;
   pointer-events: none;
 }
