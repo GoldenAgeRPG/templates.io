@@ -1,0 +1,214 @@
+/* --- TEMPLATE: BOOGIE WOOGIE (REKKEN KAGAMI) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Share+Tech+Mono&family=Nunito:wght@400;700&display=swap');
+
+:root {
+  --bw-bg: #050505;
+  --bw-panel: #0f0f0f;
+  --bw-green: #00ff55;  /* O Verde da imagem */
+  --bw-green-dim: #005c1f;
+  --bw-white: #e0e0e0;
+  --bw-gray: #333;
+}
+
+/* Animação: Glitch (Simulando o Teleporte/Troca) */
+@keyframes bw-glitch {
+  0% { text-shadow: 2px 0 var(--bw-green-dim), -2px 0 #fff; }
+  90% { text-shadow: 2px 0 var(--bw-green-dim), -2px 0 #fff; }
+  91% { text-shadow: -2px 0 var(--bw-green), 2px 0 #000; transform: skewX(2deg); }
+  92% { text-shadow: 2px 0 var(--bw-green), -2px 0 #000; transform: skewX(-2deg); }
+  93% { transform: skewX(0deg); text-shadow: none; }
+  100% { text-shadow: none; }
+}
+
+/* Animação: Pulso de Energia Amaldiçoada */
+@keyframes bw-pulse {
+  0% { box-shadow: 0 0 5px var(--bw-green-dim); border-color: var(--bw-green-dim); }
+  50% { box-shadow: 0 0 15px var(--bw-green), inset 0 0 20px rgba(0, 255, 85, 0.1); border-color: var(--bw-green); }
+  100% { box-shadow: 0 0 5px var(--bw-green-dim); border-color: var(--bw-green-dim); }
+}
+
+/* CONTAINER PRINCIPAL */
+.bw-container {
+  box-sizing: border-box;
+  max-width: 680px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--bw-bg);
+  
+  /* Fundo: Listras sutis (Ref. Chapéu Urahara) */
+  background-image: repeating-linear-gradient(
+    45deg,
+    #0a0a0a,
+    #0a0a0a 10px,
+    #0e0e0e 10px,
+    #0e0e0e 20px
+  );
+  
+  border: 2px solid var(--bw-green);
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(0, 255, 85, 0.1);
+  
+  color: var(--bw-white);
+  font-family: 'Nunito', sans-serif;
+  position: relative;
+  overflow: hidden;
+  animation: bw-pulse 3s infinite ease-in-out;
+}
+
+.bw-container * { box-sizing: border-box; }
+
+/* HEADER */
+.bw-container .bw-header {
+  text-align: center;
+  padding: 30px 20px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.9), transparent);
+  border-bottom: 2px solid var(--bw-green);
+  position: relative;
+  z-index: 2;
+}
+
+/* Ícone de Troca (Swap) */
+.bw-container .bw-icon {
+  width: 50px; height: 50px;
+  margin-bottom: 10px;
+  filter: drop-shadow(0 0 5px var(--bw-green));
+}
+.bw-container .bw-icon path { fill: var(--bw-green); }
+
+.bw-container .bw-title {
+  font-family: 'Share Tech Mono', monospace; /* Fonte mais técnica/hacker */
+  font-size: 2em;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 2px;
+  animation: bw-glitch 5s infinite;
+}
+
+.bw-container .bw-subtitle {
+  font-family: 'Cinzel', serif;
+  color: var(--bw-green);
+  font-size: 0.8em;
+  margin-top: 5px;
+  letter-spacing: 5px;
+  font-weight: 700;
+  border-top: 1px solid var(--bw-green-dim);
+  display: inline-block;
+  padding-top: 5px;
+}
+
+/* IMAGEM */
+.bw-container .bw-image-frame {
+  width: 100%;
+  height: 300px;
+  position: relative;
+  background: #000;
+  overflow: hidden;
+  border-bottom: 4px solid var(--bw-green);
+}
+
+.bw-container .bw-image-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 20%; /* Ajuste para focar no rosto */
+  /* Filtro para deixar P&B com alto contraste */
+  filter: grayscale(100%) contrast(1.2) brightness(0.9);
+  transition: 0.5s ease;
+}
+
+/* Efeito ao passar o mouse: A imagem ganha um leve tom verde */
+.bw-container:hover .bw-image-frame img {
+  filter: grayscale(100%) contrast(1.1) drop-shadow(0 0 5px var(--bw-green));
+}
+
+/* BARRAS DE STATUS */
+.bw-container .bw-stats {
+  padding: 15px 30px;
+  background: #080808;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border-bottom: 1px solid var(--bw-gray);
+  position: relative;
+}
+
+.bw-container .jjk-dossier-status-item {
+  display: grid;
+  grid-template-columns: 40px 1fr 60px;
+  align-items: center;
+  gap: 10px;
+}
+
+.bw-container .jjk-dossier-status-label {
+  font-family: 'Share Tech Mono', monospace;
+  color: var(--bw-green);
+  font-size: 1em;
+  text-align: right;
+}
+
+.bw-container .jjk-dossier-status-bar-wrapper {
+  width: 100%; height: 12px;
+  background: #1a1a1a;
+  border: 1px solid var(--bw-green-dim);
+  transform: skewX(-10deg); /* Estilo tático inclinado */
+  overflow: hidden;
+}
+
+.bw-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
+
+/* HP e EA com o mesmo Verde Neon (Estilo monitor antigo) */
+.bw-container .jjk-dossier-hp-fill,
+.bw-container .jjk-dossier-ea-fill {
+  height: 100%;
+  background: var(--bw-green);
+  box-shadow: 0 0 10px var(--bw-green);
+  border-right: 2px solid #fff;
+}
+
+.bw-container .jjk-dossier-status-value {
+  font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.8em;
+  color: #fff; text-align: right;
+}
+
+/* CONTEÚDO */
+.bw-container .bw-content {
+  padding: 30px 40px;
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: #ccc;
+  text-align: justify;
+  background: rgba(0,0,0,0.5);
+}
+
+.bw-container .bw-content b {
+  color: var(--bw-green);
+  text-shadow: 0 0 3px var(--bw-green-dim);
+}
+
+.bw-container .bw-content i {
+  color: #fff;
+  font-family: 'Cinzel', serif;
+}
+
+/* ASSINATURA INJETADA */
+.bw-signature {
+  padding: 15px 40px 30px 40px;
+  text-align: right;
+  background: linear-gradient(to top, rgba(0, 255, 85, 0.05), transparent);
+}
+
+.bw-signature::after {
+  content: 'REKKEN KAGAMI'; /* NOME INJETADO */
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1.2em;
+  color: var(--bw-green);
+  text-shadow: 0 0 5px var(--bw-green);
+  letter-spacing: 1px;
+  border-bottom: 2px solid var(--bw-green);
+}
+
+@media (max-width: 600px) {
+  .bw-container .bw-header { padding: 20px; }
+  .bw-container .bw-content { padding: 20px; }
+}
