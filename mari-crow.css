@@ -1,174 +1,235 @@
-/* --- TEMPLATE: MARI MING --- */
-@import url('https://fonts.googleapis.com/css2?family=Rye&family=Roboto:wght@300;400;700&family=Montserrat:wght@400;600;800&display=swap');
+/* --- TEMPLATE: CROW'S GAMBIT (YIZHUO MING) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Nunito:wght@400;700&family=Permanent+Marker&display=swap');
 
 :root {
-  /* === PALETA MARI MING === */
-  --mari-bg: #050505;        /* Fundo Principal (Preto quase absoluto) */
-  --mari-bg-sec: #0a0a0a;    /* Fundo Secundário (Status/Extras) */
-  --mari-wine: #781414;      /* Cor Principal (Vinho) */
-  --mari-blood: #ff0033;     /* Cor de Destaque (Sangue) */
-  --mari-text: #bfbfbf;      /* Texto (Cinza Claro) */
-  --mari-border: #222222;    /* Bordas sutis */
-  --mari-shadow: rgba(0, 0, 0, 0.9);
+  --crow-bg: #080808;
+  --crow-panel: #111111;
+  --crow-blood: #781414; /* A cor vinho solicitada */
+  --crow-blood-light: #a31b1b;
+  --crow-text: #e0e0e0;
+  --crow-accent: #333;
 }
 
-/* --- ANIMAÇÕES --- */
-@keyframes crow-shimmer {
-  0% { background-position: 0 0; } 100% { background-position: 0 100%; }
-}
-@keyframes blood-pulse {
-  0% { box-shadow: 0 0 20px rgba(120, 20, 20, 0.2); border-color: var(--mari-wine); }
-  50% { box-shadow: 0 0 35px rgba(255, 0, 51, 0.4); border-color: var(--mari-blood); }
-  100% { box-shadow: 0 0 20px rgba(120, 20, 20, 0.2); border-color: var(--mari-wine); }
+/* Animação: Penas/Corvos caindo (Simulação via Gradiente) */
+@keyframes feather-fall {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 100%; }
 }
 
-/* --- CONTAINER PRINCIPAL --- */
-.amalgam-container {
-  box-sizing: border-box; max-width: 750px; width: 95%; margin: 60px auto;
-  background-color: var(--mari-bg);
-  color: var(--mari-text);
-  font-family: 'Roboto', sans-serif;
-  border: 1px solid var(--mari-wine); 
-  border-top: 4px solid var(--mari-wine); /* Topo mais grosso */
+/* Animação: Pulso Sombrio */
+@keyframes dark-pulse {
+  0% { box-shadow: 0 0 10px var(--crow-blood), inset 0 0 20px rgba(0,0,0,0.8); }
+  50% { box-shadow: 0 0 25px var(--crow-blood), inset 0 0 40px rgba(0,0,0,0.5); }
+  100% { box-shadow: 0 0 10px var(--crow-blood), inset 0 0 20px rgba(0,0,0,0.8); }
+}
+
+/* CONTAINER PRINCIPAL */
+.crow-container {
+  box-sizing: border-box;
+  max-width: 650px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--crow-bg);
+  /* Textura de fundo sutil */
+  background-image: 
+    linear-gradient(rgba(5,5,5,0.95), rgba(5,5,5,0.95)),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231a1a1a' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  border: 1px solid var(--crow-accent);
+  border-top: 5px solid var(--crow-blood);
   border-radius: 2px;
-  box-shadow: 
-    0 0 0 1px #000,
-    0 10px 50px var(--mari-shadow);
-  position: relative; overflow: hidden;
-  padding: 0; display: flex; flex-direction: column;
-}
-.amalgam-container * { box-sizing: border-box; margin: 0; padding: 0; }
-
-/* --- FUNDO ANIMADO (CORVOS) --- */
-.amalgam-flesh-bg {
-  position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  /* Textura de penas escuras */
-  background-image: url('https://i.imgur.com/4q2j3E1.png'); 
-  background-size: 400px;
-  opacity: 0.1;
-  animation: crow-shimmer 30s linear infinite;
+  color: var(--crow-text);
+  font-family: 'Nunito', sans-serif;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
 }
 
-/* --- HEADER --- */
-.amalgam-header {
-  position: relative; z-index: 2;
-  padding: 50px 20px 30px 20px; text-align: center;
-  background: linear-gradient(to bottom, #000, transparent);
-  border-bottom: 1px solid var(--mari-wine);
-}
-.amalgam-title {
-  font-family: 'Rye', serif; font-size: 2.5em; 
-  color: var(--mari-wine); margin: 0; text-transform: uppercase;
-  text-shadow: 2px 2px 0px #000; 
-  letter-spacing: 2px; font-weight: 400;
-}
-.amalgam-subtitle {
-  font-family: 'Montserrat', sans-serif; font-size: 0.8em; 
-  color: #666; margin-top: 8px; letter-spacing: 5px;
-  text-transform: uppercase; font-weight: 700;
+.crow-container * { box-sizing: border-box; }
+
+/* EFEITO DE CORVOS (Overlay Animado) */
+.crow-container::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: radial-gradient(circle at 50% 50%, transparent 80%, #000 120%);
+  pointer-events: none;
+  z-index: 5;
+  border: 1px solid var(--crow-blood);
+  animation: dark-pulse 4s infinite ease-in-out;
 }
 
-/* --- IMAGEM (YUMEKO) --- */
-.amalgam-image-wrapper {
-  position: relative; z-index: 2; padding: 30px; display: flex; justify-content: center;
-}
-.amalgam-image-frame {
-  width: 100%; height: 350px; position: relative; 
-  background: #000;
-  border: 1px solid var(--mari-wine);
-  box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
-  /* Clip-path para corte agressivo */
-  clip-path: polygon(5% 0, 100% 0, 100% 95%, 95% 100%, 0 100%, 0 5%);
-  animation: blood-pulse 4s infinite ease-in-out;
-}
-.amalgam-image-frame img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top;
-  filter: grayscale(80%) contrast(1.2) brightness(0.9); transition: 0.5s;
-}
-.amalgam-image-frame:hover img { filter: grayscale(0%) contrast(1.1); transform: scale(1.05); }
-
-/* --- STATUS (MANTENDO ESTRUTURA PARA JS) --- */
-.amalgam-stats {
-  padding: 20px 60px; 
-  display: flex; flex-direction: column; gap: 15px; 
-  position: relative; z-index: 2;
-  background: var(--mari-bg-sec);
-  border-top: 1px solid #222; border-bottom: 1px solid #222;
-}
-.amalgam-container .jjk-dossier-status-item {
-  display: grid; grid-template-columns: 40px 1fr 60px; align-items: center; gap: 15px;
-  background: transparent; border: none; margin: 0; padding: 0;
-}
-.amalgam-container .jjk-dossier-status-label { 
-  font-family: 'Rye', serif; font-size: 0.9em; 
-  color: var(--mari-wine) !important; text-align: right;
-}
-.amalgam-container .jjk-dossier-status-value { 
-  font-family: 'Montserrat', sans-serif; font-size: 0.8em; 
-  color: #666 !important; font-weight: 700; text-align: right; white-space: nowrap;
+/* HEADER & IMAGEM */
+.crow-header {
+  position: relative;
+  width: 100%;
+  height: 250px; /* Altura do Banner */
+  overflow: hidden;
+  border-bottom: 3px solid var(--crow-blood);
+  z-index: 1;
 }
 
-/* Moldura da Barra */
-.amalgam-container .jjk-dossier-status-bar-wrapper {
-  width: 100%; height: 8px; 
-  background: #111 !important; 
+.crow-header img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center; /* Foca no rosto da imagem */
+  filter: grayscale(80%) contrast(1.2) brightness(0.8);
+  transition: 0.5s ease;
+}
+
+.crow-container:hover .crow-header img {
+  filter: grayscale(0%) contrast(1.1);
+  transform: scale(1.05);
+}
+
+/* Título sobre a imagem */
+.crow-title-box {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(120, 20, 20, 0.9), transparent);
+  padding: 40px 20px 10px 20px;
+  text-align: right;
+}
+
+.crow-title {
+  font-family: 'Cinzel', serif;
+  font-size: 2em;
+  color: #fff;
+  text-shadow: 2px 2px 0 var(--crow-blood);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+}
+
+/* STATUS (Classes Obrigatórias JJK) */
+.crow-container .art-stats {
+  background: var(--crow-panel);
+  padding: 15px 25px;
+  border-bottom: 1px solid #222;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+}
+
+.crow-container .jjk-dossier-status-item {
+  display: grid;
+  grid-template-columns: 30px 1fr 70px; /* Ajuste layout */
+  align-items: center;
+  gap: 10px;
+}
+
+.crow-container .jjk-dossier-status-label {
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1em;
+  color: var(--crow-blood);
+  text-align: center;
+}
+
+.crow-container .jjk-dossier-status-bar-wrapper {
+  width: 100%;
+  height: 10px;
+  background: #222;
   border: 1px solid #333;
-  border-radius: 0; overflow: hidden;
+  border-radius: 0; /* Estilo quadrado/agressivo */
+  overflow: hidden;
 }
 
-/* Cores das Barras (Mari Style) */
-.amalgam-container .jjk-dossier-hp-fill { 
-  background: linear-gradient(90deg, #500, var(--mari-wine), var(--mari-blood)) !important; 
-  box-shadow: 0 0 10px var(--mari-wine) !important;
-}
-.amalgam-container .jjk-dossier-ea-fill { 
-  background: linear-gradient(90deg, #222, #555) !important; box-shadow: none !important;
+.crow-container .jjk-dossier-status-bar { width: 100%; height: 100%; background: transparent; border: none; }
+
+/* Cores das barras personalizadas */
+.crow-container .jjk-dossier-hp-fill {
+  height: 100%;
+  background: var(--crow-blood);
+  box-shadow: 0 0 10px var(--crow-blood);
+  width: 100%; /* Isso será controlado pelo JS, mas deixamos 100% pra visualização */
 }
 
-/* --- CONTEÚDO --- */
-.amalgam-content {
-  padding: 30px 60px; font-size: 1em; line-height: 1.8; 
-  text-align: justify; position: relative; z-index: 2; 
-  color: var(--mari-text); background: transparent;
-}
-.amalgam-content b, .amalgam-content strong { 
-  color: var(--mari-wine); font-family: 'Montserrat', sans-serif; 
-  font-weight: 700; 
-}
-.amalgam-content i { color: #888; font-family: serif; letter-spacing: 0.5px; }
-
-/* --- EXTRAS / CONSIDERAÇÕES --- */
-.amalgam-extras {
-  margin: 0 60px 40px 60px; padding: 20px;
-  background: #0f0505; /* Fundo levemente avermelhado */
-  border: 1px solid var(--mari-wine);
-  position: relative; z-index: 2; font-size: 0.9em;
-  color: #999;
-}
-.amalgam-extras::before {
-  content: 'NOTAS'; display: block; 
-  font-family: 'Rye', serif; font-size: 1em; color: var(--mari-wine);
-  margin-bottom: 10px; border-bottom: 1px dashed #333; padding-bottom: 5px;
+.crow-container .jjk-dossier-ea-fill {
+  height: 100%;
+  background: #444; /* Energia cinza/negra */
+  box-shadow: 0 0 5px #fff;
+  width: 100%;
 }
 
-/* --- RODAPÉ --- */
-.amalgam-footer {
-  padding: 20px 0; text-align: center;
-  position: relative; z-index: 2; background: #000; 
-  border-top: 1px solid var(--mari-wine);
+.crow-container .jjk-dossier-status-value {
+  font-family: 'Nunito', sans-serif;
+  font-weight: 700;
+  font-size: 0.8em;
+  color: #666;
+  text-align: right;
 }
-.amalgam-signature::after {
-  content: 'Mari Ming Onette';
-  font-family: 'Rye', serif; font-size: 1.2em; 
-  color: #444; 
-  letter-spacing: 3px; text-transform: uppercase;
-  transition: 0.3s;
+
+/* CONTEÚDO DO POST */
+.crow-content {
+  padding: 40px 40px;
+  font-size: 1.05em;
+  line-height: 1.8;
+  color: #ccc;
+  text-align: justify;
+  background: var(--crow-bg);
+  position: relative;
+  z-index: 2;
 }
-.amalgam-container:hover .amalgam-signature::after {
-  color: var(--mari-wine); text-shadow: 0 0 10px rgba(120,20,20,0.5);
+
+/* Formatação de texto rica */
+.crow-content b {
+  color: var(--crow-blood);
+  font-weight: 700;
+}
+
+.crow-content i {
+  color: #fff;
+  font-family: 'Playfair Display', serif; /* Se tiver disponível, ou fallback */
+  font-style: italic;
+}
+
+/* Citação / Fala */
+.crow-content blockquote {
+  border-left: 3px solid var(--crow-blood);
+  margin: 20px 0;
+  padding: 10px 20px;
+  background: rgba(120, 20, 20, 0.05);
+  font-style: italic;
+  color: var(--crow-blood-light);
+}
+
+/* ASSINATURA INJETADA */
+.crow-signature {
+  background: var(--crow-panel);
+  padding: 20px 40px;
+  text-align: right;
+  border-top: 1px solid var(--crow-blood);
+  position: relative;
+  z-index: 2;
+}
+
+.crow-signature::after {
+  content: 'Yizhuo Ming'; /* NOME INJETADO */
+  font-family: 'Permanent Marker', cursive;
+  font-size: 1.5em;
+  color: var(--crow-blood);
+  text-shadow: 0 0 5px rgba(120, 20, 20, 0.5);
+  display: block;
+}
+
+/* Pena decorativa animada (CSS Only) */
+.crow-decor {
+  position: absolute;
+  top: -20px; right: -20px;
+  width: 100px; height: 100px;
+  background: radial-gradient(ellipse at center, var(--crow-blood) 0%, transparent 70%);
+  opacity: 0.2;
+  border-radius: 50%;
+  filter: blur(20px);
+  z-index: 0;
+  animation: dark-pulse 3s infinite alternate;
 }
 
 @media (max-width: 600px) {
-  .amalgam-container { width: 100%; margin: 20px auto; border-width: 2px; }
-  .amalgam-content, .amalgam-stats, .amalgam-extras { padding-left: 20px; padding-right: 20px; margin-left: 0; margin-right: 0; }
+  .crow-header { height: 180px; }
+  .crow-content { padding: 20px; }
 }
