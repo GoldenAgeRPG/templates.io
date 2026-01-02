@@ -1,4 +1,4 @@
-/* --- TEMPLATE: GYARU MODE v5 (FINAL PHONE UI) --- */
+/* --- TEMPLATE: GYARU MODE vFINAL (PERFECT UI) --- */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&family=Pacifico&display=swap');
 
 /* --- VARIÁVEIS --- */
@@ -10,25 +10,30 @@
   --gy-pattern-col: #331a26;
   --gy-box-bg: rgba(20, 10, 15, 0.95);
   --gy-text: #fff;
-  --gy-accent-main: #ff3399; 
-  --gy-accent-sec: #fff200;
+  --gy-accent-main: #ff3399; /* Pink Neon */
+  --gy-accent-sec: #fff200;  /* Amarelo */
   --gy-lace-color: #1a0f14;
-  --gy-ui-color: #fff; /* Cor da bateria/hora */
+  --gy-ui-color: #fff;
+  --gy-note-bg: rgba(0,0,0,0.6); /* Fundo Notas Dark */
+  --gy-note-text: #aaa;
 }
 
-/* LÓGICA LIGHT MODE (Checkbox Hack) */
+/* LÓGICA LIGHT MODE */
 .gyaru-mode-toggle:checked ~ .gyaru-screen {
-  --gy-screen-bg: #ffe6f0; /* Rosa bem claro, não branco */
+  --gy-screen-bg: #ffe6f0;
   --gy-pattern-col: #ffcce0;
-  --gy-box-bg: rgba(255, 255, 255, 0.85);
-  --gy-text: #6b3e54; /* Texto Roxo Escuro para contraste */
+  --gy-box-bg: rgba(255, 255, 255, 0.90);
+  --gy-text: #6b3e54;
   --gy-accent-main: #ff66b3;
   --gy-accent-sec: #ffcc00;
   --gy-lace-color: #ffffff;
   --gy-ui-color: #ff66b3;
+  /* Ajuste pedido: Escurecer fundo da caixa de notas no modo claro */
+  --gy-note-bg: rgba(107, 62, 84, 0.15); 
+  --gy-note-text: #6b3e54;
 }
 
-/* Alterar textos do cabeçalho no Light Mode */
+/* Textos específicos Light Mode */
 .gyaru-mode-toggle:checked ~ .gyaru-screen .gyaru-mode-label::after { content: 'LIGHT'; color: #ff66b3; }
 .gyaru-mode-toggle:checked ~ .gyaru-screen .gyaru-header img { filter: contrast(1) brightness(1); }
 
@@ -38,23 +43,19 @@
   max-width: 580px; width: 95%; margin: 60px auto;
   background-color: var(--gy-case);
   border: 6px solid var(--gy-border);
-  /* Borda arredondada suave */
   border-radius: 50px; 
-  /* Espaço para a câmera (topo) e botão (base) */
-  padding: 50px 18px 80px 18px; 
-  box-shadow: 
-    inset 0 0 20px rgba(0,0,0,0.1),
-    0 20px 50px rgba(0,0,0,0.4);
+  /* Padding inferior aumentado para acomodar o botão mais baixo */
+  padding: 50px 18px 75px 18px; 
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.1), 0 20px 50px rgba(0,0,0,0.4);
   position: relative;
   font-family: 'Quicksand', sans-serif;
   color: var(--gy-text);
 }
 .gyaru-phone * { box-sizing: border-box; }
 
-/* Input Invisível */
 .gyaru-mode-toggle { display: none; }
 
-/* CÂMERA E ALTO-FALANTE (Físicos na borda superior) */
+/* Câmera */
 .gyaru-phone::before {
   content: ''; position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
   width: 80px; height: 8px; background: rgba(0,0,0,0.2); border-radius: 10px; z-index: 5;
@@ -64,9 +65,11 @@
   width: 10px; height: 10px; background: #333; border-radius: 50%; box-shadow: inset 0 0 3px rgba(255,255,255,0.3);
 }
 
-/* BOTÃO HOME (Físico na borda inferior) */
+/* BOTÃO HOME (Ajustado para baixo) */
 .gyaru-home-btn {
-  position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%);
+  position: absolute; 
+  bottom: 12px; /* Mais para baixo conforme pedido */
+  left: 50%; transform: translateX(-50%);
   width: 50px; height: 50px;
   background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.1) 100%);
   border-radius: 50%;
@@ -75,28 +78,22 @@
   box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
 }
 .gyaru-home-btn:hover { background: rgba(255,255,255,0.3); box-shadow: 0 0 15px #fff; }
-/* Quadrado dentro do botão */
 .gyaru-home-btn::after { 
   content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.5); border-radius: 4px;
+  width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.5); border-radius: 5px;
 }
 
 /* --- TELA --- */
 .gyaru-screen {
   background: var(--gy-screen-bg);
-  /* Padronagem */
   background-image: radial-gradient(var(--gy-pattern-col) 15%, transparent 16%), radial-gradient(var(--gy-pattern-col) 15%, transparent 16%);
   background-size: 30px 30px; background-position: 0 0, 15px 15px;
-  
   border: 2px solid #33222b;
-  height: 100%; /* Ocupa o espaço disponível dentro do padding */
-  overflow: hidden; position: relative;
-  transition: background 0.5s ease;
-  /* Canto da tela é menos arredondado que o celular */
-  border-radius: 5px; 
+  height: 100%; border-radius: 5px; 
+  overflow: hidden; position: relative; transition: background 0.5s ease;
 }
 
-/* --- BARRA DE STATUS (UI DO CELULAR) --- */
+/* UI BAR */
 .gyaru-status-bar {
   position: absolute; top: 0; left: 0; width: 100%; height: 25px;
   background: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent);
@@ -104,23 +101,16 @@
   display: flex; justify-content: space-between; align-items: center;
   font-size: 0.75em; font-weight: 700; color: var(--gy-ui-color);
 }
-.gyaru-status-bar::before { content: '20:00'; } /* Hora */
+.gyaru-status-bar::before { content: '20:00'; }
 .gyaru-status-bar::after { 
-  /* Ícone de Bateria CSS */
   content: ''; width: 20px; height: 10px; 
   border: 1px solid var(--gy-ui-color); background: linear-gradient(to right, var(--gy-ui-color) 70%, transparent 70%);
-  display: inline-block; position: relative;
+  display: inline-block;
 }
 
 /* HEADER */
-.gyaru-header {
-  position: relative; height: 280px;
-  border-bottom: 4px dashed var(--gy-border);
-}
-.gyaru-header img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top;
-  filter: contrast(1.1) brightness(0.9); transition: 0.5s;
-}
+.gyaru-header { position: relative; height: 280px; border-bottom: 4px dashed var(--gy-border); }
+.gyaru-header img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: contrast(1.1) brightness(0.9); transition: 0.5s; }
 
 /* RENDA */
 .gyaru-lace {
@@ -128,8 +118,7 @@
   background-color: var(--gy-lace-color);
   -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M0,0 C10,15 20,5 30,10 C40,15 50,5 60,10 C70,15 80,5 90,10 C100,15 110,5 120,10 L120,0 Z'/%3E%3C/svg%3E");
   mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M0,0 C10,15 20,5 30,10 C40,15 50,5 60,10 C70,15 80,5 90,10 C100,15 110,5 120,10 L120,0 Z'/%3E%3C/svg%3E");
-  mask-size: auto 100%; -webkit-mask-size: auto 100%;
-  z-index: 10; transition: background-color 0.5s;
+  mask-size: auto 100%; -webkit-mask-size: auto 100%; z-index: 10; transition: background-color 0.5s;
 }
 
 /* TÍTULOS */
@@ -150,7 +139,7 @@
 }
 .gyaru-mode-label::after { content: 'DARK'; }
 
-/* STATUS */
+/* STATUS (COM DEGRADÊ VIBRANTE) */
 .gyaru-stats-container { display: flex; gap: 15px; padding: 30px 20px 10px 20px; }
 .gyaru-stat-widget {
   flex: 1; background: rgba(0,0,0,0.3); border: 2px solid var(--gy-border);
@@ -159,8 +148,20 @@
 .gyaru-label { font-family: 'Fredoka One', cursive; color: var(--gy-case); font-size: 0.9em; }
 .gyaru-val { font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 0.9em; color: var(--gy-text); text-shadow: 0 0 5px var(--gy-accent-main); }
 .gyaru-bar-track { height: 14px; background: rgba(0,0,0,0.5); border-radius: 10px; border: 1px solid var(--gy-border); overflow: hidden; }
-.gyaru-hp-fill { height: 100%; background: var(--gy-accent-main); width: 0%; transition: width 0.5s; box-shadow: 0 0 10px var(--gy-accent-main); }
-.gyaru-ea-fill { height: 100%; background: var(--gy-accent-sec); width: 0%; transition: width 0.5s; box-shadow: 0 0 10px var(--gy-accent-sec); }
+
+/* Barras com Degradê Vibrante e Brilho */
+.gyaru-hp-fill { 
+  height: 100%; width: 0%; 
+  background: linear-gradient(90deg, #ff0080, #ff66b3); /* Degradê Rosa/Magenta */
+  box-shadow: 0 0 10px #ff0080;
+  transition: width 0.5s; 
+}
+.gyaru-ea-fill { 
+  height: 100%; width: 0%; 
+  background: linear-gradient(90deg, #ffaa00, #ffea00); /* Degradê Laranja/Amarelo */
+  box-shadow: 0 0 10px #ffaa00;
+  transition: width 0.5s; 
+}
 
 /* TEXTO */
 .gyaru-body {
@@ -171,18 +172,33 @@
   position: relative; z-index: 5; color: var(--gy-text);
   transition: background 0.5s, color 0.5s;
 }
+
+/* O AJUSTE PRINCIPAL: CAIXINHA DA PRIMEIRA FRASE (Outline Style) */
 .gyaru-body b, .gyaru-body strong {
-  color: var(--gy-screen-bg); background: var(--gy-case); padding: 0 5px; border-radius: 4px;
+  background: transparent; /* Sem fundo */
+  border: 2px solid var(--gy-accent-main); /* Borda da cor do tema */
+  color: var(--gy-accent-main); /* Texto da cor do tema */
+  padding: 3px 12px;
+  border-radius: 50px; /* Formato de Pílula */
+  font-weight: 700;
+  letter-spacing: 1px;
+  font-family: 'Quicksand', sans-serif;
+  display: inline-block; /* Garante o formato */
+  margin-bottom: 5px;
+  box-shadow: none;
 }
+
 .gyaru-body i, .gyaru-body em {
   color: var(--gy-accent-sec); font-family: 'Pacifico', cursive; font-size: 1.15em;
 }
 
-/* FOOTER (Womb) */
+/* FOOTER / CONSIDERAÇÕES */
 .gyaru-footer { padding: 0 20px 20px 20px; margin-top: 10px; margin-bottom: 20px; }
 .gyaru-notes {
-  background: rgba(0,0,0,0.5); border: 2px solid var(--gy-border);
-  border-radius: 15px; padding: 12px 15px; position: relative; font-size: 0.85em; color: #888;
+  background: var(--gy-note-bg); /* Variável ajustada para Dark/Light */
+  border: 2px solid var(--gy-border);
+  border-radius: 15px; padding: 12px 15px; position: relative; font-size: 0.85em; color: var(--gy-note-text);
+  transition: background 0.5s;
 }
 .gyaru-notes::before {
   content: 'MSG'; position: absolute; top: -10px; left: 15px;
@@ -191,51 +207,29 @@
   padding: 2px 8px; border-radius: 10px; transform: rotate(-3deg);
 }
 
-/* ASSINATURA STICKER (Posicionamento Absoluto na Tela) */
-/* Agora ela fica colada por cima de tudo, no canto inferior */
-.gyaru-signature {
-  position: absolute; bottom: 30px; right: 20px; z-index: 30;
-  transform: rotate(-10deg);
-}
+.gyaru-signature { position: absolute; bottom: 30px; right: 20px; z-index: 30; transform: rotate(-10deg); pointer-events: none; }
 .gyaru-signature::after {
   content: 'Kirari Hasui'; font-family: 'Pacifico', cursive; font-size: 1.5em;
   color: #fff; 
-  /* Efeito de Adesivo: Borda grossa e sombra */
-  text-shadow: 
-    -2px -2px 0 var(--gy-border),  
-    2px -2px 0 var(--gy-border),
-    -2px 2px 0 var(--gy-border),
-    2px 2px 0 var(--gy-border),
-    3px 3px 5px rgba(0,0,0,0.3);
-  background: var(--gy-border);
-  padding: 5px 15px;
-  border-radius: 50px;
-  border: 2px solid #fff;
+  text-shadow: -2px -2px 0 var(--gy-border), 2px -2px 0 var(--gy-border), -2px 2px 0 var(--gy-border), 2px 2px 0 var(--gy-border), 3px 3px 5px rgba(0,0,0,0.3);
+  background: var(--gy-border); padding: 5px 15px; border-radius: 50px; border: 2px solid #fff;
 }
 
-/* ADESIVOS (Stickers) - Ajuste de Posição na Moldura */
+/* ADESIVOS */
 .gyaru-sticker { position: absolute; z-index: 60; filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.3)); pointer-events: none; }
-/* Laço Decorativo (Substituindo Emoji) */
-.st-bow { 
-  top: 60px; left: -30px; width: 80px; height: 80px; z-index: 65; 
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23ff3399' d='M20,40 Q10,20 30,20 Q50,40 20,40 M80,40 Q90,20 70,20 Q50,40 80,40' /%3E%3Ccircle fill='%23fff' cx='50' cy='40' r='8' /%3E%3Cpath fill='none' stroke='%23ff3399' stroke-width='5' d='M40,50 L30,80 M60,50 L70,80' /%3E%3C/svg%3E");
-  background-size: contain; background-repeat: no-repeat;
-  animation: wiggle-bow 3s ease-in-out infinite;
-}
-
-/* Outros Stickers */
 .gyaru-deco-rabbit { width: 55px; height: 55px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath fill='%23fff' stroke='%23ff6bb3' stroke-width='2' d='M25,30 C15,30 10,20 10,15 C10,5 15,2 18,5 C20,7 22,15 25,15 C28,15 30,7 32,5 C35,2 40,5 40,15 C40,20 35,30 25,30 Z'/%3E%3Ccircle fill='%23ff9ec7' cx='18' cy='18' r='3'/%3E%3Ccircle fill='%23ff9ec7' cx='32' cy='18' r='3'/%3E%3Cpath fill='none' stroke='%23ff6bb3' stroke-width='2' d='M22,25 Q25,28 28,25'/%3E%3C/svg%3E"); background-size: contain; background-repeat: no-repeat; animation: float-bunny 4s ease-in-out infinite; }
 .gyaru-deco-star { width: 35px; height: 35px; background: var(--gy-accent-sec); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); animation: float-star 3s linear infinite; }
 
-/* Posicionamento dos Adesivos na MOLDURA (Fora da tela) */
-.st-r1 { top: -20px; left: 20px; } /* Coelho Topo Esq */
-.st-r2 { bottom: 100px; right: -25px; animation-delay: 1s; } /* Coelho Direita */
-.st-r3 { bottom: 20px; left: -25px; animation-delay: 2s; } /* Coelho Baixo Esq */
-.st-s1 { top: 150px; right: -15px; } /* Estrela */
-.st-s2 { bottom: 180px; left: -15px; background: #fff; } /* Estrela */
+.st-r1 { top: -25px; left: 20px; } .st-r2 { bottom: 120px; right: -30px; animation-delay: 1s; } .st-r3 { bottom: 20px; left: -25px; animation-delay: 2s; }
+.st-s1 { top: 60px; right: -18px; } .st-s2 { bottom: 50px; left: -18px; background: #fff; }
+.st-bow { 
+  top: 60px; left: -30px; width: 80px; height: 80px; z-index: 65; 
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23ff3399' d='M20,40 Q10,20 30,20 Q50,40 20,40 M80,40 Q90,20 70,20 Q50,40 80,40' /%3E%3Ccircle fill='%23fff' cx='50' cy='40' r='8' /%3E%3Cpath fill='none' stroke='%23ff3399' stroke-width='5' d='M40,50 L30,80 M60,50 L70,80' /%3E%3C/svg%3E");
+  background-size: contain; background-repeat: no-repeat; animation: wiggle-bow 3s ease-in-out infinite;
+}
 
 @keyframes float-bunny { 0%, 100% { transform: translateY(0) rotate(-15deg); } 50% { transform: translateY(-5px) rotate(-10deg); } }
 @keyframes float-star { 0%, 100% { transform: scale(1) rotate(0deg); } 50% { transform: scale(1.2) rotate(180deg); } }
 @keyframes wiggle-bow { 0%, 100% { transform: rotate(-20deg); } 50% { transform: rotate(-25deg) scale(1.05); } }
 
-@media (max-width: 600px) { .gyaru-phone { margin: 30px auto; border-radius: 35px; padding: 40px 10px 70px 10px; } .gyaru-stats-container { flex-direction: column; gap: 10px; } }
+@media (max-width: 600px) { .gyaru-phone { margin: 30px auto; border-radius: 35px; padding: 40px 10px 80px 10px; } .gyaru-stats-container { flex-direction: column; gap: 10px; } }
