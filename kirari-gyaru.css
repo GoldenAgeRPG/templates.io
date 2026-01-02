@@ -1,4 +1,4 @@
-/* --- TEMPLATE: GYARU MODE vFINAL 2 (ADJUSTED LAYOUT & SCREEN FX) --- */
+/* --- TEMPLATE: GYARU MODE --- */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&family=Pacifico&display=swap');
 
 /* --- VARIÁVEIS --- */
@@ -41,7 +41,6 @@
   background-color: var(--gy-case);
   border: 6px solid var(--gy-border);
   border-radius: 50px; 
-  /* Padding inferior reduzido para o botão menor */
   padding: 50px 18px 70px 18px; 
   box-shadow: inset 0 0 20px rgba(0,0,0,0.1), 0 20px 50px rgba(0,0,0,0.4);
   position: relative;
@@ -62,22 +61,22 @@
   width: 10px; height: 10px; background: #333; border-radius: 50%; box-shadow: inset 0 0 3px rgba(255,255,255,0.3);
 }
 
-/* BOTÃO HOME (TAMANHO REDUZIDO) */
+/* BOTÃO HOME (PEQUENO) */
 .gyaru-home-btn {
   position: absolute; 
   bottom: 18px;
   left: 50%; transform: translateX(-50%);
-  width: 28px; height: 28px; /* Reduzido pela metade aprox. */
+  width: 28px; height: 28px;
   background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.1) 100%);
   border-radius: 50%;
-  border: 2px solid rgba(255,255,255,0.4); /* Borda mais fina */
+  border: 2px solid rgba(255,255,255,0.4);
   cursor: pointer; z-index: 50; transition: 0.3s;
   box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
 }
 .gyaru-home-btn:hover { background: rgba(255,255,255,0.3); box-shadow: 0 0 10px #fff; }
 .gyaru-home-btn::after { 
   content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  width: 10px; height: 10px; /* Quadrado interno menor */
+  width: 10px; height: 10px;
   border: 1px solid rgba(255,255,255,0.5); border-radius: 3px;
 }
 
@@ -106,25 +105,9 @@
   display: inline-block;
 }
 
-/* HEADER & EFEITOS DE TELA DIGITAL */
+/* HEADER (LIMPO, SEM EFEITOS) */
 .gyaru-header { position: relative; height: 280px; border-bottom: 4px dashed var(--gy-border); overflow: hidden; }
 .gyaru-header img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: contrast(1.1) brightness(0.9); transition: 0.5s; }
-
-/* Efeito 1: Reflexo de Vidro (Gloss) */
-.gyaru-header::before {
-  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 40%);
-  pointer-events: none; z-index: 5;
-}
-/* Efeito 2: Scanline Digital Animada */
-@keyframes scanline-move { 0% { transform: translateY(-100%); } 100% { transform: translateY(280px); } }
-.gyaru-header::after {
-  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 30px;
-  background: linear-gradient(to bottom, transparent, var(--gy-accent-main), transparent);
-  opacity: 0.2; pointer-events: none; z-index: 6;
-  animation: scanline-move 4s linear infinite;
-}
-
 
 /* RENDA */
 .gyaru-lace {
@@ -201,8 +184,6 @@
   border: 2px solid var(--gy-border);
   border-radius: 15px; padding: 12px 15px; position: relative; font-size: 0.85em; color: var(--gy-note-text);
   transition: background 0.5s;
-  /* Adicionada margem direita para o texto não bater na assinatura */
-  margin-right: 20px; 
 }
 .gyaru-notes::before {
   content: 'MSG'; position: absolute; top: -10px; left: 15px;
@@ -211,11 +192,11 @@
   padding: 2px 8px; border-radius: 10px; transform: rotate(-3deg);
 }
 
-/* ASSINATURA (REPOSICIONADA) */
+/* ASSINATURA (REPOSICIONADA PARA FORA DA TELA) */
 .gyaru-signature { 
   position: absolute; 
-  bottom: 15px; /* Mais para baixo */
-  right: 10px; /* Mais para a direita */
+  bottom: -25px; /* Empurra para baixo, para a moldura */
+  right: -5px;   /* Empurra para a direita */
   z-index: 30; transform: rotate(-10deg); pointer-events: none; 
 }
 .gyaru-signature::after {
@@ -242,4 +223,4 @@
 @keyframes float-star { 0%, 100% { transform: scale(1) rotate(0deg); } 50% { transform: scale(1.2) rotate(180deg); } }
 @keyframes wiggle-bow { 0%, 100% { transform: rotate(-20deg); } 50% { transform: rotate(-25deg) scale(1.05); } }
 
-@media (max-width: 600px) { .gyaru-phone { margin: 30px auto; border-radius: 35px; padding: 40px 10px 80px 10px; } .gyaru-stats-container { flex-direction: column; gap: 10px; } }
+@media (max-width: 600px) { .gyaru-phone { margin: 30px auto; border-radius: 35px; padding: 40px 10px 90px 10px; } .gyaru-stats-container { flex-direction: column; gap: 10px; } }
