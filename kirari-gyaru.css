@@ -1,4 +1,4 @@
-/* --- TEMPLATE: GYARU MODE --- */
+/* --- TEMPLATE: GYARU MODE  --- */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&family=Pacifico&display=swap');
 
 /* --- VARIÁVEIS --- */
@@ -22,6 +22,9 @@
   --gy-hp-end: #ff66b3;
   --gy-ea-start: #ffaa00;
   --gy-ea-end: #ffea00;
+
+  /* COR DO TEXTO DOS STATUS (HP/EA) */
+  --gy-label-col: #ff9ec7; /* Rosa claro original */
 }
 
 /* LÓGICA LIGHT MODE */
@@ -42,6 +45,9 @@
   --gy-hp-end: #ff3399;
   --gy-ea-start: #cc8800;
   --gy-ea-end: #ffcc00;
+
+  /* COR DO TEXTO DOS STATUS NO LIGHT MODE */
+  --gy-label-col: #cc0066; /* Magenta escuro para leitura */
 }
 
 .gyaru-mode-toggle:checked ~ .gyaru-screen .gyaru-header img { filter: contrast(1) brightness(1); }
@@ -58,7 +64,7 @@
   position: relative;
   font-family: 'Quicksand', sans-serif;
   color: var(--gy-text);
-  overflow: visible; /* Permite adesivos externos */
+  overflow: visible; 
 }
 .gyaru-phone * { box-sizing: border-box; }
 
@@ -116,11 +122,10 @@
   display: inline-block;
 }
 
-/* HEADER (CORREÇÃO DE CORTE) */
+/* HEADER */
 .gyaru-header { 
   position: relative; height: 280px; 
   border-bottom: 4px dashed var(--gy-border); 
-  /* IMPORTANTE: Mudado para visible para não cortar o título */
   overflow: visible; 
   z-index: 10;
 }
@@ -135,13 +140,10 @@
   mask-size: auto 100%; -webkit-mask-size: auto 100%; z-index: 10; transition: background-color 0.5s;
 }
 
-/* TÍTULOS (POSIÇÃO CORRIGIDA) */
+/* TÍTULOS */
 .gyaru-title-container {
   position: absolute; 
-  /* Subimos de -25px para 10px (positivo) para ficar DENTRO da tela */
-  bottom: 10px; 
-  right: 15px; 
-  z-index: 15;
+  bottom: 10px; right: 15px; z-index: 15;
   display: flex; flex-direction: column; align-items: flex-end; transform: rotate(-2deg);
 }
 .gyaru-main-title {
@@ -162,11 +164,12 @@
   flex: 1; background: rgba(0,0,0,0.3); border: 2px solid var(--gy-border);
   border-radius: 20px; padding: 10px; display: flex; flex-direction: column; gap: 5px;
 }
-.gyaru-label { font-family: 'Fredoka One', cursive; color: var(--gy-case); font-size: 0.9em; }
+/* AQUI ESTÁ A MUDANÇA DA COR DA LETRA */
+.gyaru-label { font-family: 'Fredoka One', cursive; color: var(--gy-label-col); font-size: 0.9em; }
+
 .gyaru-val { font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 0.9em; color: var(--gy-text); text-shadow: 0 0 5px var(--gy-accent-main); }
 .gyaru-bar-track { height: 14px; background: rgba(0,0,0,0.5); border-radius: 10px; border: 1px solid var(--gy-border); overflow: hidden; }
 
-/* BARRAS ATUALIZADAS COM VARIÁVEIS */
 .gyaru-hp-fill { 
   height: 100%; width: 0%; 
   background: linear-gradient(90deg, var(--gy-hp-start), var(--gy-hp-end)); 
