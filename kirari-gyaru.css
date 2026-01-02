@@ -1,279 +1,229 @@
-/* --- TEMPLATE: GYARU MODE (KIRARI HASUI) --- */
-@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;700&family=Pacifico&display=swap');
+/* --- TEMPLATE: GYARU MODE v2 (KIRARI HASUI - RABBIT MAXIMALIST) --- */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&family=Pacifico&display=swap');
 
 :root {
-  --gy-pink: #ff85b3;       /* Rosa Capinha */
-  --gy-pink-dark: #ff5c99;  /* Rosa Borda */
-  --gy-bg: #fff0f5;         /* Fundo Tela (Lavender Blush) */
-  --gy-text: #5c3a4a;       /* Texto Marrom/Roxo Suave */
-  --gy-accent: #ffeb3b;     /* Amarelo Estrela */
-  --gy-lace: #ffffff;       /* Renda */
+  --gy-pink-case: #ff9ec7;   /* Rosa da Capinha mais vibrante */
+  --gy-pink-border: #ff6bb3; /* Borda da Capinha */
+  --gy-screen-bg: #fff5f9;   /* Fundo da tela super suave */
+  --gy-text-box: rgba(255, 255, 255, 0.92); /* Fundo do texto para leitura */
+  --gy-text: #6b3e54;        /* Cor do texto principal */
+  --gy-accent-hot: #d63384;  /* Pink Forte para números/destaques */
+  --gy-accent-yellow: #fff200; /* Amarelo marca-texto */
 }
 
-/* Animação: Brilho/Sparkle nos adesivos */
-@keyframes gy-sparkle {
-  0%, 100% { transform: scale(1) rotate(0deg); }
-  50% { transform: scale(1.1) rotate(5deg); }
-}
+/* Animações de "Bling" */
+@keyframes gy-wiggle { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
+@keyframes gy-pop { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
 
-/* Animação: Notificação pulando */
-@keyframes gy-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-3px); }
-}
-
-/* CONTAINER PRINCIPAL (O Celular) */
+/* O CELULAR (Mais largo) */
 .gyaru-phone {
   box-sizing: border-box;
-  max-width: 450px; /* Largura de celular */
+  max-width: 580px; /* AUMENTADO A LARGURA */
   width: 95%;
   margin: 60px auto;
-  
-  /* A Capinha Rosa */
-  background-color: var(--gy-pink);
-  border: 4px solid var(--gy-pink-dark);
-  border-radius: 40px; /* Cantos arredondados de celular */
-  padding: 15px 15px 25px 15px; /* Padding interno */
-  
-  /* Sombra 3D da capinha */
+  background-color: var(--gy-pink-case);
+  border: 5px solid var(--gy-pink-border);
+  border-radius: 45px;
+  padding: 18px;
   box-shadow: 
-    inset 0 2px 5px rgba(255,255,255,0.6),
-    inset 0 -2px 5px rgba(0,0,0,0.1),
-    0 15px 30px rgba(0,0,0,0.2);
-    
+    inset 0 4px 8px rgba(255,255,255,0.5),
+    0 15px 35px rgba(255, 105, 180, 0.3);
   position: relative;
   font-family: 'Quicksand', sans-serif;
   color: var(--gy-text);
 }
 .gyaru-phone * { box-sizing: border-box; }
 
-/* Câmera Frontal e Speaker */
+/* Câmera */
 .gyaru-phone::before {
-  content: '';
-  position: absolute;
-  top: 25px; left: 50%; transform: translateX(-50%);
-  width: 60px; height: 6px;
-  background: rgba(0,0,0,0.1);
-  border-radius: 10px;
-  z-index: 5;
-  pointer-events: none;
-}
-.gyaru-phone::after {
-  content: '';
-  position: absolute;
-  top: 22px; left: 35%; 
-  width: 8px; height: 8px;
-  background: #333;
-  border-radius: 50%;
-  z-index: 5;
-  pointer-events: none;
+  content: ''; position: absolute; top: 28px; left: 50%; transform: translateX(-50%);
+  width: 70px; height: 7px; background: rgba(0,0,0,0.15); border-radius: 10px; z-index: 5; pointer-events: none;
 }
 
-/* TELA DO CELULAR */
+/* TELA */
 .gyaru-screen {
-  background: var(--gy-bg);
-  /* Textura de fundo fofa (Pontilhada/Polka dot) */
-  background-image: radial-gradient(#ffcce0 20%, transparent 20%);
-  background-size: 20px 20px;
-  
-  border-radius: 30px;
-  border: 2px solid #fff;
+  background: var(--gy-screen-bg);
+  /* Padrão de fundo muito sutil para não atrapalhar */
+  background-image: radial-gradient(#ffdbe9 10%, transparent 10%);
+  background-size: 25px 25px;
+  border-radius: 35px;
+  border: 3px solid #fff;
   overflow: hidden;
   position: relative;
-  min-height: 500px;
 }
 
-/* --- CABEÇALHO (BANNER) --- */
+/* HEADER & BANNER */
 .gyaru-header {
   position: relative;
-  height: 250px;
-  border-bottom: 4px dashed #fff; /* Costura branca */
+  height: 280px; /* Um pouco mais alto */
+  border-bottom: 5px dotted #fff;
 }
-
 .gyaru-header img {
   width: 100%; height: 100%;
-  object-fit: cover;
-  transition: 0.3s;
+  object-fit: cover; object-position: top;
 }
 
-/* Título Sobreposto (Estilo Sticker) */
-.gyaru-title-box {
+/* TÍTULO E SUBTÍTULO (Novo arranjo) */
+.gyaru-title-container {
   position: absolute;
-  bottom: -15px; right: 10px;
-  background: #fff;
-  padding: 5px 15px;
-  border-radius: 20px;
-  border: 2px solid var(--gy-pink-dark);
-  transform: rotate(-3deg);
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
-  z-index: 10;
-}
-
-.gyaru-title {
-  font-family: 'Fredoka One', cursive; /* Fonte gordinha */
-  color: var(--gy-pink-dark);
-  font-size: 1.5em;
-  margin: 0;
-  text-transform: uppercase;
-  text-shadow: 2px 2px 0 #fff;
-  -webkit-text-stroke: 1px var(--gy-text);
-}
-
-/* --- DECORAÇÃO (Renda e Laços - CSS Only) --- */
-.gyaru-lace-deco {
-  position: absolute;
-  top: 245px; left: 0; width: 100%; height: 20px;
-  background: radial-gradient(circle, #fff 50%, transparent 60%);
-  background-size: 20px 20px;
-  background-position: center bottom;
-  z-index: 5;
-}
-
-/* STATUS (Estilo App de Jogo) */
-.gyaru-stats {
-  padding: 25px 20px 10px 20px;
-  background: rgba(255,255,255,0.8);
-  margin: 10px;
-  border-radius: 15px;
-  border: 2px solid #ffccdd;
-}
-
-.gyaru-stat-row {
-  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
-}
-
-.gyaru-label {
-  font-family: 'Fredoka One', cursive;
-  color: var(--gy-pink-dark);
-  font-size: 0.9em; width: 30px;
-}
-
-.gyaru-bar-track {
-  flex-grow: 1; height: 12px;
-  background: #ffe6ee;
-  border-radius: 10px;
-  border: 1px solid #ffb3d9;
-  overflow: hidden;
-  position: relative;
-}
-
-/* Barras coloridas */
-.gyaru-hp-fill {
-  height: 100%; width: 0%;
-  background: linear-gradient(90deg, #ff66aa, #ff99cc); /* Gradiente Rosa */
-  border-radius: 10px;
-  transition: width 0.5s ease;
-}
-.gyaru-ea-fill {
-  height: 100%; width: 0%;
-  background: linear-gradient(90deg, #ffcc00, #ffe066); /* Gradiente Amarelo/Dourado */
-  border-radius: 10px;
-  transition: width 0.5s ease;
-}
-
-.gyaru-val {
-  font-family: 'Quicksand', sans-serif; font-weight: 700;
-  font-size: 0.8em; color: var(--gy-text); min-width: 60px; text-align: right;
-}
-
-/* CONTEÚDO (Texto) */
-.gyaru-body {
-  padding: 10px 25px 30px 25px;
-  font-size: 1em;
-  line-height: 1.6;
-  text-align: justify;
-  position: relative;
-}
-
-.gyaru-body b, .gyaru-body strong {
-  color: var(--gy-pink-dark);
-  background: #fff;
-  padding: 0 4px;
-  border-radius: 4px;
-  box-shadow: 2px 2px 0 #ffccdd;
-}
-
-.gyaru-body i, .gyaru-body em {
-  color: #ff8fab;
-  font-family: 'Pacifico', cursive;
-  font-size: 1.1em;
-}
-
-/* --- RODAPÉ: WOMB E ASSINATURA --- */
-.gyaru-footer {
-  padding: 0 15px 15px 15px;
-  margin-top: 10px;
-}
-
-/* Campo "Womb" -> NOTIFICATION */
-.gyaru-notes {
-  background: #fff;
-  border: 2px solid var(--gy-text);
-  border-radius: 10px;
-  padding: 10px 15px;
-  position: relative;
-  font-size: 0.85em;
-  color: #666;
-  animation: gy-bounce 3s infinite ease-in-out;
-}
-.gyaru-notes::before {
-  content: '❤️ NEW MESSAGE';
-  position: absolute; top: -12px; left: 10px;
-  background: var(--gy-pink-dark);
-  color: #fff;
-  font-family: 'Fredoka One', cursive;
-  font-size: 0.8em;
-  padding: 2px 8px;
-  border-radius: 10px;
+  bottom: -25px; right: 15px;
+  z-index: 15;
+  display: flex; flex-direction: column; align-items: flex-end;
   transform: rotate(-2deg);
 }
 
-/* ASSINATURA INJETADA (Sticker Style) */
-.gyaru-signature {
-  text-align: right;
-  margin-top: 15px;
-  margin-right: 10px;
+.gyaru-main-title {
+  font-family: 'Fredoka One', cursive;
+  color: #fff;
+  font-size: 2em; margin: 0;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 0 var(--gy-pink-border);
+  -webkit-text-stroke: 2px var(--gy-pink-border);
+  line-height: 1;
 }
 
+.gyaru-sub-title {
+  background: var(--gy-accent-yellow);
+  color: var(--gy-accent-hot);
+  font-family: 'Quicksand', sans-serif; font-weight: 700;
+  font-size: 0.85em;
+  padding: 3px 10px;
+  border-radius: 12px;
+  border: 2px solid var(--gy-accent-hot);
+  margin-top: -5px;
+  margin-right: 5px;
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+}
+
+/* RENDA DECORATIVA */
+.gyaru-lace {
+  position: absolute; top: 275px; left: 0; width: 100%; height: 25px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath fill='%23ffffff' d='M0,0 C10,15 20,5 30,10 C40,15 50,5 60,10 C70,15 80,5 90,10 C100,15 110,5 120,10 L120,0 Z'/%3E%3C/svg%3E") repeat-x;
+  background-size: auto 100%; z-index: 10;
+}
+
+/* --- STATUS REDESENHADOS (Widgets separados) --- */
+.gyaru-stats-container {
+  display: flex;
+  gap: 15px;
+  padding: 25px 20px 10px 20px;
+}
+
+.gyaru-stat-widget {
+  flex: 1; /* Ocupam espaço igual */
+  background: #fff;
+  border: 3px solid #ffcce6;
+  border-radius: 20px;
+  padding: 10px;
+  box-shadow: 3px 3px 0 #ffcce6;
+  display: flex; flex-direction: column; gap: 5px;
+}
+
+.gyaru-stat-header {
+  display: flex; justify-content: space-between; align-items: center;
+}
+.gyaru-label {
+  font-family: 'Fredoka One', cursive; color: var(--gy-pink-border); font-size: 0.9em;
+}
+/* Números com nova cor vibrante */
+.gyaru-val {
+  font-family: 'Quicksand', sans-serif; font-weight: 700;
+  font-size: 0.9em; color: var(--gy-accent-hot);
+}
+
+.gyaru-bar-track {
+  height: 14px; background: #ffe6f2;
+  border-radius: 10px; border: 2px solid #ffb3d9;
+  overflow: hidden;
+}
+.gyaru-hp-fill {
+  height: 100%; background: linear-gradient(90deg, #ff66b3, #ff3385);
+  border-radius: 10px; transition: width 0.5s ease;
+}
+.gyaru-ea-fill {
+  height: 100%; background: linear-gradient(90deg, #ffd700, #ffaa00);
+  border-radius: 10px; transition: width 0.5s ease;
+}
+
+/* --- CONTEÚDO (Fundo limpo) --- */
+.gyaru-body {
+  margin: 15px 20px;
+  padding: 20px;
+  /* BOX BRANCO LIMPO PARA O TEXTO */
+  background: var(--gy-text-box);
+  border-radius: 20px;
+  border: 2px dashed #ffcce6;
+  
+  font-size: 1em; line-height: 1.7; text-align: justify;
+  position: relative; z-index: 5;
+}
+
+.gyaru-body b, .gyaru-body strong {
+  color: var(--gy-accent-hot); background: #fff2f8;
+  padding: 0 5px; border-radius: 5px; border: 1px solid var(--gy-pink-border);
+}
+.gyaru-body i, .gyaru-body em {
+  color: var(--gy-pink-border); font-family: 'Pacifico', cursive; font-size: 1.15em;
+}
+
+/* FOOTER */
+.gyaru-footer { padding: 0 20px 20px 20px; margin-top: 10px; }
+.gyaru-notes {
+  background: #fff; border: 3px solid var(--gy-pink-border);
+  border-radius: 15px; padding: 12px 15px;
+  position: relative; font-size: 0.85em; color: #777;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+}
+.gyaru-notes::before {
+  content: '💖 NEW MSG'; position: absolute; top: -14px; left: 15px;
+  background: var(--gy-accent-hot); color: #fff;
+  font-family: 'Fredoka One', cursive; font-size: 0.75em;
+  padding: 3px 10px; border-radius: 12px; transform: rotate(-3deg);
+  border: 2px solid #fff;
+}
+
+/* Assinatura Sticker */
+.gyaru-signature { text-align: right; margin-top: 20px; margin-right: 10px; }
 .gyaru-signature::after {
-  content: 'Kirari Hasui';
-  font-family: 'Pacifico', cursive;
-  font-size: 1.6em;
-  color: var(--gy-pink-dark);
-  text-shadow: 2px 2px 0 #fff;
-  transform: rotate(-5deg);
-  display: inline-block;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='20' viewBox='0 0 100 20'%3E%3Cpath fill='none' stroke='%23ff99cc' stroke-width='2' d='M0,10 Q25,20 50,10 T100,10' /%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: bottom;
+  content: 'Kirari Hasui'; font-family: 'Pacifico', cursive; font-size: 1.8em;
+  color: #fff; -webkit-text-stroke: 1px var(--gy-accent-hot);
+  text-shadow: 3px 3px 0 var(--gy-pink-border);
+  transform: rotate(-4deg); display: inline-block;
 }
 
-/* --- STICKERS DECORATIVOS (O "Maximalismo") --- */
+/* --- ADESIVOS MAXIMALISTAS (Stickers & Rabbits) --- */
+.gyaru-sticker { position: absolute; z-index: 20; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.15)); }
+
+/* Coelhos (SVG Data URI) */
+.gyaru-deco-rabbit {
+  width: 50px; height: 50px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath fill='%23fff' stroke='%23ff6bb3' stroke-width='2' d='M25,30 C15,30 10,20 10,15 C10,5 15,2 18,5 C20,7 22,15 25,15 C28,15 30,7 32,5 C35,2 40,5 40,15 C40,20 35,30 25,30 Z'/%3E%3Ccircle fill='%23ff9ec7' cx='18' cy='18' r='3'/%3E%3Ccircle fill='%23ff9ec7' cx='32' cy='18' r='3'/%3E%3Cpath fill='none' stroke='%23ff6bb3' stroke-width='2' d='M22,25 Q25,28 28,25'/%3E%3C/svg%3E");
+  background-size: contain; background-repeat: no-repeat;
+}
+
+/* Estrelas e Outros */
 .gyaru-deco-star {
-  position: absolute;
-  width: 30px; height: 30px;
-  background: var(--gy-accent);
+  width: 35px; height: 35px; background: var(--gy-accent-yellow);
   clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  z-index: 20;
-  animation: gy-sparkle 2s infinite ease-in-out;
-  filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.1));
+  animation: gy-pop 2s infinite ease-in-out;
+}
+.gyaru-deco-heart {
+  width: 30px; height: 30px; background: var(--gy-accent-hot);
+  clip-path: path('M15,28 C15,28 30,15 30,9 C30,4 26,0 21,0 C18,0 15,3 15,3 C15,3 12,0 9,0 C4,0 0,4 0,9 C0,15 15,28 15,28 Z');
+  animation: gy-wiggle 3s infinite ease-in-out;
 }
 
-/* Posicionamento dos Adesivos */
-.sticker-1 { top: 20px; left: -15px; width: 50px; height: 50px; background: #ff4d4d; transform: rotate(-15deg); }
-.sticker-2 { bottom: 80px; right: -10px; width: 40px; height: 40px; background: #55ddff; transform: rotate(20deg); animation-delay: 1s; }
-.sticker-3 { top: 230px; right: 10px; width: 25px; height: 25px; background: #ff99cc; z-index: 15; }
+/* Posicionamento dos Adesivos (Espalhados na moldura) */
+.st-r1 { top: -20px; left: 10px; transform: rotate(-15deg); width: 60px; height: 60px; } /* Coelho Topo Esq */
+.st-r2 { bottom: 120px; right: -25px; transform: rotate(20deg); width: 55px; height: 55px; } /* Coelho Direita */
+.st-r3 { bottom: -15px; left: 30%; transform: rotate(5deg); } /* Coelho Baixo */
 
-/* Laço (CSS Shape) */
-.gyaru-deco-bow {
-  position: absolute;
-  top: -15px; right: -15px;
-  font-size: 3em;
-  z-index: 20;
-  filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.1));
-  transform: rotate(15deg);
-}
+.st-s1 { top: 50px; right: -15px; } /* Estrela Direita */
+.st-s2 { bottom: 40px; left: -15px; background: #ff9ec7; } /* Estrela Rosa Esquerda */
+.st-h1 { top: -10px; right: 40%; } /* Coração Topo */
+.st-bow { top: 180px; left: -20px; font-size: 3em; z-index: 25; transform: rotate(-20deg); }
 
-@media (max-width: 500px) {
-  .gyaru-phone { margin: 20px auto; border-radius: 30px; }
+@media (max-width: 600px) {
+  .gyaru-phone { margin: 30px auto; border-radius: 35px; }
+  .gyaru-stats-container { flex-direction: column; gap: 10px; }
 }
