@@ -1,33 +1,46 @@
-/* --- TEMPLATE: GYARU MODE v3 (DARK JIRAI KEI EDITION) --- */
+/* --- TEMPLATE: GYARU MODE v4 (TOGGLE EDITION) --- */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&family=Pacifico&display=swap');
 
+/* --- VARIÁVEIS (PADRÃO: DARK MODE / JIRAI KEI) --- */
 :root {
-  /* Paleta Dark Gyaru / Jirai Kei */
-  --gy-case: #ff9ec7;       /* Capinha continua Rosa */
-  --gy-border: #ff6bb3;     
-  --gy-screen-bg: #1a0f14;  /* Fundo da tela ESCURO (Preto/Roxo) */
-  --gy-box-bg: rgba(20, 10, 15, 0.95); /* Box de texto escuro */
-  --gy-text: #ffd1e8;       /* Texto Rosa Claro */
-  --gy-accent-hot: #ff3399; /* Neon Pink */
-  --gy-accent-pop: #fff200; /* Amarelo */
+  --gy-case: #ff9ec7;
+  --gy-border: #ff6bb3;
+  
+  /* Cores Dinâmicas (Mudarão ao clicar) */
+  --gy-screen-bg: #1a0f14;
+  --gy-pattern-color: #331a26;
+  --gy-box-bg: rgba(20, 10, 15, 0.95);
+  --gy-text: #fff;
+  --gy-accent-main: #ff3399; /* Pink Neon */
+  --gy-accent-sec: #fff200;  /* Amarelo */
+  --gy-lace-color: #1a0f14;  /* Renda Escura */
+  --gy-lace-opacity: 1;
 }
 
-/* --- ANIMAÇÕES DECORATIVAS --- */
-@keyframes float-bunny { 0%, 100% { transform: translateY(0) rotate(-15deg); } 50% { transform: translateY(-5px) rotate(-10deg); } }
-@keyframes float-star { 0%, 100% { transform: scale(1) rotate(0deg); } 50% { transform: scale(1.2) rotate(180deg); } }
-@keyframes wiggle-bow { 0%, 100% { transform: rotate(-20deg); } 50% { transform: rotate(-25deg) scale(1.05); } }
-@keyframes screen-glow { 0%, 100% { box-shadow: inset 0 0 10px rgba(0,0,0,0.5); } 50% { box-shadow: inset 0 0 20px rgba(255, 51, 153, 0.1); } }
+/* --- LÓGICA DO TOGGLE (CHECKBOX HACK) --- */
+/* Quando o input escondido estiver marcado (:checked), mude as variáveis para LIGHT MODE */
+.gyaru-mode-toggle:checked ~ .gyaru-screen {
+  --gy-screen-bg: #fff5f9;
+  --gy-pattern-color: #ffdbe9;
+  --gy-box-bg: rgba(255, 255, 255, 0.95);
+  --gy-text: #6b3e54;
+  --gy-accent-main: #ff66b3; /* Rosa Suave */
+  --gy-accent-sec: #ffcc00;  /* Dourado */
+  --gy-lace-color: #ffffff;  /* Renda Branca */
+}
 
-/* O CELULAR */
+/* Alterar textos específicos no Light Mode */
+.gyaru-mode-toggle:checked ~ .gyaru-screen .gyaru-mode-label::after { content: 'LIGHT'; color: #ff66b3; }
+.gyaru-mode-toggle:checked ~ .gyaru-screen .gyaru-header img { filter: contrast(1) brightness(1); }
+
+/* --- ESTRUTURA --- */
+
 .gyaru-phone {
   box-sizing: border-box;
-  max-width: 580px;
-  width: 95%;
-  margin: 60px auto;
+  max-width: 580px; width: 95%; margin: 60px auto;
   background-color: var(--gy-case);
   border: 5px solid var(--gy-border);
-  border-radius: 45px;
-  padding: 18px;
+  border-radius: 45px; padding: 18px 18px 60px 18px; /* Padding extra embaixo pro botão */
   box-shadow: 0 20px 50px rgba(0,0,0,0.4);
   position: relative;
   font-family: 'Quicksand', sans-serif;
@@ -35,164 +48,141 @@
 }
 .gyaru-phone * { box-sizing: border-box; }
 
+/* Input Invisível (O Segredo) */
+.gyaru-mode-toggle { display: none; }
+
 /* Câmera */
 .gyaru-phone::before {
   content: ''; position: absolute; top: 28px; left: 50%; transform: translateX(-50%);
   width: 70px; height: 7px; background: rgba(0,0,0,0.2); border-radius: 10px; z-index: 5; pointer-events: none;
 }
 
-/* TELA (Dark Mode Nativo) */
+/* BOTÃO HOME (O Gatilho) */
+.gyaru-home-btn {
+  position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%);
+  width: 45px; height: 45px;
+  background: rgba(0,0,0,0.15);
+  border-radius: 50%;
+  border: 2px solid rgba(255,255,255,0.3);
+  cursor: pointer; /* Mãozinha de clique */
+  z-index: 50;
+  transition: 0.3s;
+}
+.gyaru-home-btn:hover { background: rgba(255,255,255,0.4); box-shadow: 0 0 10px #fff; }
+.gyaru-home-btn::after { /* Quadrado dentro do botão */
+  content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 15px; height: 15px; border: 2px solid rgba(255,255,255,0.6); border-radius: 4px;
+}
+
+/* TELA */
 .gyaru-screen {
   background: var(--gy-screen-bg);
-  /* Padronagem sutil de corações no fundo escuro */
-  background-image: radial-gradient(#331a26 15%, transparent 16%), radial-gradient(#331a26 15%, transparent 16%);
-  background-size: 30px 30px;
-  background-position: 0 0, 15px 15px;
+  /* Padronagem */
+  background-image: radial-gradient(var(--gy-pattern-color) 15%, transparent 16%), radial-gradient(var(--gy-pattern-color) 15%, transparent 16%);
+  background-size: 30px 30px; background-position: 0 0, 15px 15px;
   
-  border-radius: 35px;
-  border: 2px solid #33222b;
-  overflow: hidden;
-  position: relative;
-  animation: screen-glow 4s infinite;
+  border-radius: 35px; border: 2px solid #33222b;
+  overflow: hidden; position: relative;
+  transition: background 0.5s ease; /* Transição suave de cor */
 }
 
 /* HEADER */
 .gyaru-header {
-  position: relative;
-  height: 280px;
+  position: relative; height: 280px;
   border-bottom: 4px dashed var(--gy-border);
 }
 .gyaru-header img {
   width: 100%; height: 100%; object-fit: cover; object-position: top;
-  filter: contrast(1.1) brightness(0.9); /* Ajuste para o modo escuro */
+  filter: contrast(1.1) brightness(0.9); transition: 0.5s;
 }
 
-/* TÍTULOS */
-.gyaru-title-container {
-  position: absolute; bottom: -25px; right: 15px; z-index: 15;
-  display: flex; flex-direction: column; align-items: flex-end;
-  transform: rotate(-2deg);
-}
-
-.gyaru-main-title {
-  font-family: 'Fredoka One', cursive; color: #fff;
-  font-size: 2.2em; margin: 0; text-transform: uppercase;
-  text-shadow: 3px 3px 0 #000, 0 0 10px var(--gy-accent-hot);
-  -webkit-text-stroke: 2px var(--gy-border); line-height: 1;
-}
-
-.gyaru-sub-title {
-  background: #000; color: var(--gy-accent-pop);
-  font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 0.85em;
-  padding: 4px 12px; border-radius: 12px;
-  border: 2px solid var(--gy-accent-pop);
-  margin-top: -5px; margin-right: 5px;
-}
-
-/* RENDA (Invertida para branco para contrastar no escuro) */
+/* RENDA (Usa Mask para mudar de cor via background-color) */
 .gyaru-lace {
   position: absolute; top: 276px; left: 0; width: 100%; height: 25px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath fill='%231a0f14' d='M0,0 C10,15 20,5 30,10 C40,15 50,5 60,10 C70,15 80,5 90,10 C100,15 110,5 120,10 L120,0 Z'/%3E%3C/svg%3E") repeat-x;
-  background-size: auto 100%; z-index: 10;
+  background-color: var(--gy-lace-color); /* A cor muda aqui */
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M0,0 C10,15 20,5 30,10 C40,15 50,5 60,10 C70,15 80,5 90,10 C100,15 110,5 120,10 L120,0 Z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath d='M0,0 C10,15 20,5 30,10 C40,15 50,5 60,10 C70,15 80,5 90,10 C100,15 110,5 120,10 L120,0 Z'/%3E%3C/svg%3E");
+  -webkit-mask-size: auto 100%; mask-size: auto 100%;
+  z-index: 10; transition: background-color 0.5s;
 }
 
-/* WIDGETS DE STATUS (Dark) */
+/* TITULOS */
+.gyaru-title-container {
+  position: absolute; bottom: -25px; right: 15px; z-index: 15;
+  display: flex; flex-direction: column; align-items: flex-end; transform: rotate(-2deg);
+}
+.gyaru-main-title {
+  font-family: 'Fredoka One', cursive; color: #fff; font-size: 2.2em; margin: 0;
+  text-shadow: 3px 3px 0 #000, 0 0 10px var(--gy-accent-main);
+  -webkit-text-stroke: 2px var(--gy-border); line-height: 1;
+}
+.gyaru-sub-title {
+  background: #000; color: var(--gy-accent-sec);
+  font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 0.85em;
+  padding: 4px 12px; border-radius: 12px; border: 2px solid var(--gy-accent-sec);
+  margin-top: -5px; margin-right: 5px;
+}
+.gyaru-mode-label::after { content: 'DARK'; } /* Texto do subtitulo muda com CSS */
+
+/* STATUS */
 .gyaru-stats-container { display: flex; gap: 15px; padding: 30px 20px 10px 20px; }
-
 .gyaru-stat-widget {
-  flex: 1;
-  background: #2b1a22; /* Widget escuro */
-  border: 2px solid var(--gy-border);
-  border-radius: 20px; padding: 10px;
-  box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
-  display: flex; flex-direction: column; gap: 5px;
+  flex: 1; background: rgba(0,0,0,0.3); border: 2px solid var(--gy-border);
+  border-radius: 20px; padding: 10px; display: flex; flex-direction: column; gap: 5px;
 }
-
 .gyaru-label { font-family: 'Fredoka One', cursive; color: var(--gy-case); font-size: 0.9em; }
-.gyaru-val { font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 0.9em; color: #fff; text-shadow: 0 0 5px var(--gy-accent-hot); }
+.gyaru-val { font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 0.9em; color: var(--gy-text); text-shadow: 0 0 5px var(--gy-accent-main); }
+.gyaru-bar-track { height: 14px; background: rgba(0,0,0,0.5); border-radius: 10px; border: 1px solid var(--gy-border); overflow: hidden; }
+.gyaru-hp-fill { height: 100%; background: var(--gy-accent-main); width: 0%; transition: width 0.5s, background 0.5s; box-shadow: 0 0 10px var(--gy-accent-main); }
+.gyaru-ea-fill { height: 100%; background: var(--gy-accent-sec); width: 0%; transition: width 0.5s, background 0.5s; box-shadow: 0 0 10px var(--gy-accent-sec); }
 
-.gyaru-bar-track {
-  height: 14px; background: #11080d; border-radius: 10px; border: 1px solid #442233; overflow: hidden;
-}
-.gyaru-hp-fill { height: 100%; background: linear-gradient(90deg, #ff0066, #ff66b3); width: 0%; transition: width 0.5s; box-shadow: 0 0 10px #ff0066; }
-.gyaru-ea-fill { height: 100%; background: linear-gradient(90deg, #ffcc00, #ffe066); width: 0%; transition: width 0.5s; box-shadow: 0 0 10px #ffcc00; }
-
-/* TEXTO (Dark Mode) */
+/* TEXTO */
 .gyaru-body {
   margin: 15px 20px; padding: 20px;
-  background: var(--gy-box-bg); /* Fundo quase preto */
-  border-radius: 20px;
-  border: 1px dashed var(--gy-border);
+  background: var(--gy-box-bg);
+  border-radius: 20px; border: 1px dashed var(--gy-border);
   font-size: 1em; line-height: 1.7; text-align: justify;
-  position: relative; z-index: 5;
-  color: #fff; /* Texto Branco */
+  position: relative; z-index: 5; color: var(--gy-text);
+  transition: background 0.5s, color 0.5s;
 }
-
 .gyaru-body b, .gyaru-body strong {
-  color: var(--gy-screen-bg); background: var(--gy-case);
-  padding: 0 5px; border-radius: 4px; font-weight: 700;
+  color: var(--gy-screen-bg); background: var(--gy-case); padding: 0 5px; border-radius: 4px;
 }
 .gyaru-body i, .gyaru-body em {
-  color: var(--gy-accent-pop); font-family: 'Pacifico', cursive; font-size: 1.15em;
+  color: var(--gy-accent-sec); font-family: 'Pacifico', cursive; font-size: 1.15em;
 }
 
 /* FOOTER */
 .gyaru-footer { padding: 0 20px 20px 20px; margin-top: 10px; }
 .gyaru-notes {
-  background: #000; border: 2px solid var(--gy-border);
-  border-radius: 15px; padding: 12px 15px;
-  position: relative; font-size: 0.85em; color: #aaa;
+  background: rgba(0,0,0,0.5); border: 2px solid var(--gy-border);
+  border-radius: 15px; padding: 12px 15px; position: relative; font-size: 0.85em; color: #888;
 }
 .gyaru-notes::before {
-  content: '☠️ DARK MSG'; position: absolute; top: -14px; left: 15px;
-  background: #000; color: var(--gy-border);
+  content: 'MSG'; position: absolute; top: -10px; left: 15px;
+  background: var(--gy-border); color: #fff;
   font-family: 'Fredoka One', cursive; font-size: 0.75em;
-  padding: 3px 10px; border-radius: 12px; transform: rotate(-3deg);
-  border: 1px solid var(--gy-border);
+  padding: 2px 8px; border-radius: 10px; transform: rotate(-3deg);
 }
 
 .gyaru-signature { text-align: right; margin-top: 20px; margin-right: 10px; }
 .gyaru-signature::after {
   content: 'Kirari Hasui'; font-family: 'Pacifico', cursive; font-size: 1.8em;
-  color: #fff; text-shadow: 0 0 5px var(--gy-accent-hot), 2px 2px 0 #000;
+  color: var(--gy-text); text-shadow: 2px 2px 0 var(--gy-accent-main);
   transform: rotate(-4deg); display: inline-block;
 }
 
-/* --- ADESIVOS ANIMADOS --- */
-.gyaru-sticker { position: absolute; z-index: 20; filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.3)); }
+/* ADESIVOS (Stickers) */
+.gyaru-sticker { position: absolute; z-index: 20; filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.3)); pointer-events: none; }
+/* Animações mantidas do v3 */
+@keyframes float-bunny { 0%, 100% { transform: translateY(0) rotate(-15deg); } 50% { transform: translateY(-5px) rotate(-10deg); } }
+@keyframes float-star { 0%, 100% { transform: scale(1) rotate(0deg); } 50% { transform: scale(1.2) rotate(180deg); } }
+@keyframes wiggle-bow { 0%, 100% { transform: rotate(-20deg); } 50% { transform: rotate(-25deg) scale(1.05); } }
 
-/* Coelhos (SVG) */
-.gyaru-deco-rabbit {
-  width: 55px; height: 55px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath fill='%23fff' stroke='%23ff6bb3' stroke-width='2' d='M25,30 C15,30 10,20 10,15 C10,5 15,2 18,5 C20,7 22,15 25,15 C28,15 30,7 32,5 C35,2 40,5 40,15 C40,20 35,30 25,30 Z'/%3E%3Ccircle fill='%23ff9ec7' cx='18' cy='18' r='3'/%3E%3Ccircle fill='%23ff9ec7' cx='32' cy='18' r='3'/%3E%3Cpath fill='none' stroke='%23ff6bb3' stroke-width='2' d='M22,25 Q25,28 28,25'/%3E%3C/svg%3E");
-  background-size: contain; background-repeat: no-repeat;
-  /* Animação de flutuar */
-  animation: float-bunny 4s ease-in-out infinite;
-}
-
-/* Estrelas */
-.gyaru-deco-star {
-  width: 35px; height: 35px; background: var(--gy-accent-pop);
-  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  animation: float-star 3s linear infinite;
-}
-
-/* Coração */
-.gyaru-deco-heart {
-  width: 30px; height: 30px; background: var(--gy-accent-hot);
-  clip-path: path('M15,28 C15,28 30,15 30,9 C30,4 26,0 21,0 C18,0 15,3 15,3 C15,3 12,0 9,0 C4,0 0,4 0,9 C0,15 15,28 15,28 Z');
-  animation: float-star 2s ease-in-out infinite alternate;
-}
-
-/* Posicionamento e Delays */
-.st-r1 { top: -25px; left: 10px; animation-delay: 0s; }
-.st-r2 { bottom: 120px; right: -30px; animation-delay: 1s; }
-.st-r3 { bottom: -20px; left: 30%; animation-delay: 2s; }
-.st-s1 { top: 60px; right: -18px; animation-duration: 5s; }
-.st-s2 { bottom: 50px; left: -18px; background: #fff; animation-duration: 4s; }
+.gyaru-deco-rabbit { width: 55px; height: 55px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath fill='%23fff' stroke='%23ff6bb3' stroke-width='2' d='M25,30 C15,30 10,20 10,15 C10,5 15,2 18,5 C20,7 22,15 25,15 C28,15 30,7 32,5 C35,2 40,5 40,15 C40,20 35,30 25,30 Z'/%3E%3Ccircle fill='%23ff9ec7' cx='18' cy='18' r='3'/%3E%3Ccircle fill='%23ff9ec7' cx='32' cy='18' r='3'/%3E%3Cpath fill='none' stroke='%23ff6bb3' stroke-width='2' d='M22,25 Q25,28 28,25'/%3E%3C/svg%3E"); background-size: contain; background-repeat: no-repeat; animation: float-bunny 4s ease-in-out infinite; }
+.gyaru-deco-star { width: 35px; height: 35px; background: var(--gy-accent-sec); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); animation: float-star 3s linear infinite; }
+.st-r1 { top: -25px; left: 10px; } .st-r2 { bottom: 120px; right: -30px; animation-delay: 1s; } .st-r3 { bottom: -20px; left: 30%; animation-delay: 2s; }
+.st-s1 { top: 60px; right: -18px; } .st-s2 { bottom: 50px; left: -18px; background: #fff; }
 .st-bow { top: 190px; left: -25px; font-size: 3.5em; z-index: 25; animation: wiggle-bow 3s ease-in-out infinite; }
 
-@media (max-width: 600px) {
-  .gyaru-phone { margin: 30px auto; border-radius: 35px; }
-  .gyaru-stats-container { flex-direction: column; gap: 10px; }
-}
+@media (max-width: 600px) { .gyaru-phone { margin: 30px auto; border-radius: 35px; } .gyaru-stats-container { flex-direction: column; gap: 10px; } }
