@@ -1,24 +1,24 @@
-/* --- TEMPLATE: GYARU MODE vFINAL (SIGNATURE ON FRAME) --- */
+/* --- TEMPLATE: GYARU MODE vFINAL (COMPLETO) --- */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&family=Pacifico&display=swap');
 
 /* --- VARIÁVEIS --- */
 :root {
-  /* DARK MODE (Padrão) */
-  --gy-case: #ff9ec7;
-  --gy-border: #ff6bb3;
-  --gy-screen-bg: #1a0f14;
+  /* DARK MODE (Padrão - Jirai Kei) */
+  --gy-case: #ff9ec7;       /* Rosa da Capinha */
+  --gy-border: #ff6bb3;     /* Borda da Capinha */
+  --gy-screen-bg: #1a0f14;  /* Fundo da Tela */
   --gy-pattern-col: #331a26;
   --gy-box-bg: rgba(20, 10, 15, 0.95);
   --gy-text: #fff;
-  --gy-accent-main: #ff3399; 
-  --gy-accent-sec: #fff200;
+  --gy-accent-main: #ff3399; /* Pink Neon */
+  --gy-accent-sec: #fff200;  /* Amarelo */
   --gy-lace-color: #1a0f14;
   --gy-ui-color: #fff;
   --gy-note-bg: rgba(0,0,0,0.6);
   --gy-note-text: #aaa;
 }
 
-/* LÓGICA LIGHT MODE */
+/* LÓGICA LIGHT MODE (Ao clicar no botão) */
 .gyaru-mode-toggle:checked ~ .gyaru-screen {
   --gy-screen-bg: #ffe6f0;
   --gy-pattern-col: #ffcce0;
@@ -41,13 +41,14 @@
   background-color: var(--gy-case);
   border: 6px solid var(--gy-border);
   border-radius: 50px; 
+  /* Padding ajustado para o botão pequeno */
   padding: 50px 18px 70px 18px; 
   box-shadow: inset 0 0 20px rgba(0,0,0,0.1), 0 20px 50px rgba(0,0,0,0.4);
   position: relative;
   font-family: 'Quicksand', sans-serif;
   color: var(--gy-text);
-  /* Overflow Visible para o adesivo sair pra fora se precisar */
-  overflow: visible; 
+  /* Permite que adesivos saiam da borda */
+  overflow: visible;
 }
 .gyaru-phone * { box-sizing: border-box; }
 
@@ -63,7 +64,7 @@
   width: 10px; height: 10px; background: #333; border-radius: 50%; box-shadow: inset 0 0 3px rgba(255,255,255,0.3);
 }
 
-/* BOTÃO HOME (PEQUENO) */
+/* BOTÃO HOME (Pequeno) */
 .gyaru-home-btn {
   position: absolute; 
   bottom: 18px;
@@ -90,11 +91,10 @@
   border: 2px solid #33222b;
   height: 100%; border-radius: 5px; 
   overflow: hidden; position: relative; transition: background 0.5s ease;
-  /* A tela fica abaixo dos adesivos da moldura */
-  z-index: 1; 
+  z-index: 1;
 }
 
-/* UI BAR */
+/* UI BAR (Relógio) */
 .gyaru-status-bar {
   position: absolute; top: 0; left: 0; width: 100%; height: 25px;
   background: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent);
@@ -109,7 +109,7 @@
   display: inline-block;
 }
 
-/* HEADER */
+/* HEADER (Limpo) */
 .gyaru-header { position: relative; height: 280px; border-bottom: 4px dashed var(--gy-border); overflow: hidden; }
 .gyaru-header img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: contrast(1.1) brightness(0.9); transition: 0.5s; }
 
@@ -171,7 +171,7 @@
 .gyaru-notes {
   background: var(--gy-note-bg); border: 2px solid var(--gy-border);
   border-radius: 15px; padding: 12px 15px; position: relative; font-size: 0.85em; color: var(--gy-note-text);
-  transition: background 0.5s;
+  transition: background 0.5s; margin-right: 20px; 
 }
 .gyaru-notes::before {
   content: 'MSG'; position: absolute; top: -10px; left: 15px;
@@ -180,30 +180,22 @@
   padding: 2px 8px; border-radius: 10px; transform: rotate(-3deg);
 }
 
-/* ASSINATURA STICKER (NA MOLDURA) */
+/* ASSINATURA (NA MOLDURA - POSIÇÃO CORRIGIDA) */
 .gyaru-signature { 
   position: absolute; 
-  /* Posicionada na moldura (queixo do celular), acima da tela */
-  bottom: 85px; 
-  right: 25px; 
-  z-index: 60; /* Mesmo nível dos stickers, acima da tela */
-  transform: rotate(-15deg); 
-  pointer-events: none; 
+  /* Ajustado para ficar aninhado no canto inferior direito */
+  bottom: 35px;
+  right: 35px;
+  z-index: 60; /* Fica acima da tela e da moldura */
+  transform: rotate(-15deg);
+  pointer-events: none;
 }
 .gyaru-signature::after {
   content: 'Kirari Hasui'; font-family: 'Pacifico', cursive; font-size: 1.6em;
   color: #fff; 
-  /* Estilo Adesivo: Borda grossa sólida */
-  text-shadow: 
-    -2px -2px 0 var(--gy-border), 
-    2px -2px 0 var(--gy-border), 
-    -2px 2px 0 var(--gy-border), 
-    2px 2px 0 var(--gy-border);
-  background: var(--gy-border); 
-  padding: 5px 15px; 
-  border-radius: 50px; 
-  border: 3px solid #fff; /* Borda branca do adesivo */
-  box-shadow: 4px 4px 5px rgba(0,0,0,0.3); /* Sombra 3D */
+  text-shadow: -2px -2px 0 var(--gy-border), 2px -2px 0 var(--gy-border), -2px 2px 0 var(--gy-border), 2px 2px 0 var(--gy-border);
+  background: var(--gy-border); padding: 5px 15px; border-radius: 50px; border: 3px solid #fff;
+  box-shadow: 4px 4px 5px rgba(0,0,0,0.3);
 }
 
 /* ADESIVOS */
