@@ -1,0 +1,231 @@
+/* --- TEMPLATE: JADE SOUL (KIYORA AMAMIYA) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@300;600&family=Cinzel+Decorative:wght@700&display=swap');
+
+:root {
+  --jade-deep: #081c15;    /* Verde Quase Preto */
+  --jade-main: #1b4332;    /* Verde Floresta */
+  --jade-light: #40916c;   /* Verde Jade Claro */
+  --jade-mist: #d8f3dc;    /* Branco Esverdeado */
+  --jade-gold: #d4af37;    /* Ouro */
+  --jade-accent: #ff6b6b;  /* Vermelho para o Selo/Carimbo */
+}
+
+/* Animação: Brilho passando no Jade */
+@keyframes jade-sheen {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Animação: Fumaça Espiritual */
+@keyframes jade-smoke {
+  0% { opacity: 0.3; transform: translateY(0) scale(1); }
+  50% { opacity: 0.6; transform: translateY(-10px) scale(1.05); }
+  100% { opacity: 0.3; transform: translateY(0) scale(1); }
+}
+
+/* CONTAINER PRINCIPAL */
+.jade-tablet {
+  box-sizing: border-box;
+  max-width: 600px;
+  width: 95%;
+  margin: 50px auto;
+  
+  /* Fundo Texturizado (Mármore Escuro) */
+  background-color: var(--jade-deep);
+  background-image: url("https://www.transparenttextures.com/patterns/black-mamba.png");
+  
+  /* Borda Dupla: Jade e Ouro */
+  border: 1px solid var(--jade-gold);
+  outline: 8px solid var(--jade-main);
+  outline-offset: 5px;
+  
+  /* Formato: Cantos cortados (Octogonal suave) */
+  border-radius: 2px;
+  box-shadow: 
+    0 0 20px rgba(8, 28, 21, 0.8),
+    inset 0 0 50px rgba(0,0,0,0.8);
+    
+  position: relative;
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--jade-mist);
+  overflow: hidden;
+}
+.jade-tablet * { box-sizing: border-box; }
+
+/* Efeito de Fumaça no Fundo */
+.jade-tablet::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: radial-gradient(circle at 50% 80%, rgba(64, 145, 108, 0.15), transparent 70%);
+  animation: jade-smoke 8s infinite ease-in-out;
+  pointer-events: none; z-index: 0;
+}
+
+/* HEADER & BANNER */
+.jade-header {
+  position: relative;
+  height: 300px;
+  border-bottom: 2px solid var(--jade-gold);
+  z-index: 1;
+}
+
+.jade-header img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center;
+  filter: contrast(1.1) saturate(0.9);
+  /* Máscara suave embaixo */
+  mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+}
+
+/* Moldura interna do banner (Ouro) */
+.jade-header::after {
+  content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
+  border: 1px solid rgba(212, 175, 55, 0.5);
+  pointer-events: none;
+}
+
+/* TÍTULOS */
+.jade-title-wrap {
+  position: absolute; bottom: 20px; left: 0; width: 100%;
+  text-align: center;
+  text-shadow: 0 2px 10px #000;
+}
+
+.jade-main-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 2.8em; color: var(--jade-mist);
+  margin: 0; letter-spacing: 2px;
+  background: linear-gradient(to bottom, #fff, #a6c0b3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 5px rgba(64,145,108,0.5));
+}
+
+.jade-sub-title {
+  font-family: 'Montserrat', sans-serif;
+  color: var(--jade-gold); font-size: 0.75em;
+  text-transform: uppercase; letter-spacing: 6px;
+  margin-top: 5px; display: block;
+}
+
+/* STATUS (Cristalinos) */
+.jade-stats {
+  padding: 20px 50px 10px 50px;
+  position: relative; z-index: 2;
+  display: flex; gap: 20px;
+}
+
+.jade-stat-col {
+  flex: 1; display: flex; flex-direction: column; gap: 5px;
+}
+
+.jade-stat-info {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  font-family: 'Montserrat', sans-serif; font-size: 0.8em;
+}
+.jade-label { color: var(--jade-gold); font-weight: 600; }
+.jade-val { color: var(--jade-mist); font-weight: 300; }
+
+.jade-track {
+  height: 6px; width: 100%;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+}
+
+.jade-hp-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--jade-main), var(--jade-light));
+  box-shadow: 0 0 10px var(--jade-light);
+  transition: width 0.6s ease;
+}
+.jade-ea-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, #b8860b, var(--jade-gold));
+  box-shadow: 0 0 10px var(--jade-gold);
+  transition: width 0.6s ease;
+}
+
+/* TEXTO / CONTEÚDO */
+.jade-content {
+  padding: 30px 50px;
+  font-size: 1.15em;
+  line-height: 1.9;
+  text-align: justify;
+  color: #cce3de;
+  position: relative; z-index: 2;
+}
+
+/* Detalhes do texto */
+.jade-content b, .jade-content strong {
+  color: var(--jade-light);
+  font-family: 'Cinzel Decorative', serif; font-weight: 700;
+}
+.jade-content i, .jade-content em {
+  color: var(--jade-gold);
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  opacity: 0.9;
+}
+
+/* Divisor Kintsugi (Rachadura Dourada) */
+.jade-hr {
+  border: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--jade-gold), transparent);
+  margin: 30px 0; opacity: 0.6;
+}
+
+/* FOOTER & ASSINATURA */
+.jade-footer {
+  margin: 0 50px 40px 50px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+  display: flex; justify-content: space-between; align-items: center;
+  position: relative; z-index: 2;
+}
+
+/* Campo de Notas */
+.jade-notes {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75em; color: #6b9080;
+  max-width: 60%;
+}
+
+/* ASSINATURA (Selo Hanko) */
+.jade-seal {
+  width: 80px; height: 80px;
+  border: 3px solid var(--jade-accent);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--jade-accent);
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: 0.9em;
+  text-align: center;
+  line-height: 1.2;
+  text-transform: uppercase;
+  /* Textura de tinta falhada */
+  mask-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
+  -webkit-mask-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
+  transform: rotate(-5deg);
+  opacity: 0.8;
+  transition: 0.3s;
+}
+.jade-seal:hover { opacity: 1; transform: rotate(0deg) scale(1.05); }
+
+/* Pequenos detalhes nos cantos do container */
+.jade-corner {
+  position: absolute; width: 15px; height: 15px;
+  border: 2px solid var(--jade-gold);
+  z-index: 10;
+}
+.tl { top: 10px; left: 10px; border-right: 0; border-bottom: 0; }
+.tr { top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
+.bl { bottom: 10px; left: 10px; border-right: 0; border-top: 0; }
+.br { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
+
+@media (max-width: 600px) {
+  .jade-tablet { width: 100%; margin: 20px 0; border: none; outline: none; }
+  .jade-content, .jade-footer, .jade-stats { padding-left: 20px; padding-right: 20px; }
+  .jade-stats { flex-direction: column; gap: 10px; }
+  .jade-seal { width: 60px; height: 60px; font-size: 0.7em; }
+}
