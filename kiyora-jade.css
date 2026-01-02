@@ -1,4 +1,4 @@
-/* --- TEMPLATE: JADE SOUL (FIXED SIGNATURE) --- */
+/* --- TEMPLATE: JADE SOUL (HARMONIZED) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@300;600&family=Cinzel+Decorative:wght@700&display=swap');
 
 :root {
@@ -7,7 +7,7 @@
   --jade-light: #40916c;
   --jade-mist: #d8f3dc;
   --jade-gold: #d4af37;
-  --jade-accent: #e63946; /* Vermelho Sangue para o Selo */
+  /* --jade-accent removed as it is no longer used */
 }
 
 /* Animação Fumaça */
@@ -28,8 +28,8 @@
   border-radius: 2px;
   box-shadow: 0 0 20px rgba(8, 28, 21, 0.8), inset 0 0 50px rgba(0,0,0,0.8);
   position: relative; font-family: 'Cormorant Garamond', serif; color: var(--jade-mist);
-  overflow: visible; /* Importante para detalhes */
-  padding-bottom: 30px; /* Espaço extra no final */
+  overflow: visible;
+  padding-bottom: 30px;
 }
 .jade-tablet * { box-sizing: border-box; }
 
@@ -77,13 +77,18 @@
   font-size: 1.15em; line-height: 1.9; text-align: justify; color: #cce3de;
   position: relative; z-index: 2;
 }
-.jade-narration b, .jade-narration strong { color: var(--jade-light); font-family: 'Cinzel Decorative', serif; font-weight: 700; }
+/* Negrito ajustado para usar a mesma fonte do corpo, mantendo o tamanho harmônico */
+.jade-narration b, .jade-narration strong { 
+    color: var(--jade-light); 
+    font-family: 'Cormorant Garamond', serif; 
+    font-weight: 700;
+    font-size: inherit; 
+}
 .jade-narration i, .jade-narration em { color: var(--jade-gold); font-family: 'Cormorant Garamond', serif; font-style: italic; opacity: 0.9; }
-.jade-hr { border: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--jade-gold), transparent); margin: 20px 0; opacity: 0.6; }
 
 /* CONSIDERAÇÕES */
 .jade-notes-container {
-  margin: 30px 50px 40px 50px; /* Margem inferior aumentada para não bater no selo */
+  margin: 30px 50px 40px 50px;
   padding: 25px 30px;
   background: rgba(8, 28, 21, 0.7);
   border: 1px solid var(--jade-gold);
@@ -104,51 +109,24 @@
   position: relative; z-index: 1;
 }
 
-/* --- ASSINATURA TIPO SELO (HANKO) - CORRIGIDA --- */
+/* --- ASSINATURA HARMONIZADA (SEM ANIMAÇÃO/CARIMBO) --- */
 .jade-signature {
   position: absolute;
-  bottom: 20px;
-  right: 40px;
-  z-index: 100; /* Garante que fique acima de tudo */
-  
-  width: 50px; 
-  height: 50px;
-  
-  transform: rotate(-8deg);
-  opacity: 0.9;
-  transition: transform 0.3s;
+  bottom: 15px;
+  right: 35px;
+  z-index: 10;
   pointer-events: none;
+  /* Estilo de texto sutil e dourado */
+  font-family: 'Cinzel Decorative', serif;
+  color: var(--jade-gold);
+  font-size: 0.7em;
+  letter-spacing: 1px;
+  opacity: 0.8;
+  text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
 }
 
 .jade-signature::after {
-  content: 'Kiyora\A Amamiya'; 
-  white-space: pre;
-  
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
-  text-align: center;
-  width: 100%; height: 100%;
-  
-  border: 2px solid var(--jade-accent);
-  border-radius: 4px;
-  color: var(--jade-accent);
-  
-  font-family: 'Cinzel Decorative', serif;
-  font-weight: 700;
-  font-size: 0.55em;
-  line-height: 1.1;
-  text-transform: uppercase;
-  
-  /* Estilos para visibilidade sem imagem externa */
-  background: rgba(230, 57, 70, 0.1); 
-  box-shadow: inset 0 0 5px rgba(230, 57, 70, 0.2);
-}
-
-/* Efeito Hover */
-.jade-tablet:hover .jade-signature {
-  transform: rotate(0deg) scale(1.1);
-  opacity: 1;
+  content: 'Kiyora Amamiya'; 
 }
 
 /* Cantos */
@@ -160,5 +138,5 @@
   .jade-tablet { width: 100%; margin: 20px 0; border: none; outline: none; }
   .jade-narration, .jade-notes-container, .jade-stats { padding-left: 20px; padding-right: 20px; }
   .jade-stats { flex-direction: column; gap: 10px; }
-  .jade-signature { bottom: 15px; right: 20px; }
+  .jade-signature { bottom: 10px; right: 20px; }
 }
