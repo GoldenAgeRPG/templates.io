@@ -1,0 +1,279 @@
+/* --- TEMPLATE: GYARU MODE (KIRARI HASUI) --- */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@400;700&family=Pacifico&display=swap');
+
+:root {
+  --gy-pink: #ff85b3;       /* Rosa Capinha */
+  --gy-pink-dark: #ff5c99;  /* Rosa Borda */
+  --gy-bg: #fff0f5;         /* Fundo Tela (Lavender Blush) */
+  --gy-text: #5c3a4a;       /* Texto Marrom/Roxo Suave */
+  --gy-accent: #ffeb3b;     /* Amarelo Estrela */
+  --gy-lace: #ffffff;       /* Renda */
+}
+
+/* Animação: Brilho/Sparkle nos adesivos */
+@keyframes gy-sparkle {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.1) rotate(5deg); }
+}
+
+/* Animação: Notificação pulando */
+@keyframes gy-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
+}
+
+/* CONTAINER PRINCIPAL (O Celular) */
+.gyaru-phone {
+  box-sizing: border-box;
+  max-width: 450px; /* Largura de celular */
+  width: 95%;
+  margin: 60px auto;
+  
+  /* A Capinha Rosa */
+  background-color: var(--gy-pink);
+  border: 4px solid var(--gy-pink-dark);
+  border-radius: 40px; /* Cantos arredondados de celular */
+  padding: 15px 15px 25px 15px; /* Padding interno */
+  
+  /* Sombra 3D da capinha */
+  box-shadow: 
+    inset 0 2px 5px rgba(255,255,255,0.6),
+    inset 0 -2px 5px rgba(0,0,0,0.1),
+    0 15px 30px rgba(0,0,0,0.2);
+    
+  position: relative;
+  font-family: 'Quicksand', sans-serif;
+  color: var(--gy-text);
+}
+.gyaru-phone * { box-sizing: border-box; }
+
+/* Câmera Frontal e Speaker */
+.gyaru-phone::before {
+  content: '';
+  position: absolute;
+  top: 25px; left: 50%; transform: translateX(-50%);
+  width: 60px; height: 6px;
+  background: rgba(0,0,0,0.1);
+  border-radius: 10px;
+  z-index: 5;
+  pointer-events: none;
+}
+.gyaru-phone::after {
+  content: '';
+  position: absolute;
+  top: 22px; left: 35%; 
+  width: 8px; height: 8px;
+  background: #333;
+  border-radius: 50%;
+  z-index: 5;
+  pointer-events: none;
+}
+
+/* TELA DO CELULAR */
+.gyaru-screen {
+  background: var(--gy-bg);
+  /* Textura de fundo fofa (Pontilhada/Polka dot) */
+  background-image: radial-gradient(#ffcce0 20%, transparent 20%);
+  background-size: 20px 20px;
+  
+  border-radius: 30px;
+  border: 2px solid #fff;
+  overflow: hidden;
+  position: relative;
+  min-height: 500px;
+}
+
+/* --- CABEÇALHO (BANNER) --- */
+.gyaru-header {
+  position: relative;
+  height: 250px;
+  border-bottom: 4px dashed #fff; /* Costura branca */
+}
+
+.gyaru-header img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: 0.3s;
+}
+
+/* Título Sobreposto (Estilo Sticker) */
+.gyaru-title-box {
+  position: absolute;
+  bottom: -15px; right: 10px;
+  background: #fff;
+  padding: 5px 15px;
+  border-radius: 20px;
+  border: 2px solid var(--gy-pink-dark);
+  transform: rotate(-3deg);
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+  z-index: 10;
+}
+
+.gyaru-title {
+  font-family: 'Fredoka One', cursive; /* Fonte gordinha */
+  color: var(--gy-pink-dark);
+  font-size: 1.5em;
+  margin: 0;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 0 #fff;
+  -webkit-text-stroke: 1px var(--gy-text);
+}
+
+/* --- DECORAÇÃO (Renda e Laços - CSS Only) --- */
+.gyaru-lace-deco {
+  position: absolute;
+  top: 245px; left: 0; width: 100%; height: 20px;
+  background: radial-gradient(circle, #fff 50%, transparent 60%);
+  background-size: 20px 20px;
+  background-position: center bottom;
+  z-index: 5;
+}
+
+/* STATUS (Estilo App de Jogo) */
+.gyaru-stats {
+  padding: 25px 20px 10px 20px;
+  background: rgba(255,255,255,0.8);
+  margin: 10px;
+  border-radius: 15px;
+  border: 2px solid #ffccdd;
+}
+
+.gyaru-stat-row {
+  display: flex; align-items: center; gap: 8px; margin-bottom: 8px;
+}
+
+.gyaru-label {
+  font-family: 'Fredoka One', cursive;
+  color: var(--gy-pink-dark);
+  font-size: 0.9em; width: 30px;
+}
+
+.gyaru-bar-track {
+  flex-grow: 1; height: 12px;
+  background: #ffe6ee;
+  border-radius: 10px;
+  border: 1px solid #ffb3d9;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Barras coloridas */
+.gyaru-hp-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, #ff66aa, #ff99cc); /* Gradiente Rosa */
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+.gyaru-ea-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, #ffcc00, #ffe066); /* Gradiente Amarelo/Dourado */
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.gyaru-val {
+  font-family: 'Quicksand', sans-serif; font-weight: 700;
+  font-size: 0.8em; color: var(--gy-text); min-width: 60px; text-align: right;
+}
+
+/* CONTEÚDO (Texto) */
+.gyaru-body {
+  padding: 10px 25px 30px 25px;
+  font-size: 1em;
+  line-height: 1.6;
+  text-align: justify;
+  position: relative;
+}
+
+.gyaru-body b, .gyaru-body strong {
+  color: var(--gy-pink-dark);
+  background: #fff;
+  padding: 0 4px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 0 #ffccdd;
+}
+
+.gyaru-body i, .gyaru-body em {
+  color: #ff8fab;
+  font-family: 'Pacifico', cursive;
+  font-size: 1.1em;
+}
+
+/* --- RODAPÉ: WOMB E ASSINATURA --- */
+.gyaru-footer {
+  padding: 0 15px 15px 15px;
+  margin-top: 10px;
+}
+
+/* Campo "Womb" -> NOTIFICATION */
+.gyaru-notes {
+  background: #fff;
+  border: 2px solid var(--gy-text);
+  border-radius: 10px;
+  padding: 10px 15px;
+  position: relative;
+  font-size: 0.85em;
+  color: #666;
+  animation: gy-bounce 3s infinite ease-in-out;
+}
+.gyaru-notes::before {
+  content: '❤️ NEW MESSAGE';
+  position: absolute; top: -12px; left: 10px;
+  background: var(--gy-pink-dark);
+  color: #fff;
+  font-family: 'Fredoka One', cursive;
+  font-size: 0.8em;
+  padding: 2px 8px;
+  border-radius: 10px;
+  transform: rotate(-2deg);
+}
+
+/* ASSINATURA INJETADA (Sticker Style) */
+.gyaru-signature {
+  text-align: right;
+  margin-top: 15px;
+  margin-right: 10px;
+}
+
+.gyaru-signature::after {
+  content: 'Kirari Hasui';
+  font-family: 'Pacifico', cursive;
+  font-size: 1.6em;
+  color: var(--gy-pink-dark);
+  text-shadow: 2px 2px 0 #fff;
+  transform: rotate(-5deg);
+  display: inline-block;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='20' viewBox='0 0 100 20'%3E%3Cpath fill='none' stroke='%23ff99cc' stroke-width='2' d='M0,10 Q25,20 50,10 T100,10' /%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+
+/* --- STICKERS DECORATIVOS (O "Maximalismo") --- */
+.gyaru-deco-star {
+  position: absolute;
+  width: 30px; height: 30px;
+  background: var(--gy-accent);
+  clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+  z-index: 20;
+  animation: gy-sparkle 2s infinite ease-in-out;
+  filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.1));
+}
+
+/* Posicionamento dos Adesivos */
+.sticker-1 { top: 20px; left: -15px; width: 50px; height: 50px; background: #ff4d4d; transform: rotate(-15deg); }
+.sticker-2 { bottom: 80px; right: -10px; width: 40px; height: 40px; background: #55ddff; transform: rotate(20deg); animation-delay: 1s; }
+.sticker-3 { top: 230px; right: 10px; width: 25px; height: 25px; background: #ff99cc; z-index: 15; }
+
+/* Laço (CSS Shape) */
+.gyaru-deco-bow {
+  position: absolute;
+  top: -15px; right: -15px;
+  font-size: 3em;
+  z-index: 20;
+  filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.1));
+  transform: rotate(15deg);
+}
+
+@media (max-width: 500px) {
+  .gyaru-phone { margin: 20px auto; border-radius: 30px; }
+}
