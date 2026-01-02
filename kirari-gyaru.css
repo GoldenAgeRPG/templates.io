@@ -1,33 +1,34 @@
-/* --- TEMPLATE: GYARU MODE v2 (KIRARI HASUI - RABBIT MAXIMALIST) --- */
+/* --- TEMPLATE: GYARU MODE v3 (DARK JIRAI KEI EDITION) --- */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&family=Pacifico&display=swap');
 
 :root {
-  --gy-pink-case: #ff9ec7;   /* Rosa da Capinha mais vibrante */
-  --gy-pink-border: #ff6bb3; /* Borda da Capinha */
-  --gy-screen-bg: #fff5f9;   /* Fundo da tela super suave */
-  --gy-text-box: rgba(255, 255, 255, 0.92); /* Fundo do texto para leitura */
-  --gy-text: #6b3e54;        /* Cor do texto principal */
-  --gy-accent-hot: #d63384;  /* Pink Forte para números/destaques */
-  --gy-accent-yellow: #fff200; /* Amarelo marca-texto */
+  /* Paleta Dark Gyaru / Jirai Kei */
+  --gy-case: #ff9ec7;       /* Capinha continua Rosa */
+  --gy-border: #ff6bb3;     
+  --gy-screen-bg: #1a0f14;  /* Fundo da tela ESCURO (Preto/Roxo) */
+  --gy-box-bg: rgba(20, 10, 15, 0.95); /* Box de texto escuro */
+  --gy-text: #ffd1e8;       /* Texto Rosa Claro */
+  --gy-accent-hot: #ff3399; /* Neon Pink */
+  --gy-accent-pop: #fff200; /* Amarelo */
 }
 
-/* Animações de "Bling" */
-@keyframes gy-wiggle { 0%, 100% { transform: rotate(-3deg); } 50% { transform: rotate(3deg); } }
-@keyframes gy-pop { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+/* --- ANIMAÇÕES DECORATIVAS --- */
+@keyframes float-bunny { 0%, 100% { transform: translateY(0) rotate(-15deg); } 50% { transform: translateY(-5px) rotate(-10deg); } }
+@keyframes float-star { 0%, 100% { transform: scale(1) rotate(0deg); } 50% { transform: scale(1.2) rotate(180deg); } }
+@keyframes wiggle-bow { 0%, 100% { transform: rotate(-20deg); } 50% { transform: rotate(-25deg) scale(1.05); } }
+@keyframes screen-glow { 0%, 100% { box-shadow: inset 0 0 10px rgba(0,0,0,0.5); } 50% { box-shadow: inset 0 0 20px rgba(255, 51, 153, 0.1); } }
 
-/* O CELULAR (Mais largo) */
+/* O CELULAR */
 .gyaru-phone {
   box-sizing: border-box;
-  max-width: 580px; /* AUMENTADO A LARGURA */
+  max-width: 580px;
   width: 95%;
   margin: 60px auto;
-  background-color: var(--gy-pink-case);
-  border: 5px solid var(--gy-pink-border);
+  background-color: var(--gy-case);
+  border: 5px solid var(--gy-border);
   border-radius: 45px;
   padding: 18px;
-  box-shadow: 
-    inset 0 4px 8px rgba(255,255,255,0.5),
-    0 15px 35px rgba(255, 105, 180, 0.3);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4);
   position: relative;
   font-family: 'Quicksand', sans-serif;
   color: var(--gy-text);
@@ -37,191 +38,159 @@
 /* Câmera */
 .gyaru-phone::before {
   content: ''; position: absolute; top: 28px; left: 50%; transform: translateX(-50%);
-  width: 70px; height: 7px; background: rgba(0,0,0,0.15); border-radius: 10px; z-index: 5; pointer-events: none;
+  width: 70px; height: 7px; background: rgba(0,0,0,0.2); border-radius: 10px; z-index: 5; pointer-events: none;
 }
 
-/* TELA */
+/* TELA (Dark Mode Nativo) */
 .gyaru-screen {
   background: var(--gy-screen-bg);
-  /* Padrão de fundo muito sutil para não atrapalhar */
-  background-image: radial-gradient(#ffdbe9 10%, transparent 10%);
-  background-size: 25px 25px;
+  /* Padronagem sutil de corações no fundo escuro */
+  background-image: radial-gradient(#331a26 15%, transparent 16%), radial-gradient(#331a26 15%, transparent 16%);
+  background-size: 30px 30px;
+  background-position: 0 0, 15px 15px;
+  
   border-radius: 35px;
-  border: 3px solid #fff;
+  border: 2px solid #33222b;
   overflow: hidden;
   position: relative;
+  animation: screen-glow 4s infinite;
 }
 
-/* HEADER & BANNER */
+/* HEADER */
 .gyaru-header {
   position: relative;
-  height: 280px; /* Um pouco mais alto */
-  border-bottom: 5px dotted #fff;
+  height: 280px;
+  border-bottom: 4px dashed var(--gy-border);
 }
 .gyaru-header img {
-  width: 100%; height: 100%;
-  object-fit: cover; object-position: top;
+  width: 100%; height: 100%; object-fit: cover; object-position: top;
+  filter: contrast(1.1) brightness(0.9); /* Ajuste para o modo escuro */
 }
 
-/* TÍTULO E SUBTÍTULO (Novo arranjo) */
+/* TÍTULOS */
 .gyaru-title-container {
-  position: absolute;
-  bottom: -25px; right: 15px;
-  z-index: 15;
+  position: absolute; bottom: -25px; right: 15px; z-index: 15;
   display: flex; flex-direction: column; align-items: flex-end;
   transform: rotate(-2deg);
 }
 
 .gyaru-main-title {
-  font-family: 'Fredoka One', cursive;
-  color: #fff;
-  font-size: 2em; margin: 0;
-  text-transform: uppercase;
-  text-shadow: 3px 3px 0 var(--gy-pink-border);
-  -webkit-text-stroke: 2px var(--gy-pink-border);
-  line-height: 1;
+  font-family: 'Fredoka One', cursive; color: #fff;
+  font-size: 2.2em; margin: 0; text-transform: uppercase;
+  text-shadow: 3px 3px 0 #000, 0 0 10px var(--gy-accent-hot);
+  -webkit-text-stroke: 2px var(--gy-border); line-height: 1;
 }
 
 .gyaru-sub-title {
-  background: var(--gy-accent-yellow);
-  color: var(--gy-accent-hot);
-  font-family: 'Quicksand', sans-serif; font-weight: 700;
-  font-size: 0.85em;
-  padding: 3px 10px;
-  border-radius: 12px;
-  border: 2px solid var(--gy-accent-hot);
-  margin-top: -5px;
-  margin-right: 5px;
-  box-shadow: 2px 2px 0 rgba(0,0,0,0.1);
+  background: #000; color: var(--gy-accent-pop);
+  font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 0.85em;
+  padding: 4px 12px; border-radius: 12px;
+  border: 2px solid var(--gy-accent-pop);
+  margin-top: -5px; margin-right: 5px;
 }
 
-/* RENDA DECORATIVA */
+/* RENDA (Invertida para branco para contrastar no escuro) */
 .gyaru-lace {
-  position: absolute; top: 275px; left: 0; width: 100%; height: 25px;
-  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath fill='%23ffffff' d='M0,0 C10,15 20,5 30,10 C40,15 50,5 60,10 C70,15 80,5 90,10 C100,15 110,5 120,10 L120,0 Z'/%3E%3C/svg%3E") repeat-x;
+  position: absolute; top: 276px; left: 0; width: 100%; height: 25px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 20' preserveAspectRatio='none'%3E%3Cpath fill='%231a0f14' d='M0,0 C10,15 20,5 30,10 C40,15 50,5 60,10 C70,15 80,5 90,10 C100,15 110,5 120,10 L120,0 Z'/%3E%3C/svg%3E") repeat-x;
   background-size: auto 100%; z-index: 10;
 }
 
-/* --- STATUS REDESENHADOS (Widgets separados) --- */
-.gyaru-stats-container {
-  display: flex;
-  gap: 15px;
-  padding: 25px 20px 10px 20px;
-}
+/* WIDGETS DE STATUS (Dark) */
+.gyaru-stats-container { display: flex; gap: 15px; padding: 30px 20px 10px 20px; }
 
 .gyaru-stat-widget {
-  flex: 1; /* Ocupam espaço igual */
-  background: #fff;
-  border: 3px solid #ffcce6;
-  border-radius: 20px;
-  padding: 10px;
-  box-shadow: 3px 3px 0 #ffcce6;
+  flex: 1;
+  background: #2b1a22; /* Widget escuro */
+  border: 2px solid var(--gy-border);
+  border-radius: 20px; padding: 10px;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
   display: flex; flex-direction: column; gap: 5px;
 }
 
-.gyaru-stat-header {
-  display: flex; justify-content: space-between; align-items: center;
-}
-.gyaru-label {
-  font-family: 'Fredoka One', cursive; color: var(--gy-pink-border); font-size: 0.9em;
-}
-/* Números com nova cor vibrante */
-.gyaru-val {
-  font-family: 'Quicksand', sans-serif; font-weight: 700;
-  font-size: 0.9em; color: var(--gy-accent-hot);
-}
+.gyaru-label { font-family: 'Fredoka One', cursive; color: var(--gy-case); font-size: 0.9em; }
+.gyaru-val { font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 0.9em; color: #fff; text-shadow: 0 0 5px var(--gy-accent-hot); }
 
 .gyaru-bar-track {
-  height: 14px; background: #ffe6f2;
-  border-radius: 10px; border: 2px solid #ffb3d9;
-  overflow: hidden;
+  height: 14px; background: #11080d; border-radius: 10px; border: 1px solid #442233; overflow: hidden;
 }
-.gyaru-hp-fill {
-  height: 100%; background: linear-gradient(90deg, #ff66b3, #ff3385);
-  border-radius: 10px; transition: width 0.5s ease;
-}
-.gyaru-ea-fill {
-  height: 100%; background: linear-gradient(90deg, #ffd700, #ffaa00);
-  border-radius: 10px; transition: width 0.5s ease;
-}
+.gyaru-hp-fill { height: 100%; background: linear-gradient(90deg, #ff0066, #ff66b3); width: 0%; transition: width 0.5s; box-shadow: 0 0 10px #ff0066; }
+.gyaru-ea-fill { height: 100%; background: linear-gradient(90deg, #ffcc00, #ffe066); width: 0%; transition: width 0.5s; box-shadow: 0 0 10px #ffcc00; }
 
-/* --- CONTEÚDO (Fundo limpo) --- */
+/* TEXTO (Dark Mode) */
 .gyaru-body {
-  margin: 15px 20px;
-  padding: 20px;
-  /* BOX BRANCO LIMPO PARA O TEXTO */
-  background: var(--gy-text-box);
+  margin: 15px 20px; padding: 20px;
+  background: var(--gy-box-bg); /* Fundo quase preto */
   border-radius: 20px;
-  border: 2px dashed #ffcce6;
-  
+  border: 1px dashed var(--gy-border);
   font-size: 1em; line-height: 1.7; text-align: justify;
   position: relative; z-index: 5;
+  color: #fff; /* Texto Branco */
 }
 
 .gyaru-body b, .gyaru-body strong {
-  color: var(--gy-accent-hot); background: #fff2f8;
-  padding: 0 5px; border-radius: 5px; border: 1px solid var(--gy-pink-border);
+  color: var(--gy-screen-bg); background: var(--gy-case);
+  padding: 0 5px; border-radius: 4px; font-weight: 700;
 }
 .gyaru-body i, .gyaru-body em {
-  color: var(--gy-pink-border); font-family: 'Pacifico', cursive; font-size: 1.15em;
+  color: var(--gy-accent-pop); font-family: 'Pacifico', cursive; font-size: 1.15em;
 }
 
 /* FOOTER */
 .gyaru-footer { padding: 0 20px 20px 20px; margin-top: 10px; }
 .gyaru-notes {
-  background: #fff; border: 3px solid var(--gy-pink-border);
+  background: #000; border: 2px solid var(--gy-border);
   border-radius: 15px; padding: 12px 15px;
-  position: relative; font-size: 0.85em; color: #777;
-  box-shadow: 3px 3px 0 rgba(0,0,0,0.1);
+  position: relative; font-size: 0.85em; color: #aaa;
 }
 .gyaru-notes::before {
-  content: '💖 NEW MSG'; position: absolute; top: -14px; left: 15px;
-  background: var(--gy-accent-hot); color: #fff;
+  content: '☠️ DARK MSG'; position: absolute; top: -14px; left: 15px;
+  background: #000; color: var(--gy-border);
   font-family: 'Fredoka One', cursive; font-size: 0.75em;
   padding: 3px 10px; border-radius: 12px; transform: rotate(-3deg);
-  border: 2px solid #fff;
+  border: 1px solid var(--gy-border);
 }
 
-/* Assinatura Sticker */
 .gyaru-signature { text-align: right; margin-top: 20px; margin-right: 10px; }
 .gyaru-signature::after {
   content: 'Kirari Hasui'; font-family: 'Pacifico', cursive; font-size: 1.8em;
-  color: #fff; -webkit-text-stroke: 1px var(--gy-accent-hot);
-  text-shadow: 3px 3px 0 var(--gy-pink-border);
+  color: #fff; text-shadow: 0 0 5px var(--gy-accent-hot), 2px 2px 0 #000;
   transform: rotate(-4deg); display: inline-block;
 }
 
-/* --- ADESIVOS MAXIMALISTAS (Stickers & Rabbits) --- */
-.gyaru-sticker { position: absolute; z-index: 20; filter: drop-shadow(2px 2px 0 rgba(0,0,0,0.15)); }
+/* --- ADESIVOS ANIMADOS --- */
+.gyaru-sticker { position: absolute; z-index: 20; filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.3)); }
 
-/* Coelhos (SVG Data URI) */
+/* Coelhos (SVG) */
 .gyaru-deco-rabbit {
-  width: 50px; height: 50px;
+  width: 55px; height: 55px;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath fill='%23fff' stroke='%23ff6bb3' stroke-width='2' d='M25,30 C15,30 10,20 10,15 C10,5 15,2 18,5 C20,7 22,15 25,15 C28,15 30,7 32,5 C35,2 40,5 40,15 C40,20 35,30 25,30 Z'/%3E%3Ccircle fill='%23ff9ec7' cx='18' cy='18' r='3'/%3E%3Ccircle fill='%23ff9ec7' cx='32' cy='18' r='3'/%3E%3Cpath fill='none' stroke='%23ff6bb3' stroke-width='2' d='M22,25 Q25,28 28,25'/%3E%3C/svg%3E");
   background-size: contain; background-repeat: no-repeat;
+  /* Animação de flutuar */
+  animation: float-bunny 4s ease-in-out infinite;
 }
 
-/* Estrelas e Outros */
+/* Estrelas */
 .gyaru-deco-star {
-  width: 35px; height: 35px; background: var(--gy-accent-yellow);
+  width: 35px; height: 35px; background: var(--gy-accent-pop);
   clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-  animation: gy-pop 2s infinite ease-in-out;
+  animation: float-star 3s linear infinite;
 }
+
+/* Coração */
 .gyaru-deco-heart {
   width: 30px; height: 30px; background: var(--gy-accent-hot);
   clip-path: path('M15,28 C15,28 30,15 30,9 C30,4 26,0 21,0 C18,0 15,3 15,3 C15,3 12,0 9,0 C4,0 0,4 0,9 C0,15 15,28 15,28 Z');
-  animation: gy-wiggle 3s infinite ease-in-out;
+  animation: float-star 2s ease-in-out infinite alternate;
 }
 
-/* Posicionamento dos Adesivos (Espalhados na moldura) */
-.st-r1 { top: -20px; left: 10px; transform: rotate(-15deg); width: 60px; height: 60px; } /* Coelho Topo Esq */
-.st-r2 { bottom: 120px; right: -25px; transform: rotate(20deg); width: 55px; height: 55px; } /* Coelho Direita */
-.st-r3 { bottom: -15px; left: 30%; transform: rotate(5deg); } /* Coelho Baixo */
-
-.st-s1 { top: 50px; right: -15px; } /* Estrela Direita */
-.st-s2 { bottom: 40px; left: -15px; background: #ff9ec7; } /* Estrela Rosa Esquerda */
-.st-h1 { top: -10px; right: 40%; } /* Coração Topo */
-.st-bow { top: 180px; left: -20px; font-size: 3em; z-index: 25; transform: rotate(-20deg); }
+/* Posicionamento e Delays */
+.st-r1 { top: -25px; left: 10px; animation-delay: 0s; }
+.st-r2 { bottom: 120px; right: -30px; animation-delay: 1s; }
+.st-r3 { bottom: -20px; left: 30%; animation-delay: 2s; }
+.st-s1 { top: 60px; right: -18px; animation-duration: 5s; }
+.st-s2 { bottom: 50px; left: -18px; background: #fff; animation-duration: 4s; }
+.st-bow { top: 190px; left: -25px; font-size: 3.5em; z-index: 25; animation: wiggle-bow 3s ease-in-out infinite; }
 
 @media (max-width: 600px) {
   .gyaru-phone { margin: 30px auto; border-radius: 35px; }
