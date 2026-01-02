@@ -1,4 +1,4 @@
-/* --- TEMPLATE: GYARU MODE vFINAL (FIXED TITLES) --- */
+/* --- TEMPLATE: GYARU MODE --- */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&family=Pacifico&display=swap');
 
 /* --- VARIÁVEIS --- */
@@ -16,6 +16,12 @@
   --gy-ui-color: #fff;
   --gy-note-bg: rgba(0,0,0,0.6);
   --gy-note-text: #aaa;
+
+  /* CORES DAS BARRAS (PADRÃO NEON) */
+  --gy-hp-start: #ff0080;
+  --gy-hp-end: #ff66b3;
+  --gy-ea-start: #ffaa00;
+  --gy-ea-end: #ffea00;
 }
 
 /* LÓGICA LIGHT MODE */
@@ -30,6 +36,12 @@
   --gy-ui-color: #ff66b3;
   --gy-note-bg: rgba(107, 62, 84, 0.15);
   --gy-note-text: #6b3e54;
+
+  /* CORES DAS BARRAS (MAIS ESCURAS PARA CONTRASTE) */
+  --gy-hp-start: #cc0066; 
+  --gy-hp-end: #ff3399;
+  --gy-ea-start: #cc8800;
+  --gy-ea-end: #ffcc00;
 }
 
 .gyaru-mode-toggle:checked ~ .gyaru-screen .gyaru-header img { filter: contrast(1) brightness(1); }
@@ -153,8 +165,20 @@
 .gyaru-label { font-family: 'Fredoka One', cursive; color: var(--gy-case); font-size: 0.9em; }
 .gyaru-val { font-family: 'Quicksand', sans-serif; font-weight: 700; font-size: 0.9em; color: var(--gy-text); text-shadow: 0 0 5px var(--gy-accent-main); }
 .gyaru-bar-track { height: 14px; background: rgba(0,0,0,0.5); border-radius: 10px; border: 1px solid var(--gy-border); overflow: hidden; }
-.gyaru-hp-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #ff0080, #ff66b3); box-shadow: 0 0 10px #ff0080; transition: width 0.5s; }
-.gyaru-ea-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #ffaa00, #ffea00); box-shadow: 0 0 10px #ffaa00; transition: width 0.5s; }
+
+/* BARRAS ATUALIZADAS COM VARIÁVEIS */
+.gyaru-hp-fill { 
+  height: 100%; width: 0%; 
+  background: linear-gradient(90deg, var(--gy-hp-start), var(--gy-hp-end)); 
+  box-shadow: 0 0 10px var(--gy-hp-start); 
+  transition: width 0.5s; 
+}
+.gyaru-ea-fill { 
+  height: 100%; width: 0%; 
+  background: linear-gradient(90deg, var(--gy-ea-start), var(--gy-ea-end)); 
+  box-shadow: 0 0 10px var(--gy-ea-start); 
+  transition: width 0.5s; 
+}
 
 /* TEXTO */
 .gyaru-body {
