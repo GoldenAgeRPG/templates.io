@@ -97,7 +97,7 @@
   font-family: 'Montserrat', sans-serif; font-size: 0.85em; color: #a6c0b3; line-height: 1.6;
 }
 .jade-notes-container::before {
-  content: 'CONSIDERAÇÕES';
+  content: 'MAR DE JADE';
   position: absolute; top: -10px; left: 20px;
   background: var(--jade-deep); padding: 0 10px;
   color: var(--jade-gold); font-family: 'Cinzel Decorative', serif; font-size: 0.85em; letter-spacing: 2px;
