@@ -1,171 +1,176 @@
-/* --- TEMPLATE: JADE SOUL (FIXED SIGNATURE) --- */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400;1,700&family=Montserrat:wght@300;600&family=Cinzel+Decorative:wght@700&display=swap');
+/* Fontes sugeridas */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap');
 
-:root {
-  --jade-deep: #081c15;
-  --jade-main: #1b4332;
-  --jade-light: #40916c;
-  --jade-mist: #d8f3dc;
-  --jade-gold: #d4af37;
-  --jade-accent: #e63946; /* Vermelho Sangue para o Selo */
-}
-
-/* Animação Fumaça */
-@keyframes jade-smoke {
-  0% { opacity: 0.3; transform: translateY(0) scale(1); }
-  50% { opacity: 0.6; transform: translateY(-10px) scale(1.05); }
-  100% { opacity: 0.3; transform: translateY(0) scale(1); }
-}
-
-/* TABLET PRINCIPAL */
-.jade-tablet {
+.template-container {
+  /* Container Principal */
+  width: 550px;
+  max-width: 100%;
+  margin: 20px auto;
+  background-color: #1a2026;
+  background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+  border: 1px solid #2e4a38;
+  padding: 20px;
   box-sizing: border-box;
-  max-width: 600px; width: 95%; margin: 50px auto;
-  background-color: var(--jade-deep);
-  background-image: url("https://www.transparenttextures.com/patterns/black-mamba.png");
-  border: 1px solid var(--jade-gold);
-  outline: 8px solid var(--jade-main); outline-offset: 5px;
-  border-radius: 2px;
-  box-shadow: 0 0 20px rgba(8, 28, 21, 0.8), inset 0 0 50px rgba(0,0,0,0.8);
-  position: relative; font-family: 'Cormorant Garamond', serif; color: var(--jade-mist);
-  overflow: visible; /* Importante para detalhes */
-  padding-bottom: 30px; /* Espaço extra no final */
-}
-.jade-tablet * { box-sizing: border-box; }
-
-.jade-tablet::before {
-  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  background: radial-gradient(circle at 50% 80%, rgba(64, 145, 108, 0.15), transparent 70%);
-  animation: jade-smoke 8s infinite ease-in-out; pointer-events: none; z-index: 0;
+  position: relative;
+  font-family: 'Lato', sans-serif;
+  color: #ccc;
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  
+  /* Flexbox para garantir fluxo vertical correto */
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-/* HEADER */
-.jade-header { position: relative; height: 300px; border-bottom: 2px solid var(--jade-gold); z-index: 1; }
-.jade-header img {
-  width: 100%; height: 100%; object-fit: cover; object-position: center;
-  filter: contrast(1.1) saturate(0.9);
-  mask-image: linear-gradient(to bottom, black 80%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-}
-.jade-header::after {
-  content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
-  border: 1px solid rgba(212, 175, 55, 0.5); pointer-events: none;
-}
-
-/* TÍTULOS */
-.jade-title-wrap { position: absolute; bottom: 20px; left: 0; width: 100%; text-align: center; text-shadow: 0 2px 10px #000; }
-.jade-main-title {
-  font-family: 'Cinzel Decorative', serif; font-size: 2.8em; color: var(--jade-mist); margin: 0; letter-spacing: 2px;
-  background: linear-gradient(to bottom, #fff, #a6c0b3); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 5px rgba(64,145,108,0.5));
-}
-.jade-sub-title {
-  font-family: 'Montserrat', sans-serif; color: var(--jade-gold); font-size: 0.75em; text-transform: uppercase; letter-spacing: 6px; margin-top: 5px; display: block;
-}
-
-/* STATUS */
-.jade-stats { padding: 20px 50px 10px 50px; position: relative; z-index: 2; display: flex; gap: 20px; }
-.jade-stat-col { flex: 1; display: flex; flex-direction: column; gap: 5px; }
-.jade-stat-info { display: flex; justify-content: space-between; align-items: flex-end; font-family: 'Montserrat', sans-serif; font-size: 0.8em; }
-.jade-label { color: var(--jade-gold); font-weight: 600; } .jade-val { color: var(--jade-mist); font-weight: 300; }
-.jade-track { height: 6px; width: 100%; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); position: relative; }
-.jade-hp-fill { height: 100%; width: 0%; background: linear-gradient(90deg, var(--jade-main), var(--jade-light)); box-shadow: 0 0 10px var(--jade-light); transition: width 0.6s ease; }
-.jade-ea-fill { height: 100%; width: 0%; background: linear-gradient(90deg, #b8860b, var(--jade-gold)); box-shadow: 0 0 10px var(--jade-gold); transition: width 0.6s ease; }
-
-/* NARRAÇÃO */
-.jade-narration {
-  padding: 30px 50px 10px 50px;
-  font-size: 1.15em; line-height: 1.9; text-align: justify; color: #cce3de;
-  position: relative; z-index: 2;
-}
-.jade-narration b, .jade-narration strong { color: var(--jade-light); font-family: 'Cinzel Decorative', serif; font-weight: 700; }
-.jade-narration i, .jade-narration em { color: var(--jade-gold); font-family: 'Cormorant Garamond', serif; font-style: italic; opacity: 0.9; }
-.jade-hr { border: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--jade-gold), transparent); margin: 20px 0; opacity: 0.6; }
-
-/* CONSIDERAÇÕES */
-.jade-notes-container {
-  margin: 30px 50px 40px 50px; /* Margem inferior aumentada para não bater no selo */
-  padding: 25px 30px;
-  background: rgba(8, 28, 21, 0.7);
-  border: 1px solid var(--jade-gold);
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
-  position: relative; z-index: 2;
-  font-family: 'Montserrat', sans-serif; font-size: 0.85em; color: #a6c0b3; line-height: 1.6;
-}
-.jade-notes-container::before {
-  content: 'CONSIDERAÇÕES';
-  position: absolute; top: -10px; left: 20px;
-  background: var(--jade-deep); padding: 0 10px;
-  color: var(--jade-gold); font-family: 'Cinzel Decorative', serif; font-size: 0.85em; letter-spacing: 2px;
-}
-
-/* RODAPÉ (LINHA) */
-.jade-footer-line {
-  margin: 0 50px; height: 1px; background: rgba(255,255,255,0.1);
-  position: relative; z-index: 1;
-}
-
-/* --- ASSINATURA TIPO SELO (HANKO) --- */
-/* Posicionamento Absoluto no Canto Inferior Direito */
-.jade-signature {
+/* Detalhes Dourados nos Cantos */
+.corner-decor {
   position: absolute;
-  bottom: 20px;
-  right: 40px;
-  z-index: 10;
-  
-  /* Tamanho pequeno e fixo */
-  width: 50px; 
-  height: 50px;
-  
-  transform: rotate(-8deg); /* Leve rotação de carimbo manual */
+  width: 20px;
+  height: 20px;
+  border-color: #d4af37;
+  border-style: solid;
+  pointer-events: none;
+}
+.top-left { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
+.top-right { top: 10px; right: 10px; border-width: 1px 1px 0 0; }
+.bottom-left { bottom: 10px; left: 10px; border-width: 0 0 1px 1px; }
+.bottom-right { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+
+/* Imagem de Topo */
+.header-image {
+  position: relative;
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  border: 1px solid #d4af37;
+}
+
+.header-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   opacity: 0.9;
-  transition: transform 0.3s;
 }
 
-/* O Desenho do Selo */
-.jade-signature::after {
-  /* Injetar o nome */
-  content: 'Kiyora\A Amamiya'; 
-  white-space: pre; /* Permite quebra de linha com \A */
-  
-  /* Layout do texto dentro do quadrado */
-  display: flex; 
-  align-items: center; 
-  justify-content: center;
+.title-overlay {
+  position: absolute;
+  bottom: 10px;
+  width: 100%;
   text-align: center;
-  width: 100%; height: 100%;
-  
-  /* Estilo Visual (Vermelho Carimbo) */
-  border: 2px solid var(--jade-accent);
-  border-radius: 4px; /* Levemente arredondado como carimbo gasto */
-  color: var(--jade-accent);
-  
-  font-family: 'Cinzel Decorative', serif;
-  font-weight: 700;
-  font-size: 0.55em; /* Fonte pequena para caber no quadrado */
-  line-height: 1.1;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+}
+
+.char-name {
+  font-family: 'Cinzel', serif;
+  font-size: 32px;
+  color: #e0e0e0;
+  letter-spacing: 2px;
   text-transform: uppercase;
-  letter-spacing: 0px;
-  
-  /* Textura de falha de tinta */
-  mask-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
-  -webkit-mask-image: url("https://www.transparenttextures.com/patterns/black-felt.png");
-  background: rgba(230, 57, 70, 0.05); /* Fundo levemente avermelhado */
+  margin: 0;
 }
 
-/* Efeito Hover */
-.jade-tablet:hover .jade-signature {
-  transform: rotate(0deg) scale(1.1);
-  opacity: 1;
+.char-subtitle {
+  font-family: 'Cinzel', serif;
+  font-size: 10px;
+  color: #d4af37;
+  letter-spacing: 4px;
+  text-transform: uppercase;
 }
 
-/* Cantos */
-.jade-corner { position: absolute; width: 15px; height: 15px; border: 2px solid var(--jade-gold); z-index: 10; }
-.tl { top: 10px; left: 10px; border-right: 0; border-bottom: 0; } .tr { top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
-.bl { bottom: 10px; left: 10px; border-right: 0; border-top: 0; } .br { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
+/* Barras de Status */
+.status-bar-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
 
-@media (max-width: 600px) {
-  .jade-tablet { width: 100%; margin: 20px 0; border: none; outline: none; }
-  .jade-narration, .jade-notes-container, .jade-stats { padding-left: 20px; padding-right: 20px; }
-  .jade-stats { flex-direction: column; gap: 10px; }
-  .jade-signature { bottom: 15px; right: 20px; }
+.bar-wrapper {
+  flex: 1;
+}
+
+.bar-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3px;
+  color: #d4af37;
+}
+
+.bar-bg {
+  width: 100%;
+  height: 4px;
+  background: #333;
+  border-radius: 2px;
+}
+
+.hp-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #2e4a38, #5eaba0);
+  box-shadow: 0 0 5px #5eaba0;
+}
+
+.ea-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #b8860b, #ffd700);
+  box-shadow: 0 0 5px #ffd700;
+}
+
+/* Conteúdo do Texto */
+.post-content {
+  text-align: justify;
+  line-height: 1.6;
+  font-size: 13px;
+  padding: 0 10px;
+}
+
+/* Ajuste do Negrito */
+.post-content b, 
+.post-content strong {
+  color: #5eaba0;
+  font-weight: bold;
+  font-size: inherit;
+}
+
+.quote {
+  font-family: 'Cinzel', serif;
+  color: #aeb5bc;
+  margin-bottom: 15px;
+  display: block;
+}
+
+/* Considerações */
+.notes-box {
+  border: 1px solid #d4af37;
+  padding: 15px;
+  margin-top: 10px;
+  position: relative;
+}
+
+.notes-title {
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  background: #1a2026;
+  padding: 0 10px;
+  color: #d4af37;
+  font-family: 'Cinzel', serif;
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.notes-text {
+  font-size: 11px;
+  color: #888;
+}
+
+/* Rodapé/Assinatura */
+.template-footer {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 10px;
+  color: #5eaba0;
+  opacity: 0.7;
 }
