@@ -1,4 +1,4 @@
-/* --- TEMPLATE: GYARU MODE --- */
+/* --- TEMPLATE: GYARU MODE vFINAL 2 (ADJUSTED LAYOUT & SCREEN FX) --- */
 @import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Quicksand:wght@500;700&family=Pacifico&display=swap');
 
 /* --- VARIÁVEIS --- */
@@ -32,7 +32,6 @@
   --gy-note-text: #6b3e54;
 }
 
-/* O subtítulo agora é estático, removemos a troca de texto via CSS */
 .gyaru-mode-toggle:checked ~ .gyaru-screen .gyaru-header img { filter: contrast(1) brightness(1); }
 
 /* --- ESTRUTURA DO CELULAR --- */
@@ -42,8 +41,8 @@
   background-color: var(--gy-case);
   border: 6px solid var(--gy-border);
   border-radius: 50px; 
-  /* AUMENTADO ESPAÇO EMBAIXO PARA O BOTÃO DESCER */
-  padding: 50px 18px 90px 18px; 
+  /* Padding inferior reduzido para o botão menor */
+  padding: 50px 18px 70px 18px; 
   box-shadow: inset 0 0 20px rgba(0,0,0,0.1), 0 20px 50px rgba(0,0,0,0.4);
   position: relative;
   font-family: 'Quicksand', sans-serif;
@@ -63,22 +62,23 @@
   width: 10px; height: 10px; background: #333; border-radius: 50%; box-shadow: inset 0 0 3px rgba(255,255,255,0.3);
 }
 
-/* BOTÃO HOME (Ajustado mais para baixo) */
+/* BOTÃO HOME (TAMANHO REDUZIDO) */
 .gyaru-home-btn {
   position: absolute; 
-  bottom: 45px; /* Posição exata na borda inferior */
+  bottom: 18px;
   left: 50%; transform: translateX(-50%);
-  width: 55px; height: 55px;
+  width: 28px; height: 28px; /* Reduzido pela metade aprox. */
   background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0,0,0,0.1) 100%);
   border-radius: 50%;
-  border: 3px solid rgba(255,255,255,0.4);
+  border: 2px solid rgba(255,255,255,0.4); /* Borda mais fina */
   cursor: pointer; z-index: 50; transition: 0.3s;
-  box-shadow: inset 0 2px 5px rgba(0,0,0,0.2);
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
 }
-.gyaru-home-btn:hover { background: rgba(255,255,255,0.3); box-shadow: 0 0 15px #fff; }
+.gyaru-home-btn:hover { background: rgba(255,255,255,0.3); box-shadow: 0 0 10px #fff; }
 .gyaru-home-btn::after { 
   content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-  width: 20px; height: 20px; border: 2px solid rgba(255,255,255,0.5); border-radius: 6px;
+  width: 10px; height: 10px; /* Quadrado interno menor */
+  border: 1px solid rgba(255,255,255,0.5); border-radius: 3px;
 }
 
 /* --- TELA --- */
@@ -99,7 +99,6 @@
   display: flex; justify-content: space-between; align-items: center;
   font-size: 0.75em; font-weight: 700; color: var(--gy-ui-color);
 }
-/* O Relógio será preenchido pelo JS */
 .gyaru-clock { font-family: sans-serif; letter-spacing: 1px; }
 .gyaru-status-bar::after { 
   content: ''; width: 20px; height: 10px; 
@@ -107,9 +106,25 @@
   display: inline-block;
 }
 
-/* HEADER */
-.gyaru-header { position: relative; height: 280px; border-bottom: 4px dashed var(--gy-border); }
+/* HEADER & EFEITOS DE TELA DIGITAL */
+.gyaru-header { position: relative; height: 280px; border-bottom: 4px dashed var(--gy-border); overflow: hidden; }
 .gyaru-header img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: contrast(1.1) brightness(0.9); transition: 0.5s; }
+
+/* Efeito 1: Reflexo de Vidro (Gloss) */
+.gyaru-header::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, transparent 40%);
+  pointer-events: none; z-index: 5;
+}
+/* Efeito 2: Scanline Digital Animada */
+@keyframes scanline-move { 0% { transform: translateY(-100%); } 100% { transform: translateY(280px); } }
+.gyaru-header::after {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 30px;
+  background: linear-gradient(to bottom, transparent, var(--gy-accent-main), transparent);
+  opacity: 0.2; pointer-events: none; z-index: 6;
+  animation: scanline-move 4s linear infinite;
+}
+
 
 /* RENDA */
 .gyaru-lace {
@@ -167,18 +182,12 @@
   transition: background 0.5s, color 0.5s;
 }
 
-/* OUTLINE BOX REFINADO (Mais fino e harmonioso) */
 .gyaru-body b, .gyaru-body strong {
   background: transparent;
-  border: 1px solid var(--gy-accent-main); /* Borda fina */
+  border: 1px solid var(--gy-accent-main);
   color: var(--gy-accent-main);
-  padding: 2px 10px; /* Padding reduzido */
-  border-radius: 50px;
-  font-weight: 700;
-  font-size: 0.9em; /* Levemente menor */
-  letter-spacing: 1px;
-  display: inline-block;
-  margin-bottom: 2px;
+  padding: 2px 10px; border-radius: 50px;
+  font-weight: 700; font-size: 0.9em; letter-spacing: 1px; display: inline-block; margin-bottom: 2px;
 }
 
 .gyaru-body i, .gyaru-body em {
@@ -192,6 +201,8 @@
   border: 2px solid var(--gy-border);
   border-radius: 15px; padding: 12px 15px; position: relative; font-size: 0.85em; color: var(--gy-note-text);
   transition: background 0.5s;
+  /* Adicionada margem direita para o texto não bater na assinatura */
+  margin-right: 20px; 
 }
 .gyaru-notes::before {
   content: 'MSG'; position: absolute; top: -10px; left: 15px;
@@ -200,7 +211,13 @@
   padding: 2px 8px; border-radius: 10px; transform: rotate(-3deg);
 }
 
-.gyaru-signature { position: absolute; bottom: 30px; right: 20px; z-index: 30; transform: rotate(-10deg); pointer-events: none; }
+/* ASSINATURA (REPOSICIONADA) */
+.gyaru-signature { 
+  position: absolute; 
+  bottom: 15px; /* Mais para baixo */
+  right: 10px; /* Mais para a direita */
+  z-index: 30; transform: rotate(-10deg); pointer-events: none; 
+}
 .gyaru-signature::after {
   content: 'Kirari Hasui'; font-family: 'Pacifico', cursive; font-size: 1.5em;
   color: #fff; 
@@ -208,35 +225,21 @@
   background: var(--gy-border); padding: 5px 15px; border-radius: 50px; border: 2px solid #fff;
 }
 
-/* --- ADESIVOS (STICKERS) --- */
+/* ADESIVOS */
 .gyaru-sticker { position: absolute; z-index: 60; filter: drop-shadow(3px 3px 2px rgba(0,0,0,0.3)); pointer-events: none; }
-
-/* 1. Coelho */
 .gyaru-deco-rabbit { width: 55px; height: 55px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath fill='%23fff' stroke='%23ff6bb3' stroke-width='2' d='M25,30 C15,30 10,20 10,15 C10,5 15,2 18,5 C20,7 22,15 25,15 C28,15 30,7 32,5 C35,2 40,5 40,15 C40,20 35,30 25,30 Z'/%3E%3Ccircle fill='%23ff9ec7' cx='18' cy='18' r='3'/%3E%3Ccircle fill='%23ff9ec7' cx='32' cy='18' r='3'/%3E%3Cpath fill='none' stroke='%23ff6bb3' stroke-width='2' d='M22,25 Q25,28 28,25'/%3E%3C/svg%3E"); background-size: contain; background-repeat: no-repeat; animation: float-bunny 4s ease-in-out infinite; }
-
-/* 2. Estrela */
 .gyaru-deco-star { width: 35px; height: 35px; background: var(--gy-accent-sec); clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%); animation: float-star 3s linear infinite; }
-
-/* 3. Cerejas (NOVO) */
 .gyaru-deco-cherry { width: 45px; height: 45px; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 50 50'%3E%3Cpath stroke='%2300cc00' stroke-width='2' fill='none' d='M25,5 Q15,25 10,35 M25,5 Q35,25 40,35'/%3E%3Ccircle fill='%23ff0066' cx='10' cy='35' r='8'/%3E%3Ccircle fill='%23ff0066' cx='40' cy='35' r='8'/%3E%3Cpath fill='%2300cc00' d='M25,5 Q35,5 35,15 Q25,15 25,5 Z'/%3E%3C/svg%3E"); background-size: contain; background-repeat: no-repeat; animation: wiggle-bow 4s ease-in-out infinite; }
-
-/* 4. Band-aid (NOVO) */
 .gyaru-deco-bandaid { width: 50px; height: 20px; background: #ffcc99; border-radius: 10px; border: 1px solid #cc9966; transform: rotate(45deg); box-shadow: inset 0 0 5px rgba(0,0,0,0.1); }
 .gyaru-deco-bandaid::after { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 15px; height: 15px; background: rgba(255,255,255,0.5); border-radius: 2px; }
-
-/* 5. Laço */
 .st-bow { top: 60px; left: -30px; width: 80px; height: 80px; z-index: 65; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath fill='%23ff3399' d='M20,40 Q10,20 30,20 Q50,40 20,40 M80,40 Q90,20 70,20 Q50,40 80,40' /%3E%3Ccircle fill='%23fff' cx='50' cy='40' r='8' /%3E%3Cpath fill='none' stroke='%23ff3399' stroke-width='5' d='M40,50 L30,80 M60,50 L70,80' /%3E%3C/svg%3E"); background-size: contain; background-repeat: no-repeat; animation: wiggle-bow 3s ease-in-out infinite; }
 
-/* Posicionamento Variado */
-.st-r1 { top: -25px; left: 20px; }
-.st-r2 { bottom: 120px; right: -30px; animation-delay: 1s; }
-.st-s1 { top: 60px; right: -18px; }
-.st-s2 { bottom: 50px; left: -18px; background: #fff; }
-.st-c1 { top: 200px; left: -20px; transform: rotate(-20deg); } /* Cereja Esq */
-.st-b1 { bottom: 10px; right: 30px; z-index: 55; } /* Band-aid no queixo */
+.st-r1 { top: -25px; left: 20px; } .st-r2 { bottom: 120px; right: -30px; animation-delay: 1s; }
+.st-s1 { top: 60px; right: -18px; } .st-s2 { bottom: 50px; left: -18px; background: #fff; }
+.st-c1 { top: 200px; left: -20px; transform: rotate(-20deg); } .st-b1 { bottom: 10px; right: 30px; z-index: 55; }
 
 @keyframes float-bunny { 0%, 100% { transform: translateY(0) rotate(-15deg); } 50% { transform: translateY(-5px) rotate(-10deg); } }
 @keyframes float-star { 0%, 100% { transform: scale(1) rotate(0deg); } 50% { transform: scale(1.2) rotate(180deg); } }
 @keyframes wiggle-bow { 0%, 100% { transform: rotate(-20deg); } 50% { transform: rotate(-25deg) scale(1.05); } }
 
-@media (max-width: 600px) { .gyaru-phone { margin: 30px auto; border-radius: 35px; padding: 40px 10px 90px 10px; } .gyaru-stats-container { flex-direction: column; gap: 10px; } }
+@media (max-width: 600px) { .gyaru-phone { margin: 30px auto; border-radius: 35px; padding: 40px 10px 80px 10px; } .gyaru-stats-container { flex-direction: column; gap: 10px; } }
