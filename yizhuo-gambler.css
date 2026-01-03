@@ -1,159 +1,150 @@
-/* --- TEMPLATE: YIZHUO MING (HIGH STAKES VERSION) --- */
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Cinzel+Decorative:wght@700&family=Montserrat:wght@300;500;700&display=swap');
+/* --- TEMPLATE: YIZHUO GAMBLER (CROW & CHANCE) --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap');
 
 :root {
-  --gamble-bg: #080808;        /* Preto Profundo */
-  --gamble-panel: #120505;     /* Fundo sutilmente avermelhado para painéis */
-  --gamble-wine: #781414;      /* O Vinho solicitado */
-  --gamble-bright: #ff3333;    /* Um vermelho mais vivo para brilhos/glows */
-  --gamble-gold: #bfa36f;      /* Dourado pálido para detalhes de dinheiro/luxo */
-  --gamble-text: #cccccc;      /* Cinza claro para leitura */
+  --g-black: #050505;
+  --g-wine: #781414;
+  --g-blood: #a31a1a; /* Um tom levemente mais claro para brilho */
+  --g-silver: #cccccc;
+  --g-dark-grey: #1a1a1a;
 }
 
-/* TABLET PRINCIPAL */
-.gamble-tablet {
+/* Animação de Pulsação (Adrenalina) */
+@keyframes wine-pulse {
+  0% { box-shadow: 0 0 10px rgba(120, 20, 20, 0.2); border-color: var(--g-wine); }
+  50% { box-shadow: 0 0 25px rgba(120, 20, 20, 0.5); border-color: var(--g-blood); }
+  100% { box-shadow: 0 0 10px rgba(120, 20, 20, 0.2); border-color: var(--g-wine); }
+}
+
+/* CONTAINER PRINCIPAL */
+.gambler-tablet {
   box-sizing: border-box;
   max-width: 600px; width: 95%; margin: 50px auto;
-  background-color: var(--gamble-bg);
-  /* Textura muito sutil de ruído para parecer feltro de mesa, sem poluir */
-  background-image: url("https://www.transparenttextures.com/patterns/stardust.png");
-  border: 1px solid var(--gamble-wine);
-  /* Outline duplo estilo "carta de baralho" */
-  outline: 6px double var(--gamble-wine); outline-offset: 4px;
-  border-radius: 4px;
-  box-shadow: 0 0 40px rgba(0, 0, 0, 1), inset 0 0 80px rgba(0,0,0,0.9);
+  background-color: var(--g-black);
+  /* Textura sutil para não ficar chapado */
+  background-image: linear-gradient(to bottom, rgba(5,5,5,0.95), rgba(5,5,5,0.98)), url("https://www.transparenttextures.com/patterns/black-scales.png");
+  border: 1px solid var(--g-wine);
+  border-top: 5px solid var(--g-wine);
+  border-bottom: 5px solid var(--g-wine);
+  box-shadow: 0 0 20px rgba(0,0,0,1);
   position: relative; 
-  font-family: 'Crimson Text', serif; 
-  color: var(--gamble-text);
-  overflow: hidden; /* Mantém tudo contido */
-  padding-bottom: 30px;
+  font-family: 'Lato', sans-serif; 
+  color: var(--g-silver);
+  overflow: hidden;
+  animation: wine-pulse 4s infinite ease-in-out;
 }
-.gamble-tablet * { box-sizing: border-box; }
+.gambler-tablet * { box-sizing: border-box; }
 
-/* HEADER */
-.gamble-header { position: relative; height: 320px; border-bottom: 2px solid var(--gamble-wine); z-index: 1; }
-.gamble-header img {
-  width: 100%; height: 100%; object-fit: cover; object-position: top;
-  filter: contrast(1.1) saturate(0.9);
-  /* Máscara suave para integrar a imagem ao fundo preto */
-  mask-image: linear-gradient(to bottom, black 60%, transparent 100%); 
-  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+/* HEADER & IMAGEM */
+.gambler-header { 
+  position: relative; 
+  height: 280px; 
+  overflow: hidden;
+  border-bottom: 3px solid var(--g-wine);
 }
 
-/* TÍTULOS */
-.gamble-title-wrap { 
-    position: absolute; bottom: 10px; left: 0; width: 100%; 
-    text-align: center; 
-    text-shadow: 0 5px 10px #000; 
+.gambler-header img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  filter: grayscale(40%) contrast(1.2); /* Deixa a imagem mais dramática */
+  transition: all 0.5s ease;
 }
-.gamble-main-title {
-  font-family: 'Cinzel Decorative', serif; font-size: 3em; color: #fff; margin: 0; 
+.gambler-header:hover img { filter: grayscale(0%) contrast(1.1); transform: scale(1.02); }
+
+/* NOME E TITULO */
+.gambler-title-card {
+  position: absolute; bottom: -20px; right: 20px;
+  background: var(--g-black);
+  padding: 15px 25px 30px 25px;
+  border: 1px solid var(--g-wine);
+  border-bottom: none;
+  transform: skewX(-10deg); /* Inclinação para estilo */
+  box-shadow: -5px 5px 15px rgba(0,0,0,0.8);
+}
+
+.gambler-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.2em;
+  color: var(--g-wine); /* Cor solicitada */
+  text-transform: uppercase;
+  margin: 0;
+  transform: skewX(10deg); /* Corrige o texto */
+  text-shadow: 2px 2px 0px #000;
   letter-spacing: 1px;
-  /* Gradiente metálico no texto */
-  background: linear-gradient(to bottom, #fff, #d6d6d6, var(--gamble-wine)); 
-  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 10px rgba(120, 20, 20, 0.6));
-}
-.gamble-sub-title {
-  font-family: 'Montserrat', sans-serif; color: var(--gamble-wine); 
-  font-size: 0.7em; text-transform: uppercase; letter-spacing: 8px; 
-  margin-top: 5px; display: block; font-weight: 700;
-  text-shadow: 0 0 5px rgba(120, 20, 20, 0.5);
 }
 
-/* DECORAÇÃO DE NAIPES (VIBE CASSINO) */
-.gamble-suit-decor {
-    position: absolute; width: 100%; text-align: center; top: -25px;
-    font-size: 1.5em; color: var(--gamble-wine); opacity: 0.3; user-select: none;
+.gambler-subtitle {
+  display: block;
+  font-size: 0.7em;
+  color: #555;
+  text-align: right;
+  transform: skewX(10deg);
+  letter-spacing: 3px;
+  margin-top: 2px;
 }
 
-/* STATUS */
-.gamble-stats { padding: 25px 50px 10px 50px; position: relative; z-index: 2; display: flex; gap: 20px; }
-.gamble-stat-col { flex: 1; display: flex; flex-direction: column; gap: 5px; }
-.gamble-stat-info { display: flex; justify-content: space-between; align-items: flex-end; font-family: 'Montserrat', sans-serif; font-size: 0.8em; }
-.gamble-label { color: var(--gamble-wine); font-weight: 700; letter-spacing: 1px; } 
-.gamble-val { color: var(--gamble-text); font-weight: 400; }
-
-.gamble-track { height: 4px; width: 100%; background: rgba(255,255,255,0.05); border: 1px solid #333; position: relative; }
-.gamble-hp-fill { 
-    height: 100%; width: 100%; 
-    background: linear-gradient(90deg, #300, var(--gamble-wine)); 
-    box-shadow: 0 0 8px var(--gamble-wine); 
+/* STATUS - BARRAS FINAS E ELEGANTES */
+.gambler-stats { 
+  margin-top: 40px; 
+  padding: 10px 40px; 
+  display: flex; gap: 20px; 
 }
-.gamble-ea-fill { 
-    height: 100%; width: 100%; 
-    background: linear-gradient(90deg, #423618, var(--gamble-gold)); 
-    box-shadow: 0 0 8px var(--gamble-gold); 
-}
+.gambler-stat-row { width: 100%; }
+.gambler-stat-header { display: flex; justify-content: space-between; font-size: 0.75em; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 5px; color: var(--g-wine); font-weight: 700; }
+.gambler-bar-bg { width: 100%; height: 4px; background: #222; position: relative; }
+.gambler-bar-fill { height: 100%; background: var(--g-wine); box-shadow: 0 0 8px var(--g-wine); transition: width 0.5s; }
 
 /* NARRAÇÃO */
-.gamble-narration {
-  padding: 20px 50px 10px 50px;
-  font-size: 1.15em; line-height: 1.8; text-align: justify; color: #bfbfbf;
-  position: relative; z-index: 2;
-}
-.gamble-narration b, .gamble-narration strong { 
-    color: var(--gamble-wine); 
-    font-family: 'Cinzel Decorative', serif; 
-    font-weight: 700;
-    font-size: 1.1em; /* Leve aumento para destaque */
-    text-shadow: 0 0 10px rgba(120, 20, 20, 0.3);
-}
-.gamble-narration i, .gamble-narration em { 
-    color: var(--gamble-gold); /* Dourado para pensamentos/falas importantes (riqueza) */
-    font-family: 'Crimson Text', serif; font-style: italic; 
-    opacity: 0.9;
+.gambler-body {
+  padding: 30px 40px;
+  font-size: 1.1em;
+  line-height: 1.8;
+  text-align: justify;
+  color: #bbb; /* Texto cinza claro para ler no preto */
 }
 
-/* Separador com Naipe */
-.gamble-hr-container { text-align: center; margin: 25px 0; opacity: 0.6; }
-.gamble-hr-line { display: inline-block; width: 40%; height: 1px; background: var(--gamble-wine); vertical-align: middle; }
-.gamble-hr-icon { display: inline-block; padding: 0 10px; color: var(--gamble-wine); font-size: 1.2em; vertical-align: middle; }
+/* O pedido: Fonte em 781414 (Vinho) para destaques */
+.gambler-body b, .gambler-body strong {
+  color: var(--g-wine);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1em;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
 
-/* CONSIDERAÇÕES */
-.gamble-notes-container {
-  margin: 30px 50px 50px 50px;
-  padding: 20px 25px;
-  background: rgba(15, 5, 5, 0.6); /* Fundo avermelhado muito escuro */
-  border-left: 2px solid var(--gamble-wine);
-  border-right: 2px solid var(--gamble-wine);
-  position: relative; z-index: 2;
-  font-family: 'Montserrat', sans-serif; font-size: 0.8em; color: #8a8a8a; line-height: 1.6;
-  text-align: center;
+.gambler-body i, .gambler-body em {
+  color: #fff;
+  opacity: 0.6;
 }
-.gamble-notes-container::before {
-  content: 'NOTAS';
-  display: block; margin-bottom: 10px;
-  color: var(--gamble-wine); font-family: 'Cinzel Decorative', serif; font-size: 0.9em; letter-spacing: 2px;
+
+/* SEPARADOR DE NAIPES */
+.gambler-divider {
+  text-align: center; margin: 20px 0; color: var(--g-wine); font-size: 1.5em; opacity: 0.7;
 }
+
+/* NOTAS - ESTILO CARTA DE APOSTA */
+.gambler-notes {
+  margin: 20px 40px 40px 40px;
+  padding: 20px;
+  background: linear-gradient(45deg, #111, #0a0a0a);
+  border: 1px dashed var(--g-wine); /* Borda tracejada como cupom/contrato */
+  font-size: 0.85em;
+  color: #888;
+}
+.gambler-notes strong { color: var(--g-wine); }
 
 /* ASSINATURA */
-.gamble-signature {
-  position: absolute;
-  bottom: 15px;
-  right: 35px;
-  z-index: 10;
-  pointer-events: none;
-  font-family: 'Cinzel Decorative', serif;
-  color: var(--gamble-wine);
-  font-size: 0.7em;
+.gambler-footer {
+  text-align: right; padding: 10px 40px 20px 40px;
+  font-family: 'Playfair Display', serif;
+  font-size: 0.9em;
+  color: var(--g-wine);
+  opacity: 0.5;
   letter-spacing: 2px;
-  opacity: 0.7;
 }
-.gamble-signature::after { content: 'Yizhuo Ming'; }
-
-/* CANTOS DECORATIVOS (Dourados/Vinho) */
-.gamble-corner { position: absolute; width: 12px; height: 12px; border: 1px solid var(--gamble-wine); z-index: 10; transition: all 0.3s ease; }
-.tl { top: 12px; left: 12px; border-right: 0; border-bottom: 0; } 
-.tr { top: 12px; right: 12px; border-left: 0; border-bottom: 0; }
-.bl { bottom: 12px; left: 12px; border-right: 0; border-top: 0; } 
-.br { bottom: 12px; right: 12px; border-left: 0; border-top: 0; }
-
-.gamble-tablet:hover .gamble-corner { width: 40px; height: 40px; border-color: var(--gamble-gold); }
 
 @media (max-width: 600px) {
-  .gamble-tablet { width: 100%; margin: 20px 0; border: none; outline: none; }
-  .gamble-narration, .gamble-notes-container, .gamble-stats { padding-left: 20px; padding-right: 20px; }
-  .gamble-stats { flex-direction: column; gap: 10px; }
-  .gamble-signature { bottom: 10px; right: 20px; }
+  .gambler-tablet { width: 100%; margin: 0; border: none; border-top: 3px solid var(--g-wine); }
+  .gambler-title-card { right: 0; bottom: 0; width: 100%; text-align: center; transform: none; padding: 10px; }
+  .gambler-name, .gambler-subtitle { transform: none; text-align: center; }
+  .gambler-stats, .gambler-body, .gambler-notes { padding-left: 20px; padding-right: 20px; }
 }
