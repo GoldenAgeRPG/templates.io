@@ -1,178 +1,132 @@
-/* --- TEMPLATE: RAVEN'S GAMBIT --- */
+/* --- TEMPLATE: YIZHUO MING --- */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,400;0,600;1,400&family=Cinzel+Decorative:wght@700&family=Montserrat:wght@300;600&display=swap');
 
 :root {
-    --raven-black: #0a0a0a;
-    --raven-dark: #141414;
-    --raven-blood: #781414; /* A cor Vinho solicitada */
-    --raven-text: #b0b0b0;  /* Cinza claro para leitura */
-    --raven-glow: rgba(120, 20, 20, 0.5);
+  --raven-bg: #050505;       /* Preto quase absoluto */
+  --raven-panel: #0f0f0f;    /* Fundo dos painéis */
+  --raven-blood: #781414;    /* O Vinho solicitado */
+  --raven-text: #bfbfbf;     /* Cinza claro para leitura */
+  --raven-dim: #404040;      /* Cinza escuro para detalhes */
 }
 
-/* Container Principal */
-.raven-template {
-    max-width: 700px;
-    margin: 40px auto;
-    background-color: var(--raven-black);
-    background-image: url("https://www.transparenttextures.com/patterns/asfalt-dark.png");
-    border: 3px solid var(--raven-blood);
-    box-shadow: 0 0 30px var(--raven-black), inset 0 0 50px var(--raven-black);
-    position: relative;
-    overflow: hidden;
-    font-family: 'Crimson Text', serif;
-    color: var(--raven-text);
+/* TABLET PRINCIPAL (Estrutura idêntica à Jade) */
+.raven-tablet {
+  box-sizing: border-box;
+  max-width: 600px; width: 95%; margin: 50px auto;
+  background-color: var(--raven-bg);
+  /* Textura sutil escura */
+  background-image: url("https://www.transparenttextures.com/patterns/cubes.png");
+  border: 1px solid var(--raven-blood);
+  /* Outline duplo para reforçar o contraste vinho/preto */
+  outline: 8px solid var(--raven-panel); outline-offset: 5px;
+  border-radius: 2px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.9), inset 0 0 60px rgba(0,0,0,0.9);
+  position: relative; 
+  font-family: 'Crimson Text', serif; 
+  color: var(--raven-text);
+  overflow: visible;
+  padding-bottom: 30px;
 }
-.raven-template * { box-sizing: border-box; }
+.raven-tablet * { box-sizing: border-box; }
 
-/* --- ANIMAÇÃO DOS CORVOS --- */
-.crow-fly-zone {
-    position: absolute;
-    top: 0; left: 0;
-    width: 100%; height: 400px;
-    pointer-events: none;
-    z-index: 5;
-    overflow: hidden;
+/* HEADER */
+.raven-header { position: relative; height: 300px; border-bottom: 2px solid var(--raven-blood); z-index: 1; }
+.raven-header img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top; /* Foco no rosto */
+  filter: contrast(1.2) saturate(0.8);
+  mask-image: linear-gradient(to bottom, black 70%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 100%);
 }
-
-.crow {
-    position: absolute;
-    width: 60px; height: 60px;
-    background-size: contain; background-repeat: no-repeat; background-position: center;
-    opacity: 0;
-    filter: brightness(0) drop-shadow(0 0 2px var(--raven-blood));
-}
-
-@keyframes fly-across {
-    0% { transform: translateX(-100px) translateY(50px) scale(0.7) rotate(-5deg); opacity: 0; }
-    10% { opacity: 0.8; }
-    80% { opacity: 0.8; }
-    100% { transform: translateX(800px) translateY(-100px) scale(1.1) rotate(5deg); opacity: 0; }
+.raven-header::after {
+  content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
+  border: 1px solid rgba(120, 20, 20, 0.5); pointer-events: none;
 }
 
-.c1 { top: 50px; animation: fly-across 12s linear infinite; animation-delay: 0s; }
-.c2 { top: 180px; animation: fly-across 15s linear infinite; animation-delay: 5s; transform: scale(0.8); }
-.c3 { top: 100px; animation: fly-across 10s linear infinite; animation-delay: 8s; transform: scale(1.2); }
-
-/* --- HEADER E BANNER --- */
-.raven-header-wrap {
-    position: relative;
-    border-bottom: 3px solid var(--raven-blood);
+/* TÍTULOS */
+.raven-title-wrap { position: absolute; bottom: 20px; left: 0; width: 100%; text-align: center; text-shadow: 0 4px 15px #000; }
+.raven-main-title {
+  font-family: 'Cinzel Decorative', serif; font-size: 2.8em; color: var(--raven-text); margin: 0; letter-spacing: 2px;
+  background: linear-gradient(to bottom, #fff, #781414); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 5px rgba(120, 20, 20, 0.8));
+}
+.raven-sub-title {
+  font-family: 'Montserrat', sans-serif; color: var(--raven-blood); font-size: 0.75em; text-transform: uppercase; letter-spacing: 6px; margin-top: 5px; display: block; font-weight: 600;
 }
 
-.raven-banner {
-    position: relative;
-    height: 350px;
-    overflow: hidden;
-}
+/* STATUS (HP / EA) */
+.raven-stats { padding: 20px 50px 10px 50px; position: relative; z-index: 2; display: flex; gap: 20px; }
+.raven-stat-col { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+.raven-stat-info { display: flex; justify-content: space-between; align-items: flex-end; font-family: 'Montserrat', sans-serif; font-size: 0.8em; }
+.raven-label { color: var(--raven-blood); font-weight: 700; } .raven-val { color: var(--raven-dim); font-weight: 400; }
 
-.raven-banner img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    object-position: top center;
-    filter: contrast(1.2) saturate(1.1);
-}
+.raven-track { height: 6px; width: 100%; background: rgba(255,255,255,0.05); border: 1px solid var(--raven-dim); position: relative; }
 
-.raven-vignette {
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at center, transparent 40%, rgba(120, 20, 20, 0.4) 100%),
-                linear-gradient(to bottom, transparent 70%, var(--raven-black) 100%);
-    pointer-events: none;
-    mix-blend-mode: multiply;
-}
+/* Barras de Progresso em Vermelho/Vinho */
+.raven-hp-fill { height: 100%; width: 100%; background: linear-gradient(90deg, #4a0d0d, var(--raven-blood)); box-shadow: 0 0 10px var(--raven-blood); }
+.raven-ea-fill { height: 100%; width: 100%; background: linear-gradient(90deg, #4a0d0d, var(--raven-blood)); box-shadow: 0 0 10px var(--raven-blood); }
 
-/* Títulos */
-.raven-title-card {
-    position: absolute;
-    bottom: -30px; left: 50%;
-    transform: translateX(-50%);
-    background: var(--raven-dark);
-    border: 2px solid var(--raven-blood);
-    padding: 15px 40px;
-    text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.8);
-    z-index: 10;
+/* NARRAÇÃO */
+.raven-narration {
+  padding: 30px 50px 10px 50px;
+  font-size: 1.2em; line-height: 1.8; text-align: justify; color: #b0b0b0;
+  position: relative; z-index: 2;
 }
-
-.raven-title-card h1 {
-    font-family: 'Cinzel Decorative', serif;
-    color: var(--raven-blood);
-    margin: 0;
-    font-size: 2.2em;
-    text-shadow: 0 0 10px var(--raven-glow);
-    text-transform: uppercase;
-    letter-spacing: 2px;
-}
-
-.raven-title-card span {
-    font-family: 'Noto Serif JP', serif;
-    color: var(--raven-text);
-    font-size: 0.9em;
-    text-transform: uppercase;
-    letter-spacing: 4px;
-    font-weight: bold;
-}
-
-/* --- CONTEÚDO --- */
-.raven-content {
-    padding: 60px 50px 40px 50px;
-    font-size: 1.1em;
-    line-height: 1.8;
-    text-align: justify;
-}
-
-.raven-content b, .raven-content strong {
-    color: var(--raven-blood);
-    font-family: 'Cinzel Decorative', serif;
+.raven-narration b, .raven-narration strong { 
+    color: var(--raven-blood); 
+    font-family: 'Cinzel Decorative', serif; 
     font-weight: 700;
-    letter-spacing: 1px;
+}
+.raven-narration i, .raven-narration em { color: #8a8a8a; font-family: 'Crimson Text', serif; font-style: italic; border-bottom: 1px solid var(--raven-blood); }
+
+/* Separador */
+.raven-hr { border: 0; height: 1px; background: linear-gradient(90deg, transparent, var(--raven-blood), transparent); margin: 20px 0; opacity: 0.8; }
+
+/* CONSIDERAÇÕES (Box inferior) */
+.raven-notes-container {
+  margin: 30px 50px 40px 50px;
+  padding: 25px 30px;
+  background: rgba(10, 10, 10, 0.8);
+  border: 1px solid var(--raven-blood);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+  position: relative; z-index: 2;
+  font-family: 'Montserrat', sans-serif; font-size: 0.85em; color: #808080; line-height: 1.6;
+}
+.raven-notes-container::before {
+  content: 'NOTAS';
+  position: absolute; top: -10px; left: 20px;
+  background: var(--raven-bg); padding: 0 10px;
+  color: var(--raven-blood); font-family: 'Cinzel Decorative', serif; font-size: 0.85em; letter-spacing: 2px;
 }
 
-.raven-content i, .raven-content em {
-    color: #d4a5a5;
-    border-bottom: 1px dashed var(--raven-blood);
+/* RODAPÉ LINHA */
+.raven-footer-line {
+  margin: 0 50px; height: 1px; background: var(--raven-dim);
+  position: relative; z-index: 1; opacity: 0.3;
 }
 
-.raven-hr {
-    border: 0; height: 1px;
-    background: linear-gradient(90deg, transparent, var(--raven-blood), transparent);
-    margin: 30px 0;
-    opacity: 0.7;
-}
-
-.raven-quote {
-    text-align: center;
-    font-family: 'Cinzel Decorative', serif;
-    color: var(--raven-blood);
-    font-size: 1.3em;
-    padding: 20px;
-    border-left: 3px solid var(--raven-blood);
-    border-right: 3px solid var(--raven-blood);
-    background: linear-gradient(90deg, rgba(120,20,20,0.1), transparent, rgba(120,20,20,0.1));
-}
-
-/* --- RODAPÉ E ASSINATURA --- */
-.raven-footer {
-    padding: 20px;
-    background: var(--raven-dark);
-    border-top: 1px solid var(--raven-blood);
-    text-align: right;
-}
-
+/* ASSINATURA (Texto simples e harmonizado) */
 .raven-signature {
-    font-family: 'Cinzel Decorative', serif;
-    color: var(--raven-blood);
-    font-size: 1.2em;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    text-shadow: 0 0 5px var(--raven-glow);
-    display: inline-block;
-    padding-bottom: 5px;
-    border-bottom: 2px solid var(--raven-blood);
+  position: absolute;
+  bottom: 15px;
+  right: 35px;
+  z-index: 10;
+  pointer-events: none;
+  font-family: 'Cinzel Decorative', serif;
+  color: var(--raven-blood);
+  font-size: 0.8em;
+  letter-spacing: 2px;
+  opacity: 0.9;
+  text-shadow: 0 0 5px rgba(0,0,0,0.8);
 }
+.raven-signature::after { content: 'Yizhuo Ming'; }
+
+/* CANTOS DECORATIVOS (Agora vermelhos) */
+.raven-corner { position: absolute; width: 15px; height: 15px; border: 2px solid var(--raven-blood); z-index: 10; }
+.tl { top: 10px; left: 10px; border-right: 0; border-bottom: 0; } .tr { top: 10px; right: 10px; border-left: 0; border-bottom: 0; }
+.bl { bottom: 10px; left: 10px; border-right: 0; border-top: 0; } .br { bottom: 10px; right: 10px; border-left: 0; border-top: 0; }
 
 @media (max-width: 600px) {
-    .raven-template { margin: 0; border: none; }
-    .raven-header-wrap { border-bottom: none;}
-    .raven-title-card { position: relative; bottom: auto; left: auto; transform: none; margin-top: -40px; width: 90%; margin-left: auto; margin-right: auto;}
-    .raven-content { padding: 30px 20px; }
-    .raven-banner { height: 250px; }
+  .raven-tablet { width: 100%; margin: 20px 0; border: none; outline: none; }
+  .raven-narration, .raven-notes-container, .raven-stats { padding-left: 20px; padding-right: 20px; }
+  .raven-stats { flex-direction: column; gap: 10px; }
+  .raven-signature { bottom: 10px; right: 20px; }
 }
