@@ -1,116 +1,176 @@
-/* --- TEMPLATE: YIZHUO CROW (NO GIF) --- */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
+/* --- TEMPLATE: YIZHUO GAMBLER (HIGH STAKES EDITION) --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Montserrat:wght@300;400;600&display=swap');
 
 :root {
-  --y-black: #020202;
-  --y-wine: #781414; /* Vinho solicitado */
-  --y-gray: #a0a0a0;
+  --g-black: #050505;
+  --g-dark: #0f0f0f;
+  --g-wine: #781414; /* A cor solicitada */
+  --g-glow: #a31a1a; /* Versão mais clara para brilho */
+  --g-text: #b0b0b0;
 }
 
-.yizhuo-card {
-  max-width: 600px;
+/* CONTAINER PRINCIPAL */
+.gambler-container {
+  max-width: 700px;
   width: 95%;
-  margin: 40px auto;
-  background-color: var(--y-black);
-  border: 1px solid var(--y-wine);
-  box-shadow: 0 0 15px rgba(0,0,0,0.8);
-  font-family: 'Roboto', sans-serif;
-  color: var(--y-gray);
+  margin: 50px auto;
+  background-color: var(--g-black);
+  /* Textura sutil de fundo */
+  background-image: 
+    linear-gradient(to bottom, rgba(5,5,5,0.95), rgba(5,5,5,0.98)),
+    url("https://www.transparenttextures.com/patterns/dark-matter.png");
+  border: 1px solid #222;
+  /* Glow sutil na cor vinho */
+  box-shadow: 0 0 0 1px #000, 0 0 25px rgba(120, 20, 20, 0.15);
+  font-family: 'Montserrat', sans-serif;
+  color: var(--g-text);
   position: relative;
+}
+
+/* HEADER / IMAGEM */
+.gambler-header {
+  position: relative;
+  height: 320px;
   overflow: hidden;
+  border-bottom: 4px solid var(--g-wine);
 }
 
-/* IMAGEM */
-.yizhuo-top-img {
-  width: 100%;
-  height: 250px;
+.gambler-header img {
+  width: 100%; height: 100%;
   object-fit: cover;
-  border-bottom: 3px solid var(--y-wine);
-  filter: grayscale(80%);
-  transition: filter 0.4s;
+  object-position: top;
+  filter: grayscale(100%) contrast(1.2);
+  transition: all 0.6s ease-in-out;
 }
-.yizhuo-card:hover .yizhuo-top-img { filter: grayscale(0%); }
+/* Efeito ao passar o mouse: a cor volta levemente */
+.gambler-container:hover .gambler-header img {
+  filter: grayscale(20%) contrast(1.1);
+  transform: scale(1.03);
+}
 
-/* AREA DO TÍTULO COM CORVOS */
-.yizhuo-title-block {
+/* BARRA DE TÍTULO (CORVOS INJETADOS AQUI) */
+.gambler-title-bar {
+  background: var(--g-dark);
+  padding: 25px 0;
   text-align: center;
-  padding: 20px 0;
-  background: linear-gradient(to bottom, #080808, #000);
+  position: relative;
   border-bottom: 1px solid #1a1a1a;
-}
-.yizhuo-name {
-  font-family: 'Cinzel', serif;
-  font-size: 2.5em;
-  color: var(--y-wine);
-  margin: 0;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-.crow-deco {
-  font-size: 1.2em;
-  margin: 0 10px;
-  vertical-align: middle;
+  box-shadow: inset 0 0 30px #000;
 }
 
-/* STATUS */
-.yizhuo-info {
+/* O Nome principal no HTML, mas os corvos injetados via CSS */
+.gambler-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.5em;
+  font-weight: 900;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin: 0;
+  text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+  display: inline-block;
+  position: relative;
+}
+
+/* INJEÇÃO DOS CORVOS */
+.gambler-name::before,
+.gambler-name::after {
+  content: '🐦‍⬛'; /* Emoji do corvo */
+  font-size: 0.6em;
+  vertical-align: middle;
+  margin: 0 20px;
+  opacity: 0.8;
+  filter: drop-shadow(0 0 5px var(--g-wine));
+}
+
+/* CONTEÚDO DO TEXTO */
+.gambler-body {
+  padding: 50px 65px;
+  text-align: justify;
+  line-height: 1.9;
+  font-size: 0.95em;
+}
+
+/* Fala da personagem (Negrito na cor vinho) */
+.gambler-body b, 
+.gambler-body strong {
+  color: var(--g-wine);
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1em;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Itálico elegante */
+.gambler-body i, 
+.gambler-body em {
+  color: #fff;
+  opacity: 0.5;
+  font-family: 'Playfair Display', serif;
+}
+
+/* SEPARADOR ESTILIZADO */
+.gambler-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--g-wine), transparent);
+  margin: 30px 0;
+  opacity: 0.5;
+}
+
+/* STATUS (Compacto e limpo) */
+.gambler-stats {
   display: flex;
   justify-content: center;
-  gap: 30px;
-  padding: 10px 0;
-  font-size: 0.8em;
-  letter-spacing: 1px;
+  gap: 2px;
+  margin-bottom: 30px;
+  padding: 0 65px;
+}
+.stat-box {
+  background: #0a0a0a;
+  border: 1px solid #1a1a1a;
+  padding: 8px 15px;
+  font-size: 0.7em;
   text-transform: uppercase;
-  color: #555;
-  border-bottom: 1px solid #111;
-}
-.yizhuo-info span b { color: var(--y-wine); }
-
-/* TEXTO */
-.yizhuo-text {
-  padding: 40px 50px;
-  text-align: justify;
-  line-height: 1.8;
-  font-size: 14px;
-}
-
-/* Destaque Vinho na fala */
-.yizhuo-text b, .yizhuo-text strong {
-  color: var(--y-wine);
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  font-size: 1.1em;
-}
-
-/* Separador interno */
-.yizhuo-sep {
+  letter-spacing: 2px;
+  color: #444;
+  flex: 1;
   text-align: center;
-  margin: 20px 0;
-  color: #333;
-  font-size: 1.2em;
+  transition: 0.3s;
+}
+.stat-box:hover { border-color: var(--g-wine); color: var(--g-wine); }
+.stat-box span { display: block; font-weight: 700; color: #fff; margin-bottom: 2px; }
+
+/* ÁREA DA ASSINATURA (INJETADA) */
+.gambler-footer {
+  text-align: right;
+  padding: 20px 65px 40px 65px;
+  position: relative;
 }
 
-/* ASSINATURA */
-.yizhuo-signature-box {
-  text-align: right;
-  padding: 20px 50px;
-  background: #050505;
-  border-top: 1px solid var(--y-wine);
-}
-.sig-name {
-  font-family: 'Cinzel', serif;
-  font-size: 1.2em;
-  color: var(--y-wine);
+/* INJEÇÃO DA ASSINATURA */
+.gambler-footer::after {
+  content: 'Yizhuo Ming'; /* Nome injetado via CSS */
+  font-family: 'Playfair Display', serif;
+  font-size: 1.8em;
+  color: var(--g-wine);
+  font-style: italic;
   letter-spacing: 1px;
+  text-shadow: 2px 2px 10px rgba(0,0,0,1);
   display: block;
 }
-.sig-sub {
-  font-size: 0.7em;
+.gambler-footer::before {
+  content: 'The Gambler'; /* Subtitulo opcional injetado */
+  display: block;
+  font-size: 0.65em;
   color: #444;
   text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-bottom: 5px;
 }
 
+/* Responsividade */
 @media (max-width: 600px) {
-  .yizhuo-text { padding: 20px; }
-  .yizhuo-signature-box { text-align: center; }
+  .gambler-body, .gambler-stats, .gambler-footer { padding-left: 25px; padding-right: 25px; }
+  .gambler-name { font-size: 1.8em; }
+  .gambler-name::before, .gambler-name::after { display: block; margin: 10px auto; }
 }
