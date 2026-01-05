@@ -1,0 +1,292 @@
+/* --- TEMPLATE: CROW & CARDS - YIZHUO MING --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Raleway:ital,wght@0,400;0,700;1,400&display=swap');
+
+:root {
+  --cc-bg: #020202;
+  --cc-panel: #0a0a0a;
+  --cc-accent: #781414; /* Cor Vinho Solicitada */
+  --cc-accent-bright: #a01b1b; /* Um tom ligeiramente mais claro para brilhos */
+  --cc-text: #d0d0d0;
+  --cc-text-muted: #888;
+  --cc-border: #2a0505;
+}
+
+/* Animação: Pulsação Carmesim (Lenta e Elegante) */
+@keyframes crimson-pulse {
+  0%, 100% { box-shadow: 0 0 5px rgba(120, 20, 20, 0.2), inset 0 0 20px rgba(0,0,0,0.8); border-color: var(--cc-accent); }
+  50% { box-shadow: 0 0 15px rgba(120, 20, 20, 0.5), inset 0 0 30px rgba(40,0,0,0.9); border-color: var(--cc-accent-bright); }
+}
+
+/* Animação: Flutuação Sutil do Ícone */
+@keyframes icon-float {
+  0%, 100% { transform: translateY(0); opacity: 0.9; }
+  50% { transform: translateY(-3px); opacity: 1; filter: drop-shadow(0 5px 5px var(--cc-accent)); }
+}
+
+/* CONTAINER PRINCIPAL */
+.cc-container {
+  box-sizing: border-box;
+  max-width: 650px;
+  width: 95%;
+  margin: 50px auto;
+  background-color: var(--cc-bg);
+  
+  /* Textura de fundo: Degradê sutil e um padrão de losango muito fino */
+  background-image: 
+    linear-gradient(to bottom, rgba(0,0,0,0.8), rgba(0,0,0,1)),
+    repeating-linear-gradient(45deg, #050505 0px, #050505 2px, #080808 2px, #080808 4px);
+  
+  /* Borda Dupla Estilo Carta */
+  border: 2px solid var(--cc-accent);
+  outline: 4px solid var(--cc-border);
+  
+  /* Formato Retangular com Cantos Cortados (Estilo Carta Gótica) */
+  border-radius: 4px;
+  clip-path: polygon(
+    0% 15px, 15px 0%, 
+    calc(100% - 15px) 0%, 100% 15px, 
+    100% calc(100% - 15px), calc(100% - 15px) 100%, 
+    15px 100%, 0% calc(100% - 15px)
+  );
+  
+  color: var(--cc-text);
+  font-family: 'Raleway', sans-serif;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px -10px rgba(0,0,0,0.8);
+}
+.cc-container * { box-sizing: border-box; }
+
+/* Elementos Decorativos de Canto (Nipes) */
+.cc-container::before, .cc-container::after {
+    content: '♠'; /* Símbolo de Espadas como exemplo */
+    position: absolute;
+    font-family: 'Cinzel', serif;
+    color: var(--cc-accent);
+    font-size: 1.5em;
+    opacity: 0.3;
+    z-index: 0;
+}
+.cc-container::before { top: 15px; left: 20px; }
+.cc-container::after { bottom: 15px; right: 20px; transform: rotate(180deg); }
+
+
+/* HEADER */
+.cc-header {
+  text-align: center;
+  padding: 35px 20px 20px 20px;
+  position: relative;
+  border-bottom: 2px solid var(--cc-border);
+  background: linear-gradient(to bottom, #0a0a0a, #020202);
+}
+
+/* Ícone (Estático, mas imponente) */
+.cc-icon {
+  width: 60px; height: 60px;
+  margin-bottom: 10px;
+  fill: var(--cc-accent);
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.5));
+  animation: icon-float 5s ease-in-out infinite;
+}
+
+.cc-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 2.4em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  text-shadow: 2px 2px 0px var(--cc-accent-bright);
+  line-height: 1;
+}
+
+.cc-subtitle {
+  font-family: 'Raleway', sans-serif;
+  font-size: 0.85em;
+  color: var(--cc-accent);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-top: 8px;
+  font-weight: 600;
+  border-top: 1px solid var(--cc-border);
+  display: inline-block;
+  padding-top: 5px;
+}
+
+/* IMAGEM */
+.cc-image-frame {
+  width: calc(100% - 40px); /* Margem interna */
+  margin: 20px auto;
+  height: 320px;
+  position: relative;
+  overflow: hidden;
+  /* Moldura interna gótica */
+  border: 3px solid var(--cc-border);
+  box-shadow: inset 0 0 20px #000;
+}
+
+.cc-image-frame img {
+  width: 100%; 
+  height: 100%;
+  object-fit: cover; 
+  object-position: center 20%; /* Foco um pouco mais acima */
+  position: relative;
+  z-index: 1;
+  filter: grayscale(40%) contrast(110%); /* Look mais dark */
+  transition: 0.7s ease;
+}
+
+.cc-container:hover .cc-image-frame img { 
+  transform: scale(1.03);
+  filter: grayscale(0%) contrast(120%);
+}
+
+/* STATUS (Estilo Sangue/Vinho) */
+.cc-stats-panel {
+  padding: 15px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;            
+  margin-top: 5px;    
+  position: relative;
+  z-index: 5;
+  background: rgba(10,10,10,0.6);
+  border-top: 1px solid var(--cc-border);
+  border-bottom: 1px solid var(--cc-border);
+}
+
+.cc-stat-row {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.cc-label {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  color: var(--cc-accent);
+  font-size: 1em;
+  width: 30px;
+  text-align: left;
+}
+
+.cc-bar-bg {
+  flex-grow: 1;
+  height: 8px; /* Barra mais fina e elegante */
+  background: #000;
+  border: 1px solid #222;
+  position: relative;
+  overflow: hidden;
+}
+
+.cc-hp-fill, .cc-ea-fill {
+  height: 100%;
+  width: 0%; /* JS preenche */
+  /* Gradiente de "sangue" */
+  background: linear-gradient(to right, var(--cc-border), var(--cc-accent), var(--cc-accent-bright));
+  box-shadow: 0 0 10px var(--cc-accent);
+  transition: width 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+}
+
+/* Valores Numéricos */
+.cc-hp-val, .cc-ea-val {
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 0.9em;
+  min-width: 85px;
+  text-align: right;
+  color: #fff !important;
+  letter-spacing: 0.5px;
+}
+
+/* CONTEÚDO */
+.cc-content {
+  padding: 25px 40px;
+  font-size: 1.05em;
+  line-height: 1.8;
+  color: var(--cc-text);
+  text-align: justify;
+  /* Fundo ligeiramente mais claro para leitura */
+  background: linear-gradient(to bottom, rgba(5,5,5,0), rgba(15,15,15,0.8));
+}
+
+/* Negrito (Cor Vinho, fonte Cinzel para destaque) */
+.cc-content b, .cc-content strong {
+  color: var(--cc-accent);
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+}
+
+/* Itálico (Pensamentos - Cinza mais claro, sutil) */
+.cc-content i, .cc-content em {
+  color: #fff;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: 0.5px;
+  opacity: 0.8;
+  padding: 0 2px;
+}
+
+/* SEGUNDA CAIXA (HIDDEN HAND) */
+.cc-notes {
+  margin: 0 40px 30px 40px;
+  padding: 15px 20px;
+  background: #080808;
+  border-left: 3px solid var(--cc-accent);
+  font-size: 0.9em;
+  color: var(--cc-text-muted);
+  position: relative;
+}
+
+.cc-notes::before {
+  content: 'HIDDEN HAND'; /* Mudança temática de WOMB para algo de cartas/segredo */
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  font-size: 0.9em;
+  color: var(--cc-accent);
+  margin-bottom: 8px;
+  letter-spacing: 2px;
+}
+
+/* ASSINATURA (Estilo Carimbo/Elegante) */
+.cc-signature {
+  text-align: center; /* Centralizado para este design */
+  padding: 0 40px 40px 40px;
+  height: auto;
+  position: relative;
+}
+
+.cc-signature::before {
+    /* Linha decorativa acima da assinatura */
+    content: '';
+    display: block;
+    width: 50px;
+    height: 2px;
+    background: var(--cc-accent);
+    margin: 0 auto 15px auto;
+    opacity: 0.5;
+}
+
+.cc-signature::after {
+  content: 'Yizhuo Ming';
+  font-family: 'Cinzel', serif; /* Fonte Serifada elegante */
+  font-weight: 900;
+  font-size: 1.6em;
+  color: var(--cc-accent);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  display: inline-block;
+  /* Efeito de carimbo de cera sutil */
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.8), 0 0 10px rgba(120, 20, 20, 0.3);
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .cc-container { margin: 20px auto; width: 98%; }
+  .cc-content, .cc-notes, .cc-stats-panel, .cc-signature { padding-left: 20px; padding-right: 20px; }
+  .cc-image-frame { width: calc(100% - 20px); height: 250px; }
+  .cc-title { font-size: 1.8em; }
+}
