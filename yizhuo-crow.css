@@ -1,11 +1,10 @@
-/* --- TEMPLATE: CROW & CARDS (YIZHUO) --- */
-/* Adicionei 'Pinyon Script' para a assinatura e 'Playfair Display' para os itálicos */
+/* --- TEMPLATE: CROW & CARDS V2 (YIZHUO) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Raleway:ital,wght@0,400;0,600;1,400&family=Pinyon+Script&family=Playfair+Display:ital@1&display=swap');
 
 :root {
   --crow-bg: #020202;
   --crow-panel: #0a0a0a;
-  --crow-accent: #781414; /* Vinho */
+  --crow-accent: #781414; /* Vinho Principal */
   --crow-accent-bright: #a01b1b; 
   --crow-text: #d0d0d0;
   --crow-text-muted: #888;
@@ -18,25 +17,36 @@
   50% { transform: translateY(-3px); opacity: 1; filter: drop-shadow(0 5px 5px var(--crow-accent)); }
 }
 
-/* CONTAINER PRINCIPAL (Classe .crow-card para bater com o JS) */
+/* Animação: Cartas Flutuando no Fundo (NOVO) */
+@keyframes card-drift {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+@keyframes card-drift-reverse {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(20px) rotate(-5deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* CONTAINER PRINCIPAL */
 .crow-card {
   box-sizing: border-box;
   max-width: 650px;
   width: 95%;
   margin: 50px auto;
   background-color: var(--crow-bg);
-  
-  /* Textura de fundo sutil */
+  /* Textura de fundo mais rica, com padrão de losangos (cartas) sutil */
   background-image: 
-    linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,1)),
-    repeating-linear-gradient(45deg, #050505 0px, #050505 2px, #080808 2px, #080808 4px);
+    linear-gradient(to bottom, rgba(5,5,5,0.95), rgba(0,0,0,1)),
+    repeating-linear-gradient(45deg, transparent 0px, transparent 2px, rgba(120,20,20,0.05) 2px, rgba(120,20,20,0.05) 4px);
   
-  /* Borda Externa Fina e Elegante */
   border: 1px solid var(--crow-border);
-  box-shadow: 0 0 0 4px #000, 0 0 0 5px var(--crow-accent); /* Borda dupla simulada via shadow */
+  /* Efeito de brilho vinho pulsante sutil na borda */
+  box-shadow: 0 0 15px rgba(120, 20, 20, 0.2);
 
-  /* Formato */
   border-radius: 4px;
+  /* Recorte angular nos cantos */
   clip-path: polygon(
     0% 15px, 15px 0%, 
     calc(100% - 15px) 0%, 100% 15px, 
@@ -48,25 +58,52 @@
   font-family: 'Raleway', sans-serif;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 20px 50px -10px #000;
 }
-.crow-card * { box-sizing: border-box; }
+.crow-card * { box-sizing: border-box; position: relative; z-index: 2; /* Conteúdo acima das cartas de fundo */ }
 
-/* SEPARADORES MODERNOS (Gradiente Fade-Out) */
+/* --- ELEMENTOS DE FUNDO (CARTAS FLUTUANTES) --- */
+.crow-bg-card {
+    position: absolute;
+    z-index: 0; /* Atrás de tudo */
+    opacity: 0.08; /* Muito sutil */
+    border: 2px solid var(--crow-accent);
+    background: rgba(120,20,20,0.1);
+    border-radius: 5px;
+    pointer-events: none;
+}
+
+.crow-bg-card.c1 {
+    width: 100px; height: 150px;
+    top: 25%; left: 5%;
+    animation: card-drift 12s ease-in-out infinite;
+}
+.crow-bg-card.c1::after { content: '♠'; font-size: 4em; color: var(--crow-accent); position: absolute; top:50%; left:50%; transform:translate(-50%, -50%); }
+
+.crow-bg-card.c2 {
+    width: 80px; height: 120px;
+    bottom: 15%; right: 5%;
+    animation: card-drift-reverse 15s ease-in-out infinite;
+}
+.crow-bg-card.c2::after { content: '♦'; font-size: 3em; color: var(--crow-accent); position: absolute; top:50%; left:50%; transform:translate(-50%, -50%); }
+
+
+/* SEPARADORES MODERNOS */
 .crow-separator {
   height: 1px;
   width: 100%;
-  background: linear-gradient(90deg, transparent, var(--crow-accent), transparent);
-  opacity: 0.6;
+  /* Gradiente com um ponto de luz no centro */
+  background: radial-gradient(circle, var(--crow-accent-bright) 0%, transparent 70%);
+  opacity: 0.7;
   margin: 0;
   border: none;
+  position: relative;
+  z-index: 5;
 }
 
 /* HEADER */
 .crow-header {
   text-align: center;
-  padding: 35px 20px 20px 20px;
-  position: relative;
+  padding: 35px 20px 25px 20px;
   background: linear-gradient(to bottom, #0a0a0a, #020202);
 }
 
@@ -74,7 +111,7 @@
   width: 60px; height: 60px;
   margin-bottom: 10px;
   fill: var(--crow-accent);
-  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.8));
+  filter: drop-shadow(0 0 8px rgba(120,20,20,0.4));
   animation: icon-float 5s ease-in-out infinite;
 }
 
@@ -86,7 +123,7 @@
   text-transform: uppercase;
   letter-spacing: 2px;
   margin: 0;
-  text-shadow: 0 0 10px rgba(160, 27, 27, 0.3);
+  text-shadow: 0 0 15px rgba(160, 27, 27, 0.5);
   line-height: 1;
 }
 
@@ -98,45 +135,59 @@
   letter-spacing: 5px;
   margin-top: 10px;
   font-weight: 600;
-  opacity: 0.9;
 }
 
-/* IMAGEM */
+/* --- IMAGEM (INTEGRAÇÃO MELHORADA) --- */
 .crow-image-frame {
-  width: calc(100% - 40px);
-  margin: 10px auto;
-  height: 320px;
+  width: 100%;
+  height: 350px; /* Um pouco mais alta */
   position: relative;
   overflow: hidden;
-  border: 1px solid #1a1a1a;
+  margin: 0; /* Remove margem para colar no header/stats */
+  
+  /* MÁSCARA: Faz a imagem desaparecer suavemente nas bordas inferior e superior */
+  mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
+}
+
+/* Overlay para tintar a imagem de vinho */
+.crow-image-frame::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(120, 20, 20, 0.15); /* Tinta vinho sutil */
+    mix-blend-mode: overlay; /* Mescla com a imagem */
+    z-index: 2;
+    pointer-events: none;
 }
 
 .crow-image-frame img {
   width: 100%; 
   height: 100%;
   object-fit: cover; 
-  object-position: top center;
+  object-position: center 30%;
   position: relative;
   z-index: 1;
-  filter: grayscale(30%) contrast(115%);
+  /* Filtros para integrar melhor: menos saturação, mais contraste */
+  filter: grayscale(40%) contrast(120%) brightness(0.9);
   transition: 0.7s ease;
 }
 
 .crow-card:hover .crow-image-frame img { 
   transform: scale(1.03);
-  filter: grayscale(0%) contrast(120%);
+  filter: grayscale(10%) contrast(125%) brightness(1);
 }
 
-/* STATUS (Classes compatíveis com o JS) */
+/* STATUS (Compatível com JS) */
 .crow-stats-panel {
-  padding: 20px 40px;
+  padding: 25px 40px 15px 40px;
   display: flex;
   flex-direction: column;
   gap: 12px;            
-  margin-top: 0;    
   position: relative;
   z-index: 5;
-  background: rgba(5,5,5,0.8);
+  /* Fundo gradiente para destacar os stats da imagem acima */
+  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(5,5,5,0.9));
 }
 
 .crow-stat-row {
@@ -147,17 +198,20 @@
 
 .crow-label {
   font-family: 'Cinzel', serif;
-  font-weight: 700;
+  font-weight: 900;
   color: var(--crow-accent);
   font-size: 0.9em;
   width: 30px;
   text-align: left;
+  text-shadow: 0 0 5px rgba(120,20,20,0.5);
 }
 
 .crow-bar-bg {
   flex-grow: 1;
-  height: 6px; /* Barra fina e moderna */
-  background: #111;
+  height: 6px;
+  background: #050505;
+  border: 1px solid #222;
+  box-shadow: inset 0 0 5px #000;
   border-radius: 2px;
   position: relative;
   overflow: hidden;
@@ -166,18 +220,26 @@
 /* Classes FILL exatas para o JS */
 .crow-hp-fill, .crow-ea-fill {
   height: 100%;
-  width: 0%; /* JS preenche */
-  background: linear-gradient(to right, #300, var(--crow-accent), var(--crow-accent-bright));
-  box-shadow: 0 0 8px var(--crow-accent);
+  width: 0%;
+  /* Gradiente mais rico */
+  background: linear-gradient(90deg, #400, var(--crow-accent), var(--crow-accent-bright));
+  box-shadow: 0 0 10px var(--crow-accent);
   transition: width 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
+  position: relative;
 }
+/* Adiciona um brilho na ponta da barra */
+.crow-hp-fill::after, .crow-ea-fill::after {
+    content: ''; position: absolute; right: 0; top:0; height: 100%; width: 20px;
+    background: linear-gradient(90deg, transparent, #fff); opacity: 0.3;
+}
+
 
 /* Classes VAL exatas para o JS */
 .crow-hp-val, .crow-ea-val {
   font-family: 'Raleway', sans-serif;
-  font-weight: 600;
+  font-weight: 700;
   font-size: 0.85em;
-  min-width: 80px;
+  min-width: 85px;
   text-align: right;
   color: #fff !important;
   letter-spacing: 1px;
@@ -190,69 +252,78 @@
   line-height: 1.8;
   color: var(--crow-text);
   text-align: justify;
-  background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(10,10,10,0.5));
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(10,10,10,0.8));
 }
 
 /* PERSONALIZAÇÃO DE NEGRITO E ITÁLICO */
-
-/* Negrito: Vinho, forte, fonte padrão ou Cinzel para destaque */
 .crow-content b, .crow-content strong {
   color: var(--crow-accent-bright);
   font-weight: 700;
-  text-shadow: 0 0 2px rgba(120, 20, 20, 0.3);
+  text-shadow: 0 0 3px rgba(120, 20, 20, 0.4);
 }
 
-/* Itálico: Fonte Serifada (Playfair), cor clara, elegante */
 .crow-content i, .crow-content em {
-  font-family: 'Playfair Display', serif; /* Fonte diferente para destacar */
+  font-family: 'Playfair Display', serif;
   color: #e0e0e0;
   font-weight: 400;
   font-style: italic;
-  font-size: 1.05em; /* Levemente maior para compensar a fonte fina */
+  font-size: 1.05em;
   letter-spacing: 0.5px;
 }
 
-/* SEGUNDA CAIXA (HIDDEN HAND) */
+/* --- SEGUNDA CAIXA (HIDDEN HAND - REWORK) --- */
 .crow-notes {
-  margin: 0 45px 30px 45px;
-  padding: 15px 20px;
-  background: rgba(255, 255, 255, 0.02);
-  border-left: 2px solid var(--crow-accent); /* Apenas detalhe lateral */
+  margin: 10px 45px 40px 45px;
+  padding: 20px 25px;
+  /* Design de "Compartimento Secreto" */
+  background-color: #040404;
+  border: 1px solid #150505;
+  /* Sombra interna para dar profundidade */
+  box-shadow: inset 0 5px 15px rgba(0,0,0,0.8), 0 0 0 1px rgba(120,20,20,0.1);
+  border-radius: 2px;
   font-size: 0.85em;
   color: var(--crow-text-muted);
+  position: relative;
 }
 
+/* Detalhe superior imitando um selo ou fecho */
 .crow-notes::before {
-  content: 'HIDDEN HAND';
+  content: '♦ HIDDEN HAND ♦'; /* Adicionado os naipes */
   display: block;
   font-family: 'Cinzel', serif;
-  font-size: 0.8em;
-  color: var(--crow-accent);
-  margin-bottom: 5px;
-  letter-spacing: 2px;
+  font-size: 0.85em;
+  font-weight: 700;
+  color: var(--crow-accent-bright);
+  margin-bottom: 10px;
+  letter-spacing: 3px;
+  text-align: center;
+  text-shadow: 0 0 5px rgba(120,20,20,0.3);
+  border-bottom: 1px solid rgba(120,20,20,0.2);
+  padding-bottom: 5px;
 }
 
 /* ASSINATURA */
 .crow-signature {
   text-align: center;
-  padding: 0 40px 40px 40px;
+  padding: 0 40px 45px 40px;
 }
 
 .crow-signature::after {
   content: 'Yizhuo Ming';
-  font-family: 'Pinyon Script', cursive; /* Fonte nova aristocrática */
-  font-size: 2.2em;
-  color: var(--crow-text);
-  text-shadow: 0 0 5px rgba(0,0,0,0.8);
-  opacity: 0.8;
+  font-family: 'Pinyon Script', cursive;
+  font-size: 2.3em;
+  color: #d0d0d0;
+  /* Sombra sutil vinho para integrar */
+  text-shadow: 2px 2px 5px rgba(0,0,0,1), 0 0 10px rgba(120,20,20,0.2);
+  opacity: 0.9;
   display: inline-block;
-  transform: rotate(-3deg);
+  transform: rotate(-2deg);
 }
 
 /* Responsividade */
 @media (max-width: 600px) {
   .crow-card { margin: 20px auto; width: 98%; }
   .crow-content, .crow-notes, .crow-stats-panel, .crow-signature { padding-left: 20px; padding-right: 20px; }
-  .crow-image-frame { width: calc(100% - 20px); height: 250px; }
+  .crow-image-frame { height: 250px; }
   .crow-title { font-size: 1.8em; }
 }
