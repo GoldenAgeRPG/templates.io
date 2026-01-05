@@ -1,174 +1,241 @@
-/* --- TEMPLATE: YIZHUO GAMBLER (FINAL VISUAL) --- */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+/* =========================================
+   IMPORT & RESET
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Roboto:wght@300;400;700&display=swap');
 
-:root {
-  --g-bg-dark: #111111;
-  --g-bg-light: #ffffff;
-  --g-wine: #a31a1a;  /* Vermelho das linhas */
-  --g-spade: #333333; /* Cinza escuro do naipe central */
-  --g-text-dark: #222222;
-  --g-text-light: #666666;
-}
-
-/* WRAPPER GERAL (Para o fundo escuro e animação lateral) */
-.gambler-wrapper {
-    background-color: var(--g-bg-dark);
-    min-height: 100vh;
-    padding: 50px 0;
-    position: relative;
-    overflow: hidden; /* Impede que as cartas laterais criem barra de rolagem */
-}
-
-/* ANIMAÇÃO DAS CARTAS LATERAIS */
-@keyframes cardDrop {
-    0% { transform: translateY(-100vh) rotate(0deg); opacity: 0; }
-    10% { opacity: 1; }
-    90% { opacity: 1; }
-    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
-}
-
-.side-card {
-    position: absolute;
-    width: 60px; /* Tamanho das cartas laterais */
-    height: auto;
-    opacity: 0;
-    animation: cardDrop 8s linear infinite;
-    z-index: 0; /* Fica atrás do container principal */
-}
-/* Posicionamento e atrasos variados para as cartas */
-.c1 { left: 5%; animation-delay: 0s; }
-.c2 { left: 12%; animation-delay: 2s; }
-.c3 { left: 2%; animation-delay: 4s; }
-.c4 { right: 5%; animation-delay: 1s; }
-.c5 { right: 12%; animation-delay: 3s; }
-.c6 { right: 2%; animation-delay: 5s; }
-
-
-/* CONTAINER PRINCIPAL CENTRAL */
-.gambler-container {
+* {
   box-sizing: border-box;
-  max-width: 700px;
-  width: 95%;
-  margin: 0 auto;
-  background-color: var(--g-bg-light);
-  border: 1px solid #ddd;
-  box-shadow: 0 0 50px rgba(0,0,0,0.5);
-  font-family: 'Cormorant Garamond', serif;
-  color: var(--g-text-dark);
-  position: relative;
-  z-index: 1; /* Fica na frente das cartas laterais */
 }
-.gambler-container * { box-sizing: border-box; }
 
-/* HEADER (IMAGEM COLORIDA) */
-.gambler-header {
-  height: 350px;
+/* =========================================
+   VARIÁVEIS (Ten Shadows Theme)
+   ========================================= */
+:root {
+  --bg-black: #050505;
+  --bg-dark-gray: #0a0a0a;
+  --accent-red: #781414;
+  --text-main: #cccccc;
+  --text-dim: #666666;
+  --border-color: #781414;
+  --shadow-color: rgba(0, 0, 0, 0.9);
+}
+
+/* =========================================
+   ESTRUTURA PRINCIPAL
+   ========================================= */
+.gam-container {
   width: 100%;
-  overflow: hidden;
-  border-bottom: 3px solid var(--g-wine);
-}
-.gambler-header img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: top center;
-  /* Filtro removido conforme pedido */
-}
-
-/* TÍTULOS */
-.gambler-title-wrap {
-  text-align: center;
-  padding: 30px 20px 10px 20px;
-}
-.gambler-title {
-  font-family: 'Cinzel', serif; font-size: 3em; font-weight: 900; color: #000;
-  text-transform: uppercase; letter-spacing: 2px; margin: 0; line-height: 1;
-}
-.gambler-subtitle {
-  font-family: 'Cinzel', serif; font-size: 0.9em; color: var(--g-text-light);
-  text-transform: uppercase; letter-spacing: 4px; margin-top: 10px; display: block; font-weight: 700;
+  max-width: 850px;
+  background-color: var(--bg-black);
+  color: var(--text-main);
+  font-family: 'Roboto', sans-serif;
+  border: 1px solid var(--border-color);
+  margin: 20px auto;
+  padding: 40px;
+  position: relative;
+  overflow: hidden; /* Mantém os corvos dentro da caixa */
+  box-shadow: 0 0 15px #000;
 }
 
-/* O DIVISOR MODERNO (ESPADA CENTRAL + LINHAS VERMELHAS) */
-.modern-spade-divider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 25px 0;
-    color: var(--g-spade); /* Cor escura do naipe */
-    font-size: 2em; /* Tamanho do naipe */
-}
-.modern-spade-divider::before,
-.modern-spade-divider::after {
-    content: '';
-    height: 2px;
-    background-color: var(--g-wine); /* Cor das linhas laterais */
-    flex-grow: 1; /* Estica a linha */
-    max-width: 180px; /* Limita a largura da linha */
-    margin: 0 20px; /* Espaço entre a linha e o naipe */
+/* =========================================
+   ELEMENTOS DE FUNDO (CORVOS - VIA CSS)
+   ========================================= */
+.gam-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  /* Insira aqui o link da imagem transparente de corvos/sombras */
+  background-image: url('https://i.imgur.com/SEU_LINK_CORVOS.png'); 
+  background-repeat: no-repeat;
+  background-position: top right;
+  background-size: 60%; 
+  opacity: 0.2;
+  pointer-events: none;
+  z-index: 0;
+  /* Animação suave opcional para "dar vida" */
+  animation: floatShadows 10s infinite alternate;
 }
 
-/* STATUS SIMPLES */
-.gambler-stats-text {
-    text-align: center;
-    font-family: 'Cinzel', serif;
-    font-size: 0.9em;
-    color: var(--g-text-light);
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 30px;
+@keyframes floatShadows {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-10px); }
 }
-.gambler-stats-text b { color: #000; }
 
-/* CORPO DO TEXTO (Sem divisões internas) */
-.gambler-body {
-  padding: 0 50px 30px 50px;
-  text-align: justify;
-  font-size: 1.1em;
-  line-height: 1.8;
-  color: var(--g-text-dark);
+.gam-content {
+  position: relative;
+  z-index: 2; /* Texto acima do fundo */
 }
-.gambler-body p { margin-bottom: 1.5em; }
 
-/* SEÇÃO DE CONSIDERAÇÕES */
-.gambler-notes-section {
-    padding: 0 50px 40px 50px;
-    text-align: left;
-}
-.notes-title {
-    font-family: 'Cinzel', serif;
-    font-size: 1.4em;
-    font-weight: 700;
-    color: #000;
-    text-transform: uppercase;
-    margin-bottom: 15px;
-    border-bottom: 2px solid var(--g-wine);
-    display: inline-block;
-}
-.gambler-notes-section ul {
-    list-style-type: square;
-    padding-left: 20px;
-    color: var(--g-text-light);
-    line-height: 1.6;
-}
-.gambler-notes-section li { margin-bottom: 10px; }
-
-/* RODAPÉ */
-.gambler-footer {
-  padding: 30px;
-  background: #f9f9f9;
-  border-top: 1px solid #eee;
-  text-align: center;
+/* =========================================
+   TÍTULO
+   ========================================= */
+.gam-title {
   font-family: 'Cinzel', serif;
-  color: var(--g-text-light);
+  color: var(--accent-red);
+  font-size: 28px;
   text-transform: uppercase;
+  border-bottom: 2px solid var(--accent-red);
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+  text-shadow: 2px 2px 4px #000;
   letter-spacing: 2px;
-  font-size: 0.8em;
-}
-.footer-sig {
-    display: block; font-size: 1.2em; color: #000; font-weight: 700; margin-bottom: 5px;
 }
 
+/* =========================================
+   BARRAS DE STATUS
+   ========================================= */
+.gam-status-wrapper {
+  display: flex;
+  flex-wrap: wrap; /* Quebra linha no mobile se necessário */
+  gap: 15px;
+  margin-bottom: 30px;
+  background: rgba(0,0,0,0.5);
+  padding: 10px;
+  border: 1px solid #1a1a1a;
+}
+
+.gam-status-bar {
+  flex: 1; /* Crescem igualmente */
+  min-width: 150px; /* Tamanho mínimo antes de quebrar */
+  background: #111;
+  height: 12px;
+  border: 1px solid var(--accent-red);
+  position: relative;
+}
+
+.gam-status-fill {
+  background: linear-gradient(90deg, #400000, var(--accent-red));
+  height: 100%;
+  display: block;
+  box-shadow: 0 0 5px var(--accent-red);
+}
+
+/* =========================================
+   TEXTO
+   ========================================= */
+.gam-text {
+  line-height: 1.8;
+  font-size: 14px;
+  text-align: justify;
+  margin-bottom: 30px;
+}
+
+.gam-text b {
+  color: var(--accent-red);
+}
+
+/* =========================================
+   CARTAS (CONFIGURAÇÃO GERAL)
+   ========================================= */
+.gam-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin: 40px auto;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.3);
+  border-top: 1px solid #222;
+  border-bottom: 1px solid #222;
+}
+
+.gam-card-item {
+  width: 70px;
+  height: 110px;
+  border: 1px solid var(--accent-red);
+  background-color: #111;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.3s ease;
+  filter: grayscale(80%); /* Estilo mais dark */
+}
+
+.gam-card-item:hover {
+  transform: translateY(-5px);
+  filter: grayscale(0%);
+  border-color: #fff;
+}
+
+/* =========================================
+   CARTAS (IMAGENS INDIVIDUAIS VIA CSS)
+   AQUI VOCÊ CONTROLA AS IMAGENS
+   ========================================= */
+.gam-card-item:nth-child(1) { background-image: url('LINK_CARTA_01.png'); }
+.gam-card-item:nth-child(2) { background-image: url('LINK_CARTA_02.png'); }
+.gam-card-item:nth-child(3) { background-image: url('LINK_CARTA_03.png'); }
+.gam-card-item:nth-child(4) { background-image: url('LINK_CARTA_04.png'); }
+.gam-card-item:nth-child(5) { background-image: url('LINK_CARTA_05.png'); }
+/* Adicione mais nth-child se colocar mais divs no HTML */
+
+
+/* =========================================
+   CONSIDERAÇÕES (VIA CSS)
+   ========================================= */
+.gam-considerations {
+  margin-top: 40px;
+  padding: 20px;
+  background: var(--bg-dark-gray);
+  border-left: 3px solid var(--accent-red);
+  position: relative;
+}
+
+/* Título "CONSIDERAÇÕES" injetado pelo CSS */
+.gam-considerations::before {
+  content: 'CONSIDERAÇÕES'; 
+  display: block;
+  font-family: 'Cinzel', serif;
+  color: var(--accent-red);
+  font-size: 16px;
+  margin-bottom: 10px;
+  letter-spacing: 1px;
+}
+
+.gam-notes {
+  color: var(--text-dim);
+  font-size: 12px;
+  font-style: italic;
+}
+
+/* =========================================
+   ASSINATURA (VIA CSS)
+   ========================================= */
+.gam-signature {
+  margin-top: 30px;
+  width: 100%;
+  height: 150px; /* Altura fixa para a imagem aparecer */
+  background-image: url('https://i.imgur.com/SEU_LINK_ASSINATURA.png'); 
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain; /* Ou 'cover' dependendo da arte */
+  opacity: 0.8;
+  mix-blend-mode: screen; /* Ajuda a remover fundo preto se a img tiver */
+}
+
+/* =========================================
+   RESPONSIVIDADE (MOBILE)
+   ========================================= */
 @media (max-width: 600px) {
-  .gambler-body, .gambler-notes-section { padding-left: 20px; padding-right: 20px; }
-  .modern-spade-divider::before, .modern-spade-divider::after { margin: 0 10px; }
+  .gam-container {
+    padding: 15px;
+  }
+  
+  .gam-status-wrapper {
+    flex-direction: column;
+  }
+  
+  .gam-status-bar {
+    width: 100%;
+  }
+
+  .gam-cards {
+    gap: 10px;
+  }
+
+  .gam-card-item {
+    width: 50px;
+    height: 80px;
+  }
 }
