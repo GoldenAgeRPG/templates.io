@@ -1,206 +1,174 @@
-/* --- TEMPLATE: YIZHUO GAMBLER --- */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+/* --- TEMPLATE: YIZHUO GAMBLER (FINAL VISUAL) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
 
 :root {
-  --y-bg: #050505;
-  --y-wine: #781414;      /* Vinho Principal */
-  --y-blood: #a31a1a;     /* Vinho Claro (Glow) */
-  --y-text: #cccccc;
-  --y-border: #1a1a1a;
+  --g-bg-dark: #111111;
+  --g-bg-light: #ffffff;
+  --g-wine: #a31a1a;  /* Vermelho das linhas */
+  --g-spade: #333333; /* Cinza escuro do naipe central */
+  --g-text-dark: #222222;
+  --g-text-light: #666666;
 }
 
-/* CONTAINER PRINCIPAL */
+/* WRAPPER GERAL (Para o fundo escuro e animação lateral) */
+.gambler-wrapper {
+    background-color: var(--g-bg-dark);
+    min-height: 100vh;
+    padding: 50px 0;
+    position: relative;
+    overflow: hidden; /* Impede que as cartas laterais criem barra de rolagem */
+}
+
+/* ANIMAÇÃO DAS CARTAS LATERAIS */
+@keyframes cardDrop {
+    0% { transform: translateY(-100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+}
+
+.side-card {
+    position: absolute;
+    width: 60px; /* Tamanho das cartas laterais */
+    height: auto;
+    opacity: 0;
+    animation: cardDrop 8s linear infinite;
+    z-index: 0; /* Fica atrás do container principal */
+}
+/* Posicionamento e atrasos variados para as cartas */
+.c1 { left: 5%; animation-delay: 0s; }
+.c2 { left: 12%; animation-delay: 2s; }
+.c3 { left: 2%; animation-delay: 4s; }
+.c4 { right: 5%; animation-delay: 1s; }
+.c5 { right: 12%; animation-delay: 3s; }
+.c6 { right: 2%; animation-delay: 5s; }
+
+
+/* CONTAINER PRINCIPAL CENTRAL */
 .gambler-container {
   box-sizing: border-box;
-  max-width: 650px;
+  max-width: 700px;
   width: 95%;
-  margin: 50px auto;
-  background-color: var(--y-bg);
-  /* Textura de fundo sutil */
-  background-image: linear-gradient(to bottom, rgba(5,5,5,0.95), rgba(5,5,5,0.98)), url("https://www.transparenttextures.com/patterns/black-lozenge.png");
-  border: 1px solid var(--y-wine);
-  /* Clip-path (Cantos cortados) */
-  clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+  margin: 0 auto;
+  background-color: var(--g-bg-light);
+  border: 1px solid #ddd;
+  box-shadow: 0 0 50px rgba(0,0,0,0.5);
   font-family: 'Cormorant Garamond', serif;
-  color: var(--y-text);
+  color: var(--g-text-dark);
   position: relative;
-  overflow: visible; /* Mudado para visible para permitir sombras externas se precisar */
-  box-shadow: 0 0 30px rgba(0,0,0,0.8);
+  z-index: 1; /* Fica na frente das cartas laterais */
 }
 .gambler-container * { box-sizing: border-box; }
 
-/* HEADER (IMAGEM) */
+/* HEADER (IMAGEM COLORIDA) */
 .gambler-header {
-  height: 300px;
+  height: 350px;
   width: 100%;
   overflow: hidden;
-  border-bottom: 2px solid var(--y-wine);
-  position: relative;
+  border-bottom: 3px solid var(--g-wine);
 }
 .gambler-header img {
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: top center;
-  filter: grayscale(100%) contrast(1.1);
-  transition: filter 0.5s ease;
+  /* Filtro removido conforme pedido */
 }
-.gambler-container:hover .gambler-header img { filter: grayscale(0%) contrast(1.1); }
 
-/* AREA DE TÍTULO E SUBTÍTULO */
+/* TÍTULOS */
 .gambler-title-wrap {
-  background: linear-gradient(90deg, #000, #110505, #000);
   text-align: center;
-  padding: 20px 0;
-  border-bottom: 1px solid #222;
+  padding: 30px 20px 10px 20px;
 }
-
 .gambler-title {
-  font-family: 'Cinzel', serif;
-  font-size: 2.8em;
-  font-weight: 700;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  margin: 0;
-  line-height: 1;
-  text-shadow: 0 2px 10px var(--y-wine);
+  font-family: 'Cinzel', serif; font-size: 3em; font-weight: 900; color: #000;
+  text-transform: uppercase; letter-spacing: 2px; margin: 0; line-height: 1;
 }
-
-/* Emojis via CSS no título */
-.gambler-title::before { content: '♠️ 🐦‍⬛'; margin-right: 15px; font-size: 0.5em; vertical-align: middle; color: var(--y-wine); opacity: 0.8; }
-.gambler-title::after { content: '🐦‍⬛ ♥️'; margin-left: 15px; font-size: 0.5em; vertical-align: middle; color: var(--y-wine); opacity: 0.8; }
-
 .gambler-subtitle {
-  display: block;
-  font-family: 'Cinzel', serif;
-  font-size: 0.75em;
-  color: var(--y-wine);
-  letter-spacing: 5px;
-  margin-top: 5px;
-  text-transform: uppercase;
-  font-weight: 700;
+  font-family: 'Cinzel', serif; font-size: 0.9em; color: var(--g-text-light);
+  text-transform: uppercase; letter-spacing: 4px; margin-top: 10px; display: block; font-weight: 700;
 }
 
-/* STATUS (Classes compatíveis com JS) */
-.gambler-stats {
-  padding: 15px 40px;
-  background: rgba(10, 5, 5, 0.6);
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  border-bottom: 1px solid var(--y-border);
+/* O DIVISOR MODERNO (ESPADA CENTRAL + LINHAS VERMELHAS) */
+.modern-spade-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 25px 0;
+    color: var(--g-spade); /* Cor escura do naipe */
+    font-size: 2em; /* Tamanho do naipe */
+}
+.modern-spade-divider::before,
+.modern-spade-divider::after {
+    content: '';
+    height: 2px;
+    background-color: var(--g-wine); /* Cor das linhas laterais */
+    flex-grow: 1; /* Estica a linha */
+    max-width: 180px; /* Limita a largura da linha */
+    margin: 0 20px; /* Espaço entre a linha e o naipe */
 }
 
-.gambler-stat-row {
-  display: grid;
-  grid-template-columns: 30px 1fr 100px; /* Label | Barra | Valor */
-  align-items: center;
-  gap: 15px;
+/* STATUS SIMPLES */
+.gambler-stats-text {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    font-size: 0.9em;
+    color: var(--g-text-light);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 30px;
 }
+.gambler-stats-text b { color: #000; }
 
-.gambler-label {
-  font-family: 'Cinzel', serif; font-weight: 900;
-  color: var(--y-wine); font-size: 0.85em;
-  text-align: right;
-}
-
-/* Barra de progresso */
-.gambler-track {
-  width: 100%; height: 6px;
-  background: #000;
-  border: 1px solid #333;
-  transform: skewX(-20deg); /* Inclinação estilosa */
-  overflow: hidden;
-}
-
-/* Classes para o JS preencher a largura (width) */
-.gambler-hp-fill, .gambler-ea-fill {
-  height: 100%;
-  width: 100%; /* Padrão, o JS deve alterar isso */
-  background: linear-gradient(90deg, var(--y-wine), var(--y-blood));
-  box-shadow: 0 0 10px var(--y-wine);
-  transition: width 0.5s ease;
-}
-
-/* Classes para o JS preencher o texto */
-.gambler-hp-val, .gambler-ea-val {
-  font-family: 'Cinzel', serif;
-  font-size: 0.8em;
-  color: #888;
-  font-weight: 700;
-  text-align: right;
-}
-
-/* CORPO DO TEXTO */
+/* CORPO DO TEXTO (Sem divisões internas) */
 .gambler-body {
-  padding: 40px 50px;
+  padding: 0 50px 30px 50px;
   text-align: justify;
   font-size: 1.1em;
   line-height: 1.8;
-  color: #bfbfbf;
+  color: var(--g-text-dark);
 }
-.gambler-body b, .gambler-body strong {
-  color: var(--y-wine);
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  font-size: 1.05em;
-}
-.gambler-body i { color: #eee; opacity: 0.7; }
+.gambler-body p { margin-bottom: 1.5em; }
 
-/* Separador interno */
-.gambler-divider {
-  display: flex; align-items: center; justify-content: center;
-  margin: 30px 0; color: var(--y-wine); font-size: 1.2em; opacity: 0.6;
+/* SEÇÃO DE CONSIDERAÇÕES */
+.gambler-notes-section {
+    padding: 0 50px 40px 50px;
+    text-align: left;
 }
-.gambler-divider::before, .gambler-divider::after {
-  content: ''; height: 1px; width: 40px; background: var(--y-wine); margin: 0 15px;
+.notes-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #000;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--g-wine);
+    display: inline-block;
 }
+.gambler-notes-section ul {
+    list-style-type: square;
+    padding-left: 20px;
+    color: var(--g-text-light);
+    line-height: 1.6;
+}
+.gambler-notes-section li { margin-bottom: 10px; }
 
-/* CONSIDERAÇÕES (Injetado via CSS) */
-.gambler-notes {
-  margin: 0 40px 30px 40px;
-  padding: 20px;
-  background: rgba(120, 20, 20, 0.05); /* Fundo vinho muito leve */
-  border: 1px dashed var(--y-wine);
-  font-size: 0.9em;
-  color: #aaa;
-  position: relative;
-  text-align: center;
-}
-
-/* Título 'CONSIDERAÇÕES' injetado */
-.gambler-notes::before {
-  content: 'CONSIDERAÇÕES';
-  display: block;
-  font-family: 'Cinzel', serif;
-  color: var(--y-wine);
-  font-weight: 900;
-  letter-spacing: 2px;
-  margin-bottom: 10px;
-  border-bottom: 1px solid rgba(120, 20, 20, 0.3);
-  padding-bottom: 5px;
-}
-
-/* RODAPÉ E ASSINATURA (Injetado via CSS) */
+/* RODAPÉ */
 .gambler-footer {
-  padding: 20px 40px 30px 40px;
-  background: #080808;
-  border-top: 1px solid var(--y-wine);
-  text-align: right;
-  /* Corte inferior */
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));
+  padding: 30px;
+  background: #f9f9f9;
+  border-top: 1px solid #eee;
+  text-align: center;
+  font-family: 'Cinzel', serif;
+  color: var(--g-text-light);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-size: 0.8em;
 }
-
-.gambler-footer::after {
-  content: 'Yizhuo Ming';
-  font-family: 'Pinyon Script', cursive;
-  font-size: 2.5em;
-  color: var(--y-wine);
-  display: block;
-  text-shadow: 2px 2px 5px rgba(0,0,0,1);
+.footer-sig {
+    display: block; font-size: 1.2em; color: #000; font-weight: 700; margin-bottom: 5px;
 }
 
 @media (max-width: 600px) {
-  .gambler-body, .gambler-stats, .gambler-notes { padding-left: 20px; padding-right: 20px; }
-  .gambler-title::before, .gambler-title::after { display: none; } /* Remove emojis no mobile p/ espaço */
+  .gambler-body, .gambler-notes-section { padding-left: 20px; padding-right: 20px; }
+  .modern-spade-divider::before, .modern-spade-divider::after { margin: 0 10px; }
 }
