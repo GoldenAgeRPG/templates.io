@@ -1,80 +1,60 @@
-/* --- TEMPLATE: YIZHUO GAMBLER (QUEEN OF CROWS - ULTIMATE) --- */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Pinyon+Script&family=Cormorant+Garamond:wght@400;600;700&display=swap');
+/* --- TEMPLATE: YIZHUO GAMBLER --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Pinyon+Script&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap');
 
 :root {
   --y-bg: #050505;
-  --y-panel: #0f0f0f;
-  --y-wine: #781414;      /* Cor Principal */
-  --y-blood: #a31a1a;     /* Brilho */
-  --y-gold: #8a6d3b;      /* Detalhe sutil */
+  --y-wine: #781414;      /* Vinho Principal */
+  --y-blood: #a31a1a;     /* Vinho Claro (Glow) */
   --y-text: #cccccc;
-}
-
-/* Animação: Brilho pulsante (High Stakes Tension) */
-@keyframes gamble-pulse {
-  0% { box-shadow: 0 0 10px rgba(120, 20, 20, 0.1); border-color: var(--y-wine); }
-  50% { box-shadow: 0 0 25px rgba(120, 20, 20, 0.4); border-color: var(--y-blood); }
-  100% { box-shadow: 0 0 10px rgba(120, 20, 20, 0.1); border-color: var(--y-wine); }
+  --y-border: #1a1a1a;
 }
 
 /* CONTAINER PRINCIPAL */
-.yizhuo-container {
+.gambler-container {
   box-sizing: border-box;
   max-width: 650px;
   width: 95%;
   margin: 50px auto;
   background-color: var(--y-bg);
-  
-  /* Textura de fundo: Padrão sutil de luxo */
-  background-image: 
-    linear-gradient(to bottom, rgba(5,5,5,0.95), rgba(5,5,5,0.98)),
-    url("https://www.transparenttextures.com/patterns/black-lozenge.png");
-
-  /* Borda e Estrutura */
+  /* Textura de fundo sutil */
+  background-image: linear-gradient(to bottom, rgba(5,5,5,0.95), rgba(5,5,5,0.98)), url("https://www.transparenttextures.com/patterns/black-lozenge.png");
   border: 1px solid var(--y-wine);
-  /* Corte nos cantos (Estilo carta/tech agressivo) */
-  clip-path: polygon(
-    0 15px, 15px 0, 
-    100% 0, 100% calc(100% - 15px), 
-    calc(100% - 15px) 100%, 0 100%
-  );
-  
+  /* Clip-path (Cantos cortados) */
+  clip-path: polygon(0 15px, 15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
   font-family: 'Cormorant Garamond', serif;
   color: var(--y-text);
   position: relative;
-  overflow: hidden;
-  animation: gamble-pulse 4s infinite ease-in-out;
+  overflow: visible; /* Mudado para visible para permitir sombras externas se precisar */
+  box-shadow: 0 0 30px rgba(0,0,0,0.8);
 }
-.yizhuo-container * { box-sizing: border-box; }
+.gambler-container * { box-sizing: border-box; }
 
-/* HEADER / IMAGEM */
-.yizhuo-header {
-  position: relative;
+/* HEADER (IMAGEM) */
+.gambler-header {
   height: 300px;
+  width: 100%;
+  overflow: hidden;
   border-bottom: 2px solid var(--y-wine);
+  position: relative;
 }
-.yizhuo-header img {
+.gambler-header img {
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: top center;
   filter: grayscale(100%) contrast(1.1);
   transition: filter 0.5s ease;
 }
-.yizhuo-container:hover .yizhuo-header img {
-  filter: grayscale(0%) contrast(1.1);
-}
+.gambler-container:hover .gambler-header img { filter: grayscale(0%) contrast(1.1); }
 
-/* TÍTULO E ORNAMENTOS */
-.yizhuo-title-wrap {
-  background: linear-gradient(90deg, #000, #140505, #000);
+/* AREA DE TÍTULO E SUBTÍTULO */
+.gambler-title-wrap {
+  background: linear-gradient(90deg, #000, #110505, #000);
   text-align: center;
-  padding: 25px 0;
+  padding: 20px 0;
   border-bottom: 1px solid #222;
-  position: relative;
-  z-index: 2;
 }
 
-.yizhuo-name {
+.gambler-title {
   font-family: 'Cinzel', serif;
   font-size: 2.8em;
   font-weight: 700;
@@ -82,148 +62,145 @@
   text-transform: uppercase;
   letter-spacing: 3px;
   margin: 0;
+  line-height: 1;
   text-shadow: 0 2px 10px var(--y-wine);
 }
 
-/* INJEÇÃO DE EMOJIS (NAIPES + CORVOS) */
-.yizhuo-name::before {
-  content: '♠️ 🐦‍⬛ ♣️'; /* Lado esquerdo */
-  font-size: 0.4em;
-  vertical-align: middle;
-  margin-right: 15px;
+/* Emojis via CSS no título */
+.gambler-title::before { content: '♠️ 🐦‍⬛'; margin-right: 15px; font-size: 0.5em; vertical-align: middle; color: var(--y-wine); opacity: 0.8; }
+.gambler-title::after { content: '🐦‍⬛ ♥️'; margin-left: 15px; font-size: 0.5em; vertical-align: middle; color: var(--y-wine); opacity: 0.8; }
+
+.gambler-subtitle {
+  display: block;
+  font-family: 'Cinzel', serif;
+  font-size: 0.75em;
   color: var(--y-wine);
-  opacity: 0.8;
-}
-.yizhuo-name::after {
-  content: '♦️ 🐦‍⬛ ♥️'; /* Lado direito */
-  font-size: 0.4em;
-  vertical-align: middle;
-  margin-left: 15px;
-  color: var(--y-wine);
-  opacity: 0.8;
+  letter-spacing: 5px;
+  margin-top: 5px;
+  text-transform: uppercase;
+  font-weight: 700;
 }
 
-/* BARRA DE STATUS (Inspirado no Grid do Sukuna) */
-.yizhuo-stats {
-  padding: 20px 40px;
-  background: rgba(10, 5, 5, 0.8);
+/* STATUS (Classes compatíveis com JS) */
+.gambler-stats {
+  padding: 15px 40px;
+  background: rgba(10, 5, 5, 0.6);
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  border-bottom: 1px solid #1a1a1a;
+  gap: 12px;
+  border-bottom: 1px solid var(--y-border);
 }
 
-.stat-row {
+.gambler-stat-row {
   display: grid;
-  grid-template-columns: 40px 1fr 50px; /* Label | Barra | Valor */
+  grid-template-columns: 30px 1fr 100px; /* Label | Barra | Valor */
   align-items: center;
   gap: 15px;
 }
 
-.stat-label {
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  color: var(--y-wine);
-  font-size: 0.8em;
+.gambler-label {
+  font-family: 'Cinzel', serif; font-weight: 900;
+  color: var(--y-wine); font-size: 0.85em;
   text-align: right;
 }
 
-.stat-track {
+/* Barra de progresso */
+.gambler-track {
   width: 100%; height: 6px;
-  background: #111;
+  background: #000;
   border: 1px solid #333;
-  transform: skewX(-20deg); /* Inclinação agressiva */
+  transform: skewX(-20deg); /* Inclinação estilosa */
   overflow: hidden;
 }
-.stat-fill {
+
+/* Classes para o JS preencher a largura (width) */
+.gambler-hp-fill, .gambler-ea-fill {
   height: 100%;
+  width: 100%; /* Padrão, o JS deve alterar isso */
   background: linear-gradient(90deg, var(--y-wine), var(--y-blood));
   box-shadow: 0 0 10px var(--y-wine);
+  transition: width 0.5s ease;
 }
 
-.stat-val {
+/* Classes para o JS preencher o texto */
+.gambler-hp-val, .gambler-ea-val {
   font-family: 'Cinzel', serif;
   font-size: 0.8em;
-  color: #666;
+  color: #888;
   font-weight: 700;
+  text-align: right;
 }
 
 /* CORPO DO TEXTO */
-.yizhuo-body {
+.gambler-body {
   padding: 40px 50px;
   text-align: justify;
   font-size: 1.1em;
   line-height: 1.8;
   color: #bfbfbf;
 }
-
-/* Destaques em Vinho */
-.yizhuo-body b, .yizhuo-body strong {
+.gambler-body b, .gambler-body strong {
   color: var(--y-wine);
   font-family: 'Cinzel', serif;
   font-weight: 700;
   font-size: 1.05em;
 }
+.gambler-body i { color: #eee; opacity: 0.7; }
 
-.yizhuo-body i {
-  color: #fff;
-  opacity: 0.7;
+/* Separador interno */
+.gambler-divider {
+  display: flex; align-items: center; justify-content: center;
+  margin: 30px 0; color: var(--y-wine); font-size: 1.2em; opacity: 0.6;
+}
+.gambler-divider::before, .gambler-divider::after {
+  content: ''; height: 1px; width: 40px; background: var(--y-wine); margin: 0 15px;
 }
 
-/* DIVISOR INTERNO */
-.yizhuo-divider {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 30px 0;
+/* CONSIDERAÇÕES (Injetado via CSS) */
+.gambler-notes {
+  margin: 0 40px 30px 40px;
+  padding: 20px;
+  background: rgba(120, 20, 20, 0.05); /* Fundo vinho muito leve */
+  border: 1px dashed var(--y-wine);
+  font-size: 0.9em;
+  color: #aaa;
+  position: relative;
+  text-align: center;
+}
+
+/* Título 'CONSIDERAÇÕES' injetado */
+.gambler-notes::before {
+  content: 'CONSIDERAÇÕES';
+  display: block;
+  font-family: 'Cinzel', serif;
   color: var(--y-wine);
-  font-size: 1.2em;
-  opacity: 0.6;
-}
-.yizhuo-divider::before, .yizhuo-divider::after {
-  content: '';
-  height: 1px;
-  width: 50px;
-  background: var(--y-wine);
-  margin: 0 15px;
+  font-weight: 900;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid rgba(120, 20, 20, 0.3);
+  padding-bottom: 5px;
 }
 
-/* RODAPÉ E ASSINATURA INJETADA */
-.yizhuo-footer {
-  margin: 0 20px 20px 20px;
-  padding: 20px 30px;
-  background: linear-gradient(to right, #080808, #111, #080808);
-  border: 1px solid #1a1a1a;
+/* RODAPÉ E ASSINATURA (Injetado via CSS) */
+.gambler-footer {
+  padding: 20px 40px 30px 40px;
+  background: #080808;
   border-top: 1px solid var(--y-wine);
   text-align: right;
-  position: relative;
-  /* Corte no rodapé */
-  clip-path: polygon(10px 0, 100% 0, 100% 100%, 0 100%, 0 10px);
+  /* Corte inferior */
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 10px 100%, 0 calc(100% - 10px));
 }
 
-/* Injeção da Assinatura */
-.yizhuo-footer::after {
+.gambler-footer::after {
   content: 'Yizhuo Ming';
-  font-family: 'Pinyon Script', cursive; /* Fonte manuscrita elegante */
-  font-size: 2.2em;
+  font-family: 'Pinyon Script', cursive;
+  font-size: 2.5em;
   color: var(--y-wine);
   display: block;
-  text-shadow: 0 0 5px rgba(0,0,0,1);
-  margin-bottom: -5px;
-}
-.yizhuo-footer::before {
-  content: 'The High Roller';
-  font-family: 'Cinzel', serif;
-  font-size: 0.6em;
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  color: #444;
-  display: block;
-  margin-bottom: 5px;
+  text-shadow: 2px 2px 5px rgba(0,0,0,1);
 }
 
-/* Responsivo */
 @media (max-width: 600px) {
-  .yizhuo-body { padding: 25px; }
-  .yizhuo-name::before, .yizhuo-name::after { display: block; margin: 5px 0; font-size: 0.6em; }
+  .gambler-body, .gambler-stats, .gambler-notes { padding-left: 20px; padding-right: 20px; }
+  .gambler-title::before, .gambler-title::after { display: none; } /* Remove emojis no mobile p/ espaço */
 }
