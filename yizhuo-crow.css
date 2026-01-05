@@ -1,4 +1,4 @@
-/* --- TEMPLATE: CROW --- */
+/* --- TEMPLATE: CROW & CARDS V5 (CORREÇÃO DE POSICIONAMENTO) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Raleway:ital,wght@0,400;0,600;1,400&family=Pinyon+Script&family=Playfair+Display:ital@1&display=swap');
 
 :root {
@@ -11,89 +11,11 @@
   --crow-border: #2a0505;
 }
 
-/* Animação: Flutuação Sutil do Ícone */
-@keyframes icon-float {
-  0%, 100% { transform: translateY(0); opacity: 0.9; }
-  50% { transform: translateY(-3px); opacity: 1; filter: drop-shadow(0 5px 5px var(--crow-accent)); }
-}
-
-/* --- ANIMAÇÃO DO BANDO DE CORVOS --- */
-
-/* 1. O bater de asas (Sprite Sheet) - Comum a todos */
-@keyframes crow-fly-cycle {
-  100% { background-position: -900px 0; }
-}
-
-/* 2. Movimento Esquerda -> Direita */
-@keyframes crow-fly-across {
-  0% { transform: translateX(-150px) translateY(20px) scale(0.6); }
-  25% { transform: translateX(150px) translateY(0px) scale(0.7); }
-  50% { transform: translateX(400px) translateY(30px) scale(0.6); }
-  75% { transform: translateX(650px) translateY(10px) scale(0.7); }
-  100% { transform: translateX(900px) translateY(20px) scale(0.6); }
-}
-
-/* 3. Movimento Direita -> Esquerda (Invertido) */
-/* Nota: scaleX(-1) vira o pássaro horizontalmente */
-@keyframes crow-fly-reverse {
-  0% { transform: translateX(900px) translateY(20px) scale(0.6) scaleX(-1); }
-  25% { transform: translateX(650px) translateY(0px) scale(0.7) scaleX(-1); }
-  50% { transform: translateX(400px) translateY(30px) scale(0.6) scaleX(-1); }
-  75% { transform: translateX(150px) translateY(10px) scale(0.7) scaleX(-1); }
-  100% { transform: translateX(-150px) translateY(20px) scale(0.6) scaleX(-1); }
-}
-
-/* Container Global do Voo - Cobre todo o card */
-.crow-fly-container {
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    z-index: 20; /* Z-Index ALTO para voar por cima de tudo (texto é z-index 2) */
-    pointer-events: none; /* Permite clicar no texto abaixo deles */
-    overflow: hidden;
-}
-
-/* O Pássaro Base */
-.crow-fly-bird {
-    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/174479/bird-cells.svg');
-    background-size: auto 100%;
-    width: 88px; height: 125px;
-    will-change: background-position, transform;
-    animation-name: crow-fly-cycle;
-    animation-timing-function: steps(10);
-    animation-iteration-count: infinite;
-    animation-duration: 1s;
-    /* Filtro para silhueta preta/vinho e transparência */
-    filter: grayscale(100%) brightness(0.2) sepia(1) hue-rotate(-50deg) saturate(3) opacity(0.6);
-}
-
-/* Wrapper Base de Movimento */
-.crow-fly-wrapper {
-    position: absolute;
-    left: -100px; /* Começa fora da tela */
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-}
-
-/* --- VARIAÇÕES DO BANDO (Cria o caos) --- */
-
-/* C1: O principal, entre subtítulo e banner */
-.c-1 { top: 110px; animation-name: crow-fly-across; animation-duration: 14s; animation-delay: 0s; }
-
-/* C2: Passando por cima do texto */
-.c-2 { top: 450px; animation-name: crow-fly-reverse; animation-duration: 18s; animation-delay: 2s; }
-
-/* C3: Mais alto, no header */
-.c-3 { top: 20px; animation-name: crow-fly-across; animation-duration: 12s; animation-delay: 5s; }
-
-/* C4: Perto da assinatura, lento */
-.c-4 { top: 650px; animation-name: crow-fly-reverse; animation-duration: 22s; animation-delay: 1s; }
-
-/* C5: Meio do banner, rápido */
-.c-5 { top: 250px; animation-name: crow-fly-across; animation-duration: 10s; animation-delay: 8s; }
-
-
-/* CONTAINER PRINCIPAL */
+/* CONTAINER PRINCIPAL - A REFERÊNCIA DE POSIÇÃO */
 .crow-card {
+  position: relative; /* Essencial para os pássaros não fugirem */
+  z-index: 1; /* Cria um contexto de empilhamento */
+  
   box-sizing: border-box;
   max-width: 650px;
   width: 95%;
@@ -102,10 +24,8 @@
   background-image: 
     linear-gradient(to bottom, rgba(5,5,5,0.95), rgba(0,0,0,1)),
     repeating-linear-gradient(45deg, transparent 0px, transparent 2px, rgba(120,20,20,0.05) 2px, rgba(120,20,20,0.05) 4px);
-  
   border: 1px solid var(--crow-border);
   box-shadow: 0 0 15px rgba(120, 20, 20, 0.2);
-
   border-radius: 4px;
   clip-path: polygon(
     0% 15px, 15px 0%, 
@@ -113,117 +33,126 @@
     100% calc(100% - 15px), calc(100% - 15px) 100%, 
     15px 100%, 0% calc(100% - 15px)
   );
-  
   color: var(--crow-text);
   font-family: 'Raleway', sans-serif;
-  position: relative;
-  overflow: hidden;
+  overflow: hidden; /* Garante que nada saia das bordas do cartão */
 }
-/* O conteúdo normal fica no z-index 2, os pássaros no 20 */
-.crow-card * { box-sizing: border-box; position: relative; z-index: 2; }
+.crow-card * { box-sizing: border-box; }
 
-/* SEPARADOR */
+/* --- CAMADA DE CONTEÚDO (Z-INDEX MÉDIO) --- */
+/* Todos os elementos de conteúdo devem estar acima do background mas abaixo dos pássaros */
+.crow-header, .crow-image-frame, .crow-stats-panel, .crow-content, .crow-notes, .crow-signature, .crow-separator {
+    position: relative;
+    z-index: 5;
+}
+
+/* --- CAMADA DE ANIMAÇÃO (Z-INDEX ALTO) --- */
+
+/* Container do Bando - Cobre EXATAMENTE o .crow-card */
+.crow-fly-container {
+    position: absolute;
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%;
+    z-index: 10; /* Fica acima do conteúdo (z-index 5) */
+    pointer-events: none; /* Permite clicar no texto abaixo deles */
+}
+
+/* Animações do Pássaro */
+@keyframes crow-fly-cycle { 100% { background-position: -900px 0; } }
+@keyframes crow-fly-across {
+  0% { transform: translateX(-150px) translateY(20px) scale(0.6); }
+  100% { transform: translateX(900px) translateY(20px) scale(0.6); }
+}
+@keyframes crow-fly-reverse {
+  0% { transform: translateX(900px) translateY(20px) scale(0.6) scaleX(-1); }
+  100% { transform: translateX(-150px) translateY(20px) scale(0.6) scaleX(-1); }
+}
+
+.crow-fly-bird {
+    background-image: url('https://s3-us-west-2.amazonaws.com/s.cdpn.io/174479/bird-cells.svg');
+    background-size: auto 100%; width: 88px; height: 125px; will-change: background-position, transform;
+    animation: crow-fly-cycle 1s steps(10) infinite;
+    filter: grayscale(100%) brightness(0.2) sepia(1) hue-rotate(-50deg) saturate(3) opacity(0.5);
+}
+.crow-fly-wrapper {
+    position: absolute; left: -150px; animation-timing-function: linear; animation-iteration-count: infinite;
+}
+
+/* Variações do Bando (Ajustadas para o novo contexto) */
+.c-1 { top: 8%; animation-name: crow-fly-across; animation-duration: 15s; animation-delay: 0s; }
+.c-2 { top: 45%; animation-name: crow-fly-reverse; animation-duration: 18s; animation-delay: 2s; }
+.c-3 { top: 2%; animation-name: crow-fly-across; animation-duration: 13s; animation-delay: 5s; }
+.c-4 { top: 85%; animation-name: crow-fly-reverse; animation-duration: 22s; animation-delay: 1s; }
+.c-5 { top: 25%; animation-name: crow-fly-across; animation-duration: 11s; animation-delay: 8s; }
+.c-6 { top: 65%; animation-name: crow-fly-reverse; animation-duration: 16s; animation-delay: 3s; }
+
+
+/* --- ESTILOS DE CONTEÚDO (Resto do template) --- */
+@keyframes icon-float { 0%, 100% { transform: translateY(0); opacity: 0.9; } 50% { transform: translateY(-3px); opacity: 1; filter: drop-shadow(0 5px 5px var(--crow-accent)); } }
 .crow-separator {
-  height: 1px; width: 100%;
-  background: radial-gradient(circle, var(--crow-accent-bright) 0%, transparent 70%);
-  opacity: 0.7; margin: 0; border: none; position: relative; z-index: 5;
+  height: 1px; width: 100%; background: radial-gradient(circle, var(--crow-accent-bright) 0%, transparent 70%); opacity: 0.7; margin: 0; border: none;
 }
-
-/* HEADER */
 .crow-header {
-  text-align: center; padding: 35px 20px 25px 20px;
-  background: linear-gradient(to bottom, #0a0a0a, #020202);
+  text-align: center; padding: 35px 20px 25px 20px; background: linear-gradient(to bottom, #0a0a0a, #020202);
 }
 .crow-icon {
-  width: 60px; height: 60px; margin-bottom: 10px; fill: var(--crow-accent);
-  filter: drop-shadow(0 0 8px rgba(120,20,20,0.4)); animation: icon-float 5s ease-in-out infinite;
+  width: 60px; height: 60px; margin-bottom: 10px; fill: var(--crow-accent); filter: drop-shadow(0 0 8px rgba(120,20,20,0.4)); animation: icon-float 5s ease-in-out infinite;
 }
 .crow-title {
-  font-family: 'Cinzel', serif; font-weight: 700; font-size: 2.4em; color: #fff;
-  text-transform: uppercase; letter-spacing: 2px; margin: 0;
-  text-shadow: 0 0 15px rgba(160, 27, 27, 0.5); line-height: 1;
+  font-family: 'Cinzel', serif; font-weight: 700; font-size: 2.4em; color: #fff; text-transform: uppercase; letter-spacing: 2px; margin: 0; text-shadow: 0 0 15px rgba(160, 27, 27, 0.5); line-height: 1;
 }
 .crow-subtitle {
-  font-family: 'Raleway', sans-serif; font-size: 0.75em; color: var(--crow-accent);
-  text-transform: uppercase; letter-spacing: 5px; margin-top: 10px; font-weight: 600;
+  font-family: 'Raleway', sans-serif; font-size: 0.75em; color: var(--crow-accent); text-transform: uppercase; letter-spacing: 5px; margin-top: 10px; font-weight: 600;
 }
-
-/* IMAGEM */
 .crow-image-frame {
-  width: 100%; height: 350px; position: relative; overflow: hidden; margin: 0;
+  width: 100%; height: 350px; margin: 0; overflow: hidden;
   mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 15%, black 85%, transparent 100%);
 }
 .crow-image-frame::after {
-    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(120, 20, 20, 0.15); mix-blend-mode: overlay; z-index: 2; pointer-events: none;
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(120, 20, 20, 0.15); mix-blend-mode: overlay; pointer-events: none;
 }
 .crow-image-frame img {
-  width: 100%; height: 100%; object-fit: cover; object-position: center 30%;
-  position: relative; z-index: 1;
-  filter: grayscale(40%) contrast(120%) brightness(0.9); transition: 0.7s ease;
+  width: 100%; height: 100%; object-fit: cover; object-position: center 30%; filter: grayscale(40%) contrast(120%) brightness(0.9); transition: 0.7s ease;
 }
 .crow-card:hover .crow-image-frame img { transform: scale(1.03); filter: grayscale(10%) contrast(125%) brightness(1); }
-
-/* STATUS */
 .crow-stats-panel {
-  padding: 25px 40px 15px 40px; display: flex; flex-direction: column; gap: 12px;            
-  position: relative; z-index: 5;
-  background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(5,5,5,0.9));
+  padding: 25px 40px 15px 40px; display: flex; flex-direction: column; gap: 12px; background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(5,5,5,0.9));
 }
 .crow-stat-row { display: flex; align-items: center; gap: 15px; }
 .crow-label {
-  font-family: 'Cinzel', serif; font-weight: 900; color: var(--crow-accent); font-size: 0.9em;
-  width: 30px; text-align: left; text-shadow: 0 0 5px rgba(120,20,20,0.5);
+  font-family: 'Cinzel', serif; font-weight: 900; color: var(--crow-accent); font-size: 0.9em; width: 30px; text-align: left; text-shadow: 0 0 5px rgba(120,20,20,0.5);
 }
 .crow-bar-bg {
-  flex-grow: 1; height: 6px; background: #050505; border: 1px solid #222;
-  box-shadow: inset 0 0 5px #000; border-radius: 2px; position: relative; overflow: hidden;
+  flex-grow: 1; height: 6px; background: #050505; border: 1px solid #222; box-shadow: inset 0 0 5px #000; border-radius: 2px; overflow: hidden;
 }
 .crow-hp-fill, .crow-ea-fill {
-  height: 100%; width: 0%;
-  background: linear-gradient(90deg, #400, var(--crow-accent), var(--crow-accent-bright));
-  box-shadow: 0 0 10px var(--crow-accent); transition: width 0.8s cubic-bezier(0.4, 0.0, 0.2, 1); position: relative;
+  height: 100%; width: 0%; background: linear-gradient(90deg, #400, var(--crow-accent), var(--crow-accent-bright)); box-shadow: 0 0 10px var(--crow-accent); transition: width 0.8s cubic-bezier(0.4, 0.0, 0.2, 1);
 }
 .crow-hp-fill::after, .crow-ea-fill::after {
-    content: ''; position: absolute; right: 0; top:0; height: 100%; width: 20px;
-    background: linear-gradient(90deg, transparent, #fff); opacity: 0.3;
+    content: ''; position: absolute; right: 0; top:0; height: 100%; width: 20px; background: linear-gradient(90deg, transparent, #fff); opacity: 0.3;
 }
 .crow-hp-val, .crow-ea-val {
-  font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 0.85em;
-  min-width: 85px; text-align: right; color: #fff !important; letter-spacing: 1px;
+  font-family: 'Raleway', sans-serif; font-weight: 700; font-size: 0.85em; min-width: 85px; text-align: right; color: #fff !important; letter-spacing: 1px;
 }
-
-/* CONTEÚDO */
 .crow-content {
-  padding: 30px 45px; font-size: 1.05em; line-height: 1.8; color: var(--crow-text);
-  text-align: justify; background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(10,10,10,0.8));
+  padding: 30px 45px; font-size: 1.05em; line-height: 1.8; color: var(--crow-text); text-align: justify; background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(10,10,10,0.8));
 }
 .crow-content b, .crow-content strong { color: var(--crow-accent-bright); font-weight: 700; text-shadow: 0 0 3px rgba(120, 20, 20, 0.4); }
 .crow-content i, .crow-content em {
   font-family: 'Playfair Display', serif; color: #e0e0e0; font-weight: 400; font-style: italic; font-size: 1.05em; letter-spacing: 0.5px;
 }
-
-/* NOTAS */
 .crow-notes {
-  margin: 10px 45px 40px 45px; padding: 20px 25px;
-  background-color: #040404; border: 1px solid #150505;
-  box-shadow: inset 0 5px 15px rgba(0,0,0,0.8), 0 0 0 1px rgba(120,20,20,0.1);
-  border-radius: 2px; font-size: 0.85em; color: var(--crow-text-muted); position: relative;
+  margin: 10px 45px 40px 45px; padding: 20px 25px; background-color: #040404; border: 1px solid #150505; box-shadow: inset 0 5px 15px rgba(0,0,0,0.8), 0 0 0 1px rgba(120,20,20,0.1); border-radius: 2px; font-size: 0.85em; color: var(--crow-text-muted);
 }
 .crow-notes::before {
-  content: '♦ HIDDEN HAND ♦'; display: block;
-  font-family: 'Cinzel', serif; font-size: 0.85em; font-weight: 700; color: var(--crow-accent-bright);
-  margin-bottom: 10px; letter-spacing: 3px; text-align: center;
-  text-shadow: 0 0 5px rgba(120,20,20,0.3); border-bottom: 1px solid rgba(120,20,20,0.2); padding-bottom: 5px;
+  content: '♦ HIDDEN HAND ♦'; display: block; font-family: 'Cinzel', serif; font-size: 0.85em; font-weight: 700; color: var(--crow-accent-bright); margin-bottom: 10px; letter-spacing: 3px; text-align: center; text-shadow: 0 0 5px rgba(120,20,20,0.3); border-bottom: 1px solid rgba(120,20,20,0.2); padding-bottom: 5px;
 }
-
-/* ASSINATURA */
 .crow-signature { text-align: center; padding: 0 40px 45px 40px; }
 .crow-signature::after {
-  content: 'Yizhuo Ming'; font-family: 'Pinyon Script', cursive; font-size: 2.3em;
-  color: #d0d0d0; text-shadow: 2px 2px 5px rgba(0,0,0,1), 0 0 10px rgba(120,20,20,0.2);
-  opacity: 0.9; display: inline-block; transform: rotate(-2deg);
+  content: 'Yizhuo Ming'; font-family: 'Pinyon Script', cursive; font-size: 2.3em; color: #d0d0d0; text-shadow: 2px 2px 5px rgba(0,0,0,1), 0 0 10px rgba(120,20,20,0.2); opacity: 0.9; display: inline-block; transform: rotate(-2deg);
 }
 @media (max-width: 600px) {
   .crow-card { margin: 20px auto; width: 98%; }
