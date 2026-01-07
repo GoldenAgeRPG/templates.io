@@ -1,11 +1,11 @@
-/* --- TEMPLATE: ZENIN IKATENARU  --- */
+/* --- TEMPLATE: ZENIN IKATENARU --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&display=swap');
 
 :root {
   --zenin-bg: #020502;
   --zenin-panel: #050f05;
   --zenin-wind: #1a4d1a;
-  --zenin-vacuum: #4dff4d; /* Verde brilhante para energia/corte */
+  --zenin-vacuum: #4dff4d;
   --zenin-text: #d0e0d0;
   --zenin-border: #206020;
 }
@@ -33,12 +33,10 @@
   width: 95%;
   margin: 50px auto;
   background-color: var(--zenin-bg);
-  /* Gradiente linear diagonal para lembrar cortes */
   background-image: linear-gradient(135deg, #020502 0%, #0a1a0a 100%);
   border: 1px solid var(--zenin-border);
-  /* Sombra verde difusa */
   box-shadow: 0 0 0 4px #000, 0 0 15px var(--zenin-wind); 
-  border-radius: 2px; /* Bordas mais quadradas/afiadas */
+  border-radius: 2px;
   color: var(--zenin-text);
   font-family: 'Crimson Text', serif;
   overflow: hidden;
@@ -46,7 +44,7 @@
 .zenin-card * { box-sizing: border-box; }
 
 
-/* --- PARTÍCULAS DE VENTO (LÂMINAS DE AR) --- */
+/* --- PARTÍCULAS DE VENTO --- */
 .wind-particle-container {
     position: absolute; 
     top: 0; left: 0; width: 100%; height: 100%;
@@ -58,14 +56,13 @@
 .wind-blade {
   position: absolute;
   bottom: 0;
-  width: 20px; height: 1px; /* Forma de lâmina fina */
+  width: 20px; height: 1px;
   background: rgba(200, 255, 200, 0.4); 
   box-shadow: 0 0 5px var(--zenin-vacuum);
   opacity: 0;
   animation: slash-float linear infinite;
 }
 
-/* Distribuição aleatória e rápida */
 .wind-blade:nth-child(1)  { left: 5%;  animation-duration: 2s; animation-delay: 0s; }
 .wind-blade:nth-child(2)  { left: 15%; animation-duration: 3s; animation-delay: 1.5s; }
 .wind-blade:nth-child(3)  { left: 45%; animation-duration: 2.5s; animation-delay: 0.5s; }
@@ -117,7 +114,6 @@
   height: 320px;
   overflow: hidden;
   border-bottom: 1px solid var(--zenin-border);
-  /* Clip-path para criar um visual "cortado" na parte inferior da imagem */
   clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
 }
 
@@ -125,12 +121,10 @@
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center 20%;
-  /* Filtro esverdeado e contrastado */
   filter: grayscale(60%) contrast(120%) brightness(0.8) sepia(30%) hue-rotate(70deg);
   transition: 0.5s ease;
 }
 
-/* Efeito de flash de corte no hover */
 .zenin-image-frame::after {
     content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
     background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
@@ -150,7 +144,7 @@
   padding: 25px 40px;
   display: flex; flex-direction: column; gap: 15px;
   background: rgba(0, 5, 0, 0.7);
-  margin-top: -20px; /* Sobrepor levemente o corte da imagem */
+  margin-top: -20px;
 }
 
 .zenin-stat-row {
@@ -170,15 +164,14 @@
   background: #000;
   border: 1px solid var(--zenin-wind);
   overflow: hidden;
-  transform: skewX(-20deg); /* Barras inclinadas para dinamismo */
+  transform: skewX(-20deg);
 }
 
 .zenin-hp-fill, .zenin-ea-fill {
   height: 100%; width: 0%;
-  /* Gradiente Verde Turbulento */
   background: linear-gradient(90deg, #0a300a 0%, #4dff4d 50%, #0a300a 100%);
   background-size: 200% 100%;
-  animation: wind-flow-bar 1s linear infinite; /* Fluxo muito rápido */
+  animation: wind-flow-bar 1s linear infinite;
   transition: width 0.6s ease;
 }
 
@@ -219,7 +212,7 @@
   padding: 20px;
   background: #020802;
   border: 1px solid var(--zenin-wind);
-  border-left: 3px solid var(--zenin-vacuum); /* Destaque lateral */
+  border-left: 3px solid var(--zenin-vacuum);
   font-size: 0.9em;
   color: #889988;
 }
@@ -247,7 +240,7 @@
   display: inline-block;
 }
 
-/* --- RODAPÉ: TURBULÊNCIA/VÁCUO --- */
+/* --- RODAPÉ: FLUXO DE VENTO SUAVE --- */
 .zenin-wind-pool {
   position: absolute;
   bottom: 0; left: 0; width: 100%; height: 120px;
@@ -276,24 +269,21 @@
   will-change: transform;
 }
 
-/* Formas pontiagudas para simular vácuo */
+/* Ondas suaves simulando corrente de ar */
 .ww-1 {
-  /* Fundo escuro */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,120 L150,40 L300,120 L450,20 L600,120 L750,50 L900,120 L1050,30 L1200,120 H0 Z' fill='%23051505' opacity='0.9'/%3E%3C/svg%3E");
-  animation: wind-scroll-left 4s linear infinite; /* Rápido */
-  z-index: 1; opacity: 0.8; transform: scaleY(1.2);
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,60 Q300,100 600,60 T1200,60 V120 H0 Z' fill='%23051505' opacity='0.9'/%3E%3C/svg%3E");
+  animation: wind-scroll-left 20s linear infinite;
+  z-index: 1; opacity: 0.8;
 }
 
 .ww-2 {
-  /* Meio */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,120 L100,60 L200,120 L300,50 L400,120 L500,40 L600,120 L700,70 L800,120 L900,30 L1000,120 L1100,50 L1200,120 H0 Z' fill='%231a4d1a' opacity='0.6'/%3E%3C/svg%3E");
-  animation: wind-scroll-right 3s linear infinite; /* Muito Rápido */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,80 Q300,50 600,80 T1200,80 V120 H0 Z' fill='%231a4d1a' opacity='0.6'/%3E%3C/svg%3E");
+  animation: wind-scroll-right 15s linear infinite;
   z-index: 2; bottom: -5px;
 }
 
 .ww-3 {
-  /* Frente - Mais brilhante */
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,120 L120,80 L240,120 L360,60 L480,120 L600,90 L720,120 L840,40 L960,120 L1080,70 L1200,120 H0 Z' fill='%23206020' opacity='0.7'/%3E%3C/svg%3E");
-  animation: wind-scroll-left 2s linear infinite; /* Extremamente rápido */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='wind' x1='50%25' y1='0%25' x2='50%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231a4d1a'/%3E%3Cstop offset='100%25' stop-color='%23206020'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0,90 Q300,60 600,90 T1200,90 V120 H0 Z' fill='url(%23wind)' opacity='0.7'/%3E%3C/svg%3E");
+  animation: wind-scroll-left 10s linear infinite;
   z-index: 3; bottom: -10px;
 }
