@@ -276,3 +276,72 @@
   .kamo-content, .kamo-stats-panel, .kamo-notes, .kamo-signature { padding-left: 20px; padding-right: 20px; }
   .kamo-image-frame { height: 250px; }
 }
+
+/* --- ADIÇÃO: PISCINA DE SANGUE (RODAPÉ) --- */
+
+/* Animação de Rolar as Ondas (Lenta e Viscosa) */
+@keyframes blood-wave-scroll {
+  0% { background-position: 0 bottom; }
+  100% { background-position: 1000px bottom; }
+}
+
+@keyframes blood-wave-scroll-reverse {
+  0% { background-position: 0 bottom; }
+  100% { background-position: -1000px bottom; }
+}
+
+/* Container da Piscina */
+.kamo-blood-pool {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 120px; /* Altura da poça */
+  overflow: hidden;
+  z-index: 3; /* Fica acima do fundo, mas abaixo do texto/assinatura */
+  pointer-events: none;
+  /* Máscara para suavizar o topo da onda e não ficar uma linha dura */
+  mask-image: linear-gradient(to top, black 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 80%, transparent 100%);
+}
+
+/* Classe base para as ondas */
+.blood-wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-repeat: repeat-x;
+  background-position: 0 bottom;
+}
+
+/* Onda 1 (Fundo - Escura e Lenta) */
+.bw-1 {
+  /* SVG Customizado: Vermelho Quase Preto */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,60 Q300,100 600,60 T1200,60 V120 H0 Z' fill='%231a0000' opacity='0.9'/%3E%3C/svg%3E");
+  background-size: 1200px 100%;
+  animation: blood-wave-scroll 20s linear infinite;
+  z-index: 1;
+  opacity: 0.8;
+}
+
+/* Onda 2 (Meio - Vermelho Sangue) */
+.bw-2 {
+  /* SVG Customizado: Vermelho Coagulado */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,80 Q300,50 600,80 T1200,80 V120 H0 Z' fill='%23500000' opacity='0.7'/%3E%3C/svg%3E");
+  background-size: 1000px 100%;
+  animation: blood-wave-scroll-reverse 15s linear infinite;
+  z-index: 2;
+  bottom: -5px;
+}
+
+/* Onda 3 (Frente - Arterial e Brilhante) */
+.bw-3 {
+  /* SVG Customizado: Vermelho Arterial */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='blood' x1='50%25' y1='0%25' x2='50%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23b30000'/%3E%3Cstop offset='100%25' stop-color='%23600000'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0,90 Q300,60 600,90 T1200,90 V120 H0 Z' fill='url(%23blood)' opacity='0.8'/%3E%3C/svg%3E");
+  background-size: 1200px 100%;
+  animation: blood-wave-scroll 10s linear infinite;
+  z-index: 3;
+  bottom: -10px;
+}
