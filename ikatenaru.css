@@ -222,7 +222,7 @@
 
 /* Titulo interno simples */
 .zenin-notes::before {
-  content: 'RESTRICTION DATA';
+  content: 'NAME OF WIND';
   display: block; 
   font-family: 'Rajdhani', sans-serif;
   font-weight: 700; 
