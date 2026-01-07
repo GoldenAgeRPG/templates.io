@@ -5,16 +5,16 @@
   --zenin-bg: #020502;
   --zenin-panel: #050f05;
   --zenin-wind: #1a4d1a;
-  --zenin-vacuum: #4dff4d;
+  --zenin-vacuum: #4dff4d; /* Verde neon para destaque */
   --zenin-text: #d0e0d0;
   --zenin-border: #206020;
 }
 
-/* --- ANIMAÇÕES --- */
+/* --- ANIMAÇÕES GERAIS --- */
 
 @keyframes wind-flow-bar {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 200% 0%; }
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
 }
 
 @keyframes slash-float {
@@ -44,7 +44,7 @@
 .zenin-card * { box-sizing: border-box; }
 
 
-/* --- PARTÍCULAS DE VENTO --- */
+/* --- PARTÍCULAS DE VENTO (Lâminas flutuantes) --- */
 .wind-particle-container {
     position: absolute; 
     top: 0; left: 0; width: 100%; height: 100%;
@@ -240,50 +240,63 @@
   display: inline-block;
 }
 
-/* --- RODAPÉ: FLUXO DE VENTO SUAVE --- */
+/* --- RODAPÉ NOVO: RASTROS DE VENTO/VÁCUO --- */
 .zenin-wind-pool {
   position: absolute;
-  bottom: 0; left: 0; width: 100%; height: 120px;
+  bottom: 0; left: 0; width: 100%; height: 100px;
   overflow: hidden; z-index: 3; pointer-events: none;
-  mask-image: linear-gradient(to top, black 70%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to top, black 70%, transparent 100%);
+  /* Máscara mais forte para focar nas linhas horizontais */
+  mask-image: linear-gradient(to top, black 40%, transparent 90%);
+  -webkit-mask-image: linear-gradient(to top, black 40%, transparent 90%);
+  background: rgba(0, 10, 0, 0.5); /* Fundo sutil */
 }
 
-@keyframes wind-scroll-left {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+/* Animação de "Rushing" (Corrida horizontal rápida) */
+@keyframes wind-rush {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
 }
 
-@keyframes wind-scroll-right {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+.wind-streak-layer {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  /* Cria listras horizontais repetidas que se movem */
+  background-image: repeating-linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(26, 77, 26, 0.4) 15%, /* Cor do vento escura */
+      transparent 30%
+  );
+  background-size: 200% 100%; /* Estica para dar sensação de velocidade */
 }
 
-.wind-wave {
-  position: absolute; bottom: 0; left: 0; 
-  width: 200%; 
-  height: 100%;
-  background-repeat: repeat-x; 
-  background-position: 0 bottom;
-  background-size: 50% 100%; 
-  will-change: transform;
+/* Camada 1: Vento de fundo mais lento */
+.ws-1 {
+  animation: wind-rush 4s linear infinite;
+  opacity: 0.5;
 }
 
-/* Ondas suaves simulando corrente de ar */
-.ww-1 {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,60 Q300,100 600,60 T1200,60 V120 H0 Z' fill='%23051505' opacity='0.9'/%3E%3C/svg%3E");
-  animation: wind-scroll-left 20s linear infinite;
-  z-index: 1; opacity: 0.8;
+/* Camada 2: Vento médio em direção oposta */
+.ws-2 {
+  background-image: repeating-linear-gradient(90deg, 
+      transparent 0%, 
+      rgba(77, 255, 77, 0.2) 10%, /* Cor neon mais clara, mais estreita */
+      transparent 20%
+  );
+  animation: wind-rush 2.5s linear infinite reverse;
+  opacity: 0.6;
+  height: 80%; top: 20%; /* Deslocamento vertical */
 }
 
-.ww-2 {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,80 Q300,50 600,80 T1200,80 V120 H0 Z' fill='%231a4d1a' opacity='0.6'/%3E%3C/svg%3E");
-  animation: wind-scroll-right 15s linear infinite;
-  z-index: 2; bottom: -5px;
-}
-
-.ww-3 {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='wind' x1='50%25' y1='0%25' x2='50%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%231a4d1a'/%3E%3Cstop offset='100%25' stop-color='%23206020'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0,90 Q300,60 600,90 T1200,90 V120 H0 Z' fill='url(%23wind)' opacity='0.7'/%3E%3C/svg%3E");
-  animation: wind-scroll-left 10s linear infinite;
-  z-index: 3; bottom: -10px;
+/* Camada 3: Cortes rápidos e brilhantes na frente */
+.ws-3 {
+  background-image: repeating-linear-gradient(90deg, 
+      transparent 0%, 
+      var(--zenin-vacuum) 5%, /* Muito brilhante e estreito */
+      transparent 10%
+  );
+  background-size: 300% 100%; /* Muito esticado = muito rápido */
+  animation: wind-rush 1.2s linear infinite;
+  opacity: 0.4;
+  height: 60%; top: 40%;
+  mix-blend-mode: screen; /* Faz brilhar sobre os outros */
 }
