@@ -1,0 +1,263 @@
+/* --- TEMPLATE: ZENIN CLAN (AIR/VACUUM CUT) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:ital,wght@0,400;0,600;0,700;1,400&family=Audiowide&display=swap');
+
+:root {
+  --zenin-bg: #020408;    /* Preto azulado profundo */
+  --zenin-panel: #081018; /* Painel ligeiramente mais claro */
+  --zenin-air: #00eaff;   /* Ciano Elétrico (Ar Cortante) */
+  --zenin-void: #005577;  /* Azul médio (Vácuo) */
+  --zenin-cut: #ffffff;   /* Branco (Borda do corte) */
+  --zenin-text: #cceeff;  /* Texto claro azulado */
+}
+
+/* --- ANIMAÇÕES --- */
+
+/* Fluxo de Ar Rápido (Barras e Fundo) */
+@keyframes air-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+/* Brilho do Corte (Shimmer) */
+@keyframes cut-shimmer {
+  0% { opacity: 0.5; transform: translateX(-100%) skewX(-20deg); }
+  50% { opacity: 1; }
+  100% { opacity: 0.5; transform: translateX(200%) skewX(-20deg); }
+}
+
+/* Pulsação de Vácuo (Ícone) */
+@keyframes vacuum-pulse {
+  0%, 100% { filter: drop-shadow(0 0 5px var(--zenin-air)); transform: scale(1); }
+  50% { filter: drop-shadow(0 0 15px var(--zenin-air)); transform: scale(1.05); }
+}
+
+/* CONTAINER PRINCIPAL (Forma de Lâmina) */
+.zenin-card {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  max-width: 650px;
+  width: 95%;
+  margin: 50px auto;
+  background-color: var(--zenin-bg);
+  
+  /* Fundo sutil de fluxo de ar */
+  background-image: linear-gradient(120deg, var(--zenin-bg) 0%, #030a12 50%, var(--zenin-bg) 100%);
+  background-size: 200% 200%;
+  animation: air-flow 15s linear infinite;
+
+  /* Borda cortante brilhante */
+  border: 2px solid var(--zenin-void);
+  box-shadow: 0 0 15px rgba(0, 234, 255, 0.2), inset 0 0 30px rgba(0,0,0,0.8);
+  
+  /* Formato Angular "Cortado" */
+  clip-path: polygon(
+    0% 20px, 20px 0%, 
+    100% 0%, 100% calc(100% - 30px), 
+    calc(100% - 20px) 100%, 0% 100%
+  );
+  
+  color: var(--zenin-text);
+  font-family: 'Montserrat', sans-serif;
+  overflow: hidden;
+}
+.zenin-card * { box-sizing: border-box; }
+
+/* EFEITO DE "CORTE DE VÁCUO" NO FUNDO */
+.zenin-card::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%; width: 200%; height: 200%;
+    background: linear-gradient(to right, transparent 40%, var(--zenin-air) 50%, transparent 60%);
+    opacity: 0.1;
+    transform: rotate(45deg);
+    pointer-events: none;
+    z-index: 0;
+    animation: cut-shimmer 5s linear infinite;
+}
+
+/* HEADER */
+.zenin-header {
+  position: relative; z-index: 5;
+  text-align: center;
+  padding: 35px 20px 25px 20px;
+  background: linear-gradient(to bottom, rgba(0, 20, 40, 0.8), rgba(2, 4, 8, 0.9));
+  border-bottom: 1px solid var(--zenin-void);
+}
+
+.zenin-icon {
+  width: 50px; height: 50px;
+  margin-bottom: 10px;
+  fill: var(--zenin-air);
+  animation: vacuum-pulse 3s ease-in-out infinite;
+}
+
+.zenin-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  font-size: 2.4em;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0;
+  /* Efeito de texto cortante */
+  text-shadow: 0 0 5px var(--zenin-air), -2px -2px 0 var(--zenin-void);
+  letter-spacing: 2px;
+  line-height: 1;
+}
+
+.zenin-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.85em;
+  color: var(--zenin-air);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-top: 8px;
+  font-weight: 600;
+}
+
+/* IMAGEM (Moldura de Ar) */
+.zenin-image-frame {
+  position: relative; z-index: 5;
+  width: calc(100% - 40px);
+  margin: 20px auto;
+  height: 320px;
+  overflow: hidden;
+  /* Moldura brilhante e angular */
+  border: 2px solid var(--zenin-air);
+  box-shadow: 0 0 15px rgba(0, 234, 255, 0.3);
+  clip-path: polygon(5% 0, 100% 0, 100% 95%, 95% 100%, 0 100%, 0 5%);
+}
+
+.zenin-image-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  filter: contrast(120%) saturate(90%) brightness(0.9) hue-rotate(5deg);
+  transition: 0.4s ease-out;
+}
+
+.zenin-card:hover .zenin-image-frame img {
+  transform: scale(1.05);
+  filter: contrast(130%) saturate(110%) brightness(1.1) hue-rotate(0deg);
+  /* Efeito de "flash" ao passar o mouse */
+  box-shadow: inset 0 0 20px var(--zenin-air);
+}
+
+/* STATUS (Tubo de Vácuo) */
+.zenin-stats-panel {
+  position: relative; z-index: 5;
+  padding: 15px 40px 25px 40px;
+  display: flex; flex-direction: column; gap: 12px;
+  background: rgba(8, 16, 24, 0.7);
+}
+
+.zenin-stat-row {
+  display: flex; align-items: center; gap: 15px;
+}
+
+.zenin-label {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
+  color: var(--zenin-air);
+  font-size: 0.9em;
+  width: 30px;
+  text-shadow: 0 0 8px var(--zenin-air);
+}
+
+.zenin-bar-bg {
+  flex-grow: 1; height: 8px;
+  background: #04080c;
+  border: 1px solid var(--zenin-void);
+  box-shadow: inset 0 0 5px #000;
+  overflow: hidden;
+  transform: skewX(-15deg); /* Barra inclinada para dar velocidade */
+}
+
+.zenin-hp-fill, .zenin-ea-fill {
+  height: 100%; width: 0%;
+  /* Gradiente de ar comprimido */
+  background: linear-gradient(90deg, var(--zenin-void) 0%, var(--zenin-air) 50%, #fff 100%);
+  background-size: 200% 100%;
+  box-shadow: 0 0 15px var(--zenin-air);
+  animation: air-flow 2s linear infinite; /* Fluxo muito rápido */
+  transition: width 0.6s ease;
+}
+
+.zenin-hp-val, .zenin-ea-val {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700; font-size: 0.9em;
+  min-width: 80px; text-align: right;
+  color: #fff !important;
+}
+
+/* CONTEÚDO */
+.zenin-content {
+  position: relative; z-index: 5;
+  padding: 30px 45px;
+  font-size: 1.05em;
+  line-height: 1.8;
+  color: var(--zenin-text);
+  text-align: justify;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.2), rgba(2,4,8,0.8));
+}
+
+/* Negrito: Brilho de corte elétrico */
+.zenin-content b, .zenin-content strong {
+  color: var(--zenin-air);
+  font-weight: 700;
+  text-shadow: 0 0 5px var(--zenin-air), 0 0 2px #fff;
+}
+
+/* Itálico: Pensamento distante (Vácuo) */
+.zenin-content i, .zenin-content em {
+  color: #aaddff;
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+}
+
+/* NOTAS (Câmara de Vácuo) */
+.zenin-notes {
+  position: relative; z-index: 5;
+  margin: 10px 45px 30px 45px;
+  padding: 15px 20px;
+  background: #010203;
+  border: 1px solid var(--zenin-void);
+  border-left: 3px solid var(--zenin-air);
+  font-size: 0.85em;
+  color: #88aabb;
+  box-shadow: inset 0 0 20px #000;
+}
+.zenin-notes::before {
+  content: 'VACUUM CHAMBER // NOTES';
+  display: block; font-family: 'Audiowide', cursive; /* Fonte tecnológica */
+  font-size: 0.8em; letter-spacing: 2px;
+  color: var(--zenin-air); margin-bottom: 8px;
+  opacity: 0.8;
+}
+
+/* ASSINATURA (Corte Rápido) */
+.zenin-signature { 
+    position: relative; z-index: 5;
+    text-align: right; padding: 0 50px 40px 40px; 
+}
+.zenin-signature::after {
+  content: 'Ikatenaru Zenin';
+  font-family: 'Audiowide', sans-serif; /* Fonte futurista/rápida */
+  font-size: 1.6em;
+  color: var(--zenin-air);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  /* Efeito de rastro de luz */
+  text-shadow: 2px 0px 2px rgba(0, 234, 255, 0.7), -2px 0px 2px rgba(255,255,255,0.5);
+  display: inline-block;
+  transform: skewX(-10deg); /* Inclinação para dar velocidade */
+}
+
+@media (max-width: 600px) {
+  .zenin-card { width: 98%; margin: 20px auto; clip-path: none; border-radius: 10px; }
+  .zenin-content, .zenin-stats-panel, .zenin-notes, .zenin-signature { padding-left: 20px; padding-right: 20px; }
+  .zenin-image-frame { height: 250px; width: calc(100% - 20px); clip-path: none; border-radius: 4px; }
+}
