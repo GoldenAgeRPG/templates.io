@@ -1,11 +1,11 @@
-/* --- TEMPLATE: KAMO CLAN  --- */
+/* --- TEMPLATE: rafss  --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&display=swap');
 
 :root {
-  --kamo-bg: #030000; /* Preto quase absoluto */
+  --kamo-bg: #030000;
   --kamo-panel: #0a0000;
-  --kamo-blood: #500000; /* Vermelho sangue escuro e coagulado */
-  --kamo-arterial: #b30000; /* Vermelho arterial (menos neon, mais sangue) */
+  --kamo-blood: #500000;
+  --kamo-arterial: #b30000;
   --kamo-text: #cccccc;
   --kamo-border: #3d0000;
 }
@@ -17,12 +17,22 @@
   100% { background-position: 200% 50%; }
 }
 
-/* Partículas subindo - Ajustadas para visibilidade */
 @keyframes cell-float-up {
   0% { transform: translateY(0) scale(0.8); opacity: 0; }
-  10% { opacity: 0.8; } /* Aparece rápido */
+  10% { opacity: 0.8; }
   80% { opacity: 0.6; }
   100% { transform: translateY(-600px) scale(1.2); opacity: 0; }
+}
+
+/* CORREÇÃO DAS ONDAS: Distância exata de 1200px para casar com o background-size */
+@keyframes blood-wave-scroll {
+  0% { background-position: 0 bottom; }
+  100% { background-position: 1200px bottom; }
+}
+
+@keyframes blood-wave-scroll-reverse {
+  0% { background-position: 0 bottom; }
+  100% { background-position: -1200px bottom; }
 }
 
 /* CONTAINER PRINCIPAL */
@@ -33,15 +43,10 @@
   max-width: 650px;
   width: 95%;
   margin: 50px auto;
-  
-  /* VOLTANDO AO ESCURO: Fundo preto sólido com vinheta sutil nas bordas */
   background-color: var(--kamo-bg);
   background-image: radial-gradient(circle at center, #0a0000 0%, #000000 100%);
-  
   border: 1px solid var(--kamo-border);
-  /* Borda dupla escura para reforçar o tema */
   box-shadow: 0 0 0 4px #000, 0 0 0 5px var(--kamo-blood); 
-  
   border-radius: 4px;
   color: var(--kamo-text);
   font-family: 'Crimson Text', serif;
@@ -50,32 +55,29 @@
 .kamo-card * { box-sizing: border-box; }
 
 
-/* --- PARTÍCULAS DE SANGUE (CORRIGIDO) --- */
+/* --- PARTÍCULAS DE SANGUE --- */
 .blood-particle-container {
     position: absolute; 
     top: 0; left: 0; width: 100%; height: 100%;
     pointer-events: none; 
-    z-index: 2; /* Fica ACIMA do fundo, mas ABAIXO do texto se necessário, ou misturado */
+    z-index: 2;
     overflow: hidden;
 }
 
 .blood-cell {
   position: absolute;
   bottom: -20px;
-  /* Cor sólida e brilhante para garantir contraste no preto */
   background: #8a0000; 
-  box-shadow: 0 0 4px #ff0000; /* Glow vermelho para destacar */
+  box-shadow: 0 0 4px #ff0000;
   border-radius: 50%;
   opacity: 0;
   animation: cell-float-up linear infinite;
 }
 
-/* Tamanhos */
 .bc-s { width: 4px; height: 4px; }
 .bc-m { width: 6px; height: 6px; }
 .bc-l { width: 9px; height: 9px; }
 
-/* Aleatoriedade (Mantida para fluxo natural) */
 .blood-cell:nth-child(1)  { left: 5%;  animation-duration: 7s;  animation-delay: 0s; }
 .blood-cell:nth-child(2)  { left: 15%; animation-duration: 9s;  animation-delay: 2s; }
 .blood-cell:nth-child(3)  { left: 25%; animation-duration: 6s;  animation-delay: 4s; }
@@ -105,10 +107,9 @@
 
 /* HEADER */
 .kamo-header {
-  position: relative; z-index: 5; /* Garante que fique acima se tiver cor sólida */
+  position: relative; z-index: 5;
   text-align: center;
   padding: 40px 20px 30px 20px;
-  /* Fundo sutilmente transparente para ver as partículas passarem por trás */
   background: rgba(5, 0, 0, 0.8); 
   border-bottom: 1px solid var(--kamo-border);
 }
@@ -143,7 +144,6 @@
   height: 320px;
   overflow: hidden;
   border-bottom: 1px solid var(--kamo-border);
-  /* Máscara para integrar ao preto */
   mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 }
@@ -152,14 +152,12 @@
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center 20%;
-  /* Filtro mais escuro conforme pedido */
   filter: grayscale(40%) contrast(120%) brightness(0.7) sepia(20%) hue-rotate(-10deg);
   transition: 0.8s ease;
 }
 
 .kamo-image-frame::after {
     content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
-    /* Overlay vermelho escuro muito suave */
     background: rgba(40, 0, 0, 0.2);
     pointer-events: none;
 }
@@ -174,7 +172,6 @@
   position: relative; z-index: 5;
   padding: 25px 40px;
   display: flex; flex-direction: column; gap: 15px;
-  /* Fundo preto semi-transparente */
   background: rgba(0, 0, 0, 0.6);
 }
 
@@ -191,7 +188,7 @@
 }
 
 .kamo-bar-bg {
-  flex-grow: 1; height: 8px; /* Barra mais fina e discreta */
+  flex-grow: 1; height: 8px;
   background: #0f0000;
   border: 1px solid #300000;
   overflow: hidden;
@@ -199,7 +196,6 @@
 
 .kamo-hp-fill, .kamo-ea-fill {
   height: 100%; width: 0%;
-  /* Gradiente mais "Gore" (Escuro -> Claro -> Escuro) */
   background: linear-gradient(90deg, #400000 0%, #a00000 50%, #400000 100%);
   background-size: 200% 100%;
   animation: blood-flow-bar 3s linear infinite;
@@ -210,7 +206,7 @@
   font-family: 'Cinzel', serif;
   font-weight: 700; font-size: 0.9em;
   min-width: 80px; text-align: right;
-  color: #bbb !important; /* Cinza claro ao invés de branco puro */
+  color: #bbb !important;
 }
 
 /* CONTEÚDO */
@@ -221,12 +217,11 @@
   line-height: 1.8;
   color: var(--kamo-text);
   text-align: justify;
-  /* Importante: Transparência para ver partículas */
   background: linear-gradient(to bottom, rgba(5,0,0,0.5), rgba(0,0,0,0.8));
 }
 
 .kamo-content b, .kamo-content strong {
-  color: #cc0000; /* Vermelho sangue forte */
+  color: #cc0000;
   font-weight: 700;
 }
 
@@ -264,84 +259,51 @@
   content: 'Vladimir Kamo';
   font-family: 'Great Vibes', cursive;
   font-size: 2.8em;
-  color: #a00000; /* Vermelho escuro */
+  color: #a00000;
   opacity: 0.9;
   text-shadow: 0 0 5px #300, 2px 2px 2px #000;
   transform: rotate(-3deg);
   display: inline-block;
 }
 
-@media (max-width: 600px) {
-  .kamo-card { width: 98%; margin: 20px auto; }
-  .kamo-content, .kamo-stats-panel, .kamo-notes, .kamo-signature { padding-left: 20px; padding-right: 20px; }
-  .kamo-image-frame { height: 250px; }
-}
-
-/* --- ADIÇÃO: PISCINA DE SANGUE (RODAPÉ) --- */
-
-/* Animação de Rolar as Ondas (Lenta e Viscosa) */
-@keyframes blood-wave-scroll {
-  0% { background-position: 0 bottom; }
-  100% { background-position: 1000px bottom; }
-}
-
-@keyframes blood-wave-scroll-reverse {
-  0% { background-position: 0 bottom; }
-  100% { background-position: -1000px bottom; }
-}
-
-/* Container da Piscina */
+/* --- PISCINA DE SANGUE (RODAPÉ) --- */
 .kamo-blood-pool {
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 120px; /* Altura da poça */
-  overflow: hidden;
-  z-index: 3; /* Fica acima do fundo, mas abaixo do texto/assinatura */
-  pointer-events: none;
-  /* Máscara para suavizar o topo da onda e não ficar uma linha dura */
+  bottom: 0; left: 0; width: 100%; height: 120px;
+  overflow: hidden; z-index: 3; pointer-events: none;
   mask-image: linear-gradient(to top, black 80%, transparent 100%);
   -webkit-mask-image: linear-gradient(to top, black 80%, transparent 100%);
 }
 
-/* Classe base para as ondas */
 .blood-wave {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-repeat: repeat-x;
-  background-position: 0 bottom;
+  position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
+  background-repeat: repeat-x; background-position: 0 bottom;
 }
 
-/* Onda 1 (Fundo - Escura e Lenta) */
+/* Padronizei background-size para 1200px para casar com a animação */
 .bw-1 {
-  /* SVG Customizado: Vermelho Quase Preto */
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,60 Q300,100 600,60 T1200,60 V120 H0 Z' fill='%231a0000' opacity='0.9'/%3E%3C/svg%3E");
-  background-size: 1200px 100%;
+  background-size: 1200px 100%; /* Largura exata */
   animation: blood-wave-scroll 20s linear infinite;
-  z-index: 1;
-  opacity: 0.8;
+  z-index: 1; opacity: 0.8;
 }
 
-/* Onda 2 (Meio - Vermelho Sangue) */
 .bw-2 {
-  /* SVG Customizado: Vermelho Coagulado */
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,80 Q300,50 600,80 T1200,80 V120 H0 Z' fill='%23500000' opacity='0.7'/%3E%3C/svg%3E");
-  background-size: 1000px 100%;
+  background-size: 1200px 100%; /* Largura exata */
   animation: blood-wave-scroll-reverse 15s linear infinite;
-  z-index: 2;
-  bottom: -5px;
+  z-index: 2; bottom: -5px;
 }
 
-/* Onda 3 (Frente - Arterial e Brilhante) */
 .bw-3 {
-  /* SVG Customizado: Vermelho Arterial */
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='blood' x1='50%25' y1='0%25' x2='50%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23b30000'/%3E%3Cstop offset='100%25' stop-color='%23600000'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0,90 Q300,60 600,90 T1200,90 V120 H0 Z' fill='url(%23blood)' opacity='0.8'/%3E%3C/svg%3E");
-  background-size: 1200px 100%;
+  background-size: 1200px 100%; /* Largura exata */
   animation: blood-wave-scroll 10s linear infinite;
-  z-index: 3;
-  bottom: -10px;
+  z-index: 3; bottom: -10px;
+}
+
+@media (max-width: 600px) {
+  .kamo-card { width: 98%; margin: 20px auto; }
+  .kamo-content, .kamo-stats-panel, .kamo-notes, .kamo-signature { padding-left: 20px; padding-right: 20px; }
+  .kamo-image-frame { height: 250px; }
 }
