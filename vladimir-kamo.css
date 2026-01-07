@@ -1,36 +1,28 @@
-/* --- TEMPLATE: KAMO CLAN --- */
+/* --- TEMPLATE: KAMO CLAN (BLOOD MANIPULATION) - V3 (DARK & STATIC) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&display=swap');
 
 :root {
-  --kamo-bg: #050000;
-  --kamo-panel: #0f0202;
-  --kamo-blood: #6a0000;
-  --kamo-arterial: #d00000;
-  --kamo-text: #e0d0d0;
-  --kamo-border: #4a0000;
+  --kamo-bg: #030000; /* Preto quase absoluto */
+  --kamo-panel: #0a0000;
+  --kamo-blood: #500000; /* Vermelho sangue escuro e coagulado */
+  --kamo-arterial: #b30000; /* Vermelho arterial (menos neon, mais sangue) */
+  --kamo-text: #cccccc;
+  --kamo-border: #3d0000;
 }
 
 /* --- ANIMAÇÕES --- */
 
-/* Fluxo Sanguíneo (Para as barras) */
 @keyframes blood-flow-bar {
   0% { background-position: 0% 50%; }
   100% { background-position: 200% 50%; }
 }
 
-/* Flutuação de Células (CORRIGIDO para melhor visibilidade) */
+/* Partículas subindo - Ajustadas para visibilidade */
 @keyframes cell-float-up {
-  0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
-  15% { opacity: 0.9; } /* Aparece mais rápido */
-  80% { opacity: 0.9; } /* Mantém visibilidade por mais tempo */
-  100% { transform: translateY(-550px) rotate(720deg) scale(1.2); opacity: 0; } /* Sobe mais */
-}
-
-/* Novo Fundo: Shifting Plasma (Substitui o "drip" feio) */
-@keyframes kamo-bg-shift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
+  0% { transform: translateY(0) scale(0.8); opacity: 0; }
+  10% { opacity: 0.8; } /* Aparece rápido */
+  80% { opacity: 0.6; }
+  100% { transform: translateY(-600px) scale(1.2); opacity: 0; }
 }
 
 /* CONTAINER PRINCIPAL */
@@ -41,92 +33,83 @@
   max-width: 650px;
   width: 95%;
   margin: 50px auto;
+  
+  /* VOLTANDO AO ESCURO: Fundo preto sólido com vinheta sutil nas bordas */
   background-color: var(--kamo-bg);
+  background-image: radial-gradient(circle at center, #0a0000 0%, #000000 100%);
   
-  /* --- Fundo Novo: Gradiente de Plasma Suave --- */
-  background-image: linear-gradient(
-      135deg,
-      #020000 0%,
-      #1a0000 25%,
-      #350202 50%, /* Núcleo mais avermelhado */
-      #1a0000 75%,
-      #020000 100%
-  );
-  background-size: 400% 400%; /* Tamanho grande para movimento suave */
-  animation: kamo-bg-shift 15s ease infinite; /* Movimento lento e contínuo */
-  /* -------------------------------------------- */
-
-  border: 2px solid var(--kamo-border);
-  border-radius: 15px 0 15px 0;
+  border: 1px solid var(--kamo-border);
+  /* Borda dupla escura para reforçar o tema */
+  box-shadow: 0 0 0 4px #000, 0 0 0 5px var(--kamo-blood); 
   
+  border-radius: 4px;
   color: var(--kamo-text);
   font-family: 'Crimson Text', serif;
   overflow: hidden;
-  box-shadow: 0 15px 40px -10px #000;
 }
-/* Garante que o conteúdo fique acima do fundo e partículas */
-.kamo-card > div { position: relative; z-index: 10; }
 .kamo-card * { box-sizing: border-box; }
 
 
-/* --- PARTICULAS DE SANGUE (VISIBILIDADE MELHORADA) --- */
+/* --- PARTÍCULAS DE SANGUE (CORRIGIDO) --- */
 .blood-particle-container {
-    position: absolute; top:0; left:0; width:100%; height:100%;
-    pointer-events: none; z-index: 5; overflow: hidden;
+    position: absolute; 
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; 
+    z-index: 2; /* Fica ACIMA do fundo, mas ABAIXO do texto se necessário, ou misturado */
+    overflow: hidden;
 }
+
 .blood-cell {
   position: absolute;
-  bottom: -30px; /* Começa mais abaixo */
-  /* Núcleo mais brilhante para destacar contra o fundo escuro */
-  background: radial-gradient(circle at 30% 30%, #ff3333, var(--kamo-blood));
+  bottom: -20px;
+  /* Cor sólida e brilhante para garantir contraste no preto */
+  background: #8a0000; 
+  box-shadow: 0 0 4px #ff0000; /* Glow vermelho para destacar */
   border-radius: 50%;
   opacity: 0;
-  box-shadow: 0 0 8px rgba(208, 0, 0, 0.6); /* Glow aumentado */
   animation: cell-float-up linear infinite;
 }
 
-/* Geração de aleatoriedade (Mantida) */
-.bc-s { width: 5px; height: 5px; } /* Levemente maiores */
-.bc-m { width: 8px; height: 8px; }
-.bc-l { width: 12px; height: 12px; }
+/* Tamanhos */
+.bc-s { width: 4px; height: 4px; }
+.bc-m { width: 6px; height: 6px; }
+.bc-l { width: 9px; height: 9px; }
 
-.blood-cell:nth-child(1)  { left: 5%;  animation-duration: 9s;  animation-delay: 0.2s; }
-.blood-cell:nth-child(2)  { left: 12%; animation-duration: 12s; animation-delay: 1.5s; }
-.blood-cell:nth-child(3)  { left: 18%; animation-duration: 8s;  animation-delay: 3.1s; }
-.blood-cell:nth-child(4)  { left: 25%; animation-duration: 11s; animation-delay: 0.7s; }
-.blood-cell:nth-child(5)  { left: 31%; animation-duration: 14s; animation-delay: 4.2s; }
-.blood-cell:nth-child(6)  { left: 38%; animation-duration: 7s;  animation-delay: 2.0s; }
-.blood-cell:nth-child(7)  { left: 44%; animation-duration: 13s; animation-delay: 1.1s; }
-.blood-cell:nth-child(8)  { left: 51%; animation-duration: 10s; animation-delay: 3.7s; }
-.blood-cell:nth-child(9)  { left: 57%; animation-duration: 15s; animation-delay: 0.5s; }
-.blood-cell:nth-child(10) { left: 63%; animation-duration: 8s;  animation-delay: 2.9s; }
-.blood-cell:nth-child(11) { left: 70%; animation-duration: 12s; animation-delay: 1.3s; }
-.blood-cell:nth-child(12) { left: 76%; animation-duration: 9s;  animation-delay: 4.5s; }
-.blood-cell:nth-child(13) { left: 82%; animation-duration: 14s; animation-delay: 0.9s; }
-.blood-cell:nth-child(14) { left: 89%; animation-duration: 7s;  animation-delay: 3.3s; }
-.blood-cell:nth-child(15) { left: 95%; animation-duration: 11s; animation-delay: 1.8s; }
-.blood-cell:nth-child(16) { left: 3%;  animation-duration: 10s; animation-delay: 2.5s; }
-.blood-cell:nth-child(17) { left: 15%; animation-duration: 13s; animation-delay: 0.3s; }
-.blood-cell:nth-child(18) { left: 28%; animation-duration: 8s;  animation-delay: 4.1s; }
-.blood-cell:nth-child(19) { left: 41%; animation-duration: 12s; animation-delay: 1.2s; }
-.blood-cell:nth-child(20) { left: 54%; animation-duration: 9s;  animation-delay: 3.8s; }
-.blood-cell:nth-child(21) { left: 67%; animation-duration: 14s; animation-delay: 0.6s; }
-.blood-cell:nth-child(22) { left: 80%; animation-duration: 7s;  animation-delay: 2.2s; }
-.blood-cell:nth-child(23) { left: 92%; animation-duration: 11s; animation-delay: 4.7s; }
-.blood-cell:nth-child(24) { left: 9%;  animation-duration: 15s; animation-delay: 1.6s; }
-.blood-cell:nth-child(25) { left: 22%; animation-duration: 8s;  animation-delay: 3.5s; }
-.blood-cell:nth-child(26) { left: 35%; animation-duration: 13s; animation-delay: 0.8s; }
-.blood-cell:nth-child(27) { left: 48%; animation-duration: 10s; animation-delay: 2.7s; }
-.blood-cell:nth-child(28) { left: 61%; animation-duration: 14s; animation-delay: 4.3s; }
-.blood-cell:nth-child(29) { left: 74%; animation-duration: 9s;  animation-delay: 1.9s; }
-.blood-cell:nth-child(30) { left: 87%; animation-duration: 12s; animation-delay: 3.1s; }
+/* Aleatoriedade (Mantida para fluxo natural) */
+.blood-cell:nth-child(1)  { left: 5%;  animation-duration: 7s;  animation-delay: 0s; }
+.blood-cell:nth-child(2)  { left: 15%; animation-duration: 9s;  animation-delay: 2s; }
+.blood-cell:nth-child(3)  { left: 25%; animation-duration: 6s;  animation-delay: 4s; }
+.blood-cell:nth-child(4)  { left: 35%; animation-duration: 8s;  animation-delay: 1s; }
+.blood-cell:nth-child(5)  { left: 45%; animation-duration: 10s; animation-delay: 3s; }
+.blood-cell:nth-child(6)  { left: 55%; animation-duration: 7s;  animation-delay: 0.5s; }
+.blood-cell:nth-child(7)  { left: 65%; animation-duration: 11s; animation-delay: 2.5s; }
+.blood-cell:nth-child(8)  { left: 75%; animation-duration: 8s;  animation-delay: 1.5s; }
+.blood-cell:nth-child(9)  { left: 85%; animation-duration: 9s;  animation-delay: 3.5s; }
+.blood-cell:nth-child(10) { left: 95%; animation-duration: 6s;  animation-delay: 0.2s; }
+.blood-cell:nth-child(11) { left: 10%; animation-duration: 10s; animation-delay: 1.2s; }
+.blood-cell:nth-child(12) { left: 30%; animation-duration: 7s;  animation-delay: 4.2s; }
+.blood-cell:nth-child(13) { left: 50%; animation-duration: 9s;  animation-delay: 0.8s; }
+.blood-cell:nth-child(14) { left: 70%; animation-duration: 8s;  animation-delay: 3.8s; }
+.blood-cell:nth-child(15) { left: 90%; animation-duration: 11s; animation-delay: 1.8s; }
+.blood-cell:nth-child(16) { left: 20%; animation-duration: 6s;  animation-delay: 2.2s; }
+.blood-cell:nth-child(17) { left: 40%; animation-duration: 9s;  animation-delay: 0.3s; }
+.blood-cell:nth-child(18) { left: 60%; animation-duration: 7s;  animation-delay: 3.2s; }
+.blood-cell:nth-child(19) { left: 80%; animation-duration: 10s; animation-delay: 1.0s; }
+.blood-cell:nth-child(20) { left: 5%;  animation-duration: 8s;  animation-delay: 2.8s; }
+.blood-cell:nth-child(21) { left: 12%; animation-duration: 12s; animation-delay: 0.6s; }
+.blood-cell:nth-child(22) { left: 38%; animation-duration: 9s;  animation-delay: 3.0s; }
+.blood-cell:nth-child(23) { left: 62%; animation-duration: 7s;  animation-delay: 1.4s; }
+.blood-cell:nth-child(24) { left: 88%; animation-duration: 10s; animation-delay: 4.0s; }
+.blood-cell:nth-child(25) { left: 2%;  animation-duration: 11s; animation-delay: 0.9s; }
 
 
 /* HEADER */
 .kamo-header {
+  position: relative; z-index: 5; /* Garante que fique acima se tiver cor sólida */
   text-align: center;
   padding: 40px 20px 30px 20px;
-  background: linear-gradient(to bottom, rgba(20,0,0,0.9), rgba(5,0,0,0.9)); /* Ajuste leve na transparência */
+  /* Fundo sutilmente transparente para ver as partículas passarem por trás */
+  background: rgba(5, 0, 0, 0.8); 
   border-bottom: 1px solid var(--kamo-border);
 }
 
@@ -137,7 +120,7 @@
   color: #fff;
   text-transform: uppercase;
   margin: 0;
-  text-shadow: 0 0 10px var(--kamo-arterial), 0 2px 2px #000;
+  text-shadow: 0 0 10px #700;
   letter-spacing: 3px;
   line-height: 1;
 }
@@ -150,17 +133,17 @@
   letter-spacing: 5px;
   margin-top: 10px;
   font-weight: 700;
-  opacity: 0.9;
 }
 
 /* IMAGEM */
 .kamo-image-frame {
+  position: relative; z-index: 5;
   width: 100%;
   margin: 0;
   height: 320px;
-  position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--kamo-border);
+  /* Máscara para integrar ao preto */
   mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
   -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 }
@@ -169,27 +152,30 @@
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center 20%;
-  filter: contrast(130%) saturate(90%) sepia(30%) hue-rotate(-15deg) brightness(0.8);
+  /* Filtro mais escuro conforme pedido */
+  filter: grayscale(40%) contrast(120%) brightness(0.7) sepia(20%) hue-rotate(-10deg);
   transition: 0.8s ease;
 }
 
 .kamo-image-frame::after {
     content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
-    background: linear-gradient(to bottom, rgba(100,0,0,0.2), rgba(50,0,0,0.6));
-    mix-blend-mode: multiply;
+    /* Overlay vermelho escuro muito suave */
+    background: rgba(40, 0, 0, 0.2);
     pointer-events: none;
 }
 
 .kamo-card:hover .kamo-image-frame img {
-  transform: scale(1.05);
-  filter: contrast(120%) saturate(110%) sepia(10%) hue-rotate(-10deg) brightness(0.9);
+  transform: scale(1.03);
+  filter: grayscale(0%) contrast(110%) brightness(0.9);
 }
 
 /* STATUS */
 .kamo-stats-panel {
+  position: relative; z-index: 5;
   padding: 25px 40px;
   display: flex; flex-direction: column; gap: 15px;
-  background: rgba(10,0,0,0.7); /* Um pouco mais escuro para contraste */
+  /* Fundo preto semi-transparente */
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .kamo-stat-row {
@@ -202,23 +188,21 @@
   color: var(--kamo-arterial);
   font-size: 0.9em;
   width: 30px;
-  text-shadow: 0 0 5px var(--kamo-blood);
 }
 
 .kamo-bar-bg {
-  flex-grow: 1; height: 10px;
-  background: #150000;
-  border: 1px solid #300;
-  box-shadow: inset 0 2px 5px rgba(0,0,0,1);
+  flex-grow: 1; height: 8px; /* Barra mais fina e discreta */
+  background: #0f0000;
+  border: 1px solid #300000;
   overflow: hidden;
 }
 
 .kamo-hp-fill, .kamo-ea-fill {
   height: 100%; width: 0%;
-  background: linear-gradient(90deg, var(--kamo-blood) 0%, var(--kamo-arterial) 50%, var(--kamo-blood) 100%);
+  /* Gradiente mais "Gore" (Escuro -> Claro -> Escuro) */
+  background: linear-gradient(90deg, #400000 0%, #a00000 50%, #400000 100%);
   background-size: 200% 100%;
-  box-shadow: 0 0 15px var(--kamo-arterial);
-  animation: blood-flow-bar 2s linear infinite;
+  animation: blood-flow-bar 3s linear infinite;
   transition: width 0.6s ease;
 }
 
@@ -226,66 +210,69 @@
   font-family: 'Cinzel', serif;
   font-weight: 700; font-size: 0.9em;
   min-width: 80px; text-align: right;
-  color: #fff !important;
+  color: #bbb !important; /* Cinza claro ao invés de branco puro */
 }
 
 /* CONTEÚDO */
 .kamo-content {
+  position: relative; z-index: 5;
   padding: 30px 45px;
   font-size: 1.1em;
   line-height: 1.8;
   color: var(--kamo-text);
   text-align: justify;
-  background: linear-gradient(to bottom, rgba(20,0,0,0.5), rgba(5,0,0,0.9));
+  /* Importante: Transparência para ver partículas */
+  background: linear-gradient(to bottom, rgba(5,0,0,0.5), rgba(0,0,0,0.8));
 }
 
 .kamo-content b, .kamo-content strong {
-  color: var(--kamo-arterial);
+  color: #cc0000; /* Vermelho sangue forte */
   font-weight: 700;
-  text-shadow: 0 0 2px rgba(0,0,0,0.5);
 }
 
 .kamo-content i, .kamo-content em {
-  color: #f0f0f0;
+  color: #999;
   font-family: 'Crimson Text', serif;
   font-style: italic;
   font-weight: 400;
-  opacity: 0.9;
 }
 
 /* NOTAS */
 .kamo-notes {
+  position: relative; z-index: 5;
   margin: 10px 45px 30px 45px;
   padding: 20px;
-  background: rgba(40, 0, 0, 0.3);
-  border: 1px solid var(--kamo-border);
+  background: #080000;
+  border: 1px solid #2a0000;
   font-size: 0.9em;
-  color: #b09090;
-  position: relative;
+  color: #888;
 }
 .kamo-notes::before {
   content: 'BLOOD PACT';
   display: block; font-family: 'Cinzel', serif;
   font-weight: 700; letter-spacing: 2px;
-  color: var(--kamo-arterial); margin-bottom: 10px; font-size: 0.85em;
-  border-bottom: 1px solid var(--kamo-border); padding-bottom: 5px;
+  color: #8a0000; margin-bottom: 10px; font-size: 0.85em;
+  border-bottom: 1px solid #2a0000; padding-bottom: 5px;
 }
 
 /* ASSINATURA */
-.kamo-signature { text-align: center; padding: 0 40px 50px 40px; }
+.kamo-signature { 
+    position: relative; z-index: 5;
+    text-align: center; padding: 0 40px 50px 40px; 
+}
 .kamo-signature::after {
   content: 'Vladimir Kamo';
   font-family: 'Great Vibes', cursive;
   font-size: 2.8em;
-  color: var(--kamo-arterial);
-  opacity: 0.8;
-  text-shadow: 0 0 10px var(--kamo-blood), 2px 2px 2px #000;
+  color: #a00000; /* Vermelho escuro */
+  opacity: 0.9;
+  text-shadow: 0 0 5px #300, 2px 2px 2px #000;
   transform: rotate(-3deg);
   display: inline-block;
 }
 
 @media (max-width: 600px) {
-  .kamo-card { width: 98%; margin: 20px auto; border-radius: 10px; }
+  .kamo-card { width: 98%; margin: 20px auto; }
   .kamo-content, .kamo-stats-panel, .kamo-notes, .kamo-signature { padding-left: 20px; padding-right: 20px; }
   .kamo-image-frame { height: 250px; }
 }
