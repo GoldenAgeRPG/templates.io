@@ -24,11 +24,6 @@
   100% { transform: translate(200px, -200px) rotate(45deg) scale(0); opacity: 0; }
 }
 
-@keyframes header-mist {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 100% 0%; }
-}
-
 /* --- CONTAINER PRINCIPAL --- */
 .zenin-card {
   position: relative;
@@ -45,17 +40,16 @@
   color: var(--zenin-text);
   font-family: 'Crimson Text', serif;
   overflow: hidden;
-  padding-bottom: 20px; /* Espaço extra já que removemos o rodapé */
+  padding-bottom: 20px;
 }
 .zenin-card * { box-sizing: border-box; }
 
-
-/* --- PARTÍCULAS GLOBAIS --- */
+/* --- PARTÍCULAS (USADAS NO FUNDO E NO TOPO) --- */
 .wind-particle-container {
     position: absolute; 
     top: 0; left: 0; width: 100%; height: 100%;
     pointer-events: none; 
-    z-index: 2;
+    z-index: 1; /* Fica atrás do texto */
     overflow: hidden;
 }
 
@@ -92,22 +86,8 @@
   overflow: hidden;
 }
 
-/* Efeito de Vento/Névoa exclusivo do Header */
-.zenin-header-wind {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  background: repeating-linear-gradient(
-    45deg,
-    transparent 0%,
-    transparent 10%,
-    rgba(77, 255, 77, 0.03) 10%,
-    rgba(77, 255, 77, 0.03) 20%
-  );
-  background-size: 200% 200%;
-  animation: header-mist 10s linear infinite;
-  pointer-events: none; z-index: -1;
-}
-
 .zenin-title {
+  position: relative; z-index: 5;
   font-family: 'Cinzel', serif;
   font-weight: 900;
   font-size: 2.4em;
@@ -120,6 +100,7 @@
 }
 
 .zenin-subtitle {
+  position: relative; z-index: 5;
   font-family: 'Cinzel', serif;
   font-size: 0.85em;
   color: var(--zenin-vacuum);
@@ -138,7 +119,7 @@
   height: 320px;
   overflow: hidden;
   border-bottom: 1px solid var(--zenin-border);
-  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); /* Corte diagonal sutil */
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
 }
 
 .zenin-image-frame img {
@@ -227,31 +208,30 @@
   font-weight: 400;
 }
 
-/* --- NOTAS (Design Novo) --- */
+/* --- NOTAS (REFEITO) --- */
 .zenin-notes {
   position: relative; z-index: 5;
   margin: 10px 45px 30px 45px;
-  padding: 25px;
-  background: rgba(0, 10, 0, 0.4);
-  /* Bordas em cima e embaixo apenas */
-  border-top: 1px solid var(--zenin-wind);
-  border-bottom: 1px solid var(--zenin-wind);
+  padding: 20px;
+  background: #010301; /* Fundo sólido e escuro */
+  border: 1px solid var(--zenin-border);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8); /* Sombra interna para profundidade */
   font-size: 0.9em;
-  color: #9ab;
-  text-align: center;
+  color: #8fa;
 }
 
-/* Título da caixa de notas centralizado e integrado */
+/* Titulo interno simples */
 .zenin-notes::before {
   content: 'RESTRICTION DATA';
-  display: inline-block;
+  display: block; 
   font-family: 'Rajdhani', sans-serif;
-  font-weight: 700; letter-spacing: 3px;
-  color: var(--zenin-vacuum);
-  margin-bottom: 15px; font-size: 0.9em;
-  background: #020502;
-  padding: 0 15px;
-  margin-top: -35px; /* Sobe para ficar na linha da borda */
+  font-weight: 700; 
+  letter-spacing: 2px;
+  color: var(--zenin-wind); 
+  border-bottom: 1px solid var(--zenin-border);
+  margin-bottom: 10px; 
+  padding-bottom: 5px;
+  font-size: 1em;
 }
 
 /* --- ASSINATURA --- */
