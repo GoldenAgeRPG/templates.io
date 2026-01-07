@@ -1,16 +1,16 @@
 /* --- TEMPLATE: ZENIN IKATENARU --- */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Rajdhani:wght@500;700&display=swap');
 
 :root {
   --zenin-bg: #020502;
   --zenin-panel: #050f05;
   --zenin-wind: #1a4d1a;
-  --zenin-vacuum: #4dff4d; /* Verde neon para destaque */
+  --zenin-vacuum: #4dff4d;
   --zenin-text: #d0e0d0;
   --zenin-border: #206020;
 }
 
-/* --- ANIMAÇÕES GERAIS --- */
+/* --- ANIMAÇÕES --- */
 
 @keyframes wind-flow-bar {
   0% { background-position: 0% 50%; }
@@ -24,6 +24,11 @@
   100% { transform: translate(200px, -200px) rotate(45deg) scale(0); opacity: 0; }
 }
 
+@keyframes header-mist {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 100% 0%; }
+}
+
 /* --- CONTAINER PRINCIPAL --- */
 .zenin-card {
   position: relative;
@@ -33,18 +38,19 @@
   width: 95%;
   margin: 50px auto;
   background-color: var(--zenin-bg);
-  background-image: linear-gradient(135deg, #020502 0%, #0a1a0a 100%);
+  background-image: linear-gradient(135deg, #020502 0%, #081408 100%);
   border: 1px solid var(--zenin-border);
-  box-shadow: 0 0 0 4px #000, 0 0 15px var(--zenin-wind); 
+  box-shadow: 0 0 0 4px #000, 0 0 10px var(--zenin-wind); 
   border-radius: 2px;
   color: var(--zenin-text);
   font-family: 'Crimson Text', serif;
   overflow: hidden;
+  padding-bottom: 20px; /* Espaço extra já que removemos o rodapé */
 }
 .zenin-card * { box-sizing: border-box; }
 
 
-/* --- PARTÍCULAS DE VENTO (Lâminas flutuantes) --- */
+/* --- PARTÍCULAS GLOBAIS --- */
 .wind-particle-container {
     position: absolute; 
     top: 0; left: 0; width: 100%; height: 100%;
@@ -56,13 +62,14 @@
 .wind-blade {
   position: absolute;
   bottom: 0;
-  width: 20px; height: 1px;
-  background: rgba(200, 255, 200, 0.4); 
-  box-shadow: 0 0 5px var(--zenin-vacuum);
+  width: 25px; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(200, 255, 200, 0.6), transparent);
+  box-shadow: 0 0 8px var(--zenin-vacuum);
   opacity: 0;
   animation: slash-float linear infinite;
 }
 
+/* Tempos aleatórios */
 .wind-blade:nth-child(1)  { left: 5%;  animation-duration: 2s; animation-delay: 0s; }
 .wind-blade:nth-child(2)  { left: 15%; animation-duration: 3s; animation-delay: 1.5s; }
 .wind-blade:nth-child(3)  { left: 45%; animation-duration: 2.5s; animation-delay: 0.5s; }
@@ -79,9 +86,25 @@
 .zenin-header {
   position: relative; z-index: 5;
   text-align: center;
-  padding: 40px 20px 30px 20px;
-  background: linear-gradient(to bottom, rgba(5, 15, 5, 0.95), rgba(0,0,0,0.8));
+  padding: 50px 20px 40px 20px;
+  background: #030a03;
   border-bottom: 1px solid var(--zenin-border);
+  overflow: hidden;
+}
+
+/* Efeito de Vento/Névoa exclusivo do Header */
+.zenin-header-wind {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent 0%,
+    transparent 10%,
+    rgba(77, 255, 77, 0.03) 10%,
+    rgba(77, 255, 77, 0.03) 20%
+  );
+  background-size: 200% 200%;
+  animation: header-mist 10s linear infinite;
+  pointer-events: none; z-index: -1;
 }
 
 .zenin-title {
@@ -91,8 +114,8 @@
   color: #fff;
   text-transform: uppercase;
   margin: 0;
-  text-shadow: 0 0 10px var(--zenin-wind);
-  letter-spacing: 3px;
+  text-shadow: 0 0 15px var(--zenin-wind);
+  letter-spacing: 4px;
   line-height: 1;
 }
 
@@ -101,9 +124,10 @@
   font-size: 0.85em;
   color: var(--zenin-vacuum);
   text-transform: uppercase;
-  letter-spacing: 5px;
+  letter-spacing: 6px;
   margin-top: 10px;
   font-weight: 700;
+  opacity: 0.9;
 }
 
 /* --- IMAGEM --- */
@@ -114,28 +138,26 @@
   height: 320px;
   overflow: hidden;
   border-bottom: 1px solid var(--zenin-border);
-  clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%); /* Corte diagonal sutil */
 }
 
 .zenin-image-frame img {
   width: 100%; height: 100%;
   object-fit: cover;
   object-position: center 20%;
-  filter: grayscale(60%) contrast(120%) brightness(0.8) sepia(30%) hue-rotate(70deg);
-  transition: 0.5s ease;
+  filter: grayscale(50%) contrast(110%) brightness(0.9) sepia(20%) hue-rotate(80deg);
+  transition: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .zenin-image-frame::after {
     content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
-    background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.1) 50%, transparent 60%);
-    background-size: 200% 200%;
-    opacity: 0.5;
+    background: linear-gradient(to top, rgba(0,20,0,0.6), transparent);
     pointer-events: none;
 }
 
 .zenin-card:hover .zenin-image-frame img {
-  transform: scale(1.05);
-  filter: grayscale(0%) contrast(110%) brightness(1.0);
+  transform: scale(1.03);
+  filter: grayscale(0%) contrast(105%) brightness(1.0);
 }
 
 /* --- STATUS --- */
@@ -143,8 +165,8 @@
   position: relative; z-index: 5;
   padding: 25px 40px;
   display: flex; flex-direction: column; gap: 15px;
-  background: rgba(0, 5, 0, 0.7);
-  margin-top: -20px;
+  background: linear-gradient(to bottom, rgba(2,10,2,0.8), rgba(0,0,0,0.6));
+  border-bottom: 1px solid rgba(77, 255, 77, 0.1);
 }
 
 .zenin-stat-row {
@@ -157,29 +179,30 @@
   color: var(--zenin-vacuum);
   font-size: 0.9em;
   width: 30px;
+  text-shadow: 0 0 5px var(--zenin-wind);
 }
 
 .zenin-bar-bg {
-  flex-grow: 1; height: 6px;
-  background: #000;
-  border: 1px solid var(--zenin-wind);
+  flex-grow: 1; height: 5px;
+  background: #051005;
+  border: 1px solid #306030;
   overflow: hidden;
-  transform: skewX(-20deg);
 }
 
 .zenin-hp-fill, .zenin-ea-fill {
   height: 100%; width: 0%;
-  background: linear-gradient(90deg, #0a300a 0%, #4dff4d 50%, #0a300a 100%);
+  background: linear-gradient(90deg, #1a4d1a 0%, #4dff4d 50%, #1a4d1a 100%);
   background-size: 200% 100%;
-  animation: wind-flow-bar 1s linear infinite;
+  animation: wind-flow-bar 1.5s linear infinite;
   transition: width 0.6s ease;
+  box-shadow: 0 0 8px var(--zenin-vacuum);
 }
 
 .zenin-hp-val, .zenin-ea-val {
   font-family: 'Cinzel', serif;
   font-weight: 700; font-size: 0.9em;
   min-width: 80px; text-align: right;
-  color: #fff !important;
+  color: #e0f0e0 !important;
 }
 
 /* --- CONTEÚDO --- */
@@ -190,7 +213,6 @@
   line-height: 1.8;
   color: var(--zenin-text);
   text-align: justify;
-  background: linear-gradient(to bottom, rgba(2,5,2,0.6), rgba(0,0,0,0.9));
 }
 
 .zenin-content b, .zenin-content strong {
@@ -199,104 +221,51 @@
 }
 
 .zenin-content i, .zenin-content em {
-  color: #8fbc8f;
+  color: #aaddaa;
   font-family: 'Crimson Text', serif;
   font-style: italic;
   font-weight: 400;
 }
 
-/* --- NOTAS --- */
+/* --- NOTAS (Design Novo) --- */
 .zenin-notes {
   position: relative; z-index: 5;
   margin: 10px 45px 30px 45px;
-  padding: 20px;
-  background: #020802;
-  border: 1px solid var(--zenin-wind);
-  border-left: 3px solid var(--zenin-vacuum);
+  padding: 25px;
+  background: rgba(0, 10, 0, 0.4);
+  /* Bordas em cima e embaixo apenas */
+  border-top: 1px solid var(--zenin-wind);
+  border-bottom: 1px solid var(--zenin-wind);
   font-size: 0.9em;
-  color: #889988;
+  color: #9ab;
+  text-align: center;
 }
+
+/* Título da caixa de notas centralizado e integrado */
 .zenin-notes::before {
-  content: 'HEAVENLY RESTRICTION / TECHNIQUE';
-  display: block; font-family: 'Cinzel', serif;
-  font-weight: 700; letter-spacing: 2px;
-  color: var(--zenin-wind); margin-bottom: 10px; font-size: 0.85em;
-  border-bottom: 1px solid var(--zenin-wind); padding-bottom: 5px;
+  content: 'RESTRICTION DATA';
+  display: inline-block;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700; letter-spacing: 3px;
+  color: var(--zenin-vacuum);
+  margin-bottom: 15px; font-size: 0.9em;
+  background: #020502;
+  padding: 0 15px;
+  margin-top: -35px; /* Sobe para ficar na linha da borda */
 }
 
 /* --- ASSINATURA --- */
 .zenin-signature { 
     position: relative; z-index: 5;
-    text-align: center; padding: 0 40px 60px 40px; 
+    text-align: center; padding: 20px 40px 10px 40px; 
 }
 .zenin-signature::after {
   content: 'Ikatenaru Zenin';
   font-family: 'Great Vibes', cursive;
   font-size: 3em;
   color: var(--zenin-vacuum);
-  opacity: 0.8;
+  opacity: 0.7;
   text-shadow: 0 0 10px var(--zenin-wind);
   transform: rotate(-2deg);
   display: inline-block;
-}
-
-/* --- RODAPÉ NOVO: RASTROS DE VENTO/VÁCUO --- */
-.zenin-wind-pool {
-  position: absolute;
-  bottom: 0; left: 0; width: 100%; height: 100px;
-  overflow: hidden; z-index: 3; pointer-events: none;
-  /* Máscara mais forte para focar nas linhas horizontais */
-  mask-image: linear-gradient(to top, black 40%, transparent 90%);
-  -webkit-mask-image: linear-gradient(to top, black 40%, transparent 90%);
-  background: rgba(0, 10, 0, 0.5); /* Fundo sutil */
-}
-
-/* Animação de "Rushing" (Corrida horizontal rápida) */
-@keyframes wind-rush {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 200% 0%; }
-}
-
-.wind-streak-layer {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  /* Cria listras horizontais repetidas que se movem */
-  background-image: repeating-linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(26, 77, 26, 0.4) 15%, /* Cor do vento escura */
-      transparent 30%
-  );
-  background-size: 200% 100%; /* Estica para dar sensação de velocidade */
-}
-
-/* Camada 1: Vento de fundo mais lento */
-.ws-1 {
-  animation: wind-rush 4s linear infinite;
-  opacity: 0.5;
-}
-
-/* Camada 2: Vento médio em direção oposta */
-.ws-2 {
-  background-image: repeating-linear-gradient(90deg, 
-      transparent 0%, 
-      rgba(77, 255, 77, 0.2) 10%, /* Cor neon mais clara, mais estreita */
-      transparent 20%
-  );
-  animation: wind-rush 2.5s linear infinite reverse;
-  opacity: 0.6;
-  height: 80%; top: 20%; /* Deslocamento vertical */
-}
-
-/* Camada 3: Cortes rápidos e brilhantes na frente */
-.ws-3 {
-  background-image: repeating-linear-gradient(90deg, 
-      transparent 0%, 
-      var(--zenin-vacuum) 5%, /* Muito brilhante e estreito */
-      transparent 10%
-  );
-  background-size: 300% 100%; /* Muito esticado = muito rápido */
-  animation: wind-rush 1.2s linear infinite;
-  opacity: 0.4;
-  height: 60%; top: 40%;
-  mix-blend-mode: screen; /* Faz brilhar sobre os outros */
 }
