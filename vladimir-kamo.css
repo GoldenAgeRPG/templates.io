@@ -1,37 +1,35 @@
-/* --- TEMPLATE: KAMO CLAN (BLOOD MANIPULATION) --- */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&display=swap');
+/* --- TEMPLATE: KAMO CLAN --- */
+/* Mantido o nome do arquivo conforme solicitado */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&display=swap');
 
 :root {
   --kamo-bg: #050000;
   --kamo-panel: #0f0202;
-  --kamo-blood: #8a0303; /* Vermelho Sangue Escuro */
-  --kamo-arterial: #ff0f0f; /* Vermelho Arterial Brilhante */
+  --kamo-blood: #6a0000; /* Sangue mais escuro e coagulado */
+  --kamo-arterial: #d00000; /* Vermelho arterial vibrante */
   --kamo-text: #e0d0d0;
   --kamo-border: #4a0000;
 }
 
-/* ANIMAÇÕES */
-/* Pulsação Cardíaca (Rápida e dupla, como um coração) */
-@keyframes heartbeat {
-  0% { box-shadow: 0 0 0 0 rgba(138, 3, 3, 0.4); }
-  15% { box-shadow: 0 0 15px 5px rgba(138, 3, 3, 0.6); }
-  30% { box-shadow: 0 0 0 0 rgba(138, 3, 3, 0.4); }
-  45% { box-shadow: 0 0 10px 3px rgba(138, 3, 3, 0.5); }
-  100% { box-shadow: 0 0 0 0 rgba(138, 3, 3, 0); }
-}
+/* --- ANIMAÇÕES --- */
 
-/* Fluxo Sanguíneo (Para as barras e bordas) */
-@keyframes blood-flow {
+/* Fluxo Sanguíneo (Para as barras) */
+@keyframes blood-flow-bar {
   0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; } /* Fluxo contínuo */
 }
 
-/* Flutuação de Células (Partículas) */
-@keyframes cell-float {
-  0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-  50% { opacity: 0.6; }
-  100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+/* Flutuação de Células (Partículas) - Movimento mais orgânico */
+@keyframes cell-float-up {
+  0% { transform: translateY(0) rotate(0deg) scale(0.8); opacity: 0; }
+  10% { opacity: 0.7; }
+  100% { transform: translateY(-400px) rotate(720deg) scale(1.2); opacity: 0; }
+}
+
+/* Sangue Escorrendo (Fundo) */
+@keyframes blood-drip-down {
+  0% { background-position: 0% 0%; }
+  100% { background-position: 0% 100%; }
 }
 
 /* CONTAINER PRINCIPAL */
@@ -44,124 +42,160 @@
   margin: 50px auto;
   background-color: var(--kamo-bg);
   
-  /* Textura de fundo orgânica (microscópica) */
+  /* Textura de fundo + Efeito de Sangue Escorrendo */
   background-image: 
-    radial-gradient(circle at 50% 50%, rgba(50, 0, 0, 0.2) 0%, transparent 60%),
-    repeating-linear-gradient(90deg, #050000 0px, #050000 19px, #0a0000 20px);
+    /* Textura de ruído */
+    radial-gradient(circle at 50% 50%, rgba(20, 0, 0, 0.3) 0%, transparent 70%),
+    /* Padrão de gotas escorrendo */
+    linear-gradient(to bottom, transparent 0%, rgba(80,0,0,0.1) 5%, transparent 20%, transparent 40%, rgba(80,0,0,0.1) 45%, transparent 60%, transparent 80%, rgba(80,0,0,0.1) 85%, transparent 100%),
+    /* Fundo base */
+    linear-gradient(to bottom, #080000, #020000);
   
-  /* Borda sólida com brilho pulsante */
+  background-size: 100% 100%, 100% 200px, 100% 100%; /* Tamanho do padrão de gotas */
+  animation: blood-drip-down 20s linear infinite; /* Anima o escorrimento */
+
   border: 2px solid var(--kamo-border);
-  border-radius: 15px 0 15px 0; /* Assimétrico */
+  border-radius: 15px 0 15px 0;
   
   color: var(--kamo-text);
   font-family: 'Crimson Text', serif;
   overflow: hidden;
-  box-shadow: 0 10px 30px #000;
-  
-  /* A pulsação ocorre na borda */
-  animation: heartbeat 3s infinite ease-in-out;
+  box-shadow: 0 15px 40px -10px #000;
+  /* Pisca-pisca removido */
 }
-.kamo-card * { box-sizing: border-box; position: relative; z-index: 5; }
+/* Garante que o conteúdo fique acima do fundo e partículas */
+.kamo-card > div { position: relative; z-index: 10; }
+.kamo-card * { box-sizing: border-box; }
 
-/* PARTICULAS DE SANGUE (FUNDO) */
-.blood-particle {
+
+/* --- PARTICULAS DE SANGUE (AUMENTADO) --- */
+.blood-particle-container {
+    position: absolute; top:0; left:0; width:100%; height:100%;
+    pointer-events: none; z-index: 5; overflow: hidden;
+}
+.blood-cell {
   position: absolute;
-  width: 4px; height: 4px;
-  background: var(--kamo-arterial);
+  bottom: -20px; /* Começa fora da tela */
+  background: radial-gradient(circle at 30% 30%, var(--kamo-arterial), var(--kamo-blood));
   border-radius: 50%;
   opacity: 0;
-  z-index: 0; /* Atrás do texto */
-  pointer-events: none;
-  animation: cell-float 8s infinite linear;
+  box-shadow: 0 0 5px var(--kamo-blood);
+  animation: cell-float-up linear infinite;
 }
-/* Distribuição aleatória via CSS */
-.bp1 { left: 10%; bottom: 0; animation-duration: 7s; animation-delay: 0s; }
-.bp2 { left: 30%; bottom: 0; animation-duration: 9s; animation-delay: 2s; width: 6px; height: 6px; }
-.bp3 { left: 70%; bottom: 0; animation-duration: 6s; animation-delay: 4s; }
-.bp4 { left: 90%; bottom: 0; animation-duration: 8s; animation-delay: 1s; width: 3px; height: 3px;}
+
+/* Geração de aleatoriedade para 30 partículas via CSS */
+/* Tamanhos variados */
+.bc-s { width: 4px; height: 4px; }
+.bc-m { width: 7px; height: 7px; }
+.bc-l { width: 10px; height: 10px; }
+
+/* Posições e Delays (Uma amostra para criar o caos) */
+.blood-cell:nth-child(1)  { left: 5%;  animation-duration: 9s;  animation-delay: 0.2s; }
+.blood-cell:nth-child(2)  { left: 12%; animation-duration: 12s; animation-delay: 1.5s; }
+.blood-cell:nth-child(3)  { left: 18%; animation-duration: 8s;  animation-delay: 3.1s; }
+.blood-cell:nth-child(4)  { left: 25%; animation-duration: 11s; animation-delay: 0.7s; }
+.blood-cell:nth-child(5)  { left: 31%; animation-duration: 14s; animation-delay: 4.2s; }
+.blood-cell:nth-child(6)  { left: 38%; animation-duration: 7s;  animation-delay: 2.0s; }
+.blood-cell:nth-child(7)  { left: 44%; animation-duration: 13s; animation-delay: 1.1s; }
+.blood-cell:nth-child(8)  { left: 51%; animation-duration: 10s; animation-delay: 3.7s; }
+.blood-cell:nth-child(9)  { left: 57%; animation-duration: 15s; animation-delay: 0.5s; }
+.blood-cell:nth-child(10) { left: 63%; animation-duration: 8s;  animation-delay: 2.9s; }
+.blood-cell:nth-child(11) { left: 70%; animation-duration: 12s; animation-delay: 1.3s; }
+.blood-cell:nth-child(12) { left: 76%; animation-duration: 9s;  animation-delay: 4.5s; }
+.blood-cell:nth-child(13) { left: 82%; animation-duration: 14s; animation-delay: 0.9s; }
+.blood-cell:nth-child(14) { left: 89%; animation-duration: 7s;  animation-delay: 3.3s; }
+.blood-cell:nth-child(15) { left: 95%; animation-duration: 11s; animation-delay: 1.8s; }
+/* Repete para mais densidade */
+.blood-cell:nth-child(16) { left: 3%;  animation-duration: 10s; animation-delay: 2.5s; }
+.blood-cell:nth-child(17) { left: 15%; animation-duration: 13s; animation-delay: 0.3s; }
+.blood-cell:nth-child(18) { left: 28%; animation-duration: 8s;  animation-delay: 4.1s; }
+.blood-cell:nth-child(19) { left: 41%; animation-duration: 12s; animation-delay: 1.2s; }
+.blood-cell:nth-child(20) { left: 54%; animation-duration: 9s;  animation-delay: 3.8s; }
+.blood-cell:nth-child(21) { left: 67%; animation-duration: 14s; animation-delay: 0.6s; }
+.blood-cell:nth-child(22) { left: 80%; animation-duration: 7s;  animation-delay: 2.2s; }
+.blood-cell:nth-child(23) { left: 92%; animation-duration: 11s; animation-delay: 4.7s; }
+.blood-cell:nth-child(24) { left: 9%;  animation-duration: 15s; animation-delay: 1.6s; }
+.blood-cell:nth-child(25) { left: 22%; animation-duration: 8s;  animation-delay: 3.5s; }
+.blood-cell:nth-child(26) { left: 35%; animation-duration: 13s; animation-delay: 0.8s; }
+.blood-cell:nth-child(27) { left: 48%; animation-duration: 10s; animation-delay: 2.7s; }
+.blood-cell:nth-child(28) { left: 61%; animation-duration: 14s; animation-delay: 4.3s; }
+.blood-cell:nth-child(29) { left: 74%; animation-duration: 9s;  animation-delay: 1.9s; }
+.blood-cell:nth-child(30) { left: 87%; animation-duration: 12s; animation-delay: 3.1s; }
 
 
 /* HEADER */
 .kamo-header {
   text-align: center;
-  padding: 40px 20px 20px 20px;
-  background: linear-gradient(to bottom, #1a0000, #050000);
+  padding: 40px 20px 30px 20px;
+  background: linear-gradient(to bottom, rgba(26,0,0,0.8), rgba(5,0,0,0.8)); /* Transparência para ver o fundo */
   border-bottom: 1px solid var(--kamo-border);
-}
-
-.kamo-icon {
-  width: 50px; height: 50px;
-  margin-bottom: 15px;
-  fill: var(--kamo-arterial);
-  filter: drop-shadow(0 0 10px var(--kamo-blood));
+  /* Ícone SVG removido */
 }
 
 .kamo-title {
-  font-family: 'Cinzel Decorative', cursive;
+  font-family: 'Cinzel', serif; /* Fonte alterada para Cinzel normal, mais forte */
   font-weight: 900;
-  font-size: 2.2em;
+  font-size: 2.4em;
   color: #fff;
   text-transform: uppercase;
   margin: 0;
-  /* Efeito de texto "molhado" */
-  text-shadow: 0 0 5px var(--kamo-arterial), 2px 2px 0px #000;
-  letter-spacing: 2px;
+  text-shadow: 0 0 10px var(--kamo-arterial), 0 2px 2px #000;
+  letter-spacing: 3px;
+  line-height: 1;
 }
 
 .kamo-subtitle {
-  font-family: 'Crimson Text', serif;
-  font-size: 0.9em;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85em;
   color: var(--kamo-arterial);
   text-transform: uppercase;
-  letter-spacing: 4px;
-  margin-top: 5px;
-  font-weight: 600;
-  font-style: italic;
+  letter-spacing: 5px;
+  margin-top: 10px;
+  font-weight: 700;
+  opacity: 0.9;
 }
 
-/* IMAGEM */
+/* IMAGEM (Integração Melhorada) */
 .kamo-image-frame {
-  width: calc(100% - 30px);
-  margin: 15px auto;
-  height: 300px;
+  width: 100%; /* Ocupa toda a largura */
+  margin: 0;
+  height: 320px;
   position: relative;
   overflow: hidden;
-  border: 1px solid var(--kamo-border);
-  box-shadow: inset 0 0 50px #000;
+  border-bottom: 1px solid var(--kamo-border);
+  
+  /* MÁSCARA DE INTEGRAÇÃO: Faz a imagem desaparecer suavemente na parte inferior */
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 }
 
 .kamo-image-frame img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: top;
-  filter: contrast(120%) saturate(80%) sepia(20%) hue-rotate(-10deg); /* Tom avermelhado cinematográfico */
+  object-position: center 20%; /* Foco no rosto */
+  /* Filtros para integrar a cor da nova imagem ao tema de sangue */
+  filter: contrast(130%) saturate(90%) sepia(30%) hue-rotate(-15deg) brightness(0.8);
   transition: 0.8s ease;
+}
+
+/* Overlay para reforçar o tom vermelho */
+.kamo-image-frame::after {
+    content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
+    background: linear-gradient(to bottom, rgba(100,0,0,0.2), rgba(50,0,0,0.6));
+    mix-blend-mode: multiply;
+    pointer-events: none;
 }
 
 .kamo-card:hover .kamo-image-frame img {
   transform: scale(1.05);
-  filter: contrast(110%) saturate(100%) sepia(0%);
+  filter: contrast(120%) saturate(110%) sepia(10%) hue-rotate(-10deg) brightness(0.9);
 }
 
-/* Overlay de vinheta vermelha */
-.kamo-image-frame::after {
-  content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
-  background: radial-gradient(circle, transparent 40%, rgba(50,0,0,0.6) 100%);
-  pointer-events: none; z-index: 2;
-}
-
-/* SEPARADOR (Fluid) */
-.kamo-separator {
-  height: 2px; width: 80%; margin: 20px auto;
-  border: none;
-  background: radial-gradient(ellipse at center, var(--kamo-arterial) 0%, transparent 70%);
-  opacity: 0.8;
-}
-
-/* STATUS (Líquido) */
+/* STATUS */
 .kamo-stats-panel {
-  padding: 10px 40px;
+  padding: 25px 40px;
   display: flex; flex-direction: column; gap: 15px;
+  background: rgba(10,0,0,0.6); /* Fundo semi-transparente para destacar */
 }
 
 .kamo-stat-row {
@@ -169,94 +203,98 @@
 }
 
 .kamo-label {
-  font-family: 'Cinzel Decorative', cursive;
-  font-weight: 700;
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
   color: var(--kamo-arterial);
-  font-size: 1em;
-  width: 35px;
+  font-size: 0.9em;
+  width: 30px;
+  text-shadow: 0 0 5px var(--kamo-blood);
 }
 
 .kamo-bar-bg {
-  flex-grow: 1; height: 14px;
-  background: #100000;
-  border: 1px solid var(--kamo-border);
-  border-radius: 20px; /* Arredondado como uma célula */
+  flex-grow: 1; height: 10px;
+  background: #150000;
+  border: 1px solid #300;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,1);
   overflow: hidden;
-  box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);
 }
 
 .kamo-hp-fill, .kamo-ea-fill {
   height: 100%; width: 0%;
-  /* Gradiente líquido animado */
-  background: linear-gradient(90deg, var(--kamo-blood), var(--kamo-arterial), var(--kamo-blood));
+  /* Gradiente de fluxo sanguíneo mais intenso */
+  background: linear-gradient(90deg, var(--kamo-blood) 0%, var(--kamo-arterial) 50%, var(--kamo-blood) 100%);
   background-size: 200% 100%;
-  border-radius: 20px;
-  box-shadow: 0 0 10px var(--kamo-blood);
-  animation: blood-flow 3s linear infinite;
+  box-shadow: 0 0 15px var(--kamo-arterial);
+  animation: blood-flow-bar 2s linear infinite; /* Fluxo rápido */
   transition: width 0.6s ease;
 }
 
 .kamo-hp-val, .kamo-ea-val {
-  font-family: 'Crimson Text', serif;
-  font-weight: 700; font-size: 1em;
+  font-family: 'Cinzel', serif;
+  font-weight: 700; font-size: 0.9em;
   min-width: 80px; text-align: right;
   color: #fff !important;
 }
 
 /* CONTEÚDO */
 .kamo-content {
-  padding: 20px 45px;
-  font-size: 1.15em;
+  padding: 30px 45px;
+  font-size: 1.1em;
   line-height: 1.8;
   color: var(--kamo-text);
   text-align: justify;
-  background: linear-gradient(to bottom, transparent, rgba(20,0,0,0.3));
+  background: linear-gradient(to bottom, rgba(20,0,0,0.4), rgba(5,0,0,0.8));
 }
 
-/* Estilização de Texto */
+/* Estilização de Texto (CORRIGIDO: Apenas cor e peso) */
 .kamo-content b, .kamo-content strong {
   color: var(--kamo-arterial);
-  font-family: 'Cinzel Decorative', cursive;
   font-weight: 700;
+  text-shadow: 0 0 2px rgba(0,0,0,0.5);
+  /* Removido font-family, font-size e text-transform */
 }
 
 .kamo-content i, .kamo-content em {
-  color: #fff;
-  font-family: 'Crimson Text', serif;
+  color: #f0f0f0;
+  font-family: 'Crimson Text', serif; /* Mantém a fonte do corpo, mas itálico */
   font-style: italic;
   font-weight: 400;
-  text-shadow: 0 0 5px rgba(255,0,0,0.3);
+  opacity: 0.9;
 }
 
-/* NOTAS (Oculto/Sangue) */
+/* NOTAS */
 .kamo-notes {
   margin: 10px 45px 30px 45px;
-  padding: 15px;
-  background: rgba(30, 0, 0, 0.3);
-  border-left: 3px solid var(--kamo-arterial);
+  padding: 20px;
+  background: rgba(40, 0, 0, 0.2);
+  border: 1px solid var(--kamo-border);
   font-size: 0.9em;
-  color: #a08080;
+  color: #b09090;
+  position: relative;
 }
 .kamo-notes::before {
-  content: 'Noritoshi\'s Notes';
-  display: block; font-family: 'Cinzel Decorative', cursive;
-  color: var(--kamo-arterial); margin-bottom: 5px; font-size: 0.8em;
+  content: 'BLOOD PACT';
+  display: block; font-family: 'Cinzel', serif;
+  font-weight: 700; letter-spacing: 2px;
+  color: var(--kamo-arterial); margin-bottom: 10px; font-size: 0.85em;
+  border-bottom: 1px solid var(--kamo-border); padding-bottom: 5px;
 }
 
 /* ASSINATURA */
-.kamo-signature { text-align: right; padding: 0 50px 40px 0; }
+.kamo-signature { text-align: center; padding: 0 40px 50px 40px; }
 .kamo-signature::after {
   content: 'Vladimir Kamo';
-  font-family: 'Great Vibes', cursive; /* Fonte manuscrita elegante */
-  font-size: 2.5em;
+  font-family: 'Great Vibes', cursive;
+  font-size: 2.8em;
   color: var(--kamo-arterial);
   opacity: 0.8;
-  text-shadow: 0 0 4px var(--kamo-blood);
-  transform: rotate(-5deg);
+  text-shadow: 0 0 10px var(--kamo-blood), 2px 2px 2px #000;
+  transform: rotate(-3deg);
   display: inline-block;
 }
 
 @media (max-width: 600px) {
   .kamo-card { width: 98%; margin: 20px auto; border-radius: 10px; }
-  .kamo-content, .kamo-stats-panel { padding-left: 20px; padding-right: 20px; }
+  .kamo-content, .kamo-stats-panel, .kamo-notes, .kamo-signature { padding-left: 20px; padding-right: 20px; }
+  .kamo-image-frame { height: 250px; }
 }
