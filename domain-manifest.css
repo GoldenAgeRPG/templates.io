@@ -1,0 +1,182 @@
+/* NOME DO ARQUIVO: domain-manifest.css */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    --dm-bg: #121212;
+    --dm-card-bg: rgba(20, 20, 20, 0.9);
+    --dm-text: #e0e0e0;
+    --dm-border-radius: 12px;
+}
+
+.dm-container {
+    /* Variáveis Dinâmicas - Serão alteradas pelo Gerador */
+    --theme-color: #d32f2f; 
+    --bg-image: url('');
+    
+    font-family: 'Inter', sans-serif;
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: var(--dm-bg);
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.8), var(--dm-bg)), var(--bg-image);
+    background-size: cover;
+    background-position: center;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--dm-border-radius);
+    box-shadow: 0 0 20px rgba(0,0,0,0.5), 0 0 5px var(--theme-color);
+    overflow: hidden;
+    color: var(--dm-text);
+    position: relative;
+}
+
+/* Faixa Decorativa de Topo */
+.dm-container::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--theme-color);
+    box-shadow: 0 0 10px var(--theme-color);
+}
+
+.dm-header {
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    backdrop-filter: blur(5px);
+}
+
+.dm-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: 2px solid var(--theme-color);
+    background-size: cover;
+    background-position: center;
+    box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    flex-shrink: 0;
+}
+
+.dm-header-text {
+    flex-grow: 1;
+}
+
+.dm-title {
+    font-family: 'Cinzel', serif;
+    font-size: 2em;
+    color: var(--theme-color);
+    text-transform: uppercase;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    margin: 0;
+    line-height: 1.1;
+}
+
+.dm-subtitle {
+    font-size: 0.9em;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-top: 5px;
+}
+
+.dm-tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--theme-color);
+    color: var(--theme-color);
+    padding: 2px 8px;
+    font-size: 0.7em;
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-left: 10px;
+}
+
+.dm-body {
+    padding: 30px;
+}
+
+.dm-section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2em;
+    border-left: 3px solid var(--theme-color);
+    padding-left: 10px;
+    margin-bottom: 15px;
+    color: #fff;
+    background: linear-gradient(90deg, rgba(255,255,255,0.05), transparent);
+}
+
+.dm-text {
+    line-height: 1.6;
+    color: #ccc;
+    font-size: 0.95em;
+    margin-bottom: 20px;
+}
+
+/* Imagem Flutuante na Descrição */
+.dm-float-img {
+    width: 200px;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid rgba(255,255,255,0.1);
+    margin-bottom: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+.dm-float-right { float: right; margin-left: 20px; }
+.dm-float-left { float: left; margin-right: 20px; }
+
+/* Grid de Status */
+.dm-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.dm-stat-card {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+.dm-stat-card:hover { transform: translateY(-2px); border-color: var(--theme-color); }
+
+.dm-stat-label {
+    font-size: 0.75em;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+}
+
+.dm-stat-value {
+    font-weight: 600;
+    color: #fff;
+    font-size: 1.1em;
+}
+
+/* Box de Efeito Especial */
+.dm-effect-box {
+    background: rgba(var(--theme-color), 0.1); /* Fallback */
+    background: linear-gradient(45deg, rgba(0,0,0,0.6), rgba(40,40,40,0.6));
+    border-left: 4px solid var(--theme-color);
+    padding: 20px;
+    border-radius: 0 8px 8px 0;
+    margin-top: 20px;
+    position: relative;
+}
+
+.dm-effect-box h4 {
+    margin: 0 0 10px 0;
+    color: var(--theme-color);
+    font-family: 'Cinzel', serif;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .dm-header { flex-direction: column; text-align: center; }
+    .dm-float-img { float: none; width: 100%; margin: 10px 0; }
+    .dm-tag { display: block; margin: 10px auto; width: fit-content; }
+}
