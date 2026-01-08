@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700&family=Inter:wght@300;400;600&display=swap');
+
+:root {
+    --sp-bg: #0a0a0a;
+    --sp-card: #141414;
+    --sp-accent: #d32f2f; /* Vermelho Jujutsu */
+    --sp-gold: #ffb300;
+    --sp-text: #e0e0e0;
+    --sp-text-dim: #888;
+}
+
+.sp-container {
+    max-width: 900px;
+    margin: 20px auto;
+    background-color: var(--sp-bg);
+    color: var(--sp-text);
+    font-family: 'Inter', sans-serif;
+    border: 1px solid #333;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
+}
+
+/* HEADER */
+.sp-header {
+    background: linear-gradient(135deg, #1a0505, #000);
+    padding: 40px;
+    position: relative;
+    border-bottom: 2px solid var(--sp-accent);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.sp-title-block h1 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 3em;
+    margin: 0;
+    line-height: 1;
+    text-transform: uppercase;
+    color: #fff;
+    text-shadow: 0 0 10px var(--sp-accent);
+}
+.sp-title-block span {
+    font-size: 1.2em;
+    color: var(--sp-accent);
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+.sp-date {
+    margin-top: 5px;
+    font-size: 0.9em;
+    color: var(--sp-text-dim);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.sp-date::before { content: '⏱'; }
+
+/* CARD DE PREÇO */
+.sp-price-card {
+    background: rgba(255,255,255,0.05);
+    padding: 15px 25px;
+    border-radius: 8px;
+    border: 1px solid #333;
+    text-align: right;
+    min-width: 200px;
+}
+.sp-price-big { font-family: 'Rajdhani', sans-serif; font-size: 2em; color: var(--sp-gold); font-weight: 700; }
+.sp-price-sub { font-size: 0.85em; color: #aaa; margin-top: 5px; }
+.sp-booster { color: #ff73fa; font-weight: 700; }
+
+/* SEÇÃO DE XP */
+.sp-section { padding: 30px; border-bottom: 1px solid #222; }
+.sp-sec-title {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    color: #fff;
+    margin-bottom: 20px;
+    border-left: 4px solid var(--sp-accent);
+    padding-left: 15px;
+}
+
+.sp-xp-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 15px;
+}
+.sp-xp-item {
+    background: var(--sp-card);
+    padding: 15px;
+    border-radius: 6px;
+    border: 1px solid #2a2a2a;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.sp-xp-label { font-weight: 600; font-size: 0.9em; }
+.sp-xp-val { color: var(--sp-accent); font-weight: 700; font-family: 'Rajdhani', sans-serif; font-size: 1.2em; }
+
+/* LISTA DE TIERS (SCROLLABLE) */
+.sp-tiers-container {
+    max-height: 500px;
+    overflow-y: auto;
+    background: #0f0f0f;
+    border: 1px solid #222;
+    border-radius: 8px;
+}
+.sp-tiers-container::-webkit-scrollbar { width: 8px; }
+.sp-tiers-container::-webkit-scrollbar-track { background: #000; }
+.sp-tiers-container::-webkit-scrollbar-thumb { background: var(--sp-accent); border-radius: 4px; }
+
+.sp-tier-row {
+    display: grid;
+    grid-template-columns: 50px 1fr 100px;
+    padding: 12px 20px;
+    border-bottom: 1px solid #222;
+    align-items: center;
+    transition: 0.2s;
+}
+.sp-tier-row:hover { background: #1a1a1a; }
+.sp-tier-num {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    color: #555;
+    font-size: 1.2em;
+}
+.sp-tier-reward { font-size: 0.95em; color: #ccc; }
+.sp-tier-reward span { display: block; font-size: 0.75em; color: #666; margin-top: 2px; }
+.sp-tier-icon { 
+    text-align: right; 
+    font-size: 1.2em; 
+}
+
+/* DESTAQUES (Tier 10, 20, etc) */
+.sp-tier-row.milestone {
+    background: linear-gradient(90deg, rgba(211, 47, 47, 0.1), transparent);
+    border-left: 3px solid var(--sp-accent);
+}
+.sp-tier-row.milestone .sp-tier-num { color: var(--sp-accent); }
+.sp-tier-row.milestone .sp-tier-reward { color: #fff; font-weight: 600; }
