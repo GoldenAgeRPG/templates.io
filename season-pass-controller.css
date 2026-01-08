@@ -1,366 +1,166 @@
-/* --- SEASON PASS CONTROLLER CSS --- */
-/* Host: https://goldenagerpg.github.io/templates.io/season-pass-controller.css */
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700&family=Inter:wght@300;400;600&display=swap');
 
 :root {
-    --spc-bg: #0a0a1a;
-    --spc-card: #15152b;
-    --spc-border: #2a2a4a;
-    --spc-primary: #8a2be2;
-    --spc-secondary: #9d4edd;
-    --spc-accent: #7b2cbf;
-    --spc-text: #e0e0ff;
-    --spc-text-secondary: #a0a0cc;
-    --spc-success: #00cc88;
-    --spc-error: #ff3366;
-    --spc-warning: #ffaa00;
+    --spc-bg: #0b0b0b;
+    --spc-card: #141414;
+    --spc-primary: #7b1fa2; /* Roxo Jujutsu */
+    --spc-primary-light: #ae52d4;
+    --spc-glow: rgba(123, 31, 162, 0.5);
+    --spc-text: #e0e0e0;
+    --spc-text-dim: #888;
 }
 
-.sp-controller {
-    background: var(--spc-card);
-    border: 2px solid var(--spc-border);
-    border-radius: 12px;
-    padding: 25px;
+.sp-tracker-container {
+    max-width: 700px;
     margin: 20px auto;
-    max-width: 800px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-.sp-controller * {
-    box-sizing: border-box;
-}
-
-/* HEADER */
-.spc-header {
-    text-align: center;
-    margin-bottom: 25px;
-    padding-bottom: 15px;
-    border-bottom: 1px solid var(--spc-border);
-}
-
-.spc-header h2 {
+    background-color: var(--spc-bg);
     color: var(--spc-text);
-    margin: 0;
-    font-size: 1.8em;
-    background: linear-gradient(45deg, var(--spc-primary), var(--spc-secondary));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-family: 'Inter', sans-serif;
+    border: 1px solid #222;
+    border-top: 3px solid var(--spc-primary);
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.5);
+    overflow: hidden;
 }
 
-.spc-header p {
-    color: var(--spc-text-secondary);
-    margin: 5px 0 0;
-    font-size: 0.95em;
-}
-
-/* XP DISPLAY */
-.spc-xp-display {
-    background: rgba(42, 42, 74, 0.5);
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 25px;
-    border: 1px solid var(--spc-border);
-}
-
-.spc-level-info {
+/* HEADER DO TRACKER */
+.sp-tracker-header {
+    background: linear-gradient(180deg, rgba(123,31,162,0.1), rgba(0,0,0,0));
+    padding: 25px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 15px;
-    flex-wrap: wrap;
-    gap: 10px;
+    border-bottom: 1px solid #222;
 }
 
-.spc-current-level {
-    background: linear-gradient(135deg, var(--spc-primary), var(--spc-accent));
-    padding: 10px 20px;
-    border-radius: 8px;
-    text-align: center;
-    min-width: 140px;
+.sp-user-info h2 {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 1.8em;
+    margin: 0;
+    text-transform: uppercase;
+    color: #fff;
+    line-height: 1;
 }
-
-.spc-level-label {
-    display: block;
+.sp-user-info span {
     font-size: 0.85em;
-    color: rgba(255, 255, 255, 0.9);
-    margin-bottom: 5px;
+    color: var(--spc-primary-light);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
 }
 
-.spc-level-value {
-    font-size: 2.2em;
-    font-weight: bold;
-    color: white;
-}
-
-.spc-xp-info {
-    flex-grow: 1;
+.sp-total-xp {
     text-align: right;
-    color: var(--spc-text);
 }
-
-.spc-xp-info .label {
+.sp-total-xp .val {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 2.2em;
+    color: #fff;
+    font-weight: 700;
+    text-shadow: 0 0 10px var(--spc-glow);
+}
+.sp-total-xp .label {
+    font-size: 0.7em;
+    color: #666;
+    text-transform: uppercase;
     display: block;
-    font-size: 0.9em;
-    color: var(--spc-text-secondary);
-    margin-bottom: 5px;
+    margin-top: -5px;
 }
 
-.spc-xp-info .value {
-    font-size: 1.4em;
-    font-weight: bold;
-    color: var(--spc-success);
+/* BARRA DE PROGRESSO */
+.sp-progress-section {
+    padding: 20px 25px;
+    background: #0e0e0e;
 }
-
-.spc-progress-container {
-    margin-top: 15px;
-}
-
-.spc-xp-text {
+.sp-bar-meta {
     display: flex;
     justify-content: space-between;
     margin-bottom: 8px;
-    font-size: 0.9em;
-    color: var(--spc-text-secondary);
+    font-size: 0.85em;
+    color: #aaa;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
 }
-
-.spc-xp-bar {
-    height: 20px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
+.sp-bar-bg {
+    width: 100%;
+    height: 12px;
+    background: #1a1a1a;
+    border-radius: 6px;
     overflow: hidden;
-    border: 1px solid var(--spc-border);
+    border: 1px solid #333;
     position: relative;
 }
-
-.spc-xp-fill {
+.sp-bar-fill {
     height: 100%;
-    background: linear-gradient(90deg, var(--spc-primary), var(--spc-secondary));
-    width: 0%;
-    transition: width 0.3s ease;
+    background: linear-gradient(90deg, var(--spc-primary), var(--spc-primary-light));
+    box-shadow: 0 0 15px var(--spc-glow);
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 6px;
     position: relative;
 }
-
-.spc-xp-fill::after {
+/* Efeito de brilho na ponta da barra */
+.sp-bar-fill::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, 
-        transparent, 
-        rgba(255, 255, 255, 0.2), 
-        transparent);
-    animation: spc-shine 2s infinite;
+    top: 0; right: 0; bottom: 0;
+    width: 2px;
+    background: #fff;
+    box-shadow: 0 0 10px #fff;
 }
 
-@keyframes spc-shine {
-    0% { transform: translateX(-100%); }
-    100% { transform: translateX(100%); }
+/* LISTA DE ATIVIDADES */
+.sp-activity-list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }
-
-/* XP INPUT */
-.spc-xp-input-section {
-    background: rgba(42, 42, 74, 0.3);
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 25px;
-    border: 1px solid var(--spc-border);
+.sp-activity-item {
+    display: grid;
+    grid-template-columns: 40px 1fr 80px;
+    padding: 15px 25px;
+    border-bottom: 1px solid #1a1a1a;
+    align-items: center;
+    transition: 0.2s;
 }
+.sp-activity-item:last-child { border-bottom: none; }
+.sp-activity-item:hover { background: rgba(255,255,255,0.02); }
 
-.spc-input-group {
-    margin-bottom: 15px;
+.sp-act-icon {
+    font-size: 1.2em;
+    opacity: 0.7;
 }
-
-.spc-input-group label {
-    display: block;
-    color: var(--spc-text);
-    margin-bottom: 8px;
-    font-weight: 500;
-}
-
-.spc-xp-input {
-    width: 100%;
-    padding: 12px 15px;
-    background: rgba(0, 0, 0, 0.3);
-    border: 1px solid var(--spc-border);
-    border-radius: 8px;
-    color: var(--spc-text);
-    font-size: 1.1em;
-    transition: all 0.3s ease;
-}
-
-.spc-xp-input:focus {
-    outline: none;
-    border-color: var(--spc-primary);
-    box-shadow: 0 0 0 2px rgba(138, 43, 226, 0.2);
-}
-
-.spc-xp-input::placeholder {
-    color: var(--spc-text-secondary);
-}
-
-/* ACTIVITIES LOG */
-.spc-activities {
-    background: rgba(42, 42, 74, 0.3);
-    border-radius: 10px;
-    padding: 20px;
-    border: 1px solid var(--spc-border);
-}
-
-.spc-activities h3 {
-    color: var(--spc-text);
-    margin: 0 0 20px 0;
-    font-size: 1.3em;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--spc-border);
-}
-
-.spc-activity-list {
+.sp-act-details {
     display: flex;
     flex-direction: column;
-    gap: 12px;
 }
-
-.spc-activity {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 8px;
-    padding: 15px;
-    border: 1px solid transparent;
-    transition: all 0.3s ease;
+.sp-act-type {
+    font-weight: 600;
+    color: #fff;
+    font-size: 0.95em;
 }
-
-.spc-activity:hover {
-    border-color: var(--spc-border);
-    background: rgba(0, 0, 0, 0.3);
-}
-
-.spc-activity-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.spc-activity-name {
-    font-weight: bold;
-    color: var(--spc-text);
-    font-size: 1.1em;
-}
-
-.spc-activity-xp {
-    background: var(--spc-primary);
-    color: white;
-    padding: 4px 10px;
-    border-radius: 20px;
-    font-size: 0.9em;
-    font-weight: bold;
-}
-
-.spc-activity-links {
-    margin-top: 10px;
-}
-
-.spc-link-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 5px;
-    padding: 5px 0;
-}
-
-.spc-link-label {
-    color: var(--spc-text-secondary);
-    font-size: 0.9em;
-    min-width: 120px;
-}
-
-.spc-link-url {
-    color: var(--spc-secondary);
+.sp-act-link {
+    font-size: 0.8em;
+    color: var(--spc-primary-light);
     text-decoration: none;
+    transition: 0.2s;
+    margin-top: 2px;
+}
+.sp-act-link:hover { color: #fff; text-decoration: underline; }
+
+.sp-act-xp {
+    text-align: right;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    color: #ccc;
+    background: #1a1a1a;
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #333;
     font-size: 0.9em;
-    word-break: break-all;
-    flex-grow: 1;
 }
+.sp-act-xp span { font-size: 0.7em; color: #666; margin-left: 2px; }
 
-.spc-link-url:hover {
-    color: var(--spc-primary);
-    text-decoration: underline;
-}
-
-/* FOOTER */
-.spc-footer {
-    margin-top: 25px;
-    padding-top: 15px;
-    border-top: 1px solid var(--spc-border);
-    text-align: center;
-    color: var(--spc-text-secondary);
-    font-size: 0.85em;
-}
-
-.spc-footer a {
-    color: var(--spc-secondary);
-    text-decoration: none;
-}
-
-.spc-footer a:hover {
-    color: var(--spc-primary);
-    text-decoration: underline;
-}
-
-/* RESPONSIVIDADE */
-@media (max-width: 768px) {
-    .sp-controller {
-        padding: 15px;
-        margin: 10px;
-    }
-    
-    .spc-level-info {
-        flex-direction: column;
-        align-items: stretch;
-    }
-    
-    .spc-current-level {
-        width: 100%;
-    }
-    
-    .spc-xp-info {
-        text-align: center;
-    }
-    
-    .spc-activity-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-    
-    .spc-activity-xp {
-        align-self: flex-start;
-    }
-    
-    .spc-link-item {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 5px;
-    }
-    
-    .spc-link-label {
-        min-width: auto;
-    }
-}
-
-@media (max-width: 480px) {
-    .spc-header h2 {
-        font-size: 1.5em;
-    }
-    
-    .spc-level-value {
-        font-size: 1.8em;
-    }
-    
-    .spc-xp-bar {
-        height: 16px;
-    }
+@media (max-width: 500px) {
+    .sp-header { flex-direction: column; text-align: center; gap: 15px; }
+    .sp-total-xp { text-align: center; }
 }
