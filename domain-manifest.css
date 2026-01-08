@@ -12,7 +12,7 @@
     --banner-img: url('');
     
     font-family: 'Inter', sans-serif;
-    /* LARGURA AUMENTADA AQUI (Era 800px) */
+    /* LARGURA AUMENTADA PARA 900px */
     max-width: 900px;
     margin: 20px auto;
     background-color: var(--dm-bg);
@@ -168,8 +168,8 @@
 }
 .dm-text p { margin-top: 0; margin-bottom: 15px; }
 
+/* IMAGEM REDUZIDA PARA 200px */
 .dm-float-img {
-    /* TAMANHO REDUZIDO AQUI (Era 240px) */
     width: 200px; 
     height: auto;
     border-radius: 6px;
@@ -178,8 +178,8 @@
     box-shadow: 0 5px 15px rgba(0,0,0,0.5);
     object-fit: cover;
 }
-.dm-float-right { float: right; margin-left: 20px; clear: right; }
-.dm-float-left { float: left; margin-right: 20px; clear: left; }
+.dm-float-right { float: right; margin-left: 25px; clear: right; }
+.dm-float-left { float: left; margin-right: 25px; clear: left; }
 .dm-clear { clear: both; }
 
 /* EFEITO BOX */
