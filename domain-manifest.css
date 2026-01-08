@@ -12,7 +12,8 @@
     --banner-img: url('');
     
     font-family: 'Inter', sans-serif;
-    max-width: 800px;
+    /* LARGURA AUMENTADA AQUI (Era 800px) */
+    max-width: 900px;
     margin: 20px auto;
     background-color: var(--dm-bg);
     border: 1px solid rgba(255,255,255,0.1);
@@ -111,7 +112,7 @@
 .dm-stat-label { font-size: 0.7em; color: #888; text-transform: uppercase; margin-bottom: 4px; }
 .dm-stat-value { font-weight: 600; color: #fff; font-size: 1em; }
 
-/* --- NOVO: LISTA DE BÔNUS (PROPRIEDADES) --- */
+/* LISTA DE BÔNUS */
 .dm-bonus-list {
     margin-bottom: 30px;
     background: rgba(255,255,255,0.02);
@@ -131,6 +132,32 @@
 .dm-bonus-bullet { color: var(--theme-color); font-weight: bold; }
 .dm-bonus-title { color: #fff; font-weight: 600; margin-right: 5px; }
 
+/* VOTOS */
+.dm-vow-box {
+    background: rgba(0,0,0,0.3);
+    border: 1px dashed rgba(255,255,255,0.2);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    position: relative;
+}
+.dm-vow-title {
+    font-family: 'Cinzel', serif;
+    color: #bbb;
+    font-size: 0.9em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.dm-vow-content {
+    font-size: 0.9em;
+    color: #ddd;
+    font-style: italic;
+    line-height: 1.6;
+}
+
 /* TEXTO E IMAGENS */
 .dm-text {
     line-height: 1.7;
@@ -142,7 +169,9 @@
 .dm-text p { margin-top: 0; margin-bottom: 15px; }
 
 .dm-float-img {
-    width: 240px; height: auto;
+    /* TAMANHO REDUZIDO AQUI (Era 240px) */
+    width: 200px; 
+    height: auto;
     border-radius: 6px;
     border: 1px solid rgba(255,255,255,0.1);
     margin-bottom: 10px;
