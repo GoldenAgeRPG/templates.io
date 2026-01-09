@@ -1,12 +1,11 @@
-/* --- TEMPLATE: GOJO AIZEN (Final Tech) --- */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Italianno&family=Rajdhani:wght@500;700&display=swap');
+/* --- TEMPLATE: GOJO AIZEN --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@400;600&family=Italianno&family=Rajdhani:wght@600;700&display=swap');
 
 :root {
-  --az-bg: #020202;
-  --az-content-bg: #050505; /* Fundo Sólido para texto */
+  --az-bg: #050505;
   --az-purple: #7b2cbf;
   --az-pink: #f72585;
-  --az-text: #e0e0e0;
+  --az-text: #ccc;
 }
 
 /* --- CONTAINER --- */
@@ -17,187 +16,217 @@
   margin: 50px auto;
   background-color: var(--az-bg);
   border: 1px solid #1a1a1a;
-  border-top: 3px solid var(--az-purple);
-  box-shadow: 0 0 40px rgba(0,0,0,0.9);
+  box-shadow: 0 0 30px rgba(0,0,0,0.8);
   font-family: 'Montserrat', sans-serif;
   color: var(--az-text);
   overflow: hidden;
+  border-radius: 4px;
 }
 .aizen-card * { box-sizing: border-box; }
 
-/* --- HEADER & IMAGEM --- */
-.aizen-header {
-  position: relative;
-  width: 100%;
-  height: 0;
-  padding-bottom: 56.25%; /* 16:9 */
-  overflow: hidden;
-}
-
-.aizen-header img {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  object-fit: cover;
-  filter: contrast(110%) brightness(0.9);
-  transition: transform 1s ease;
-}
-
-.aizen-card:hover .aizen-header img { transform: scale(1.05); }
-
-/* Título Flutuante sobre a imagem */
-.aizen-overlay-title {
-  position: absolute;
-  bottom: 30px; left: 0; width: 100%;
+/* --- HEADER --- */
+.aizen-title-box {
+  background: #080808;
+  padding: 25px 10px;
   text-align: center;
-  z-index: 2;
-  pointer-events: none;
+  border-bottom: 1px solid var(--az-purple);
 }
 .aizen-h1 {
   font-family: 'Cinzel', serif;
-  font-size: 2.5em;
+  font-size: 2em;
   color: #fff;
   text-transform: uppercase;
-  letter-spacing: 5px;
-  text-shadow: 0 0 15px var(--az-purple), 0 4px 2px #000;
+  letter-spacing: 4px;
   margin: 0;
+  text-shadow: 0 0 10px rgba(123, 44, 191, 0.6);
 }
 .aizen-sub {
   font-family: 'Montserrat', sans-serif;
-  font-size: 0.8em;
+  font-size: 0.75em;
   color: var(--az-pink);
   text-transform: uppercase;
-  letter-spacing: 4px;
-  background: rgba(0,0,0,0.6);
-  padding: 2px 10px;
-  border-radius: 4px;
+  letter-spacing: 3px;
+  display: block;
+  margin-top: 5px;
 }
 
-/* --- SEPARADOR "ESTILHAÇO" (Efeito solicitado) --- */
-.aizen-shatter-separator {
+/* --- IMAGEM & ONDA --- */
+.aizen-visual {
   position: relative;
   width: 100%;
-  height: 40px;
-  background: linear-gradient(90deg, var(--az-purple), var(--az-pink));
-  margin-top: -1px; /* Cola na imagem */
-  z-index: 5;
-  /* Recorte Geométrico Irregular */
-  clip-path: polygon(
-    0 0, 100% 0, 
-    100% 100%, 
-    85% 40%, 70% 100%, 
-    55% 30%, 40% 100%, 
-    25% 35%, 10% 100%, 
-    0 30%
-  );
+}
+.aizen-img-frame {
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 */
+  position: relative;
+  overflow: hidden;
+}
+.aizen-img-frame img {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  filter: contrast(110%) brightness(0.95);
 }
 
-/* --- STATUS FINOS --- */
+/* A ONDA CURVA (Separador) */
+.aizen-wave-sep {
+  position: relative;
+  height: 20px;
+  background: linear-gradient(90deg, var(--az-purple), var(--az-pink));
+  /* Cria a curva convexa suave */
+  border-radius: 0 0 50% 50% / 0 0 100% 100%;
+  margin-top: -10px; /* Sobe para encostar na imagem */
+  z-index: 5;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+}
+
+/* --- STATUS (Finos + Numeração Interna) --- */
 .aizen-stats {
-  background: var(--az-content-bg); /* Fundo sólido */
   padding: 30px 40px 10px 40px;
-  display: flex; flex-direction: column; gap: 8px;
-  border-bottom: 1px solid #111;
+  display: flex; flex-direction: column; gap: 10px;
 }
 
 .aizen-stat-row {
   display: flex; align-items: center; gap: 15px;
-  font-family: 'Rajdhani', sans-serif;
-  font-weight: 700;
 }
 
 .aizen-label {
+  font-family: 'Cinzel', serif;
+  font-weight: 700;
   width: 30px;
-  font-size: 0.9em;
+  font-size: 0.85em;
   color: #888;
 }
 
+/* Barra Fina (15px) */
 .aizen-bar-bg {
   flex-grow: 1; 
-  height: 8px; /* BARRA FINA */
+  height: 15px; 
   background: #111;
   border: 1px solid #333;
   border-radius: 2px;
+  position: relative; /* Para o texto absoluto */
   overflow: hidden;
 }
 
+/* Fill */
 .aizen-hp-fill, .aizen-ea-fill, .aizen-san-fill {
   height: 100%; width: 0%;
+  position: absolute; top: 0; left: 0;
+  z-index: 1;
   transition: width 0.6s ease;
 }
+.aizen-hp-fill { background: linear-gradient(90deg, #5c0000, #b71c1c); }
+.aizen-ea-fill { background: linear-gradient(90deg, #1a237e, #3d5afe); }
+.aizen-san-fill { background: linear-gradient(90deg, var(--az-purple), var(--az-pink)); box-shadow: 0 0 10px var(--az-purple); }
 
-/* CORES DAS BARRAS */
-/* HP - Vermelho Escuro */
-.aizen-hp-fill { background: linear-gradient(90deg, #4a0000, #b71c1c); box-shadow: 0 0 5px #b71c1c; }
-/* EA - Azul Profundo */
-.aizen-ea-fill { background: linear-gradient(90deg, #0d47a1, #2979ff); box-shadow: 0 0 5px #2979ff; }
-/* SAN - ROXO (A cor do template) */
-.aizen-san-fill { background: linear-gradient(90deg, var(--az-purple), var(--az-pink)); box-shadow: 0 0 8px var(--az-purple); }
-
+/* Texto DENTRO da barra (Overlay) */
 .aizen-hp-val, .aizen-ea-val, .aizen-san-val {
-  font-size: 0.85em;
-  color: #aaa !important;
-  min-width: 70px; text-align: right;
+  position: absolute;
+  top: 0; right: 5px; /* Alinhado à direita dentro da barra */
+  width: 100%; height: 100%;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700; 
+  font-size: 11px; /* Fonte pequena para caber na barra fina */
+  line-height: 15px; /* Centraliza verticalmente na altura da barra */
+  color: #fff !important;
+  text-shadow: 1px 1px 1px #000;
+  z-index: 2;
+  text-align: right;
+  padding-right: 5px;
+  mix-blend-mode: overlay; /* Mescla bonito com a cor */
+}
+/* Fallback de leitura */
+.aizen-bar-bg:hover .aizen-hp-val,
+.aizen-bar-bg:hover .aizen-ea-val,
+.aizen-bar-bg:hover .aizen-san-val {
+    mix-blend-mode: normal;
 }
 
-/* --- CONTEÚDO (Legibilidade Total) --- */
+
+/* --- CONTEÚDO --- */
 .aizen-content {
-  background-color: var(--az-content-bg); /* PRETO SÓLIDO */
-  padding: 20px 45px 30px 45px;
-  font-size: 1em;
+  padding: 20px 45px;
+  font-size: 0.95em;
   line-height: 1.8;
   text-align: justify;
   color: #ccc;
+  background: var(--az-bg);
 }
-
 .aizen-content b { color: var(--az-pink); }
 .aizen-content i { color: #ce93d8; }
 
 /* --- CONSIDERAÇÕES --- */
-.aizen-notes-container {
-  background: #080808;
+.aizen-notes-box {
   margin: 0 45px 20px 45px;
+  padding: 10px 15px;
   border: 1px solid #222;
   border-left: 3px solid var(--az-purple);
-  padding: 15px;
+  background: #080808;
 }
-.aizen-notes-title {
+.aizen-notes-head {
   display: block;
   font-family: 'Rajdhani', sans-serif;
   text-transform: uppercase;
   color: var(--az-pink);
-  font-size: 0.8em;
+  font-size: 0.75em;
   letter-spacing: 1px;
-  margin-bottom: 5px;
+  margin-bottom: 3px;
 }
-.aizen-notes-text { font-size: 0.85em; color: #666; }
+.aizen-notes-body { font-size: 0.8em; color: #666; }
 
-/* --- FOOTER (Assinatura + Audio) --- */
+/* --- FOOTER: ASSINATURA + BOTÃO PLAY --- */
 .aizen-footer {
-  background: #020202;
-  border-top: 1px solid #1a1a1a;
-  padding: 20px 40px 30px 40px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 15px;
+  text-align: center;
+  padding: 10px 40px 30px 40px;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
 }
 
-.aizen-signature {
+.aizen-sig {
   font-family: 'Italianno', cursive;
-  font-size: 3.2em;
-  background: linear-gradient(to right, #fff, var(--az-purple));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  filter: drop-shadow(0 0 5px rgba(123, 44, 191, 0.5));
+  font-size: 3em;
+  color: #e0e0e0;
+  text-shadow: 0 0 8px var(--az-purple);
 }
 
-/* Audio Player Discreto */
-.aizen-audio-box {
-  width: 100%;
-  max-width: 250px;
-  opacity: 0.6;
-  transition: opacity 0.3s;
-  /* Filtro para deixar o player roxo/escuro */
-  filter: sepia(100%) hue-rotate(240deg) saturate(150%) brightness(0.7) contrast(1.2);
+/* PLAYER DISCRETO (Botão Redondo) */
+.aizen-play-btn {
+  width: 40px; height: 40px;
+  border-radius: 50%;
+  background: #111;
+  border: 1px solid var(--az-purple);
+  box-shadow: 0 0 10px rgba(123, 44, 191, 0.3);
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s;
 }
-.aizen-audio-box:hover { opacity: 1; }
-.aizen-audio-box audio { width: 100%; height: 25px; outline: none; }
+.aizen-play-btn:hover { transform: scale(1.1); box-shadow: 0 0 15px var(--az-pink); }
+
+/* Ícone de Play centralizado (Visual apenas) */
+.aizen-play-btn::after {
+  content: '▶';
+  position: absolute;
+  top: 50%; left: 53%;
+  transform: translate(-50%, -50%);
+  color: var(--az-pink);
+  font-size: 14px;
+  pointer-events: none;
+}
+
+/* O Audio Tag hackeado para cobrir o botão */
+.aizen-play-btn audio {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0; /* Invisível mas clicável */
+  cursor: pointer;
+  z-index: 10;
+}
+   
+.aizen-mini-player {
+    height: 30px;
+    width: 200px; /* Largura reduzida */
+    opacity: 0.7;
+    filter: sepia(100%) hue-rotate(240deg) saturate(200%) invert(1); /* Deixa roxo/escuro */
+    border-radius: 15px;
+}
