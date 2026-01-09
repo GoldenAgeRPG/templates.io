@@ -1,4 +1,4 @@
-/* --- TEMPLATE: GOJO AIZEN (Shattered Mirror - Final V8) --- */
+/* --- TEMPLATE: GOJO AIZEN */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Italianno&family=Rajdhani:wght@500;700&display=swap');
 
 :root {
@@ -58,7 +58,7 @@
     z-index: 5;
 }
 
-/* --- PLAYER DISCRETO --- */
+/* --- PLAYER DISCRETO (CORRIGIDO) --- */
 .aizen-audio-box {
   position: absolute;
   top: 25px; right: 25px;
@@ -68,7 +68,7 @@
   border: 1px solid var(--az-pink);
   display: flex; justify-content: center; align-items: center;
   cursor: pointer;
-  z-index: 100; /* Z-index altíssimo para garantir o clique */
+  z-index: 100; /* Prioridade de clique máxima */
   opacity: 0.7;
   transition: opacity 0.3s, transform 0.3s, box-shadow 0.3s;
   box-shadow: 0 0 5px rgba(247, 37, 133, 0.5);
@@ -81,10 +81,12 @@
 
 .aizen-play-icon {
   width: 14px; height: 14px; fill: #fff;
-  transition: fill 0.3s; margin-left: 2px;
+  transition: fill 0.3s;
+  /* Margem removida para corrigir centralização */
 }
 .aizen-audio-box:hover .aizen-play-icon { fill: var(--az-pink); }
-#aizen-audio-player { display: none; }
+/* Oculta o elemento de áudio que estará dentro da caixa */
+.aizen-audio-box audio { display: none; }
 
 
 /* --- DIVISORES --- */
@@ -101,7 +103,7 @@
     position: relative;
     display: flex; justify-content: center; align-items: center;
     overflow: visible;
-    margin: 15px auto 0 auto; /* Margem inferior zerada para colar no texto */
+    margin: 15px auto 0 auto;
 }
 
 .aizen-stats + .aizen-divider::before {
@@ -174,16 +176,15 @@
 .aizen-bar-bg:hover .aizen-hp-val, .aizen-bar-bg:hover .aizen-ea-val, .aizen-bar-bg:hover .aizen-san-val { mix-blend-mode: normal; }
 
 
-/* --- CONTEÚDO (Correção do Degrade) --- */
+/* --- CONTEÚDO --- */
 .aizen-content {
   padding: 30px 45px;
   font-size: 1em;
   line-height: 1.8;
   text-align: justify;
-  /* Gradiente para remover o corte seco */
   background: linear-gradient(to bottom, transparent 0%, #050205 50px, #050205 100%);
-  margin-top: -10px; /* Puxa levemente para cima para integrar com o divisor */
-  padding-top: 40px; /* Compensa o puxão */
+  margin-top: -10px;
+  padding-top: 40px;
 }
 
 .aizen-content b, .aizen-content strong { color: var(--az-pink); font-weight: 700; }
@@ -211,10 +212,7 @@
   display: inline-block;
 }
 
-/* Injeção do Nome via CSS */
-.aizen-notes-title::before {
-    content: "Transcendence";
-}
+.aizen-notes-title::before { content: "Transcendence"; }
 
 .aizen-notes-content { font-size: 0.85em; color: #aaa; }
 
@@ -226,7 +224,7 @@
 .aizen-signature::after {
   content: "Gojo Aizen";
   font-family: 'Italianno', cursive;
-  font-size: 4em; /* Aumentado */
+  font-size: 4em;
   color: var(--az-text);
   text-shadow: 0 0 10px var(--az-purple);
   background: linear-gradient(to right, #fff, var(--az-pink));
