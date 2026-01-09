@@ -1,4 +1,4 @@
-/* --- TEMPLATE: GOJO AIZEN--- */
+/* --- TEMPLATE: GOJO AIZEN (Shattered Mirror - V4) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Italianno&family=Rajdhani:wght@500;700&display=swap');
 
 :root {
@@ -44,7 +44,7 @@
   z-index: 10;
 }
 
-/* --- PLAYER DISCRETO (SÓ BOTÃO) --- */
+/* --- PLAYER DISCRETO (SVG ICON) --- */
 .aizen-audio-box {
   position: absolute;
   top: 25px; 
@@ -54,29 +54,38 @@
   border-radius: 50%;
   background: #000;
   border: 1px solid var(--az-pink);
-  overflow: hidden; /* Corta o resto do player */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
   z-index: 50;
-  opacity: 0.6;
-  transition: opacity 0.3s, transform 0.3s;
-  box-shadow: 0 0 10px rgba(247, 37, 133, 0.3);
+  opacity: 0.7;
+  transition: opacity 0.3s, transform 0.3s, box-shadow 0.3s;
+  box-shadow: 0 0 5px rgba(247, 37, 133, 0.5);
 }
 
 .aizen-audio-box:hover {
   opacity: 1;
   transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(247, 37, 133, 0.8);
 }
 
-/* Ajuste do elemento audio para mostrar só o Play */
-.aizen-audio-box audio {
-  position: absolute;
-  top: 50%; left: 50%;
-  transform: translate(-15%, -50%); /* Centraliza o ícone de play */
-  width: 150px; /* Largo o suficiente para jogar o volume pra fora */
-  height: 35px;
-  filter: invert(1) sepia(0) saturate(0) brightness(2); /* Deixa o ícone branco */
-  outline: none;
-  cursor: pointer;
+.aizen-play-icon {
+  width: 16px;
+  height: 16px;
+  fill: #fff;
+  transition: fill 0.3s;
 }
+
+.aizen-audio-box:hover .aizen-play-icon {
+  fill: var(--az-pink);
+}
+
+/* Oculta o player nativo */
+#aizen-audio-player {
+  display: none;
+}
+
 
 /* --- DIVISORES --- */
 .aizen-divider {
@@ -245,7 +254,7 @@
 }
 
 .aizen-signature::after {
-  content: "Gojo Aizen"; /* Assinatura injetada aqui */
+  content: "Gojo Aizen";
   font-family: 'Italianno', cursive;
   font-size: 2.5em;
   color: var(--az-text);
