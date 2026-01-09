@@ -1,4 +1,4 @@
-/* --- TEMPLATE: GOJO AIZEN  --- */
+/* --- TEMPLATE: GOJO AIZEN--- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Italianno&family=Rajdhani:wght@500;700&display=swap');
 
 :root {
@@ -42,6 +42,40 @@
   content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
   background: linear-gradient(90deg, transparent, var(--az-pink), transparent);
   z-index: 10;
+}
+
+/* --- PLAYER DISCRETO (SÓ BOTÃO) --- */
+.aizen-audio-box {
+  position: absolute;
+  top: 25px; 
+  right: 25px;
+  width: 35px; 
+  height: 35px;
+  border-radius: 50%;
+  background: #000;
+  border: 1px solid var(--az-pink);
+  overflow: hidden; /* Corta o resto do player */
+  z-index: 50;
+  opacity: 0.6;
+  transition: opacity 0.3s, transform 0.3s;
+  box-shadow: 0 0 10px rgba(247, 37, 133, 0.3);
+}
+
+.aizen-audio-box:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+/* Ajuste do elemento audio para mostrar só o Play */
+.aizen-audio-box audio {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-15%, -50%); /* Centraliza o ícone de play */
+  width: 150px; /* Largo o suficiente para jogar o volume pra fora */
+  height: 35px;
+  filter: invert(1) sepia(0) saturate(0) brightness(2); /* Deixa o ícone branco */
+  outline: none;
+  cursor: pointer;
 }
 
 /* --- DIVISORES --- */
@@ -99,7 +133,7 @@
 /* --- STATUS --- */
 .aizen-stats {
   padding: 20px 40px;
-  display: flex; flex-direction: column; gap: 10px; /* Reduzi gap */
+  display: flex; flex-direction: column; gap: 10px;
 }
 
 .aizen-stat-row { display: flex; align-items: center; gap: 15px; }
@@ -113,9 +147,8 @@
   font-size: 0.9em;
 }
 
-/* Container da barra */
 .aizen-bar-bg {
-  flex-grow: 1; height: 14px; /* Mais fina */
+  flex-grow: 1; height: 14px;
   background: rgba(0,0,0,0.8);
   border: 1px solid rgba(123, 44, 191, 0.3);
   position: relative;
@@ -123,7 +156,6 @@
   overflow: hidden;
 }
 
-/* Preenchimento e Cores Corrigidas */
 .aizen-hp-fill, .aizen-ea-fill, .aizen-san-fill {
   height: 100%; width: 0%;
   position: absolute; top: 0; left: 0;
@@ -131,11 +163,10 @@
   z-index: 1;
 }
 
-.aizen-hp-fill { background: linear-gradient(90deg, #880e4f, #f72585); } /* Rosa/Red */
-.aizen-ea-fill { background: linear-gradient(90deg, #1a237e, #536dfe); } /* Azul */
-.aizen-san-fill { background: linear-gradient(90deg, #4a0072, #7b2cbf); } /* Roxo (Sanidade) */
+.aizen-hp-fill { background: linear-gradient(90deg, #880e4f, #f72585); }
+.aizen-ea-fill { background: linear-gradient(90deg, #1a237e, #536dfe); }
+.aizen-san-fill { background: linear-gradient(90deg, #4a0072, #7b2cbf); }
 
-/* Texto/Valor */
 .aizen-hp-val, .aizen-ea-val, .aizen-san-val {
   position: absolute;
   width: 100%; height: 100%;
@@ -144,7 +175,7 @@
   display: flex; align-items: center; justify-content: flex-end;
   padding-right: 5px;
   font-family: 'Rajdhani', sans-serif;
-  font-weight: 700; font-size: 0.75em; /* Ajuste para barra fina */
+  font-weight: 700; font-size: 0.75em;
   color: #fff !important;
   text-shadow: 1px 1px 2px #000;
   mix-blend-mode: overlay;
@@ -160,7 +191,7 @@
   font-size: 1em;
   line-height: 1.8;
   text-align: justify;
-  background-color: #020202; /* Fundo sólido preto para leitura */
+  background-color: #020202;
   border-top: 1px solid rgba(123, 44, 191, 0.2);
 }
 
@@ -169,7 +200,7 @@
 
 /* --- CONSIDERAÇÕES --- */
 .aizen-notes-box {
-  margin: 0 45px 10px 45px; /* Reduzi margem inferior */
+  margin: 0 45px 10px 45px;
   padding: 15px;
   background: #080508;
   border: 1px solid rgba(123, 44, 191, 0.2);
@@ -205,17 +236,18 @@
   color: #aaa;
 }
 
-/* --- ASSINATURA --- */
+/* --- ASSINATURA (CSS INJECTED) --- */
 .aizen-footer {
-  text-align: right; /* Alinhado a direita */
+  text-align: right;
   padding: 0 45px 25px 0;
   opacity: 0.8;
   margin-top: 5px;
 }
 
-.aizen-signature {
+.aizen-signature::after {
+  content: "Gojo Aizen"; /* Assinatura injetada aqui */
   font-family: 'Italianno', cursive;
-  font-size: 2.5em; /* Levemente menor para não destoar */
+  font-size: 2.5em;
   color: var(--az-text);
   text-shadow: 0 0 10px var(--az-purple);
   background: linear-gradient(to right, #fff, var(--az-pink));
