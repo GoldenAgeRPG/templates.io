@@ -1,248 +1,203 @@
-/* --- TEMPLATE: GOJO AIZEN --- */
+/* --- TEMPLATE: GOJO AIZEN (Final Tech) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Italianno&family=Rajdhani:wght@500;700&display=swap');
 
 :root {
-  --az-bg: #050205;
+  --az-bg: #020202;
+  --az-content-bg: #050505; /* Fundo Sólido para texto */
   --az-purple: #7b2cbf;
   --az-pink: #f72585;
-  --az-glass: rgba(255, 255, 255, 0.03);
   --az-text: #e0e0e0;
 }
 
-/* --- ANIMAÇÕES --- */
-@keyframes border-pulse {
-  0% { box-shadow: 0 0 15px rgba(123, 44, 191, 0.2); }
-  50% { box-shadow: 0 0 30px rgba(247, 37, 133, 0.4); }
-  100% { box-shadow: 0 0 15px rgba(123, 44, 191, 0.2); }
-}
-
-@keyframes mist-move {
-  0% { background-position: 0% 0%; }
-  100% { background-position: 200% 200%; }
-}
-
-/* --- CONTAINER (Chanfrado e Cristalino) --- */
+/* --- CONTAINER --- */
 .aizen-card {
   position: relative;
   max-width: 650px;
   width: 95%;
   margin: 50px auto;
   background-color: var(--az-bg);
-  /* Formato Chanfrado (Cut corners) */
-  clip-path: polygon(
-    20px 0, 100% 0, 
-    100% calc(100% - 20px), calc(100% - 20px) 100%, 
-    0 100%, 0 20px
-  );
-  /* Fundo com efeito de névoa espiritual */
-  background-image: repeating-linear-gradient(
-    45deg,
-    rgba(123, 44, 191, 0.05) 0%,
-    rgba(123, 44, 191, 0.05) 10%,
-    transparent 10%,
-    transparent 20%
-  );
-  background-size: 200% 200%;
-  animation: mist-move 10s linear infinite, border-pulse 4s infinite alternate;
-  
-  /* Borda falsa simulada via box-shadow (já que clip-path corta bordas reais) */
-  /* Nota: Em clip-path, bordas são difíceis, usamos um container interno ou glow externo via filter */
-  filter: drop-shadow(0 0 5px var(--az-purple));
-  
-  color: var(--az-text);
+  border: 1px solid #1a1a1a;
+  border-top: 3px solid var(--az-purple);
+  box-shadow: 0 0 40px rgba(0,0,0,0.9);
   font-family: 'Montserrat', sans-serif;
+  color: var(--az-text);
+  overflow: hidden;
 }
 .aizen-card * { box-sizing: border-box; }
 
-/* Elemento decorativo de "Espelho" no topo */
-.aizen-card::before {
-  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
-  background: linear-gradient(90deg, transparent, var(--az-pink), transparent);
-  z-index: 10;
-}
-
-/* --- DIVISORES (Sem linhas sólidas) --- */
-.aizen-divider {
-  width: 80%; height: 1px; margin: 0 auto;
-  background: linear-gradient(90deg, transparent, var(--az-purple), transparent);
-  opacity: 0.5;
-}
-
-/* --- HEADER --- */
+/* --- HEADER & IMAGEM --- */
 .aizen-header {
-  text-align: center;
-  padding: 30px 20px 20px 20px;
   position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%; /* 16:9 */
+  overflow: hidden;
 }
 
-.aizen-title {
+.aizen-header img {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  filter: contrast(110%) brightness(0.9);
+  transition: transform 1s ease;
+}
+
+.aizen-card:hover .aizen-header img { transform: scale(1.05); }
+
+/* Título Flutuante sobre a imagem */
+.aizen-overlay-title {
+  position: absolute;
+  bottom: 30px; left: 0; width: 100%;
+  text-align: center;
+  z-index: 2;
+  pointer-events: none;
+}
+.aizen-h1 {
   font-family: 'Cinzel', serif;
-  font-size: 2.2em;
+  font-size: 2.5em;
   color: #fff;
   text-transform: uppercase;
   letter-spacing: 5px;
+  text-shadow: 0 0 15px var(--az-purple), 0 4px 2px #000;
   margin: 0;
-  text-shadow: 0 0 10px var(--az-purple);
 }
-
-.aizen-subtitle {
+.aizen-sub {
   font-family: 'Montserrat', sans-serif;
   font-size: 0.8em;
   color: var(--az-pink);
   text-transform: uppercase;
   letter-spacing: 4px;
-  margin-top: 5px;
+  background: rgba(0,0,0,0.6);
+  padding: 2px 10px;
+  border-radius: 4px;
 }
 
-/* --- IMAGEM (16:9) --- */
-.aizen-img-box {
-  width: 100%;
-  padding-bottom: 56.25%; /* 16:9 */
+/* --- SEPARADOR "ESTILHAÇO" (Efeito solicitado) --- */
+.aizen-shatter-separator {
   position: relative;
-  overflow: hidden;
-  /* Máscara de gradiente para não ter corte seco embaixo */
-  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(90deg, var(--az-purple), var(--az-pink));
+  margin-top: -1px; /* Cola na imagem */
+  z-index: 5;
+  /* Recorte Geométrico Irregular */
+  clip-path: polygon(
+    0 0, 100% 0, 
+    100% 100%, 
+    85% 40%, 70% 100%, 
+    55% 30%, 40% 100%, 
+    25% 35%, 10% 100%, 
+    0 30%
+  );
 }
 
-.aizen-img-box img {
-  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-  object-fit: cover;
-  transition: transform 1s ease;
-  filter: saturate(1.2) contrast(1.1);
-}
-
-.aizen-card:hover .aizen-img-box img {
-  transform: scale(1.05);
-}
-
-/* --- STATUS (Numeração Interna) --- */
+/* --- STATUS FINOS --- */
 .aizen-stats {
-  padding: 20px 40px;
-  display: flex; flex-direction: column; gap: 15px;
+  background: var(--az-content-bg); /* Fundo sólido */
+  padding: 30px 40px 10px 40px;
+  display: flex; flex-direction: column; gap: 8px;
+  border-bottom: 1px solid #111;
 }
 
 .aizen-stat-row {
   display: flex; align-items: center; gap: 15px;
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700;
 }
 
 .aizen-label {
-  font-family: 'Cinzel', serif;
-  font-weight: 700;
-  width: 35px;
-  color: var(--az-pink);
-  text-shadow: 0 0 5px var(--az-purple);
+  width: 30px;
+  font-size: 0.9em;
+  color: #888;
 }
 
-/* Container da barra */
 .aizen-bar-bg {
-  flex-grow: 1; height: 20px; /* Mais alta para caber o número */
-  background: rgba(0,0,0,0.5);
-  border: 1px solid rgba(123, 44, 191, 0.3);
-  position: relative; /* Para posicionar o texto dentro */
+  flex-grow: 1; 
+  height: 8px; /* BARRA FINA */
+  background: #111;
+  border: 1px solid #333;
   border-radius: 2px;
   overflow: hidden;
 }
 
-/* Preenchimento */
 .aizen-hp-fill, .aizen-ea-fill, .aizen-san-fill {
   height: 100%; width: 0%;
-  position: absolute; top: 0; left: 0;
   transition: width 0.6s ease;
-  z-index: 1; /* Atrás do texto */
 }
 
-.aizen-hp-fill { background: linear-gradient(90deg, #4a0072, #7b1fa2); }
-.aizen-ea-fill { background: linear-gradient(90deg, #1a237e, #3949ab); }
-.aizen-san-fill { background: linear-gradient(90deg, #880e4f, #d81b60); }
+/* CORES DAS BARRAS */
+/* HP - Vermelho Escuro */
+.aizen-hp-fill { background: linear-gradient(90deg, #4a0000, #b71c1c); box-shadow: 0 0 5px #b71c1c; }
+/* EA - Azul Profundo */
+.aizen-ea-fill { background: linear-gradient(90deg, #0d47a1, #2979ff); box-shadow: 0 0 5px #2979ff; }
+/* SAN - ROXO (A cor do template) */
+.aizen-san-fill { background: linear-gradient(90deg, var(--az-purple), var(--az-pink)); box-shadow: 0 0 8px var(--az-purple); }
 
-/* Texto/Valor (Flutuando SOBRE a barra) */
 .aizen-hp-val, .aizen-ea-val, .aizen-san-val {
-  position: absolute;
-  width: 100%; height: 100%;
-  top: 0; left: 0;
-  z-index: 2; /* Na frente do fill */
-  display: flex; align-items: center; justify-content: flex-end; /* Alinhado à direita dentro da barra */
-  padding-right: 10px;
-  font-family: 'Rajdhani', sans-serif;
-  font-weight: 700; font-size: 0.9em;
-  color: #fff !important;
-  text-shadow: 1px 1px 2px #000;
-  mix-blend-mode: overlay; /* Efeito visual legal */
-}
-/* Fallback se mix-blend-mode ficar ruim em fundo preto */
-.aizen-bar-bg:hover .aizen-hp-val,
-.aizen-bar-bg:hover .aizen-ea-val,
-.aizen-bar-bg:hover .aizen-san-val {
-    mix-blend-mode: normal;
+  font-size: 0.85em;
+  color: #aaa !important;
+  min-width: 70px; text-align: right;
 }
 
-
-/* --- CONTEÚDO --- */
+/* --- CONTEÚDO (Legibilidade Total) --- */
 .aizen-content {
-  padding: 30px 45px;
+  background-color: var(--az-content-bg); /* PRETO SÓLIDO */
+  padding: 20px 45px 30px 45px;
   font-size: 1em;
   line-height: 1.8;
   text-align: justify;
-  background: linear-gradient(to bottom, transparent, rgba(5,0,10,0.5));
+  color: #ccc;
 }
 
 .aizen-content b { color: var(--az-pink); }
 .aizen-content i { color: #ce93d8; }
 
-/* --- CONSIDERAÇÕES (Box Técnico) --- */
-.aizen-notes-box {
-  margin: 0 45px 30px 45px;
+/* --- CONSIDERAÇÕES --- */
+.aizen-notes-container {
+  background: #080808;
+  margin: 0 45px 20px 45px;
+  border: 1px solid #222;
+  border-left: 3px solid var(--az-purple);
   padding: 15px;
-  background: rgba(123, 44, 191, 0.05);
-  border: 1px solid rgba(123, 44, 191, 0.2);
-  position: relative;
 }
-
-/* Efeito de cantos brilhantes na box de notas */
-.aizen-notes-box::after {
-  content: ''; position: absolute; bottom: 0; right: 0;
-  width: 10px; height: 10px;
-  border-bottom: 2px solid var(--az-pink);
-  border-right: 2px solid var(--az-pink);
-}
-.aizen-notes-box::before {
-  content: ''; position: absolute; top: 0; left: 0;
-  width: 10px; height: 10px;
-  border-top: 2px solid var(--az-purple);
-  border-left: 2px solid var(--az-purple);
-}
-
 .aizen-notes-title {
+  display: block;
   font-family: 'Rajdhani', sans-serif;
   text-transform: uppercase;
-  color: var(--az-purple);
+  color: var(--az-pink);
   font-size: 0.8em;
-  letter-spacing: 2px;
+  letter-spacing: 1px;
   margin-bottom: 5px;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
-  display: inline-block;
 }
+.aizen-notes-text { font-size: 0.85em; color: #666; }
 
-.aizen-notes-content {
-  font-size: 0.85em;
-  color: #aaa;
-}
-
-/* --- ASSINATURA (Integrada) --- */
+/* --- FOOTER (Assinatura + Audio) --- */
 .aizen-footer {
-  text-align: center;
-  padding-bottom: 40px;
-  opacity: 0.8;
+  background: #020202;
+  border-top: 1px solid #1a1a1a;
+  padding: 20px 40px 30px 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
 }
 
 .aizen-signature {
   font-family: 'Italianno', cursive;
-  font-size: 3.5em;
-  color: var(--az-text);
-  text-shadow: 0 0 10px var(--az-purple);
-  /* Efeito de gradiente no texto */
-  background: linear-gradient(to right, #fff, var(--az-pink));
+  font-size: 3.2em;
+  background: linear-gradient(to right, #fff, var(--az-purple));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 5px rgba(123, 44, 191, 0.5));
 }
+
+/* Audio Player Discreto */
+.aizen-audio-box {
+  width: 100%;
+  max-width: 250px;
+  opacity: 0.6;
+  transition: opacity 0.3s;
+  /* Filtro para deixar o player roxo/escuro */
+  filter: sepia(100%) hue-rotate(240deg) saturate(150%) brightness(0.7) contrast(1.2);
+}
+.aizen-audio-box:hover { opacity: 1; }
+.aizen-audio-box audio { width: 100%; height: 25px; outline: none; }
