@@ -1,4 +1,4 @@
-/* --- TEMPLATE: GOJO AIZEN (Shattered Mirror - Final V10) --- */
+/* --- TEMPLATE: GOJO AIZEN --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Italianno&family=Rajdhani:wght@500;700&display=swap');
 
 :root {
@@ -232,4 +232,22 @@
   background: linear-gradient(to right, #fff, var(--az-pink));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* --- CSS EXTRA: Feedback Visual do Player Ativo --- */
+/* Esta classe é adicionada pelo Javascript quando está tocando */
+.aizen-audio-box.is-playing {
+  opacity: 1 !important; /* Garante opacidade total */
+  background: rgba(247, 37, 133, 0.2) !important; /* Fundo levemente rosado */
+  border-color: #fff !important; /* Borda branca para destaque */
+  /* Brilho intenso interno e externo */
+  box-shadow: 0 0 25px var(--az-pink), inset 0 0 15px var(--az-pink) !important;
+  /* Animação de pulso para indicar atividade */
+  animation: border-pulse 2s infinite alternate;
+}
+
+/* Opcional: Faz o ícone brilhar também */
+.aizen-audio-box.is-playing .aizen-play-icon {
+    fill: #fff !important;
+    filter: drop-shadow(0 0 8px var(--az-pink));
 }
