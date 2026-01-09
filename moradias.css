@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Manrope:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons+Sharp');
+
+.zenin-wrapper {
+    /* VARIÁVEIS LOCAIS */
+    --z-bg: #0a0a0a;
+    --z-panel: #141414;
+    --z-border: #2a2a2a;
+    --z-accent: #d4af37; /* Ouro envelhecido */
+    --z-accent-dim: #5c4d1f;
+    --z-text: #e0e0e0;
+    --z-text-dim: #888;
+    --z-font-title: 'Cinzel', serif;
+    --z-font-body: 'Manrope', sans-serif;
+
+    /* ESTRUTURA BASE */
+    max-width: 950px;
+    margin: 0 auto;
+    background: var(--z-bg);
+    border: 1px solid var(--z-border);
+    box-shadow: 0 0 30px rgba(0,0,0,0.8);
+    font-family: var(--z-font-body);
+    color: var(--z-text);
+    line-height: 1.6;
+}
+
+/* HEADER / BANNER */
+.zenin-header {
+    position: relative;
+    height: 400px;
+    overflow: hidden;
+    border-bottom: 4px solid var(--z-accent);
+}
+
+.zenin-header-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.6;
+    transition: transform 3s ease;
+}
+.zenin-header:hover .zenin-header-img {
+    transform: scale(1.05);
+}
+
+.zenin-title-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: linear-gradient(to top, var(--z-bg), transparent);
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+.zenin-title {
+    font-family: var(--z-font-title);
+    font-size: 3.5em;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin: 0;
+    text-shadow: 0 4px 10px rgba(0,0,0,1);
+}
+
+.zenin-subtitle {
+    font-family: var(--z-font-title);
+    font-size: 1em;
+    color: var(--z-accent);
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-top: 5px;
+    border-left: 3px solid var(--z-accent);
+    padding-left: 15px;
+}
+
+/* CONTEÚDO */
+.zenin-content {
+    padding: 40px;
+    position: relative; /* Para o kanji de fundo */
+}
+
+.zenin-quote {
+    font-family: var(--z-font-title);
+    font-size: 1.2em;
+    text-align: center;
+    color: var(--z-text-dim);
+    font-style: italic;
+    margin-bottom: 30px;
+    border-top: 1px solid var(--z-border);
+    border-bottom: 1px solid var(--z-border);
+    padding: 20px 0;
+}
+
+.zenin-desc {
+    text-align: justify;
+    margin-bottom: 50px;
+    column-count: 2;
+    column-gap: 40px;
+    font-size: 0.95em;
+}
+
+/* MEDIA QUERIES DESCRIÇÃO */
+@media (max-width: 768px) {
+    .zenin-desc { column-count: 1; }
+    .zenin-title { font-size: 2em; }
+}
+
+/* GRID SECTIONS */
+.zenin-grid-section {
+    margin-bottom: 30px;
+}
+
+.zenin-section-title {
+    display: flex;
+    align-items: center;
+    font-family: var(--z-font-title);
+    color: var(--z-accent);
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+}
+
+.zenin-section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--z-border);
+    margin-left: 20px;
+}
+
+/* CARDS */
+.zenin-locations-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+@media (max-width: 600px) {
+    .zenin-locations-row { grid-template-columns: 1fr; }
+}
+
+.zenin-card {
+    background: var(--z-panel);
+    border: 1px solid var(--z-border);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.zenin-card:hover {
+    border-color: var(--z-accent-dim);
+    transform: translateY(-3px);
+}
+
+.zenin-card-img {
+    height: 120px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(100%) contrast(120%);
+    transition: 0.4s;
+    position: relative;
+}
+
+.zenin-card:hover .zenin-card-img {
+    filter: grayscale(0%);
+}
+
+.zenin-card-body {
+    padding: 15px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.zenin-card-title {
+    font-family: var(--z-font-title);
+    color: #fff;
+    font-size: 0.9em;
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+}
+
+.zenin-card-desc {
+    font-size: 0.8em;
+    color: var(--z-text-dim);
+    line-height: 1.4;
+}
+
+/* DECORAÇÃO DE FUNDO */
+.zenin-kanji {
+    position: absolute;
+    top: -20px;
+    right: 10px;
+    font-family: var(--z-font-title);
+    font-size: 150px;
+    color: rgba(255,255,255,0.03);
+    pointer-events: none;
+    z-index: 0;
+}
