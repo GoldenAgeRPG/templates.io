@@ -78,7 +78,7 @@
 /* CONTEÚDO */
 .zenin-content {
     padding: 40px;
-    position: relative; /* Para o kanji de fundo */
+    position: relative;
 }
 
 .zenin-quote {
@@ -101,7 +101,6 @@
     font-size: 0.95em;
 }
 
-/* MEDIA QUERIES DESCRIÇÃO */
 @media (max-width: 768px) {
     .zenin-desc { column-count: 1; }
     .zenin-title { font-size: 2em; }
@@ -141,20 +140,28 @@
     .zenin-locations-row { grid-template-columns: 1fr; }
 }
 
-.zenin-card {
+/* Estilo do Card (Link) */
+a.zenin-card {
     background: var(--z-panel);
     border: 1px solid var(--z-border);
     transition: all 0.3s ease;
-    text-decoration: none;
+    text-decoration: none !important; /* Remove sublinhado */
+    color: inherit !important; /* Remove cor padrão de link azul/roxo */
     display: flex;
     flex-direction: column;
     height: 100%;
     position: relative;
     overflow: hidden;
+    outline: none;
 }
 
-.zenin-card:hover {
+a.zenin-card:hover, a.zenin-card:focus, a.zenin-card:visited {
+    text-decoration: none !important;
+    color: inherit !important;
     border-color: var(--z-accent-dim);
+}
+
+a.zenin-card:hover {
     transform: translateY(-3px);
 }
 
@@ -168,7 +175,7 @@
     position: relative;
 }
 
-.zenin-card:hover .zenin-card-img {
+a.zenin-card:hover .zenin-card-img {
     filter: grayscale(0%);
 }
 
