@@ -1,0 +1,210 @@
+/* --- TEMPLATE: GOJO AIZEN (Bleach Aesthetic) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Montserrat:wght@400;600;700&family=Italianno&display=swap');
+
+:root {
+  --aizen-bg: #030003; /* Preto profundo com tom roxo */
+  --aizen-purple: #6a0dad; /* Roxo principal */
+  --aizen-pink: #d400ff; /* Rosa magenta neon */
+  --aizen-text: #e0d0e0;
+  --aizen-border: #3d004d;
+}
+
+/* --- ANIMAÇÕES --- */
+/* Fluxo lento e hipnótico para as barras */
+@keyframes aizen-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Efeito de pulsação nas bordas laterais */
+@keyframes side-glow {
+  0% { box-shadow: inset 3px 0 10px var(--aizen-purple), inset -3px 0 10px var(--aizen-pink); }
+  50% { box-shadow: inset 5px 0 20px var(--aizen-purple), inset -5px 0 20px var(--aizen-pink); }
+  100% { box-shadow: inset 3px 0 10px var(--aizen-purple), inset -3px 0 10px var(--aizen-pink); }
+}
+
+/* --- CONTAINER PRINCIPAL --- */
+.aizen-card {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  max-width: 650px;
+  width: 95%;
+  margin: 50px auto;
+  background-color: var(--aizen-bg);
+  
+  /* Padrão de fundo sutil: Fragmentação espiritual */
+  background-image: 
+    linear-gradient(to bottom, rgba(10,0,15,0.9), rgba(0,0,0,1)),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239c27b0' fill-opacity='0.08'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  
+  border-top: 1px solid var(--aizen-border);
+  border-bottom: 1px solid var(--aizen-border);
+  /* Bordas laterais coloridas */
+  border-left: 2px solid var(--aizen-purple);
+  border-right: 2px solid var(--aizen-pink);
+  
+  box-shadow: 0 0 25px rgba(106, 13, 173, 0.2);
+  border-radius: 2px;
+  color: var(--aizen-text);
+  font-family: 'Montserrat', sans-serif;
+  overflow: hidden;
+  animation: side-glow 4s ease-in-out infinite;
+}
+.aizen-card * { box-sizing: border-box; }
+
+/* --- HEADER SIMPLES (Opcional, acima da imagem) --- */
+.aizen-header-title {
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    color: #fff;
+    text-shadow: 0 0 10px var(--aizen-purple);
+    margin: 0;
+    padding: 15px 0;
+    background: rgba(20, 0, 25, 0.8);
+    border-bottom: 1px solid var(--aizen-border);
+    font-size: 1.4em;
+}
+
+/* --- IMAGEM TOPO (16:9 Widescreen) --- */
+.aizen-image-frame {
+  position: relative;
+  width: 100%;
+  /* Truque CSS para manter a proporção 16:9 (9 / 16 = 0.5625) */
+  padding-bottom: 56.25%; 
+  height: 0;
+  overflow: hidden;
+  border-bottom: 3px solid var(--aizen-border);
+}
+
+.aizen-image-frame img {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center center;
+  /* Filtro para dar um ar mais "espiritual" e vibrante */
+  filter: contrast(110%) saturation(115%) hue-rotate(-5deg) drop-shadow(0 0 10px rgba(212, 0, 255, 0.3));
+  transition: 0.5s ease;
+}
+
+/* Efeito de reflexo no hover */
+.aizen-card:hover .aizen-image-frame img {
+  transform: scale(1.02);
+  filter: contrast(120%) saturation(120%);
+}
+
+/* --- STATUS PANEL (Abaixo da imagem) --- */
+.aizen-stats-panel {
+  position: relative;
+  padding: 20px 30px;
+  display: flex; flex-direction: column; gap: 12px;
+  background: linear-gradient(to right, rgba(20,0,30,0.9), rgba(30,0,20,0.9));
+  border-bottom: 1px solid var(--aizen-border);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+}
+
+.aizen-stat-row {
+  display: flex; align-items: center; gap: 15px;
+}
+
+.aizen-label {
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  color: var(--aizen-pink); /* Rótulos em rosa */
+  text-shadow: 0 0 5px var(--aizen-purple);
+  font-size: 0.9em;
+  width: 35px;
+}
+
+/* Fundo das barras */
+.aizen-bar-bg {
+  flex-grow: 1; height: 8px;
+  background: #0a000a;
+  border: 1px solid #3d004d;
+  overflow: hidden;
+  border-radius: 4px;
+  box-shadow: inset 0 0 5px #000;
+}
+
+/* Preenchimento das Barras */
+.aizen-hp-fill, .aizen-ea-fill, .aizen-san-fill {
+  height: 100%; width: 0%; /* JS controla a largura */
+  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 4px;
+}
+
+/* Cores específicas das barras */
+.aizen-hp-fill {
+    /* Gradiente Roxo avermelhado */
+    background: linear-gradient(90deg, #4a004a, #a600a6, #4a004a);
+    background-size: 200% 100%;
+    animation: aizen-flow 4s ease infinite;
+    box-shadow: 0 0 10px rgba(166, 0, 166, 0.5);
+}
+.aizen-ea-fill {
+    /* Gradiente Roxo azulado */
+    background: linear-gradient(90deg, #300050, #7000a0, #300050);
+    background-size: 200% 100%;
+    animation: aizen-flow 5s ease infinite;
+    box-shadow: 0 0 10px rgba(112, 0, 160, 0.5);
+}
+/* NOVA BARRA SAN (Sanidade/Pressão) */
+.aizen-san-fill {
+    /* Gradiente Roxo-Rosa vibrante */
+    background: linear-gradient(90deg, var(--aizen-purple), var(--aizen-pink), var(--aizen-purple));
+    background-size: 200% 100%;
+    animation: aizen-flow 3s linear infinite; /* Mais rápido e caótico */
+    box-shadow: 0 0 12px var(--aizen-pink);
+}
+
+
+.aizen-hp-val, .aizen-ea-val, .aizen-san-val {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600; font-size: 0.85em;
+  min-width: 80px; text-align: right;
+  color: #fff !important;
+  text-shadow: 0 0 5px var(--aizen-purple);
+}
+
+/* --- CONTEÚDO --- */
+.aizen-content {
+  position: relative;
+  padding: 30px 40px;
+  font-size: 1.05em;
+  line-height: 1.8;
+  color: var(--aizen-text);
+  text-align: justify;
+  background: rgba(5, 0, 5, 0.8);
+}
+
+.aizen-content b, .aizen-content strong {
+  color: var(--aizen-pink);
+  font-weight: 700;
+  text-shadow: 0 0 8px rgba(212, 0, 255, 0.4);
+}
+
+.aizen-content i, .aizen-content em {
+  color: #b39ddb;
+  font-family: 'Montserrat', sans-serif;
+  font-style: italic;
+}
+
+/* --- ASSINATURA --- */
+.aizen-signature { 
+    position: relative;
+    text-align: center; padding: 10px 40px 40px 40px;
+    background: linear-gradient(to top, rgba(106, 13, 173, 0.1), transparent);
+}
+.aizen-signature::after {
+  content: 'Gojo Aizen';
+  font-family: 'Italianno', cursive; /* Fonte elegante e cursiva */
+  font-size: 3.5em;
+  /* Gradiente de texto roxo para rosa */
+  background: linear-gradient(45deg, var(--aizen-purple), var(--aizen-pink));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 5px rgba(106, 13, 173, 0.8));
+  display: inline-block;
+}
