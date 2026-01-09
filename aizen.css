@@ -1,4 +1,4 @@
-/* --- TEMPLATE: GOJO AIZEN (Shattered Mirror - V4) --- */
+/* --- TEMPLATE: GOJO AIZEN (Shattered Mirror - Final V6) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Italianno&family=Rajdhani:wght@500;700&display=swap');
 
 :root {
@@ -28,6 +28,7 @@
   width: 95%;
   margin: 50px auto;
   background-color: var(--az-bg);
+  /* Formato Chanfrado */
   clip-path: polygon(20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%, 0 20px);
   background-image: repeating-linear-gradient(45deg, rgba(123, 44, 191, 0.05) 0%, rgba(123, 44, 191, 0.05) 10%, transparent 10%, transparent 20%);
   background-size: 200% 200%;
@@ -38,11 +39,34 @@
 }
 .aizen-card * { box-sizing: border-box; }
 
+/* Linha superior fina */
 .aizen-card::before {
   content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 2px;
   background: linear-gradient(90deg, transparent, var(--az-pink), transparent);
   z-index: 10;
 }
+
+/* NOVA BORDA LATERAL COM EFEITO */
+.aizen-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  /* Gradiente que desaparece nos cantos cortados */
+  background: linear-gradient(to bottom, transparent 15px, var(--az-purple) 30%, var(--az-pink) 50%, var(--az-purple) 70%, transparent calc(100% - 15px));
+  box-shadow: 2px 0 15px rgba(247, 37, 133, 0.5);
+  z-index: 1; /* Fica atrás do conteúdo de texto */
+  opacity: 0.9;
+}
+
+/* Garante que o conteúdo fique sobre a nova borda lateral */
+.aizen-header, .aizen-divider, .aizen-img-box, .aizen-stats, .aizen-content, .aizen-notes-box, .aizen-footer, .aizen-audio-box {
+    position: relative;
+    z-index: 5;
+}
+
 
 /* --- PLAYER DISCRETO (SVG ICON) --- */
 .aizen-audio-box {
@@ -58,7 +82,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  z-index: 50;
+  /* z-index já definido na regra de grupo acima */
   opacity: 0.7;
   transition: opacity 0.3s, transform 0.3s, box-shadow 0.3s;
   box-shadow: 0 0 5px rgba(247, 37, 133, 0.5);
@@ -71,20 +95,18 @@
 }
 
 .aizen-play-icon {
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
   fill: #fff;
   transition: fill 0.3s;
+  margin-left: 2px;
 }
 
 .aizen-audio-box:hover .aizen-play-icon {
   fill: var(--az-pink);
 }
 
-/* Oculta o player nativo */
-#aizen-audio-player {
-  display: none;
-}
+#aizen-audio-player { display: none; }
 
 
 /* --- DIVISORES --- */
@@ -98,7 +120,6 @@
 .aizen-header {
   text-align: center;
   padding: 30px 20px 20px 20px;
-  position: relative;
 }
 
 .aizen-title {
@@ -120,10 +141,10 @@
   margin-top: 5px;
 }
 
-/* --- IMAGEM --- */
+/* --- IMAGEM (16:9 já configurado) --- */
 .aizen-img-box {
   width: 100%;
-  padding-bottom: 56.25%;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
   position: relative;
   overflow: hidden;
   mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
@@ -194,7 +215,7 @@
 .aizen-bar-bg:hover .aizen-san-val { mix-blend-mode: normal; }
 
 
-/* --- CONTEÚDO --- */
+/* --- CONTEÚDO (BBCode Support) --- */
 .aizen-content {
   padding: 30px 45px;
   font-size: 1em;
@@ -204,8 +225,8 @@
   border-top: 1px solid rgba(123, 44, 191, 0.2);
 }
 
-.aizen-content b { color: var(--az-pink); }
-.aizen-content i { color: #ce93d8; }
+.aizen-content b, .aizen-content strong { color: var(--az-pink); font-weight: 700; }
+.aizen-content i, .aizen-content em { color: #ce93d8; font-style: italic; }
 
 /* --- CONSIDERAÇÕES --- */
 .aizen-notes-box {
