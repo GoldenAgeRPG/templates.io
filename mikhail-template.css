@@ -1,193 +1,134 @@
-/* --- TEMPLATE: MIKHAIL (Modern Cursed UI) --- */
+/* --- TEMPLATE: MIKHAIL --- */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Syncopate:wght@700&family=La+Belle+Aurore&family=Rajdhani:wght@500;700&display=swap');
 
 :root {
-  --mk-bg: #050505;       /* Preto Fundo */
-  --mk-card: #0b0b0b;     /* Cinza muito escuro para cartões */
-  --mk-accent: #8a0000;   /* Vermelho Sangue (Mikhail) */
-  --mk-sadako: #1a0b2e;   /* Roxo escuro (Sadako) */
-  --mk-text: #e0e0e0;     /* Texto Leitura */
-  --mk-dim: #666;         /* Texto Secundário */
+  --mk-bg: #050505;
+  --mk-accent: #8a0000;
+  --mk-sadako-color: #4a148c; /* Cor tema da Sadako */
+  --mk-text: #e0e0e0;
 }
 
 /* --- CONTAINER --- */
 .mikhail-card {
-  max-width: 650px;
-  width: 95%;
-  margin: 50px auto;
-  background-color: var(--mk-bg);
-  color: var(--mk-text);
+  max-width: 650px; width: 95%; margin: 50px auto;
+  background-color: var(--mk-bg); color: var(--mk-text);
   font-family: 'Montserrat', sans-serif;
-  border-left: 4px solid var(--mk-accent); /* Identidade visual lateral */
+  border-left: 3px solid var(--mk-accent);
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  position: relative;
-  overflow: hidden;
+  position: relative; overflow: hidden;
 }
 .mikhail-card * { box-sizing: border-box; }
 
-/* --- HEADER COM IMAGEM --- */
-.mk-hero {
-  position: relative;
-  width: 100%;
-  height: 280px;
-  overflow: hidden;
-}
-
+/* --- HERO IMAGE & TITLES --- */
+.mk-hero { position: relative; width: 100%; height: 280px; overflow: hidden; }
 .mk-hero-img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-  /* Efeito moderno: preto e branco com alto contraste */
-  filter: grayscale(100%) contrast(1.2) brightness(0.8); 
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(100%) contrast(1.2) brightness(0.8);
   transition: all 0.5s ease;
 }
-.mikhail-card:hover .mk-hero-img {
-    filter: grayscale(50%) contrast(1.1); /* Recupera cor ao passar mouse */
-    transform: scale(1.02);
-}
+.mikhail-card:hover .mk-hero-img { filter: grayscale(50%) contrast(1.1); transform: scale(1.02); }
 
-/* Título Flutuante (Glassmorphism) */
 .mk-title-box {
-  position: absolute;
-  bottom: 0; left: 0; width: 100%;
-  background: linear-gradient(to top, #050505 10%, transparent);
-  padding: 40px 25px 15px 25px;
-  z-index: 2;
+  position: absolute; bottom: 0; left: 0; width: 100%;
+  background: linear-gradient(to top, #050505 20%, transparent);
+  padding: 40px 25px 15px 25px; z-index: 2;
 }
-
 .mk-name {
-  font-family: 'Syncopate', sans-serif; /* Fonte larga e moderna */
-  font-weight: 700;
-  font-size: 2.2em;
-  color: #fff;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin: 0;
-  line-height: 1;
+  font-family: 'Syncopate', sans-serif; font-weight: 700; font-size: 2.2em;
+  color: #fff; text-transform: uppercase; margin: 0; line-height: 1;
 }
-
 .mk-role {
-  font-family: 'Rajdhani', sans-serif;
-  font-size: 0.9em;
-  color: var(--mk-accent);
-  text-transform: uppercase;
-  letter-spacing: 4px;
-  margin-top: 5px;
-  font-weight: 600;
+  font-family: 'Rajdhani', sans-serif; font-size: 0.9em; color: var(--mk-accent);
+  text-transform: uppercase; letter-spacing: 4px; font-weight: 600;
 }
 
-/* --- CONTEÚDO (Leitura Otimizada) --- */
+/* --- CONTEÚDO --- */
 .mk-body {
-  padding: 30px 40px;
-  background-color: var(--mk-bg);
-  font-size: 0.95em;
-  line-height: 1.8; /* Espaçamento bom para leitura */
-  color: #ccc;
-  text-align: justify;
+  padding: 30px 40px; background-color: var(--mk-bg);
+  font-size: 0.95em; line-height: 1.8; color: #ccc; text-align: justify;
 }
-
 .mk-body b { color: #fff; font-weight: 600; }
-.mk-body i { color: var(--mk-accent); font-style: normal; } /* Destaque sutil */
+.mk-body i { color: var(--mk-accent); font-style: normal; }
 
-/* --- STATUS MODERNOS (Laser Lines) --- */
-/* Nada de caixas. Apenas linhas. */
-.mk-stats-grid {
-    padding: 0 40px 30px 40px;
-    display: flex; flex-direction: column; gap: 15px;
-}
-
-.mk-stat-item {
-    display: flex; align-items: center; gap: 15px;
-}
-
+/* --- STATUS PRINCIPAIS (Laser Lines) --- */
+.mk-stats-grid { padding: 0 40px 30px 40px; display: flex; flex-direction: column; gap: 15px; }
+.mk-stat-item { display: flex; align-items: center; gap: 15px; }
 .mk-stat-label {
-    font-family: 'Syncopate', sans-serif;
-    font-size: 0.8em; font-weight: 700;
+    font-family: 'Syncopate', sans-serif; font-size: 0.8em; font-weight: 700;
     color: #555; width: 40px;
 }
 
-/* O Container da Linha */
+/* Trilho Principal */
 .mk-line-track {
-    flex-grow: 1; height: 2px; /* Muito fino */
-    background: #222;
-    position: relative;
+    flex-grow: 1; height: 2px; background: #222; position: relative;
     display: flex; align-items: center;
 }
-
-/* O Preenchimento (Brilho) */
+/* Preenchimento Principal */
 .mk-line-fill {
     height: 100%; position: absolute; top: 0; left: 0;
-    box-shadow: 0 0 10px currentColor; /* Glow nativo da cor */
-    transition: width 0.5s ease;
+    box-shadow: 0 0 10px currentColor; transition: width 0.5s ease;
 }
-
-/* Ponto na ponta da linha (Tech feel) */
 .mk-line-fill::after {
-    content: ''; position: absolute; right: 0; top: 50%;
-    transform: translateY(-50%);
-    width: 6px; height: 6px;
-    background: inherit; border-radius: 50%;
-    box-shadow: 0 0 5px inherit;
+    content: ''; position: absolute; right: 0; top: 50%; transform: translateY(-50%);
+    width: 6px; height: 6px; background: inherit; border-radius: 50%; box-shadow: 0 0 5px inherit;
 }
 
-/* Cores das linhas */
+/* Cores Principais */
 .fill-hp { background-color: var(--mk-accent); color: var(--mk-accent); }
-.fill-ea { background-color: #0d47a1; color: #0d47a1; } /* Azul Neon */
-.fill-san { background-color: #7b1fa2; color: #7b1fa2; } /* Roxo Neon */
+.fill-ea { background-color: #0d47a1; color: #0d47a1; }
+.fill-san { background-color: #7b1fa2; color: #7b1fa2; }
 
 .mk-stat-val {
-    font-family: 'Rajdhani', sans-serif; font-weight: 700;
-    font-size: 0.9em; color: #fff; width: 70px; text-align: right;
+    font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.9em;
+    color: #fff; width: 70px; text-align: right;
 }
 
-/* --- FOOTER HÍBRIDO (Assinatura + Sadako Discreta) --- */
+/* --- FOOTER (Sadako + Assinatura) --- */
 .mk-footer {
-    background: #000;
-    border-top: 1px solid #111;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background: #000; border-top: 1px solid #111;
+    display: flex; justify-content: space-between; align-items: center;
     padding: 10px 20px;
 }
 
-/* Sadako: Metadata Discreta */
+/* Container Sadako */
 .mk-sadako-unit {
     display: flex; align-items: center; gap: 15px;
-    opacity: 0.6; transition: opacity 0.3s;
+    opacity: 0.7; transition: opacity 0.3s;
 }
 .mikhail-card:hover .mk-sadako-unit { opacity: 1; }
 
 .mk-sadako-thumb {
-    width: 35px; height: 35px;
-    border-radius: 3px;
-    overflow: hidden;
-    filter: grayscale(100%);
-    border: 1px solid #333;
+    width: 40px; height: 40px; border-radius: 3px; overflow: hidden;
+    filter: grayscale(100%); border: 1px solid #333;
 }
 .mk-sadako-thumb img { width: 100%; height: 100%; object-fit: cover; }
 
-.mk-sadako-info {
-    display: flex; flex-direction: column; gap: 2px;
-}
+.mk-sadako-info { display: flex; flex-direction: column; gap: 4px; }
 .mk-sadako-name {
     font-family: 'Rajdhani', sans-serif; text-transform: uppercase;
-    font-weight: 700; font-size: 0.8em; color: #555; letter-spacing: 1px;
+    font-weight: 700; font-size: 0.8em; color: #666; letter-spacing: 1px;
 }
-/* Micro-status (Apenas Texto) para discrição máxima */
-.mk-sadako-nums {
-    font-family: 'Rajdhani', sans-serif; font-size: 0.75em; color: #888;
-    display: flex; gap: 10px;
+
+/* Mini Status Sadako */
+.mk-mini-stats { display: flex; flex-direction: column; gap: 3px; }
+.mk-mini-row { display: flex; align-items: center; gap: 8px; }
+.mk-mini-label { font-size: 0.7em; color: #444; width: 15px; font-weight: 700; font-family: 'Syncopate', sans-serif; }
+
+/* Mini Barras (Discretas) */
+.mk-mini-track {
+    width: 60px; height: 2px; background: #222; position: relative;
 }
-.mk-sadako-nums span b { color: var(--mk-accent); font-weight: normal; }
+.mk-mini-fill {
+    height: 100%; position: absolute; top: 0; left: 0;
+    background-color: var(--mk-sadako-color);
+    box-shadow: 0 0 5px var(--mk-sadako-color);
+}
+.mk-mini-val { font-family: 'Rajdhani', sans-serif; font-size: 0.7em; color: #888; }
 
 
 /* Assinatura CSS */
-.mk-signature {
-    text-align: right;
-}
 .mk-signature::after {
-    content: "Mikhail Okkotsu Volkovich"; /* Nome inserido aqui */
+    content: "Mikhail Okkotsu Volkovich";
     font-family: 'La Belle Aurore', cursive;
-    font-size: 1.2em;
-    color: #666;
-    letter-spacing: 1px;
+    font-size: 1.1em; color: #666;
 }
