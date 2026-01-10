@@ -4,7 +4,7 @@
 .mikhail-card {
   --mk-bg: #121212;
   --mk-panel: #1e1e1e;
-  --mk-accent: #6c5ce7; /* Neon Roxo Elegante */
+  --mk-accent: #6c5ce7;
   --mk-accent-glow: rgba(108, 92, 231, 0.4);
   --mk-text: #e0e0e0;
   --mk-dim: #777;
@@ -95,14 +95,13 @@
 
 .mk-bar-fill {
   height: 100%;
-  width: 0%; /* JS controla isso */
+  width: 0%; 
   background: var(--mk-accent);
   border-radius: var(--mk-bar-radius);
   box-shadow: 0 0 10px var(--mk-accent-glow);
   transition: width 0.8s ease-in-out;
 }
 
-/* Cores específicas para diferenciar HP e SAN se quiser */
 .mikhail-hp-fill { background: #ff4757; box-shadow: 0 0 10px rgba(255, 71, 87, 0.4); }
 .mikhail-san-fill { background: #2ed573; box-shadow: 0 0 10px rgba(46, 213, 115, 0.4); }
 
@@ -133,7 +132,6 @@
   position: relative;
 }
 
-/* Injeção do Título "Cursed" */
 .mikhail-notes::before {
   content: 'CURSED';
   position: absolute;
@@ -163,7 +161,6 @@
   background: linear-gradient(to bottom, var(--mk-bg), #0a0a0a);
 }
 
-/* Sadako Section */
 .sadako-wrapper {
   display: flex;
   align-items: center;
@@ -202,10 +199,9 @@
   transition: width 0.5s ease;
 }
 
-.sadako-hp-fill { background: #a29bfe; } /* Roxo pálido */
-.sadako-ea-fill { background: #74b9ff; } /* Azul pálido */
+.sadako-hp-fill { background: #a29bfe; }
+.sadako-ea-fill { background: #74b9ff; }
 
-/* Assinatura CSS */
 .mikhail-signature::after {
   content: 'Mikhail Okkotsu';
   font-family: 'Montserrat', sans-serif;
