@@ -266,25 +266,53 @@
 }
 
 /* Lista de Itens */
+/* --- LISTA DE ITENS (ATUALIZADO PARA SUPORTAR STATUS) --- */
 .reward-item-list {
-  font-size: 13px;
-  color: var(--muted);
+  display: flex;
+  flex-direction: column; /* Um item abaixo do outro */
+  gap: 10px; /* Espaço entre itens */
   list-style: none;
   padding: 0;
   margin: 0;
   border-top: 1px solid rgba(255,255,255,0.05);
-  padding-top: 8px;
-  margin-top: 5px;
+  padding-top: 15px;
+  margin-top: 10px;
 }
+
 .reward-item-list li { 
-    margin-bottom: 2px; 
-    font-family: var(--mono); 
-    display: inline-block;
-    margin-right: 10px;
+    font-family: var(--mono);
+    font-size: 0.85em;
+    background: rgba(0, 0, 0, 0.25);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-left: 3px solid var(--accent1);
+    border-radius: 4px;
+    padding: 10px 12px;
+    color: var(--muted);
+    line-height: 1.5;
+    white-space: pre-wrap; /* ISSO É O SEGREDO: Respeita os 'Enters' do texto */
 }
-.reward-item-list li::before {
-    content: '✦ ';
-    color: var(--accent1);
+
+/* Removemos a bolinha antiga (::before) pois agora é um card */
+.reward-item-list li::before { content: none; }
+
+/* Estilo automático para chaves (Tipo:, Dano:, etc) */
+.reward-item-list li strong, 
+.reward-item-list li b {
+    color: var(--highlight);
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 0.95em;
+}
+
+/* Destaque para o Nome do Item (primeira linha geralmente) */
+.item-title {
+    color: var(--text);
+    font-size: 1.1em;
+    font-weight: 700;
+    display: block;
+    margin-bottom: 4px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 4px;
 }
 
 /* Carimbos */
