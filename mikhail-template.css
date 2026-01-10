@@ -236,7 +236,7 @@
   text-align: justify;
   color: #c0c0e0;
   background: rgba(15, 15, 25, 0.5);
-  margin: 10px 20px 20px 20px; /* AQUI: Reduzi de 25px para 20px nas laterais */
+  margin: 10px 15px 15px 15px; /* AQUI: Reduzi de 25px para 20px nas laterais */
   border-radius: 20px;
   border: 1px solid rgba(155, 89, 182, 0.15);
   backdrop-filter: blur(8px);
