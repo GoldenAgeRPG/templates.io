@@ -743,3 +743,120 @@
     transform: scale(0.6);
   }
 }
+
+/* ========== SISTEMA ALTERNATIVO DE PARTÍCULAS 10X MAIS DENSAS ========== */
+/* Este código NÃO altera nada do design existente, apenas adiciona partículas */
+
+/* Container para as novas partículas */
+.mk-particles-alt {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* Partículas usando múltiplos elementos pseudo */
+.mk-particles-alt::before,
+.mk-particles-alt::after,
+.mk-particles-alt .particle-layer {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+/* Camada 1: Pequenas estrelas (500+) */
+.mk-particles-alt::before {
+  background-image: 
+    radial-gradient(1px 1px at 5% 10%, rgba(221, 160, 221, 0.8), transparent),
+    radial-gradient(1px 1px at 10% 20%, rgba(230, 230, 250, 0.8), transparent),
+    radial-gradient(1px 1px at 15% 30%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 20% 40%, rgba(221, 160, 221, 0.8), transparent),
+    radial-gradient(1px 1px at 25% 50%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 30% 60%, rgba(230, 230, 250, 0.8), transparent),
+    radial-gradient(1px 1px at 35% 70%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 40% 80%, rgba(221, 160, 221, 0.8), transparent),
+    radial-gradient(1px 1px at 45% 90%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 50% 5%, rgba(230, 230, 250, 0.8), transparent),
+    radial-gradient(1px 1px at 55% 15%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 60% 25%, rgba(221, 160, 221, 0.8), transparent),
+    radial-gradient(1px 1px at 65% 35%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 70% 45%, rgba(230, 230, 250, 0.8), transparent),
+    radial-gradient(1px 1px at 75% 55%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 80% 65%, rgba(221, 160, 221, 0.8), transparent),
+    radial-gradient(1px 1px at 85% 75%, rgba(255, 255, 255, 0.8), transparent),
+    radial-gradient(1px 1px at 90% 85%, rgba(230, 230, 250, 0.8), transparent),
+    radial-gradient(1px 1px at 95% 95%, rgba(255, 255, 255, 0.8), transparent);
+  background-repeat: repeat;
+  background-size: 100% 100%;
+  animation: particlesFloat 120s linear infinite;
+  opacity: 0.8;
+}
+
+/* Camada 2: Estrelas médias (300+) */
+.mk-particles-alt::after {
+  background-image: 
+    radial-gradient(2px 2px at 8% 12%, rgba(155, 89, 182, 0.7), transparent),
+    radial-gradient(2px 2px at 18% 28%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(2px 2px at 28% 42%, rgba(155, 89, 182, 0.7), transparent),
+    radial-gradient(2px 2px at 38% 58%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(2px 2px at 48% 72%, rgba(155, 89, 182, 0.7), transparent),
+    radial-gradient(2px 2px at 58% 88%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(2px 2px at 68% 18%, rgba(155, 89, 182, 0.7), transparent),
+    radial-gradient(2px 2px at 78% 32%, rgba(255, 255, 255, 0.7), transparent),
+    radial-gradient(2px 2px at 88% 48%, rgba(155, 89, 182, 0.7), transparent),
+    radial-gradient(2px 2px at 98% 62%, rgba(255, 255, 255, 0.7), transparent);
+  background-repeat: repeat;
+  background-size: 100% 100%;
+  animation: particlesFloat2 150s linear infinite reverse;
+  opacity: 0.6;
+}
+
+/* Camada 3: Estrelas grandes (100+) */
+.mk-particles-alt .particle-layer {
+  background-image: 
+    radial-gradient(3px 3px at 12% 24%, rgba(162, 155, 254, 0.6), transparent),
+    radial-gradient(3px 3px at 36% 48%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(3px 3px at 60% 72%, rgba(162, 155, 254, 0.6), transparent),
+    radial-gradient(3px 3px at 84% 96%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(3px 3px at 24% 12%, rgba(162, 155, 254, 0.6), transparent),
+    radial-gradient(3px 3px at 48% 36%, rgba(255, 255, 255, 0.6), transparent),
+    radial-gradient(3px 3px at 72% 60%, rgba(162, 155, 254, 0.6), transparent),
+    radial-gradient(3px 3px at 96% 84%, rgba(255, 255, 255, 0.6), transparent);
+  background-repeat: repeat;
+  background-size: 100% 100%;
+  animation: particlesFloat3 200s linear infinite;
+  opacity: 0.5;
+}
+
+/* Animações para as partículas */
+@keyframes particlesFloat {
+  0% { transform: translateY(0) translateX(0); }
+  100% { transform: translateY(-2000px) translateX(-500px); }
+}
+
+@keyframes particlesFloat2 {
+  0% { transform: translateY(0) translateX(0); }
+  100% { transform: translateY(-1800px) translateX(-300px); }
+}
+
+@keyframes particlesFloat3 {
+  0% { transform: translateY(0) translateX(0); }
+  100% { transform: translateY(-1600px) translateX(-200px); }
+}
+
+/* Efeito de brilho para todas as camadas */
+@keyframes particleGlow {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 0.4; }
+}
+
+.mk-particles-alt::before { animation: particlesFloat 120s linear infinite, particleGlow 4s ease-in-out infinite; }
+.mk-particles-alt::after { animation: particlesFloat2 150s linear infinite reverse, particleGlow 5s ease-in-out infinite 1s; }
+.mk-particles-alt .particle-layer { animation: particlesFloat3 200s linear infinite, particleGlow 6s ease-in-out infinite 2s; }
