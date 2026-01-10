@@ -1,0 +1,241 @@
+/* --- TEMPLATE: MIKHAIL (The Bleeding Veil - Final) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@400;700&family=Montserrat:wght@300;400;600&family=Great+Vibes&family=Rajdhani:wght@500;700&display=swap');
+
+:root {
+  --mk-bg: #050505;
+  --mk-panel: #0a0a0a;
+  --mk-blood: #4a0000;
+  --mk-blood-light: #8a0000;
+  --mk-ce: #0a1533;
+  --mk-ce-light: #1a3c8a;
+  --mk-san: #1a0526;
+  --mk-san-light: #4a0e6e;
+  --mk-text: #b0b0b0;
+}
+
+/* --- ANIMAÇÕES DE PARTÍCULAS (Cinzas Flutuantes) --- */
+/* Movem-se da esquerda para a direita (saindo da barra) e desaparecem */
+@keyframes ash-drift-1 { 
+  0% { background-position: 0% 50%; opacity: 0; } 
+  20% { opacity: 0.8; } 
+  100% { background-position: 100% 50%; opacity: 0; } 
+}
+@keyframes ash-drift-2 { 
+  0% { background-position: 0% 20%; opacity: 0; } 
+  30% { opacity: 0.5; } 
+  100% { background-position: 120% 40%; opacity: 0; } 
+}
+
+@keyframes vein-pulse {
+  0% { box-shadow: inset 0 0 10px rgba(74, 0, 0, 0.2); border-color: #220505; }
+  50% { box-shadow: inset 0 0 25px rgba(74, 0, 0, 0.4); border-color: #4a0000; }
+  100% { box-shadow: inset 0 0 10px rgba(74, 0, 0, 0.2); border-color: #220505; }
+}
+
+/* --- CONTAINER --- */
+.mikhail-card {
+  position: relative;
+  max-width: 650px;
+  width: 95%;
+  margin: 50px auto;
+  background-color: var(--mk-bg);
+  /* Textura de ruído sutil no fundo */
+  background-image: url('https://www.transparenttextures.com/patterns/stardust.png');
+  border: 1px solid #220505;
+  border-radius: 4px;
+  /* Animação de "veia" pulsando nas bordas internas */
+  animation: vein-pulse 4s infinite alternate;
+  color: var(--mk-text);
+  font-family: 'Montserrat', sans-serif;
+  box-shadow: 0 0 30px rgba(0,0,0,0.9);
+}
+.mikhail-card * { box-sizing: border-box; }
+
+/* Detalhe de topo */
+.mikhail-card::before {
+    content: ''; position: absolute; top: -1px; left: 10%; width: 80%; height: 2px;
+    background: linear-gradient(90deg, transparent, var(--mk-blood), transparent);
+}
+
+/* --- HEADER --- */
+.mikhail-header {
+  text-align: center;
+  padding: 40px 20px 25px 20px;
+  position: relative;
+}
+
+.mikhail-title {
+  font-family: 'Cormorant SC', serif;
+  font-size: 3em;
+  color: #dcdcdc;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+}
+
+.mikhail-subtitle {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.75em;
+  color: var(--mk-blood-light);
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin-top: 5px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+/* --- IMAGEM --- */
+.mikhail-img-wrap {
+    width: 100%; padding-bottom: 50%; /* Banner mais wide */
+    position: relative; overflow: hidden;
+    border-top: 1px solid #1a0505;
+    border-bottom: 1px solid #1a0505;
+}
+.mikhail-img-wrap img {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.4) contrast(1.1) brightness(0.8);
+    transition: transform 3s ease;
+}
+.mikhail-card:hover .mikhail-img-wrap img { transform: scale(1.03); }
+
+/* --- STATUS (Partículas Corretas) --- */
+.mikhail-stats-box {
+    padding: 25px 45px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+    display: flex; flex-direction: column; gap: 8px;
+}
+
+.mikhail-stat-row { display: flex; align-items: center; gap: 15px; }
+
+.mikhail-label {
+    font-family: 'Cormorant SC', serif;
+    font-weight: 700; width: 35px; font-size: 1.1em;
+    color: #888; text-shadow: 0 0 5px rgba(0,0,0,0.8);
+}
+
+/* O Trilho da Barra (O Vazio) */
+.mikhail-track {
+    flex-grow: 1; height: 10px; /* Fino */
+    background: #080808;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden; /* Mantém as partículas dentro */
+    border: 1px solid #1f1f1f;
+}
+
+/* AS PARTÍCULAS (Pseudo-elementos no Trilho) */
+/* Elas são invisíveis por padrão e animam da esquerda p/ direita */
+.mikhail-track::before, .mikhail-track::after {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-repeat: repeat-x;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* HP: Cinzas Vermelhas */
+.hp-track::before {
+    background-image: radial-gradient(circle, var(--mk-blood-light) 1px, transparent 2px);
+    background-size: 20px 10px; /* Esparsas */
+    animation: ash-drift-1 4s linear infinite;
+}
+.hp-track::after {
+    background-image: radial-gradient(circle, var(--mk-blood) 1px, transparent 1px);
+    background-size: 35px 10px; /* Muito Esparsas */
+    animation: ash-drift-2 7s linear infinite;
+}
+
+/* EA: Cinzas Azuis */
+.ce-track::before {
+    background-image: radial-gradient(circle, var(--mk-ce-light) 1px, transparent 2px);
+    background-size: 25px 10px;
+    animation: ash-drift-1 5s linear infinite;
+}
+.ce-track::after {
+    background-image: radial-gradient(circle, var(--mk-ce) 1px, transparent 1px);
+    background-size: 40px 10px;
+    animation: ash-drift-2 8s linear infinite;
+}
+
+/* SAN: Cinzas Roxas */
+.san-track::before {
+    background-image: radial-gradient(circle, var(--mk-san-light) 1px, transparent 2px);
+    background-size: 15px 10px;
+    animation: ash-drift-1 6s linear infinite;
+}
+.san-track::after {
+    background-image: radial-gradient(circle, var(--mk-san) 1px, transparent 1px);
+    background-size: 30px 10px;
+    animation: ash-drift-2 9s linear infinite;
+}
+
+/* O Preenchimento (Sólido) */
+.mikhail-fill {
+    position: absolute; top: 0; left: 0; height: 100%;
+    border-radius: 10px;
+    z-index: 2; /* Cobre as partículas atrás */
+    box-shadow: 2px 0 8px rgba(0,0,0,0.8);
+}
+.hp-fill { background: linear-gradient(90deg, var(--mk-blood), var(--mk-blood-light)); }
+.ce-fill { background: linear-gradient(90deg, var(--mk-ce), var(--mk-ce-light)); }
+.san-fill { background: linear-gradient(90deg, var(--mk-san), var(--mk-san-light)); }
+
+/* Valor */
+.mikhail-val {
+    position: absolute; right: 5px; top: 0; height: 100%;
+    display: flex; align-items: center;
+    font-family: 'Rajdhani', sans-serif; font-weight: 700; font-size: 0.7em;
+    color: #fff; z-index: 3; text-shadow: 1px 1px 2px #000;
+}
+
+/* --- CONTEÚDO --- */
+.mikhail-content {
+    padding: 10px 45px 30px 45px;
+    font-size: 0.95em;
+    line-height: 1.8;
+    text-align: justify;
+    color: #a0a0a0;
+}
+
+.mikhail-content p { margin-bottom: 15px; }
+.mikhail-content b { color: #ccc; font-weight: 700; text-shadow: 0 0 5px rgba(255,255,255,0.1); }
+.mikhail-content i { color: var(--mk-blood-light); }
+
+/* Divisor Fino */
+.mikhail-sep {
+    height: 1px; width: 60%; margin: 10px auto 30px auto;
+    background: linear-gradient(90deg, transparent, #220505, transparent);
+}
+
+/* --- NOTAS (Técnica) --- */
+.mikhail-notes {
+    margin: 0 45px 20px 45px;
+    padding: 15px;
+    background: rgba(10, 0, 0, 0.3);
+    border-left: 2px solid var(--mk-blood);
+    position: relative;
+}
+
+.mikhail-notes-head {
+    display: block; font-family: 'Rajdhani', sans-serif;
+    font-size: 0.8em; color: var(--mk-blood-light);
+    text-transform: uppercase; letter-spacing: 1px;
+    margin-bottom: 5px; font-weight: 700;
+}
+.mikhail-notes-text { font-size: 0.85em; color: #777; font-style: italic; }
+
+/* --- FOOTER --- */
+.mikhail-footer {
+    text-align: right; padding: 0 45px 30px 0; opacity: 0.7;
+}
+
+.mikhail-signature::after {
+    content: "Mikhail Okkotsu";
+    font-family: 'Great Vibes', cursive;
+    font-size: 2.2em;
+    color: #888;
+    text-shadow: 0 0 10px rgba(0,0,0,0.5);
+    transition: color 0.5s;
+}
+.mikhail-card:hover .mikhail-signature::after { color: #bbb; }
