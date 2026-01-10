@@ -5,11 +5,10 @@
   --mk-bg: #121212;
   --mk-panel: #1a1a1a;
   --mk-border: #333;
-  /* Roxo Neon Principal */
-  --mk-accent: #9b59b6; 
-  --mk-accent-glow: rgba(155, 89, 182, 0.5);
+  --mk-accent: #9b59b6;
+  --mk-accent-glow: rgba(155, 89, 182, 0.6);
   --mk-text: #bdc3c7;
-  --mk-radius: 25px; /* Bem arredondado */
+  --mk-radius: 20px;
   
   width: 100%;
   max-width: 650px;
@@ -19,8 +18,7 @@
   font-family: 'Montserrat', sans-serif;
   color: var(--mk-text);
   line-height: 1.7;
-  /* Glow externo elegante */
-  box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 20px rgba(155, 89, 182, 0.15);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 15px rgba(155, 89, 182, 0.1);
   overflow: hidden;
   border: 1px solid rgba(255,255,255,0.05);
 }
@@ -32,18 +30,16 @@
   background-image: url('https://i.pinimg.com/736x/0f/fb/f4/0ffbf44fb1cee4ad983d0ef3a4ade63f.jpg');
   background-size: cover;
   background-position: center;
-  /* Fade suave para o preto */
-  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
-/* --- Título --- */
+/* --- Título (Abaixo do Banner) --- */
 .mikhail-title-bar {
-  margin-top: -60px;
-  padding: 0 35px;
-  position: relative;
-  z-index: 5;
+  /* Margem negativa removida para não cobrir o banner */
+  padding: 20px 35px 10px 35px;
+  background: var(--mk-bg);
   text-align: right;
+  border-bottom: 1px solid rgba(255,255,255,0.02);
 }
 
 .mikhail-title-bar h1 {
@@ -53,11 +49,12 @@
   color: #fff;
   letter-spacing: 2px;
   font-weight: 700;
-  text-shadow: 0 0 15px rgba(155, 89, 182, 0.8); /* Neon no Título */
+  text-shadow: 0 0 15px rgba(155, 89, 182, 0.8);
+  line-height: 1.2;
 }
 
 .mikhail-title-bar h2 {
-  margin: 0;
+  margin: 5px 0 0 0;
   font-size: 11px;
   color: var(--mk-accent);
   font-weight: 600;
@@ -92,10 +89,10 @@
 
 .mk-bar-bg {
   width: 100%;
-  height: 8px; /* Altura média */
-  background: #000;
-  border-radius: 50px; /* Pílula */
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.8); /* Profundidade */
+  height: 8px;
+  background: #080808;
+  border-radius: 50px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.8);
   overflow: hidden;
 }
 
@@ -104,8 +101,7 @@
   width: 0%;
   border-radius: 50px;
   transition: width 0.8s ease-in-out;
-  /* Glow interno nas barras */
-  box-shadow: 0 0 8px currentColor; 
+  box-shadow: 0 0 8px currentColor;
 }
 
 .mikhail-hp-fill { background: #ff4757; color: #ff4757; }
@@ -120,20 +116,18 @@
   color: #b0b0b0;
 }
 
-/* Negrito: Roxo Neon */
-.mikhail-content b, 
-.mikhail-content strong {
-  color: #d1a5ff; /* Roxo claro */
+.mikhail-content strong, 
+.mikhail-content b {
+  color: #d1a5ff;
   font-weight: 700;
-  text-shadow: 0 0 8px rgba(209, 165, 255, 0.7); /* Brilho */
+  text-shadow: 0 0 10px rgba(209, 165, 255, 0.6);
 }
 
-/* Itálico: Prata Brilhante */
-.mikhail-content i, 
-.mikhail-content em {
+.mikhail-content em, 
+.mikhail-content i {
   color: #ecf0f1;
   font-style: italic;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Brilho */
+  text-shadow: 0 0 6px rgba(255, 255, 255, 0.4);
 }
 
 /* Divisória Neon */
@@ -143,14 +137,14 @@
   margin: 5px auto;
   background: linear-gradient(90deg, transparent, var(--mk-accent), transparent);
   opacity: 0.6;
-  box-shadow: 0 0 5px var(--mk-accent);
+  box-shadow: 0 0 4px var(--mk-accent);
 }
 
 /* --- Considerações --- */
 .mikhail-notes {
   margin: 15px 35px;
   padding: 15px 20px;
-  border-radius: 15px; /* Arredondado */
+  border-radius: 15px;
   background: rgba(255, 255, 255, 0.03);
   border: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
@@ -187,7 +181,7 @@
   justify-content: space-between;
 }
 
-/* Sadako Card - MAIOR E SEM QUEBRA */
+/* Sadako Card */
 .sadako-wrapper {
   display: flex;
   align-items: center;
@@ -195,8 +189,7 @@
   padding: 8px 15px; 
   background: rgba(30, 30, 30, 0.6);
   border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 30px; /* Pílula */
-  /* Tamanho mínimo para não ficar minúsculo */
+  border-radius: 30px;
   min-width: 180px; 
   box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
@@ -215,7 +208,7 @@
   display: flex;
   flex-direction: column;
   gap: 5px;
-  flex-grow: 1; /* Ocupa o espaço disponível */
+  flex-grow: 1;
 }
 
 .sadako-row {
@@ -233,24 +226,24 @@
   color: #aaa;
 }
 
-/* Barras da Sadako */
+/* Barras */
 .sadako-bar-bg {
   flex-grow: 1;
   height: 4px;
   background: #111;
   border-radius: 10px;
-  min-width: 40px; /* Garante que a barra apareça */
+  min-width: 50px;
 }
 
 .sadako-hp-fill { background: #a29bfe; height: 100%; width: 0%; border-radius: 10px; }
 .sadako-ea-fill { background: #74b9ff; height: 100%; width: 0%; border-radius: 10px; }
 
-/* Números SEM QUEBRA DE LINHA */
+/* Números fixos */
 .sadako-hp-val, .sadako-ea-val {
   font-size: 9px;
   font-family: monospace;
   color: #bbb;
-  white-space: nowrap; /* O segredo para não quebrar */
+  white-space: nowrap;
 }
 
 /* --- Assinatura --- */
@@ -263,7 +256,7 @@
 .sig-line {
   height: 35px;
   width: 2px;
-  background: var(--mk-accent); /* Linha neon */
+  background: var(--mk-accent);
   box-shadow: 0 0 8px var(--mk-accent);
   border-radius: 2px;
 }
