@@ -1,207 +1,193 @@
-/* --- TEMPLATE: MIKHAIL (Concept: Analog Horror Tape) --- */
-/* NOME DO ARQUIVO: mikhail-template.css */
-@import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=VT323&family=Cinzel+Decorative:wght@700&display=swap');
+/* --- TEMPLATE: MIKHAIL (Modern Cursed UI) --- */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;700&family=Syncopate:wght@700&family=La+Belle+Aurore&family=Rajdhani:wght@500;700&display=swap');
 
 :root {
-  --mk-bg: #0a0a0a;
-  --mk-signal-dark: #111;
-  --mk-signal-light: #f0f0f0; /* Branco sujo de tela antiga */
-  --mk-blood: #8a0000; /* Vermelho sangue pálido */
-  --mk-static: #222;
+  --mk-bg: #050505;       /* Preto Fundo */
+  --mk-card: #0b0b0b;     /* Cinza muito escuro para cartões */
+  --mk-accent: #8a0000;   /* Vermelho Sangue (Mikhail) */
+  --mk-sadako: #1a0b2e;   /* Roxo escuro (Sadako) */
+  --mk-text: #e0e0e0;     /* Texto Leitura */
+  --mk-dim: #666;         /* Texto Secundário */
 }
 
-/* --- CONTAINER PRINCIPAL (A Tela) --- */
+/* --- CONTAINER --- */
 .mikhail-card {
-  position: relative;
   max-width: 650px;
   width: 95%;
   margin: 50px auto;
   background-color: var(--mk-bg);
-  /* Textura de Scanlines estáticas */
-  background-image: repeating-linear-gradient(
-    to bottom,
-    transparent 0px,
-    transparent 2px,
-    rgba(0, 0, 0, 0.8) 3px,
-    rgba(0, 0, 0, 0.8) 4px
-  );
-  border: 3px solid var(--mk-signal-dark);
-  /* Efeito de borda de tubo de TV antiga */
-  box-shadow: inset 0 0 50px rgba(0,0,0,0.9), 0 0 10px rgba(0,0,0,0.5);
-  color: var(--mk-signal-light);
-  font-family: 'Special Elite', cursive; /* Fonte de máquina de escrever/documento sujo */
+  color: var(--mk-text);
+  font-family: 'Montserrat', sans-serif;
+  border-left: 4px solid var(--mk-accent); /* Identidade visual lateral */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  position: relative;
   overflow: hidden;
 }
 .mikhail-card * { box-sizing: border-box; }
 
-/* --- HEADER & BANNER (A Fita) --- */
-.mk-screen-area {
+/* --- HEADER COM IMAGEM --- */
+.mk-hero {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+}
+
+.mk-hero-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  /* Efeito moderno: preto e branco com alto contraste */
+  filter: grayscale(100%) contrast(1.2) brightness(0.8); 
+  transition: all 0.5s ease;
+}
+.mikhail-card:hover .mk-hero-img {
+    filter: grayscale(50%) contrast(1.1); /* Recupera cor ao passar mouse */
+    transform: scale(1.02);
+}
+
+/* Título Flutuante (Glassmorphism) */
+.mk-title-box {
+  position: absolute;
+  bottom: 0; left: 0; width: 100%;
+  background: linear-gradient(to top, #050505 10%, transparent);
+  padding: 40px 25px 15px 25px;
+  z-index: 2;
+}
+
+.mk-name {
+  font-family: 'Syncopate', sans-serif; /* Fonte larga e moderna */
+  font-weight: 700;
+  font-size: 2.2em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  line-height: 1;
+}
+
+.mk-role {
+  font-family: 'Rajdhani', sans-serif;
+  font-size: 0.9em;
+  color: var(--mk-accent);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-top: 5px;
+  font-weight: 600;
+}
+
+/* --- CONTEÚDO (Leitura Otimizada) --- */
+.mk-body {
+  padding: 30px 40px;
+  background-color: var(--mk-bg);
+  font-size: 0.95em;
+  line-height: 1.8; /* Espaçamento bom para leitura */
+  color: #ccc;
+  text-align: justify;
+}
+
+.mk-body b { color: #fff; font-weight: 600; }
+.mk-body i { color: var(--mk-accent); font-style: normal; } /* Destaque sutil */
+
+/* --- STATUS MODERNOS (Laser Lines) --- */
+/* Nada de caixas. Apenas linhas. */
+.mk-stats-grid {
+    padding: 0 40px 30px 40px;
+    display: flex; flex-direction: column; gap: 15px;
+}
+
+.mk-stat-item {
+    display: flex; align-items: center; gap: 15px;
+}
+
+.mk-stat-label {
+    font-family: 'Syncopate', sans-serif;
+    font-size: 0.8em; font-weight: 700;
+    color: #555; width: 40px;
+}
+
+/* O Container da Linha */
+.mk-line-track {
+    flex-grow: 1; height: 2px; /* Muito fino */
+    background: #222;
     position: relative;
-    width: 100%;
-    border-bottom: 3px solid var(--mk-signal-dark);
+    display: flex; align-items: center;
 }
 
-/* Efeito de "Tracking" VHS na imagem */
-.mk-banner-img {
-    width: 100%;
-    height: auto;
-    display: block;
-    filter: grayscale(1) contrast(1.5) brightness(0.6) sepia(0.2);
-    /* Simula a distorção de cores nas bordas (aberração cromática estática) */
-    text-shadow: 2px 0 0 red, -2px 0 0 blue;
-    position: relative;
-    z-index: 0;
+/* O Preenchimento (Brilho) */
+.mk-line-fill {
+    height: 100%; position: absolute; top: 0; left: 0;
+    box-shadow: 0 0 10px currentColor; /* Glow nativo da cor */
+    transition: width 0.5s ease;
 }
 
-/* Títulos como OSD (On-Screen Display) de VCR */
-.mk-title-overlay {
-    position: absolute;
-    bottom: 15px;
-    left: 20px;
-    z-index: 2;
-    font-family: 'VT323', monospace; /* Fonte digital antiga */
-    text-transform: uppercase;
-    background: rgba(0,0,0,0.7);
-    padding: 5px 10px;
-    border-left: 3px solid var(--mk-blood);
+/* Ponto na ponta da linha (Tech feel) */
+.mk-line-fill::after {
+    content: ''; position: absolute; right: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 6px; height: 6px;
+    background: inherit; border-radius: 50%;
+    box-shadow: 0 0 5px inherit;
 }
 
-.mk-main-title {
-    font-size: 2em;
-    color: var(--mk-signal-light);
-    margin: 0;
-    line-height: 1;
-    letter-spacing: 2px;
-}
-.mk-sub-title {
-    font-size: 1em;
-    color: var(--mk-blood);
+/* Cores das linhas */
+.fill-hp { background-color: var(--mk-accent); color: var(--mk-accent); }
+.fill-ea { background-color: #0d47a1; color: #0d47a1; } /* Azul Neon */
+.fill-san { background-color: #7b1fa2; color: #7b1fa2; } /* Roxo Neon */
+
+.mk-stat-val {
+    font-family: 'Rajdhani', sans-serif; font-weight: 700;
+    font-size: 0.9em; color: #fff; width: 70px; text-align: right;
 }
 
-/* --- STATUS PRINCIPAIS (Mikhail) --- */
-.mk-status-deck {
-    padding: 20px;
-    background: var(--mk-signal-dark);
-    border-bottom: 2px solid #000;
-}
-
-.mk-stat-row {
+/* --- FOOTER HÍBRIDO (Assinatura + Sadako Discreta) --- */
+.mk-footer {
+    background: #000;
+    border-top: 1px solid #111;
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 8px;
-    font-family: 'VT323', monospace;
+    padding: 10px 20px;
 }
 
-.mk-label {
-    width: 40px;
+/* Sadako: Metadata Discreta */
+.mk-sadako-unit {
+    display: flex; align-items: center; gap: 15px;
+    opacity: 0.6; transition: opacity 0.3s;
+}
+.mikhail-card:hover .mk-sadako-unit { opacity: 1; }
+
+.mk-sadako-thumb {
+    width: 35px; height: 35px;
+    border-radius: 3px;
+    overflow: hidden;
+    filter: grayscale(100%);
+    border: 1px solid #333;
+}
+.mk-sadako-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.mk-sadako-info {
+    display: flex; flex-direction: column; gap: 2px;
+}
+.mk-sadako-name {
+    font-family: 'Rajdhani', sans-serif; text-transform: uppercase;
+    font-weight: 700; font-size: 0.8em; color: #555; letter-spacing: 1px;
+}
+/* Micro-status (Apenas Texto) para discrição máxima */
+.mk-sadako-nums {
+    font-family: 'Rajdhani', sans-serif; font-size: 0.75em; color: #888;
+    display: flex; gap: 10px;
+}
+.mk-sadako-nums span b { color: var(--mk-accent); font-weight: normal; }
+
+
+/* Assinatura CSS */
+.mk-signature {
+    text-align: right;
+}
+.mk-signature::after {
+    content: "Mikhail Okkotsu Volkovich"; /* Nome inserido aqui */
+    font-family: 'La Belle Aurore', cursive;
     font-size: 1.2em;
     color: #666;
+    letter-spacing: 1px;
 }
-
-/* Barras estilo "Sinal de Rastreamento" - Retas e brutas */
-.mk-track {
-    flex-grow: 1;
-    height: 18px;
-    background: #000;
-    border: 1px solid #333;
-    position: relative;
-    /* Textura interna de ruído */
-    background-image: url('https://www.transparenttextures.com/patterns/dark-noise-light.png');
-}
-
-.mk-fill {
-    height: 100%;
-    position: absolute; top: 0; left: 0;
-    /* Borda direita sólida para parecer um medidor de sinal */
-    border-right: 2px solid rgba(255,255,255,0.5);
-}
-
-/* Cores sólidas e chapadas, sem degradês suaves */
-.fill-hp { background: var(--mk-blood); }
-.fill-ea { background: #1a2a5c; }
-.fill-san { background: #361a5c; }
-
-.mk-val {
-    position: absolute;
-    right: 5px; top: 0; height: 100%;
-    display: flex; align-items: center;
-    font-size: 1em;
-    color: var(--mk-signal-light);
-    text-shadow: 1px 1px 0 #000;
-}
-
-/* --- CONTEÚDO --- */
-.mk-content-body {
-    padding: 25px;
-    text-align: justify;
-    line-height: 1.6;
-    font-size: 0.95em;
-    color: #ccc;
-    background-image: url('https://www.transparenttextures.com/patterns/dirty-old-shirt.png');
-}
-.mk-content-body b { color: var(--mk-blood); }
-.mk-content-body i { color: #888; text-decoration: underline dotted; }
-
-
-/* --- RODAPÉ AMALDIÇOADO (Sadako Unit) --- */
-.mk-footer-curse {
-    background: #000;
-    border-top: 3px solid var(--mk-blood);
-    padding: 15px;
-    display: flex; /* Layout lado a lado */
-    align-items: center;
-    gap: 15px;
-    position: relative;
-}
-
-/* Imagem da Sadako (Pequena, quadrada, distorcida) */
-.mk-sadako-frame {
-    width: 80px;
-    height: 80px;
-    border: 2px solid var(--mk-blood);
-    overflow: hidden;
-    flex-shrink: 0; /* Não deixa diminuir */
-    background: #000;
-}
-.mk-sadako-img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    /* Filtro extremo para parecer filmagem ruim */
-    filter: grayscale(1) contrast(2) brightness(0.5);
-    mix-blend-mode: hard-light;
-}
-
-/* Dados da Sadako */
-.mk-sadako-data {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.mk-sadako-name {
-    font-family: 'Cinzel Decorative', serif;
-    color: var(--mk-blood);
-    font-size: 1.2em;
-    margin-bottom: 5px;
-    text-transform: uppercase;
-}
-
-/* Barras da Sadako (Mais finas para hierarquia) */
-.mk-track.mini { height: 12px; border-color: #330000; }
-.mk-val.mini { font-size: 0.8em; }
-
-/* Assinatura (Estilo carimbo/marca d'água) */
-.mk-signature-stamp {
-    position: absolute;
-    bottom: 10px;
-    right: 15px;
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 1.5em;
-    color: #333;
-    text-transform: uppercase;
-    opacity: 0.4;
-    transform: rotate(-5deg); /* Levemente torto como um carimbo */
-    pointer-events: none;
-}
-.mk-signature-stamp::after { content: "M. Volkovich"; }
