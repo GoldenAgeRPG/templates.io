@@ -1,16 +1,18 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
 
-/* --- Variáveis Neumorphism --- */
+/* --- Variáveis --- */
 .mikhail-card {
-  --mk-bg: #212121; /* Cinza escuro base */
+  --mk-bg: #181818; /* Fundo base quase preto */
+  --mk-glass: rgba(30, 30, 30, 0.6); /* Vidro escuro */
+  --mk-glass-border: rgba(255, 255, 255, 0.08);
   --mk-accent: #6c5ce7;
-  --mk-text: #b2bec3;
-  --mk-shadow-light: rgba(255, 255, 255, 0.05); /* Luz */
-  --mk-shadow-dark: rgba(0, 0, 0, 0.6); /* Sombra */
-  --neu-flat: 8px 8px 16px var(--mk-shadow-dark), -8px -8px 16px var(--mk-shadow-light);
-  --neu-pressed: inset 6px 6px 12px var(--mk-shadow-dark), inset -6px -6px 12px var(--mk-shadow-light);
-  --mk-radius: 30px;
+  --mk-text: #bdc3c7;
+  --mk-radius: 25px;
   
+  /* Neumorphism Sutil (Apenas para barras e detalhes) */
+  --neu-inset: inset 2px 2px 5px rgba(0,0,0,0.7), inset -1px -1px 2px rgba(255,255,255,0.05);
+  --neu-flat-soft: 5px 5px 10px rgba(0,0,0,0.3), -2px -2px 5px rgba(255,255,255,0.03);
+
   width: 100%;
   max-width: 650px;
   margin: 0 auto;
@@ -19,56 +21,62 @@
   font-family: 'Montserrat', sans-serif;
   color: var(--mk-text);
   line-height: 1.7;
-  /* Efeito Neumorphism Externo no Card Principal */
-  box-shadow: 15px 15px 30px #121212, -15px -15px 30px #303030;
   overflow: hidden;
-  padding-bottom: 20px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+  border: 1px solid #2a2a2a;
 }
 
-/* --- Header --- */
+/* --- Banner (Limpo) --- */
 .mikhail-header {
-  position: relative;
-  height: 250px;
+  height: 220px;
+  width: 100%;
   background-image: url('https://i.pinimg.com/736x/0f/fb/f4/0ffbf44fb1cee4ad983d0ef3a4ade63f.jpg');
   background-size: cover;
   background-position: center;
-  border-bottom: 2px solid var(--mk-accent);
-  border-radius: var(--mk-radius) var(--mk-radius) 0 0;
+  border-bottom: 1px solid var(--mk-accent);
 }
 
-.mikhail-overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background: linear-gradient(to top, var(--mk-bg) 5%, transparent);
-  padding: 20px 30px;
-  box-sizing: border-box;
+/* --- Barra de Título (Glassmorphism) --- */
+.mikhail-title-bar {
+  background: var(--mk-glass);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  padding: 15px 30px;
+  border-bottom: 1px solid var(--mk-glass-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.mikhail-titles h1 {
+.mikhail-title-bar h1 {
   margin: 0;
-  font-size: 26px;
+  font-size: 22px;
   text-transform: uppercase;
-  color: #dfe6e9;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  color: #fff;
   letter-spacing: 1px;
+  text-shadow: 0 0 10px rgba(108, 92, 231, 0.5);
 }
 
-.mikhail-titles h2 {
+.mikhail-title-bar h2 {
   margin: 0;
-  font-size: 12px;
+  font-size: 11px;
   color: var(--mk-accent);
   font-weight: 700;
   letter-spacing: 2px;
   text-transform: uppercase;
+  text-align: right;
 }
 
-/* --- Status Principais --- */
+/* --- Corpo do Card --- */
+.mikhail-body {
+  padding: 10px 0;
+}
+
+/* --- Status Principais (Neumorphism Inset) --- */
 .mikhail-stats-primary {
   display: flex;
   gap: 20px;
-  padding: 25px 35px 10px 35px;
+  padding: 20px 35px;
 }
 
 .mk-stat-group {
@@ -78,20 +86,19 @@
 .mk-stat-label {
   font-size: 10px;
   font-weight: 700;
-  text-transform: uppercase;
-  color: var(--mk-text);
-  margin-bottom: 8px;
+  color: #7f8c8d;
+  margin-bottom: 6px;
   display: flex;
   justify-content: space-between;
 }
 
-/* Barra "Afundada" (Pressed) */
+/* O Buraco da barra (Inset) */
 .mk-bar-bg {
   width: 100%;
-  height: 10px;
-  background: var(--mk-bg);
+  height: 8px;
+  background: #0f0f0f;
   border-radius: 20px;
-  box-shadow: var(--neu-pressed);
+  box-shadow: var(--neu-inset); /* Aqui mantivemos o efeito que vc gostou */
   overflow: hidden;
   position: relative;
 }
@@ -101,147 +108,143 @@
   width: 0%;
   border-radius: 20px;
   transition: width 0.8s ease-in-out;
+  box-shadow: 0 0 5px currentColor;
 }
 
-.mikhail-hp-fill { background: linear-gradient(90deg, #d63031, #ff7675); }
-.mikhail-ea-fill { background: linear-gradient(90deg, #6c5ce7, #a29bfe); }
-.mikhail-san-fill { background: linear-gradient(90deg, #00b894, #55efc4); }
+.mikhail-hp-fill { background: #ff4757; color: #ff4757; }
+.mikhail-ea-fill { background: #6c5ce7; color: #6c5ce7; }
+.mikhail-san-fill { background: #00b894; color: #00b894; }
 
-/* --- Conteúdo & Tipografia --- */
+/* --- Conteúdo --- */
 .mikhail-content {
-  padding: 20px 35px;
+  padding: 10px 35px 20px 35px;
   font-size: 14px;
   text-align: justify;
   color: #b2bec3;
 }
 
-/* Efeito 1: Negrito Neon */
+/* Efeitos de Texto */
 .mikhail-content b, 
 .mikhail-content strong {
   color: var(--mk-accent);
   font-weight: 700;
-  text-shadow: 0 0 8px rgba(108, 92, 231, 0.6);
+  text-shadow: 0 0 8px rgba(108, 92, 231, 0.5);
 }
 
-/* Efeito 2: Itálico Brilhante */
 .mikhail-content i, 
 .mikhail-content em {
   color: #dfe6e9;
   font-style: italic;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.4);
+  text-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
 }
 
-/* Divisória Neumorphic */
+/* Divisória Glass */
 .mikhail-divider {
-  height: 2px;
-  width: 80%;
-  margin: 15px auto;
-  border-radius: 50%;
-  background: var(--mk-bg);
-  box-shadow: 2px 2px 5px var(--mk-shadow-dark), -2px -2px 5px var(--mk-shadow-light);
+  height: 1px;
+  width: 90%;
+  margin: 10px auto;
+  background: linear-gradient(90deg, transparent, var(--mk-glass-border), transparent);
 }
 
-/* --- Considerações (Cursed) --- */
+/* --- Considerações (Glassmorphism) --- */
+/* Ficou feio antes, agora é um painel de vidro limpo */
 .mikhail-notes {
-  padding: 20px 30px;
-  margin: 20px 35px;
-  border-radius: 20px;
-  background: var(--mk-bg);
-  /* Efeito Pressed (Afundado) */
-  box-shadow: var(--neu-pressed);
+  margin: 15px 35px;
+  padding: 15px 20px;
+  border-radius: 15px;
+  background: rgba(0, 0, 0, 0.2); /* Fundo sutil */
+  border-left: 2px solid var(--mk-accent); /* Detalhe moderno */
   position: relative;
-  border: 1px solid transparent; /* Fix para bordas */
-}
-
-.mikhail-notes::before {
-  content: 'CURSED';
-  position: absolute;
-  top: -10px;
-  right: 20px; /* Mudei para direita para variar */
-  background: var(--mk-bg);
-  padding: 2px 10px;
-  font-size: 10px;
-  font-weight: bold;
-  color: var(--mk-accent);
-  border-radius: 10px;
-  box-shadow: var(--neu-flat);
 }
 
 .mikhail-notes span {
   font-size: 12px;
-  color: #636e72;
+  color: #95a5a6;
   font-style: italic;
+  display: block;
 }
 
-/* --- Footer & Sadako --- */
+/* Tag "Cursed" mais discreta */
+.mikhail-notes::before {
+  content: 'CURSED';
+  display: block;
+  font-size: 9px;
+  font-weight: bold;
+  color: var(--mk-accent);
+  margin-bottom: 5px;
+  letter-spacing: 1px;
+}
+
+/* --- Footer & Sadako (Glass + Soft Neu) --- */
 .mikhail-footer {
+  margin-top: 10px;
+  padding: 15px 35px 25px 35px;
+  background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.4));
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 35px 20px 35px;
-  margin-top: 20px;
 }
 
+/* Card Sadako - Suave */
 .sadako-wrapper {
   display: flex;
   align-items: center;
-  gap: 15px;
-  /* Moldura Neumorphic no container da Sadako */
-  padding: 10px;
-  border-radius: 20px;
-  box-shadow: var(--neu-flat);
+  gap: 12px;
+  padding: 8px 15px;
+  border-radius: 50px;
+  /* Neumorphism muito suave e convexo (saltado) */
+  background: #1a1a1a;
+  box-shadow: var(--neu-flat-soft);
+  border: 1px solid #252525;
 }
 
 .sadako-avatar {
-  width: 40px;
-  height: 40px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   background-image: url('https://i.pinimg.com/736x/91/01/6d/91016dfb9943e90d5f511c1c2c42a195.jpg');
   background-size: cover;
   background-position: center;
-  /* Borda sutil */
-  border: 2px solid var(--mk-bg);
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.5);
 }
 
-/* Sadako Stats Visíveis */
 .sadako-stats {
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  min-width: 120px;
+  gap: 4px;
 }
 
 .sadako-row {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   font-size: 9px;
-  color: var(--mk-dim);
+  color: #777;
 }
 
 .sadako-label {
   font-weight: bold;
-  width: 15px;
+  color: #555;
+  width: 12px;
 }
 
+/* Barrinhas da Sadako (Pequenos buracos) */
 .sadako-bar-bg {
-  flex-grow: 1;
-  height: 5px;
-  background: var(--mk-bg);
+  width: 60px;
+  height: 4px;
+  background: #0f0f0f;
   border-radius: 10px;
-  box-shadow: var(--neu-pressed);
+  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.8);
   overflow: hidden;
 }
 
-.sadako-hp-fill { background: #a29bfe; height: 100%; width: 0%; transition: width 0.5s; }
-.sadako-ea-fill { background: #74b9ff; height: 100%; width: 0%; transition: width 0.5s; }
+.sadako-hp-fill { background: #a29bfe; height: 100%; width: 0%; }
+.sadako-ea-fill { background: #74b9ff; height: 100%; width: 0%; }
 
 .sadako-hp-val, .sadako-ea-val {
+  width: 40px;
   font-size: 8px;
-  color: #777;
-  width: 45px;
   text-align: right;
+  opacity: 0.8;
 }
 
 /* Assinatura */
@@ -249,9 +252,9 @@
   content: 'Mikhail Okkotsu';
   font-family: 'Montserrat', sans-serif;
   font-weight: 700;
-  font-size: 16px;
-  color: var(--mk-text);
+  font-size: 14px;
+  color: #fff;
   text-transform: uppercase;
-  text-shadow: var(--neu-flat); /* Texto "saltando" */
-  opacity: 0.5;
+  letter-spacing: 1px;
+  opacity: 0.4;
 }
