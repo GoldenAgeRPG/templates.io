@@ -1,4 +1,4 @@
-/* --- TEMPLATE: GOJO AIZEN --- */
+/* --- TEMPLATE: GOJO AIZEN  --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Montserrat:wght@300;400;600&family=Italianno&family=Rajdhani:wght@500;700&display=swap');
 
 :root {
@@ -152,8 +152,13 @@
 }
 .aizen-card:hover .aizen-img-box img { transform: scale(1.05); }
 
-/* --- STATUS (Arredondados) --- */
-.aizen-stats { padding: 20px 40px; display: flex; flex-direction: column; gap: 12px; }
+/* --- STATUS (COMPACTOS) --- */
+.aizen-stats { 
+    padding: 10px 40px; /* Reduzido de 20px */
+    display: flex; 
+    flex-direction: column; 
+    gap: 4px; /* Reduzido de 12px para 4px (Bem colado) */
+}
 .aizen-stat-row { display: flex; align-items: center; gap: 15px; }
 .aizen-label {
   font-family: 'Cinzel', serif; font-weight: 700; width: 35px;
@@ -182,7 +187,6 @@
 .aizen-content {
   padding: 30px 45px;
   font-size: 1em; line-height: 1.8; text-align: justify;
-  /* Fade no topo e no fundo para integração suave */
   background: linear-gradient(to bottom, transparent 0%, #050205 50px, #050205 calc(100% - 50px), transparent 100%);
   margin-top: -20px; padding-top: 40px; padding-bottom: 40px;
 }
