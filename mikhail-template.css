@@ -3,7 +3,6 @@
 /* --- Variáveis --- */
 .mikhail-card {
   --mk-bg: #121212;
-  --mk-border: #333;
   --mk-accent: #9b59b6;
   --mk-accent-dim: rgba(155, 89, 182, 0.4);
   --mk-text: #bdc3c7;
@@ -18,31 +17,29 @@
   color: var(--mk-text);
   line-height: 1.7;
   box-shadow: 0 15px 50px rgba(0,0,0,0.9);
-  overflow: hidden; /* Importante para cortar o banner e particulas */
+  overflow: hidden;
   border: 1px solid rgba(255,255,255,0.05);
-  position: relative;
 }
 
-/* --- Banner com Fade (Sem corte seco) --- */
+/* --- Banner (CORRIGIDO: Sem margens estranhas) --- */
 .mikhail-header {
   height: 250px;
   width: 100%;
   background-image: url('https://i.pinimg.com/736x/0f/fb/f4/0ffbf44fb1cee4ad983d0ef3a4ade63f.jpg');
   background-size: cover;
   background-position: center;
-  /* O segredo do fade suave: */
-  mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 40%, transparent 100%);
-  border-bottom: none;
+  /* Borda inferior para separar visualmente do título */
+  border-bottom: 2px solid var(--mk-accent); 
 }
 
-/* --- Título --- */
+/* --- Título (CORRIGIDO: Abaixo do Banner) --- */
 .mikhail-title-bar {
-  padding: 0 40px;
-  margin-top: -60px; /* Sobe um pouco sobre o fade */
+  background: var(--mk-bg);
+  padding: 20px 40px 10px 40px;
   text-align: right;
   position: relative;
   z-index: 5;
+  margin-top: 0 !important; /* Força bruta para não subir */
 }
 
 .mikhail-title-bar h1 {
@@ -68,12 +65,12 @@
 /* --- Corpo --- */
 .mikhail-body {
   padding: 10px 0;
-  background: var(--mk-bg); /* Garante fundo sólido pro texto */
+  background: var(--mk-bg);
   position: relative;
   z-index: 2;
 }
 
-/* --- Status Principais --- */
+/* --- Status --- */
 .mikhail-stats-primary {
   display: flex;
   gap: 20px;
@@ -122,70 +119,61 @@
 }
 
 .mikhail-content strong, .mikhail-content b {
-  color: #d1a5ff;
-  font-weight: 700;
-  text-shadow: 0 0 8px rgba(155, 89, 182, 0.6);
+  color: #d1a5ff; font-weight: 700; text-shadow: 0 0 8px rgba(155, 89, 182, 0.6);
 }
 
 .mikhail-content em, .mikhail-content i {
-  color: #ecf0f1;
-  font-style: italic;
-  text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+  color: #ecf0f1; font-style: italic; text-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
 }
 
-/* --- NOVA ÁREA DO RODAPÉ (Com Animação) --- */
+/* --- RODAPÉ & PARTÍCULAS --- */
 .mikhail-footer-area {
   position: relative;
-  background: linear-gradient(to bottom, #121212, #050505);
-  overflow: hidden; /* Segura as particulas aqui dentro */
+  background: linear-gradient(to bottom, #121212, #000);
+  overflow: hidden;
   padding: 20px 0;
   border-top: 1px solid rgba(255,255,255,0.05);
+  min-height: 180px; /* Garante altura para animação */
 }
 
-/* Container das Partículas (Fundo) */
+/* Container Fundo Animado */
 .mk-particles {
   position: absolute;
   top: 0; left: 0; width: 100%; height: 100%;
   z-index: 0;
-  opacity: 0.6; /* Suaviza as estrelas */
+  opacity: 0.8; 
   pointer-events: none;
 }
 
-/* --- Considerações (Cursed) --- */
+/* Considerações (Fundo Sólido para bloquear particulas dentro) */
 .mikhail-notes {
   margin: 0 40px 20px 40px;
   padding: 20px;
   border-radius: 15px;
-  /* Fundo escuro semi-transparente para ler sobre as particulas */
-  background: rgba(20, 20, 20, 0.85); 
+  background: #161616; /* Fundo sólido, não transparente */
   border: 1px solid rgba(155, 89, 182, 0.2);
   position: relative;
-  z-index: 2; /* Fica ACIMA das particulas */
-  backdrop-filter: blur(2px);
+  z-index: 2; /* Acima das particulas */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
 }
 
 .mikhail-notes::before {
-  content: 'CURSED'; /* Apenas CURSED */
+  content: 'CURSED';
   position: absolute;
   top: -10px;
   left: 20px;
-  background: #121212;
+  background: #161616;
   padding: 0 10px;
   font-size: 10px;
   color: var(--mk-accent);
   font-weight: bold;
   border-radius: 10px;
   border: 1px solid var(--mk-accent);
-  box-shadow: 0 0 5px var(--mk-accent-dim);
 }
 
-.mikhail-notes span {
-  font-size: 12px;
-  color: #888;
-  font-style: italic;
-}
+.mikhail-notes span { font-size: 12px; color: #888; font-style: italic; }
 
-/* --- Footer Content (Sadako + Assinatura) --- */
+/* Sadako & Assinatura */
 .mikhail-footer-content {
   padding: 0 40px;
   display: flex;
@@ -195,130 +183,106 @@
   z-index: 2;
 }
 
-/* SADAKO CARD - AUMENTADO E CORRIGIDO */
 .sadako-wrapper {
   display: flex;
   align-items: center;
   gap: 15px;
   padding: 10px 20px; 
-  background: rgba(30, 30, 30, 0.8);
+  background: rgba(30, 30, 30, 0.9);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 40px;
-  min-width: 220px; /* Largura mínima garantida */
+  min-width: 220px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-  backdrop-filter: blur(4px);
 }
 
 .sadako-avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+  width: 50px; height: 50px; border-radius: 50%;
   background-image: url('https://i.pinimg.com/736x/91/01/6d/91016dfb9943e90d5f511c1c2c42a195.jpg');
-  background-size: cover;
-  background-position: center;
+  background-size: cover; background-position: center;
   border: 2px solid #555;
 }
 
-.sadako-info {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  flex-grow: 1;
-}
-
-.sadako-row {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 11px; /* Fonte maior */
-  color: #aaa;
-  line-height: 1;
-}
-
-.sadako-label {
-  font-weight: 700;
-  width: 15px;
-  color: #fff;
-}
-
-.sadako-bar-bg {
-  flex-grow: 1;
-  height: 5px;
-  background: #000;
-  border-radius: 10px;
-  min-width: 60px;
-}
-
+.sadako-info { display: flex; flex-direction: column; gap: 6px; flex-grow: 1; }
+.sadako-row { display: flex; align-items: center; gap: 10px; font-size: 11px; color: #aaa; line-height: 1; }
+.sadako-label { font-weight: 700; width: 15px; color: #fff; }
+.sadako-bar-bg { flex-grow: 1; height: 5px; background: #000; border-radius: 10px; min-width: 60px; }
 .sadako-hp-fill { background: #a29bfe; height: 100%; width: 0%; border-radius: 10px; }
 .sadako-ea-fill { background: #74b9ff; height: 100%; width: 0%; border-radius: 10px; }
+.sadako-hp-val, .sadako-ea-val { font-size: 10px; font-family: monospace; color: #ccc; white-space: nowrap; min-width: 55px; text-align: right; }
 
-/* Correção de quebra de linha nos números */
-.sadako-hp-val, .sadako-ea-val {
-  font-size: 10px;
-  font-family: monospace;
-  color: #ccc;
-  white-space: nowrap; /* IMPEDE QUEBRA */
-  min-width: 55px;
-  text-align: right;
-}
+.mikhail-sig-container { display: flex; align-items: center; gap: 15px; }
+.sig-line { height: 40px; width: 2px; background: var(--mk-accent); box-shadow: 0 0 10px var(--mk-accent); }
+.mikhail-signature::after { content: 'Mikhail Okkotsu'; font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 16px; color: #eee; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 10px rgba(155, 89, 182, 0.5); }
 
-/* --- Assinatura --- */
-.mikhail-sig-container {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-}
-
-.sig-line {
-  height: 40px;
-  width: 2px;
-  background: var(--mk-accent);
-  box-shadow: 0 0 10px var(--mk-accent);
-}
-
-.mikhail-signature::after {
-  content: 'Mikhail Okkotsu';
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
-  font-size: 16px;
-  color: #eee;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px rgba(155, 89, 182, 0.5);
-}
-
-/* --- ANIMAÇÃO DE PARTÍCULAS (Adaptado para Roxo/Branco) --- */
+/* --- PARTICULAS MASSIVAS --- */
+/* Criei uma nuvem de pontos muito mais densa */
 #stars {
   width: 1px; height: 1px; background: transparent;
-  box-shadow: 177px 463px #DDA0DD, 54px 1320px #E6E6FA, 1699px 1238px #FFF, 895px 609px #DDA0DD, 659px 1052px #FFF, 192px 1450px #E6E6FA, 107px 119px #FFF, 240px 92px #DDA0DD, 1749px 1168px #FFF, 1269px 1018px #E6E6FA, 230px 1414px #FFF, 622px 1277px #DDA0DD, 1234px 50px #FFF, 1374px 1278px #E6E6FA, 1530px 1008px #FFF, 1960px 446px #DDA0DD, 368px 432px #FFF, 888px 128px #E6E6FA, 1285px 843px #FFF, 1421px 338px #DDA0DD;
-  animation: animStar 50s linear infinite;
+  box-shadow: 
+    100px 200px #FFF, 250px 500px #9b59b6, 400px 100px #FFF, 500px 600px #9b59b6,
+    600px 300px #FFF, 750px 800px #9b59b6, 100px 1200px #FFF, 300px 1500px #9b59b6,
+    900px 100px #FFF, 50px 400px #9b59b6, 650px 10px #FFF, 20px 900px #9b59b6,
+    1100px 500px #FFF, 1200px 900px #9b59b6, 1300px 200px #FFF, 1400px 600px #9b59b6,
+    150px 1100px #FFF, 350px 1300px #9b59b6, 550px 1500px #FFF, 750px 1700px #9b59b6,
+    850px 400px #FFF, 950px 700px #9b59b6, 1050px 200px #FFF, 1150px 600px #9b59b6,
+    1250px 800px #FFF, 1350px 1200px #9b59b6, 1450px 1400px #FFF, 1550px 1600px #9b59b6,
+    1650px 100px #FFF, 1750px 300px #9b59b6, 1850px 500px #FFF, 1950px 700px #9b59b6,
+    50px 1800px #FFF, 250px 1900px #9b59b6, 450px 200px #FFF, 650px 400px #9b59b6;
+  animation: animStar 20s linear infinite; /* Rápido */
 }
 #stars:after {
-  content: " "; position: absolute; top: 1000px; width: 1px; height: 1px; background: transparent;
-  box-shadow: 177px 463px #DDA0DD, 54px 1320px #E6E6FA, 1699px 1238px #FFF, 895px 609px #DDA0DD, 659px 1052px #FFF, 192px 1450px #E6E6FA, 107px 119px #FFF, 240px 92px #DDA0DD, 1749px 1168px #FFF, 1269px 1018px #E6E6FA, 230px 1414px #FFF, 622px 1277px #DDA0DD, 1234px 50px #FFF, 1374px 1278px #E6E6FA, 1530px 1008px #FFF, 1960px 446px #DDA0DD, 368px 432px #FFF, 888px 128px #E6E6FA, 1285px 843px #FFF, 1421px 338px #DDA0DD;
+  content: " "; position: absolute; top: 2000px; width: 1px; height: 1px; background: transparent;
+  box-shadow: 
+    100px 200px #FFF, 250px 500px #9b59b6, 400px 100px #FFF, 500px 600px #9b59b6,
+    600px 300px #FFF, 750px 800px #9b59b6, 100px 1200px #FFF, 300px 1500px #9b59b6,
+    900px 100px #FFF, 50px 400px #9b59b6, 650px 10px #FFF, 20px 900px #9b59b6,
+    1100px 500px #FFF, 1200px 900px #9b59b6, 1300px 200px #FFF, 1400px 600px #9b59b6,
+    150px 1100px #FFF, 350px 1300px #9b59b6, 550px 1500px #FFF, 750px 1700px #9b59b6,
+    850px 400px #FFF, 950px 700px #9b59b6, 1050px 200px #FFF, 1150px 600px #9b59b6,
+    1250px 800px #FFF, 1350px 1200px #9b59b6, 1450px 1400px #FFF, 1550px 1600px #9b59b6,
+    1650px 100px #FFF, 1750px 300px #9b59b6, 1850px 500px #FFF, 1950px 700px #9b59b6,
+    50px 1800px #FFF, 250px 1900px #9b59b6, 450px 200px #FFF, 650px 400px #9b59b6;
 }
 
 #stars2 {
   width: 2px; height: 2px; background: transparent;
-  box-shadow: 1003px 209px #9b59b6, 321px 1361px #FFF, 1358px 1334px #9b59b6, 42px 186px #FFF, 1642px 759px #9b59b6, 555px 1456px #FFF, 730px 849px #9b59b6, 1729px 1445px #FFF, 912px 255px #9b59b6, 1261px 827px #FFF;
-  animation: animStar 100s linear infinite;
+  box-shadow: 
+    120px 150px #9b59b6, 300px 400px #FFF, 500px 700px #9b59b6, 700px 1100px #FFF,
+    900px 1300px #9b59b6, 1100px 100px #FFF, 1300px 500px #9b59b6, 1500px 900px #FFF,
+    1700px 1200px #9b59b6, 1900px 1600px #FFF, 200px 1800px #9b59b6, 400px 50px #FFF,
+    600px 250px #9b59b6, 800px 550px #FFF, 1000px 850px #9b59b6, 1200px 1150px #FFF,
+    1400px 1450px #9b59b6, 1600px 1750px #FFF, 1800px 50px #9b59b6, 50px 350px #FFF,
+    250px 650px #9b59b6, 450px 950px #FFF, 650px 1250px #9b59b6, 850px 1550px #FFF;
+  animation: animStar 30s linear infinite;
 }
 #stars2:after {
-  content: " "; position: absolute; top: 1000px; width: 2px; height: 2px; background: transparent;
-  box-shadow: 1003px 209px #9b59b6, 321px 1361px #FFF, 1358px 1334px #9b59b6, 42px 186px #FFF, 1642px 759px #9b59b6, 555px 1456px #FFF, 730px 849px #9b59b6, 1729px 1445px #FFF, 912px 255px #9b59b6, 1261px 827px #FFF;
+  content: " "; position: absolute; top: 2000px; width: 2px; height: 2px; background: transparent;
+  box-shadow: 
+    120px 150px #9b59b6, 300px 400px #FFF, 500px 700px #9b59b6, 700px 1100px #FFF,
+    900px 1300px #9b59b6, 1100px 100px #FFF, 1300px 500px #9b59b6, 1500px 900px #FFF,
+    1700px 1200px #9b59b6, 1900px 1600px #FFF, 200px 1800px #9b59b6, 400px 50px #FFF,
+    600px 250px #9b59b6, 800px 550px #FFF, 1000px 850px #9b59b6, 1200px 1150px #FFF,
+    1400px 1450px #9b59b6, 1600px 1750px #FFF, 1800px 50px #9b59b6, 50px 350px #FFF,
+    250px 650px #9b59b6, 450px 950px #FFF, 650px 1250px #9b59b6, 850px 1550px #FFF;
 }
 
 #stars3 {
   width: 3px; height: 3px; background: transparent;
-  box-shadow: 500px 300px #a29bfe, 1200px 800px #FFF, 800px 1500px #a29bfe;
-  animation: animStar 150s linear infinite;
+  box-shadow: 
+    100px 1000px #a29bfe, 600px 500px #FFF, 1100px 1500px #a29bfe, 1600px 200px #FFF,
+    300px 1800px #a29bfe, 800px 1200px #FFF, 1300px 600px #a29bfe, 1800px 100px #FFF,
+    400px 800px #a29bfe, 900px 1400px #FFF, 1400px 400px #a29bfe, 1900px 900px #FFF;
+  animation: animStar 40s linear infinite;
 }
 #stars3:after {
-  content: " "; position: absolute; top: 1000px; width: 3px; height: 3px; background: transparent;
-  box-shadow: 500px 300px #a29bfe, 1200px 800px #FFF, 800px 1500px #a29bfe;
+  content: " "; position: absolute; top: 2000px; width: 3px; height: 3px; background: transparent;
+  box-shadow: 
+    100px 1000px #a29bfe, 600px 500px #FFF, 1100px 1500px #a29bfe, 1600px 200px #FFF,
+    300px 1800px #a29bfe, 800px 1200px #FFF, 1300px 600px #a29bfe, 1800px 100px #FFF,
+    400px 800px #a29bfe, 900px 1400px #FFF, 1400px 400px #a29bfe, 1900px 900px #FFF;
 }
 
 @keyframes animStar {
   from { transform: translateY(0px); }
-  to { transform: translateY(-1000px); }
+  to { transform: translateY(-2000px); }
 }
