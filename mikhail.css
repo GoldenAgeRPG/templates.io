@@ -1,0 +1,232 @@
+/* --- TEMPLATE: MIKHAIL (The Cursed Vessel) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Roboto+Mono:wght@400;700&family=Nosifer&display=swap');
+
+:root {
+  --mk-bg: #0a0a0c; /* Preto quase absoluto */
+  --mk-blood: #8a0000; /* Vermelho sangue escuro */
+  --mk-spirit: #240046; /* Roxo espectral */
+  --mk-text: #b0b0b0; /* Cinza claro para texto */
+  --mk-accent: #ff3333; /* Vermelho vivo para destaques */
+}
+
+/* --- ANIMAÇÕES --- */
+/* Pulsação de energia amaldiçoada nas bordas */
+@keyframes curse-pulse {
+  0% { box-shadow: 0 0 10px var(--mk-blood), inset 0 0 20px #000; }
+  50% { box-shadow: 0 0 25px var(--mk-blood), inset 0 0 40px var(--mk-spirit); }
+  100% { box-shadow: 0 0 10px var(--mk-blood), inset 0 0 20px #000; }
+}
+
+/* Fumaça de fundo */
+@keyframes shadow-drift {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+/* Partículas de drenagem nas barras */
+@keyframes particle-drain {
+    0% { background-position: 0px 0px; opacity: 0.8; }
+    100% { background-position: -100px 0px; opacity: 0; }
+}
+
+/* --- CONTAINER PRINCIPAL --- */
+.mikhail-card {
+  position: relative;
+  max-width: 650px;
+  width: 95%;
+  margin: 50px auto;
+  background-color: var(--mk-bg);
+  /* Fundo com textura de sombras se movendo */
+  background-image: linear-gradient(to right, #0a0a0c, #1a001a, #0a0a0c);
+  background-size: 200% 200%;
+  animation: shadow-drift 15s ease infinite alternate, curse-pulse 5s infinite alternate;
+  
+  border: 1px solid #220000;
+  /* Efeito de "sangramento" nas bordas em vez de corte limpo */
+  outline: 2px dashed rgba(138, 0, 0, 0.3);
+  outline-offset: 5px;
+  
+  color: var(--mk-text);
+  font-family: 'Roboto Mono', monospace; /* Fonte mais técnica/rústica */
+  overflow: hidden; /* Contém os efeitos de fumaça */
+}
+.mikhail-card * { box-sizing: border-box; }
+
+
+/* --- HEADER --- */
+.mikhail-header {
+  text-align: center;
+  padding: 30px 20px 20px 20px;
+  background: linear-gradient(to bottom, rgba(138,0,0,0.2), transparent);
+  border-bottom: 2px solid var(--mk-blood);
+}
+
+.mikhail-title {
+  font-family: 'Cinzel Decorative', serif; /* Fonte gótica */
+  font-size: 2.5em;
+  color: var(--mk-accent);
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 2px 2px 4px #000, 0 0 10px var(--mk-blood);
+}
+
+.mikhail-subtitle {
+  font-size: 0.9em;
+  color: var(--mk-blood);
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  margin-top: 5px;
+  font-weight: 700;
+}
+
+/* --- IMAGEM (16:9) --- */
+.mikhail-img-box {
+  width: 100%;
+  padding-bottom: 56.25%;
+  position: relative;
+  border-bottom: 3px solid var(--mk-blood);
+}
+
+.mikhail-img-box img {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(0.6) contrast(1.2) sepia(0.2); /* Tratamento sombrio na imagem */
+  mix-blend-mode: luminosity;
+}
+
+/* Efeito de sobreposição vermelha na imagem */
+.mikhail-img-box::after {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to top, var(--mk-bg), transparent 70%);
+    pointer-events: none;
+}
+
+/* --- STATUS (COM EFEITO DE DRENAGEM) --- */
+.mikhail-stats {
+  padding: 25px 40px;
+  display: flex; flex-direction: column; gap: 15px;
+  background: rgba(0,0,0,0.3);
+  border-bottom: 2px solid var(--mk-blood);
+}
+
+.mikhail-stat-row { display: flex; align-items: center; gap: 15px; }
+
+.mikhail-label {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  width: 45px;
+  color: var(--mk-accent);
+  text-shadow: 0 0 5px var(--mk-blood);
+  font-size: 1em;
+}
+
+/* Container da Barra */
+.mikhail-bar-bg {
+  flex-grow: 1; height: 20px;
+  background: #000; /* Fundo preto sólido onde não tem preenchimento */
+  border: 1px solid var(--mk-blood);
+  position: relative;
+  overflow: hidden;
+  /* Sombra interna para parecer profundo */
+  box-shadow: inset 0 0 10px #000;
+}
+
+/* EFEITO DE PARTÍCULAS DRENANDO (Onde a barra está vazia) */
+/* Este elemento fica atrás do preenchimento sólido */
+.mikhail-bar-bg::before {
+    content: '';
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 0;
+    /* Textura de "ruído" ou partículas vermelhas */
+    background-image:
+        radial-gradient(circle at 20% 50%, rgba(138,0,0,0.4) 1px, transparent 1px),
+        radial-gradient(circle at 80% 50%, rgba(138,0,0,0.4) 1px, transparent 1px),
+        linear-gradient(to right, transparent, rgba(138,0,0,0.2) 50%, transparent);
+    background-size: 20px 20px, 30px 30px, 50px 100%;
+    /* Animação movendo para a esquerda (drenando) */
+    animation: particle-drain 2s linear infinite;
+}
+
+
+/* Preenchimento Sólido (Fica na frente do efeito) */
+.mikhail-hp-fill, .mikhail-ce-fill {
+  height: 100%;
+  position: absolute; top: 0; left: 0;
+  transition: width 0.6s ease;
+  z-index: 1; /* Cobre o efeito de partículas onde está cheio */
+  box-shadow: 2px 0 10px rgba(0,0,0,0.8); /* Sombra na ponta do preenchimento */
+}
+
+.mikhail-hp-fill { background: linear-gradient(90deg, #4a0000, var(--mk-blood)); }
+.mikhail-ce-fill { background: linear-gradient(90deg, var(--mk-spirit), #4a148c); }
+
+/* Texto do Valor */
+.mikhail-val {
+  position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 2;
+  display: flex; align-items: center; justify-content: flex-end; padding-right: 10px;
+  font-weight: 700; font-size: 0.85em; color: #fff;
+  text-shadow: 1px 1px 2px #000;
+}
+
+
+/* --- CONTEÚDO --- */
+.mikhail-content {
+  padding: 30px 40px;
+  font-size: 1em;
+  line-height: 1.7;
+  text-align: justify;
+  background-color: var(--mk-bg);
+  /* Textura sutil de sujeira no fundo do texto */
+  background-image: url('https://www.transparenttextures.com/patterns/black-felt.png');
+}
+
+/* Negrito e Itálico personalizados para o tema */
+.mikhail-content b, .mikhail-content strong {
+    color: var(--mk-accent);
+    text-shadow: 0 0 5px var(--mk-blood);
+    font-family: 'Cinzel Decorative', serif;
+}
+.mikhail-content i, .mikhail-content em {
+    color: #9e9e9e;
+    border-bottom: 1px dashed var(--mk-blood);
+}
+
+/* --- CURSED TECHNIQUE (Notes) --- */
+.mikhail-curse-box {
+  margin: 0 40px 20px 40px; padding: 20px;
+  background: #050005;
+  border: 2px solid var(--mk-blood);
+  position: relative;
+  /* Efeito de "rasgo" nas bordas */
+  box-shadow: 0 0 0 4px #0a0a0c, 0 0 15px var(--mk-blood);
+}
+
+.mikhail-curse-title {
+  font-family: 'Cinzel Decorative', sans-serif;
+  text-transform: uppercase;
+  color: var(--mk-accent);
+  font-size: 1.1em;
+  border-bottom: 2px solid var(--mk-blood);
+  display: inline-block; margin-bottom: 10px;
+}
+.mikhail-curse-title::before { content: "Manifestação: "; }
+
+.mikhail-curse-content { font-size: 0.9em; color: #c0c0c0; }
+
+/* --- ASSINATURA --- */
+.mikhail-footer {
+  text-align: right;
+  padding: 10px 40px 40px 0;
+  margin-top: 20px;
+  background: linear-gradient(to top, rgba(138,0,0,0.1), transparent);
+}
+
+.mikhail-signature::after {
+  content: "Mikhail Okkotsu Volkovich";
+  /* Fonte Nosifer parece sangue escorrendo/terror */
+  font-family: 'Nosifer', cursive;
+  font-size: 2.2em;
+  color: var(--mk-accent);
+  text-shadow: 3px 3px 0px #000, 0 0 15px var(--mk-blood);
+  opacity: 0.9;
+}
