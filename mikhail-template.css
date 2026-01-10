@@ -231,12 +231,12 @@
 
 /* --- Conteúdo do Texto MAIS LARGO --- */
 .mikhail-content {
-  padding: 25px 35px 35px 35px;
+  padding: 25px 30px 35px 30px; /* Reduzi padding lateral */
   font-size: 14px;
   text-align: justify;
   color: #c0c0e0;
   background: rgba(15, 15, 25, 0.5);
-  margin: 10px 25px 20px 25px;
+  margin: 10px 20px 20px 20px; /* AQUI: Reduzi de 25px para 20px nas laterais */
   border-radius: 20px;
   border: 1px solid rgba(155, 89, 182, 0.15);
   backdrop-filter: blur(8px);
