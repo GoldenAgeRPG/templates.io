@@ -1,104 +1,109 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
-/* --- Variáveis --- */
+/* --- Variáveis Premium --- */
 .mikhail-card {
-  --mk-bg: #181818; /* Fundo base quase preto */
-  --mk-glass: rgba(30, 30, 30, 0.6); /* Vidro escuro */
-  --mk-glass-border: rgba(255, 255, 255, 0.08);
-  --mk-accent: #6c5ce7;
+  --mk-bg: #111111;
+  --mk-panel: #161616;
+  --mk-border: #2a2a2a;
+  --mk-accent: #8e44ad; /* Roxo mais profundo e nobre */
+  --mk-accent-bright: #9b59b6;
   --mk-text: #bdc3c7;
-  --mk-radius: 25px;
+  --mk-text-dim: #555;
+  --mk-radius: 6px; /* Bordas menos arredondadas = mais sério/premium */
   
-  /* Neumorphism Sutil (Apenas para barras e detalhes) */
-  --neu-inset: inset 2px 2px 5px rgba(0,0,0,0.7), inset -1px -1px 2px rgba(255,255,255,0.05);
-  --neu-flat-soft: 5px 5px 10px rgba(0,0,0,0.3), -2px -2px 5px rgba(255,255,255,0.03);
-
   width: 100%;
   max-width: 650px;
   margin: 0 auto;
   background: var(--mk-bg);
-  border-radius: var(--mk-radius);
+  border: 1px solid var(--mk-border);
   font-family: 'Montserrat', sans-serif;
   color: var(--mk-text);
-  line-height: 1.7;
+  line-height: 1.8;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+  position: relative;
   overflow: hidden;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.6);
-  border: 1px solid #2a2a2a;
 }
 
-/* --- Banner (Limpo) --- */
+/* Detalhe de topo (borda colorida fina) */
+.mikhail-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--mk-accent), transparent);
+  z-index: 10;
+}
+
+/* --- Header --- */
 .mikhail-header {
-  height: 220px;
+  height: 200px;
   width: 100%;
   background-image: url('https://i.pinimg.com/736x/0f/fb/f4/0ffbf44fb1cee4ad983d0ef3a4ade63f.jpg');
   background-size: cover;
-  background-position: center;
-  border-bottom: 1px solid var(--mk-accent);
+  background-position: center 30%;
+  opacity: 0.9;
+  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
 }
 
-/* --- Barra de Título (Glassmorphism) --- */
+/* --- Título (Estilo Revista/Cinema) --- */
 .mikhail-title-bar {
-  background: var(--mk-glass);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  padding: 15px 30px;
-  border-bottom: 1px solid var(--mk-glass-border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  margin-top: -40px; /* Sobe para cima do banner que desvanece */
+  padding: 0 40px;
+  position: relative;
+  z-index: 2;
+  text-align: right;
 }
 
 .mikhail-title-bar h1 {
   margin: 0;
-  font-size: 22px;
+  font-size: 32px;
   text-transform: uppercase;
   color: #fff;
-  letter-spacing: 1px;
-  text-shadow: 0 0 10px rgba(108, 92, 231, 0.5);
+  letter-spacing: 2px;
+  font-weight: 700;
+  text-shadow: 0 5px 15px rgba(0,0,0,0.8);
 }
 
 .mikhail-title-bar h2 {
   margin: 0;
-  font-size: 11px;
-  color: var(--mk-accent);
-  font-weight: 700;
-  letter-spacing: 2px;
+  font-size: 10px;
+  color: var(--mk-accent-bright);
+  font-weight: 600;
+  letter-spacing: 4px;
   text-transform: uppercase;
-  text-align: right;
 }
 
-/* --- Corpo do Card --- */
+/* --- Corpo --- */
 .mikhail-body {
-  padding: 10px 0;
+  padding: 10px 0 0 0;
+  background: radial-gradient(circle at top right, rgba(142, 68, 173, 0.03), transparent 40%);
 }
 
-/* --- Status Principais (Neumorphism Inset) --- */
+/* --- Status Principais (Clean Tech) --- */
 .mikhail-stats-primary {
   display: flex;
-  gap: 20px;
-  padding: 20px 35px;
+  gap: 25px;
+  padding: 20px 40px;
 }
 
-.mk-stat-group {
-  flex: 1;
-}
+.mk-stat-group { flex: 1; }
 
 .mk-stat-label {
-  font-size: 10px;
-  font-weight: 700;
-  color: #7f8c8d;
-  margin-bottom: 6px;
+  font-size: 9px;
+  font-weight: 600;
+  color: var(--mk-text-dim);
+  margin-bottom: 8px;
   display: flex;
   justify-content: space-between;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-/* O Buraco da barra (Inset) */
 .mk-bar-bg {
   width: 100%;
-  height: 8px;
-  background: #0f0f0f;
-  border-radius: 20px;
-  box-shadow: var(--neu-inset); /* Aqui mantivemos o efeito que vc gostou */
+  height: 4px; /* Barra fina = Elegância */
+  background: #222;
   overflow: hidden;
   position: relative;
 }
@@ -106,155 +111,170 @@
 .mk-bar-fill {
   height: 100%;
   width: 0%;
-  border-radius: 20px;
   transition: width 0.8s ease-in-out;
-  box-shadow: 0 0 5px currentColor;
+  box-shadow: 0 0 10px currentColor; /* Glow suave */
 }
 
-.mikhail-hp-fill { background: #ff4757; color: #ff4757; }
-.mikhail-ea-fill { background: #6c5ce7; color: #6c5ce7; }
-.mikhail-san-fill { background: #00b894; color: #00b894; }
+.mikhail-hp-fill { background: #e74c3c; color: rgba(231, 76, 60, 0.4); }
+.mikhail-ea-fill { background: #9b59b6; color: rgba(155, 89, 182, 0.4); }
+.mikhail-san-fill { background: #1abc9c; color: rgba(26, 188, 156, 0.4); }
 
 /* --- Conteúdo --- */
 .mikhail-content {
-  padding: 10px 35px 20px 35px;
-  font-size: 14px;
+  padding: 10px 40px 20px 40px;
+  font-size: 13px;
   text-align: justify;
-  color: #b2bec3;
+  color: #a0a0a0;
 }
 
-/* Efeitos de Texto */
-.mikhail-content b, 
-.mikhail-content strong {
-  color: var(--mk-accent);
+/* BBCode simulado */
+.mikhail-content b, strong {
+  color: #fff;
   font-weight: 700;
-  text-shadow: 0 0 8px rgba(108, 92, 231, 0.5);
 }
 
-.mikhail-content i, 
-.mikhail-content em {
-  color: #dfe6e9;
+.mikhail-content i, em {
+  color: var(--mk-accent-bright);
   font-style: italic;
-  text-shadow: 0 0 4px rgba(255, 255, 255, 0.3);
 }
 
-/* Divisória Glass */
+/* Divisória Minimalista */
 .mikhail-divider {
   height: 1px;
-  width: 90%;
-  margin: 10px auto;
-  background: linear-gradient(90deg, transparent, var(--mk-glass-border), transparent);
+  width: 100%;
+  background: linear-gradient(90deg, transparent, var(--mk-border), transparent);
+  margin: 10px 0;
 }
 
-/* --- Considerações (Glassmorphism) --- */
-/* Ficou feio antes, agora é um painel de vidro limpo */
+/* --- Considerações --- */
 .mikhail-notes {
-  margin: 15px 35px;
-  padding: 15px 20px;
-  border-radius: 15px;
-  background: rgba(0, 0, 0, 0.2); /* Fundo sutil */
-  border-left: 2px solid var(--mk-accent); /* Detalhe moderno */
+  margin: 10px 40px;
+  padding: 15px;
+  border: 1px solid var(--mk-border);
+  background: rgba(0,0,0,0.2);
+  font-size: 11px;
+  color: #666;
   position: relative;
 }
 
-.mikhail-notes span {
-  font-size: 12px;
-  color: #95a5a6;
-  font-style: italic;
-  display: block;
-}
-
-/* Tag "Cursed" mais discreta */
 .mikhail-notes::before {
-  content: 'CURSED';
-  display: block;
-  font-size: 9px;
-  font-weight: bold;
-  color: var(--mk-accent);
-  margin-bottom: 5px;
+  content: 'CURSED NOTES';
+  position: absolute;
+  top: -8px;
+  left: 10px;
+  background: var(--mk-bg);
+  padding: 0 5px;
+  font-size: 8px;
   letter-spacing: 1px;
+  color: var(--mk-accent);
+  font-weight: bold;
 }
 
-/* --- Footer & Sadako (Glass + Soft Neu) --- */
+/* --- Footer Premium --- */
 .mikhail-footer {
-  margin-top: 10px;
-  padding: 15px 35px 25px 35px;
-  background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.4));
+  margin-top: 20px;
+  padding: 15px 40px 25px 40px;
+  background: #0d0d0d;
+  border-top: 1px solid var(--mk-border);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-/* Card Sadako - Suave */
+/* Sadako Card - CORRIGIDO (Leve e Flat) */
 .sadako-wrapper {
   display: flex;
   align-items: center;
-  gap: 12px;
-  padding: 8px 15px;
+  gap: 15px;
+  /* Design: Pill Shape, Borda Fina, Fundo leve */
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 6px 15px 6px 6px; /* Padding ajustado */
   border-radius: 50px;
-  /* Neumorphism muito suave e convexo (saltado) */
-  background: #1a1a1a;
-  box-shadow: var(--neu-flat-soft);
-  border: 1px solid #252525;
 }
 
 .sadako-avatar {
-  width: 38px;
-  height: 38px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background-image: url('https://i.pinimg.com/736x/91/01/6d/91016dfb9943e90d5f511c1c2c42a195.jpg');
   background-size: cover;
   background-position: center;
+  border: 1px solid #333;
+  filter: grayscale(40%); /* Deixa menos saturado = mais premium */
 }
 
-.sadako-stats {
+.sadako-info {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
+  min-width: 90px;
 }
 
 .sadako-row {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: 9px;
-  color: #777;
+  color: #555;
+  line-height: 1;
 }
 
 .sadako-label {
-  font-weight: bold;
-  color: #555;
+  font-weight: 700;
   width: 12px;
+  color: #444;
 }
 
-/* Barrinhas da Sadako (Pequenos buracos) */
+/* Barrinhas Sadako (Micro-thin) */
 .sadako-bar-bg {
-  width: 60px;
-  height: 4px;
-  background: #0f0f0f;
-  border-radius: 10px;
-  box-shadow: inset 1px 1px 2px rgba(0,0,0,0.8);
-  overflow: hidden;
+  flex-grow: 1;
+  height: 2px;
+  background: #222;
 }
 
-.sadako-hp-fill { background: #a29bfe; height: 100%; width: 0%; }
-.sadako-ea-fill { background: #74b9ff; height: 100%; width: 0%; }
+.sadako-hp-fill { background: #888; height: 100%; width: 0%; }
+.sadako-ea-fill { background: #666; height: 100%; width: 0%; }
 
 .sadako-hp-val, .sadako-ea-val {
-  width: 40px;
   font-size: 8px;
-  text-align: right;
-  opacity: 0.8;
+  font-family: monospace; /* Fonte técnica para números */
+  color: #666;
 }
 
-/* Assinatura */
+/* --- Assinatura Premium --- */
+.mikhail-sig-container {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* Linha decorativa vertical */
+.sig-line {
+  height: 30px;
+  width: 1px;
+  background: var(--mk-border);
+}
+
 .mikhail-signature::after {
   content: 'Mikhail Okkotsu';
   font-family: 'Montserrat', sans-serif;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 14px;
-  color: #fff;
+  color: #ddd;
   text-transform: uppercase;
+  letter-spacing: 3px; /* Espaçamento premium */
+  display: block;
+}
+
+/* Subtexto da assinatura (Opcional, injetado via CSS) */
+.mikhail-signature::before {
+  content: 'Special Grade';
+  display: block;
+  font-size: 8px;
+  color: var(--mk-accent);
+  text-align: right;
   letter-spacing: 1px;
-  opacity: 0.4;
+  margin-bottom: 2px;
+  text-transform: uppercase;
 }
