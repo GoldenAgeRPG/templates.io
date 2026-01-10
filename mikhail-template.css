@@ -1,280 +1,280 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
 
-/* --- Variáveis Premium --- */
+/* --- Variáveis Neon Soft --- */
 .mikhail-card {
-  --mk-bg: #111111;
-  --mk-panel: #161616;
-  --mk-border: #2a2a2a;
-  --mk-accent: #8e44ad; /* Roxo mais profundo e nobre */
-  --mk-accent-bright: #9b59b6;
+  --mk-bg: #121212;
+  --mk-panel: #1a1a1a;
+  --mk-border: #333;
+  /* Roxo Neon Principal */
+  --mk-accent: #9b59b6; 
+  --mk-accent-glow: rgba(155, 89, 182, 0.5);
   --mk-text: #bdc3c7;
-  --mk-text-dim: #555;
-  --mk-radius: 6px; /* Bordas menos arredondadas = mais sério/premium */
+  --mk-radius: 25px; /* Bem arredondado */
   
   width: 100%;
   max-width: 650px;
   margin: 0 auto;
   background: var(--mk-bg);
-  border: 1px solid var(--mk-border);
+  border-radius: var(--mk-radius);
   font-family: 'Montserrat', sans-serif;
   color: var(--mk-text);
-  line-height: 1.8;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.8);
-  position: relative;
+  line-height: 1.7;
+  /* Glow externo elegante */
+  box-shadow: 0 10px 40px rgba(0,0,0,0.8), 0 0 20px rgba(155, 89, 182, 0.15);
   overflow: hidden;
-}
-
-/* Detalhe de topo (borda colorida fina) */
-.mikhail-card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--mk-accent), transparent);
-  z-index: 10;
+  border: 1px solid rgba(255,255,255,0.05);
 }
 
 /* --- Header --- */
 .mikhail-header {
-  height: 200px;
+  height: 220px;
   width: 100%;
   background-image: url('https://i.pinimg.com/736x/0f/fb/f4/0ffbf44fb1cee4ad983d0ef3a4ade63f.jpg');
   background-size: cover;
-  background-position: center 30%;
-  opacity: 0.9;
-  mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+  background-position: center;
+  /* Fade suave para o preto */
+  mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, black 50%, transparent 100%);
 }
 
-/* --- Título (Estilo Revista/Cinema) --- */
+/* --- Título --- */
 .mikhail-title-bar {
-  margin-top: -40px; /* Sobe para cima do banner que desvanece */
-  padding: 0 40px;
+  margin-top: -60px;
+  padding: 0 35px;
   position: relative;
-  z-index: 2;
+  z-index: 5;
   text-align: right;
 }
 
 .mikhail-title-bar h1 {
   margin: 0;
-  font-size: 32px;
+  font-size: 30px;
   text-transform: uppercase;
   color: #fff;
   letter-spacing: 2px;
   font-weight: 700;
-  text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+  text-shadow: 0 0 15px rgba(155, 89, 182, 0.8); /* Neon no Título */
 }
 
 .mikhail-title-bar h2 {
   margin: 0;
-  font-size: 10px;
-  color: var(--mk-accent-bright);
+  font-size: 11px;
+  color: var(--mk-accent);
   font-weight: 600;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
   text-transform: uppercase;
+  text-shadow: 0 0 5px var(--mk-accent-glow);
 }
 
 /* --- Corpo --- */
 .mikhail-body {
-  padding: 10px 0 0 0;
-  background: radial-gradient(circle at top right, rgba(142, 68, 173, 0.03), transparent 40%);
+  padding: 10px 0;
 }
 
-/* --- Status Principais (Clean Tech) --- */
+/* --- Status Principais --- */
 .mikhail-stats-primary {
   display: flex;
-  gap: 25px;
-  padding: 20px 40px;
+  gap: 20px;
+  padding: 10px 35px;
 }
 
 .mk-stat-group { flex: 1; }
 
 .mk-stat-label {
-  font-size: 9px;
-  font-weight: 600;
-  color: var(--mk-text-dim);
-  margin-bottom: 8px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #666;
+  margin-bottom: 6px;
   display: flex;
   justify-content: space-between;
-  letter-spacing: 1px;
   text-transform: uppercase;
 }
 
 .mk-bar-bg {
   width: 100%;
-  height: 4px; /* Barra fina = Elegância */
-  background: #222;
+  height: 8px; /* Altura média */
+  background: #000;
+  border-radius: 50px; /* Pílula */
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.8); /* Profundidade */
   overflow: hidden;
-  position: relative;
 }
 
 .mk-bar-fill {
   height: 100%;
   width: 0%;
+  border-radius: 50px;
   transition: width 0.8s ease-in-out;
-  box-shadow: 0 0 10px currentColor; /* Glow suave */
+  /* Glow interno nas barras */
+  box-shadow: 0 0 8px currentColor; 
 }
 
-.mikhail-hp-fill { background: #e74c3c; color: rgba(231, 76, 60, 0.4); }
-.mikhail-ea-fill { background: #9b59b6; color: rgba(155, 89, 182, 0.4); }
-.mikhail-san-fill { background: #1abc9c; color: rgba(26, 188, 156, 0.4); }
+.mikhail-hp-fill { background: #ff4757; color: #ff4757; }
+.mikhail-ea-fill { background: #9b59b6; color: #9b59b6; }
+.mikhail-san-fill { background: #2ecc71; color: #2ecc71; }
 
-/* --- Conteúdo --- */
+/* --- Conteúdo & BBCode Neon --- */
 .mikhail-content {
-  padding: 10px 40px 20px 40px;
+  padding: 15px 35px 25px 35px;
   font-size: 13px;
   text-align: justify;
-  color: #a0a0a0;
+  color: #b0b0b0;
 }
 
-/* BBCode simulado */
-.mikhail-content b, strong {
-  color: #fff;
+/* Negrito: Roxo Neon */
+.mikhail-content b, 
+.mikhail-content strong {
+  color: #d1a5ff; /* Roxo claro */
   font-weight: 700;
+  text-shadow: 0 0 8px rgba(209, 165, 255, 0.7); /* Brilho */
 }
 
-.mikhail-content i, em {
-  color: var(--mk-accent-bright);
+/* Itálico: Prata Brilhante */
+.mikhail-content i, 
+.mikhail-content em {
+  color: #ecf0f1;
   font-style: italic;
+  text-shadow: 0 0 5px rgba(255, 255, 255, 0.5); /* Brilho */
 }
 
-/* Divisória Minimalista */
+/* Divisória Neon */
 .mikhail-divider {
   height: 1px;
-  width: 100%;
-  background: linear-gradient(90deg, transparent, var(--mk-border), transparent);
-  margin: 10px 0;
+  width: 80%;
+  margin: 5px auto;
+  background: linear-gradient(90deg, transparent, var(--mk-accent), transparent);
+  opacity: 0.6;
+  box-shadow: 0 0 5px var(--mk-accent);
 }
 
 /* --- Considerações --- */
 .mikhail-notes {
-  margin: 10px 40px;
-  padding: 15px;
-  border: 1px solid var(--mk-border);
-  background: rgba(0,0,0,0.2);
-  font-size: 11px;
-  color: #666;
+  margin: 15px 35px;
+  padding: 15px 20px;
+  border-radius: 15px; /* Arredondado */
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.05);
   position: relative;
 }
 
 .mikhail-notes::before {
   content: 'CURSED NOTES';
   position: absolute;
-  top: -8px;
-  left: 10px;
+  top: -9px;
+  left: 20px;
   background: var(--mk-bg);
-  padding: 0 5px;
-  font-size: 8px;
-  letter-spacing: 1px;
+  padding: 0 8px;
+  font-size: 9px;
   color: var(--mk-accent);
   font-weight: bold;
+  border-radius: 10px;
+  border: 1px solid var(--mk-accent);
+  box-shadow: 0 0 5px var(--mk-accent-glow);
 }
 
-/* --- Footer Premium --- */
+.mikhail-notes span {
+  font-size: 11px;
+  color: #777;
+  font-style: italic;
+}
+
+/* --- Footer --- */
 .mikhail-footer {
-  margin-top: 20px;
-  padding: 15px 40px 25px 40px;
-  background: #0d0d0d;
-  border-top: 1px solid var(--mk-border);
+  margin-top: 10px;
+  padding: 15px 35px 25px 35px;
+  background: linear-gradient(to bottom, var(--mk-bg), #080808);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-/* Sadako Card - CORRIGIDO (Leve e Flat) */
+/* Sadako Card - MAIOR E SEM QUEBRA */
 .sadako-wrapper {
   display: flex;
   align-items: center;
   gap: 15px;
-  /* Design: Pill Shape, Borda Fina, Fundo leve */
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  padding: 6px 15px 6px 6px; /* Padding ajustado */
-  border-radius: 50px;
+  padding: 8px 15px; 
+  background: rgba(30, 30, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 30px; /* Pílula */
+  /* Tamanho mínimo para não ficar minúsculo */
+  min-width: 180px; 
+  box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
 
 .sadako-avatar {
-  width: 36px;
-  height: 36px;
+  width: 45px;
+  height: 45px;
   border-radius: 50%;
   background-image: url('https://i.pinimg.com/736x/91/01/6d/91016dfb9943e90d5f511c1c2c42a195.jpg');
   background-size: cover;
   background-position: center;
-  border: 1px solid #333;
-  filter: grayscale(40%); /* Deixa menos saturado = mais premium */
+  border: 2px solid #444;
 }
 
 .sadako-info {
   display: flex;
   flex-direction: column;
-  gap: 3px;
-  min-width: 90px;
+  gap: 5px;
+  flex-grow: 1; /* Ocupa o espaço disponível */
 }
 
 .sadako-row {
   display: flex;
   align-items: center;
   gap: 8px;
-  font-size: 9px;
-  color: #555;
+  font-size: 10px;
+  color: #888;
   line-height: 1;
 }
 
 .sadako-label {
   font-weight: 700;
-  width: 12px;
-  color: #444;
+  width: 15px;
+  color: #aaa;
 }
 
-/* Barrinhas Sadako (Micro-thin) */
+/* Barras da Sadako */
 .sadako-bar-bg {
   flex-grow: 1;
-  height: 2px;
-  background: #222;
+  height: 4px;
+  background: #111;
+  border-radius: 10px;
+  min-width: 40px; /* Garante que a barra apareça */
 }
 
-.sadako-hp-fill { background: #888; height: 100%; width: 0%; }
-.sadako-ea-fill { background: #666; height: 100%; width: 0%; }
+.sadako-hp-fill { background: #a29bfe; height: 100%; width: 0%; border-radius: 10px; }
+.sadako-ea-fill { background: #74b9ff; height: 100%; width: 0%; border-radius: 10px; }
 
+/* Números SEM QUEBRA DE LINHA */
 .sadako-hp-val, .sadako-ea-val {
-  font-size: 8px;
-  font-family: monospace; /* Fonte técnica para números */
-  color: #666;
+  font-size: 9px;
+  font-family: monospace;
+  color: #bbb;
+  white-space: nowrap; /* O segredo para não quebrar */
 }
 
-/* --- Assinatura Premium --- */
+/* --- Assinatura --- */
 .mikhail-sig-container {
   display: flex;
   align-items: center;
   gap: 15px;
 }
 
-/* Linha decorativa vertical */
 .sig-line {
-  height: 30px;
-  width: 1px;
-  background: var(--mk-border);
+  height: 35px;
+  width: 2px;
+  background: var(--mk-accent); /* Linha neon */
+  box-shadow: 0 0 8px var(--mk-accent);
+  border-radius: 2px;
 }
 
 .mikhail-signature::after {
   content: 'Mikhail Okkotsu';
   font-family: 'Montserrat', sans-serif;
-  font-weight: 600;
-  font-size: 14px;
-  color: #ddd;
+  font-weight: 700;
+  font-size: 15px;
+  color: #fff;
   text-transform: uppercase;
-  letter-spacing: 3px; /* Espaçamento premium */
-  display: block;
-}
-
-/* Subtexto da assinatura (Opcional, injetado via CSS) */
-.mikhail-signature::before {
-  content: 'Special Grade';
-  display: block;
-  font-size: 8px;
-  color: var(--mk-accent);
-  text-align: right;
-  letter-spacing: 1px;
-  margin-bottom: 2px;
-  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(255,255,255,0.2);
 }
