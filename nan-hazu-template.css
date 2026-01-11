@@ -5,74 +5,80 @@
   --paper: #f5f0e6;
   --paper-aged: #e8dfd0;
   --paper-dark: #d8ceb8;
-  --paper-shadow: #c4baa3;
   --ink: #2c1810;
-  --ink-light: #5a4738;
   --accent: #8b4513;
   --accent-dark: #4a2c18;
   --red: #8b0000;
   --energy: #d2691e;
-  --sanity: #556b2f;
+  --sanity: #556b2f; /* Cor da Sanidade */
   --purple: #4b0082;
   
   width: 100%;
-  max-width: 900px; /* Largura do livro aberto */
+  max-width: 950px;
   margin: 40px auto;
   position: relative;
-  min-height: 600px;
-  perspective: 1500px; /* Essencial para o 3D */
+  min-height: 650px; /* Aumentado */
+  perspective: 1500px;
 }
 
-/* INPUT ESCONDIDO */
 .book-toggle { display: none; }
 
-/* --- BOTÃO DE ABRIR (Estilo Selo) --- */
-.book-toggle-label {
+/* BOTÃO ABRIR (Selo) */
+.book-open-btn {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 50%; left: 50%;
   transform: translate(-50%, -50%);
   z-index: 100;
   background: var(--accent-dark);
   color: var(--paper);
-  padding: 12px 25px;
+  padding: 15px 30px;
   border-radius: 4px;
   font-family: 'Cinzel', serif;
-  font-size: 14px;
   cursor: pointer;
   border: 1px solid var(--accent);
-  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  box-shadow: 0 0 20px rgba(0,0,0,0.6);
   transition: all 0.3s ease;
   text-transform: uppercase;
   letter-spacing: 2px;
 }
+.book-open-btn:hover { background: var(--accent); transform: translate(-50%, -55%); }
+.book-toggle:checked ~ .book-open-btn { opacity: 0; pointer-events: none; }
 
-.book-toggle-label:hover {
-  background: var(--accent);
-  letter-spacing: 4px;
+/* BOTÃO FECHAR (Marcador) */
+.book-close-btn {
+  position: absolute;
+  top: -15px;
+  right: 40px;
+  width: 40px;
+  height: 60px;
+  background: var(--red);
+  z-index: 100;
+  cursor: pointer;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+  transition: top 0.3s;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 10px;
 }
-
-/* Quando aberto, o botão some ou muda de lugar. Vamos esconder. */
-.book-toggle:checked ~ .book-toggle-label {
-  opacity: 0;
-  pointer-events: none;
+.book-close-btn::after {
+  content: 'X';
+  color: #fff;
+  font-family: 'Cinzel', sans-serif;
+  font-weight: bold;
 }
+.book-close-btn:hover { top: -5px; }
 
-/* --- CAPA DO LIVRO (FECHADO) --- */
+/* --- CAPA (Aumentada) --- */
 .book-closed {
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  width: 400px; /* Largura de capa retrato */
-  height: 600px; /* Altura igual ao livro aberto */
+  top: 0; left: 0; right: 0; margin: auto;
+  width: 450px; /* Mais largo */
+  height: 650px; /* Mais alto */
   background: #2b1d16;
   border-radius: 5px 15px 15px 5px;
-  box-shadow: 
-    15px 20px 40px rgba(0,0,0,0.6),
-    inset 4px 0 10px rgba(0,0,0,0.5);
-  transform-origin: left center; /* Gira a partir da lombada */
+  box-shadow: 15px 20px 50px rgba(0,0,0,0.6), inset 4px 0 10px rgba(0,0,0,0.5);
+  transform-origin: left center;
   transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.5s ease 0.5s;
   z-index: 50;
   transform-style: preserve-3d;
@@ -80,86 +86,47 @@
 }
 
 .book-cover {
-  width: 100%;
-  height: 100%;
-  background: 
-    linear-gradient(135deg, rgba(60, 30, 10, 0.8), rgba(40, 20, 5, 0.9)),
-    url('https://i.pinimg.com/736x/d9/69/68/d969681df2aee2e21287f72299d5106d.jpg');
+  width: 100%; height: 100%;
+  background: linear-gradient(135deg, rgba(60, 30, 10, 0.9), rgba(40, 20, 5, 0.95)), url('https://i.pinimg.com/736x/d9/69/68/d969681df2aee2e21287f72299d5106d.jpg');
   background-size: cover;
-  background-position: center;
   border-radius: 5px 15px 15px 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 50px;
   border: 1px solid rgba(255,255,255,0.1);
-  box-shadow: inset 0 0 60px rgba(0,0,0,0.8);
 }
 
-/* Detalhe da lombada na capa */
-.book-closed::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 0; bottom: 0;
-  width: 40px;
-  background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(0,0,0,0.3) 20%, rgba(0,0,0,0.6));
-  z-index: 2;
-  border-radius: 5px 0 0 5px;
-}
-
-/* Títulos da Capa Melhorados */
 .cover-title {
   text-align: center;
   border: 4px double var(--accent);
   padding: 40px 20px;
-  background: rgba(0,0,0,0.6);
-  backdrop-filter: blur(2px);
+  background: rgba(0,0,0,0.7);
   width: 100%;
+  backdrop-filter: blur(2px);
 }
-
 .cover-title h1 {
   font-family: 'Cinzel', serif;
-  font-size: 42px;
+  font-size: 48px;
   color: #e8dfd0;
-  text-transform: uppercase;
-  letter-spacing: 5px;
   margin: 0;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.8);
-  background: -webkit-linear-gradient(#fff, #c4baa3);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  text-shadow: 0 5px 15px rgba(0,0,0,1);
 }
-
 .cover-title h2 {
-  font-family: 'La Belle Aurore', cursive; /* Subtitulo manuscrito */
-  font-size: 28px;
+  font-family: 'La Belle Aurore', cursive;
+  font-size: 32px;
   color: var(--accent-light);
-  margin-top: 10px;
-  text-shadow: 0 2px 5px rgba(0,0,0,1);
+  margin-top: 15px;
 }
-
 .cover-author {
-  position: absolute;
-  bottom: 40px;
-  font-family: 'Cinzel', serif;
-  color: rgba(255,255,255,0.6);
-  font-size: 14px;
-  letter-spacing: 3px;
+  position: absolute; bottom: 50px;
+  font-family: 'Cinzel', serif; color: rgba(255,255,255,0.6);
+  font-size: 16px; letter-spacing: 4px;
 }
 
-/* Lógica de Animação */
-.book-toggle:checked ~ .book-closed {
-  transform: rotateY(-180deg);
-  pointer-events: none;
-}
-
-.book-toggle:checked ~ .book-open {
-  opacity: 1;
-  transform: translateY(0) scale(1);
-  pointer-events: all;
-  transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s;
-}
+.book-toggle:checked ~ .book-closed { transform: rotateY(-180deg); pointer-events: none; }
+.book-toggle:checked ~ .book-open { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s; }
 
 /* --- LIVRO ABERTO --- */
 .book-open {
@@ -181,6 +148,7 @@
   padding: 40px;
   position: relative;
   background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
+  overflow: hidden; /* Para conter os PNGs */
 }
 
 .left-page {
@@ -188,131 +156,139 @@
   border-radius: 5px 0 0 5px;
   background: linear-gradient(90deg, #d8ceb8 0%, #f5f0e6 10%, #f5f0e6 95%, #d8ceb8 100%);
 }
-
 .right-page {
   border-radius: 0 5px 5px 0;
   background: linear-gradient(90deg, #d8ceb8 0%, #f5f0e6 5%, #f5f0e6 90%, #d8ceb8 100%);
 }
 
-/* Sombra central (lombada) */
-.book-open::before {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0; left: 50%;
-  width: 60px;
-  transform: translateX(-50%);
-  background: linear-gradient(90deg, rgba(0,0,0,0.05), rgba(0,0,0,0.2) 45%, rgba(0,0,0,0.2) 55%, rgba(0,0,0,0.05));
-  pointer-events: none;
-  z-index: 20;
+/* DECORAÇÃO (PNGs) */
+.left-page::before {
+  content: ''; position: absolute; top: -20px; left: -20px; width: 150px; height: 150px;
+  background: url('https://i.imgur.com/PR6AbSC.png') no-repeat contain; opacity: 0.4; pointer-events: none;
+}
+.right-page::after {
+  content: ''; position: absolute; bottom: -30px; right: -30px; width: 200px; height: 200px;
+  background: url('https://i.imgur.com/Jat8HBW.png') no-repeat contain; opacity: 0.3; pointer-events: none; transform: rotate(180deg);
 }
 
-/* Cabeçalho */
-.page-header {
-  border-bottom: 2px solid var(--accent);
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  display: flex;
-  justify-content: space-between;
-  font-family: 'Cinzel', serif;
-  color: var(--accent-dark);
-}
-
-.page-title { font-weight: 700; font-size: 14px; }
-.page-number { font-weight: 400; color: var(--accent); }
-
-/* Texto */
-.text-content {
-  font-family: 'Crimson Text', serif;
-  font-size: 16px;
-  line-height: 1.8;
-  color: var(--ink);
-  text-align: justify;
-}
-
-.left-page .text-content::first-letter {
-  font-family: 'Cinzel', serif;
-  font-size: 38px;
-  float: left;
-  margin-right: 8px;
-  line-height: 1;
-  color: var(--accent);
-}
-
-/* Status Pequeno */
+/* STATUS (Correção de Visibilidade + SAN) */
 .stats-compact {
-  margin-bottom: 20px;
-  padding: 10px;
-  background: rgba(0,0,0,0.03);
-  border: 1px solid rgba(0,0,0,0.1);
+  margin-bottom: 25px;
+  padding: 15px;
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(139, 69, 19, 0.2);
   border-radius: 4px;
+  box-shadow: inset 0 0 10px rgba(139, 69, 19, 0.05);
+  position: relative;
+  z-index: 5;
 }
-.stat-row { display: flex; align-items: center; margin-bottom: 5px; font-size: 11px; }
-.stat-name { width: 60px; font-weight: bold; font-family: 'Cinzel'; }
-.stat-bar-bg { flex: 1; height: 4px; background: #ccc; margin: 0 10px; }
-.stat-fill { height: 100%; background: var(--red); width: 0; transition: width 1s; }
-.stat-val { width: 50px; text-align: right; font-family: 'monospace'; }
 
-/* Gengar Card Compacto */
-.gengar-mini {
+.stat-row {
   display: flex;
   align-items: center;
-  background: rgba(75,0,130,0.05);
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid rgba(75,0,130,0.2);
+  margin-bottom: 8px;
+  font-family: 'Cinzel', serif;
+  font-size: 12px;
+  position: relative;
+}
+
+.stat-name { width: 40px; font-weight: 700; color: var(--ink); }
+
+.stat-bar-bg {
+  flex: 1;
+  height: 14px; /* Barra mais alta */
+  background: rgba(0,0,0,0.1);
+  margin: 0 10px;
+  border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-fill { height: 100%; width: 0; transition: width 1s; }
+
+/* Cores das Barras */
+.nan-hp-fill { background: linear-gradient(90deg, #8b0000, #b22222); }
+.nan-ea-fill { background: linear-gradient(90deg, #b35917, #d2691e); }
+.nan-san-fill { background: linear-gradient(90deg, #556b2f, #6b8e23); }
+
+/* Texto do valor agora fica PRETO e com alto contraste */
+.stat-val {
+  width: 80px;
+  text-align: right;
+  font-family: 'Crimson Text', serif;
+  font-weight: 700;
+  font-size: 14px;
+  color: #000; /* Preto absoluto */
+  text-shadow: 0 0 2px rgba(255,255,255,0.8); /* Halo branco para garantir leitura */
+  z-index: 10;
+}
+
+/* Texto e Conteúdo */
+.page-header {
+  border-bottom: 2px solid var(--accent);
+  margin-bottom: 20px; padding-bottom: 10px;
+  display: flex; justify-content: space-between;
+  font-family: 'Cinzel', serif; color: var(--accent-dark);
+}
+.page-title { font-weight: 700; font-size: 16px; }
+.text-content {
+  font-family: 'Crimson Text', serif; font-size: 17px; line-height: 1.8;
+  color: var(--ink); text-align: justify;
+}
+.left-page .text-content::first-letter {
+  font-family: 'Cinzel', serif; font-size: 42px; float: left;
+  margin-right: 10px; line-height: 1; color: var(--accent);
+}
+
+/* CONSIDERATIONS / SPOILER */
+.notes-container {
+  margin-top: 30px;
+  border-top: 1px dashed var(--accent);
+  padding-top: 15px;
+}
+.spoiler-box {
+  background: rgba(248, 243, 233, 0.8);
+  padding: 10px; border-radius: 4px;
+  border-left: 3px solid var(--accent); font-size: 15px;
+  font-family: 'Crimson Text'; color: var(--ink-light);
+}
+
+/* GENGAR E ASSINATURA */
+.gengar-mini {
+  display: flex; align-items: center;
+  background: rgba(75,0,130,0.05); padding: 10px;
+  border-radius: 5px; border: 1px solid rgba(75,0,130,0.2);
   margin-top: 20px;
 }
 .gengar-img {
-  width: 40px; height: 40px; border-radius: 50%;
+  width: 45px; height: 45px; border-radius: 50%;
   background: url('https://i.pinimg.com/1200x/97/27/4f/97274fe18acf564f54fd89fa8f036e9e.jpg') center/cover;
-  margin-right: 10px;
-  border: 2px solid var(--purple);
+  margin-right: 10px; border: 2px solid var(--purple);
 }
-.gengar-data { font-size: 12px; }
-.gengar-name { font-family: 'Cinzel'; color: var(--purple); font-weight: bold; }
+.gengar-data { font-size: 12px; flex: 1; }
+.gengar-hp-bar { height: 4px; background: #ddd; margin-top: 5px; width: 100px; }
+.gengar-hp-fill { height: 100%; background: var(--purple); width: 0%; }
 
-/* Assinatura */
-.signature-section {
-  margin-top: 30px;
-  text-align: right;
-  padding-right: 20px;
-}
-.signature-text {
+.signature-section { margin-top: 40px; text-align: right; padding-right: 20px; position: relative; }
+/* ASSINATURA VIA CSS */
+.signature-section::after {
+  content: 'Nan Hazu';
   font-family: 'La Belle Aurore', cursive;
-  font-size: 28px;
+  font-size: 32px;
   color: var(--ink);
-  transform: rotate(-2deg);
+  transform: rotate(-3deg);
   display: inline-block;
 }
 
-/* Esconde o texto fonte original */
 .nan-source-text { display: none; }
 
-/* --- MOBILE --- */
+/* MOBILE */
 @media (max-width: 768px) {
-  .book-container { 
-    max-width: 100%; 
-    min-height: auto; 
-    margin: 10px 0;
-  }
-  
-  .book-closed {
-    width: 90%;
-    left: 5%;
-    height: 450px;
-  }
-  
-  .book-open {
-    flex-direction: column;
-  }
-  
-  .left-page, .right-page {
-    border: none;
-    border-bottom: 1px solid #ccc;
-    padding: 25px;
-  }
-  
-  .book-open::before { display: none; }
-  
-  /* Ajuste no JS para mobile se quiser, mas empilhado funciona bem */
+  .book-container { max-width: 100%; margin: 10px 0; min-height: auto; }
+  .book-closed { width: 90%; left: 5%; height: 500px; }
+  .book-open { flex-direction: column; }
+  .left-page, .right-page { padding: 25px; border: none; border-bottom: 1px solid #ccc; }
+  .book-close-btn { right: 10px; }
+  .cover-title h1 { font-size: 36px; }
 }
