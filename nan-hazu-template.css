@@ -1,508 +1,318 @@
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Cinzel:wght@400;500;600&family=IM+Fell+English:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Cinzel:wght@400;500;700&family=IM+Fell+English:ital@0;1&family=La+Belle+Aurore&display=swap');
 
 /* --- ESTILOS GERAIS --- */
 .book-container {
   --paper: #f5f0e6;
   --paper-aged: #e8dfd0;
   --paper-dark: #d8ceb8;
-  --paper-stain: #d4c9a8;
   --paper-shadow: #c4baa3;
   --ink: #2c1810;
   --ink-light: #5a4738;
   --accent: #8b4513;
-  --accent-dark: #654321;
-  --accent-light: #a65c29;
+  --accent-dark: #4a2c18;
   --red: #8b0000;
-  --red-light: #b22222;
   --energy: #d2691e;
-  --energy-dark: #b35917;
   --sanity: #556b2f;
-  --sanity-light: #6b8e23;
   --purple: #4b0082;
-  --purple-light: #663399;
-  --shadow: rgba(60, 40, 20, 0.4);
   
   width: 100%;
-  max-width: 1100px;
-  margin: 30px auto;
+  max-width: 900px; /* Largura do livro aberto */
+  margin: 40px auto;
   position: relative;
-  /* Removemos min-height fixa exagerada para evitar buracos no mobile */
-  min-height: 300px; 
+  min-height: 600px;
+  perspective: 1500px; /* Essencial para o 3D */
 }
 
-/* --- LIVRO FECHADO (CAPA) --- */
-.book-toggle {
-  display: none;
-}
+/* INPUT ESCONDIDO */
+.book-toggle { display: none; }
 
+/* --- BOTÃO DE ABRIR (Estilo Selo) --- */
 .book-toggle-label {
   position: absolute;
-  top: 10px;
-  right: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   z-index: 100;
   background: var(--accent-dark);
   color: var(--paper);
-  padding: 6px 12px;
+  padding: 12px 25px;
   border-radius: 4px;
   font-family: 'Cinzel', serif;
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
-  transition: all 0.3s ease;
   border: 1px solid var(--accent);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  box-shadow: 0 0 15px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .book-toggle-label:hover {
   background: var(--accent);
-  transform: translateY(-2px);
+  letter-spacing: 4px;
 }
 
+/* Quando aberto, o botão some ou muda de lugar. Vamos esconder. */
+.book-toggle:checked ~ .book-toggle-label {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* --- CAPA DO LIVRO (FECHADO) --- */
 .book-closed {
-  position: relative;
-  width: 100%;
-  height: 400px;
-  background: var(--accent-dark);
-  border-radius: 8px 12px 12px 8px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 400px; /* Largura de capa retrato */
+  height: 600px; /* Altura igual ao livro aberto */
+  background: #2b1d16;
+  border-radius: 5px 15px 15px 5px;
   box-shadow: 
-    0 15px 40px var(--shadow),
-    0 0 0 1px var(--accent),
-    inset -5px 0 20px rgba(0,0,0,0.5);
-  overflow: hidden;
-  transition: opacity 0.5s ease, transform 0.8s ease;
-  transform-origin: left center;
-  z-index: 10;
-}
-
-/* LÓGICA DE ABERTURA CORRIGIDA */
-.book-toggle:checked ~ .book-closed {
-  display: none; /* Remove do fluxo para não ocupar espaço */
-}
-
-.book-toggle:checked ~ .book-open {
-  display: block;
-  position: relative; /* Volta ao fluxo normal para empurrar o footer */
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: all;
+    15px 20px 40px rgba(0,0,0,0.6),
+    inset 4px 0 10px rgba(0,0,0,0.5);
+  transform-origin: left center; /* Gira a partir da lombada */
+  transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.5s ease 0.5s;
+  z-index: 50;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .book-cover {
   width: 100%;
   height: 100%;
   background: 
-    linear-gradient(135deg, rgba(101, 67, 33, 0.9), rgba(139, 69, 19, 0.8)),
+    linear-gradient(135deg, rgba(60, 30, 10, 0.8), rgba(40, 20, 5, 0.9)),
     url('https://i.pinimg.com/736x/d9/69/68/d969681df2aee2e21287f72299d5106d.jpg');
   background-size: cover;
   background-position: center;
-  position: relative;
+  border-radius: 5px 15px 15px 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 40px;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: inset 0 0 60px rgba(0,0,0,0.8);
 }
 
-.book-cover::before {
+/* Detalhe da lombada na capa */
+.book-closed::before {
   content: '';
   position: absolute;
-  top: 20px;
-  left: 20px;
-  right: 20px;
-  bottom: 20px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  pointer-events: none;
+  left: 0; top: 0; bottom: 0;
+  width: 40px;
+  background: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(0,0,0,0.3) 20%, rgba(0,0,0,0.6));
+  z-index: 2;
+  border-radius: 5px 0 0 5px;
 }
 
+/* Títulos da Capa Melhorados */
 .cover-title {
   text-align: center;
-  position: relative;
-  z-index: 2;
-  padding: 30px;
-  background: rgba(44, 24, 16, 0.8);
-  border-radius: 8px;
-  border: 3px double rgba(210, 105, 30, 0.5);
-  animation: coverGlow 4s ease-in-out infinite;
-}
-
-@keyframes coverGlow {
-  0%, 100% { box-shadow: 0 0 30px rgba(210, 105, 30, 0.3); }
-  50% { box-shadow: 0 0 40px rgba(210, 105, 30, 0.5); }
+  border: 4px double var(--accent);
+  padding: 40px 20px;
+  background: rgba(0,0,0,0.6);
+  backdrop-filter: blur(2px);
+  width: 100%;
 }
 
 .cover-title h1 {
-  margin: 0;
   font-family: 'Cinzel', serif;
-  font-size: 36px;
-  color: #fff;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+  font-size: 42px;
+  color: #e8dfd0;
+  text-transform: uppercase;
+  letter-spacing: 5px;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+  background: -webkit-linear-gradient(#fff, #c4baa3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .cover-title h2 {
-  margin: 10px 0 0 0;
-  font-family: 'IM Fell English', serif;
-  font-size: 20px;
+  font-family: 'La Belle Aurore', cursive; /* Subtitulo manuscrito */
+  font-size: 28px;
   color: var(--accent-light);
-  font-weight: 400;
-  font-style: italic;
-  letter-spacing: 2px;
+  margin-top: 10px;
+  text-shadow: 0 2px 5px rgba(0,0,0,1);
 }
 
 .cover-author {
   position: absolute;
-  bottom: 30px;
-  right: 40px;
-  font-family: 'IM Fell English', serif;
-  font-size: 20px;
-  color: rgba(255, 255, 255, 0.7);
-  font-style: italic;
+  bottom: 40px;
+  font-family: 'Cinzel', serif;
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+  letter-spacing: 3px;
+}
+
+/* Lógica de Animação */
+.book-toggle:checked ~ .book-closed {
+  transform: rotateY(-180deg);
+  pointer-events: none;
+}
+
+.book-toggle:checked ~ .book-open {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  pointer-events: all;
+  transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s;
 }
 
 /* --- LIVRO ABERTO --- */
 .book-open {
-  display: none; /* Começa escondido */
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.5s ease;
-}
-
-.book-pages {
-  display: flex;
   position: relative;
-  min-height: 600px;
+  width: 100%;
+  display: flex;
   background: var(--paper);
-  border-radius: 8px;
-  box-shadow: 
-    0 10px 30px var(--shadow),
-    0 0 0 1px var(--paper-dark),
-    inset 0 0 60px rgba(139, 69, 19, 0.1);
-  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  opacity: 0;
+  transform: translateY(20px) scale(0.95);
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 10;
 }
 
-/* Efeito de páginas sobrepostas */
-.book-pages::before {
-  content: '';
-  position: absolute;
-  top: -6px; left: -6px; right: -6px; bottom: -6px;
-  background: var(--paper-aged);
-  border-radius: 10px;
-  z-index: -1;
-  opacity: 0.7;
-}
-
-.book-pages::after {
-  content: '';
-  position: absolute;
-  top: -12px; left: -12px; right: -12px; bottom: -12px;
-  background: var(--paper-dark);
-  border-radius: 12px;
-  z-index: -2;
-  opacity: 0.5;
-}
-
-/* Sombras das páginas individuais */
-.page-shadow-left, .page-shadow-right {
-  position: absolute;
-  top: 15px; bottom: 15px; width: 20px;
-  background: linear-gradient(to right, rgba(0,0,0,0.1) 0%, transparent 100%);
-  z-index: 5;
-  pointer-events: none;
-}
-.page-shadow-left { left: 0; transform: rotate(180deg); }
-.page-shadow-right { right: 0; }
-
-/* --- PÁGINAS --- */
+/* PÁGINAS */
 .left-page, .right-page {
   flex: 1;
-  padding: 30px 25px; /* Padding reduzido */
+  padding: 40px;
   position: relative;
-  background: var(--paper);
-  /* Textura simplificada */
-  background-image: 
-    radial-gradient(circle at 20% 80%, rgba(139, 69, 19, 0.08) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(101, 67, 33, 0.06) 0%, transparent 50%);
+  background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
 }
 
 .left-page {
-  border-right: 1px solid var(--paper-shadow);
-  padding-right: 35px;
+  border-right: 1px solid rgba(0,0,0,0.1);
+  border-radius: 5px 0 0 5px;
+  background: linear-gradient(90deg, #d8ceb8 0%, #f5f0e6 10%, #f5f0e6 95%, #d8ceb8 100%);
 }
 
 .right-page {
-  border-left: 1px solid var(--paper-shadow);
-  padding-left: 35px;
+  border-radius: 0 5px 5px 0;
+  background: linear-gradient(90deg, #d8ceb8 0%, #f5f0e6 5%, #f5f0e6 90%, #d8ceb8 100%);
 }
 
-/* Cabeçalho das páginas */
-.page-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--accent);
-  position: relative;
-}
-
-.page-number {
-  font-family: 'Cinzel', serif;
-  font-size: 12px;
-  color: var(--accent);
-  font-weight: 600;
-  padding: 2px 6px;
-  background: rgba(139, 69, 19, 0.1);
-  border-radius: 3px;
-}
-
-.page-title {
-  font-family: 'IM Fell English', serif;
-  font-size: 16px;
-  color: var(--accent-dark);
-  font-weight: 600;
-  text-align: center;
-  flex: 1;
-  letter-spacing: 1px;
-}
-
-/* --- SEÇÃO DE STATUS (COMPACTA) --- */
-.stats-section {
-  background: rgba(248, 243, 233, 0.9);
-  border-radius: 6px;
-  padding: 10px 15px; /* Reduzido drasticamente */
-  margin-bottom: 20px;
-  border: 1px solid var(--paper-dark);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-}
-
-.stats-title {
-  font-family: 'Cinzel', serif;
-  font-size: 13px; /* Reduzido */
-  color: var(--accent-dark);
-  text-align: center;
-  margin-bottom: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  position: relative;
-}
-
-.stats-title::after {
+/* Sombra central (lombada) */
+.book-open::before {
   content: '';
   position: absolute;
-  bottom: -4px;
-  left: 20%; right: 20%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  top: 0; bottom: 0; left: 50%;
+  width: 60px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, rgba(0,0,0,0.05), rgba(0,0,0,0.2) 45%, rgba(0,0,0,0.2) 55%, rgba(0,0,0,0.05));
+  pointer-events: none;
+  z-index: 20;
 }
 
-.stats-grid {
-  display: flex;
-  flex-direction: column;
-  gap: 8px; /* Gap reduzido */
-}
-
-.stat-item {
-  display: flex; /* Layout Flex para economizar altura */
-  align-items: center;
-  gap: 10px;
-}
-
-.stat-label {
-  font-family: 'IM Fell English', serif;
-  font-size: 12px;
-  color: var(--ink-light);
-  font-weight: 600;
-  width: 75px; /* Largura fixa para alinhar */
-  flex-shrink: 0;
-}
-
-.stat-value {
-  font-family: 'Crimson Text', serif;
-  font-size: 13px;
-  font-weight: 700;
-  color: var(--ink);
-  width: 70px;
-  text-align: right;
-  flex-shrink: 0;
-}
-
-.stat-bar {
-  flex-grow: 1;
-  width: auto; /* Ocupa o resto */
-}
-
-.bar-bg {
-  width: 100%;
-  height: 6px; /* Barra fina */
-  background: var(--paper-dark);
-  border-radius: 3px;
-  overflow: hidden;
-  position: relative;
-  border: 1px solid var(--paper-shadow);
-}
-
-.bar-fill {
-  height: 100%;
-  width: 0%; /* JS controla isso */
-  border-radius: 3px;
-  transition: width 1s ease;
-}
-
-/* Cores das barras */
-.nan-hp-fill { background: linear-gradient(90deg, var(--red), var(--red-light)); }
-.nan-ea-fill { background: linear-gradient(90deg, var(--energy-dark), var(--energy)); }
-.nan-san-fill { background: linear-gradient(90deg, var(--sanity), var(--sanity-light)); }
-
-/* --- CONTEÚDO DE TEXTO --- */
-.content-column {
+/* Cabeçalho */
+.page-header {
+  border-bottom: 2px solid var(--accent);
   margin-bottom: 20px;
+  padding-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  font-family: 'Cinzel', serif;
+  color: var(--accent-dark);
 }
 
+.page-title { font-weight: 700; font-size: 14px; }
+.page-number { font-weight: 400; color: var(--accent); }
+
+/* Texto */
 .text-content {
   font-family: 'Crimson Text', serif;
   font-size: 16px;
-  line-height: 1.6;
+  line-height: 1.8;
   color: var(--ink);
   text-align: justify;
-  margin-bottom: 20px;
 }
 
-.text-content::first-letter {
+.left-page .text-content::first-letter {
   font-family: 'Cinzel', serif;
-  font-size: 24px;
-  color: var(--accent);
+  font-size: 38px;
   float: left;
+  margin-right: 8px;
   line-height: 1;
-  margin-right: 4px;
-  margin-top: 2px;
+  color: var(--accent);
 }
 
-/* --- SEÇÃO DE NOTAS --- */
-.notes-section {
-  background: rgba(255, 253, 248, 0.95);
-  border-radius: 6px;
-  padding: 15px;
-  border: 1px solid var(--paper-dark);
-  margin-top: 15px;
-}
-
-.notes-title::before {
-  content: 'Anotações';
-  font-family: 'IM Fell English', serif;
-  font-size: 16px;
-  color: var(--accent-dark);
-  display: block;
-  text-align: center;
-  margin-bottom: 10px;
-  border-bottom: 1px dashed var(--accent);
-}
-
-.spoiler-container {
-  background: rgba(248, 243, 233, 0.8);
-  padding: 10px;
-  border-radius: 4px;
-  border-left: 3px solid var(--accent);
-  font-size: 14px;
-}
-
-/* --- GENGAR & ASSINATURA --- */
-.gengar-section {
-  background: linear-gradient(145deg, rgba(75, 0, 130, 0.05), rgba(139, 69, 19, 0.05));
-  border-radius: 8px;
-  padding: 15px;
-  border: 1px solid rgba(75, 0, 130, 0.2);
+/* Status Pequeno */
+.stats-compact {
   margin-bottom: 20px;
+  padding: 10px;
+  background: rgba(0,0,0,0.03);
+  border: 1px solid rgba(0,0,0,0.1);
+  border-radius: 4px;
 }
+.stat-row { display: flex; align-items: center; margin-bottom: 5px; font-size: 11px; }
+.stat-name { width: 60px; font-weight: bold; font-family: 'Cinzel'; }
+.stat-bar-bg { flex: 1; height: 4px; background: #ccc; margin: 0 10px; }
+.stat-fill { height: 100%; background: var(--red); width: 0; transition: width 1s; }
+.stat-val { width: 50px; text-align: right; font-family: 'monospace'; }
 
-.gengar-header {
+/* Gengar Card Compacto */
+.gengar-mini {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  background: rgba(75,0,130,0.05);
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid rgba(75,0,130,0.2);
+  margin-top: 20px;
 }
-
-.gengar-avatar {
-  width: 50px; height: 50px;
-  border-radius: 50%;
-  background-image: url('https://i.pinimg.com/1200x/97/27/4f/97274fe18acf564f54fd89fa8f036e9e.jpg');
-  background-size: cover;
+.gengar-img {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: url('https://i.pinimg.com/1200x/97/27/4f/97274fe18acf564f54fd89fa8f036e9e.jpg') center/cover;
+  margin-right: 10px;
   border: 2px solid var(--purple);
 }
+.gengar-data { font-size: 12px; }
+.gengar-name { font-family: 'Cinzel'; color: var(--purple); font-weight: bold; }
 
-.gengar-name {
-  font-family: 'Cinzel', serif;
-  font-size: 18px;
-  color: var(--purple);
-  margin: 0;
+/* Assinatura */
+.signature-section {
+  margin-top: 30px;
+  text-align: right;
+  padding-right: 20px;
 }
-.gengar-subtitle { font-size: 11px; color: var(--ink-light); font-style: italic; }
-
-.gengar-stats { margin: 10px 0; }
-.gengar-hp-fill { background: linear-gradient(90deg, var(--purple), var(--purple-light)); }
-
-.gengar-quote {
-  font-style: italic;
-  font-size: 13px;
-  text-align: center;
-  color: var(--ink-light);
-  border-top: 1px dashed rgba(75,0,130,0.2);
-  padding-top: 8px;
+.signature-text {
+  font-family: 'La Belle Aurore', cursive;
+  font-size: 28px;
+  color: var(--ink);
+  transform: rotate(-2deg);
+  display: inline-block;
 }
 
-.signature-section { margin-top: 30px; text-align: right; }
-.signature-line {
-  width: 150px; height: 1px;
-  background: var(--accent);
-  margin-left: auto; margin-bottom: 5px;
-}
-.signature-text::before {
-  content: 'Nan Hazu';
-  font-family: 'IM Fell English', serif;
-  font-size: 20px;
-  color: var(--accent-dark);
-  font-style: italic;
-}
+/* Esconde o texto fonte original */
+.nan-source-text { display: none; }
 
-/* --- RESPONSIVIDADE (MOBILE) --- */
-@media (max-width: 900px) {
-  .book-container { margin: 10px auto; width: 98%; }
+/* --- MOBILE --- */
+@media (max-width: 768px) {
+  .book-container { 
+    max-width: 100%; 
+    min-height: auto; 
+    margin: 10px 0;
+  }
   
-  .book-pages {
-    flex-direction: column; /* Empilha as páginas */
-    min-height: auto; /* Altura automática */
+  .book-closed {
+    width: 90%;
+    left: 5%;
+    height: 450px;
+  }
+  
+  .book-open {
+    flex-direction: column;
   }
   
   .left-page, .right-page {
     border: none;
-    border-bottom: 1px solid var(--paper-shadow);
-    padding: 20px 15px !important; /* Padding forçado para mobile */
-  }
-
-  .left-page::after, .right-page::after,
-  .left-page::before, .right-page::before,
-  .page-shadow-left, .page-shadow-right {
-    display: none; /* Remove decorações pesadas no mobile */
-  }
-
-  .stat-item {
-    flex-wrap: wrap; /* Permite quebrar se a tela for muito pequena */
+    border-bottom: 1px solid #ccc;
+    padding: 25px;
   }
   
-  .stat-bar {
-    min-width: 100%; /* Barra ocupa linha nova em telas mto pequenas */
-    margin-top: 2px;
-  }
+  .book-open::before { display: none; }
   
-  .book-toggle-label {
-    position: relative;
-    top: 0; right: 0;
-    display: table;
-    margin: 0 auto 15px auto;
-  }
-  
-  .cover-title h1 { font-size: 28px; }
+  /* Ajuste no JS para mobile se quiser, mas empilhado funciona bem */
 }
