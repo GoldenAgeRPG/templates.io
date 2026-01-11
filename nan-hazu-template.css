@@ -1,0 +1,569 @@
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;500;600;700&family=Cinzel:wght@400;500;600&display=swap');
+
+/* --- Variáveis do Tema Livro Antigo --- */
+.nan-hazu-card {
+  --nan-paper: #f5f1e8;
+  --nan-paper-dark: #e8e1d1;
+  --nan-paper-border: #d4c9b8;
+  --nan-aged: #d8c9a6;
+  --nan-ink: #3a3329;
+  --nan-ink-light: #5c5345;
+  --nan-accent: #8b4513;
+  --nan-accent-dark: #654321;
+  --nan-red: #8b0000;
+  --nan-green: #556b2f;
+  --nan-shadow: rgba(60, 50, 30, 0.15);
+  
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
+  background: var(--nan-paper);
+  background-image: 
+    linear-gradient(90deg, transparent 79px, rgba(139, 69, 19, 0.1) 79px, transparent 80px),
+    linear-gradient(var(--nan-paper) 30px, transparent 30px);
+  background-size: 100% 100%, 100% 32px;
+  border-radius: 8px;
+  font-family: 'Crimson Pro', serif;
+  color: var(--nan-ink);
+  line-height: 1.6;
+  box-shadow: 
+    0 10px 30px var(--nan-shadow),
+    0 0 0 1px var(--nan-paper-border),
+    inset 0 0 30px rgba(139, 69, 19, 0.05);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--nan-paper-border);
+}
+
+/* Efeito de papel envelhecido */
+.nan-hazu-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 80%, rgba(139, 69, 19, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(139, 69, 19, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(139, 69, 19, 0.02) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* --- Banner com Moldura Antiga --- */
+.nan-banner {
+  height: 250px;
+  width: 100%;
+  background: 
+    linear-gradient(rgba(60, 50, 30, 0.1), rgba(60, 50, 30, 0.2)),
+    url('https://i.pinimg.com/736x/d9/69/68/d969681df2aee2e21287f72299d5106d.jpg');
+  background-size: cover;
+  background-position: center 40%;
+  position: relative;
+  border-bottom: 3px double var(--nan-paper-border);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+}
+
+/* Efeito de borda decorativa no banner */
+.nan-banner::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  right: 10px;
+  bottom: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  pointer-events: none;
+}
+
+/* --- Título com Estilo Antigo --- */
+.nan-title-bar {
+  padding: 25px 40px 15px 40px;
+  text-align: center;
+  position: relative;
+  background: linear-gradient(to bottom, transparent, rgba(139, 69, 19, 0.05) 100%);
+  border-bottom: 1px dashed var(--nan-paper-border);
+}
+
+.nan-title-bar h1 {
+  margin: 0 0 5px 0;
+  font-family: 'Cinzel', serif;
+  font-size: 42px;
+  color: var(--nan-accent-dark);
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+  position: relative;
+  display: inline-block;
+}
+
+.nan-title-bar h1::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 25%;
+  right: 25%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--nan-accent), transparent);
+}
+
+.nan-title-bar h2 {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+  color: var(--nan-ink-light);
+  font-weight: 500;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-style: italic;
+  opacity: 0.8;
+}
+
+/* --- Corpo Principal --- */
+.nan-body {
+  padding: 5px 0 0 0;
+  position: relative;
+  z-index: 2;
+}
+
+/* --- Status Principais (Estilo Livro) --- */
+.nan-stats-primary {
+  display: flex;
+  gap: 20px;
+  padding: 20px 40px 15px 40px;
+  background: rgba(232, 225, 209, 0.5);
+  border-bottom: 1px dashed var(--nan-paper-border);
+  margin: 0 20px;
+  border-radius: 4px;
+}
+
+.nan-stat-group { 
+  flex: 1;
+  position: relative;
+}
+
+.nan-stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--nan-ink-light);
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Cinzel', serif;
+}
+
+.nan-stat-label span {
+  font-weight: 700;
+  color: var(--nan-ink);
+  white-space: nowrap;
+}
+
+/* Barras com Estilo Antigo */
+.nan-bar-bg {
+  width: 100%;
+  height: 10px;
+  background: var(--nan-paper-dark);
+  border-radius: 4px;
+  box-shadow: 
+    inset 2px 2px 4px rgba(0,0,0,0.1),
+    inset -1px -1px 2px rgba(255,255,255,0.5);
+  overflow: hidden;
+  position: relative;
+  border: 1px solid var(--nan-paper-border);
+}
+
+.nan-bar-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255,255,255,0.3) 50%, 
+    transparent 100%);
+  z-index: 1;
+}
+
+.nan-bar-fill {
+  height: 100%;
+  width: 0%;
+  border-radius: 4px;
+  transition: width 0.8s ease-in-out;
+  position: relative;
+  z-index: 2;
+  box-shadow: 
+    inset 0 0 10px rgba(255,255,255,0.3),
+    0 2px 4px rgba(0,0,0,0.2);
+}
+
+.nan-hp-fill { 
+  background: linear-gradient(90deg, var(--nan-red), #a52a2a);
+}
+.nan-ea-fill { 
+  background: linear-gradient(90deg, var(--nan-accent), var(--nan-accent-dark));
+}
+.nan-san-fill { 
+  background: linear-gradient(90deg, var(--nan-green), #6b8e23);
+}
+
+/* --- Conteúdo de Texto (Estilo Livro) --- */
+.nan-content {
+  padding: 25px 50px 25px 50px;
+  font-size: 17px;
+  text-align: justify;
+  color: var(--nan-ink);
+  line-height: 1.8;
+  position: relative;
+  min-height: 200px;
+  background: transparent;
+}
+
+/* Linhas de papel pautado */
+.nan-content p {
+  margin: 0 0 24px 0;
+  padding-left: 20px;
+  position: relative;
+  min-height: 24px;
+}
+
+.nan-content p::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: rgba(139, 69, 19, 0.3);
+}
+
+.nan-content strong, .nan-content b {
+  color: var(--nan-accent-dark);
+  font-weight: 700;
+  text-shadow: 0.5px 0.5px 0 rgba(0,0,0,0.1);
+}
+
+.nan-content em, .nan-content i {
+  color: var(--nan-ink-light);
+  font-style: italic;
+}
+
+/* --- Divisor Decorativo --- */
+.nan-divider {
+  text-align: center;
+  padding: 10px 40px;
+  position: relative;
+}
+
+.nan-divider::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 40px;
+  right: 40px;
+  height: 1px;
+  background: linear-gradient(90deg, var(--nan-paper-border), transparent 20%, transparent 80%, var(--nan-paper-border));
+}
+
+.divider-icon {
+  position: relative;
+  z-index: 2;
+  background: var(--nan-paper);
+  padding: 0 20px;
+  color: var(--nan-accent);
+  font-size: 20px;
+  opacity: 0.7;
+}
+
+/* --- Seção "Livro de Receitas" --- */
+.nan-notes-section {
+  padding: 0 40px 25px 40px;
+  position: relative;
+}
+
+.nan-notes-header {
+  font-family: 'Cinzel', serif;
+  font-size: 22px;
+  color: var(--nan-accent-dark);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 15px;
+  padding-bottom: 10px;
+  position: relative;
+  letter-spacing: 1px;
+}
+
+.nan-notes-header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  right: 30%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--nan-accent), transparent);
+}
+
+.nan-notes {
+  padding: 20px;
+  background: rgba(232, 225, 209, 0.7);
+  border-radius: 4px;
+  border: 1px solid var(--nan-paper-border);
+  box-shadow: 
+    inset 0 0 20px rgba(139, 69, 19, 0.1),
+    0 2px 4px rgba(0,0,0,0.05);
+  position: relative;
+}
+
+.nan-notes::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 1px solid rgba(139, 69, 19, 0.1);
+  pointer-events: none;
+}
+
+.nan-notes span {
+  font-size: 15px;
+  color: var(--nan-ink-light);
+  font-style: italic;
+  display: block;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* --- Área do Rodapé (Gengar + Assinatura) --- */
+.nan-footer-area {
+  padding: 25px 40px 30px 40px;
+  background: rgba(232, 225, 209, 0.8);
+  border-top: 2px solid var(--nan-paper-border);
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+}
+
+/* --- Card do Gengar --- */
+.nan-gengar-card {
+  flex: 1;
+  max-width: 350px;
+  background: var(--nan-paper);
+  border: 1px solid var(--nan-paper-border);
+  border-radius: 6px;
+  padding: 15px;
+  box-shadow: 
+    0 4px 12px var(--nan-shadow),
+    inset 0 0 20px rgba(139, 69, 19, 0.05);
+  position: relative;
+}
+
+.nan-gengar-card::before {
+  content: '';
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 1px solid rgba(139, 69, 19, 0.1);
+  border-radius: 3px;
+  pointer-events: none;
+}
+
+.gengar-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px dashed var(--nan-paper-border);
+}
+
+.gengar-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  background: 
+    radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8) 2%, transparent 3%),
+    url('https://i.pinimg.com/1200x/97/27/4f/97274fe18acf564f54fd89fa8f036e9e.jpg');
+  background-size: cover;
+  background-position: center;
+  border: 2px solid var(--nan-paper-border);
+  box-shadow: 
+    0 0 10px rgba(0,0,0,0.2),
+    inset 0 0 10px rgba(0,0,0,0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.gengar-avatar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 50%;
+  box-shadow: inset 0 0 15px rgba(0,0,0,0.4);
+}
+
+.gengar-info {
+  flex: 1;
+}
+
+.gengar-info h3 {
+  margin: 0;
+  font-family: 'Cinzel', serif;
+  font-size: 24px;
+  color: var(--nan-accent-dark);
+  font-weight: 600;
+}
+
+.gengar-subtitle {
+  margin: 5px 0 0 0;
+  font-size: 13px;
+  color: var(--nan-ink-light);
+  font-style: italic;
+  opacity: 0.9;
+}
+
+.gengar-stats {
+  padding: 10px 5px 5px 5px;
+}
+
+.gengar-stat-group {
+  position: relative;
+}
+
+.gengar-stat-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--nan-ink-light);
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  font-family: 'Cinzel', serif;
+}
+
+.gengar-stat-label span {
+  font-weight: 700;
+  color: var(--nan-ink);
+  white-space: nowrap;
+}
+
+.gengar-hp-fill { 
+  background: linear-gradient(90deg, #4b0082, #8a2be2);
+}
+
+/* --- Assinatura --- */
+.nan-signature {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  min-width: 200px;
+}
+
+.signature-line {
+  width: 150px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--nan-accent), transparent);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.signature-name::after {
+  content: 'Nan Hazu';
+  font-family: 'Cinzel', serif;
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--nan-accent-dark);
+  letter-spacing: 2px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* --- Efeitos de Destaque para Imagens --- */
+.nan-content img, .nan-notes img {
+  border: 1px solid var(--nan-paper-border);
+  padding: 5px;
+  background: var(--nan-paper);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 3px;
+}
+
+/* --- Responsividade --- */
+@media (max-width: 768px) {
+  .nan-hazu-card {
+    max-width: 95%;
+    margin: 0 auto;
+  }
+  
+  .nan-title-bar {
+    padding: 20px 25px 10px 25px;
+  }
+  
+  .nan-title-bar h1 {
+    font-size: 32px;
+  }
+  
+  .nan-stats-primary,
+  .nan-content,
+  .nan-notes-section,
+  .nan-footer-area {
+    padding-left: 25px;
+    padding-right: 25px;
+  }
+  
+  .nan-content {
+    font-size: 16px;
+    padding-left: 35px;
+    padding-right: 35px;
+  }
+  
+  .nan-stats-primary {
+    flex-direction: column;
+    gap: 15px;
+    margin: 0 15px;
+  }
+  
+  .nan-footer-area {
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+  }
+  
+  .nan-gengar-card {
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .nan-signature {
+    align-items: center;
+    min-width: auto;
+  }
+}
+
+/* --- Animações Suaves --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.nan-hazu-card {
+  animation: fadeIn 0.8s ease-out;
+}
+
+.nan-content p {
+  animation: fadeIn 0.5s ease-out forwards;
+  opacity: 0;
+}
+
+.nan-content p:nth-child(1) { animation-delay: 0.1s; }
+.nan-content p:nth-child(2) { animation-delay: 0.3s; }
+.nan-content p:nth-child(3) { animation-delay: 0.5s; }
