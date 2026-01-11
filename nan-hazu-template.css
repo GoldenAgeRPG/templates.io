@@ -17,169 +17,63 @@
   max-width: 950px;
   margin: 40px auto;
   position: relative;
-  perspective: 1500px;
-  min-height: 700px; /* Altura mínima para o espaço do livro */
+  /* Altura mínima para garantir presença na página */
+  min-height: 800px; 
 }
 
-.book-toggle { display: none; }
-
-/* BOTÃO ABRIR (Centralizado abaixo da capa) */
-.book-open-btn {
-  display: block;
-  width: fit-content;
-  margin: 30px auto 0; /* Espaço acima e centralizado */
-  z-index: 100;
-  background: var(--accent-dark);
-  color: var(--paper);
-  padding: 15px 30px;
-  border-radius: 4px;
-  font-family: 'Cinzel', serif;
-  cursor: pointer;
-  border: 1px solid var(--accent);
-  box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-  transition: all 0.3s ease;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  position: relative; /* Para não ser afetado pelo absolute da capa */
-}
-.book-open-btn:hover { background: var(--accent); transform: translateY(-2px); }
-.book-toggle:checked ~ .book-open-btn { opacity: 0; pointer-events: none; position: absolute; }
-
-/* BOTÃO FECHAR (Marcador) */
-.book-close-btn {
-  position: absolute;
-  top: -15px;
-  right: 40px;
-  width: 40px;
-  height: 60px;
-  background: var(--red);
-  z-index: 100;
-  cursor: pointer;
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-  transition: top 0.3s;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 10px;
-}
-.book-close-btn::after { content: 'X'; color: #fff; font-family: 'Cinzel', sans-serif; font-weight: bold; }
-.book-close-btn:hover { top: -5px; }
-
-/* --- CAPA (Centralizada e Maior) --- */
-.book-closed {
-  /* Remove absolute e usa margin auto para centralizar */
-  position: relative; 
-  margin: 0 auto;
-  width: 500px; /* Aumentado */
-  height: 750px; /* Aumentado */
-  background: #2b1d16;
-  border-radius: 5px 15px 15px 5px;
-  box-shadow: 15px 20px 50px rgba(0,0,0,0.6), inset 4px 0 10px rgba(0,0,0,0.5);
-  transform-origin: left center;
-  transition: transform 1.2s cubic-bezier(0.645, 0.045, 0.355, 1), opacity 0.5s ease 0.5s;
-  z-index: 50;
-  transform-style: preserve-3d;
-  backface-visibility: hidden;
-}
-
-.book-cover {
-  width: 100%; height: 100%;
-  background: linear-gradient(135deg, rgba(60, 30, 10, 0.9), rgba(40, 20, 5, 0.95)), url('https://i.pinimg.com/736x/d9/69/68/d969681df2aee2e21287f72299d5106d.jpg');
-  background-size: cover;
-  border-radius: 5px 15px 15px 5px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 50px;
-  border: 1px solid rgba(255,255,255,0.1);
-}
-
-.cover-title {
-  text-align: center;
-  border: 4px double var(--accent);
-  padding: 40px 20px;
-  background: rgba(0,0,0,0.7);
-  width: 100%;
-  backdrop-filter: blur(2px);
-}
-.cover-title h1 {
-  font-family: 'Cinzel', serif; font-size: 52px; color: #e8dfd0;
-  margin: 0; text-shadow: 0 5px 15px rgba(0,0,0,1);
-}
-.cover-title h2 {
-  font-family: 'La Belle Aurore', cursive; font-size: 36px; color: var(--accent-light);
-  margin-top: 15px;
-}
-.cover-author {
-  position: absolute; bottom: 50px;
-  font-family: 'Cinzel', serif; color: rgba(255,255,255,0.6);
-  font-size: 16px; letter-spacing: 4px;
-}
-
-.book-toggle:checked ~ .book-closed { transform: rotateY(-180deg); pointer-events: none; position: absolute; top: 0; left: 0; right: 0; margin: auto; } /* Vira absolute ao abrir para não ocupar espaço */
-.book-toggle:checked ~ .book-open { opacity: 1; transform: translateY(0) scale(1); pointer-events: all; transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s; }
-
-/* --- LIVRO ABERTO --- */
+/* --- LIVRO SEMPRE ABERTO --- */
 .book-open {
   position: relative;
   width: 100%;
+  height: 100%; /* Ocupa o container */
   display: flex;
   background: var(--paper);
   border-radius: 5px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-  opacity: 0;
-  transform: translateY(20px) scale(0.95);
-  transition: opacity 0.3s, transform 0.3s;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  /* Removidas animações de abertura */
+  opacity: 1;
+  transform: none;
   z-index: 10;
-  /* Garante que a página tenha altura suficiente para as decorações não vazarem */
-  min-height: 800px; 
 }
 
 /* PÁGINAS */
 .left-page, .right-page {
   flex: 1;
-  padding: 40px;
+  padding: 40px 50px; /* Padding ajustado para não bater nas decorações */
   position: relative;
-  background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
-  overflow: hidden;
   display: flex;
-  flex-direction: column; /* Para o conteúdo fluir verticalmente */
+  flex-direction: column;
+  /* Textura base do papel */
+  background-color: var(--paper);
+  background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
 }
 
 .left-page {
   border-right: 1px solid rgba(0,0,0,0.1);
   border-radius: 5px 0 0 5px;
-  background: linear-gradient(90deg, #d8ceb8 0%, #f5f0e6 10%, #f5f0e6 95%, #d8ceb8 100%);
-}
-.right-page {
-  border-radius: 0 5px 5px 0;
-  background: linear-gradient(90deg, #d8ceb8 0%, #f5f0e6 5%, #f5f0e6 90%, #d8ceb8 100%);
+  /* Múltiplos backgrounds: Decoração Topo, Decoração Base, Gradiente de Sombra, Textura */
+  background: 
+    url('https://i.imgur.com/PR6AbSC.png') top left / 150px no-repeat,
+    url('https://i.imgur.com/J2x1duv.png') bottom left / 180px no-repeat,
+    linear-gradient(90deg, rgba(0,0,0,0.05) 0%, transparent 10%, transparent 95%, rgba(0,0,0,0.1) 100%),
+    url("https://www.transparenttextures.com/patterns/cream-paper.png");
 }
 
-/* DECORAÇÃO (PNGs) - Posicionados no fundo e nas bordas */
-.left-page::before {
-  content: ''; position: absolute; top: 20px; left: 20px; width: 150px; height: 150px;
-  background: url('https://i.imgur.com/PR6AbSC.png') no-repeat contain; opacity: 0.2; pointer-events: none; z-index: 0;
-}
-.left-page::after {
-  content: ''; position: absolute; bottom: 40px; left: 30px; width: 180px; height: 180px;
-  background: url('https://i.imgur.com/J2x1duv.png') no-repeat contain; opacity: 0.2; pointer-events: none; z-index: 0;
-}
-.right-page::before {
-  content: ''; position: absolute; top: 30px; right: 30px; width: 160px; height: 160px;
-  background: url('https://i.imgur.com/HXcbUnZ.png') no-repeat contain; opacity: 0.2; pointer-events: none; z-index: 0;
-}
-.right-page::after {
-  content: ''; position: absolute; bottom: 50px; right: 20px; width: 200px; height: 200px;
-  background: url('https://i.imgur.com/Jat8HBW.png') no-repeat contain; opacity: 0.2; pointer-events: none; z-index: 0; transform: rotate(180deg);
+.right-page {
+  border-radius: 0 5px 5px 0;
+  /* Múltiplos backgrounds: Decoração Topo, Decoração Base (rotacionada), Gradiente de Sombra, Textura */
+  background: 
+    url('https://i.imgur.com/HXcbUnZ.png') top right / 160px no-repeat,
+    url('https://i.imgur.com/Jat8HBW.png') bottom right / 200px no-repeat,
+    linear-gradient(90deg, rgba(0,0,0,0.1) 0%, transparent 5%, transparent 90%, rgba(0,0,0,0.05) 100%),
+    url("https://www.transparenttextures.com/patterns/cream-paper.png");
 }
 
 /* STATUS */
 .stats-compact {
   margin-bottom: 25px;
   padding: 15px;
-  background: rgba(255, 255, 255, 0.6); /* Fundo mais claro para contraste */
+  background: rgba(255, 255, 255, 0.5); /* Levemente transparente */
   border: 1px solid rgba(139, 69, 19, 0.2);
   border-radius: 4px;
   box-shadow: inset 0 0 10px rgba(139, 69, 19, 0.05);
@@ -198,49 +92,43 @@
 /* CONTEÚDO */
 .page-header { border-bottom: 2px solid var(--accent); margin-bottom: 20px; padding-bottom: 10px; display: flex; justify-content: space-between; font-family: 'Cinzel', serif; color: var(--accent-dark); z-index: 5; position: relative; }
 .page-title { font-weight: 700; font-size: 16px; }
-.text-content { font-family: 'Crimson Text', serif; font-size: 17px; line-height: 1.8; color: var(--ink); text-align: justify; z-index: 5; position: relative; flex: 1; /* Ocupa o espaço restante */ }
+.text-content { font-family: 'Crimson Text', serif; font-size: 17px; line-height: 1.8; color: var(--ink); text-align: justify; z-index: 5; position: relative; flex: 1; }
 .left-page .text-content::first-letter { font-family: 'Cinzel', serif; font-size: 42px; float: left; margin-right: 10px; line-height: 1; color: var(--accent); }
 
-/* CONSIDERATIONS / SPOILER (Cor e Título) */
+/* CONSIDERATIONS / SPOILER SIMPLIFICADO */
 .notes-container {
-  margin-top: auto; /* Empurra para o final da página */
-  border-top: 1px dashed var(--accent);
-  padding-top: 15px;
+  margin-top: auto;
+  border-top: 1px solid rgba(139, 69, 19, 0.3);
+  padding-top: 20px;
   position: relative; z-index: 5;
 }
-/* Título "Temperos" via CSS */
-.notes-container::before {
-  content: 'Temperos';
-  font-family: 'IM Fell English', serif;
-  font-size: 20px;
-  color: var(--accent-dark);
-  display: block;
-  text-align: center;
-  margin-bottom: 10px;
-}
+
+/* Estilização básica para o container do spoiler, sem quebrar ícones do fórum */
 .spoiler-box {
-  background: rgba(248, 243, 233, 0.9); /* Fundo mais opaco */
-  padding: 10px; border-radius: 4px;
-  border-left: 3px solid var(--accent); font-size: 15px;
-  font-family: 'Crimson Text'; color: var(--ink); /* Cor do texto escura */
+  background: rgba(248, 243, 233, 0.6);
+  padding: 5px 15px;
+  border-radius: 4px;
+  border: 1px solid rgba(139, 69, 19, 0.2);
+  font-family: 'Crimson Text', serif;
+  color: var(--ink);
 }
 
-/* GENGAR E ASSINATURA (Cores corrigidas) */
+/* GENGAR E ASSINATURA */
 .gengar-mini {
   display: flex; align-items: center;
-  background: rgba(75,0,130,0.1); /* Fundo mais visível */
+  background: rgba(75,0,130,0.1);
   padding: 10px;
   border-radius: 5px; border: 1px solid rgba(75,0,130,0.2);
-  margin-top: auto; /* Empurra para o final da página */
+  margin-top: auto;
   position: relative; z-index: 5;
 }
 .gengar-img { width: 45px; height: 45px; border-radius: 50%; background: url('https://i.pinimg.com/1200x/97/27/4f/97274fe18acf564f54fd89fa8f036e9e.jpg') center/cover; margin-right: 10px; border: 2px solid var(--purple); }
 .gengar-data { font-size: 12px; flex: 1; }
-.gengar-name { font-family: 'Cinzel'; color: var(--purple); font-weight: bold; } /* Cor do nome */
+.gengar-name { font-family: 'Cinzel'; color: var(--purple); font-weight: bold; }
 .gengar-hp-bar { height: 6px; background: rgba(0,0,0,0.1); margin-top: 5px; width: 100px; border-radius: 3px; }
 .gengar-hp-fill { height: 100%; background: var(--purple); width: 0%; border-radius: 3px; }
-.gengar-val { font-size:11px; margin-top:2px; color: var(--ink); } /* Cor do valor */
-.gengar-quote { font-style: italic; color: var(--ink-light); font-size: 13px; margin-top: 5px; } /* Cor da frase */
+.gengar-val { font-size:11px; margin-top:2px; color: var(--ink); }
+.gengar-quote { font-style: italic; color: var(--ink-light); font-size: 13px; margin-top: 5px; }
 
 .signature-section { margin-top: 30px; text-align: right; padding-right: 20px; position: relative; z-index: 5; }
 .signature-section::after { content: 'Nan Hazu'; font-family: 'La Belle Aurore', cursive; font-size: 32px; color: var(--ink); transform: rotate(-3deg); display: inline-block; }
@@ -250,11 +138,9 @@
 /* MOBILE */
 @media (max-width: 768px) {
   .book-container { max-width: 100%; margin: 10px 0; min-height: auto; }
-  .book-closed { width: 90%; height: 500px; }
-  .book-open { flex-direction: column; min-height: auto; }
-  .left-page, .right-page { padding: 25px; border: none; border-bottom: 1px solid #ccc; min-height: 500px; /* Altura mínima para mobile */ }
-  .book-close-btn { right: 10px; }
-  .cover-title h1 { font-size: 42px; }
-  /* Opcional: Esconder PNGs no mobile para limpar a tela */
-  .left-page::before, .left-page::after, .right-page::before, .right-page::after { display: none; }
+  .book-open { flex-direction: column; }
+  .left-page, .right-page { padding: 25px; border: none; border-bottom: 1px solid #ccc; min-height: 500px; }
+  /* Ajuste dos backgrounds para mobile (opcional, pode remover se preferir sem) */
+  .left-page { background-size: 100px, 120px, auto, auto; }
+  .right-page { background-size: 100px, 120px, auto, auto; }
 }
