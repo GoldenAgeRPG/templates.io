@@ -6,6 +6,7 @@
   --paper-aged: #e8dfd0;
   --paper-dark: #d8ceb8;
   --ink: #2c1810;
+  --ink-light: #5a4738;
   --accent: #8b4513;
   --accent-dark: #4a2c18;
   --red: #8b0000;
@@ -32,6 +33,25 @@
   z-index: 1;
 }
 
+/* AJUSTE 1: Sombra Central (Lombada) Recolocada */
+.book-open::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 50px; /* Largura da sombra */
+  transform: translateX(-50%);
+  /* Gradiente suave do centro para as pontas */
+  background: linear-gradient(to right, 
+    transparent 0%, 
+    rgba(44, 24, 16, 0.05) 30%,
+    rgba(44, 24, 16, 0.2) 50%, 
+    rgba(44, 24, 16, 0.05) 70%,
+    transparent 100%
+  );
+  pointer-events: none; /* Não interfere no clique */
+  z-index: 5; /* Fica acima do papel, abaixo do texto */
+}
+
 /* PÁGINAS E DECORAÇÃO */
 .left-page, .right-page {
   flex: 1;
@@ -41,50 +61,30 @@
   flex-direction: column;
   background-color: var(--paper);
   background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
-  /* Z-index baixo para ficar atrás do conteúdo */
   z-index: 0;
 }
 
-.left-page { border-right: 1px solid rgba(0,0,0,0.1); border-radius: 5px 0 0 5px; }
+.left-page { border-right: 1px solid rgba(0,0,0,0.05); border-radius: 5px 0 0 5px; }
 .right-page { border-radius: 0 5px 5px 0; }
 
-/* Pseudo-elementos para os PNGs (permite controlar opacidade sem afetar texto) */
 .left-page::before, .right-page::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  /* Opacidade reduzida para mesclar */
-  opacity: 0.25; 
-  pointer-events: none;
-  z-index: -1; /* Garante que fique atrás de tudo na página */
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  opacity: 0.25; pointer-events: none; z-index: -1;
 }
+.left-page::before { background: url('https://i.imgur.com/PR6AbSC.png') top 20px left 20px / 150px no-repeat, url('https://i.imgur.com/J2x1duv.png') bottom 30px left 30px / 180px no-repeat; }
+.right-page::before { background: url('https://i.imgur.com/HXcbUnZ.png') top 30px right 30px / 160px no-repeat, url('https://i.imgur.com/Jat8HBW.png') bottom 80px right 20px / 190px no-repeat; }
 
-.left-page::before {
-  background: 
-    url('https://i.imgur.com/PR6AbSC.png') top 20px left 20px / 150px no-repeat,
-    url('https://i.imgur.com/J2x1duv.png') bottom 30px left 30px / 180px no-repeat;
-}
-
-.right-page::before {
-  background: 
-    url('https://i.imgur.com/HXcbUnZ.png') top 30px right 30px / 160px no-repeat,
-    /* Ajustei a posição do de baixo para não bater na assinatura */
-    url('https://i.imgur.com/Jat8HBW.png') bottom 80px right 20px / 190px no-repeat;
-}
-
-/* --- CONTEÚDO (Z-index alto para bloquear os PNGs) --- */
-
-/* HEADER */
+/* --- CONTEÚDO --- */
 .page-header {
   border-bottom: 2px solid var(--accent); margin-bottom: 20px; padding-bottom: 10px; display: flex; justify-content: space-between; font-family: 'Cinzel', serif; color: var(--accent-dark);
   position: relative; z-index: 10;
 }
-.page-title { font-weight: 700; font-size: 16px; }
+.page-title { font-weight: 700; font-size: 16px; text-transform: uppercase; letter-spacing: 1px; }
+.page-number { font-style: italic; font-family: 'IM Fell English', serif; }
 
 /* STATUS */
 .stats-compact {
   margin-bottom: 25px; padding: 15px;
-  /* Fundo semi-sólido para bloquear PNGs */
   background: rgba(245, 240, 230, 0.8); 
   border: 1px solid rgba(139, 69, 19, 0.2); border-radius: 4px;
   position: relative; z-index: 10;
@@ -98,63 +98,69 @@
 .nan-san-fill { background: linear-gradient(90deg, #556b2f, #6b8e23); }
 .stat-val { width: 80px; text-align: right; font-family: 'Crimson Text', serif; font-weight: 700; font-size: 14px; color: #000; text-shadow: 0 0 2px rgba(255,255,255,0.8); z-index: 10; }
 
-/* TEXTO PRINCIPAL */
+/* TEXTO */
 .text-content {
   font-family: 'Crimson Text', serif; font-size: 17px; line-height: 1.8; color: var(--ink); text-align: justify;
   position: relative; z-index: 10; flex: 1;
 }
 .left-page .text-content::first-letter { font-family: 'Cinzel', serif; font-size: 42px; float: left; margin-right: 10px; line-height: 1; color: var(--accent); }
 
-/* CONSIDERATIONS / SPOILER */
+/* SPOILER */
 .notes-container {
-  margin-top: auto;
-  border-top: 1px solid rgba(139, 69, 19, 0.3);
-  padding-top: 20px;
-  position: relative; z-index: 10; /* Z-index alto */
+  margin-top: auto; border-top: 1px solid rgba(139, 69, 19, 0.3); padding-top: 20px; position: relative; z-index: 10;
 }
-
-/* Título "Temperos" via CSS (Reinserido) */
 .notes-container::before {
-  content: 'Temperos';
-  font-family: 'IM Fell English', serif;
-  font-size: 22px;
-  color: var(--accent-dark);
-  display: block;
-  text-align: center;
-  margin-bottom: 15px;
+  content: 'Temperos'; font-family: 'IM Fell English', serif; font-size: 22px; color: var(--accent-dark); display: block; text-align: center; margin-bottom: 15px;
 }
-
 .spoiler-box {
-  /* Fundo mais sólido para bloquear PNGs */
-  background: #f0e8da; 
-  padding: 5px 15px; border-radius: 4px;
-  border: 1px solid rgba(139, 69, 19, 0.2);
-  font-family: 'Crimson Text', serif; color: var(--ink);
+  background: #f0e8da; padding: 5px 15px; border-radius: 4px;
+  border: 1px solid rgba(139, 69, 19, 0.2); font-family: 'Crimson Text', serif; color: var(--ink);
 }
 
-/* GENGAR E ASSINATURA */
+/* AJUSTE 4: REDESIGN DO CARD GENGAR */
 .gengar-mini {
   display: flex; align-items: center;
-  /* Fundo SÓLIDO cor de papel (levemente roxo) para bloquear o PNG de fundo */
-  background: #ede6f0; 
+  /* Fundo mais transparente e envelhecido */
+  background: rgba(255, 253, 248, 0.7);
   padding: 15px;
-  border-radius: 5px; border: 2px solid rgba(75,0,130,0.15);
+  border-radius: 4px;
+  /* Borda dupla estilo moldura antiga */
+  border: 3px double var(--accent);
+  /* Sombra interna para parecer pressionado no papel */
+  box-shadow: inset 0 0 15px rgba(139, 69, 19, 0.1);
   margin-top: auto;
-  position: relative; z-index: 10; /* Z-index alto */
-  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-.gengar-img { width: 50px; height: 50px; border-radius: 50%; background: url('https://i.pinimg.com/1200x/97/27/4f/97274fe18acf564f54fd89fa8f036e9e.jpg') center/cover; margin-right: 15px; border: 2px solid var(--purple); }
-.gengar-data { font-size: 12px; flex: 1; }
-.gengar-name { font-family: 'Cinzel'; color: var(--purple); font-weight: 700; font-size: 16px; }
-.gengar-hp-bar { height: 8px; background: rgba(75,0,130,0.1); margin-top: 5px; width: 100%; border-radius: 4px; border: 1px solid rgba(75,0,130,0.2); overflow: hidden; }
-.gengar-hp-fill { height: 100%; background: var(--purple); width: 0%; }
-.gengar-val { font-size:12px; margin-top:4px; color: var(--ink); font-weight: bold; text-align: right; }
-.gengar-quote { font-style: italic; color: var(--ink-light); font-size: 13px; margin-top: 10px; border-top: 1px dashed rgba(75,0,130,0.2); padding-top: 5px; }
-
-.signature-section {
-  margin-top: 40px; text-align: right; padding-right: 30px;
   position: relative; z-index: 10;
 }
+.gengar-img {
+  width: 50px; height: 50px; border-radius: 50%;
+  background: url('https://i.pinimg.com/1200x/97/27/4f/97274fe18acf564f54fd89fa8f036e9e.jpg') center/cover;
+  margin-right: 15px;
+  /* Borda escura para combinar com o tema */
+  border: 2px solid var(--accent-dark);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+.gengar-data { font-size: 12px; flex: 1; }
+.gengar-name { font-family: 'Cinzel'; color: var(--purple); font-weight: 700; font-size: 16px; }
+.gengar-hp-bar {
+  height: 8px; background: rgba(0,0,0,0.1); margin-top: 5px; width: 100%; border-radius: 2px;
+  border: 1px solid var(--accent-dark); /* Borda estilo rascunho */
+  overflow: hidden;
+}
+.gengar-hp-fill { height: 100%; background: var(--purple); width: 0%; }
+.gengar-val { font-size:12px; margin-top:4px; color: var(--ink); font-weight: bold; text-align: right; }
+
+/* AJUSTE 2: Cor da citação do Gengar */
+.gengar-quote {
+  font-style: italic;
+  color: var(--ink); /* Cor escura para leitura */
+  font-weight: 600; /* Mais peso */
+  font-size: 13px;
+  margin-top: 12px;
+  border-top: 1px dashed var(--accent);
+  padding-top: 8px;
+}
+
+.signature-section { margin-top: 40px; text-align: right; padding-right: 30px; position: relative; z-index: 10; }
 .signature-section::after { content: 'Nan Hazu'; font-family: 'La Belle Aurore', cursive; font-size: 36px; color: var(--ink); transform: rotate(-3deg); display: inline-block; }
 
 .nan-source-text { display: none; }
@@ -163,7 +169,8 @@
 @media (max-width: 768px) {
   .book-container { max-width: 100%; margin: 10px 0; min-height: auto; }
   .book-open { flex-direction: column; }
+  .book-open::after { display: none; /* Remove sombra central no mobile */ }
   .left-page, .right-page { padding: 25px; border: none; border-bottom: 1px solid #ccc; min-height: 500px; }
-  /* No mobile, pode ser melhor esconder os PNGs para ganhar espaço */
+  .left-page { border-right: none; }
   .left-page::before, .right-page::before { display: none; }
 }
