@@ -17,68 +17,77 @@
   max-width: 950px;
   margin: 40px auto;
   position: relative;
-  /* Altura mínima para garantir presença na página */
   min-height: 800px; 
 }
 
-/* --- LIVRO SEMPRE ABERTO --- */
+/* --- LIVRO ABERTO --- */
 .book-open {
   position: relative;
   width: 100%;
-  height: 100%; /* Ocupa o container */
+  height: 100%;
   display: flex;
   background: var(--paper);
   border-radius: 5px;
   box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-  /* Removidas animações de abertura */
-  opacity: 1;
-  transform: none;
-  z-index: 10;
+  z-index: 1;
 }
 
-/* PÁGINAS */
+/* PÁGINAS E DECORAÇÃO */
 .left-page, .right-page {
   flex: 1;
-  padding: 40px 50px; /* Padding ajustado para não bater nas decorações */
+  padding: 40px 50px;
   position: relative;
   display: flex;
   flex-direction: column;
-  /* Textura base do papel */
   background-color: var(--paper);
   background-image: url("https://www.transparenttextures.com/patterns/cream-paper.png");
+  /* Z-index baixo para ficar atrás do conteúdo */
+  z-index: 0;
 }
 
-.left-page {
-  border-right: 1px solid rgba(0,0,0,0.1);
-  border-radius: 5px 0 0 5px;
-  /* Múltiplos backgrounds: Decoração Topo, Decoração Base, Gradiente de Sombra, Textura */
-  background: 
-    url('https://i.imgur.com/PR6AbSC.png') top left / 150px no-repeat,
-    url('https://i.imgur.com/J2x1duv.png') bottom left / 180px no-repeat,
-    linear-gradient(90deg, rgba(0,0,0,0.05) 0%, transparent 10%, transparent 95%, rgba(0,0,0,0.1) 100%),
-    url("https://www.transparenttextures.com/patterns/cream-paper.png");
+.left-page { border-right: 1px solid rgba(0,0,0,0.1); border-radius: 5px 0 0 5px; }
+.right-page { border-radius: 0 5px 5px 0; }
+
+/* Pseudo-elementos para os PNGs (permite controlar opacidade sem afetar texto) */
+.left-page::before, .right-page::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  /* Opacidade reduzida para mesclar */
+  opacity: 0.25; 
+  pointer-events: none;
+  z-index: -1; /* Garante que fique atrás de tudo na página */
 }
 
-.right-page {
-  border-radius: 0 5px 5px 0;
-  /* Múltiplos backgrounds: Decoração Topo, Decoração Base (rotacionada), Gradiente de Sombra, Textura */
+.left-page::before {
   background: 
-    url('https://i.imgur.com/HXcbUnZ.png') top right / 160px no-repeat,
-    url('https://i.imgur.com/Jat8HBW.png') bottom right / 200px no-repeat,
-    linear-gradient(90deg, rgba(0,0,0,0.1) 0%, transparent 5%, transparent 90%, rgba(0,0,0,0.05) 100%),
-    url("https://www.transparenttextures.com/patterns/cream-paper.png");
+    url('https://i.imgur.com/PR6AbSC.png') top 20px left 20px / 150px no-repeat,
+    url('https://i.imgur.com/J2x1duv.png') bottom 30px left 30px / 180px no-repeat;
 }
+
+.right-page::before {
+  background: 
+    url('https://i.imgur.com/HXcbUnZ.png') top 30px right 30px / 160px no-repeat,
+    /* Ajustei a posição do de baixo para não bater na assinatura */
+    url('https://i.imgur.com/Jat8HBW.png') bottom 80px right 20px / 190px no-repeat;
+}
+
+/* --- CONTEÚDO (Z-index alto para bloquear os PNGs) --- */
+
+/* HEADER */
+.page-header {
+  border-bottom: 2px solid var(--accent); margin-bottom: 20px; padding-bottom: 10px; display: flex; justify-content: space-between; font-family: 'Cinzel', serif; color: var(--accent-dark);
+  position: relative; z-index: 10;
+}
+.page-title { font-weight: 700; font-size: 16px; }
 
 /* STATUS */
 .stats-compact {
-  margin-bottom: 25px;
-  padding: 15px;
-  background: rgba(255, 255, 255, 0.5); /* Levemente transparente */
-  border: 1px solid rgba(139, 69, 19, 0.2);
-  border-radius: 4px;
-  box-shadow: inset 0 0 10px rgba(139, 69, 19, 0.05);
-  position: relative;
-  z-index: 5;
+  margin-bottom: 25px; padding: 15px;
+  /* Fundo semi-sólido para bloquear PNGs */
+  background: rgba(245, 240, 230, 0.8); 
+  border: 1px solid rgba(139, 69, 19, 0.2); border-radius: 4px;
+  position: relative; z-index: 10;
 }
 .stat-row { display: flex; align-items: center; margin-bottom: 8px; font-family: 'Cinzel', serif; font-size: 12px; position: relative; }
 .stat-name { width: 40px; font-weight: 700; color: var(--ink); }
@@ -89,49 +98,64 @@
 .nan-san-fill { background: linear-gradient(90deg, #556b2f, #6b8e23); }
 .stat-val { width: 80px; text-align: right; font-family: 'Crimson Text', serif; font-weight: 700; font-size: 14px; color: #000; text-shadow: 0 0 2px rgba(255,255,255,0.8); z-index: 10; }
 
-/* CONTEÚDO */
-.page-header { border-bottom: 2px solid var(--accent); margin-bottom: 20px; padding-bottom: 10px; display: flex; justify-content: space-between; font-family: 'Cinzel', serif; color: var(--accent-dark); z-index: 5; position: relative; }
-.page-title { font-weight: 700; font-size: 16px; }
-.text-content { font-family: 'Crimson Text', serif; font-size: 17px; line-height: 1.8; color: var(--ink); text-align: justify; z-index: 5; position: relative; flex: 1; }
+/* TEXTO PRINCIPAL */
+.text-content {
+  font-family: 'Crimson Text', serif; font-size: 17px; line-height: 1.8; color: var(--ink); text-align: justify;
+  position: relative; z-index: 10; flex: 1;
+}
 .left-page .text-content::first-letter { font-family: 'Cinzel', serif; font-size: 42px; float: left; margin-right: 10px; line-height: 1; color: var(--accent); }
 
-/* CONSIDERATIONS / SPOILER SIMPLIFICADO */
+/* CONSIDERATIONS / SPOILER */
 .notes-container {
   margin-top: auto;
   border-top: 1px solid rgba(139, 69, 19, 0.3);
   padding-top: 20px;
-  position: relative; z-index: 5;
+  position: relative; z-index: 10; /* Z-index alto */
 }
 
-/* Estilização básica para o container do spoiler, sem quebrar ícones do fórum */
+/* Título "Temperos" via CSS (Reinserido) */
+.notes-container::before {
+  content: 'Temperos';
+  font-family: 'IM Fell English', serif;
+  font-size: 22px;
+  color: var(--accent-dark);
+  display: block;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
 .spoiler-box {
-  background: rgba(248, 243, 233, 0.6);
-  padding: 5px 15px;
-  border-radius: 4px;
+  /* Fundo mais sólido para bloquear PNGs */
+  background: #f0e8da; 
+  padding: 5px 15px; border-radius: 4px;
   border: 1px solid rgba(139, 69, 19, 0.2);
-  font-family: 'Crimson Text', serif;
-  color: var(--ink);
+  font-family: 'Crimson Text', serif; color: var(--ink);
 }
 
 /* GENGAR E ASSINATURA */
 .gengar-mini {
   display: flex; align-items: center;
-  background: rgba(75,0,130,0.1);
-  padding: 10px;
-  border-radius: 5px; border: 1px solid rgba(75,0,130,0.2);
+  /* Fundo SÓLIDO cor de papel (levemente roxo) para bloquear o PNG de fundo */
+  background: #ede6f0; 
+  padding: 15px;
+  border-radius: 5px; border: 2px solid rgba(75,0,130,0.15);
   margin-top: auto;
-  position: relative; z-index: 5;
+  position: relative; z-index: 10; /* Z-index alto */
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
 }
-.gengar-img { width: 45px; height: 45px; border-radius: 50%; background: url('https://i.pinimg.com/1200x/97/27/4f/97274fe18acf564f54fd89fa8f036e9e.jpg') center/cover; margin-right: 10px; border: 2px solid var(--purple); }
+.gengar-img { width: 50px; height: 50px; border-radius: 50%; background: url('https://i.pinimg.com/1200x/97/27/4f/97274fe18acf564f54fd89fa8f036e9e.jpg') center/cover; margin-right: 15px; border: 2px solid var(--purple); }
 .gengar-data { font-size: 12px; flex: 1; }
-.gengar-name { font-family: 'Cinzel'; color: var(--purple); font-weight: bold; }
-.gengar-hp-bar { height: 6px; background: rgba(0,0,0,0.1); margin-top: 5px; width: 100px; border-radius: 3px; }
-.gengar-hp-fill { height: 100%; background: var(--purple); width: 0%; border-radius: 3px; }
-.gengar-val { font-size:11px; margin-top:2px; color: var(--ink); }
-.gengar-quote { font-style: italic; color: var(--ink-light); font-size: 13px; margin-top: 5px; }
+.gengar-name { font-family: 'Cinzel'; color: var(--purple); font-weight: 700; font-size: 16px; }
+.gengar-hp-bar { height: 8px; background: rgba(75,0,130,0.1); margin-top: 5px; width: 100%; border-radius: 4px; border: 1px solid rgba(75,0,130,0.2); overflow: hidden; }
+.gengar-hp-fill { height: 100%; background: var(--purple); width: 0%; }
+.gengar-val { font-size:12px; margin-top:4px; color: var(--ink); font-weight: bold; text-align: right; }
+.gengar-quote { font-style: italic; color: var(--ink-light); font-size: 13px; margin-top: 10px; border-top: 1px dashed rgba(75,0,130,0.2); padding-top: 5px; }
 
-.signature-section { margin-top: 30px; text-align: right; padding-right: 20px; position: relative; z-index: 5; }
-.signature-section::after { content: 'Nan Hazu'; font-family: 'La Belle Aurore', cursive; font-size: 32px; color: var(--ink); transform: rotate(-3deg); display: inline-block; }
+.signature-section {
+  margin-top: 40px; text-align: right; padding-right: 30px;
+  position: relative; z-index: 10;
+}
+.signature-section::after { content: 'Nan Hazu'; font-family: 'La Belle Aurore', cursive; font-size: 36px; color: var(--ink); transform: rotate(-3deg); display: inline-block; }
 
 .nan-source-text { display: none; }
 
@@ -140,7 +164,6 @@
   .book-container { max-width: 100%; margin: 10px 0; min-height: auto; }
   .book-open { flex-direction: column; }
   .left-page, .right-page { padding: 25px; border: none; border-bottom: 1px solid #ccc; min-height: 500px; }
-  /* Ajuste dos backgrounds para mobile (opcional, pode remover se preferir sem) */
-  .left-page { background-size: 100px, 120px, auto, auto; }
-  .right-page { background-size: 100px, 120px, auto, auto; }
+  /* No mobile, pode ser melhor esconder os PNGs para ganhar espaço */
+  .left-page::before, .right-page::before { display: none; }
 }
