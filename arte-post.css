@@ -140,7 +140,7 @@
   padding: 0 4px; color: #000; font-weight: 800; border-radius: 2px;
 }
 .art-container .art-content i {
-  font-family: 'Shadows Into Light'; font-size: 1.3em; color: var(--art-magenta); font-weight: 700;
+  font-family: 'Kalam', cursive; font-size: 1.3em; color: var(--art-magenta); font-weight: 700;
 }
 
 /* EXTRAS */
