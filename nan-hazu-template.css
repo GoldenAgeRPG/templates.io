@@ -1,295 +1,148 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text:wght@400;600;700&family=Cinzel:wght@400;700;900&family=IM+Fell+English:ital@0;1&family=La+Belle+Aurore&display=swap');
 
-/* --- Variáveis --- */
-.mikhail-card {
-  --mk-bg: #0f0f0f;
-  --mk-accent: #9b59b6; /* Roxo Neon */
-  --mk-accent-bright: #e056fd; /* Roxo Brilhante para pontas */
-  --mk-accent-dim: rgba(155, 89, 182, 0.2);
-  --mk-text: #bdc3c7;
-  --mk-radius: 12px; /* Reduzi o raio para ficar menos "bolinha" e mais sério */
+/* --- CONTAINER GERAL --- */
+.torn-wrapper {
+  width: 100%;
+  max-width: 800px; /* Levemente menor para elegância */
+  margin: 40px auto;
+  position: relative;
+  /* Sombra difusa para dar profundidade ao papel */
+  filter: drop-shadow(0px 10px 20px rgba(0,0,0,0.5));
+}
+
+/* --- O PAPEL (Textura e Borda Realista) --- */
+.torn-paper {
+  background-color: #e3d0b9; /* Cor base de pergaminho */
+  background-image: 
+    url("https://www.transparenttextures.com/patterns/aged-paper.png"),
+    linear-gradient(to bottom, rgba(255,255,255,0.2), rgba(0,0,0,0.1));
   
-  width: 100%;
-  max-width: 650px;
-  margin: 0 auto;
-  background: var(--mk-bg);
-  border-radius: var(--mk-radius);
-  font-family: 'Montserrat', sans-serif;
-  color: var(--mk-text);
-  line-height: 1.7;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.95);
-  overflow: hidden;
-  border: 1px solid #222;
-}
+  /* Borda Irregular Realista usando MASK (Substitui o clip-path cartoon) */
+  --mask: 
+    linear-gradient(#000 0 0) 50% / calc(100% - 10px) calc(100% - 10px) no-repeat,
+    radial-gradient(farthest-side, #000 98%, #0000) 0 0/20px 20px round;
+  -webkit-mask: var(--mask);
+  mask: var(--mask);
+  
+  /* Se o browser não suportar mask, usa um clip-path sutil de fallback */
+  clip-path: polygon(
+    0% 0%, 100% 0%, 100% 100%, 0% 100%,
+    1% 95%, 0% 90%, 1% 85%, 0% 80%, 1% 75%, 0% 70%, 1% 65%, 0% 60%, 1% 55%, 0% 50%, 1% 45%, 0% 40%, 1% 35%, 0% 30%, 1% 25%, 0% 20%, 1% 15%, 0% 10%, 1% 5%
+  );
 
-/* --- Banner (CORTE LIMPO - SEM RASGO) --- */
-.mikhail-header {
-  height: 240px;
-  width: 100%;
-  background-image: url('https://i.pinimg.com/736x/0f/fb/f4/0ffbf44fb1cee4ad983d0ef3a4ade63f.jpg');
-  background-size: cover;
-  background-position: center;
-  /* Borda inferior brilhante e fina (Efeito Laser) */
-  border-bottom: 2px solid var(--mk-accent);
-  box-shadow: 0 5px 20px rgba(155, 89, 182, 0.3); /* Glow sob a imagem */
+  padding: 60px 80px;
   position: relative;
-  z-index: 10;
+  z-index: 1;
+  color: #2b1d16;
 }
 
-/* --- Título --- */
-.mikhail-title-bar {
-  background: var(--mk-bg);
-  padding: 25px 40px 10px 40px;
-  text-align: right;
-  position: relative;
-  z-index: 5;
+/* Decorações Vegetais (Mesclagem Multiply) */
+.torn-paper::before, .torn-paper::after {
+  content: ''; position: absolute; pointer-events: none; z-index: -1;
+  opacity: 0.12; mix-blend-mode: multiply;
+}
+.torn-paper::before {
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('https://i.imgur.com/PR6AbSC.png') top 30px left 30px / 160px no-repeat, url('https://i.imgur.com/Jat8HBW.png') bottom 30px right 30px / 200px no-repeat;
+}
+.torn-paper::after {
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('https://i.imgur.com/HXcbUnZ.png') top 30px right 30px / 140px no-repeat, url('https://i.imgur.com/J2x1duv.png') bottom 50px left 50px / 160px no-repeat;
 }
 
-.mikhail-title-bar h1 {
-  margin: 0;
-  font-size: 34px;
-  text-transform: uppercase;
-  color: #fff;
-  letter-spacing: 2px;
-  font-weight: 800; /* Mais grosso */
-  text-shadow: 0 0 20px rgba(155, 89, 182, 0.6);
-  line-height: 1;
+/* --- CABEÇALHO --- */
+.torn-header {
+  text-align: center; margin-bottom: 40px; border-bottom: 1px solid rgba(43, 29, 22, 0.2); padding-bottom: 20px;
+}
+.torn-title {
+  font-family: 'Cinzel', serif; font-size: 32px; font-weight: 900; color: #2b1d16; text-transform: uppercase; letter-spacing: 4px; line-height: 1.1;
+}
+.torn-subtitle {
+  font-family: 'IM Fell English', serif; font-size: 18px; color: #8b4513; margin-top: 8px; font-style: italic; letter-spacing: 1px;
 }
 
-.mikhail-title-bar h2 {
-  margin: 5px 0 0 0;
-  font-size: 10px;
-  color: var(--mk-accent);
-  font-weight: 600;
-  letter-spacing: 5px;
-  text-transform: uppercase;
+/* --- STATUS (Estilo Minimalista/Sleek) --- */
+.torn-stats {
+  margin-bottom: 40px; padding: 0 10px;
+}
+.t-stat-row {
+  display: flex; align-items: center; margin-bottom: 15px; font-family: 'Cinzel', serif; font-size: 12px; color: #5e4b3f;
+}
+.t-label { width: 40px; font-weight: 700; letter-spacing: 1px; opacity: 0.8; }
+
+/* Barra Fina e Elegante */
+.t-bar-bg {
+  flex: 1; height: 4px; /* Bem fina */
+  background: rgba(43, 29, 22, 0.1); /* Cinza bem claro */
+  margin: 0 15px; border-radius: 2px;
+}
+.t-fill { height: 100%; width: 0%; border-radius: 2px; transition: width 1s ease-out; }
+
+/* Cores Sólidas e Foscas (Matte) */
+.nan-hp-fill { background: #8b0000; } /* Vermelho sangue seco */
+.nan-ea-fill { background: #c75b14; } /* Laranja queimado */
+.nan-san-fill { background: #516335; } /* Verde musgo */
+
+.t-val { width: 70px; text-align: right; font-family: 'Crimson Text', serif; font-weight: 600; font-size: 14px; color: #2b1d16; opacity: 0.7; }
+
+/* --- TEXTO --- */
+.torn-text {
+  font-family: 'Crimson Text', serif; font-size: 18px; line-height: 1.9; color: #2b1d16; text-align: justify; margin-bottom: 40px;
+}
+.torn-text::first-letter {
+  font-family: 'Cinzel', serif; font-size: 56px; float: left; margin-right: 12px; line-height: 0.8; color: #8b4513; font-weight: 700;
 }
 
-/* --- Corpo --- */
-.mikhail-body {
-  padding: 10px 0;
-  background: var(--mk-bg);
-  position: relative;
-  z-index: 2;
+/* --- SPOILER / NOTAS --- */
+.torn-notes { margin-bottom: 50px; position: relative; }
+.notes-label {
+  font-family: 'IM Fell English', serif; font-size: 20px; color: #5e4b3f; margin-bottom: 10px; display: block;
+}
+/* Estilo do Spoiler BBCode */
+.spoiler-box {
+  background: transparent; border-left: 3px solid #8b4513; padding-left: 15px; font-style: italic; color: #4a3b32;
 }
 
-/* --- STATUS (NOVO ESTILO: TECH STREAM) --- */
-.mikhail-stats-primary {
-  display: flex;
-  gap: 25px;
-  padding: 20px 40px;
+/* --- RODAPÉ --- */
+.torn-footer {
+  display: flex; justify-content: space-between; align-items: flex-end; margin-top: 40px; padding-top: 20px; border-top: 1px solid rgba(43, 29, 22, 0.1);
 }
 
-.mk-stat-group { flex: 1; }
-
-.mk-stat-label {
-  font-size: 9px;
-  font-weight: 700;
-  color: #555;
-  margin-bottom: 8px;
-  display: flex;
-  justify-content: space-between;
-  text-transform: uppercase;
-  letter-spacing: 1px;
+/* Card Gengar (Estilo Rascunho) */
+.gengar-wrapper {
+  display: flex; align-items: center; opacity: 0.9;
 }
-
-.mk-bar-bg {
-  width: 100%;
-  height: 6px; /* Mais fino */
-  background: #1a1a1a; /* Fundo bem escuro */
-  border-radius: 2px; /* Quase quadrado */
-  border: 1px solid #333; /* Moldura fina */
-  overflow: hidden;
+.g-avatar {
+  width: 45px; height: 45px; border-radius: 50%;
+  background: url('https://i.pinimg.com/1200x/97/27/4f/97274fe18acf564f54fd89fa8f036e9e.jpg') center/cover;
+  border: 2px solid #5e4b3f; margin-right: 12px; filter: grayscale(30%);
 }
+.g-info { display: flex; flex-direction: column; }
+.g-name { font-family: 'Cinzel', serif; font-weight: 700; color: #4b0082; font-size: 14px; margin-bottom: 2px; }
+.g-quote { font-style: italic; font-size: 12px; color: #5e4b3f; font-family: 'Crimson Text', serif; }
+/* Barra mini do gengar */
+.g-bar-mini { width: 80px; height: 3px; background: rgba(0,0,0,0.1); margin-bottom: 3px; border-radius: 1px; }
+.g-bar-fill-mini { height: 100%; background: #4b0082; width: 0%; border-radius: 1px; }
 
-.mk-bar-fill {
-  height: 100%;
-  width: 0%;
-  border-radius: 1px;
-  transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
+/* ASSINATURA (Via CSS) */
+.sig-box::after {
+  content: 'Nan Hazu'; /* Texto injetado aqui */
+  font-family: 'La Belle Aurore', cursive;
+  font-size: 42px;
+  color: #2b1d16;
+  transform: rotate(-3deg);
+  display: block;
+  opacity: 0.85;
 }
 
-/* Efeito de brilho na ponta da barra (Head Glow) */
-.mk-bar-fill::after {
-  content: '';
-  position: absolute;
-  top: 0; right: 0; bottom: 0;
-  width: 10px; /* Ponta brilhante */
-  background: rgba(255,255,255,0.8);
-  box-shadow: 0 0 10px #fff;
-  border-radius: 2px;
-}
+.nan-source-text { display: none; }
 
-/* Cores Tech Neon */
-.mikhail-hp-fill { 
-  background: linear-gradient(90deg, #c0392b, #ff7675); 
-  box-shadow: 0 0 10px rgba(255, 118, 117, 0.5);
-}
-.mikhail-ea-fill { 
-  background: linear-gradient(90deg, #8e44ad, #a29bfe); 
-  box-shadow: 0 0 10px rgba(162, 155, 254, 0.5);
-}
-.mikhail-san-fill { 
-  background: linear-gradient(90deg, #16a085, #55efc4); 
-  box-shadow: 0 0 10px rgba(85, 239, 196, 0.5);
-}
-
-/* --- Conteúdo --- */
-.mikhail-content {
-  padding: 10px 40px 30px 40px;
-  font-size: 13px;
-  text-align: justify;
-  color: #a0a0a0;
-}
-
-.mikhail-content strong, .mikhail-content b {
-  color: #d1a5ff; font-weight: 700; text-shadow: 0 0 8px rgba(155, 89, 182, 0.6);
-}
-
-.mikhail-content em, .mikhail-content i {
-  color: #fff; font-style: italic; opacity: 0.8;
-}
-
-/* --- RODAPÉ & PARTÍCULAS --- */
-.mikhail-footer-area {
-  position: relative;
-  background: #000;
-  overflow: hidden;
-  padding: 25px 0;
-  border-top: 1px solid #222;
-  min-height: 200px;
-}
-
-/* Partículas */
-.mk-particles {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  z-index: 0;
-  opacity: 0.7; 
-  pointer-events: none;
-}
-
-/* Considerações (Clean Box) */
-.mikhail-notes {
-  margin: 0 40px 25px 40px;
-  padding: 20px 25px;
-  border-radius: 4px;
-  /* Fundo preto sólido com leve transparência para efeito vidro fosco se o navegador suportar */
-  background: rgba(18, 18, 18, 0.95); 
-  border-left: 3px solid var(--mk-accent); /* Apenas barra lateral, sem borda total */
-  position: relative;
-  z-index: 2; 
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
-}
-
-.mikhail-notes::before {
-  content: 'CURSED';
-  position: absolute;
-  top: -10px;
-  right: 10px; /* Mudei para direita para ficar dinâmico */
-  background: #000;
-  padding: 2px 8px;
-  font-size: 9px;
-  color: var(--mk-accent);
-  font-weight: bold;
-  border: 1px solid #333;
-  letter-spacing: 1px;
-}
-
-.mikhail-notes span { font-size: 12px; color: #777; font-style: italic; display: block; }
-
-/* Sadako & Assinatura */
-.mikhail-footer-content {
-  padding: 0 40px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: relative;
-  z-index: 2;
-}
-
-/* Card Sadako Tech */
-.sadako-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 15px;
-  padding: 10px 15px; 
-  background: rgba(20, 20, 20, 0.9);
-  border: 1px solid #333;
-  border-radius: 60px; /* Pílula completa aqui fica bom */
-  min-width: 200px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-}
-
-.sadako-avatar {
-  width: 48px; height: 48px; border-radius: 50%;
-  background-image: url('https://i.pinimg.com/736x/91/01/6d/91016dfb9943e90d5f511c1c2c42a195.jpg');
-  background-size: cover; background-position: center;
-  border: 2px solid #333;
-  filter: grayscale(30%); /* Toque premium */
-}
-
-.sadako-info { display: flex; flex-direction: column; gap: 4px; flex-grow: 1; }
-.sadako-row { display: flex; align-items: center; gap: 8px; font-size: 10px; color: #888; line-height: 1; }
-.sadako-label { font-weight: 700; width: 14px; color: #bbb; }
-.sadako-bar-bg { flex-grow: 1; height: 4px; background: #000; border-radius: 2px; min-width: 50px; }
-.sadako-hp-fill { background: #a29bfe; height: 100%; width: 0%; border-radius: 2px; }
-.sadako-ea-fill { background: #74b9ff; height: 100%; width: 0%; border-radius: 2px; }
-.sadako-hp-val, .sadako-ea-val { font-size: 9px; font-family: monospace; color: #666; white-space: nowrap; min-width: 50px; text-align: right; }
-
-/* Assinatura CSS */
-.mikhail-sig-container { display: flex; align-items: center; gap: 15px; }
-.sig-line { height: 40px; width: 1px; background: #333; }
-.mikhail-signature::after { 
-  content: 'Mikhail Okkotsu'; 
-  font-family: 'Montserrat', sans-serif; 
-  font-weight: 700; 
-  font-size: 18px; 
-  color: #fff; 
-  text-transform: uppercase; 
-  letter-spacing: 1px; 
-  text-shadow: 0 0 20px rgba(155, 89, 182, 0.8);
-}
-
-/* --- PARTÍCULAS (MÁXIMA DENSIDADE) --- */
-#stars {
-  width: 1px; height: 1px; background: transparent;
-  box-shadow: 
-    100px 200px #FFF, 250px 500px #9b59b6, 400px 100px #FFF, 500px 600px #9b59b6, 600px 300px #FFF, 750px 800px #9b59b6, 100px 1200px #FFF, 300px 1500px #9b59b6, 900px 100px #FFF, 50px 400px #9b59b6, 650px 10px #FFF, 20px 900px #9b59b6, 1100px 500px #FFF, 1200px 900px #9b59b6, 1300px 200px #FFF, 1400px 600px #9b59b6, 150px 1100px #FFF, 350px 1300px #9b59b6, 550px 1500px #FFF, 750px 1700px #9b59b6, 850px 400px #FFF, 950px 700px #9b59b6, 1050px 200px #FFF, 1150px 600px #9b59b6, 1250px 800px #FFF, 1350px 1200px #9b59b6, 1450px 1400px #FFF, 1550px 1600px #9b59b6, 1650px 100px #FFF, 1750px 300px #9b59b6, 1850px 500px #FFF, 1950px 700px #9b59b6, 50px 1800px #FFF, 250px 1900px #9b59b6, 450px 200px #FFF, 650px 400px #9b59b6, 20px 20px #FFF, 1900px 1900px #9b59b6;
-  animation: animStar 15s linear infinite;
-}
-#stars:after {
-  content: " "; position: absolute; top: 2000px; width: 1px; height: 1px; background: transparent;
-  box-shadow: 
-    100px 200px #FFF, 250px 500px #9b59b6, 400px 100px #FFF, 500px 600px #9b59b6, 600px 300px #FFF, 750px 800px #9b59b6, 100px 1200px #FFF, 300px 1500px #9b59b6, 900px 100px #FFF, 50px 400px #9b59b6, 650px 10px #FFF, 20px 900px #9b59b6, 1100px 500px #FFF, 1200px 900px #9b59b6, 1300px 200px #FFF, 1400px 600px #9b59b6, 150px 1100px #FFF, 350px 1300px #9b59b6, 550px 1500px #FFF, 750px 1700px #9b59b6, 850px 400px #FFF, 950px 700px #9b59b6, 1050px 200px #FFF, 1150px 600px #9b59b6, 1250px 800px #FFF, 1350px 1200px #9b59b6, 1450px 1400px #FFF, 1550px 1600px #9b59b6, 1650px 100px #FFF, 1750px 300px #9b59b6, 1850px 500px #FFF, 1950px 700px #9b59b6, 50px 1800px #FFF, 250px 1900px #9b59b6, 450px 200px #FFF, 650px 400px #9b59b6, 20px 20px #FFF, 1900px 1900px #9b59b6;
-}
-
-#stars2 {
-  width: 2px; height: 2px; background: transparent;
-  box-shadow: 
-    120px 150px #9b59b6, 300px 400px #FFF, 500px 700px #9b59b6, 700px 1100px #FFF, 900px 1300px #9b59b6, 1100px 100px #FFF, 1300px 500px #9b59b6, 1500px 900px #FFF, 1700px 1200px #9b59b6, 1900px 1600px #FFF, 200px 1800px #9b59b6, 400px 50px #FFF, 600px 250px #9b59b6, 800px 550px #FFF, 1000px 850px #9b59b6, 1200px 1150px #FFF, 1400px 1450px #9b59b6, 1600px 1750px #FFF, 1800px 50px #9b59b6, 50px 350px #FFF, 250px 650px #9b59b6, 450px 950px #FFF, 650px 1250px #9b59b6, 850px 1550px #FFF;
-  animation: animStar 25s linear infinite;
-}
-#stars2:after {
-  content: " "; position: absolute; top: 2000px; width: 2px; height: 2px; background: transparent;
-  box-shadow: 
-    120px 150px #9b59b6, 300px 400px #FFF, 500px 700px #9b59b6, 700px 1100px #FFF, 900px 1300px #9b59b6, 1100px 100px #FFF, 1300px 500px #9b59b6, 1500px 900px #FFF, 1700px 1200px #9b59b6, 1900px 1600px #FFF, 200px 1800px #9b59b6, 400px 50px #FFF, 600px 250px #9b59b6, 800px 550px #FFF, 1000px 850px #9b59b6, 1200px 1150px #FFF, 1400px 1450px #9b59b6, 1600px 1750px #FFF, 1800px 50px #9b59b6, 50px 350px #FFF, 250px 650px #9b59b6, 450px 950px #FFF, 650px 1250px #9b59b6, 850px 1550px #FFF;
-}
-
-#stars3 {
-  width: 3px; height: 3px; background: transparent;
-  box-shadow: 
-    100px 1000px #a29bfe, 600px 500px #FFF, 1100px 1500px #a29bfe, 1600px 200px #FFF, 300px 1800px #a29bfe, 800px 1200px #FFF, 1300px 600px #a29bfe, 1800px 100px #FFF, 400px 800px #a29bfe, 900px 1400px #FFF, 1400px 400px #a29bfe, 1900px 900px #FFF, 150px 50px #FFF, 1850px 1850px #a29bfe;
-  animation: animStar 30s linear infinite;
-}
-#stars3:after {
-  content: " "; position: absolute; top: 2000px; width: 3px; height: 3px; background: transparent;
-  box-shadow: 
-    100px 1000px #a29bfe, 600px 500px #FFF, 1100px 1500px #a29bfe, 1600px 200px #FFF, 300px 1800px #a29bfe, 800px 1200px #FFF, 1300px 600px #a29bfe, 1800px 100px #FFF, 400px 800px #a29bfe, 900px 1400px #FFF, 1400px 400px #a29bfe, 1900px 900px #FFF, 150px 50px #FFF, 1850px 1850px #a29bfe;
-}
-
-@keyframes animStar {
-  from { transform: translateY(0px); }
-  to { transform: translateY(-2000px); }
+/* MOBILE */
+@media (max-width: 768px) {
+  .torn-paper { padding: 40px 25px; mask: none; -webkit-mask: none; border: 1px solid rgba(0,0,0,0.1); } /* Remove mask pesada no mobile */
+  .torn-footer { flex-direction: column; align-items: center; gap: 30px; }
+  .sig-box { text-align: center; }
+  .torn-title { font-size: 26px; }
+  .torn-text { font-size: 16px; }
+  .t-val { font-size: 12px; }
 }
