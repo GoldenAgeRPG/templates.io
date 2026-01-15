@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Cinzel+Decorative:wght@700&display=swap');
 
 :root {
-  --ink-primary: #1a1510;       /* Preto quase marrom, tinta velha */
-  --ink-accent: #5e1818;        /* Sangue seco */
-  --paper-base: #d4c5a3;        /* Cor base do papel */
-  --gengar-purple: #4a3b59; 
-  --burn-edge: rgba(43, 29, 14, 0.6); /* Sombra de queimado nas bordas */
-  --stain-color: rgba(0,0,0,0.15);    /* Manchas */
+  /* NOVAS CORES PARA FUNDO ESCURO */
+  --ink-primary: #e8dcc5;       /* Cor de pergaminho claro para texto principal */
+  --ink-accent: #ff6b6b;        /* Vermelho vivo para destaque */
+  --paper-base: #1a1510;        /* Cor de fundo de segurança (escuro) */
+  --gengar-purple: #c4a7e6;     /* Roxo mais claro e vibrante para o Gengar */
+  --border-light: rgba(232, 220, 197, 0.3); /* Bordas sutis claras */
 }
 
 /* --- CONTAINER PRINCIPAL --- */
@@ -15,44 +15,33 @@
   max-width: 650px;
   width: 95%;
   margin: 50px auto;
-  padding: 80px 60px 90px 60px; /* Espaço para as bordas "sujas" */
+  padding: 60px 50px 80px 50px; /* Padding ajustado para bordas retas */
   color: var(--ink-primary);
   font-family: 'Spectral', serif;
   
-  /* FUNDO COMPLEXO: Imagem + Gradientes de Sujeira */
   background-color: var(--paper-base);
-  /* Substitua a URL abaixo pela textura de papel enviada */
-  background-image: 
-    linear-gradient(to bottom right, var(--burn-edge), transparent 20%, transparent 80%, var(--burn-edge)),
-    linear-gradient(to bottom left, var(--burn-edge), transparent 20%, transparent 80%, var(--burn-edge)),
-    radial-gradient(circle at 50% 50%, transparent 60%, rgba(60, 40, 20, 0.2)),
-    url('https://i.imgur.com/A0eo2NP.png'); 
-  background-size: cover, cover, cover, cover;
-  background-blend-mode: multiply; /* Mistura as camadas para escurecer */
-
-  /* Sombra interna para dar profundidade nas bordas rasgadas */
-  box-shadow: inset 0 0 60px 20px rgba(20, 10, 0, 0.4);
-
-  /* RECORTE ORGÂNICO (Caótico e menos geométrico) */
-  /* Nota: O drop-shadow abaixo faz a sombra seguir o recorte */
-  filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.6));
+  /* NOVA URL DA IMAGEM */
+  background-image: url('https://i.imgur.com/A0eo2NP.png');
+  /* 'cover' força a imagem a preencher tudo, cortando as bordas transparentes */
+  background-size: cover;
+  background-position: center;
   
-  clip-path: polygon(
-    1% 2%, 3% 1%, 6% 3%, 9% 1%, 12% 2%, 16% 0%, 20% 2%, 25% 1%, 29% 3%, 34% 1%, 38% 2%, 42% 1%, 46% 3%, 50% 0%, 54% 2%, 58% 1%, 63% 3%, 67% 1%, 71% 2%, 75% 1%, 79% 3%, 83% 1%, 87% 2%, 91% 1%, 95% 3%, 98% 1%, 100% 4%, 
-    99% 8%, 97% 12%, 99% 17%, 98% 22%, 100% 26%, 98% 31%, 99% 36%, 97% 41%, 99% 46%, 98% 51%, 100% 56%, 98% 61%, 99% 66%, 97% 71%, 99% 77%, 98% 82%, 100% 87%, 98% 92%, 99% 96%, 
-    96% 99%, 92% 97%, 88% 99%, 84% 97%, 80% 99%, 76% 97%, 72% 99%, 68% 97%, 64% 99%, 60% 97%, 56% 99%, 52% 97%, 48% 99%, 44% 97%, 40% 99%, 36% 97%, 32% 99%, 28% 97%, 24% 99%, 20% 97%, 16% 99%, 12% 97%, 8% 99%, 4% 97%, 1% 99%, 
-    2% 94%, 0% 90%, 2% 86%, 1% 81%, 3% 76%, 0% 72%, 2% 67%, 1% 62%, 3% 57%, 0% 52%, 2% 47%, 1% 42%, 3% 37%, 0% 32%, 2% 27%, 1% 22%, 3% 17%, 0% 12%, 2% 7%
-  );
+  /* Bordas retas e sombra padrão */
+  border: 2px solid #3a3025; /* Borda sutil escura para definição */
+  box-shadow: 0 15px 40px rgba(0,0,0,0.9); /* Sombra pesada para destacar o bloco */
+  border-radius: 4px; /* Leve arredondamento nos cantos */
 }
 
 /* --- HEADER --- */
 .book-header {
   text-align: center;
   margin-bottom: 35px;
-  border-bottom: 2px solid var(--ink-primary);
+  /* Borda clara para contraste */
+  border-bottom: 2px solid var(--border-light);
   padding-bottom: 20px;
-  mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent); /* Desvanece a linha nas pontas */
-  -webkit-mask-image: linear-gradient(to right, transparent, black 20%, black 80%, transparent);
+  /* Máscara para desvanecer a linha nas pontas (mantido, fica bonito) */
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
 
 .book-title {
@@ -64,15 +53,15 @@
   margin: 0;
   line-height: 0.9;
   letter-spacing: 2px;
-  text-shadow: 2px 2px 0px rgba(180, 160, 140, 0.5);
+  /* Sombra clara sutil (glow) em vez de sombra escura */
+  text-shadow: 0px 0px 8px rgba(232, 220, 197, 0.3);
 }
 
 .book-subtitle {
   font-family: 'Dancing Script', cursive;
   font-size: 1.6em;
   color: var(--ink-accent);
-  margin-top: 8px;
-  transform: rotate(-2deg); /* Levemente torto */
+  margin-top: 10px;
 }
 
 /* --- STATUS --- */
@@ -81,11 +70,11 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   margin-bottom: 35px;
-  /* Fundo de "anotação" */
-  background: rgba(0, 0, 0, 0.03);
+  background: rgba(0, 0, 0, 0.3); /* Fundo mais escuro para o box de status */
   padding: 15px;
-  border: 1px solid rgba(0,0,0,0.1);
-  box-shadow: 2px 2px 5px rgba(0,0,0,0.05);
+  border: 1px solid var(--border-light);
+  border-radius: 4px;
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
 }
 
 .book-stat-item { display: flex; flex-direction: column; gap: 5px; }
@@ -97,29 +86,32 @@
   color: var(--ink-primary);
   text-align: center;
   text-transform: uppercase;
-  opacity: 0.8;
+  opacity: 0.9;
+  letter-spacing: 1px;
 }
 
 .book-bar-wrapper {
-  width: 100%; height: 6px;
-  background: rgba(44, 36, 27, 0.2);
-  border: 1px solid var(--ink-primary);
+  width: 100%; height: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid var(--border-light); /* Borda clara */
   border-radius: 2px;
   position: relative;
   overflow: hidden;
 }
 
-/* Cores das barras com textura leve */
-.nan-hp-fill { background: var(--ink-accent); height: 100%; transition: width 0.5s; box-shadow: inset 0 0 5px rgba(0,0,0,0.3); }
-.nan-ea-fill { background: var(--ink-primary); height: 100%; transition: width 0.5s; box-shadow: inset 0 0 5px rgba(0,0,0,0.3); }
-.nan-san-fill { background: #3d5c5c; height: 100%; transition: width 0.5s; box-shadow: inset 0 0 5px rgba(0,0,0,0.3); }
+/* Cores das barras (mais vibrantes para o escuro) */
+.nan-hp-fill { background: linear-gradient(90deg, #8b0000, var(--ink-accent)); height: 100%; transition: width 0.5s; box-shadow: 0 0 10px var(--ink-accent); }
+.nan-ea-fill { background: linear-gradient(90deg, #cbb38d, var(--ink-primary)); height: 100%; transition: width 0.5s; box-shadow: 0 0 10px var(--ink-primary); }
+.nan-san-fill { background: linear-gradient(90deg, #2a4d4d, #598c8c); height: 100%; transition: width 0.5s; box-shadow: 0 0 10px #598c8c; }
 
 .nan-hp-val, .nan-ea-val, .nan-san-val {
   font-family: 'Spectral', serif;
-  font-size: 0.85em;
+  font-size: 0.9em;
   text-align: center;
   font-weight: 700;
-  margin-top: 2px;
+  margin-top: 4px;
+  color: var(--ink-primary);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
 /* --- CONTEÚDO --- */
@@ -128,7 +120,7 @@
   line-height: 1.9;
   text-align: justify;
   margin-bottom: 40px;
-  color: #222;
+  color: var(--ink-primary); /* Garante que o texto corrido seja claro */
 }
 
 .book-content::first-letter {
@@ -139,7 +131,7 @@
   padding-right: 12px;
   padding-top: 5px;
   color: var(--ink-accent);
-  text-shadow: 2px 2px 0px rgba(0,0,0,0.1);
+  text-shadow: 0px 0px 10px rgba(255, 107, 107, 0.4);
 }
 
 .book-content b { color: var(--ink-accent); font-weight: 700; }
@@ -147,26 +139,33 @@
 /* --- EXTRAS (INGREDIENTES) --- */
 .book-extras {
   margin: 0 10px 40px 10px;
-  padding: 20px;
+  padding: 25px;
   position: relative;
-  /* Visual de "papel colado" ou nota */
-  border-top: 1px dashed var(--ink-primary);
-  border-bottom: 1px dashed var(--ink-primary);
+  border-top: 1px dashed var(--border-light);
+  border-bottom: 1px dashed var(--border-light);
   font-size: 0.95em;
-  background: rgba(255, 255, 255, 0.1); /* Leve clareamento */
+  background: rgba(0, 0, 0, 0.2); /* Fundo levemente mais escuro */
+  color: var(--ink-primary);
 }
 
-/* Título Injetado via CSS (#3) */
+/* Título Injetado via CSS (#3) - Cor ajustada */
 .book-extras::before {
   content: 'Ingredientes';
   display: block;
   font-family: 'Dancing Script', cursive;
-  font-size: 1.8em;
-  color: var(--ink-primary);
-  margin-bottom: 15px;
+  font-size: 2em;
+  color: var(--ink-accent); /* Título em destaque */
+  margin-bottom: 20px;
   text-align: center;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
+  border-bottom: 1px solid var(--border-light);
+  padding-bottom: 10px;
 }
+
+/* Ajuste para os spoilers dentro dos extras ficarem visíveis */
+.book-extras .spoiler-content, .book-extras .spoiler-header {
+    color: var(--ink-primary);
+}
+
 
 /* --- RODAPÉ & ASSINATURA --- */
 .book-footer {
@@ -175,36 +174,40 @@
   justify-content: space-between;
   align-items: flex-end;
   position: relative;
+  border-top: 2px solid var(--border-light);
+  padding-top: 20px;
 }
 
 /* Shikigami */
-.gengar-container { width: 180px; opacity: 0.9; }
+.gengar-container { width: 180px; opacity: 1; }
 
 .gengar-label {
   font-family: 'Spectral', serif;
   font-style: italic;
   color: var(--gengar-purple);
-  font-size: 1em;
-  margin-bottom: 2px;
+  font-size: 1.1em;
+  margin-bottom: 4px;
   display: block;
-}
-
-.gengar-bar-wrapper {
-  width: 100%; height: 4px;
-  background: rgba(74, 59, 89, 0.1);
-  border: 1px solid var(--gengar-purple);
-}
-
-.gengar-hp-fill { background: var(--gengar-purple); height: 100%; }
-
-.gengar-hp-val {
-  font-size: 0.75em;
-  color: var(--gengar-purple);
-  float: right;
   font-weight: 600;
 }
 
-/* Assinatura CSS (#2) */
+.gengar-bar-wrapper {
+  width: 100%; height: 5px;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid var(--gengar-purple);
+}
+
+.gengar-hp-fill { background: var(--gengar-purple); height: 100%; box-shadow: 0 0 8px var(--gengar-purple); }
+
+.gengar-hp-val {
+  font-size: 0.8em;
+  color: var(--gengar-purple);
+  float: right;
+  font-weight: 700;
+  margin-top: 2px;
+}
+
+/* Assinatura CSS (#2) - Cor ajustada */
 .book-signature {
   position: relative;
   min-width: 150px;
@@ -214,20 +217,18 @@
 .book-signature::after {
   content: 'Nan Hazu';
   font-family: 'Dancing Script', cursive;
-  font-size: 2.5em;
-  color: var(--ink-primary);
+  font-size: 2.8em;
+  color: var(--ink-accent); /* Assinatura em destaque */
   display: block;
-  transform: rotate(-8deg); /* Rotação orgânica */
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
-  /* Efeito de tinta falhada */
-  mask-image: linear-gradient(to bottom, black 50%, rgba(0,0,0,0.8) 100%); 
-  -webkit-mask-image: linear-gradient(to bottom, black 50%, rgba(0,0,0,0.8) 100%);
+  transform: rotate(-5deg);
+  text-shadow: 0px 0px 10px rgba(0,0,0,0.5);
+  opacity: 0.9;
 }
 
 /* Responsividade */
 @media (max-width: 500px) {
-  .book-container { padding: 40px 25px; clip-path: none; border-radius: 5px; }
-  .book-stats-grid { grid-template-columns: 1fr; gap: 10px; }
-  .book-footer { flex-direction: column; align-items: center; gap: 25px; }
+  .book-container { padding: 40px 25px; }
+  .book-stats-grid { grid-template-columns: 1fr; gap: 15px; }
+  .book-footer { flex-direction: column; align-items: center; gap: 30px; }
   .book-signature { text-align: center; }
 }
