@@ -1,227 +1,468 @@
-@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Cinzel+Decorative:wght@700&display=swap');
+/* --- TEMPLATE: ANCIENT RECIPE BOOK (Nan Hazu) --- */
+/* Fontes: Cormorant Garamond para texto envelhecido, Shadows Into Light para título */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Shadows+Into+Light&family=Cinzel+Decorative:wght@400;700&display=swap');
 
 :root {
-  /* CORREÇÃO: Tinta escura para fundo claro */
-  --ink-primary: #1a0f0a;       /* Café quase preto */
-  --ink-accent: #8b0000;        /* Vermelho sangue seco (escuro) */
-  --paper-bg-color: #d4c5a3;    /* Cor de segurança */
-  --gengar-purple: #4a3b59;     /* Roxo escuro */
-  --border-ink: rgba(26, 15, 10, 0.4); /* Bordas escuras */
+  --parchment-dark: #3c2f2f;
+  --parchment-medium: #5d4a3c;
+  --parchment-light: #8b7355;
+  --parchment-bg: #f5e8d0;
+  --stain-brown: #4a3728;
+  --stain-red: #8b4513;
+  --ink-faded: #6b5a4d;
+  --ink-dark: #3c2a1e;
+  --blood-red: #8b0000;
+  --moss-green: #556b2f;
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes flicker {
+  0%, 100% { opacity: 0.95; }
+  50% { opacity: 0.85; }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-3px); }
 }
 
 /* --- CONTAINER PRINCIPAL --- */
-.book-container {
-  position: relative;
-  max-width: 650px;
+.ancient-book-container {
+  max-width: 750px;
   width: 95%;
-  margin: 50px auto;
-  /* Padding ajustado para o texto não encostar na borda da imagem */
-  padding: 80px 70px 90px 70px; 
-  color: var(--ink-primary);
-  font-family: 'Spectral', serif;
-  
-  /* Fundo */
-  background-color: var(--paper-bg-color);
-  background-image: url('https://i.imgur.com/A0eo2NP.png');
-  background-size: 100% 100%; /* Estica a imagem para cobrir tudo exato */
-  background-repeat: no-repeat;
-  
-  /* Removido bordas e sombras do container para focar na imagem do papel */
-  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  /* Sem borda CSS, deixa a borda da imagem atuar */
-  border: none; 
-}
-
-/* --- HEADER --- */
-.book-header {
-  text-align: center;
-  margin-bottom: 30px;
-  border-bottom: 2px solid var(--ink-primary);
-  padding-bottom: 15px;
-}
-
-.book-title {
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 2.4em;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: var(--ink-primary);
-  margin: 0;
-  line-height: 0.9;
-  letter-spacing: 1px;
-  text-shadow: 1px 1px 0px rgba(255,255,255,0.4); /* Sombra clara para relevo */
-}
-
-.book-subtitle {
-  font-family: 'Dancing Script', cursive;
-  font-size: 1.8em;
-  color: var(--ink-accent);
-  margin-top: 5px;
-  font-weight: 700;
-}
-
-/* --- STATUS --- */
-.book-stats-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 15px;
-  margin-bottom: 30px;
-  /* Fundo sutil para legibilidade */
-  background: rgba(26, 15, 10, 0.05); 
-  padding: 15px;
-  border: 1px solid var(--border-ink);
-  border-radius: 4px;
-}
-
-.book-stat-item { display: flex; flex-direction: column; gap: 5px; }
-
-.book-stat-label {
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 0.7em;
-  font-weight: bold;
-  color: var(--ink-primary);
-  text-align: center;
-  text-transform: uppercase;
-}
-
-.book-bar-wrapper {
-  width: 100%; height: 6px;
-  background: rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--ink-primary);
-  border-radius: 2px;
+  margin: 40px auto;
+  background-color: var(--parchment-bg);
+  color: var(--ink-dark);
+  font-family: 'Cormorant Garamond', serif;
+  position: relative;
   overflow: hidden;
+  padding: 0;
+  border-radius: 2px;
+  box-shadow: 
+    0 0 40px rgba(60, 47, 47, 0.5),
+    inset 0 0 100px rgba(139, 115, 85, 0.2);
 }
 
-/* Cores das barras (Escurecidas) */
-.nan-hp-fill { background: #8b0000; height: 100%; transition: width 0.5s; }
-.nan-ea-fill { background: #2c241b; height: 100%; transition: width 0.5s; }
-.nan-san-fill { background: #2f4f4f; height: 100%; transition: width 0.5s; }
+.ancient-book-container * { 
+  box-sizing: border-box;
+}
 
-.nan-hp-val, .nan-ea-val, .nan-san-val {
-  font-family: 'Spectral', serif;
-  font-size: 0.9em;
+/* Textura de fundo envelhecida */
+.ancient-book-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: 
+    url('https://i.imgur.com/A0eo2NP.png'),
+    radial-gradient(circle at 20% 30%, rgba(139, 115, 85, 0.15) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(75, 55, 40, 0.1) 0%, transparent 40%);
+  background-size: cover, auto, auto;
+  background-blend-mode: multiply;
+  opacity: 0.9;
+  animation: flicker 8s infinite ease-in-out;
+}
+
+/* Manchas de água/envelhecimento */
+.book-stain-1, .book-stain-2, .book-stain-3 {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.08;
+  mix-blend-mode: multiply;
+}
+
+.book-stain-1 {
+  width: 200px;
+  height: 150px;
+  background: var(--stain-brown);
+  top: 10%;
+  left: 5%;
+  transform: rotate(45deg);
+}
+
+.book-stain-2 {
+  width: 180px;
+  height: 180px;
+  background: var(--stain-red);
+  bottom: 15%;
+  right: 8%;
+  transform: rotate(-20deg);
+}
+
+.book-stain-3 {
+  width: 150px;
+  height: 100px;
+  background: var(--moss-green);
+  top: 40%;
+  left: 70%;
+  transform: rotate(15deg);
+}
+
+/* --- CABEÇALHO --- */
+.ancient-book-header {
+  position: relative;
+  z-index: 2;
   text-align: center;
+  padding: 40px 20px 20px;
+  border-bottom: 1px dashed var(--parchment-medium);
+  margin: 0 20px;
+}
+
+.ancient-book-title {
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 3.2em;
   font-weight: 700;
-  margin-top: 3px;
-  color: var(--ink-primary);
+  color: var(--parchment-dark);
+  text-shadow: 2px 2px 4px rgba(60, 47, 47, 0.2);
+  letter-spacing: 2px;
+  margin: 0;
+  line-height: 1;
+  position: relative;
+  display: inline-block;
+}
+
+.ancient-book-title::before,
+.ancient-book-title::after {
+  content: "✦";
+  color: var(--blood-red);
+  margin: 0 15px;
+  opacity: 0.6;
+}
+
+.ancient-book-subtitle {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.3em;
+  color: var(--ink-faded);
+  margin-top: 8px;
+  font-style: italic;
+  letter-spacing: 1px;
+  position: relative;
+  padding-bottom: 10px;
+}
+
+.ancient-book-subtitle::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 30%;
+  right: 30%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--parchment-medium), transparent);
+}
+
+/* --- SEÇÃO DE STATUS (HP, EA, SAN) --- */
+.ancient-book-stats {
+  position: relative;
+  z-index: 2;
+  background: rgba(245, 232, 208, 0.7);
+  padding: 25px 40px;
+  margin: 20px;
+  border-radius: 3px;
+  border: 1px solid rgba(139, 115, 85, 0.3);
+  box-shadow: 
+    inset 0 0 20px rgba(139, 115, 85, 0.1),
+    0 5px 15px rgba(60, 47, 47, 0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Contêiner para cada item de status */
+.book-status-item {
+  display: grid;
+  grid-template-columns: 80px 1fr 100px;
+  align-items: center;
+  gap: 20px;
+}
+
+.book-status-label {
+  font-family: 'Cinzel Decorative', serif;
+  font-weight: 700;
+  font-size: 1.1em;
+  color: var(--parchment-dark);
+  text-align: right;
+  position: relative;
+  padding-right: 10px;
+}
+
+.book-status-label::after {
+  content: ":";
+  position: absolute;
+  right: 0;
+}
+
+.book-status-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: 1.2em;
+  color: var(--blood-red);
+  text-align: right;
+  white-space: nowrap;
+}
+
+/* Barras de status */
+.book-status-bar-wrapper {
+  width: 100%;
+  height: 12px;
+  background: rgba(139, 115, 85, 0.2);
+  border: 1px solid rgba(139, 115, 85, 0.4);
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.book-status-bar-fill {
+  height: 100%;
+  display: block;
+  transition: width 0.8s ease-out;
+  border-radius: 5px;
+}
+
+/* Cores específicas para cada barra */
+.book-hp-fill {
+  background: linear-gradient(90deg, #8b0000, #d14334);
+  box-shadow: 0 0 5px rgba(139, 0, 0, 0.3);
+}
+
+.book-ea-fill {
+  background: linear-gradient(90deg, #2e4c6d, #4a77a0);
+  box-shadow: 0 0 5px rgba(46, 76, 109, 0.3);
+}
+
+.book-san-fill {
+  background: linear-gradient(90deg, #556b2f, #7c9c4f);
+  box-shadow: 0 0 5px rgba(85, 107, 47, 0.3);
+}
+
+/* --- IMAGEM --- */
+.ancient-book-image-wrapper {
+  padding: 20px 40px;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+}
+
+.ancient-book-frame {
+  width: 100%;
+  max-width: 400px;
+  height: 250px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  border: 1px solid rgba(139, 115, 85, 0.5);
+  box-shadow: 
+    0 5px 15px rgba(60, 47, 47, 0.3),
+    inset 0 0 20px rgba(139, 115, 85, 0.2);
+}
+
+.ancient-book-frame img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.5) contrast(1.1) brightness(0.95);
+  transition: transform 0.7s ease, filter 0.7s ease;
+}
+
+.ancient-book-frame:hover img {
+  transform: scale(1.03);
+  filter: sepia(0.3) contrast(1.2) brightness(1);
 }
 
 /* --- CONTEÚDO --- */
-.book-content {
-  font-size: 1.15em;
-  line-height: 1.8;
-  text-align: justify;
-  margin-bottom: 40px;
-  color: #1a0f0a; /* Garante preto */
-}
-
-.book-content::first-letter {
-  float: left;
-  font-family: 'Cinzel Decorative', serif;
-  font-size: 3.5em;
-  line-height: 0.8;
-  padding-right: 10px;
-  padding-top: 5px;
-  color: var(--ink-accent);
-}
-
-.book-content b { color: var(--ink-accent); font-weight: 700; }
-
-/* --- EXTRAS (INGREDIENTES) --- */
-.book-extras {
-  margin: 0 0 40px 0;
-  padding: 20px;
+.ancient-book-content {
   position: relative;
-  border-top: 1px dashed var(--ink-primary);
-  border-bottom: 1px dashed var(--ink-primary);
-  font-size: 0.95em;
+  z-index: 2;
+  padding: 30px 50px;
+  text-align: justify;
+  line-height: 1.8;
+  font-size: 1.15em;
   background: transparent;
-  color: var(--ink-primary);
+  margin: 0 20px;
+  border-top: 1px dashed rgba(139, 115, 85, 0.3);
+  border-bottom: 1px dashed rgba(139, 115, 85, 0.3);
 }
 
-/* Título Injetado */
-.book-extras::before {
+.ancient-book-content p {
+  margin-bottom: 1.2em;
+  text-indent: 1.5em;
+}
+
+.ancient-book-content b, 
+.ancient-book-content strong { 
+  color: var(--blood-red);
+  font-weight: 700;
+  font-family: 'Cormorant Garamond', serif;
+}
+
+.ancient-book-content i, 
+.ancient-book-content em { 
+  color: var(--parchment-medium);
+  font-style: italic;
+  font-weight: 600;
+}
+
+.ancient-book-content u {
+  text-decoration: underline;
+  text-decoration-color: var(--stain-red);
+  text-decoration-thickness: 1px;
+}
+
+/* --- SEÇÃO "INGREDIENTES" (Considerações) --- */
+.ancient-book-ingredients {
+  margin: 30px 50px;
+  padding: 25px;
+  position: relative;
+  z-index: 2;
+  border: 1px solid rgba(139, 115, 85, 0.4);
+  background: rgba(245, 232, 208, 0.8);
+  font-size: 0.95em;
+  color: var(--ink-faded);
+  border-radius: 3px;
+  box-shadow: 0 5px 15px rgba(60, 47, 47, 0.1);
+}
+
+.ancient-book-ingredients::before {
   content: 'Ingredientes';
   display: block;
-  font-family: 'Dancing Script', cursive;
-  font-size: 2em;
-  color: var(--ink-accent);
+  font-family: 'Cinzel Decorative', serif;
+  color: var(--parchment-dark);
+  font-size: 1.3em;
   margin-bottom: 15px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(139, 115, 85, 0.3);
   text-align: center;
+  letter-spacing: 1px;
 }
 
-/* Ajuste nos Spoilers (Forumeiros) para não ficar caixa cinza */
-.book-extras .spoiler-header {
-    background: transparent !important;
-    border: 1px solid var(--ink-primary) !important;
-    color: var(--ink-primary) !important;
-    font-weight: bold;
-}
-.book-extras .spoiler-content {
-    background: rgba(0,0,0,0.02) !important;
-    border: none !important;
-    color: var(--ink-primary) !important;
-}
-
-/* --- RODAPÉ & ASSINATURA --- */
-.book-footer {
-  margin-top: 20px;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  border-top: 2px solid var(--border-ink);
-  padding-top: 15px;
-}
-
-/* Shikigami */
-.gengar-container { width: 180px; }
-
-.gengar-label {
-  font-family: 'Spectral', serif;
-  font-style: italic;
-  color: var(--gengar-purple);
-  font-size: 1.1em;
-  font-weight: 700;
-  display: block;
-  margin-bottom: 3px;
-}
-
-.gengar-bar-wrapper {
-  width: 100%; height: 5px;
-  background: rgba(74, 59, 89, 0.1);
-  border: 1px solid var(--gengar-purple);
-}
-
-.gengar-hp-fill { background: var(--gengar-purple); height: 100%; }
-
-.gengar-hp-val {
-  font-size: 0.8em;
-  color: var(--gengar-purple);
-  float: right;
-  font-weight: 700;
-}
-
-/* Assinatura */
-.book-signature {
+/* --- RODAPÉ COM SHIKIGAMI E ASSINATURA --- */
+.ancient-book-footer {
   position: relative;
-  min-width: 150px;
+  z-index: 2;
+  padding: 25px 40px;
+  margin: 0 20px 20px;
+  border-top: 1px dashed rgba(139, 115, 85, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Status do Shikigami */
+.shikigami-status {
+  background: rgba(139, 115, 85, 0.1);
+  padding: 15px 25px;
+  border-radius: 3px;
+  border: 1px solid rgba(139, 115, 85, 0.3);
+}
+
+.shikigami-title {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 1.1em;
+  color: var(--parchment-dark);
+  margin-bottom: 10px;
+  text-align: center;
+  position: relative;
+}
+
+.shikigami-title::before,
+.shikigami-title::after {
+  content: "❧";
+  color: var(--blood-red);
+  margin: 0 10px;
+  opacity: 0.6;
+}
+
+.shikigami-hp-container {
+  display: grid;
+  grid-template-columns: 80px 1fr 80px;
+  align-items: center;
+  gap: 15px;
+}
+
+.shikigami-label {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-size: 1em;
+  color: var(--ink-faded);
   text-align: right;
 }
 
-.book-signature::after {
-  content: 'Nan Hazu';
-  font-family: 'Dancing Script', cursive;
-  font-size: 2.5em;
-  color: var(--ink-accent);
-  display: block;
-  transform: rotate(-6deg);
-  font-weight: bold;
+.shikigami-value {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: 1.1em;
+  color: var(--blood-red);
+  text-align: right;
 }
 
-/* Responsividade */
-@media (max-width: 500px) {
-  .book-container { padding: 60px 30px; background-size: cover; }
-  .book-stats-grid { grid-template-columns: 1fr; }
-  .book-footer { flex-direction: column; align-items: center; gap: 20px; }
-  .book-signature { text-align: center; }
+.shikigami-bar-wrapper {
+  width: 100%;
+  height: 10px;
+  background: rgba(139, 115, 85, 0.2);
+  border: 1px solid rgba(139, 115, 85, 0.4);
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.shikigami-bar-fill {
+  height: 100%;
+  display: block;
+  transition: width 0.8s ease-out;
+  background: linear-gradient(90deg, #4a3728, #8b7355);
+  box-shadow: 0 0 5px rgba(139, 115, 85, 0.4);
+}
+
+/* Assinatura */
+.ancient-book-signature {
+  text-align: center;
+  padding-top: 15px;
+  border-top: 1px dashed rgba(139, 115, 85, 0.3);
+  position: relative;
+}
+
+.ancient-book-signature::after {
+  content: 'Nan Hazu';
+  font-family: 'Shadows Into Light', cursive;
+  font-size: 2.5em;
+  color: var(--parchment-dark);
+  text-shadow: 2px 2px 4px rgba(60, 47, 47, 0.2);
+  letter-spacing: 3px;
+  display: block;
+  animation: float 4s infinite ease-in-out;
+}
+
+/* --- RESPONSIVIDADE --- */
+@media (max-width: 650px) {
+  .ancient-book-container { 
+    width: 100%; 
+    margin: 20px auto;
+  }
+  
+  .ancient-book-title { 
+    font-size: 2.5em; 
+  }
+  
+  .ancient-book-content, 
+  .ancient-book-stats, 
+  .ancient-book-ingredients { 
+    padding-left: 25px; 
+    padding-right: 25px; 
+    margin-left: 15px;
+    margin-right: 15px;
+  }
+  
+  .book-status-item,
+  .shikigami-hp-container {
+    grid-template-columns: 70px 1fr 70px;
+    gap: 12px;
+  }
+  
+  .ancient-book-footer {
+    padding-left: 25px;
+    padding-right: 25px;
+    margin-left: 15px;
+    margin-right: 15px;
+  }
 }
