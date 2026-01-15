@@ -241,3 +241,44 @@
   .book-footer { flex-direction: column; align-items: center; gap: 20px; }
   .book-signature { text-align: center; }
 }
+
+/* --- IMAGENS DE TINTA / MARCA D'ÁGUA --- */
+
+/* Classe geral para imagens que devem parecer impressas no papel */
+.ink-overlay {
+  position: absolute;
+  pointer-events: none; /* Deixa clicar no texto através da imagem */
+  mix-blend-mode: multiply; /* O TRUQUE: Faz o branco sumir e o preto tingir o fundo */
+  filter: grayscale(100%) contrast(1.2) brightness(0.95); /* Preto e branco e alto contraste */
+  opacity: 0.7; /* Transparência para parecer desbotado */
+  z-index: 0; /* Fica ATRÁS do texto */
+}
+
+/* Imagem 1: Ilustração do Personagem (Lateral Direita) */
+.ink-char-illustration {
+  top: 180px; /* Ajuste a altura conforme necessário */
+  right: 10px;
+  width: 280px; /* Tamanho da imagem */
+  max-width: 45%;
+  transform: rotate(2deg); /* Leve inclinação natural */
+  /* Máscara para suavizar as bordas da imagem e não ficar um quadrado duro */
+  mask-image: radial-gradient(circle, black 40%, transparent 95%);
+  -webkit-mask-image: radial-gradient(circle, black 40%, transparent 95%);
+}
+
+/* Imagem 2: Carimbo/Gengar (Canto Inferior Esquerdo) */
+.ink-gengar-stamp {
+  bottom: 25px;
+  left: 30px;
+  width: 140px;
+  transform: rotate(-10deg); /* Rotação de carimbo */
+  opacity: 0.85; /* Um pouco mais forte que a ilustração */
+  z-index: 3; /* Este fica SOBRE o rodapé */
+}
+
+/* GARANTIA DE LEITURA */
+/* Isso garante que o texto fique ACIMA da ilustração do fundo */
+.book-content, .book-stats-grid, .book-header, .book-extras {
+  position: relative;
+  z-index: 2;
+}
