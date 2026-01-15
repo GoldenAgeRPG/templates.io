@@ -1,12 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Cinzel+Decorative:wght@700&display=swap');
 
 :root {
-  /* NOVAS CORES PARA FUNDO ESCURO */
-  --ink-primary: #e8dcc5;       /* Cor de pergaminho claro para texto principal */
-  --ink-accent: #ff6b6b;        /* Vermelho vivo para destaque */
-  --paper-base: #1a1510;        /* Cor de fundo de segurança (escuro) */
-  --gengar-purple: #c4a7e6;     /* Roxo mais claro e vibrante para o Gengar */
-  --border-light: rgba(232, 220, 197, 0.3); /* Bordas sutis claras */
+  /* CORREÇÃO: Tinta escura para fundo claro */
+  --ink-primary: #1a0f0a;       /* Café quase preto */
+  --ink-accent: #8b0000;        /* Vermelho sangue seco (escuro) */
+  --paper-bg-color: #d4c5a3;    /* Cor de segurança */
+  --gengar-purple: #4a3b59;     /* Roxo escuro */
+  --border-ink: rgba(26, 15, 10, 0.4); /* Bordas escuras */
 }
 
 /* --- CONTAINER PRINCIPAL --- */
@@ -15,33 +15,29 @@
   max-width: 650px;
   width: 95%;
   margin: 50px auto;
-  padding: 60px 50px 80px 50px; /* Padding ajustado para bordas retas */
+  /* Padding ajustado para o texto não encostar na borda da imagem */
+  padding: 80px 70px 90px 70px; 
   color: var(--ink-primary);
   font-family: 'Spectral', serif;
   
-  background-color: var(--paper-base);
-  /* NOVA URL DA IMAGEM */
+  /* Fundo */
+  background-color: var(--paper-bg-color);
   background-image: url('https://i.imgur.com/A0eo2NP.png');
-  /* 'cover' força a imagem a preencher tudo, cortando as bordas transparentes */
-  background-size: cover;
-  background-position: center;
+  background-size: 100% 100%; /* Estica a imagem para cobrir tudo exato */
+  background-repeat: no-repeat;
   
-  /* Bordas retas e sombra padrão */
-  border: 2px solid #3a3025; /* Borda sutil escura para definição */
-  box-shadow: 0 15px 40px rgba(0,0,0,0.9); /* Sombra pesada para destacar o bloco */
-  border-radius: 4px; /* Leve arredondamento nos cantos */
+  /* Removido bordas e sombras do container para focar na imagem do papel */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+  /* Sem borda CSS, deixa a borda da imagem atuar */
+  border: none; 
 }
 
 /* --- HEADER --- */
 .book-header {
   text-align: center;
-  margin-bottom: 35px;
-  /* Borda clara para contraste */
-  border-bottom: 2px solid var(--border-light);
-  padding-bottom: 20px;
-  /* Máscara para desvanecer a linha nas pontas (mantido, fica bonito) */
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  margin-bottom: 30px;
+  border-bottom: 2px solid var(--ink-primary);
+  padding-bottom: 15px;
 }
 
 .book-title {
@@ -52,162 +48,160 @@
   color: var(--ink-primary);
   margin: 0;
   line-height: 0.9;
-  letter-spacing: 2px;
-  /* Sombra clara sutil (glow) em vez de sombra escura */
-  text-shadow: 0px 0px 8px rgba(232, 220, 197, 0.3);
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 0px rgba(255,255,255,0.4); /* Sombra clara para relevo */
 }
 
 .book-subtitle {
   font-family: 'Dancing Script', cursive;
-  font-size: 1.6em;
+  font-size: 1.8em;
   color: var(--ink-accent);
-  margin-top: 10px;
+  margin-top: 5px;
+  font-weight: 700;
 }
 
 /* --- STATUS --- */
 .book-stats-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
-  gap: 20px;
-  margin-bottom: 35px;
-  background: rgba(0, 0, 0, 0.3); /* Fundo mais escuro para o box de status */
+  gap: 15px;
+  margin-bottom: 30px;
+  /* Fundo sutil para legibilidade */
+  background: rgba(26, 15, 10, 0.05); 
   padding: 15px;
-  border: 1px solid var(--border-light);
+  border: 1px solid var(--border-ink);
   border-radius: 4px;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
 }
 
 .book-stat-item { display: flex; flex-direction: column; gap: 5px; }
 
 .book-stat-label {
   font-family: 'Cinzel Decorative', serif;
-  font-size: 0.75em;
+  font-size: 0.7em;
   font-weight: bold;
   color: var(--ink-primary);
   text-align: center;
   text-transform: uppercase;
-  opacity: 0.9;
-  letter-spacing: 1px;
 }
 
 .book-bar-wrapper {
-  width: 100%; height: 8px;
-  background: rgba(0, 0, 0, 0.5);
-  border: 1px solid var(--border-light); /* Borda clara */
+  width: 100%; height: 6px;
+  background: rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--ink-primary);
   border-radius: 2px;
-  position: relative;
   overflow: hidden;
 }
 
-/* Cores das barras (mais vibrantes para o escuro) */
-.nan-hp-fill { background: linear-gradient(90deg, #8b0000, var(--ink-accent)); height: 100%; transition: width 0.5s; box-shadow: 0 0 10px var(--ink-accent); }
-.nan-ea-fill { background: linear-gradient(90deg, #cbb38d, var(--ink-primary)); height: 100%; transition: width 0.5s; box-shadow: 0 0 10px var(--ink-primary); }
-.nan-san-fill { background: linear-gradient(90deg, #2a4d4d, #598c8c); height: 100%; transition: width 0.5s; box-shadow: 0 0 10px #598c8c; }
+/* Cores das barras (Escurecidas) */
+.nan-hp-fill { background: #8b0000; height: 100%; transition: width 0.5s; }
+.nan-ea-fill { background: #2c241b; height: 100%; transition: width 0.5s; }
+.nan-san-fill { background: #2f4f4f; height: 100%; transition: width 0.5s; }
 
 .nan-hp-val, .nan-ea-val, .nan-san-val {
   font-family: 'Spectral', serif;
   font-size: 0.9em;
   text-align: center;
   font-weight: 700;
-  margin-top: 4px;
+  margin-top: 3px;
   color: var(--ink-primary);
-  text-shadow: 0 2px 4px rgba(0,0,0,0.8);
 }
 
 /* --- CONTEÚDO --- */
 .book-content {
-  font-size: 1.1em;
-  line-height: 1.9;
+  font-size: 1.15em;
+  line-height: 1.8;
   text-align: justify;
   margin-bottom: 40px;
-  color: var(--ink-primary); /* Garante que o texto corrido seja claro */
+  color: #1a0f0a; /* Garante preto */
 }
 
 .book-content::first-letter {
   float: left;
   font-family: 'Cinzel Decorative', serif;
-  font-size: 4em;
-  line-height: 0.75;
-  padding-right: 12px;
+  font-size: 3.5em;
+  line-height: 0.8;
+  padding-right: 10px;
   padding-top: 5px;
   color: var(--ink-accent);
-  text-shadow: 0px 0px 10px rgba(255, 107, 107, 0.4);
 }
 
 .book-content b { color: var(--ink-accent); font-weight: 700; }
 
 /* --- EXTRAS (INGREDIENTES) --- */
 .book-extras {
-  margin: 0 10px 40px 10px;
-  padding: 25px;
+  margin: 0 0 40px 0;
+  padding: 20px;
   position: relative;
-  border-top: 1px dashed var(--border-light);
-  border-bottom: 1px dashed var(--border-light);
+  border-top: 1px dashed var(--ink-primary);
+  border-bottom: 1px dashed var(--ink-primary);
   font-size: 0.95em;
-  background: rgba(0, 0, 0, 0.2); /* Fundo levemente mais escuro */
+  background: transparent;
   color: var(--ink-primary);
 }
 
-/* Título Injetado via CSS (#3) - Cor ajustada */
+/* Título Injetado */
 .book-extras::before {
   content: 'Ingredientes';
   display: block;
   font-family: 'Dancing Script', cursive;
   font-size: 2em;
-  color: var(--ink-accent); /* Título em destaque */
-  margin-bottom: 20px;
+  color: var(--ink-accent);
+  margin-bottom: 15px;
   text-align: center;
-  border-bottom: 1px solid var(--border-light);
-  padding-bottom: 10px;
 }
 
-/* Ajuste para os spoilers dentro dos extras ficarem visíveis */
-.book-extras .spoiler-content, .book-extras .spoiler-header {
-    color: var(--ink-primary);
+/* Ajuste nos Spoilers (Forumeiros) para não ficar caixa cinza */
+.book-extras .spoiler-header {
+    background: transparent !important;
+    border: 1px solid var(--ink-primary) !important;
+    color: var(--ink-primary) !important;
+    font-weight: bold;
 }
-
+.book-extras .spoiler-content {
+    background: rgba(0,0,0,0.02) !important;
+    border: none !important;
+    color: var(--ink-primary) !important;
+}
 
 /* --- RODAPÉ & ASSINATURA --- */
 .book-footer {
-  margin-top: 30px;
+  margin-top: 20px;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  position: relative;
-  border-top: 2px solid var(--border-light);
-  padding-top: 20px;
+  border-top: 2px solid var(--border-ink);
+  padding-top: 15px;
 }
 
 /* Shikigami */
-.gengar-container { width: 180px; opacity: 1; }
+.gengar-container { width: 180px; }
 
 .gengar-label {
   font-family: 'Spectral', serif;
   font-style: italic;
   color: var(--gengar-purple);
   font-size: 1.1em;
-  margin-bottom: 4px;
+  font-weight: 700;
   display: block;
-  font-weight: 600;
+  margin-bottom: 3px;
 }
 
 .gengar-bar-wrapper {
   width: 100%; height: 5px;
-  background: rgba(0,0,0,0.5);
+  background: rgba(74, 59, 89, 0.1);
   border: 1px solid var(--gengar-purple);
 }
 
-.gengar-hp-fill { background: var(--gengar-purple); height: 100%; box-shadow: 0 0 8px var(--gengar-purple); }
+.gengar-hp-fill { background: var(--gengar-purple); height: 100%; }
 
 .gengar-hp-val {
   font-size: 0.8em;
   color: var(--gengar-purple);
   float: right;
   font-weight: 700;
-  margin-top: 2px;
 }
 
-/* Assinatura CSS (#2) - Cor ajustada */
+/* Assinatura */
 .book-signature {
   position: relative;
   min-width: 150px;
@@ -217,18 +211,17 @@
 .book-signature::after {
   content: 'Nan Hazu';
   font-family: 'Dancing Script', cursive;
-  font-size: 2.8em;
-  color: var(--ink-accent); /* Assinatura em destaque */
+  font-size: 2.5em;
+  color: var(--ink-accent);
   display: block;
-  transform: rotate(-5deg);
-  text-shadow: 0px 0px 10px rgba(0,0,0,0.5);
-  opacity: 0.9;
+  transform: rotate(-6deg);
+  font-weight: bold;
 }
 
 /* Responsividade */
 @media (max-width: 500px) {
-  .book-container { padding: 40px 25px; }
-  .book-stats-grid { grid-template-columns: 1fr; gap: 15px; }
-  .book-footer { flex-direction: column; align-items: center; gap: 30px; }
+  .book-container { padding: 60px 30px; background-size: cover; }
+  .book-stats-grid { grid-template-columns: 1fr; }
+  .book-footer { flex-direction: column; align-items: center; gap: 20px; }
   .book-signature { text-align: center; }
 }
