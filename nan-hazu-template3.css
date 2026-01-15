@@ -1,50 +1,77 @@
 @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600;700&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Cinzel+Decorative:wght@700&display=swap');
 
 :root {
-  /* Cores de Tinta Escura */
   --ink-primary: #1a0f0a;       /* Café quase preto */
   --ink-accent: #8b0000;        /* Vermelho sangue seco */
-  /* A cor de fundo de segurança agora é transparente, pois a imagem da borda preenche tudo */
   --paper-bg-color: transparent;
   --gengar-purple: #4a3b59;
   --border-ink: rgba(26, 15, 10, 0.4);
 }
 
-/* --- CONTAINER PRINCIPAL (A MÁGICA ACONTECE AQUI) --- */
+/* --- CONTAINER PRINCIPAL --- */
 .book-container {
   position: relative;
   max-width: 650px;
   width: 95%;
-  margin: 40px auto; /* Margem externa para afastar do resto do fórum */
+  margin: 40px auto;
   color: var(--ink-primary);
   font-family: 'Spectral', serif;
-  box-sizing: border-box; /* Garante que bordas e padding não quebrem o layout */
+  box-sizing: border-box;
 
-  /* --- CONFIGURAÇÃO DE BORDER-IMAGE --- */
-  /* 1. Define a largura da borda visual. Isso reserva o espaço para as bordas queimadas */
+  /* BORDER-IMAGE (Papel Envelhecido) */
   border-style: solid;
-  border-width: 75px 65px 85px 65px; /* Topo, Direita, Base, Esquerda */
-  
-  /* 2. Define a imagem fonte */
+  border-width: 75px 65px 85px 65px;
   border-image-source: url('https://i.imgur.com/A0eo2NP.png');
-  
-  /* 3. O CORTE (Slice): Onde o CSS deve "cortar" a imagem original para separar cantos do meio.
-     O valor '110' é um chute baseado na resolução da imagem para pegar bem a parte queimada.
-     O 'fill' diz para usar o miolo da imagem como fundo do conteúdo. */
   border-image-slice: 110 fill;
-  
-  /* 4. Como repetir as laterais e o meio. 'stretch' funciona melhor para texturas orgânicas */
   border-image-repeat: stretch;
   
-  /* Limpa configurações antigas de background que atrapalhariam */
   background-color: transparent;
-  background-image: none;
-  box-shadow: none; /* A própria borda da imagem já dá o efeito de sombra */
-
-  /* Padding interno para o texto não ficar em cima da área da borda queimada */
-  /* Como já temos uma border-width grande, o padding aqui pode ser menor */
   padding: 10px 30px 20px 30px; 
 }
+
+/* --- IMAGENS DE TINTA / MARCA D'ÁGUA (O Ponto #3) --- */
+
+/* Classe base obrigatória para todas as imagens de fundo */
+.ink-overlay {
+  position: absolute;
+  pointer-events: none;
+  mix-blend-mode: multiply; /* O segredo da "impressão" */
+  filter: grayscale(100%) contrast(1.2) brightness(0.95);
+  opacity: 0.7;
+  z-index: 0; /* Fica atrás do texto */
+}
+
+/* Posição 1: Personagem (Direita Superior) - Ajustado tamanho (#2) */
+.ink-char-illustration {
+  top: 160px;
+  right: -10px;
+  width: 220px; /* Reduzido de 280px */
+  max-width: 40%;
+  transform: rotate(2deg);
+  mask-image: radial-gradient(circle, black 50%, transparent 98%);
+  -webkit-mask-image: radial-gradient(circle, black 50%, transparent 98%);
+}
+
+/* Posição 2: Gengar (Esquerda Inferior) - Ajustado posição (#5) */
+.ink-gengar-stamp {
+  bottom: 60px; /* Subiu para não bater na barra */
+  left: 20px;
+  width: 130px;
+  transform: rotate(-10deg);
+  opacity: 0.8;
+}
+
+/* --- Exemplos de posições extras (Ponto #3) ---
+   Para usar, adicione no HTML: <img src="..." class="ink-overlay ink-pos-top-left"> */
+
+.ink-pos-top-left {
+    top: 20px; left: 20px; width: 150px; transform: rotate(-5deg); opacity: 0.6;
+}
+.ink-pos-mid-right {
+    top: 50%; right: 10px; width: 180px; transform: translateY(-50%) rotate(3deg); opacity: 0.5;
+}
+
+/* -------------------------------------------------- */
 
 /* --- HEADER --- */
 .book-header {
@@ -52,6 +79,7 @@
   margin-bottom: 30px;
   border-bottom: 2px solid var(--border-ink);
   padding-bottom: 15px;
+  position: relative; z-index: 2;
 }
 
 .book-title {
@@ -80,10 +108,11 @@
   grid-template-columns: 1fr 1fr 1fr;
   gap: 15px;
   margin-bottom: 30px;
-  background: rgba(26, 15, 10, 0.05); /* Fundo sutil */
+  background: rgba(26, 15, 10, 0.05);
   padding: 15px;
   border: 1px solid var(--border-ink);
   border-radius: 4px;
+  position: relative; z-index: 2;
 }
 
 .book-stat-item { display: flex; flex-direction: column; gap: 5px; }
@@ -125,6 +154,7 @@
   line-height: 1.8;
   text-align: justify;
   margin-bottom: 40px;
+  position: relative; z-index: 2;
 }
 
 .book-content::first-letter {
@@ -144,9 +174,9 @@
   margin: 0 0 40px 0;
   padding: 20px;
   position: relative;
-  border-top: 1px dashed var(--border-ink);
-  border-bottom: 1px dashed var(--border-ink);
+  /* Linhas pontilhadas removidas aqui (#4) */
   font-size: 0.95em;
+  position: relative; z-index: 2;
 }
 
 /* Título Injetado */
@@ -160,7 +190,7 @@
   text-align: center;
 }
 
-/* Ajuste nos Spoilers para o tema claro */
+/* Ajuste nos Spoilers */
 .book-extras .spoiler-header {
     background: transparent !important;
     border: 1px solid var(--border-ink) !important;
@@ -183,6 +213,7 @@
   align-items: flex-end;
   border-top: 2px solid var(--border-ink);
   padding-top: 15px;
+  position: relative; z-index: 2;
 }
 
 /* Shikigami */
@@ -232,7 +263,6 @@
 
 /* Responsividade */
 @media (max-width: 550px) {
-  /* Ajusta as bordas para telas menores para sobrar espaço pro texto */
   .book-container { 
       border-width: 50px 35px 60px 35px;
       padding: 10px 15px 20px 15px;
@@ -240,45 +270,8 @@
   .book-stats-grid { grid-template-columns: 1fr; }
   .book-footer { flex-direction: column; align-items: center; gap: 20px; }
   .book-signature { text-align: center; }
-}
-
-/* --- IMAGENS DE TINTA / MARCA D'ÁGUA --- */
-
-/* Classe geral para imagens que devem parecer impressas no papel */
-.ink-overlay {
-  position: absolute;
-  pointer-events: none; /* Deixa clicar no texto através da imagem */
-  mix-blend-mode: multiply; /* O TRUQUE: Faz o branco sumir e o preto tingir o fundo */
-  filter: grayscale(100%) contrast(1.2) brightness(0.95); /* Preto e branco e alto contraste */
-  opacity: 0.7; /* Transparência para parecer desbotado */
-  z-index: 0; /* Fica ATRÁS do texto */
-}
-
-/* Imagem 1: Ilustração do Personagem (Lateral Direita) */
-.ink-char-illustration {
-  top: 180px; /* Ajuste a altura conforme necessário */
-  right: 10px;
-  width: 280px; /* Tamanho da imagem */
-  max-width: 45%;
-  transform: rotate(2deg); /* Leve inclinação natural */
-  /* Máscara para suavizar as bordas da imagem e não ficar um quadrado duro */
-  mask-image: radial-gradient(circle, black 40%, transparent 95%);
-  -webkit-mask-image: radial-gradient(circle, black 40%, transparent 95%);
-}
-
-/* Imagem 2: Carimbo/Gengar (Canto Inferior Esquerdo) */
-.ink-gengar-stamp {
-  bottom: 25px;
-  left: 30px;
-  width: 140px;
-  transform: rotate(-10deg); /* Rotação de carimbo */
-  opacity: 0.85; /* Um pouco mais forte que a ilustração */
-  z-index: 3; /* Este fica SOBRE o rodapé */
-}
-
-/* GARANTIA DE LEITURA */
-/* Isso garante que o texto fique ACIMA da ilustração do fundo */
-.book-content, .book-stats-grid, .book-header, .book-extras {
-  position: relative;
-  z-index: 2;
+  
+  /* Ajuste das imagens em telas pequenas para não cobrir tudo */
+  .ink-char-illustration { width: 150px; top: 200px; opacity: 0.5; }
+  .ink-gengar-stamp { width: 100px; bottom: 80px; }
 }
