@@ -1,0 +1,193 @@
+/* GRIMÓRIO DE MALDIÇÕES - EXTERNAL CSS */
+.gr-v5-box {
+    --p: #6D20C5;
+    --b: #0a0a0a;
+    --bg: #121212;
+    max-width: 800px;
+    margin: auto;
+    font-family: 'Segoe UI', sans-serif;
+    background: var(--b);
+    border: 1px solid #222;
+    box-shadow: 0 0 25px rgba(0,0,0,0.8);
+    color: #ccc;
+    position: relative;
+}
+.gr-v5-head {
+    background: linear-gradient(180deg, #1a1a1a, var(--b));
+    padding: 15px;
+    border-bottom: 2px solid var(--p);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.gr-v5-title {
+    color: #fff;
+    font-size: 18px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+}
+.gr-v5-stats {
+    font-size: 10px;
+    color: #888;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: right;
+}
+.gr-v5-stats b {
+    color: var(--p);
+    font-size: 12px;
+}
+.gr-v5-check { display: none; }
+
+/* NAVEGAÇÃO / ABAS */
+.gr-v5-nav {
+    display: flex;
+    background: #050505;
+    border-bottom: 1px solid #333;
+    flex-wrap: wrap;
+}
+.gr-v5-nav label {
+    flex: 1;
+    text-align: center;
+    padding: 10px 5px;
+    cursor: pointer;
+    background: #0e0e0e;
+    color: #555;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: .3s;
+    border-right: 1px solid #222;
+    min-width: 50px;
+}
+.gr-v5-nav label:hover { background: #161616; color: #ccc; }
+
+/* LÓGICA DE SELEÇÃO */
+#tab4:checked ~ .gr-v5-nav label[for="tab4"],
+#tab3:checked ~ .gr-v5-nav label[for="tab3"],
+#tab2:checked ~ .gr-v5-nav label[for="tab2"],
+#tab1:checked ~ .gr-v5-nav label[for="tab1"],
+#tabs:checked ~ .gr-v5-nav label[for="tabs"],
+#tabe:checked ~ .gr-v5-nav label[for="tabe"] {
+    background: var(--p);
+    color: #fff;
+}
+
+#tab4:checked ~ .gr-v5-body .c4,
+#tab3:checked ~ .gr-v5-body .c3,
+#tab2:checked ~ .gr-v5-body .c2,
+#tab1:checked ~ .gr-v5-body .c1,
+#tabs:checked ~ .gr-v5-body .cs,
+#tabe:checked ~ .gr-v5-body .ce {
+    display: grid;
+}
+
+.gr-v5-content {
+    display: none;
+    padding: 15px;
+    animation: grfade .4s;
+}
+@keyframes grfade { from { opacity: 0; transform: translateY(5px); } to { opacity: 1; transform: translateY(0); } }
+
+/* GRAU 4 LISTA */
+.gr-g4-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+}
+.gr-g4-card {
+    background: #161616;
+    border: 1px solid #333;
+    padding: 5px 10px;
+    font-size: 10px;
+    color: #999;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.gr-g4-card b {
+    color: #fff;
+    background: #222;
+    padding: 1px 4px;
+    border-radius: 2px;
+}
+.gr-g4-card a { color: var(--p); text-decoration: none; font-weight: bold; }
+
+/* CARDS GERAIS */
+.gr-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+.gr-card {
+    background: var(--bg);
+    border: 1px solid #333;
+    padding: 10px;
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    gap: 10px;
+    position: relative;
+    border-left: 3px solid #555;
+}
+.gr-img, .gr-no-img {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border: 1px solid #333;
+    background: #000;
+}
+.gr-no-img {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #333;
+    font-size: 20px;
+}
+.gr-top {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #222;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+}
+.gr-name {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.gr-tag {
+    font-size: 9px;
+    padding: 1px 5px;
+    border-radius: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
+    border: 1px solid;
+}
+.gr-desc {
+    font-size: 10px;
+    color: #999;
+    line-height: 1.4;
+    white-space: pre-wrap;
+}
+.gr-links {
+    margin-top: auto;
+    align-self: flex-end;
+    font-size: 9px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #555;
+    display: flex;
+    gap: 10px;
+}
+.gr-links a { color: var(--p); text-decoration: none; }
+.gr-links a:hover { color: #fff; }
+
+/* VARIAÇÕES DE COR */
+.b-g3 { border-left-color: #2e8b57; } .b-g3-t { color: #2e8b57; border-color: #2e8b57; }
+.b-g2 { border-left-color: #d4af37; } .b-g2-t { color: #d4af37; border-color: #d4af37; }
+.b-g1 { border-left-color: #ff4500; } .b-g1-t { color: #ff4500; border-color: #ff4500; }
+.b-gs { border-left-color: #bf00ff; } .b-gs-t { color: #bf00ff; border-color: #bf00ff; }
+.b-ge { border-left-color: #a020f0; } .b-ge-t { color: #fff; background: #a020f0; border-color: #a020f0; }
+.gr-empty { text-align: center; color: #444; font-style: italic; padding: 20px; }
