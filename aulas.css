@@ -1,0 +1,107 @@
+/* ARQUIVO: aulas.css */
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@400;600&family=Inter:wght@300;400;600&display=swap');
+
+.jjk-container {
+    max-width: 850px;
+    margin: 0 auto;
+    background-color: #050505;
+    border: 1px solid #1a1a1a;
+    box-shadow: 0 0 25px rgba(106,13,173,0.05);
+    overflow: hidden;
+    font-family: 'Inter', sans-serif;
+}
+
+.jjk-header {
+    background: linear-gradient(90deg, #0a0a0a 0%, #111 100%);
+    padding: 40px 50px;
+    border-left: 6px solid #6a0dad;
+    border-bottom: 1px solid #222;
+}
+
+.jjk-meta {
+    font-family: 'Teko', sans-serif;
+    font-size: 14px;
+    color: #9b59b6;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-weight: 600;
+}
+
+.jjk-title {
+    font-family: 'Teko', sans-serif;
+    font-size: 48px;
+    color: #fff;
+    margin: 0;
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 400;
+}
+
+.jjk-body {
+    padding: 50px 50px 0 50px;
+    background-color: #080808;
+    font-size: 15px;
+    color: #ccc;
+    line-height: 1.9;
+    text-align: justify;
+}
+
+.jjk-body p {
+    margin-top: 0;
+    margin-bottom: 25px;
+}
+
+.jjk-body b, .jjk-body strong {
+    color: #b062ea;
+    font-weight: 700;
+}
+
+.jjk-body i, .jjk-body em {
+    color: #fff;
+    font-style: italic;
+}
+
+.jjk-extra-box {
+    background: #0f0f0f;
+    border: 1px solid #222;
+    border-left: 4px solid #6a0dad;
+    padding: 30px;
+    margin-bottom: 50px;
+    margin-top: 40px;
+}
+
+.jjk-extra-title {
+    display: block;
+    font-family: 'Teko', sans-serif;
+    font-size: 16px;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
+}
+
+.jjk-extra-text {
+    color: #888;
+    font-size: 14px;
+    display: block;
+}
+
+.jjk-footer {
+    background-color: #050505;
+    padding: 15px 50px;
+    border-top: 1px solid #1a1a1a;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.jjk-footer span {
+    font-family: 'Teko', sans-serif;
+    font-size: 12px;
+    color: #444;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
