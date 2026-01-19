@@ -1,74 +1,203 @@
-/* --- ZONA DE IMPORTAÇÃO --- */
+/* --- 1. ZONA DE IMPORTAÇÃO --- */
 @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,700,800');
 @import url('https://fonts.googleapis.com/css?family=Hind:200,300,400,700,800');
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Rajdhani:200,300,400,700,800');
 @import url('//icons.cappuccicons.com/cpf.css');
-@import url('https://dl.dropbox.com/s/3vono8lj48a6cp8/birds.css?dl=0');
 
-/* --- ESTRUTURA GERAL --- */
-.amn-img::before { display: none; }
-.amn-img::after { height: 100%; }
-.amn-img { height: 230px; }
-.amn-body { --color: #8D2E2E; width: 600px; position: relative; }
+/* --- 2. CÓDIGO LEGADO (BIRDS.CSS) - HIGIENIZADO --- */
 
-/* --- BARRAS DE STATUS (Substitui o amn-quote) --- */
-.amn-status-grid {
-    display: flex;
-    justify-content: space-between;
-    gap: 10px;
-    margin: -10px 0px -20px 0px; /* Ajuste fino de posição */
-    padding: 10px 40px;
-    height: 60px;
-    align-items: center;
+/* Reset básico para evitar quebras de linha duplas de fórum */
+.amn-body br { display: none; }
+.amn-texto br { display: block; }
+
+/* Estrutura Principal */
+.amn-body {
+    margin: 10px auto;
+    background: #171717;
+    width: 600px; /* Ajustei para 600px conforme seu pedido anterior */
+    padding: 25px;
+    border-radius: 10px;
+    color: #aaa;
+    font: 12px 'Hind', sans-serif;
+    line-height: 18px;
+    text-align: justify;
+    position: relative;
+    --color: #8D2E2E; /* Cor padrão injetada aqui caso falte no HTML */
 }
 
-.amn-stat-item {
-    width: 32%;
-    display: flex;
-    flex-direction: column;
-    gap: 3px;
-}
-
-.amn-stat-label {
-    font-family: 'Rajdhani', sans-serif;
-    font-size: 10px;
-    text-transform: uppercase;
-    color: #666;
-    letter-spacing: 1px;
-    display: flex;
-    justify-content: space-between;
-}
-
-.amn-stat-bar-bg {
-    width: 100%;
-    height: 4px;
+.amn-wrap {
     background: #1a1a1a;
-    border-radius: 2px;
+    border-radius: 10px;
+    overflow: hidden;
+    border-top: 15px solid #131313;
+    position: relative;
+}
+
+/* Imagem e Efeitos de Blend */
+.amn-img {
+    width: 100%; /* Fluido para caber no container de 600px */
+    height: 230px; /* Altura ajustada para sua imagem */
+    display: block;
+    position: relative;
     overflow: hidden;
 }
 
-.amn-hp-fill { height: 100%; background: var(--color); width: 0%; transition: width 0.5s ease; }
-.amn-ea-fill { height: 100%; background: #4a69bd; width: 0%; transition: width 0.5s ease; }
-.amn-san-fill { height: 100%; background: #dfe4ea; width: 0%; transition: width 0.5s ease; }
+.amn-img:before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: #000;
+    mix-blend-mode: color;
+}
 
-/* --- ASSINATURA INJETADA VIA CSS --- */
+.amn-img:after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background: var(--color);
+    top: 0;
+    mix-blend-mode: multiply;
+}
+
+/* Títulos e Textos */
+.amn-title {
+    font: 80px 'Abril Fatface';
+    color: #d0d0d0;
+    margin-top: -100px;
+    z-index: 10;
+    position: relative;
+    padding: 20px;
+    text-shadow: #000 2px 2px 0;
+    text-transform: uppercase;
+    line-height: 0.9;
+}
+
+.amn-lyric {
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 10px;
+    padding: 20px;
+    margin-top: -50px; /* Ajuste fino */
+    position: relative;
+    z-index: 20;
+    text-align: right;
+    width: auto;
+    text-shadow: #000 1px 1px 0;
+    color: #f0f0f0;
+}
+
+.amn-texto {
+    padding: 40px;
+    margin: 20px 20px 20px;
+    position: relative;
+    z-index: 30;
+    background: #131313;
+}
+
+/* --- AQUI ESTAVA O ASSASSINO --- */
+/* Renomeei de '.amn-body span' para '.amn-ribbon' para não quebrar as barras de status */
+.amn-ribbon {
+    color: #0a0a0a;
+    background: var(--color);
+    clip-path: polygon(50% 0%, 100% 0, 100% 35%, 100% 55%, 100% 100%, 50% 84%, 0 100%, 0 57%, 0 37%, 0 0);
+    width: 20px;
+    height: 30px;
+    display: block;
+    padding: 20px;
+    font-size: 20px;
+    float: left;
+    margin: -10px 0 0 20px;
+    z-index: 50;
+    position: relative;
+    opacity: .6;
+}
+
+/* Formatação de Texto Rica */
+.amn-texto b { font: 800 13px 'Poppins', sans-serif; color: var(--color); }
+.amn-texto i { font: italic 12px 'Poppins', sans-serif; color: var(--color); }
+
+.amn-quote2 {
+    background: #0f0f0f;
+    border: transparent solid 5px;
+    overflow: hidden;
+    color: #aaa;
+    margin-top: 20px;
+}
+
+/* --- 3. NOVAS FUNCIONALIDADES (BARRAS DE STATUS) --- */
+
+.sewer-status-wrapper {
+    display: flex !important;
+    justify-content: space-between !important;
+    gap: 15px !important;
+    margin: 10px 40px 25px 40px !important;
+    height: auto !important;
+    align-items: flex-end !important;
+    position: relative !important;
+    z-index: 40 !important; /* Acima do background */
+}
+
+.sewer-stat-item {
+    width: 32%;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.sewer-stat-label {
+    font-family: 'Rajdhani', sans-serif !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    line-height: 1 !important;
+    text-transform: uppercase !important;
+    color: #888 !important;
+    letter-spacing: 1px !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    width: 100% !important;
+    margin-bottom: 3px !important;
+}
+
+/* Reset explícito para impedir heranças malditas */
+.sewer-stat-label span {
+    display: inline-block !important;
+    background: transparent !important;
+    clip-path: none !important; /* ANULA O EFEITO RIBBON SE ELE TENTAR VOLTAR */
+    padding: 0 !important;
+    width: auto !important;
+    height: auto !important;
+    margin: 0 !important;
+    float: none !important;
+}
+
+.sewer-bar-bg {
+    width: 100%;
+    height: 6px;
+    background: #0a0a0a;
+    border: 1px solid #222;
+    overflow: hidden;
+}
+
+.sewer-hp-fill { height: 100%; background: var(--color); width: 0%; transition: width 0.5s ease; }
+.sewer-ea-fill { height: 100%; background: #4a69bd; width: 0%; transition: width 0.5s ease; }
+.sewer-san-fill { height: 100%; background: #dfe4ea; width: 0%; transition: width 0.5s ease; }
+
+/* --- 4. ASSINATURA --- */
 .amn-wrap::after {
     content: "Zenin Rikuya";
     display: block;
     text-align: right;
-    font-family: 'Abril Fatface', cursive; /* Mantendo o tema */
+    font-family: 'Abril Fatface', cursive;
     font-size: 14px;
     color: var(--color);
     opacity: 0.6;
     margin-top: 20px;
-    margin-right: 15px;
-    padding-bottom: 10px;
+    margin-right: 25px;
+    padding-bottom: 15px;
     letter-spacing: 1px;
 }
-
-/* --- TIPOGRAFIA DO CONTEÚDO --- */
-.amn-title { font: 47px 'Abril Fatface'; margin-top: -45px; text-transform: uppercase; }
-.amn-lyric { padding: 0px; margin-top: -38px; width: 485px; }
-.amn-texto { padding: 10px; font-size: 12px; }
-.amn-quote2 { background: #0f0f0f; border: transparent solid 5px; overflow: hidden; color: #aaa; }
