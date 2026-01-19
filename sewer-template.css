@@ -1,4 +1,12 @@
-/* CSS Limpo e Higienizado - Sewer Template */
+/* --- ZONA DE IMPORTAÇÃO (NÃO MEXA NA ORDEM OU TUDO EXPLODE) --- */
+@import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,700,800');
+@import url('https://fonts.googleapis.com/css?family=Hind:200,300,400,700,800');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Rajdhani:200,300,400,700,800');
+@import url('//icons.cappuccicons.com/cpf.css');
+@import url('https://dl.dropbox.com/s/3vono8lj48a6cp8/birds.css?dl=0');
+
+/* --- ESTILOS DO TEMPLATE --- */
 
 /* Estilos da Imagem e Estrutura */
 .amn-img::before {
@@ -10,12 +18,12 @@
 }
 
 .amn-img {
-    height: 230px; /* Extraído do inline */
+    height: 230px;
 }
 
 .amn-body {
-    --color: #8D2E2E; /* Extraído do inline */
-    width: 600px;     /* Extraído do inline */
+    --color: #8D2E2E;
+    width: 600px;
 }
 
 /* Tipografia e Layout */
@@ -33,7 +41,7 @@
 .amn-lyric {
     padding: 0px;
     margin-top: -38px;
-    width: 485px; /* Corrigi o ')' criminoso que estava aqui */
+    width: 485px;
 }
 
 .amn-texto {
