@@ -1,4 +1,4 @@
-/* --- ZONA DE IMPORTAÇÃO (NÃO MEXA NA ORDEM OU TUDO EXPLODE) --- */
+/* --- ZONA DE IMPORTAÇÃO --- */
 @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,700,800');
 @import url('https://fonts.googleapis.com/css?family=Hind:200,300,400,700,800');
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
@@ -6,52 +6,69 @@
 @import url('//icons.cappuccicons.com/cpf.css');
 @import url('https://dl.dropbox.com/s/3vono8lj48a6cp8/birds.css?dl=0');
 
-/* --- ESTILOS DO TEMPLATE --- */
+/* --- ESTRUTURA GERAL --- */
+.amn-img::before { display: none; }
+.amn-img::after { height: 100%; }
+.amn-img { height: 230px; }
+.amn-body { --color: #8D2E2E; width: 600px; position: relative; }
 
-/* Estilos da Imagem e Estrutura */
-.amn-img::before {
-    display: none;
-}
-
-.amn-img::after {
-    height: 100%;
-}
-
-.amn-img {
-    height: 230px;
-}
-
-.amn-body {
-    --color: #8D2E2E;
-    width: 600px;
-}
-
-/* Tipografia e Layout */
-.amn-quote {
-    margin: -2px 0px -30px 0px;
+/* --- BARRAS DE STATUS (Substitui o amn-quote) --- */
+.amn-status-grid {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin: -10px 0px -20px 0px; /* Ajuste fino de posição */
+    padding: 10px 40px;
     height: 60px;
+    align-items: center;
 }
 
-.amn-title {
-    font: 47px 'Abril Fatface';
-    margin-top: -45px;
+.amn-stat-item {
+    width: 32%;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+
+.amn-stat-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 10px;
     text-transform: uppercase;
+    color: #666;
+    letter-spacing: 1px;
+    display: flex;
+    justify-content: space-between;
 }
 
-.amn-lyric {
-    padding: 0px;
-    margin-top: -38px;
-    width: 485px;
-}
-
-.amn-texto {
-    padding: 10px;
-    font-size: 12px;
-}
-
-.amn-quote2 {
-    background: #0f0f0f;
-    border: transparent solid 5px;
+.amn-stat-bar-bg {
+    width: 100%;
+    height: 4px;
+    background: #1a1a1a;
+    border-radius: 2px;
     overflow: hidden;
-    color: #aaa;
 }
+
+.amn-hp-fill { height: 100%; background: var(--color); width: 0%; transition: width 0.5s ease; }
+.amn-ea-fill { height: 100%; background: #4a69bd; width: 0%; transition: width 0.5s ease; }
+.amn-san-fill { height: 100%; background: #dfe4ea; width: 0%; transition: width 0.5s ease; }
+
+/* --- ASSINATURA INJETADA VIA CSS --- */
+.amn-wrap::after {
+    content: "Zenin Rikuya";
+    display: block;
+    text-align: right;
+    font-family: 'Abril Fatface', cursive; /* Mantendo o tema */
+    font-size: 14px;
+    color: var(--color);
+    opacity: 0.6;
+    margin-top: 20px;
+    margin-right: 15px;
+    padding-bottom: 10px;
+    letter-spacing: 1px;
+}
+
+/* --- TIPOGRAFIA DO CONTEÚDO --- */
+.amn-title { font: 47px 'Abril Fatface'; margin-top: -45px; text-transform: uppercase; }
+.amn-lyric { padding: 0px; margin-top: -38px; width: 485px; }
+.amn-texto { padding: 10px; font-size: 12px; }
+.amn-quote2 { background: #0f0f0f; border: transparent solid 5px; overflow: hidden; color: #aaa; }
