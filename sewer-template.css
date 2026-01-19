@@ -1,21 +1,39 @@
-/* --- 1. ZONA DE IMPORTAÇÃO --- */
+/* --- 1. FONTE DE ÍCONES --- */
+@font-face {
+    font-family: 'cappuccicons';
+    src: url('//source.cappuccicons.com/cappuccicons.eot');
+    src: url('//source.cappuccicons.com/cappuccicons.eot#iefix') format('embedded-opentype'), url('//source.cappuccicons.com/cappuccicons.ttf') format('truetype'), url('//source.cappuccicons.com/cappuccicons.woff') format('woff'), url('//source.cappuccicons.com/cappuccicons.svg#cappuccicons') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: block;
+}
+i.cp, span.cp {
+    font-family: 'cappuccicons' !important;
+    speak: never;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+/* ... (As classes de ícones individuais serão carregadas automaticamente pelo navegador via fonte) ... */
+
+/* --- 2. IMPORTAÇÃO DE FONTES DE TEXTO --- */
 @import url('https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,700,800');
 @import url('https://fonts.googleapis.com/css?family=Hind:200,300,400,700,800');
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Rajdhani:200,300,400,700,800');
-@import url('//icons.cappuccicons.com/cpf.css');
 
-/* --- 2. CÓDIGO LEGADO (BIRDS.CSS) - HIGIENIZADO --- */
-
-/* Reset básico para evitar quebras de linha duplas de fórum */
+/* --- 3. ESTRUTURA PRINCIPAL --- */
 .amn-body br { display: none; }
 .amn-texto br { display: block; }
 
-/* Estrutura Principal */
 .amn-body {
     margin: 10px auto;
     background: #171717;
-    width: 600px; /* Ajustei para 600px conforme seu pedido anterior */
+    width: 600px;
     padding: 25px;
     border-radius: 10px;
     color: #aaa;
@@ -23,7 +41,7 @@
     line-height: 18px;
     text-align: justify;
     position: relative;
-    --color: #8D2E2E; /* Cor padrão injetada aqui caso falte no HTML */
+    --color: #8D2E2E; /* Cor Vermelho Sangue padrão */
 }
 
 .amn-wrap {
@@ -34,15 +52,16 @@
     position: relative;
 }
 
-/* Imagem e Efeitos de Blend */
+/* --- 4. IMAGEM E EFEITOS (FIXED) --- */
 .amn-img {
-    width: 100%; /* Fluido para caber no container de 600px */
-    height: 230px; /* Altura ajustada para sua imagem */
+    width: 100%;
+    height: 250px; /* Aumentei um pouco para dar ar ao título */
     display: block;
     position: relative;
     overflow: hidden;
 }
 
+/* Camada Preto e Branco */
 .amn-img:before {
     content: '';
     display: block;
@@ -50,9 +69,11 @@
     height: 100%;
     position: absolute;
     background: #000;
-    mix-blend-mode: color;
+    mix-blend-mode: color; /* Deixa a imagem P&B */
+    z-index: 1;
 }
 
+/* Camada de Cor (Vermelha) */
 .amn-img:after {
     content: '';
     display: block;
@@ -61,46 +82,55 @@
     position: absolute;
     background: var(--color);
     top: 0;
-    mix-blend-mode: multiply;
+    mix-blend-mode: multiply; /* Tinge de vermelho */
+    opacity: 0.8; /* Ajuste isso se ficar muito escuro */
+    z-index: 2;
 }
 
-/* Títulos e Textos */
+/* --- 5. TÍTULOS ESTILO "WOLF" (TEXTO SOBRE A IMAGEM) --- */
 .amn-title {
-    font: 80px 'Abril Fatface';
-    color: #d0d0d0;
-    margin-top: -100px;
-    z-index: 10;
+    font: 60px 'Abril Fatface'; /* Reduzi de 80px para caber */
+    color: #f0f0f0;
+    margin-top: -85px; /* Puxa para cima da imagem */
+    margin-bottom: 0px;
     position: relative;
-    padding: 20px;
-    text-shadow: #000 2px 2px 0;
+    z-index: 20; /* Fica acima da imagem */
+    text-align: center; /* Centralizado como no pedido */
+    text-shadow: 3px 3px 0px #000; /* Sombra dura para ler em cima da imagem */
     text-transform: uppercase;
     line-height: 0.9;
+    letter-spacing: 1px;
+    pointer-events: none; /* Deixa clicar na imagem através do texto */
 }
 
 .amn-lyric {
     text-transform: uppercase;
-    font-size: 10px;
-    letter-spacing: 10px;
-    padding: 20px;
-    margin-top: -50px; /* Ajuste fino */
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    letter-spacing: 4px;
+    padding: 0;
+    margin-top: 5px; /* Colado no título */
+    margin-bottom: 25px; /* O ESPACINHO QUE O JOGADOR PEDIU ATÉ AS BARRAS */
     position: relative;
     z-index: 20;
-    text-align: right;
-    width: auto;
-    text-shadow: #000 1px 1px 0;
-    color: #f0f0f0;
+    text-align: center; /* Centralizado junto com o título */
+    width: 100%;
+    text-shadow: 2px 2px 0px #000;
+    color: #fff;
+    opacity: 0.9;
 }
 
 .amn-texto {
-    padding: 40px;
-    margin: 20px 20px 20px;
+    padding: 20px 40px 40px 40px;
+    margin: 0;
     position: relative;
     z-index: 30;
-    background: #131313;
+    background: #1a1a1a; /* Cor de fundo contínua */
 }
 
-/* --- AQUI ESTAVA O ASSASSINO --- */
-/* Renomeei de '.amn-body span' para '.amn-ribbon' para não quebrar as barras de status */
+/* --- 6. ELEMENTOS DECORATIVOS --- */
+/* Ribbon (Fitinha) - Mantida caso você use */
 .amn-ribbon {
     color: #0a0a0a;
     background: var(--color);
@@ -111,35 +141,34 @@
     padding: 20px;
     font-size: 20px;
     float: left;
-    margin: -10px 0 0 20px;
+    margin: -5px 15px 5px 0;
     z-index: 50;
     position: relative;
-    opacity: .6;
+    opacity: .8;
 }
 
-/* Formatação de Texto Rica */
 .amn-texto b { font: 800 13px 'Poppins', sans-serif; color: var(--color); }
 .amn-texto i { font: italic 12px 'Poppins', sans-serif; color: var(--color); }
 
 .amn-quote2 {
     background: #0f0f0f;
-    border: transparent solid 5px;
-    overflow: hidden;
-    color: #aaa;
+    border-left: 3px solid var(--color);
+    padding: 10px;
+    color: #888;
     margin-top: 20px;
+    font-size: 11px;
 }
 
-/* --- 3. NOVAS FUNCIONALIDADES (BARRAS DE STATUS) --- */
-
+/* --- 7. BARRAS DE STATUS (BLINDADAS) --- */
 .sewer-status-wrapper {
     display: flex !important;
     justify-content: space-between !important;
     gap: 15px !important;
-    margin: 10px 40px 25px 40px !important;
+    margin: 0px 40px 25px 40px !important; /* Margens ajustadas */
     height: auto !important;
     align-items: flex-end !important;
     position: relative !important;
-    z-index: 40 !important; /* Acima do background */
+    z-index: 40 !important;
 }
 
 .sewer-stat-item {
@@ -155,7 +184,7 @@
     font-weight: 700 !important;
     line-height: 1 !important;
     text-transform: uppercase !important;
-    color: #888 !important;
+    color: #666 !important;
     letter-spacing: 1px !important;
     display: flex !important;
     justify-content: space-between !important;
@@ -163,11 +192,10 @@
     margin-bottom: 3px !important;
 }
 
-/* Reset explícito para impedir heranças malditas */
 .sewer-stat-label span {
     display: inline-block !important;
     background: transparent !important;
-    clip-path: none !important; /* ANULA O EFEITO RIBBON SE ELE TENTAR VOLTAR */
+    clip-path: none !important;
     padding: 0 !important;
     width: auto !important;
     height: auto !important;
@@ -187,7 +215,7 @@
 .sewer-ea-fill { height: 100%; background: #4a69bd; width: 0%; transition: width 0.5s ease; }
 .sewer-san-fill { height: 100%; background: #dfe4ea; width: 0%; transition: width 0.5s ease; }
 
-/* --- 4. ASSINATURA --- */
+/* --- 8. ASSINATURA --- */
 .amn-wrap::after {
     content: "Zenin Rikuya";
     display: block;
