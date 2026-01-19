@@ -1,0 +1,49 @@
+/* CSS Limpo e Higienizado - Sewer Template */
+
+/* Estilos da Imagem e Estrutura */
+.amn-img::before {
+    display: none;
+}
+
+.amn-img::after {
+    height: 100%;
+}
+
+.amn-img {
+    height: 230px; /* Extraído do inline */
+}
+
+.amn-body {
+    --color: #8D2E2E; /* Extraído do inline */
+    width: 600px;     /* Extraído do inline */
+}
+
+/* Tipografia e Layout */
+.amn-quote {
+    margin: -2px 0px -30px 0px;
+    height: 60px;
+}
+
+.amn-title {
+    font: 47px 'Abril Fatface';
+    margin-top: -45px;
+    text-transform: uppercase;
+}
+
+.amn-lyric {
+    padding: 0px;
+    margin-top: -38px;
+    width: 485px; /* Corrigi o ')' criminoso que estava aqui */
+}
+
+.amn-texto {
+    padding: 10px;
+    font-size: 12px;
+}
+
+.amn-quote2 {
+    background: #0f0f0f;
+    border: transparent solid 5px;
+    overflow: hidden;
+    color: #aaa;
+}
