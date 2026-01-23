@@ -1,0 +1,176 @@
+/* --- TEMPLATE: CELESTIAL VANGUARD (TENSHI) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Lato:wght@300;400;700&display=swap');
+
+:root {
+  --ts-ivory: #fdfbf7;     /* Cor de fundo principal, mármore claro */
+  --ts-dark: #1a222e;      /* Cor do texto e sombras profundas (baseado nas asas) */
+  --ts-gold: #cba135;      /* Dourado divino envelhecido */
+  --ts-sky: #b0c4de;       /* Azul céu pálido (baseado no fundo da imagem) */
+  --ts-glow: rgba(255, 250, 240, 0.8); /* Brilho sagrado */
+}
+
+/* Animação de Halo Pulsante */
+@keyframes halo-pulse {
+  0% { box-shadow: 0 0 15px rgba(203, 161, 53, 0.2), 0 0 30px rgba(255, 255, 255, 0.1); }
+  50% { box-shadow: 0 0 25px rgba(203, 161, 53, 0.4), 0 0 50px rgba(255, 255, 255, 0.3); }
+  100% { box-shadow: 0 0 15px rgba(203, 161, 53, 0.2), 0 0 30px rgba(255, 255, 255, 0.1); }
+}
+
+/* CONTAINER PRINCIPAL */
+.tenshi-card {
+  box-sizing: border-box;
+  max-width: 600px; width: 95%; margin: 50px auto;
+  background-color: var(--ts-ivory);
+  /* Textura sutil de mármore branco */
+  background-image: url("https://www.transparenttextures.com/patterns/white-marble.png");
+  border: 1px solid var(--ts-gold);
+  /* Borda dupla para elegância */
+  outline: 4px solid var(--ts-ivory); outline-offset: -6px;
+  border-radius: 4px 4px 0 0;
+  position: relative; 
+  font-family: 'Lato', sans-serif; 
+  color: var(--ts-dark);
+  overflow: hidden;
+  animation: halo-pulse 5s infinite ease-in-out;
+}
+.tenshi-card * { box-sizing: border-box; }
+
+/* Detalhe decorativo no topo */
+.tenshi-card::before {
+  content: ''; position: absolute; top: 5px; left: 50%; transform: translateX(-50%);
+  width: 80%; height: 2px; background: linear-gradient(90deg, transparent, var(--ts-gold), transparent);
+  z-index: 10; opacity: 0.7;
+}
+
+/* HEADER */
+.tenshi-header { 
+  position: relative; 
+  height: 280px; 
+  border-bottom: 3px solid var(--ts-gold); 
+  z-index: 1;
+  overflow: hidden;
+}
+.tenshi-header img {
+  width: 100%; height: 100%; object-fit: cover; 
+  /* Foco na parte superior da imagem */
+  object-position: center 20%; 
+  filter: contrast(1.05) brightness(0.95);
+}
+
+/* Overlay de gradiente para o texto do título */
+.tenshi-header::after {
+  content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 50%;
+  background: linear-gradient(to top, rgba(26, 34, 46, 0.8), transparent);
+  pointer-events: none;
+}
+
+/* TÍTULO */
+.tenshi-title-block {
+  position: absolute; bottom: 20px; width: 100%; text-align: center;
+  z-index: 2;
+}
+.tenshi-name {
+  font-family: 'Cinzel Decorative', serif; font-size: 2.5em; color: var(--ts-ivory);
+  text-transform: uppercase; letter-spacing: 4px; font-weight: 400;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5); margin: 0;
+  /* Gradiente dourado no texto */
+  background: linear-gradient(to bottom, #fff, var(--ts-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+.tenshi-rank {
+  font-family: 'Lato', sans-serif; font-size: 0.75em; color: var(--ts-sky);
+  letter-spacing: 3px; text-transform: uppercase; margin-top: 5px; font-weight: 700; display: block;
+}
+
+/* STATUS (GRID 3 Colunas) */
+.tenshi-stats {
+  padding: 25px 30px 15px 30px; position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.8), rgba(240, 235, 225, 0.6));
+  border-bottom: 1px solid rgba(203, 161, 53, 0.3);
+}
+.tenshi-stat-col { display: flex; flex-direction: column; gap: 6px; }
+
+.tenshi-info { 
+  display: flex; justify-content: space-between; align-items: center; 
+  font-family: 'Cinzel Decorative', serif; font-size: 0.8em; letter-spacing: 1px;
+}
+/* Ícones de asa antes dos labels */
+.ts-label::before { content: '✦'; color: var(--ts-gold); margin-right: 5px; font-size: 0.8em; }
+.ts-label { color: var(--ts-dark); font-weight: 700; }
+.ts-val { color: var(--ts-gold); font-family: 'Lato', sans-serif; font-weight: 700; font-size: 0.85em; }
+
+/* Barras */
+.ts-track {
+  height: 5px; width: 100%; background: rgba(26, 34, 46, 0.1);
+  border: 1px solid rgba(203, 161, 53, 0.3); border-radius: 10px; overflow: hidden;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1);
+}
+.ts-bar { height: 100%; width: 0%; transition: width 0.8s ease-in-out; position: relative; border-radius: 10px; }
+
+/* Cores das Barras (Gradientes Etéreos) */
+/* HP: Vermelho Sagrado */
+.ts-hp-fill { background: linear-gradient(90deg, #a83232, #d4af37); }
+/* EA: Luz Divina (Azul para Branco) */
+.ts-ea-fill { background: linear-gradient(90deg, var(--ts-sky), #ffffff); box-shadow: 0 0 10px var(--ts-sky); }
+/* SAN: Clareza Mental (Roxo Pálido para Dourado) */
+.ts-san-fill { background: linear-gradient(90deg, #9575cd, var(--ts-gold)); }
+
+
+/* NARRAÇÃO */
+.tenshi-narration {
+  padding: 30px 40px;
+  font-size: 1.05em; line-height: 1.9; text-align: justify;
+  color: var(--ts-dark);
+  background: transparent;
+  position: relative; z-index: 2;
+}
+/* Formatação de Texto */
+.tenshi-narration b, .tenshi-narration strong { 
+  color: var(--ts-dark); font-family: 'Cinzel Decorative', serif; font-weight: 700; 
+  border-bottom: 1px solid rgba(203, 161, 53, 0.5);
+}
+.tenshi-narration i, .tenshi-narration em { color: var(--ts-gold); font-weight: 600; }
+
+/* Citação/Fala */
+.tenshi-speech { 
+    display: block; margin: 15px 0; padding: 10px 20px;
+    background: rgba(255,255,255,0.5);
+    border-left: 3px solid var(--ts-gold);
+    font-style: italic; color: #333;
+    box-shadow: 2px 2px 10px rgba(203, 161, 53, 0.1);
+}
+
+/* FOOTER & SIGNATURE */
+.tenshi-footer {
+  padding: 20px 40px 30px 40px;
+  position: relative;
+  text-align: center;
+  background: linear-gradient(to top, rgba(203, 161, 53, 0.1), transparent);
+}
+/* Linha decorativa final */
+.tenshi-footer::before {
+    content: ''; position: absolute; top: 0; left: 20%; width: 60%; height: 1px; background: linear-gradient(90deg, transparent, var(--ts-gold), transparent); opacity: 0.5;
+}
+
+.tenshi-signature {
+  font-family: 'Cinzel Decorative', serif; color: var(--ts-gold);
+  font-size: 1.1em; letter-spacing: 3px;
+  font-weight: 700;
+  display: inline-block;
+  position: relative;
+}
+
+/* Asas decorativas na assinatura */
+.tenshi-signature::before { content: '༺'; margin-right: 10px; opacity: 0.7; }
+.tenshi-signature::after { content: 'Tenshi ༻'; margin-left: 5px; opacity: 0.7; }
+
+
+/* Responsivo */
+@media (max-width: 600px) {
+  .tenshi-card { margin: 20px 0; border-width: 1px; outline: none; border-radius: 0; width: 100%; }
+  .tenshi-stats { grid-template-columns: 1fr; gap: 15px; padding: 20px; }
+  .tenshi-narration { padding: 20px; }
+  .tenshi-header { height: 200px; }
+  .tenshi-title-block { bottom: 10px; }
+  .tenshi-name { font-size: 1.8em; }
+}
