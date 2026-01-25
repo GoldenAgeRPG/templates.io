@@ -1,4 +1,4 @@
-/* --- TEMPLATE: CELESTIAL VANGUARD (TENSHI) - FIX --- */
+/* --- TEMPLATE: CELESTIAL VANGUARD (TENSHI) - FIX V2 --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Lato:wght@300;400;700&display=swap');
 
 :root {
@@ -116,19 +116,22 @@
 
 /* --- ÁREA CORRIGIDA: NEGRITO E ITÁLICO --- */
 .tenshi-narration b, .tenshi-narration strong { 
-  color: var(--ts-dark);   /* Mantém a cor escura */
-  font-weight: 700;        /* Aplica apenas o peso padrão de negrito */
-  font-family: inherit;    /* Garante que NÃO mude a fonte (usa Lato) */
-  font-size: inherit;      /* Garante que NÃO mude o tamanho */
-  border: none;            /* Remove a borda/sublinhado */
+  /* Muda a cor para o dourado do tema */
+  color: var(--ts-gold);   
+  font-weight: 700;
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  /* Adiciona um brilho dourado suave e difuso (text-shadow) */
+  text-shadow: 0 0 4px rgba(203, 161, 53, 0.5);
 }
 
 .tenshi-narration i, .tenshi-narration em { 
-  color: var(--ts-gold);   /* Muda apenas a cor para dourado */
-  font-style: italic;      /* Aplica itálico */
-  font-weight: normal;     /* Remove pesos extras */
-  font-family: inherit;    /* Garante que NÃO mude a fonte (usa Lato) */
-  font-size: inherit;      /* Garante que NÃO mude o tamanho */
+  color: var(--ts-gold);   /* Itálico também é dourado, mas sem brilho */
+  font-style: italic;      
+  font-weight: normal;
+  font-family: inherit;
+  font-size: inherit;
 }
 /* ------------------------------------------ */
 
