@@ -1,0 +1,100 @@
+/* --- TEMPLATE: MARI EL-MELLOI --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Montserrat:wght@300;400;600&family=Pinyon+Script&family=Syncopate:wght@400;700&display=swap');
+
+:root {
+  --metal-bg: #1a1a1a;
+  --metal-dark: #0f0f0f;
+  --metal-chrome-light: #e8e8e8;
+  --metal-chrome-mid: #a0a0a0;
+  --metal-chrome-dark: #505050;
+  --metal-accent-blue: #c0e0ff;
+  --mari-hp: linear-gradient(90deg, #500, #f22, #a00);
+  --mari-ea: linear-gradient(90deg, #005, #22f, #00a);
+  --mari-san: linear-gradient(90deg, #303, #909, #505);
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes wave-scroll-right {
+  0% { background-position: 0 bottom; }
+  100% { background-position: 1200px bottom; }
+}
+@keyframes wave-scroll-left {
+  0% { background-position: 0 bottom; }
+  100% { background-position: -1200px bottom; }
+}
+@keyframes metal-rise {
+  0% { transform: translateY(100px) scale(0.5); opacity: 0; }
+  10% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(-400px) scale(1); opacity: 0; }
+}
+
+/* CONTAINER PRINCIPAL */
+.mari-container {
+  box-sizing: border-box; max-width: 800px; width: 95%; margin: 40px auto;
+  background-color: var(--metal-bg);
+  display: grid; grid-template-columns: 60px 1fr 60px; grid-template-rows: auto auto auto 1fr auto auto;
+  border: 3px solid var(--metal-chrome-dark);
+  border-image: linear-gradient(to bottom, var(--metal-chrome-light), var(--metal-chrome-dark)) 1;
+  box-shadow: 0 20px 50px #000; position: relative; overflow: hidden;
+  font-family: 'Montserrat', sans-serif; color: var(--metal-chrome-light);
+}
+
+/* LATERAIS */
+.mari-sidebar {
+  grid-row: 1 / 5; position: relative;
+  background: linear-gradient(to right, #0a0a0a, #1a1a1a, #0a0a0a);
+  border-right: 1px solid var(--metal-chrome-dark); border-left: 1px solid var(--metal-chrome-dark);
+  overflow: hidden; z-index: 1;
+}
+.mari-sidebar.left { grid-column: 1; border-left: none; }
+.mari-sidebar.right { grid-column: 3; border-right: none; }
+
+.metal-bubble {
+  position: absolute; bottom: -40px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff, var(--metal-accent-blue) 10%, var(--metal-chrome-mid) 40%, var(--metal-chrome-dark) 80%, #000 100%);
+  opacity: 0; animation: metal-rise linear infinite;
+}
+.mb1 { width: 20px; height: 20px; left: 10%; animation-duration: 12s; }
+.mb2 { width: 35px; height: 35px; left: 40%; animation-duration: 15s; animation-delay: 5s; }
+.mb3 { width: 15px; height: 15px; left: 70%; animation-duration: 10s; animation-delay: 2s; }
+
+/* HEADER & IMAGEM */
+.mari-content-col { grid-column: 2; background: var(--metal-bg); position: relative; z-index: 2; display: flex; flex-direction: column; }
+.mari-header { text-align: center; padding: 30px 20px; background: linear-gradient(to bottom, #2a2a2a, var(--metal-bg)); border-bottom: 2px solid var(--metal-chrome-dark); }
+.mari-title { font-family: 'Cinzel Decorative', cursive; font-size: 2.2em; margin: 0; letter-spacing: 2px; background: linear-gradient(to bottom, #fff, var(--metal-chrome-mid), var(--metal-chrome-dark)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+.mari-image-frame { width: 100%; height: 350px; border-bottom: 3px solid var(--metal-chrome-dark); background: #000; overflow: hidden; }
+.mari-image-frame img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.8); transition: 0.5s; }
+.mari-container:hover .mari-image-frame img { filter: grayscale(0.2); }
+
+/* STATUS AUTOMÁTICO */
+.mari-stats { padding: 20px 30px; background: #141414; border-bottom: 1px solid var(--metal-chrome-dark); display: flex; flex-direction: column; gap: 12px; }
+.mari-status-item { display: grid; grid-template-columns: 50px 1fr 90px; align-items: center; gap: 15px; }
+.mari-status-label { font-family: 'Cinzel Decorative', cursive; font-weight: 700; color: var(--metal-chrome-light); font-size: 0.9em; text-align: right; }
+.mari-status-bar-wrapper { width: 100%; height: 10px; background: #000; border-radius: 5px; border: 1px solid var(--metal-chrome-dark); overflow: hidden; }
+.mari-status-bar-fill { width: 0%; height: 100%; transition: width 0.8s ease-in-out; }
+.mari-hp-fill { background: var(--mari-hp); box-shadow: 0 0 8px #f22; }
+.mari-ea-fill { background: var(--mari-ea); box-shadow: 0 0 8px #22f; }
+.mari-san-fill { background: var(--mari-san); box-shadow: 0 0 8px #909; }
+.mari-status-value { font-family: 'Montserrat'; font-weight: 700; font-size: 0.8em; color: var(--metal-chrome-light); text-align: right; }
+
+/* CONTEÚDO */
+.mari-content { padding: 35px; font-size: 1.05em; line-height: 1.8; text-align: justify; }
+.mari-content b { color: #fff; text-shadow: 0 0 5px var(--metal-chrome-light); }
+.mari-content i { color: var(--metal-accent-blue); }
+
+.mari-extras { margin: 0 30px 20px; padding: 15px; background: #111; border: 1px solid var(--metal-chrome-dark); font-size: 0.85em; }
+
+/* RODAPÉ */
+.mari-footer-pool { grid-column: 1 / -1; position: relative; height: 100px; background: #0a0a0a; overflow: hidden; border-top: 3px solid var(--metal-chrome-dark); }
+.metal-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background-repeat: repeat-x; background-position: 0 bottom; }
+.wave1 { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,60 Q300,0 600,60 T1200,60 V120 H0 Z' fill='%23e8e8e8' opacity='0.8'/%3E%3C/svg%3E"); background-size: 1200px 100%; animation: wave-scroll-right 8s linear infinite; z-index: 3; }
+.wave2 { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,80 Q300,30 600,80 T1200,80 V120 H0 Z' fill='%23505050' opacity='0.6'/%3E%3C/svg%3E"); background-size: 1200px 100%; animation: wave-scroll-left 12s linear infinite; z-index: 2; }
+
+.mari-signature { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10; width: 100%; text-align: center; }
+.mari-signature::after { content: 'Mari El-Melloi Archisorte'; font-family: 'Syncopate'; font-size: 1.5em; background: linear-gradient(to bottom, #fff, var(--metal-chrome-mid)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 700; text-transform: uppercase; }
+
+@media (max-width: 700px) {
+  .mari-container { grid-template-columns: 0 1fr 0; }
+  .mari-sidebar { display: none; }
+}
