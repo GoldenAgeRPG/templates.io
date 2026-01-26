@@ -41,7 +41,6 @@
 }
 .seth-card:hover .seth-hero img { transform: scale(1.02); }
 
-/* Fade no fundo da imagem para o texto */
 .seth-hero::after {
   content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
   background: linear-gradient(to top, var(--s-bg) 0%, transparent 70%);
@@ -62,7 +61,7 @@
 }
 .seth-role::before { content: ''; width: 6px; height: 6px; background: var(--s-gold); border-radius: 50%; }
 
-/* STATUS (HP, EA, SAN) */
+/* STATUS PRINCIPAIS */
 .seth-stats {
   padding: 25px 30px;
   background: var(--s-card);
@@ -104,12 +103,12 @@
 .seth-body i { color: var(--s-accent); font-style: italic; }
 
 
-/* NOTAS / CONSIDERAÇÕES (Borda esquerda colorida e Título CSS) */
+/* NOTAS / CONSIDERAÇÕES */
 .seth-notes {
   margin: 0 30px 30px 30px;
   background: rgba(0,0,0,0.2);
   border: 1px solid var(--s-border);
-  border-left: 3px solid var(--s-gold); /* Destaque lateral */
+  border-left: 3px solid var(--s-gold);
   padding: 15px 20px;
   font-size: 0.9em;
   color: var(--s-dim);
@@ -117,9 +116,8 @@
   position: relative;
 }
 
-/* Título Injetado via CSS */
 .seth-notes::before {
-  content: 'SYSTEM LOG'; /* Título fixo */
+  content: 'SYSTEM LOG';
   display: block;
   font-family: 'Manrope', sans-serif;
   font-weight: 800; font-size: 0.7em; letter-spacing: 1px;
@@ -130,45 +128,97 @@
 }
 
 
-/* RODAPÉ E ASSINATURA */
+/* --- RODAPÉ (MODIFICADO) --- */
 .seth-footer {
-  padding: 0 30px 30px 30px;
-  text-align: right;
-  position: relative;
+  padding: 20px 30px 30px 30px;
+  border-top: 1px solid var(--s-border); /* Separador sutil */
+  display: flex;
+  justify-content: space-between; /* Separa os dois blocos */
+  align-items: center; /* Alinha verticalmente */
+  gap: 20px;
 }
 
+/* Bloco Secundário (Liang) - Esquerda */
+.seth-secondary {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-grow: 1; /* Ocupa espaço disponível */
+}
+
+.seth-sec-img {
+    width: 48px; height: 48px;
+    border-radius: 8px; /* Quadrado arredondado moderno */
+    object-fit: cover;
+    border: 1px solid var(--s-border);
+    filter: grayscale(0.3); /* Levemente desaturado para combinar */
+}
+
+.seth-sec-data {
+    display: flex; flex-direction: column; gap: 6px;
+    width: 100%; max-width: 180px; /* Limita largura das barras */
+}
+
+.seth-sec-name {
+    font-size: 0.85em; font-weight: 700; color: var(--s-text);
+    line-height: 1;
+}
+
+/* Mini Barras Secundárias */
+.seth-sec-row {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 0.7em; font-weight: 600; color: var(--s-dim);
+}
+.seth-sec-label { width: 20px; }
+.seth-sec-track {
+    flex-grow: 1; height: 4px; /* Altura menor */
+    background: rgba(0,0,0,0.4); border-radius: 2px; overflow: hidden;
+}
+/* Reusa as classes .fill-hp/ea, o CSS aqui ajusta o border-radius */
+.seth-sec-track .seth-fill { border-radius: 2px; }
+
+.seth-sec-val { min-width: 50px; text-align: right; font-variant-numeric: tabular-nums; }
+
+
+/* Assinatura Principal (Seth) - Direita */
 .seth-signature {
   display: inline-block;
   position: relative;
-  padding-right: 10px;
+  flex-shrink: 0; /* Não encolhe */
 }
 
-/* Kanji (Selo) via CSS (::before) */
 .seth-signature::before {
   content: '乙';
-  display: inline-block;
-  font-size: 0.9em;
-  color: #d65d5d; /* Vermelho do selo */
-  border: 1px solid #d65d5d;
-  padding: 2px 6px;
-  margin-right: 10px;
-  border-radius: 4px;
-  vertical-align: middle;
-  opacity: 0.8;
+  display: inline-block; font-size: 0.9em; color: #d65d5d;
+  border: 1px solid #d65d5d; padding: 2px 6px; margin-right: 10px;
+  border-radius: 4px; vertical-align: middle; opacity: 0.8;
 }
 
-/* Nome via CSS (::after) */
 .seth-signature::after {
   content: 'Seth Liang Okkotsu';
-  font-family: 'La Belle Aurore', cursive; /* Fonte manuscrita moderna */
-  font-size: 1.6em;
-  color: var(--s-text);
-  vertical-align: middle;
+  font-family: 'La Belle Aurore', cursive;
+  font-size: 1.6em; color: var(--s-text); vertical-align: middle;
 }
 
+
+/* Responsivo Atualizado */
 @media (max-width: 600px) {
   .seth-card { width: 100%; border: none; border-radius: 0; margin: 20px 0; }
-  .seth-body, .seth-footer, .seth-notes, .seth-stats { padding-left: 20px; padding-right: 20px; margin-left: 20px; margin-right: 20px; }
+  .seth-body, .seth-notes, .seth-stats { padding-left: 20px; padding-right: 20px; margin-left: 20px; margin-right: 20px; }
   .seth-notes { margin: 0 20px 30px 20px; }
   .seth-hero { height: 200px; }
+  
+  /* Ajuste do rodapé para mobile */
+  .seth-footer {
+      flex-direction: column; /* Empilha */
+      gap: 25px; padding: 20px;
+      align-items: stretch; /* Estica para centralizar itens internos */
+  }
+  .seth-secondary {
+      justify-content: center; text-align: left;
+      padding-bottom: 20px; border-bottom: 1px solid var(--s-border); /* Separador no mobile */
+  }
+  .seth-signature {
+      text-align: center; align-self: center; /* Centraliza assinatura */
+  }
 }
