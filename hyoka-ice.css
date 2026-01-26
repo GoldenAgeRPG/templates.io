@@ -1,10 +1,10 @@
-/* --- TEMPLATE: HYŌKA (FALLING SNOW VERSION) --- */
+/* --- TEMPLATE: HYŌKA --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Rajdhani:wght@500;700&display=swap');
 
 :root {
   --hyoka-bg: #050a10;
   --hyoka-panel: #0a1520;
-  --hyoka-ice: #bae3f7; /* Cor principal */
+  --hyoka-ice: #bae3f7;
   --hyoka-deep: #2c5870;
   --hyoka-text: #eef7ff;
   --hyoka-glow: rgba(186, 227, 247, 0.6);
@@ -17,12 +17,11 @@
   100% { background-position: 200% 50%; }
 }
 
-/* Nova animação: Queda de neve com leve rotação */
 @keyframes snow-fall {
-  0% { top: -5%; opacity: 0; transform: translateX(0) rotate(0deg); }
-  10% { opacity: 0.8; }
-  90% { opacity: 0.8; }
-  100% { top: 100%; opacity: 0; transform: translateX(20px) rotate(360deg); }
+  0% { top: -10%; opacity: 0; transform: translateX(0) rotate(0deg); }
+  10% { opacity: 0.9; }
+  90% { opacity: 0.9; }
+  100% { top: 105%; opacity: 0; transform: translateX(30px) rotate(360deg); }
 }
 
 /* --- CONTAINER PRINCIPAL --- */
@@ -45,41 +44,42 @@
 }
 .hyoka-card * { box-sizing: border-box; }
 
-/* --- PARTÍCULAS DE NEVE (REALISTAS) --- */
+/* --- NEVE (Fundo e Lenta) --- */
 .snow-container {
   position: absolute; 
-  top: 0; left: 0; width: 100%; height: 100%; /* Cobre todo o card */
+  top: 0; left: 0; width: 100%; height: 100%;
   pointer-events: none; 
-  z-index: 1; /* Atrás do texto */
+  z-index: 1; /* Nível mais baixo: fica atrás de tudo */
   overflow: hidden;
 }
 
 .snowflake {
   position: absolute;
   color: var(--hyoka-ice);
-  font-size: 1.2em; /* Tamanho base do floco */
   text-shadow: 0 0 5px var(--hyoka-ice);
   opacity: 0;
-  top: -5%; /* Começa fora da tela */
+  top: -10%;
   animation: snow-fall linear infinite;
+  /* Velocidade base muito lenta */
+  animation-duration: 25s; 
 }
 
-/* Variações aleatórias para a queda */
-.snowflake:nth-child(1)  { left: 10%; animation-duration: 8s; animation-delay: 0s; font-size: 1em; }
-.snowflake:nth-child(2)  { left: 20%; animation-duration: 10s; animation-delay: 2s; font-size: 0.8em; opacity: 0.6;}
-.snowflake:nth-child(3)  { left: 35%; animation-duration: 7s; animation-delay: 1s; font-size: 1.4em; }
-.snowflake:nth-child(4)  { left: 50%; animation-duration: 12s; animation-delay: 0.5s; font-size: 0.9em; }
-.snowflake:nth-child(5)  { left: 65%; animation-duration: 9s; animation-delay: 3s; font-size: 1.1em; }
-.snowflake:nth-child(6)  { left: 80%; animation-duration: 11s; animation-delay: 1.5s; font-size: 0.7em; opacity: 0.5;}
-.snowflake:nth-child(7)  { left: 90%; animation-duration: 8.5s; animation-delay: 2.5s; font-size: 1.3em; }
-.snowflake:nth-child(8)  { left: 15%; animation-duration: 13s; animation-delay: 1.2s; font-size: 1em; }
-.snowflake:nth-child(9)  { left: 55%; animation-duration: 7.5s; animation-delay: 0.2s; font-size: 1.2em; }
-.snowflake:nth-child(10) { left: 75%; animation-duration: 9.5s; animation-delay: 4s; font-size: 0.9em; }
+/* Variações de tempo (MUITO LENTO) e tamanho */
+.snowflake:nth-child(1)  { left: 10%; animation-duration: 25s; animation-delay: 0s; font-size: 1.2em; }
+.snowflake:nth-child(2)  { left: 20%; animation-duration: 32s; animation-delay: 5s; font-size: 0.8em; opacity: 0.6;}
+.snowflake:nth-child(3)  { left: 35%; animation-duration: 22s; animation-delay: 2s; font-size: 1.4em; }
+.snowflake:nth-child(4)  { left: 50%; animation-duration: 35s; animation-delay: 0s; font-size: 1em; }
+.snowflake:nth-child(5)  { left: 65%; animation-duration: 28s; animation-delay: 8s; font-size: 1.1em; }
+.snowflake:nth-child(6)  { left: 80%; animation-duration: 30s; animation-delay: 3s; font-size: 0.7em; opacity: 0.5;}
+.snowflake:nth-child(7)  { left: 90%; animation-duration: 24s; animation-delay: 6s; font-size: 1.3em; }
+.snowflake:nth-child(8)  { left: 5%;  animation-duration: 33s; animation-delay: 1s; font-size: 1em; }
+.snowflake:nth-child(9)  { left: 55%; animation-duration: 20s; animation-delay: 4s; font-size: 1.2em; }
+.snowflake:nth-child(10) { left: 75%; animation-duration: 29s; animation-delay: 9s; font-size: 0.9em; }
 
 
 /* --- HEADER --- */
 .hyoka-header {
-  position: relative; z-index: 5;
+  position: relative; z-index: 10; /* Acima da neve */
   text-align: center;
   padding: 50px 20px 40px 20px;
   background: rgba(5, 10, 16, 0.9);
@@ -88,7 +88,7 @@
 }
 
 .hyoka-title {
-  position: relative; z-index: 5;
+  position: relative; z-index: 10;
   font-family: 'Cinzel', serif;
   font-weight: 900;
   font-size: 2.4em;
@@ -101,7 +101,7 @@
 }
 
 .hyoka-subtitle {
-  position: relative; z-index: 5;
+  position: relative; z-index: 10;
   font-family: 'Cinzel', serif;
   font-size: 0.85em;
   color: var(--hyoka-ice);
@@ -114,21 +114,19 @@
 
 /* --- IMAGEM --- */
 .hyoka-image-frame {
-  position: relative; z-index: 5;
+  position: relative; z-index: 5; /* Imagem fica entre a neve e o texto */
   width: 100%;
   margin: 0;
   height: 320px;
   overflow: hidden;
   border-bottom: 1px solid var(--hyoka-deep);
-  /* Clip-path poligonal mantido */
   clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
 }
 
 .hyoka-image-frame img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center center; /* Centralizado para o novo banner */
-  /* Filtro frio */
+  object-position: center center;
   filter: contrast(110%) brightness(0.95) saturate(0.8) hue-rotate(10deg);
   transition: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
@@ -146,10 +144,11 @@
 
 /* --- STATUS --- */
 .hyoka-stats-panel {
-  position: relative; z-index: 5;
+  position: relative; z-index: 10; /* Acima da neve */
   padding: 25px 40px;
   display: flex; flex-direction: column; gap: 15px;
-  background: linear-gradient(to bottom, rgba(10,21,32,0.8), rgba(0,0,0,0.6));
+  /* Fundo sólido para tapar a neve atrás dos status */
+  background: linear-gradient(to bottom, #0a1520, rgba(5,10,16,0.95));
   border-bottom: 1px solid rgba(186, 227, 247, 0.1);
 }
 
@@ -162,7 +161,7 @@
   font-weight: 900;
   color: var(--hyoka-ice);
   font-size: 0.9em;
-  width: 35px; /* Levemente maior para caber SAN */
+  width: 35px;
   text-shadow: 0 0 5px rgba(186, 227, 247, 0.5);
 }
 
@@ -173,10 +172,9 @@
   overflow: hidden;
 }
 
-/* Cores das barras */
 .hyoka-hp-fill { background: linear-gradient(90deg, #2c5870, var(--hyoka-ice), #2c5870); }
 .hyoka-ea-fill { background: linear-gradient(90deg, #103040, #80d4ff, #103040); }
-.hyoka-san-fill { background: linear-gradient(90deg, #4b0082, #9370db, #4b0082); } /* Roxo gelado para Sanidade */
+.hyoka-san-fill { background: linear-gradient(90deg, #4b0082, #9370db, #4b0082); }
 
 .hyoka-hp-fill, .hyoka-ea-fill, .hyoka-san-fill {
   height: 100%; width: 0%;
@@ -193,14 +191,18 @@
   color: #fff !important;
 }
 
-/* --- CONTEÚDO --- */
+/* --- CONTEÚDO (ÁREA DE TEXTO) --- */
 .hyoka-content {
-  position: relative; z-index: 5;
+  position: relative; 
+  z-index: 10; /* CRUCIAL: Texto acima da neve */
   padding: 30px 45px;
   font-size: 1.1em;
   line-height: 1.8;
   color: var(--hyoka-text);
   text-align: justify;
+  /* Fundo semitransparente escuro para melhorar leitura contra a neve que passa atrás */
+  background-color: rgba(5, 10, 16, 0.85); 
+  box-shadow: 0 0 20px rgba(5, 10, 16, 0.85);
 }
 
 .hyoka-content b, .hyoka-content strong {
@@ -218,10 +220,10 @@
 
 /* --- NOTAS --- */
 .hyoka-notes {
-  position: relative; z-index: 5;
+  position: relative; z-index: 10; /* Acima da neve */
   margin: 10px 45px 30px 45px;
   padding: 20px;
-  background: rgba(5, 10, 16, 0.8);
+  background: rgba(5, 10, 16, 0.95); /* Fundo quase sólido */
   border: 1px solid var(--hyoka-deep);
   box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
   font-size: 0.9em;
@@ -229,7 +231,7 @@
 }
 
 .hyoka-notes::before {
-  content: 'FROST LOG'; /* Título das notas */
+  content: 'FROST LOG'; 
   display: block; 
   font-family: 'Rajdhani', sans-serif;
   font-weight: 700; 
@@ -243,7 +245,7 @@
 
 /* --- ASSINATURA --- */
 .hyoka-signature { 
-    position: relative; z-index: 5;
+    position: relative; z-index: 10;
     text-align: center; padding: 20px 40px 10px 40px; 
 }
 .hyoka-signature::after {
