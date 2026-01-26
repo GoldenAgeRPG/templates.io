@@ -1,10 +1,10 @@
-/* --- TEMPLATE: HYŌKA (GLACIAL MIRROR) --- */
+/* --- TEMPLATE: HYŌKA (FALLING SNOW VERSION) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Rajdhani:wght@500;700&display=swap');
 
 :root {
   --hyoka-bg: #050a10;
   --hyoka-panel: #0a1520;
-  --hyoka-ice: #bae3f7; /* A cor pedida */
+  --hyoka-ice: #bae3f7; /* Cor principal */
   --hyoka-deep: #2c5870;
   --hyoka-text: #eef7ff;
   --hyoka-glow: rgba(186, 227, 247, 0.6);
@@ -17,11 +17,12 @@
   100% { background-position: 200% 50%; }
 }
 
-@keyframes snow-rise {
-  0% { transform: translateY(20px) scale(0.5); opacity: 0; }
-  20% { opacity: 0.8; }
-  80% { opacity: 0.8; }
-  100% { transform: translateY(-100px) scale(1.2) rotate(180deg); opacity: 0; }
+/* Nova animação: Queda de neve com leve rotação */
+@keyframes snow-fall {
+  0% { top: -5%; opacity: 0; transform: translateX(0) rotate(0deg); }
+  10% { opacity: 0.8; }
+  90% { opacity: 0.8; }
+  100% { top: 100%; opacity: 0; transform: translateX(20px) rotate(360deg); }
 }
 
 /* --- CONTAINER PRINCIPAL --- */
@@ -44,38 +45,36 @@
 }
 .hyoka-card * { box-sizing: border-box; }
 
-/* --- PARTÍCULAS DE NEVE (RODAPÉ/FUNDO) --- */
+/* --- PARTÍCULAS DE NEVE (REALISTAS) --- */
 .snow-container {
   position: absolute; 
-  bottom: 0; left: 0; width: 100%; height: 150px; /* Focado na parte inferior */
+  top: 0; left: 0; width: 100%; height: 100%; /* Cobre todo o card */
   pointer-events: none; 
-  z-index: 1; 
+  z-index: 1; /* Atrás do texto */
   overflow: hidden;
-  mask-image: linear-gradient(to top, black, transparent); -webkit-mask-image: linear-gradient(to top, black, transparent);
 }
 
 .snowflake {
   position: absolute;
-  bottom: -10px;
-  width: 4px; height: 4px;
-  background-color: var(--hyoka-ice);
-  border-radius: 50%;
-  box-shadow: 0 0 5px var(--hyoka-ice);
+  color: var(--hyoka-ice);
+  font-size: 1.2em; /* Tamanho base do floco */
+  text-shadow: 0 0 5px var(--hyoka-ice);
   opacity: 0;
-  animation: snow-rise linear infinite;
+  top: -5%; /* Começa fora da tela */
+  animation: snow-fall linear infinite;
 }
 
-/* Variações aleatórias para a neve */
-.snowflake:nth-child(1)  { left: 10%; animation-duration: 4s; animation-delay: 0s; }
-.snowflake:nth-child(2)  { left: 20%; animation-duration: 6s; animation-delay: 2s; width: 3px; height: 3px; }
-.snowflake:nth-child(3)  { left: 35%; animation-duration: 3.5s; animation-delay: 1s; }
-.snowflake:nth-child(4)  { left: 50%; animation-duration: 5s; animation-delay: 0.5s; width: 5px; height: 5px; }
-.snowflake:nth-child(5)  { left: 65%; animation-duration: 4.2s; animation-delay: 3s; }
-.snowflake:nth-child(6)  { left: 80%; animation-duration: 5.5s; animation-delay: 1.5s; width: 2px; height: 2px;}
-.snowflake:nth-child(7)  { left: 90%; animation-duration: 3.8s; animation-delay: 2.5s; }
-.snowflake:nth-child(8)  { left: 15%; animation-duration: 4.5s; animation-delay: 1.2s; }
-.snowflake:nth-child(9)  { left: 55%; animation-duration: 6.2s; animation-delay: 0.2s; }
-.snowflake:nth-child(10) { left: 75%; animation-duration: 3s; animation-delay: 4s; }
+/* Variações aleatórias para a queda */
+.snowflake:nth-child(1)  { left: 10%; animation-duration: 8s; animation-delay: 0s; font-size: 1em; }
+.snowflake:nth-child(2)  { left: 20%; animation-duration: 10s; animation-delay: 2s; font-size: 0.8em; opacity: 0.6;}
+.snowflake:nth-child(3)  { left: 35%; animation-duration: 7s; animation-delay: 1s; font-size: 1.4em; }
+.snowflake:nth-child(4)  { left: 50%; animation-duration: 12s; animation-delay: 0.5s; font-size: 0.9em; }
+.snowflake:nth-child(5)  { left: 65%; animation-duration: 9s; animation-delay: 3s; font-size: 1.1em; }
+.snowflake:nth-child(6)  { left: 80%; animation-duration: 11s; animation-delay: 1.5s; font-size: 0.7em; opacity: 0.5;}
+.snowflake:nth-child(7)  { left: 90%; animation-duration: 8.5s; animation-delay: 2.5s; font-size: 1.3em; }
+.snowflake:nth-child(8)  { left: 15%; animation-duration: 13s; animation-delay: 1.2s; font-size: 1em; }
+.snowflake:nth-child(9)  { left: 55%; animation-duration: 7.5s; animation-delay: 0.2s; font-size: 1.2em; }
+.snowflake:nth-child(10) { left: 75%; animation-duration: 9.5s; animation-delay: 4s; font-size: 0.9em; }
 
 
 /* --- HEADER --- */
@@ -128,7 +127,7 @@
 .hyoka-image-frame img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: center 20%;
+  object-position: center center; /* Centralizado para o novo banner */
   /* Filtro frio */
   filter: contrast(110%) brightness(0.95) saturate(0.8) hue-rotate(10deg);
   transition: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
