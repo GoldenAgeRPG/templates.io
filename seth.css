@@ -117,7 +117,7 @@
 }
 
 .seth-notes::before {
-  content: 'SYSTEM LOG';
+  content: 'CURSED';
   display: block;
   font-family: 'Manrope', sans-serif;
   font-weight: 800; font-size: 0.7em; letter-spacing: 1px;
