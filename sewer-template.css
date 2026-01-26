@@ -5,176 +5,254 @@
 @import url('https://fonts.googleapis.com/css?family=Hind:200,300,400,700,800');
 @import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&display=swap');
 @import url('https://fonts.googleapis.com/css?family=Rajdhani:500,700,800');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&display=swap');
 
 /* 2. VARIÁVEIS E GERAL */
 .amn-body {
-    --blood-red: #8D2E2E; /* Cor base solicitada */
+    --blood-red: #8D2E2E; 
+    --blood-bright: #ab1313;
     
     margin: 30px auto;
-    background: #101010;
-    /* Ajuste de largura solicitado: igual aos outros templates */
+    background: #0a0a0a;
     max-width: 650px; width: 95%; 
-    padding: 25px;
-    border-radius: 4px;
+    padding: 20px;
+    border-radius: 2px;
     color: #b0b0b0;
     font: 13px/1.8 'Hind', sans-serif;
     text-align: justify;
     position: relative;
-    box-shadow: 0 0 20px rgba(0,0,0,0.8);
-    border: 1px solid #1a1a1a;
+    box-shadow: 0 0 30px rgba(0,0,0,0.9);
+    border: 1px solid #1f1f1f;
+    overflow: hidden; /* Contém as cinzas */
 }
 .amn-body * { box-sizing: border-box; }
 .amn-body br { display: none; }
 .amn-texto br { display: block; }
 
-/* 3. WRAPPER DA IMAGEM E CONTEÚDO */
-.amn-wrap {
-    background: #151515;
-    border-radius: 4px;
-    overflow: hidden;
-    border-top: 15px solid #0a0a0a; /* Topo escuro */
-    position: relative;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+/* EFEITO DE CINZAS (ATMOSFÉRICO, NÃO TECNOLÓGICO) */
+@keyframes ash-fall {
+  0% { transform: translateY(-10%) rotate(0deg); opacity: 0; }
+  10% { opacity: 0.5; }
+  90% { opacity: 0.5; }
+  100% { transform: translateY(110%) rotate(360deg); opacity: 0; }
 }
 
-/* 4. IMAGEM COM FILTRO MONOCROMÁTICO/SANGUE */
-.amn-img {
-    width: 100%;
-    height: 300px;
-    display: block;
-    position: relative;
+.ash-container {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none; z-index: 1;
+}
+
+.ash-particle {
+    position: absolute; width: 3px; height: 3px;
+    background: #333; opacity: 0;
+    border-radius: 50%;
+    animation: ash-fall linear infinite;
+}
+/* Variações das partículas */
+.ash-particle:nth-child(1) { left: 10%; animation-duration: 8s; animation-delay: 0s; width: 2px; height: 2px; }
+.ash-particle:nth-child(2) { left: 30%; animation-duration: 12s; animation-delay: 2s; background: #444; }
+.ash-particle:nth-child(3) { left: 50%; animation-duration: 7s; animation-delay: 1s; width: 4px; height: 4px; background: #222; }
+.ash-particle:nth-child(4) { left: 70%; animation-duration: 10s; animation-delay: 4s; }
+.ash-particle:nth-child(5) { left: 90%; animation-duration: 9s; animation-delay: 3s; width: 2px; height: 2px; }
+
+
+/* 3. WRAPPER */
+.amn-wrap {
+    background: #111;
+    border-radius: 2px;
     overflow: hidden;
+    border-top: 4px solid var(--blood-red); /* Linha de sangue no topo */
+    position: relative; z-index: 5;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.7);
+}
+
+/* 4. IMAGEM */
+.amn-img {
+    width: 100%; height: 320px;
+    display: block; position: relative; overflow: hidden;
     background: #000;
 }
 .amn-img img {
-    width: 100%; height: 100%; object-fit: cover;
-    /* Filtro CSS para garantir P&B + Contraste antes do overlay */
-    filter: grayscale(100%) contrast(120%);
+    width: 100%; height: 100%; object-fit: cover; object-position: center 20%;
+    filter: grayscale(100%) contrast(110%) brightness(0.9);
+    transition: transform 3s ease;
 }
-/* Overlay Vermelho */
+.amn-body:hover .amn-img img { transform: scale(1.05); }
+
+/* Overlay de Vinheta + Sangue */
 .amn-img::after {
     content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--blood-red);
-    mix-blend-mode: multiply; /* Mescla o vermelho com o preto/branco */
-    opacity: 0.7;
+    background: radial-gradient(circle, transparent 40%, rgba(141, 46, 46, 0.2) 100%);
+    mix-blend-mode: multiply;
     z-index: 2;
+    box-shadow: inset 0 0 50px #000;
 }
 
-/* 5. TÍTULOS */
-.amn-title {
-    font: 55px 'Abril Fatface', cursive;
-    color: #e0e0e0;
-    margin-top: -85px; /* Sobe sobre a imagem */
-    margin-bottom: 0;
+/* 5. TÍTULOS E TARJA */
+.amn-header-group {
     position: relative; z-index: 20;
+    margin-top: -60px; /* Sobe na imagem */
     text-align: center;
-    text-shadow: 4px 4px 0 #000;
+    padding-bottom: 20px;
+}
+
+.amn-title {
+    font: 60px 'Abril Fatface', cursive;
+    color: #e0e0e0;
+    text-shadow: 0 5px 10px #000;
     text-transform: uppercase;
-    line-height: 1;
+    line-height: 0.9;
     white-space: nowrap;
-    pointer-events: none;
+    margin: 0;
+}
+
+/* TARJA PRETA RESTAURADA */
+.amn-lyric-box {
+    display: flex; justify-content: center;
+    margin-top: 10px;
 }
 
 .amn-lyric {
-    text-transform: uppercase;
-    font-family: 'Rajdhani', sans-serif;
-    font-weight: 700; font-size: 11px;
-    letter-spacing: 6px;
-    margin-top: 5px; margin-bottom: 30px;
-    position: relative; z-index: 20;
-    text-align: center;
-    text-shadow: 2px 2px 0 #000;
+    background: #000; /* Tarja Preta */
     color: var(--blood-red);
+    padding: 5px 25px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700; font-size: 12px;
+    letter-spacing: 4px; text-transform: uppercase;
+    border: 1px solid #222;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.8);
+    position: relative;
 }
-
-/* 6. TEXTO E FORMATAÇÃO */
-.amn-texto {
-    padding: 10px 50px 40px 50px;
-    background: #151515;
-    position: relative; z-index: 30;
+/* Detalhe estético na tarja */
+.amn-lyric::before, .amn-lyric::after {
+    content: ''; position: absolute; top: 50%; transform: translateY(-50%);
+    width: 5px; height: 5px; background: var(--blood-red); border-radius: 50%;
 }
+.amn-lyric::before { left: 8px; }
+.amn-lyric::after { right: 8px; }
 
-/* NEGRITO ESPECÍFICO (Pedido no print) */
-.amn-texto b, .amn-texto strong { 
-    font-family: inherit; /* Mesma fonte do texto */
-    font-weight: 800; /* Apenas mais grosso */
-    color: var(--blood-red); /* #8D2E2E */
-    font-size: 1.05em;
-}
 
-.amn-texto i, .amn-texto em { 
-    color: #ddd; font-style: italic; font-family: 'Poppins', sans-serif;
-}
-
-/* Quote/Considerações */
-.amn-quote2 {
-    background: #0d0d0d;
-    border-left: 2px solid var(--blood-red);
-    padding: 15px 20px;
-    color: #666;
-    margin-top: 30px;
-    font-size: 11px;
-    font-family: 'Poppins', sans-serif;
-}
-
-/* 7. STATUS (BARRAS) */
+/* 6. STATUS */
 .sewer-status-wrapper {
     display: flex; justify-content: space-between; gap: 20px;
     padding: 0 50px; margin-bottom: 30px;
-    position: relative; z-index: 40;
+    position: relative; z-index: 20;
 }
 
-.sewer-stat-item {
-    width: 32%; display: flex; flex-direction: column; gap: 5px;
-}
+.sewer-stat-item { width: 32%; display: flex; flex-direction: column; gap: 6px; }
 
 .sewer-stat-label {
     font-family: 'Rajdhani', sans-serif;
-    font-size: 11px; font-weight: 800;
+    font-size: 12px; font-weight: 800;
     text-transform: uppercase; letter-spacing: 1px;
-    color: #666;
+    color: #777;
     display: flex; justify-content: space-between;
 }
-.sewer-stat-label span:last-child { color: #aaa; }
+.sewer-stat-label span:last-child { color: #ccc; }
 
-/* Trilho da barra */
 .sewer-bar-bg {
     width: 100%; height: 6px;
-    background: #080808;
-    border-bottom: 1px solid #222;
+    background: #050505;
+    border: 1px solid #222;
+    padding: 1px;
 }
 
-/* Cores das Barras (Exatas do Print) */
-.sewer-hp-fill { 
-    height: 100%; width: 0%; transition: width 0.6s ease;
-    background: #ab1313; /* Vermelho Vivo */
-}
-.sewer-ea-fill { 
-    height: 100%; width: 0%; transition: width 0.6s ease;
-    background: #591616; /* Vermelho Escuro */
-}
-.sewer-san-fill { 
-    height: 100%; width: 0%; transition: width 0.6s ease;
-    background: #944b4b; /* Vermelho Lavado */
+/* Cores Exatas */
+.sewer-hp-fill { height: 100%; background: #ab1313; width: 0%; transition: width 0.6s ease; }
+.sewer-ea-fill { height: 100%; background: #591616; width: 0%; transition: width 0.6s ease; }
+.sewer-san-fill { height: 100%; background: #944b4b; width: 0%; transition: width 0.6s ease; }
+
+
+/* 7. TEXTO E CONSIDERAÇÕES */
+.amn-texto {
+    padding: 10px 50px 40px 50px;
+    background: #111;
+    position: relative; z-index: 30;
+    /* Divisória sutil no topo */
+    border-top: 1px solid #1a1a1a;
 }
 
-/* 8. ASSINATURA */
-.amn-signature {
-    text-align: right;
-    font-family: 'Abril Fatface', cursive;
-    font-size: 20px;
+.amn-texto b, .amn-texto strong { 
+    font-family: inherit; font-weight: 800; color: var(--blood-red); font-size: 1.05em;
+}
+.amn-texto i, .amn-texto em { 
+    color: #888; font-style: italic; font-family: 'Poppins', sans-serif;
+}
+
+/* CONSIDERAÇÕES COM TÍTULO INJETADO */
+.amn-quote2 {
+    background: #0a0a0a;
+    border-left: 3px solid var(--blood-red);
+    border-bottom: 1px solid #1a1a1a;
+    padding: 20px;
+    color: #666;
+    margin-top: 40px;
+    font-size: 11px;
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+}
+
+/* Título Injetado via CSS */
+.amn-quote2::before {
+    content: 'DEATH MARCH'; /* Título fixo */
+    display: block;
+    font-family: 'Cinzel Decorative', cursive;
     color: var(--blood-red);
-    text-shadow: 2px 2px 10px rgba(0,0,0,0.5);
-    margin: 20px 50px 30px 0;
-    opacity: 0.9;
+    font-size: 14px;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    border-bottom: 1px solid #222;
+    padding-bottom: 5px;
 }
-.amn-signature::after { content: 'Zenin Rikuya'; }
+
+
+/* 8. ASSINATURA (REFORMULADA) */
+.amn-footer {
+    padding: 0 50px 30px 50px;
+    text-align: right;
+}
+
+.amn-signature {
+    display: inline-block;
+    position: relative;
+    padding-top: 15px;
+}
+
+/* Linha decorativa acima da assinatura */
+.amn-signature::before {
+    content: ''; position: absolute; top: 0; right: 0;
+    width: 60px; height: 2px;
+    background: var(--blood-red);
+}
+
+.amn-sig-text {
+    font-family: 'Cinzel Decorative', cursive; /* Fonte mais gótica/elegante */
+    font-size: 1.4em;
+    color: #ccc;
+    text-shadow: 0 0 10px rgba(0,0,0,1);
+    letter-spacing: 1px;
+}
+
+/* Selo vermelho ao lado */
+.amn-sig-seal {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px;
+    border: 2px solid var(--blood-red);
+    color: var(--blood-red);
+    font-size: 12px;
+    margin-left: 10px;
+    border-radius: 4px;
+    vertical-align: middle;
+    opacity: 0.8;
+    font-weight: bold;
+}
+
 
 /* Responsivo */
 @media (max-width: 600px) {
-    .amn-body { width: 100%; padding: 10px; margin: 10px 0; border: none; }
-    .amn-texto, .sewer-status-wrapper { padding-left: 20px; padding-right: 20px; }
-    .amn-title { font-size: 40px; margin-top: -60px; white-space: normal; line-height: 0.9;}
-    .sewer-status-wrapper { flex-direction: column; gap: 10px; }
+    .amn-body { width: 100%; border: none; margin: 10px 0; padding: 10px;}
+    .amn-title { font-size: 36px; white-space: normal; line-height: 1; margin-top: -40px;}
+    .sewer-status-wrapper { flex-direction: column; gap: 15px; padding: 0 20px; }
     .sewer-stat-item { width: 100%; }
+    .amn-texto, .amn-footer { padding-left: 20px; padding-right: 20px; }
 }
