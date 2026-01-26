@@ -1,167 +1,174 @@
-/* --- TEMPLATE: SETH (MOONLIT INK - MODERN UX) --- */
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;500;700&display=swap');
+/* --- TEMPLATE: SETH --- */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;800&family=La+Belle+Aurore&display=swap');
 
 :root {
-  --ui-bg: #141416;         /* Fundo quase preto, suave */
-  --ui-card: #1f1f23;       /* Fundo do card, levemente mais claro */
-  --ui-accent: #648dae;     /* Azul Mineral (Suave, não neon) */
-  --ui-gold: #c8b273;       /* Ouro Fosco */
-  --ui-text-main: #e0e0e0;  /* Texto claro, mas não branco puro (dói menos o olho) */
-  --ui-text-dim: #a0a0a0;   /* Texto secundário */
+  --s-bg: #121214;       /* Fundo quase preto */
+  --s-card: #1c1c1f;     /* Fundo do card */
+  --s-accent: #648dae;   /* Azul Mineral */
+  --s-gold: #c8b273;     /* Ouro Fosco */
+  --s-text: #e1e1e6;     /* Texto principal */
+  --s-dim: #a8a8b3;      /* Texto secundário */
+  --s-border: rgba(255,255,255,0.08);
 }
 
-/* Container Principal - Estilo "Card" Moderno */
-.seth-ui-card {
+/* CONTAINER */
+.seth-card {
   box-sizing: border-box;
-  max-width: 650px; width: 95%; margin: 50px auto;
-  background-color: var(--ui-bg);
-  border-radius: 16px; /* Cantos arredondados modernos */
-  box-shadow: 0 20px 40px rgba(0,0,0,0.4); /* Sombra difusa e elegante */
-  font-family: 'Manrope', sans-serif; /* Fonte Sans-serif moderna e geométrica */
-  color: var(--ui-text-main);
+  max-width: 600px; width: 95%; margin: 50px auto;
+  background-color: var(--s-bg);
+  border-radius: 12px;
+  border: 1px solid var(--s-border);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  font-family: 'Manrope', sans-serif;
+  color: var(--s-text);
   overflow: hidden;
   position: relative;
-  border: 1px solid rgba(255,255,255,0.05); /* Borda sutilíssima */
 }
-.seth-ui-card * { box-sizing: border-box; }
+.seth-card * { box-sizing: border-box; }
 
-/* Header Clean com Imagem */
+/* HEADER */
 .seth-hero {
   position: relative;
-  height: 260px;
+  height: 240px;
   width: 100%;
   overflow: hidden;
 }
-
 .seth-hero img {
   width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center 25%;
-  transition: transform 0.7s ease;
-  filter: brightness(0.9);
+  object-fit: cover; object-position: center 25%;
+  transition: transform 0.5s ease;
+  filter: brightness(0.85);
 }
-.seth-ui-card:hover .seth-hero img { transform: scale(1.03); }
+.seth-card:hover .seth-hero img { transform: scale(1.02); }
 
-/* Gradiente suave para o texto do título não "brigar" com a imagem */
+/* Fade no fundo da imagem para o texto */
 .seth-hero::after {
   content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 100%;
-  background: linear-gradient(to top, var(--ui-bg) 5%, transparent 60%);
+  background: linear-gradient(to top, var(--s-bg) 0%, transparent 70%);
 }
 
-/* Títulos - Tipografia Editorial */
+/* TÍTULO */
 .seth-meta {
   position: absolute; bottom: 20px; left: 30px; z-index: 2;
 }
-
 .seth-name {
-  font-family: 'Cormorant Garamond', serif; /* Toque de tradição, mas legível */
-  font-size: 3em;
-  font-weight: 400;
-  color: #fff;
-  margin: 0;
-  line-height: 1;
-  letter-spacing: -0.02em; /* Kerning moderno */
+  font-weight: 800; font-size: 2.8em; color: #fff;
+  margin: 0; line-height: 1; letter-spacing: -1px;
 }
-
 .seth-role {
-  font-family: 'Manrope', sans-serif;
-  font-size: 0.75em;
-  text-transform: uppercase;
-  letter-spacing: 3px;
-  color: var(--ui-gold);
-  margin-top: 8px;
-  font-weight: 700;
-  display: flex; align-items: center; gap: 8px;
+  font-size: 0.75em; text-transform: uppercase; letter-spacing: 3px;
+  color: var(--s-gold); margin-top: 5px; font-weight: 600;
+  display: flex; align-items: center; gap: 10px;
 }
-.seth-role::before { content: ''; width: 20px; height: 1px; background: var(--ui-gold); opacity: 0.5; }
+.seth-role::before { content: ''; width: 6px; height: 6px; background: var(--s-gold); border-radius: 50%; }
 
-/* Painel de Status - Minimalista */
-.seth-dashboard {
-  padding: 30px 40px 10px 40px;
-  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px;
-  border-bottom: 1px solid rgba(255,255,255,0.05);
+/* STATUS (HP, EA, SAN) */
+.seth-stats {
+  padding: 25px 30px;
+  background: var(--s-card);
+  border-bottom: 1px solid var(--s-border);
+  display: flex; flex-direction: column; gap: 12px;
 }
 
-.seth-stat-group { display: flex; flex-direction: column; gap: 8px; }
+.seth-stat-row {
+  display: flex; align-items: center; gap: 15px;
+  font-size: 0.8em; font-weight: 600; color: var(--s-dim);
+}
+.seth-label { width: 30px; color: var(--s-text); }
 
-.seth-stat-header {
-  display: flex; justify-content: space-between; font-size: 0.75em;
-  color: var(--ui-text-dim); font-weight: 500; text-transform: uppercase; letter-spacing: 1px;
+.seth-track {
+  flex-grow: 1; height: 6px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 3px; overflow: hidden;
 }
 
-.seth-progress-track {
-  width: 100%; height: 6px;
-  background: rgba(255,255,255,0.1);
-  border-radius: 10px; /* Barras arredondadas (Pill shape) */
-  overflow: hidden;
-}
+.seth-fill { height: 100%; width: 0%; border-radius: 3px; transition: width 0.6s ease; }
 
-.seth-progress-fill {
-  height: 100%; width: 0%;
-  border-radius: 10px;
-  transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1); /* Animação suave (Easing) */
-}
+/* Cores das barras */
+.fill-hp { background: #d65d5d; }
+.fill-ea { background: var(--s-accent); }
+.fill-san { background: #9b72cf; }
 
-/* Cores das barras - Tons pastéis escuros/Minerais */
-.fill-hp { background: #d46a6a; } /* Vermelho suave */
-.fill-ea { background: var(--ui-accent); } /* Azul Mineral */
-.fill-san { background: #9b8bc6; } /* Lavanda Fosca */
+.seth-val { min-width: 70px; text-align: right; color: var(--s-text); font-variant-numeric: tabular-nums; }
 
-/* Conteúdo - Foco na Leitura */
+
+/* CONTEÚDO */
 .seth-body {
-  padding: 30px 40px;
-  font-size: 1.05em;
-  line-height: 1.8; /* Espaçamento de linha confortável */
-  color: var(--ui-text-main);
+  padding: 30px;
+  font-size: 1em; line-height: 1.7;
   text-align: justify;
+  color: var(--s-dim);
 }
+.seth-body p { margin-bottom: 15px; margin-top: 0; }
+.seth-body b { color: var(--s-text); font-weight: 700; }
+.seth-body i { color: var(--s-accent); font-style: italic; }
 
-.seth-body p { margin-bottom: 20px; margin-top: 0; }
 
-/* Destaques no texto */
-.seth-body b { color: var(--ui-accent); font-weight: 600; }
-.seth-body i { color: var(--ui-gold); font-family: 'Cormorant Garamond', serif; font-size: 1.15em; }
-
-/* Citação moderna */
-.seth-quote-box {
-  background: rgba(255,255,255,0.03);
-  border-left: 2px solid var(--ui-gold);
+/* NOTAS / CONSIDERAÇÕES (Borda esquerda colorida e Título CSS) */
+.seth-notes {
+  margin: 0 30px 30px 30px;
+  background: rgba(0,0,0,0.2);
+  border: 1px solid var(--s-border);
+  border-left: 3px solid var(--s-gold); /* Destaque lateral */
   padding: 15px 20px;
-  margin: 20px 0;
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2em;
-  color: #f0f0f0;
-  font-style: italic;
+  font-size: 0.9em;
+  color: var(--s-dim);
+  border-radius: 0 4px 4px 0;
+  position: relative;
 }
 
-/* Assinatura Clean */
-.seth-footer-sign {
-  padding: 0 40px 30px 40px;
-  text-align: right;
+/* Título Injetado via CSS */
+.seth-notes::before {
+  content: 'SYSTEM LOG'; /* Título fixo */
+  display: block;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800; font-size: 0.7em; letter-spacing: 1px;
+  color: var(--s-gold);
+  margin-bottom: 8px;
+  text-transform: uppercase;
   opacity: 0.8;
 }
 
-.sign-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.2em;
-  color: var(--ui-text-dim);
-  display: flex; align-items: center; justify-content: flex-end; gap: 10px;
+
+/* RODAPÉ E ASSINATURA */
+.seth-footer {
+  padding: 0 30px 30px 30px;
+  text-align: right;
+  position: relative;
 }
 
-/* Kanji Stamp minimalista (marca d'água) */
-.sign-stamp {
-  font-family: sans-serif;
-  border: 1px solid var(--ui-text-dim);
-  color: var(--ui-text-dim);
-  width: 24px; height: 24px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 0.6em; border-radius: 4px;
+.seth-signature {
+  display: inline-block;
+  position: relative;
+  padding-right: 10px;
 }
 
-/* Responsivo */
+/* Kanji (Selo) via CSS (::before) */
+.seth-signature::before {
+  content: '乙';
+  display: inline-block;
+  font-size: 0.9em;
+  color: #d65d5d; /* Vermelho do selo */
+  border: 1px solid #d65d5d;
+  padding: 2px 6px;
+  margin-right: 10px;
+  border-radius: 4px;
+  vertical-align: middle;
+  opacity: 0.8;
+}
+
+/* Nome via CSS (::after) */
+.seth-signature::after {
+  content: 'Seth Liang Okkotsu';
+  font-family: 'La Belle Aurore', cursive; /* Fonte manuscrita moderna */
+  font-size: 1.6em;
+  color: var(--s-text);
+  vertical-align: middle;
+}
+
 @media (max-width: 600px) {
-  .seth-ui-card { width: 100%; border-radius: 0; margin: 20px 0; border: none; }
+  .seth-card { width: 100%; border: none; border-radius: 0; margin: 20px 0; }
+  .seth-body, .seth-footer, .seth-notes, .seth-stats { padding-left: 20px; padding-right: 20px; margin-left: 20px; margin-right: 20px; }
+  .seth-notes { margin: 0 20px 30px 20px; }
   .seth-hero { height: 200px; }
-  .seth-dashboard { grid-template-columns: 1fr; padding: 20px; gap: 15px; }
-  .seth-body { padding: 20px; }
 }
