@@ -1,0 +1,259 @@
+/* --- TEMPLATE: HYŌKA (GLACIAL MIRROR) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Crimson+Text:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&family=Rajdhani:wght@500;700&display=swap');
+
+:root {
+  --hyoka-bg: #050a10;
+  --hyoka-panel: #0a1520;
+  --hyoka-ice: #bae3f7; /* A cor pedida */
+  --hyoka-deep: #2c5870;
+  --hyoka-text: #eef7ff;
+  --hyoka-glow: rgba(186, 227, 247, 0.6);
+}
+
+/* --- ANIMAÇÕES --- */
+
+@keyframes ice-shimmer {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+@keyframes snow-rise {
+  0% { transform: translateY(20px) scale(0.5); opacity: 0; }
+  20% { opacity: 0.8; }
+  80% { opacity: 0.8; }
+  100% { transform: translateY(-100px) scale(1.2) rotate(180deg); opacity: 0; }
+}
+
+/* --- CONTAINER PRINCIPAL --- */
+.hyoka-card {
+  position: relative;
+  z-index: 1;
+  box-sizing: border-box;
+  max-width: 650px;
+  width: 95%;
+  margin: 50px auto;
+  background-color: var(--hyoka-bg);
+  background-image: linear-gradient(135deg, #050a10 0%, #0f1f30 100%);
+  border: 1px solid var(--hyoka-deep);
+  box-shadow: 0 0 0 4px #000, 0 0 15px rgba(186, 227, 247, 0.15); 
+  border-radius: 2px;
+  color: var(--hyoka-text);
+  font-family: 'Crimson Text', serif;
+  overflow: hidden;
+  padding-bottom: 20px;
+}
+.hyoka-card * { box-sizing: border-box; }
+
+/* --- PARTÍCULAS DE NEVE (RODAPÉ/FUNDO) --- */
+.snow-container {
+  position: absolute; 
+  bottom: 0; left: 0; width: 100%; height: 150px; /* Focado na parte inferior */
+  pointer-events: none; 
+  z-index: 1; 
+  overflow: hidden;
+  mask-image: linear-gradient(to top, black, transparent); -webkit-mask-image: linear-gradient(to top, black, transparent);
+}
+
+.snowflake {
+  position: absolute;
+  bottom: -10px;
+  width: 4px; height: 4px;
+  background-color: var(--hyoka-ice);
+  border-radius: 50%;
+  box-shadow: 0 0 5px var(--hyoka-ice);
+  opacity: 0;
+  animation: snow-rise linear infinite;
+}
+
+/* Variações aleatórias para a neve */
+.snowflake:nth-child(1)  { left: 10%; animation-duration: 4s; animation-delay: 0s; }
+.snowflake:nth-child(2)  { left: 20%; animation-duration: 6s; animation-delay: 2s; width: 3px; height: 3px; }
+.snowflake:nth-child(3)  { left: 35%; animation-duration: 3.5s; animation-delay: 1s; }
+.snowflake:nth-child(4)  { left: 50%; animation-duration: 5s; animation-delay: 0.5s; width: 5px; height: 5px; }
+.snowflake:nth-child(5)  { left: 65%; animation-duration: 4.2s; animation-delay: 3s; }
+.snowflake:nth-child(6)  { left: 80%; animation-duration: 5.5s; animation-delay: 1.5s; width: 2px; height: 2px;}
+.snowflake:nth-child(7)  { left: 90%; animation-duration: 3.8s; animation-delay: 2.5s; }
+.snowflake:nth-child(8)  { left: 15%; animation-duration: 4.5s; animation-delay: 1.2s; }
+.snowflake:nth-child(9)  { left: 55%; animation-duration: 6.2s; animation-delay: 0.2s; }
+.snowflake:nth-child(10) { left: 75%; animation-duration: 3s; animation-delay: 4s; }
+
+
+/* --- HEADER --- */
+.hyoka-header {
+  position: relative; z-index: 5;
+  text-align: center;
+  padding: 50px 20px 40px 20px;
+  background: rgba(5, 10, 16, 0.9);
+  border-bottom: 1px solid var(--hyoka-deep);
+  overflow: hidden;
+}
+
+.hyoka-title {
+  position: relative; z-index: 5;
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  font-size: 2.4em;
+  color: #fff;
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 0 0 10px var(--hyoka-ice);
+  letter-spacing: 4px;
+  line-height: 1;
+}
+
+.hyoka-subtitle {
+  position: relative; z-index: 5;
+  font-family: 'Cinzel', serif;
+  font-size: 0.85em;
+  color: var(--hyoka-ice);
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  margin-top: 10px;
+  font-weight: 700;
+  opacity: 0.9;
+}
+
+/* --- IMAGEM --- */
+.hyoka-image-frame {
+  position: relative; z-index: 5;
+  width: 100%;
+  margin: 0;
+  height: 320px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--hyoka-deep);
+  /* Clip-path poligonal mantido */
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+}
+
+.hyoka-image-frame img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center 20%;
+  /* Filtro frio */
+  filter: contrast(110%) brightness(0.95) saturate(0.8) hue-rotate(10deg);
+  transition: 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hyoka-image-frame::after {
+    content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
+    background: linear-gradient(to top, rgba(5,15,30,0.5), transparent);
+    pointer-events: none;
+}
+
+.hyoka-card:hover .hyoka-image-frame img {
+  transform: scale(1.03);
+  filter: contrast(105%) brightness(1.05) saturate(1);
+}
+
+/* --- STATUS --- */
+.hyoka-stats-panel {
+  position: relative; z-index: 5;
+  padding: 25px 40px;
+  display: flex; flex-direction: column; gap: 15px;
+  background: linear-gradient(to bottom, rgba(10,21,32,0.8), rgba(0,0,0,0.6));
+  border-bottom: 1px solid rgba(186, 227, 247, 0.1);
+}
+
+.hyoka-stat-row {
+  display: flex; align-items: center; gap: 15px;
+}
+
+.hyoka-label {
+  font-family: 'Cinzel', serif;
+  font-weight: 900;
+  color: var(--hyoka-ice);
+  font-size: 0.9em;
+  width: 35px; /* Levemente maior para caber SAN */
+  text-shadow: 0 0 5px rgba(186, 227, 247, 0.5);
+}
+
+.hyoka-bar-bg {
+  flex-grow: 1; height: 5px;
+  background: #050a10;
+  border: 1px solid var(--hyoka-deep);
+  overflow: hidden;
+}
+
+/* Cores das barras */
+.hyoka-hp-fill { background: linear-gradient(90deg, #2c5870, var(--hyoka-ice), #2c5870); }
+.hyoka-ea-fill { background: linear-gradient(90deg, #103040, #80d4ff, #103040); }
+.hyoka-san-fill { background: linear-gradient(90deg, #4b0082, #9370db, #4b0082); } /* Roxo gelado para Sanidade */
+
+.hyoka-hp-fill, .hyoka-ea-fill, .hyoka-san-fill {
+  height: 100%; width: 0%;
+  background-size: 200% 100%;
+  animation: ice-shimmer 2s linear infinite;
+  transition: width 0.6s ease;
+  box-shadow: 0 0 8px rgba(186, 227, 247, 0.3);
+}
+
+.hyoka-hp-val, .hyoka-ea-val, .hyoka-san-val {
+  font-family: 'Cinzel', serif;
+  font-weight: 700; font-size: 0.9em;
+  min-width: 80px; text-align: right;
+  color: #fff !important;
+}
+
+/* --- CONTEÚDO --- */
+.hyoka-content {
+  position: relative; z-index: 5;
+  padding: 30px 45px;
+  font-size: 1.1em;
+  line-height: 1.8;
+  color: var(--hyoka-text);
+  text-align: justify;
+}
+
+.hyoka-content b, .hyoka-content strong {
+  color: var(--hyoka-ice);
+  font-weight: 700;
+  text-shadow: 0 0 2px rgba(186, 227, 247, 0.4);
+}
+
+.hyoka-content i, .hyoka-content em {
+  color: #80d4ff;
+  font-family: 'Crimson Text', serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* --- NOTAS --- */
+.hyoka-notes {
+  position: relative; z-index: 5;
+  margin: 10px 45px 30px 45px;
+  padding: 20px;
+  background: rgba(5, 10, 16, 0.8);
+  border: 1px solid var(--hyoka-deep);
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8);
+  font-size: 0.9em;
+  color: #a0c0d0;
+}
+
+.hyoka-notes::before {
+  content: 'FROST LOG'; /* Título das notas */
+  display: block; 
+  font-family: 'Rajdhani', sans-serif;
+  font-weight: 700; 
+  letter-spacing: 2px;
+  color: var(--hyoka-ice); 
+  border-bottom: 1px solid var(--hyoka-deep);
+  margin-bottom: 10px; 
+  padding-bottom: 5px;
+  font-size: 1em;
+}
+
+/* --- ASSINATURA --- */
+.hyoka-signature { 
+    position: relative; z-index: 5;
+    text-align: center; padding: 20px 40px 10px 40px; 
+}
+.hyoka-signature::after {
+  content: 'Hyōka Nanako';
+  font-family: 'Great Vibes', cursive;
+  font-size: 3em;
+  color: var(--hyoka-ice);
+  opacity: 0.8;
+  text-shadow: 0 0 10px rgba(186, 227, 247, 0.5);
+  transform: rotate(-3deg);
+  display: inline-block;
+}
