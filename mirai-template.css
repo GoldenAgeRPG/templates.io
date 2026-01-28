@@ -1,57 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;500;700&family=Rubik+Glitch&display=swap');
 
 :root{
-  --mk-bg:#050505;
-  --mk-panel:#0b0b0b;
-  --mk-panel2:#0f0f0f;
+  --mira-bg:#050505;
+  --mira-panel:#0b0b0b;
+  --mira-panel2:#0f0f0f;
 
-  --mk-white:#f2f2f2;
-  --mk-soft:#bdbdbd;
+  --mira-white:#f2f2f2;
+  --mira-soft:rgba(255,255,255,0.65);
 
-  --mk-red:#e1061b;
-  --mk-red2:#ff2a2a;
+  --mira-red:#e1061b;
+  --mira-red2:#ff2a2a;
 
-  --mk-hp:#ed0f87;
-  --mk-ea:#ffffff;
-  --mk-san:#ff3b30;
+  --mira-hp:#ed0f87;
+  --mira-ea:#ffffff;
+  --mira-san:#ff3b30;
 
-  --mk-outline:rgba(255,255,255,0.10);
-  --mk-shadow:rgba(0,0,0,0.75);
+  --mira-outline:rgba(255,255,255,0.10);
+  --mira-shadow:rgba(0,0,0,0.75);
 
-  --mk-font:'Rubik',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
-  --mk-glitch:'Rubik Glitch',cursive;
+  --mira-font:'Rubik',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  --mira-glitch:'Rubik Glitch',cursive;
 
-  --mk-banner:none;
-  --mk-banner-opacity:0.62;
+  --mira-banner:none;
+  --mira-banner-opacity:0.62;
 
-  --mk-f-title:18px;
-  --mk-f-sub:11px;
-  --mk-f-label:12px;
-  --mk-f-val:12px;
-  --mk-f-body:14px;
-  --mk-f-notes:13px;
-  --mk-f-puppet:12px;
+  --mira-f-title:18px;
+  --mira-f-sub:11px;
+  --mira-f-label:12px;
+  --mira-f-val:12px;
+  --mira-f-body:14px;
+  --mira-f-notes:13px;
+  --mira-f-puppet:12px;
 }
 
-.mirai-card,
-.mirai-card *{
-  box-sizing:border-box !important;
-}
+.mirai-card, .mirai-card *{ box-sizing:border-box; }
 
 .mirai-card{
-  width:min(760px,96%) !important;
-  margin:50px auto !important;
-  background:var(--mk-bg) !important;
-  color:var(--mk-white) !important;
-  border:1px solid var(--mk-outline) !important;
-  box-shadow:0 18px 60px var(--mk-shadow) !important;
-  position:relative !important;
-  overflow:hidden !important;
-  font-family:var(--mk-font) !important;
+  width:min(760px,96%);
+  margin:50px auto;
+  background:var(--mira-bg);
+  color:var(--mira-white);
+  border:1px solid var(--mira-outline);
+  box-shadow:0 18px 60px var(--mira-shadow);
+  position:relative;
+  overflow:hidden;
+  font-family:var(--mira-font);
 }
-
-.mirai-card a{ color:inherit !important; }
-.mirai-card img{ max-width:100% !important; height:auto !important; }
 
 .mirai-card::before{
   content:"";
@@ -59,33 +53,42 @@
   inset:0;
   pointer-events:none;
   z-index:0;
-  opacity:1;
   background:
     repeating-linear-gradient(0deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 1px, transparent 1px, transparent 14px),
     repeating-linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02) 1px, transparent 1px, transparent 14px),
-    linear-gradient(90deg, transparent 0 5%, rgba(225,6,27,0.06) 5% 6%, transparent 6% 18%, rgba(255,255,255,0.035) 18% 19%, transparent 19% 100%),
-    linear-gradient(0deg, transparent 0 18%, rgba(255,255,255,0.025) 18% 19%, transparent 19% 52%, rgba(225,6,27,0.04) 52% 53%, transparent 53% 100%),
     radial-gradient(circle at 50% 40%, transparent 55%, rgba(0,0,0,0.82) 100%);
 }
 
+.mirai-targets{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index:1;
+  opacity:0.55;
+  background:
+    radial-gradient(circle at 15% 30%, rgba(225,6,27,0.26) 0 2px, transparent 3px 16px, rgba(255,255,255,0.07) 17px 18px, transparent 19px),
+    radial-gradient(circle at 78% 26%, rgba(255,255,255,0.10) 0 2px, transparent 3px 12px, rgba(225,6,27,0.08) 13px 14px, transparent 15px),
+    radial-gradient(circle at 90% 62%, rgba(225,6,27,0.16) 0 2px, transparent 3px 14px, rgba(255,255,255,0.05) 15px 16px, transparent 17px);
+}
+
 .mirai-header{
-  position:relative !important;
-  z-index:2 !important;
-  padding:16px 18px 14px 18px !important;
-  border-bottom:1px solid var(--mk-outline) !important;
-  overflow:hidden !important;
-  min-height:230px !important;
+  position:relative;
+  z-index:2;
+  padding:16px 18px 14px 18px;
+  border-bottom:1px solid var(--mira-outline);
+  overflow:hidden;
+  min-height:240px;
 }
 
 .mirai-header::before{
   content:"";
   position:absolute;
-  inset:-30px -30px -30px -30px;
-  background-image:var(--mk-banner);
+  inset:-30px;
+  background-image:var(--mira-banner);
   background-size:cover;
   background-position:center;
   filter:contrast(1.08) saturate(0.98);
-  opacity:var(--mk-banner-opacity);
+  opacity:var(--mira-banner-opacity);
   transform:scale(1.04);
   z-index:0;
 }
@@ -97,7 +100,7 @@
   z-index:1;
   background:
     linear-gradient(90deg, rgba(0,0,0,0.88), rgba(0,0,0,0.62) 55%, rgba(0,0,0,0.88)),
-    linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.65));
+    linear-gradient(180deg, rgba(0,0,0,0.22), rgba(0,0,0,0.70));
 }
 
 .mirai-slices{
@@ -112,18 +115,6 @@
     linear-gradient(135deg, transparent 0 80%, rgba(255,255,255,0.06) 80% 81%, transparent 81%);
 }
 
-.mirai-targets{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index:2;
-  opacity:0.60;
-  background:
-    radial-gradient(circle at 15% 30%, rgba(225,6,27,0.26) 0 2px, transparent 3px 16px, rgba(255,255,255,0.07) 17px 18px, transparent 19px),
-    radial-gradient(circle at 78% 26%, rgba(255,255,255,0.10) 0 2px, transparent 3px 12px, rgba(225,6,27,0.08) 13px 14px, transparent 15px),
-    radial-gradient(circle at 90% 62%, rgba(225,6,27,0.16) 0 2px, transparent 3px 14px, rgba(255,255,255,0.05) 15px 16px, transparent 17px);
-}
-
 .mirai-title-row{
   position:relative;
   z-index:3;
@@ -136,15 +127,14 @@
 
 .mirai-title{
   font-weight:700;
-  font-size:var(--mk-f-title);
+  font-size:var(--mira-f-title);
   letter-spacing:0.6px;
   text-transform:uppercase;
-  color:var(--mk-white);
 }
 
 .mirai-subtitle{
-  font-family:var(--mk-glitch);
-  font-size:var(--mk-f-sub);
+  font-family:var(--mira-glitch);
+  font-size:var(--mira-f-sub);
   letter-spacing:3px;
   color:rgba(225,6,27,0.92);
   text-transform:uppercase;
@@ -160,7 +150,7 @@
   background:
     linear-gradient(90deg, transparent 0 10px, rgba(225,6,27,0.95) 10px 16px, transparent 16px 24px, rgba(255,255,255,0.18) 24px 26px, transparent 26px),
     linear-gradient(90deg, transparent, rgba(225,6,27,0.18), transparent);
-  clip-path:polygon(0 50%, 14% 50%, 18% 0, 28% 100%, 40% 40%, 55% 60%, 62% 15%, 76% 85%, 86% 50%, 100% 50%, 100% 100%, 0 100%);
+  clip-path:polygon(0 50%,14% 50%,18% 0,28% 100%,40% 40%,55% 60%,62% 15%,76% 85%,86% 50%,100% 50%,100% 100%,0 100%);
 }
 
 .mirai-status{
@@ -169,7 +159,7 @@
   padding:12px 18px 14px 18px;
   display:grid;
   gap:9px;
-  border-bottom:1px solid var(--mk-outline);
+  border-bottom:1px solid var(--mira-outline);
   background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0));
 }
 
@@ -183,22 +173,21 @@
 .mirai-status-label{
   font-weight:700;
   letter-spacing:1px;
-  font-size:var(--mk-f-label);
-  color:var(--mk-white);
+  font-size:var(--mira-f-label);
 }
 
 .mirai-status-value{
   font-weight:500;
-  color:var(--mk-soft);
+  color:var(--mira-soft);
   text-align:right;
-  font-size:var(--mk-f-val);
+  font-size:var(--mira-f-val);
   white-space:nowrap;
 }
 
 .mirai-bar-bg{
   height:8px;
   width:100%;
-  border:1px solid var(--mk-outline);
+  border:1px solid var(--mira-outline);
   background:rgba(255,255,255,0.04);
   overflow:hidden;
 }
@@ -209,65 +198,30 @@
   display:block;
 }
 
-.mirai-hp-fill{
-  background:linear-gradient(90deg, rgba(237,15,135,0.74), var(--mk-hp));
-  box-shadow:0 0 12px rgba(237,15,135,0.20);
-}
+.mirai-hp-fill{ background:linear-gradient(90deg, rgba(237,15,135,0.74), var(--mira-hp)); }
+.mirai-ea-fill{ background:linear-gradient(90deg, rgba(255,255,255,0.22), var(--mira-ea)); }
+.mirai-san-fill{ background:linear-gradient(90deg, rgba(255,59,48,0.40), var(--mira-san)); }
 
-.mirai-ea-fill{
-  background:linear-gradient(90deg, rgba(255,255,255,0.22), var(--mk-ea));
-  box-shadow:0 0 10px rgba(255,255,255,0.08);
-}
-
-.mirai-san-fill{
-  background:linear-gradient(90deg, rgba(255,59,48,0.40), var(--mk-san));
-  box-shadow:0 0 10px rgba(255,59,48,0.16);
-}
-
-.mirai-content{
-  position:relative;
-  z-index:2;
-  padding:18px;
-}
+.mirai-content{ position:relative; z-index:2; padding:18px; }
 
 .mirai-textbox{
   min-height:420px;
   padding:18px 16px;
-  background:var(--mk-panel);
-  border:1px solid var(--mk-outline);
+  background:var(--mira-panel);
+  border:1px solid var(--mira-outline);
   box-shadow:inset 0 0 0 1px rgba(225,6,27,0.10);
   line-height:1.85;
-  font-size:var(--mk-f-body);
+  font-size:var(--mira-f-body);
   text-align:justify;
   position:relative;
   overflow:hidden;
 }
 
-.mirai-textbox p{
-  margin:0 0 12px 0 !important;
-}
+.mirai-textbox p{ margin:0 0 12px 0; }
 
-.mirai-textbox::before,
-.mirai-textbox::after{
-  content:"";
-  position:absolute;
-  width:62px;
-  height:62px;
-  border:1px solid rgba(255,255,255,0.10);
-  background:radial-gradient(circle at 50% 50%, rgba(225,6,27,0.55) 0 2px, transparent 3px 14px, rgba(255,255,255,0.07) 15px 16px, transparent 17px);
-  opacity:0.50;
-  pointer-events:none;
-}
-.mirai-textbox::before{ top:-18px; left:-18px; }
-.mirai-textbox::after{ bottom:-18px; right:-18px; }
+.mirai-textbox i{ color:rgba(225,6,27,0.85); font-weight:600; }
 
-.mirai-textbox i{
-  color:rgba(225,6,27,0.85);
-  font-weight:600;
-}
-
-.mirai-textbox b,
-.mirai-textbox strong{
+.mirai-textbox b, .mirai-textbox strong{
   color:rgba(255,255,255,0.95);
   font-weight:700;
   text-shadow:0 0 10px rgba(225,6,27,0.18);
@@ -277,8 +231,8 @@
 .mirai-footer{
   position:relative;
   z-index:2;
-  border-top:1px solid var(--mk-outline);
-  background:var(--mk-panel2);
+  border-top:1px solid var(--mira-outline);
+  background:var(--mira-panel2);
   padding:16px 18px 18px 18px;
   display:grid;
   gap:12px;
@@ -292,73 +246,49 @@
   overflow:hidden;
 }
 
-.mirai-notes-block{
-  padding-top:34px;
-}
+.mirai-notes-block{ padding-top:34px; }
 .mirai-notes-block::before{
   content:"Datacenter";
   position:absolute;
-  top:10px;
-  left:12px;
-  font-family:var(--mk-glitch);
+  top:10px; left:12px;
+  font-family:var(--mira-glitch);
   font-size:12px;
   letter-spacing:3px;
   text-transform:uppercase;
   color:rgba(225,6,27,0.92);
-  opacity:0.95;
   z-index:2;
 }
 .mirai-notes-block::after{
   content:"";
   position:absolute;
-  top:26px;
-  left:12px;
-  right:12px;
+  top:26px; left:12px; right:12px;
   height:1px;
   background:linear-gradient(90deg, rgba(225,6,27,0.55), rgba(255,255,255,0.06), rgba(225,6,27,0.35));
-  opacity:0.80;
   z-index:2;
 }
 
-.mirai-notes{
-  position:relative;
-  z-index:2;
-  font-size:var(--mk-f-notes);
-  line-height:1.6;
-  color:var(--mk-white);
-}
-
-.mirai-puppets-block{
-  padding-top:34px;
-}
+.mirai-puppets-block{ padding-top:34px; }
 .mirai-puppets-block::before{
   content:"Kumópolis";
   position:absolute;
-  top:10px;
-  left:12px;
-  font-family:var(--mk-glitch);
+  top:10px; left:12px;
+  font-family:var(--mira-glitch);
   font-size:12px;
   letter-spacing:3px;
   text-transform:uppercase;
   color:rgba(225,6,27,0.92);
-  opacity:0.95;
   z-index:2;
 }
 .mirai-puppets-block::after{
   content:"";
   position:absolute;
-  top:26px;
-  left:12px;
-  right:12px;
+  top:26px; left:12px; right:12px;
   height:1px;
   background:linear-gradient(90deg, rgba(225,6,27,0.55), rgba(255,255,255,0.06), rgba(225,6,27,0.35));
-  opacity:0.80;
   z-index:2;
 }
 
 .mirai-puppets{
-  position:relative;
-  z-index:2;
   display:grid;
   grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
   gap:10px;
@@ -376,8 +306,7 @@
 }
 
 .mirai-puppet-icon{
-  width:42px;
-  height:42px;
+  width:42px; height:42px;
   border:1px solid rgba(255,255,255,0.10);
   background:#000;
   box-shadow:inset 0 0 0 1px rgba(225,6,27,0.10);
@@ -391,12 +320,13 @@
   font-weight:800;
   letter-spacing:0.4px;
   text-transform:uppercase;
-  font-size:var(--mk-f-puppet);
+  font-size:var(--mira-f-puppet);
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
 }
+
 .mirai-puppet-name small{
   font-weight:500;
   color:rgba(255,255,255,0.55);
@@ -405,11 +335,7 @@
   font-size:11px;
 }
 
-.mirai-puppet-stats{
-  margin-top:8px;
-  display:grid;
-  gap:7px;
-}
+.mirai-puppet-stats{ margin-top:8px; display:grid; gap:7px; }
 
 .mirai-puppet-stat{
   display:grid;
@@ -441,15 +367,9 @@
   overflow:hidden;
 }
 
-.mirai-puppet-fill{
-  height:100%;
-  width:0%;
-  display:block;
-}
-
+.mirai-puppet-fill{ height:100%; width:0%; display:block; }
 .mirai-dur-fill{ background:linear-gradient(90deg, rgba(225,6,27,0.28), rgba(225,6,27,0.72)); }
 .mirai-bat-fill{ background:linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.62)); }
-
 .mirai-puppet.no-battery .mirai-puppet-stat.is-battery{ display:none; }
 
 .mirai-signature{
@@ -461,7 +381,7 @@
 }
 .mirai-signature::after{
   content:"Mirai Kumamoto";
-  font-family:var(--mk-glitch);
+  font-family:var(--mira-glitch);
   letter-spacing:3px;
   text-transform:uppercase;
   font-size:12px;
