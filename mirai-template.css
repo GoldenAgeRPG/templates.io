@@ -1,5 +1,4 @@
-/* --- TEMPLATE: MIRAI KUMAMOTO (Danganronpa/Monokuma) v1.0 --- */
-/* Arquivo: mirai-template.css */
+/* --- TEMPLATE: MIRAI KUMAMOTO (Danganronpa/Monokuma) v1.1 --- */
 
 @import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;500;700&family=Rubik+Glitch&display=swap');
 
@@ -13,7 +12,7 @@
   --mk-red: #e1061b;
   --mk-red2: #ff2a2a;
 
-  --mk-hp: #ed0f87; /* pedido: HP diferente do vermelho padrão */
+  --mk-hp: #ed0f87;
   --mk-ea: #ffffff;
   --mk-san: #ff3b30;
 
@@ -22,6 +21,19 @@
 
   --mk-font: 'Rubik', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
   --mk-glitch: 'Rubik Glitch', cursive;
+
+  /* Banner (setado via inline style no HTML) */
+  --mk-banner: none;
+  --mk-banner-opacity: 0.45; /* ajuste fino */
+
+  /* Controle de fonte (pra não ficar grande) */
+  --mk-f-title: 18px;
+  --mk-f-sub: 11px;
+  --mk-f-label: 12px;
+  --mk-f-val: 12px;
+  --mk-f-body: 14px;
+  --mk-f-notes: 13px;
+  --mk-f-puppet: 12px;
 }
 
 /* --- CONTAINER --- */
@@ -38,47 +50,102 @@
   font-family: var(--mk-font);
 }
 
-/* Padrões “Danganronpa”: pixels, alvos, eletricidade */
+/* Base: grid escuro + pixels “Monokuma” */
 .mirai-card::before{
   content:"";
   position:absolute;
   inset:0;
   pointer-events:none;
-  opacity: 0.95;
+  opacity: 1;
   background:
-    /* pixels */
-    repeating-linear-gradient(0deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02) 1px, transparent 1px, transparent 7px),
-    repeating-linear-gradient(90deg, rgba(255,255,255,0.015), rgba(255,255,255,0.015) 1px, transparent 1px, transparent 9px),
-    /* alvos */
-    radial-gradient(circle at 16% 22%, rgba(225,6,27,0.22) 0 2px, transparent 3px 18px, rgba(225,6,27,0.12) 19px 20px, transparent 21px),
-    radial-gradient(circle at 86% 70%, rgba(255,255,255,0.10) 0 2px, transparent 3px 14px, rgba(255,255,255,0.06) 15px 16px, transparent 17px),
+    /* grid (mais parecido com o print) */
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 1px, transparent 1px, transparent 14px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02) 1px, transparent 1px, transparent 14px),
+    /* pixels aleatórios “monokuma” (blocos) */
+    linear-gradient(90deg, transparent 0 5%, rgba(225,6,27,0.08) 5% 6%, transparent 6% 18%, rgba(255,255,255,0.04) 18% 19%, transparent 19% 100%),
+    linear-gradient(0deg, transparent 0 18%, rgba(255,255,255,0.03) 18% 19%, transparent 19% 52%, rgba(225,6,27,0.05) 52% 53%, transparent 53% 100%),
     /* vinheta */
-    radial-gradient(circle at 50% 50%, transparent 55%, rgba(0,0,0,0.75) 100%);
+    radial-gradient(circle at 50% 40%, transparent 55%, rgba(0,0,0,0.78) 100%);
 }
 
-.mirai-card::after{
-  content:"";
+/* Targets (mira) em pontos estratégicos do HEADER */
+.mirai-targets{
   position:absolute;
-  top:-40px; right:-60px;
-  width: 280px; height: 280px;
-  background:
-    linear-gradient(135deg, transparent 0 40%, rgba(225,6,27,0.35) 40% 46%, transparent 46% 58%, rgba(225,6,27,0.25) 58% 62%, transparent 62% 100%);
-  transform: rotate(12deg);
-  filter: blur(0.3px);
-  opacity: 0.9;
+  inset:0;
   pointer-events:none;
+  z-index: 1;
+  opacity: 0.85;
+  background:
+    radial-gradient(circle at 18% 34%, rgba(225,6,27,0.32) 0 2px, transparent 3px 16px, rgba(255,255,255,0.08) 17px 18px, transparent 19px),
+    radial-gradient(circle at 72% 26%, rgba(255,255,255,0.12) 0 2px, transparent 3px 12px, rgba(225,6,27,0.10) 13px 14px, transparent 15px),
+    radial-gradient(circle at 88% 58%, rgba(225,6,27,0.20) 0 2px, transparent 3px 14px, rgba(255,255,255,0.06) 15px 16px, transparent 17px);
 }
 
 /* --- HEADER --- */
 .mirai-header{
   position: relative;
-  padding: 18px 18px 10px 18px;
+  padding: 16px 18px 12px 18px;
   border-bottom: 1px solid var(--mk-outline);
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent);
   z-index: 2;
+  overflow: hidden;
 }
 
+/* Banner (imagem) + overlay */
+.mirai-header::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background-image: var(--mk-banner);
+  background-size: cover;
+  background-position: center;
+  filter: contrast(1.05) saturate(0.95);
+  opacity: var(--mk-banner-opacity);
+  transform: scale(1.02);
+  z-index: 0;
+}
+
+/* Overlay escuro pra manter legibilidade + grid do print */
+.mirai-header::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg, rgba(0,0,0,0.88), rgba(0,0,0,0.72) 55%, rgba(0,0,0,0.88)),
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.03), rgba(255,255,255,0.03) 1px, transparent 1px, transparent 14px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.02), rgba(255,255,255,0.02) 1px, transparent 1px, transparent 14px);
+  z-index: 0;
+}
+
+/* Faixas diagonais vermelhas (lado direito) */
+.mirai-slices{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  z-index: 1;
+  opacity: 0.85;
+  background:
+    linear-gradient(135deg, transparent 0 70%, rgba(225,6,27,0.35) 70% 76%, transparent 76%),
+    linear-gradient(135deg, transparent 0 76%, rgba(225,6,27,0.25) 76% 82%, transparent 82%),
+    linear-gradient(135deg, transparent 0 82%, rgba(255,255,255,0.07) 82% 83%, transparent 83%);
+}
+
+/* “Relâmpago” vermelho (efeito pedido) */
+.mirai-bolt{
+  position: relative;
+  margin-top: 10px;
+  height: 10px;
+  z-index: 2;
+  opacity: 0.95;
+  background:
+    linear-gradient(90deg, transparent 0 10px, rgba(225,6,27,0.95) 10px 16px, transparent 16px 24px, rgba(255,255,255,0.20) 24px 26px, transparent 26px),
+    linear-gradient(90deg, transparent, rgba(225,6,27,0.20), transparent);
+  clip-path: polygon(0 50%, 14% 50%, 18% 0, 28% 100%, 40% 40%, 55% 60%, 62% 15%, 76% 85%, 86% 50%, 100% 50%, 100% 100%, 0 100%);
+}
+
+/* Título / subtítulo (tamanho contido) */
 .mirai-title-row{
+  position: relative;
+  z-index: 2;
   display:flex;
   align-items: baseline;
   justify-content: space-between;
@@ -87,36 +154,25 @@
 
 .mirai-title{
   font-weight: 700;
-  font-size: 1.35rem;
+  font-size: var(--mk-f-title);
   letter-spacing: 0.6px;
   text-transform: uppercase;
 }
 
 .mirai-subtitle{
   font-family: var(--mk-glitch);
-  font-size: 0.85rem;
+  font-size: var(--mk-f-sub);
   letter-spacing: 3px;
-  color: rgba(225,6,27,0.85);
+  color: rgba(225,6,27,0.90);
   text-transform: uppercase;
   white-space: nowrap;
 }
 
-/* detalhe “relâmpago” */
-.mirai-bolt{
-  margin-top: 10px;
-  height: 10px;
-  background:
-    linear-gradient(90deg, transparent 0 12px, rgba(225,6,27,0.95) 12px 18px, transparent 18px 26px, rgba(255,255,255,0.35) 26px 28px, transparent 28px),
-    linear-gradient(90deg, transparent, rgba(225,6,27,0.18), transparent);
-  clip-path: polygon(0 50%, 14% 50%, 18% 0, 28% 100%, 40% 40%, 55% 60%, 62% 15%, 76% 85%, 86% 50%, 100% 50%, 100% 100%, 0 100%);
-  opacity: 0.9;
-}
-
 /* --- STATUS TOP (HP/EA/SAN) --- */
 .mirai-status{
-  padding: 14px 18px 18px 18px;
+  padding: 12px 18px 14px 18px;
   display: grid;
-  gap: 10px;
+  gap: 9px;
   z-index: 2;
   position: relative;
   border-bottom: 1px solid var(--mk-outline);
@@ -125,7 +181,7 @@
 
 .mirai-status-item{
   display:grid;
-  grid-template-columns: 52px 1fr 86px;
+  grid-template-columns: 46px 1fr 92px;
   align-items:center;
   gap: 12px;
 }
@@ -134,14 +190,14 @@
   font-weight: 700;
   letter-spacing: 1px;
   color: var(--mk-white);
-  font-size: 0.85rem;
+  font-size: var(--mk-f-label);
 }
 
 .mirai-status-value{
   font-weight: 500;
   color: var(--mk-soft);
   text-align: right;
-  font-size: 0.85rem;
+  font-size: var(--mk-f-val);
   white-space: nowrap;
 }
 
@@ -162,40 +218,40 @@
   box-shadow: 0 0 10px rgba(225,6,27,0.25);
 }
 
-.mirai-hp-fill{ background: linear-gradient(90deg, rgba(237,15,135,0.85), var(--mk-hp)); box-shadow: 0 0 12px rgba(237,15,135,0.22); }
-.mirai-ea-fill{ background: linear-gradient(90deg, rgba(255,255,255,0.35), var(--mk-ea)); box-shadow: 0 0 10px rgba(255,255,255,0.10); }
-.mirai-san-fill{ background: linear-gradient(90deg, rgba(255,59,48,0.5), var(--mk-san)); box-shadow: 0 0 10px rgba(255,59,48,0.18); }
+.mirai-hp-fill{ background: linear-gradient(90deg, rgba(237,15,135,0.75), var(--mk-hp)); box-shadow: 0 0 12px rgba(237,15,135,0.22); }
+.mirai-ea-fill{ background: linear-gradient(90deg, rgba(255,255,255,0.25), var(--mk-ea)); box-shadow: 0 0 10px rgba(255,255,255,0.10); }
+.mirai-san-fill{ background: linear-gradient(90deg, rgba(255,59,48,0.45), var(--mk-san)); box-shadow: 0 0 10px rgba(255,59,48,0.18); }
 
 /* --- CAIXA DE TEXTO GRANDE --- */
 .mirai-content{
   position: relative;
   z-index: 2;
-  padding: 22px 18px 26px 18px;
+  padding: 18px;
 }
 
 .mirai-textbox{
-  min-height: 420px; /* “caixa grande” */
-  padding: 20px 18px;
+  min-height: 420px;
+  padding: 18px 16px;
   background: var(--mk-panel);
   border: 1px solid var(--mk-outline);
-  box-shadow: inset 0 0 0 1px rgba(225,6,27,0.12);
+  box-shadow: inset 0 0 0 1px rgba(225,6,27,0.10);
   line-height: 1.85;
-  font-size: 1.02rem;
+  font-size: var(--mk-f-body);
   text-align: justify;
   position: relative;
   overflow:hidden;
 }
 
-/* cantos com “alvo/mira” */
+/* cantos com mira */
 .mirai-textbox::before,
 .mirai-textbox::after{
   content:"";
   position:absolute;
-  width: 64px; height: 64px;
-  border: 1px solid rgba(255,255,255,0.12);
+  width: 62px; height: 62px;
+  border: 1px solid rgba(255,255,255,0.10);
   background:
-    radial-gradient(circle at 50% 50%, rgba(225,6,27,0.65) 0 2px, transparent 3px 14px, rgba(255,255,255,0.10) 15px 16px, transparent 17px);
-  opacity: 0.8;
+    radial-gradient(circle at 50% 50%, rgba(225,6,27,0.65) 0 2px, transparent 3px 14px, rgba(255,255,255,0.08) 15px 16px, transparent 17px);
+  opacity: 0.75;
 }
 .mirai-textbox::before{ top: -18px; left: -18px; }
 .mirai-textbox::after{ bottom: -18px; right: -18px; }
@@ -203,29 +259,31 @@
 .mirai-textbox b, .mirai-textbox strong{ color: var(--mk-white); }
 .mirai-textbox i{ color: rgba(225,6,27,0.85); }
 
-/* --- RODAPÉ: CONSIDERAÇÕES + MARIONETES --- */
+/* --- RODAPÉ --- */
 .mirai-footer{
   position: relative;
   z-index: 2;
   border-top: 1px solid var(--mk-outline);
   background: var(--mk-panel2);
-  padding: 18px;
+  padding: 16px 18px 18px 18px;
   display: grid;
-  gap: 14px;
+  gap: 12px;
 }
 
+/* Blocos */
 .mirai-block{
-  border: 1px solid var(--mk-outline);
-  background: rgba(0,0,0,0.35);
-  padding: 14px;
+  border: 1px solid rgba(255,255,255,0.09);
+  background: rgba(0,0,0,0.32);
+  padding: 12px 12px 12px 12px;
   position: relative;
 }
 
+/* Título padrão (usado só quando existir no HTML) */
 .mirai-block-title{
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: 1.2px;
-  font-size: 0.9rem;
+  font-size: 12px;
   margin-bottom: 10px;
   display:flex;
   align-items:center;
@@ -235,47 +293,79 @@
   content:"";
   width: 10px; height: 10px;
   background: var(--mk-red);
-  box-shadow: 0 0 12px rgba(225,6,27,0.25);
+  box-shadow: 0 0 12px rgba(225,6,27,0.18);
 }
 
-/* Considerações (tu pode enfiar spoiler/quote do fórum aqui dentro) */
-.mirai-notes{
+/* --- BLOCO “Kumópolis” (título injetado via CSS) --- */
+.mirai-notes-block{
+  padding-top: 34px; /* espaço pro título injetado */
+}
+
+.mirai-notes-block::before{
+  content: "Kumópolis";
+  position: absolute;
+  top: 10px; left: 12px;
+  font-family: var(--mk-glitch);
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: rgba(225,6,27,0.92);
   opacity: 0.95;
-  line-height: 1.6;
-  font-size: 0.95rem;
 }
 
-/* Marionetes grid */
+.mirai-notes-block::after{
+  content:"";
+  position:absolute;
+  top: 26px; left: 12px; right: 12px;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(225,6,27,0.55), rgba(255,255,255,0.06), rgba(225,6,27,0.35));
+  opacity: 0.8;
+}
+
+/* Conteúdo das notas */
+.mirai-notes{
+  opacity: 0.96;
+  line-height: 1.6;
+  font-size: var(--mk-f-notes);
+}
+
+/* --- Marionetes MAIS DISCRETO --- */
+.mirai-puppets-block{
+  opacity: 0.85; /* discreto */
+}
+
 .mirai-puppets{
   display:grid;
   grid-template-columns: 1fr;
-  gap: 12px;
+  gap: 10px;
 }
 
 .mirai-puppet{
   display:grid;
-  grid-template-columns: 56px 1fr;
-  gap: 12px;
+  grid-template-columns: 42px 1fr;
+  gap: 10px;
   align-items: start;
-  border: 1px solid var(--mk-outline);
-  background: rgba(0,0,0,0.30);
-  padding: 12px;
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.22);
+  padding: 10px;
 }
 
 .mirai-puppet-icon{
-  width: 56px; height: 56px;
-  border: 1px solid rgba(255,255,255,0.12);
+  width: 42px; height: 42px;
+  border: 1px solid rgba(255,255,255,0.10);
   background: #000;
-  box-shadow: inset 0 0 0 1px rgba(225,6,27,0.18);
-  background-image: var(--puppet-icon, radial-gradient(circle at 30% 30%, rgba(225,6,27,0.35), transparent 55%));
+  box-shadow: inset 0 0 0 1px rgba(225,6,27,0.10);
+  background-image: var(--puppet-icon, radial-gradient(circle at 30% 30%, rgba(225,6,27,0.22), transparent 55%));
   background-size: cover;
   background-position: center;
+  filter: saturate(0.9) contrast(1.05);
 }
 
 .mirai-puppet-name{
   font-weight: 800;
   letter-spacing: 0.4px;
   text-transform: uppercase;
+  font-size: var(--mk-f-puppet);
   display:flex;
   align-items:center;
   justify-content: space-between;
@@ -284,45 +374,45 @@
 
 .mirai-puppet-name small{
   font-weight: 500;
-  color: var(--mk-soft);
+  color: rgba(255,255,255,0.55);
   text-transform: none;
   letter-spacing: 0;
+  font-size: 11px;
 }
 
-/* Stats das Marionetes (Durabilidade/Bateria) */
 .mirai-puppet-stats{
-  margin-top: 10px;
+  margin-top: 8px;
   display:grid;
-  gap: 8px;
+  gap: 7px;
 }
 
 .mirai-puppet-stat{
   display:grid;
-  grid-template-columns: 92px 1fr 90px;
-  gap: 10px;
+  grid-template-columns: 58px 1fr 84px;
+  gap: 8px;
   align-items:center;
 }
 
 .mirai-puppet-label{
   font-weight: 700;
-  font-size: 0.82rem;
+  font-size: 11px;
   letter-spacing: 0.8px;
-  color: rgba(255,255,255,0.92);
+  color: rgba(255,255,255,0.85);
   text-transform: uppercase;
 }
 
 .mirai-puppet-val{
   text-align:right;
-  color: var(--mk-soft);
-  font-size: 0.85rem;
+  color: rgba(255,255,255,0.55);
+  font-size: 11px;
   white-space: nowrap;
 }
 
 .mirai-puppet-bar-bg{
-  height: 7px;
+  height: 6px;
   width:100%;
-  border: 1px solid var(--mk-outline);
-  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
   overflow:hidden;
 }
 
@@ -330,20 +420,17 @@
   height:100%;
   width:0%;
   display:block;
-  background: linear-gradient(90deg, rgba(255,255,255,0.20), rgba(255,255,255,0.85));
+  background: linear-gradient(90deg, rgba(255,255,255,0.14), rgba(255,255,255,0.55));
 }
 
-.mirai-dur-fill{ background: linear-gradient(90deg, rgba(225,6,27,0.45), rgba(225,6,27,0.95)); }
-.mirai-bat-fill{ background: linear-gradient(90deg, rgba(255,255,255,0.22), rgba(255,255,255,0.95)); }
+.mirai-dur-fill{ background: linear-gradient(90deg, rgba(225,6,27,0.28), rgba(225,6,27,0.72)); }
+.mirai-bat-fill{ background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.62)); }
 
-/* Se a marionete NÃO usa bateria/EA, oculta a linha */
-.mirai-puppet.no-battery .mirai-puppet-stat.is-battery{
-  display:none;
-}
+.mirai-puppet.no-battery .mirai-puppet-stat.is-battery{ display:none; }
 
-/* --- ASSINATURA (injeção via CSS) --- */
+/* --- ASSINATURA --- */
 .mirai-signature{
-  margin-top: 6px;
+  margin-top: 8px;
   padding-top: 10px;
   border-top: 1px solid rgba(255,255,255,0.08);
   text-align:center;
@@ -354,13 +441,13 @@
   font-family: var(--mk-glitch);
   letter-spacing: 3px;
   text-transform: uppercase;
-  font-size: 0.95rem;
-  color: rgba(255,255,255,0.90);
+  font-size: 12px;
+  color: rgba(255,255,255,0.88);
 }
 
 /* --- MOBILE --- */
 @media (max-width: 640px){
-  .mirai-status-item{ grid-template-columns: 46px 1fr 78px; }
+  .mirai-status-item{ grid-template-columns: 44px 1fr 86px; }
   .mirai-textbox{ min-height: 360px; }
-  .mirai-puppet-stat{ grid-template-columns: 86px 1fr 84px; }
+  .mirai-puppet-stat{ grid-template-columns: 56px 1fr 78px; }
 }
