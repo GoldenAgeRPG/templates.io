@@ -1,154 +1,193 @@
-/* --- TEMPLATE: GENGAR CULINARY (JORNADA DO TEMPERO) --- */
-@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&display=swap');
+/* --- TEMPLATE: HAZU GENGAR (CHEF FUSION) --- */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&family=Ma+Shan+Zheng&display=swap');
 
 :root {
-  --gn-bg: #fdf5e6; /* Creme papel */
-  --gn-red: #b22222; /* Vermelho escuro */
-  --gn-yellow: #ffd700; /* Amarelo ouro */
-  --gn-purple: #483d8b; /* Roxo Gengar */
-  --gn-border: #5c0000; /* Borda escura */
+  --gn-bg: #fff8e7;
+  --gn-red: #d32f2f;
+  --gn-gold: #ffc107;
+  --gn-purple: #673ab7;
+  --gn-dark: #3e2723;
 }
 
+/* ANIMAÇÕES */
+@keyframes gn-steam {
+  0% { background-position: 0 0; opacity: 0.5; }
+  100% { background-position: 20px -20px; opacity: 0.8; }
+}
+@keyframes gn-wiggle {
+  0%, 100% { transform: rotate(0deg); }
+  25% { transform: rotate(-3deg); }
+  75% { transform: rotate(3deg); }
+}
+
+/* CONTAINER PRINCIPAL */
 .gengar-container {
-  max-width: 600px; margin: 40px auto;
+  box-sizing: border-box;
+  max-width: 700px; /* Largura estendida */
+  width: 95%;
+  margin: 40px auto;
   background-color: var(--gn-bg);
-  border: 4px solid var(--gn-border);
-  box-shadow: 10px 10px 0 rgba(0,0,0,0.2);
-  font-family: 'Patrick Hand', cursive;
-  position: relative; overflow: hidden;
-  color: #5a3a2a;
-}
-
-/* HEADER AMARELO */
-.gengar-header {
-  background: var(--gn-yellow);
-  padding: 15px; text-align: center;
-  border-bottom: 4px solid var(--gn-border);
-  position: relative;
-  background-image: radial-gradient(#ffec8b 20%, transparent 20%);
-  background-size: 10px 10px;
-}
-.gengar-title {
-  font-family: 'Bangers', cursive; font-size: 2.5em;
-  color: #222; text-transform: uppercase;
-  text-shadow: 2px 2px 0 #fff; line-height: 1;
-  transform: rotate(-1deg); margin: 0;
-}
-.gengar-subtitle {
-  font-family: 'Bangers', cursive; font-size: 1.5em;
-  color: var(--gn-purple); text-shadow: 1px 1px 0 #fff;
-  margin-top: -5px; transform: rotate(1deg);
-}
-
-/* STICKER "BO WOK" */
-.gengar-sticker {
-  position: absolute; top: -10px; left: -10px;
-  background: #ff0066; color: #fff;
-  padding: 5px 15px; font-family: 'Bangers', cursive;
-  transform: rotate(-15deg); border: 2px solid #000;
-  box-shadow: 3px 3px 0 #000; z-index: 10;
-}
-
-/* MOLDURA DA IMAGEM */
-.gengar-img-frame {
-  margin: 20px; padding: 10px;
-  background: #fff;
-  border: 3px solid var(--gn-border);
+  /* Estampa de nuvens sutis */
+  background-image: repeating-radial-gradient( circle at 0 0, transparent 0, var(--gn-bg) 10px ), repeating-linear-gradient( #f0e6d2, #fff8e7 );
+  border: 4px solid var(--gn-red);
+  /* Moldura Dupla */
+  box-shadow: 
+    0 0 0 4px var(--gn-gold), 
+    0 0 0 8px var(--gn-dark),
+    15px 15px 0 rgba(0,0,0,0.3);
   border-radius: 15px;
   position: relative;
-  box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
-}
-.gengar-img-frame::before {
-  content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px;
-  border: 2px dashed var(--gn-yellow); border-radius: 10px; pointer-events: none;
-}
-.gengar-img-frame img {
-  width: 100%; height: 250px; object-fit: cover;
-  border-radius: 8px; display: block;
+  font-family: 'Patrick Hand', cursive;
+  color: var(--gn-dark);
+  padding-bottom: 60px;
+  overflow: visible; /* Permite a assinatura sair da caixa */
 }
 
-/* BARRAS DE STATUS */
-.gengar-status-box { padding: 0 25px; margin-bottom: 20px; }
-.gengar-stat-row { 
-  display: flex; align-items: center; gap: 10px; margin-bottom: 8px; 
-}
-.gengar-stat-label {
-  font-family: 'Bangers', cursive; color: var(--gn-border); 
-  font-size: 1.2em; width: 30px;
-}
-.gengar-bar-bg {
-  flex-grow: 1; height: 18px; background: #eee;
-  border: 2px solid var(--gn-border); border-radius: 20px;
-  overflow: hidden; position: relative;
-}
-/* Animação listrada */
-.gengar-hp-fill {
-  height: 100%; background: repeating-linear-gradient(45deg, #ff69b4, #ff69b4 10px, #ff1493 10px, #ff1493 20px);
-  width: 0%; transition: width 1s ease; border-right: 2px solid #000;
-}
-.gengar-ea-fill {
-  height: 100%; background: repeating-linear-gradient(45deg, #ffd700, #ffd700 10px, #ffa500 10px, #ffa500 20px);
-  width: 0%; transition: width 1s ease; border-right: 2px solid #000;
-}
-.gengar-stat-val {
-  font-family: 'Bangers'; font-size: 1em; color: var(--gn-border); width: 80px; text-align: right;
+/* ASSINATURA (Nan Hazu) */
+.gengar-container::after {
+  content: "Nan Hazu";
+  position: absolute;
+  bottom: 15px;
+  right: -25px;
+  font-family: 'Ma Shan Zheng', cursive;
+  font-size: 3.5em;
+  color: var(--gn-red);
+  transform: rotate(-8deg);
+  text-shadow: 2px 2px 0 var(--gn-gold), 3px 3px 0 var(--gn-dark);
+  z-index: 10;
+  pointer-events: none;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0 15px;
+  border: 2px solid var(--gn-red);
+  border-radius: 8px;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
 }
 
-/* CORPO DO TEXTO (Borda de Corrente Simulada) */
-.gengar-body-chain {
-  margin: 10px 20px 20px; padding: 25px;
-  background: #fff8dc;
-  /* Truque para simular a corrente dourada */
-  border: 6px dashed #daa520; 
-  outline: 4px solid var(--gn-border); /* Borda externa */
-  border-radius: 10px;
-  position: relative;
-  box-shadow: inset 0 0 15px rgba(218,165,32, 0.3);
+/* HEADER */
+.gengar-header {
+  background: var(--gn-gold);
+  padding: 15px 25px;
+  border-bottom: 4px solid var(--gn-dark);
+  display: flex; justify-content: space-between; align-items: center;
+  border-radius: 10px 10px 0 0;
+  background-image: linear-gradient(45deg, #ffca28 25%, transparent 25%, transparent 75%, #ffca28 75%, #ffca28);
+  background-size: 20px 20px;
 }
-
-/* Elementos decorativos nos cantos (Círculos da corrente) */
-.gengar-body-chain::after, .gengar-body-chain::before {
-  content: '✦'; position: absolute; font-size: 20px; color: var(--gn-border);
-  background: var(--gn-yellow); border: 2px solid var(--gn-border);
-  border-radius: 50%; width: 30px; height: 30px;
-  display: flex; justify-content: center; align-items: center;
-}
-.gengar-body-chain::before { top: -15px; left: -15px; }
-.gengar-body-chain::after { bottom: -15px; right: -15px; }
-
-.gengar-text {
-  font-size: 1.1em; line-height: 1.6; text-align: justify;
-  margin-bottom: 20px;
-}
-.gengar-text::first-letter {
-  font-family: 'Bangers'; font-size: 2em; float: left; margin-right: 5px; color: var(--gn-red);
-}
-
-/* CAIXA DE EFEITOS (Rodapé interno) */
-.gengar-effect-box {
-  background: rgba(255, 215, 0, 0.2);
-  border: 2px solid #daa520; border-radius: 8px;
-  padding: 10px; margin-top: 15px;
-}
-.gengar-effect-box ul { margin: 0; padding-left: 20px; list-style: square; }
-.gengar-effect-box li { color: var(--gn-red); font-weight: bold; }
-
-/* BOTÕES RODAPÉ */
-.gengar-footer {
-  padding: 0 20px 20px; text-align: center;
-  display: flex; flex-direction: column; gap: 10px;
-}
-.gengar-btn {
-  background: var(--gn-red); color: var(--gn-yellow);
-  font-family: 'Bangers'; font-size: 1.2em;
-  padding: 8px; border: 3px solid var(--gn-yellow);
-  box-shadow: 0 4px 0 var(--gn-border);
-  transform: skew(-10deg); text-decoration: none; display: block;
+.gengar-title-box { text-align: left; }
+.gengar-title {
+  font-family: 'Bangers', cursive; font-size: 2.8em; color: var(--gn-red);
+  text-shadow: 2px 2px 0 #fff; line-height: 0.9; margin: 0;
   text-transform: uppercase; letter-spacing: 1px;
 }
-.gengar-btn:hover { transform: skew(-10deg) translateY(2px); box-shadow: 0 2px 0 var(--gn-border); }
+.gengar-subtitle {
+  font-family: 'Bangers', cursive; font-size: 1.3em; color: var(--gn-purple);
+  background: #fff; padding: 2px 12px; border-radius: 12px;
+  border: 2px solid var(--gn-dark); display: inline-block; margin-top: 5px;
+  transform: rotate(-2deg);
+}
+.gengar-icon {
+  font-size: 3.5em; animation: gn-wiggle 3s ease-in-out infinite;
+  filter: drop-shadow(3px 3px 0 rgba(0,0,0,0.2));
+}
+
+/* IMAGEM */
+.gengar-img-frame {
+  margin: 25px; padding: 10px; background: #fff;
+  border: 3px solid var(--gn-dark); border-radius: 4px;
+  box-shadow: 6px 6px 0 var(--gn-red);
+}
+.gengar-img-frame img {
+  width: 100%; height: 320px; object-fit: cover; border-radius: 2px;
+  border: 1px solid #ddd;
+}
+
+/* STATUS (HP / EA / SAN) */
+.gengar-stats { padding: 0 30px 20px; display: flex; flex-direction: column; gap: 12px; }
+.gengar-stat-row { display: grid; grid-template-columns: 40px 1fr 80px; align-items: center; gap: 10px; }
+.gengar-stat-label {
+  font-family: 'Bangers', cursive; font-size: 1.4em;
+  color: var(--gn-dark); text-align: right;
+}
+.gengar-bar-bg {
+  width: 100%; height: 20px; background: #333;
+  border: 2px solid var(--gn-gold); border-radius: 12px; overflow: hidden;
+  box-shadow: inset 0 3px 5px #000;
+}
+.gengar-fill { height: 100%; width: 0%; transition: width 0.6s ease; position: relative; }
+/* Listras Animadas */
+.gengar-fill::after {
+  content: ''; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(45deg, rgba(255,255,255,0.3) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.3) 75%, transparent 75%, transparent);
+  background-size: 20px 20px; animation: gn-steam 1s linear infinite;
+}
+.gn-hp { background: var(--gn-red); }
+.gn-ea { background: var(--gn-gold); }
+.gn-san { background: var(--gn-purple); }
+
+.gengar-stat-val {
+  font-family: 'Bangers'; font-size: 1.1em; color: var(--gn-dark); text-align: right;
+}
+
+/* CORPO DO TEXTO (Correntes) */
+.gengar-body {
+  margin: 10px 30px 25px; padding: 25px;
+  background: #fff; border-radius: 10px;
+  border: 4px dashed var(--gn-gold); /* A "Corrente" */
+  box-shadow: 0 0 0 2px var(--gn-red); /* O Contorno */
+  position: relative;
+  text-align: justify; line-height: 1.7; font-size: 1.15em;
+}
+/* Detalhes nos cantos */
+.gengar-body::before, .gengar-body::after {
+  content: '✦'; position: absolute; color: var(--gn-red); font-size: 1.5em;
+  background: var(--gn-bg); border-radius: 50%; width: 30px; height: 30px;
+  display: flex; align-items: center; justify-content: center;
+  border: 2px solid var(--gn-dark);
+}
+.gengar-body::before { top: -15px; left: -15px; }
+.gengar-body::after { bottom: -15px; right: -15px; }
+
+/* BOX EXTRAS */
+.gengar-extras {
+  margin: 0 30px 20px; padding: 15px 20px;
+  background: rgba(103, 58, 183, 0.08);
+  border-left: 6px solid var(--gn-purple);
+  border-radius: 0 8px 8px 0;
+}
+.gengar-extras strong {
+  font-family: 'Bangers'; color: var(--gn-purple); font-size: 1.2em; letter-spacing: 0.5px;
+}
+
+/* MINI CARD PET (Footer) */
+.gengar-pet-card {
+  margin: 10px 30px 20px;
+  background: var(--gn-dark);
+  padding: 8px 15px 8px 8px; 
+  border-radius: 50px 15px 15px 50px;
+  border: 2px solid var(--gn-purple);
+  display: inline-flex; align-items: center; gap: 15px;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+}
+.gengar-pet-img {
+  width: 45px; height: 45px; border-radius: 50%;
+  border: 2px solid var(--gn-purple); background: #fff;
+  object-fit: cover;
+}
+.gengar-pet-info { display: flex; flex-direction: column; width: 100px; }
+.gengar-pet-name {
+  color: var(--gn-gold); font-family: 'Bangers'; font-size: 0.9em; line-height: 1; margin-bottom: 4px;
+}
+.gengar-pet-bar {
+  width: 100%; height: 6px; background: #222; border-radius: 3px; overflow: hidden;
+}
+.gengar-pet-fill {
+  height: 100%; background: var(--gn-purple); width: 0%; transition: width 0.5s;
+}
 
 /* MOBILE */
-@media (max-width: 500px) {
-  .gengar-container { margin: 10px; width: auto; border-width: 2px; }
+@media (max-width: 600px) {
+  .gengar-container { margin: 10px auto; width: 98%; border-width: 2px; }
+  .gengar-header { flex-direction: column; text-align: center; gap: 10px; }
+  .gengar-title-box { text-align: center; }
+  .gengar-stat-row { grid-template-columns: 30px 1fr 60px; font-size: 0.9em; }
 }
