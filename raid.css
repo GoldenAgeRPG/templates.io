@@ -1,0 +1,90 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+:root {
+    --raid-bg: #121212;
+    --raid-accent: #8b0000;
+    --raid-text: #e0e0e0;
+    --raid-panel: #1e1e1e;
+    --raid-border: #333;
+}
+
+.raid-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: var(--raid-bg);
+    border: 1px solid var(--raid-border);
+    border-left: 5px solid var(--raid-accent);
+    font-family: 'Merriweather', serif;
+    color: var(--raid-text);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.raid-header {
+    background-color: var(--raid-panel);
+    padding: 30px;
+    border-bottom: 2px solid var(--raid-accent);
+    position: relative;
+    background-image: linear-gradient(45deg, rgba(0,0,0,0.8), transparent);
+}
+
+.raid-title {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 2.5em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0;
+    line-height: 1;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0px var(--raid-accent);
+}
+
+.raid-meta {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 0.9em;
+    color: var(--raid-accent);
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.raid-body {
+    padding: 40px;
+    font-size: 1.05em;
+    line-height: 1.8;
+    color: #cccccc;
+    text-align: justify;
+}
+
+.raid-body b, .raid-body strong {
+    color: #fff;
+    font-weight: 700;
+}
+
+.raid-footer {
+    background-color: #0a0a0a;
+    border-top: 1px solid var(--raid-border);
+    padding: 20px 40px 30px 40px;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.raid-footer::before {
+    content: "CONSIDERAÇÕES";
+    display: block;
+    font-weight: 700;
+    color: var(--raid-accent);
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #333;
+    width: 100%;
+}
+
+.raid-notes {
+    font-size: 0.9em;
+    color: #888;
+    line-height: 1.6;
+}
