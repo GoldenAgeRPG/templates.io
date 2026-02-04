@@ -1,206 +1,223 @@
-/* --- TEMPLATE: HAZU GENGAR (CHEF RPG FUSION v2) --- */
+/* --- TEMPLATE: HAZU GENGAR (DUAL SKIN MASTER) --- */
 @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&family=Ma+Shan+Zheng&display=swap');
 
+/* --- VARIÁVEIS DE TEMA (SKINS) --- */
 :root {
-  --gn-bg: #fff8e7;
-  --gn-red: #d32f2f;
-  --gn-gold: #ffc107;
-  --gn-purple: #673ab7;
-  --gn-dark: #3e2723;
+  /* TEMA PADRÃO (COZINHEIRO) */
+  --gn-bg: #fff8e7;          /* Creme */
+  --gn-panel: #ffffff;       /* Fundo dos painéis */
+  --gn-border: #3e2723;      /* Marrom Escuro (Bordas) */
+  --gn-accent: #d32f2f;      /* Vermelho (Destaque Principal) */
+  --gn-gold: #ffc107;        /* Dourado */
+  --gn-sec: #673ab7;         /* Roxo (Detalhes) */
+  --gn-text: #3e2723;        /* Texto Escuro */
+  --gn-bar-bg: #e0e0e0;      /* Fundo da Barra Vazia */
+  --gn-shadow: rgba(0,0,0,0.2);
+  
+  /* Textos Injetados (Padrão) */
+  --txt-recipe: "Receita Secreta";
+  --txt-actions: "Ações do Turno:";
+  --txt-summary: "Resumo do Prato:";
+  --txt-inventory: "Temperos (Inventário)";
+  --txt-tech: "Técnicas Especiais:";
 }
 
-/* ANIMAÇÕES */
-@keyframes gn-steam {
-  0% { background-position: 0 0; opacity: 0.5; }
-  100% { background-position: 20px -20px; opacity: 0.8; }
-}
-@keyframes gn-wiggle {
-  0%, 100% { transform: rotate(0deg); }
-  25% { transform: rotate(-3deg); }
-  75% { transform: rotate(3deg); }
+/* TEMA ALTERNATIVO (GENGAR/SHADOW) - Ativado via Classe JS */
+.skin-gengar {
+  --gn-bg: #1a0b2e;          /* Roxo Profundo */
+  --gn-panel: #2d1b4e;       /* Roxo Médio */
+  --gn-border: #000000;      /* Preto */
+  --gn-accent: #b026ff;      /* Neon Roxo */
+  --gn-gold: #00e5ff;        /* Cyan (Substituto do Ouro) */
+  --gn-sec: #ff0055;         /* Pink (Detalhes) */
+  --gn-text: #e0d4fc;        /* Texto Claro */
+  --gn-bar-bg: #111111;
+  --gn-shadow: rgba(176, 38, 255, 0.4); /* Glow Roxo */
 }
 
-/* CONTAINER PRINCIPAL */
+/* --- ESTRUTURA BASE --- */
 .gengar-container {
-  box-sizing: border-box;
-  max-width: 700px;
-  width: 95%;
-  margin: 40px auto;
+  box-sizing: border-box; max-width: 700px; width: 95%; margin: 40px auto;
   background-color: var(--gn-bg);
-  background-image: repeating-radial-gradient( circle at 0 0, transparent 0, var(--gn-bg) 10px ), repeating-linear-gradient( #f0e6d2, #fff8e7 );
-  border: 4px solid var(--gn-red);
-  box-shadow: 
-    0 0 0 4px var(--gn-gold), 
-    0 0 0 8px var(--gn-dark),
-    15px 15px 0 rgba(0,0,0,0.3);
-  border-radius: 15px;
-  position: relative;
-  font-family: 'Patrick Hand', cursive;
-  color: var(--gn-dark);
-  padding-bottom: 60px;
-  overflow: visible;
+  /* Padrão Sutil */
+  background-image: repeating-radial-gradient(circle at 0 0, transparent 0, var(--gn-bg) 10px), 
+                    repeating-linear-gradient(rgba(255,255,255,0.05), transparent);
+  border: 4px solid var(--gn-border);
+  box-shadow: 0 0 0 4px var(--gn-gold), 0 0 0 8px var(--gn-border), 15px 15px 0 var(--gn-shadow);
+  border-radius: 15px; position: relative;
+  font-family: 'Patrick Hand', cursive; color: var(--gn-text);
+  padding-bottom: 60px; overflow: visible; transition: 0.5s ease;
 }
 
-/* ASSINATURA */
-.gengar-container::after {
-  content: "Nan Hazu";
-  position: absolute; bottom: 15px; right: -25px;
-  font-family: 'Ma Shan Zheng', cursive; font-size: 3.5em; color: var(--gn-red);
-  transform: rotate(-8deg); text-shadow: 2px 2px 0 var(--gn-gold), 3px 3px 0 var(--gn-dark);
-  z-index: 10; pointer-events: none;
-  background: rgba(255, 255, 255, 0.8); padding: 0 15px;
-  border: 2px solid var(--gn-red); border-radius: 8px;
-  box-shadow: 3px 3px 0 rgba(0,0,0,0.2);
+/* BOTÃO DE TROCA DE SKIN (Switch) */
+.skin-toggle-btn {
+  position: absolute; top: -25px; right: 10px;
+  background: var(--gn-accent); color: #fff; border: 2px solid var(--gn-border);
+  font-family: 'Bangers'; padding: 5px 15px; cursor: pointer;
+  transform: skew(-10deg); box-shadow: 3px 3px 0 var(--gn-border);
+  z-index: 50; transition: 0.3s;
 }
+.skin-toggle-btn:hover { top: -28px; box-shadow: 3px 6px 0 var(--gn-border); }
 
 /* HEADER */
 .gengar-header {
   background: var(--gn-gold); padding: 15px 25px;
-  border-bottom: 4px solid var(--gn-dark);
+  border-bottom: 4px solid var(--gn-border);
   display: flex; justify-content: space-between; align-items: center;
-  border-radius: 10px 10px 0 0;
-  background-image: linear-gradient(45deg, #ffca28 25%, transparent 25%, transparent 75%, #ffca28 75%, #ffca28);
-  background-size: 20px 20px;
+  border-radius: 10px 10px 0 0; transition: 0.5s;
 }
 .gengar-title {
-  font-family: 'Bangers', cursive; font-size: 2.8em; color: var(--gn-red);
-  text-shadow: 2px 2px 0 #fff; line-height: 0.9; margin: 0;
+  font-family: 'Bangers', cursive; font-size: 2.8em; color: var(--gn-accent);
+  text-shadow: 2px 2px 0 var(--gn-panel); line-height: 0.9; margin: 0;
   text-transform: uppercase; letter-spacing: 1px;
 }
 .gengar-subtitle {
-  font-family: 'Bangers', cursive; font-size: 1.3em; color: var(--gn-purple);
-  background: #fff; padding: 2px 12px; border-radius: 12px;
-  border: 2px solid var(--gn-dark); display: inline-block; margin-top: 5px;
+  font-family: 'Bangers', cursive; font-size: 1.3em; color: var(--gn-sec);
+  background: var(--gn-panel); padding: 2px 12px; border-radius: 12px;
+  border: 2px solid var(--gn-border); display: inline-block; margin-top: 5px;
   transform: rotate(-2deg);
 }
 
 /* IMAGEM */
 .gengar-img-frame {
-  margin: 25px; padding: 10px; background: #fff;
-  border: 3px solid var(--gn-dark); border-radius: 4px;
-  box-shadow: 6px 6px 0 var(--gn-red);
+  margin: 25px; padding: 10px; background: var(--gn-panel);
+  border: 3px solid var(--gn-border); border-radius: 4px;
+  box-shadow: 6px 6px 0 var(--gn-accent); transition: 0.5s;
 }
 .gengar-img-frame img {
-  width: 100%; height: 350px; /* Altura ajustada para o novo banner */
-  object-fit: cover; object-position: center; border-radius: 2px;
-  border: 1px solid #ddd;
+  width: 100%; height: 350px; object-fit: cover; border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.2);
 }
 
-/* STATUS PRINCIPAIS (Ajuste de espaçamento) */
+/* STATUS (Compacto e Novo Efeito) */
 .gengar-stats { 
   padding: 0 30px 20px; display: flex; flex-direction: column; 
-  gap: 8px; /* [CORREÇÃO 1] Espaço diminuído */
+  gap: 3px; /* APROXIMAÇÃO MÁXIMA */
 }
-.gengar-stat-row { display: grid; grid-template-columns: 40px 1fr 80px; align-items: center; gap: 10px; }
+.gengar-stat-row { display: grid; grid-template-columns: 40px 1fr 80px; align-items: center; gap: 8px; }
 .gengar-stat-label {
   font-family: 'Bangers', cursive; font-size: 1.4em;
-  color: var(--gn-dark); text-align: right;
+  color: var(--gn-text); text-align: right;
 }
 .gengar-bar-bg {
-  width: 100%; height: 20px; background: #333;
-  border: 2px solid var(--gn-gold); border-radius: 12px; overflow: hidden;
-  box-shadow: inset 0 3px 5px #000;
+  width: 100%; height: 16px; background: var(--gn-bar-bg);
+  border: 2px solid var(--gn-border); border-radius: 12px; overflow: hidden;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
 }
-.gengar-fill { height: 100%; width: 0%; transition: width 0.6s ease; position: relative; }
+
+/* NOVO EFEITO: FLUIDO/PLASMA (Sem Barbearia) */
+.gengar-fill { 
+  height: 100%; width: 0%; position: relative; 
+  transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  box-shadow: inset 0 2px 0 rgba(255,255,255,0.3), inset 0 -2px 0 rgba(0,0,0,0.2);
+}
 .gengar-fill::after {
-  content: ''; position: absolute; top: 0; left: 0; bottom: 0; right: 0;
-  background: linear-gradient(45deg, rgba(255,255,255,0.3) 25%, transparent 25%, transparent 50%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0.3) 75%, transparent 75%, transparent);
-  background-size: 20px 20px; animation: gn-steam 1s linear infinite;
+  content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  transform: translateX(-100%); animation: gn-shine 2.5s infinite;
 }
-.gn-hp { background: var(--gn-red); }
+@keyframes gn-shine { 100% { transform: translateX(100%); } }
+
+.gn-hp { background: var(--gn-accent); }
 .gn-ea { background: var(--gn-gold); }
-.gn-san { background: var(--gn-purple); }
+.gn-san { background: var(--gn-sec); }
+
 .gengar-stat-val {
-  font-family: 'Bangers'; font-size: 1.1em; color: var(--gn-dark); text-align: right;
+  font-family: 'Bangers'; font-size: 1.1em; color: var(--gn-text); text-align: right;
 }
 
 /* CORPO DO TEXTO */
 .gengar-body {
-  margin: 10px 30px 25px; padding: 25px;
-  background: #fff; border-radius: 10px;
-  border: 4px dashed var(--gn-gold); box-shadow: 0 0 0 2px var(--gn-red);
+  margin: 10px 30px 15px; padding: 25px;
+  background: var(--gn-panel); border-radius: 10px;
+  border: 4px dashed var(--gn-gold); box-shadow: 0 0 0 2px var(--gn-accent);
   position: relative; text-align: justify; line-height: 1.7; font-size: 1.15em;
-}
-/* [CORREÇÃO 2] Emojis removidos, substituídos por pontos estilizados */
-.gengar-body::before, .gengar-body::after {
-  content: ''; position: absolute; background: var(--gn-red);
-  width: 15px; height: 15px; border-radius: 50%;
-  border: 2px solid var(--gn-dark); box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
-}
-.gengar-body::before { top: -10px; left: -10px; }
-.gengar-body::after { bottom: -10px; right: -10px; }
-
-/* --- NOVA ÁREA DE RECEITA (RPG TRACKER) --- */
-.gengar-extras {
-  margin: 0 30px 20px; padding: 15px 20px;
-  background: rgba(103, 58, 183, 0.08);
-  border-left: 6px solid var(--gn-purple); border-radius: 0 8px 8px 0;
-  display: flex; flex-direction: column; gap: 10px;
-}
-/* [CORREÇÃO 3] Título Injetado via CSS */
-.gengar-extras strong { display: none; } /* Esconde o texto original se houver */
-.gengar-extras::before {
-  content: "Receita:"; font-family: 'Bangers'; color: var(--gn-purple);
-  font-size: 1.5em; text-decoration: underline; letter-spacing: 1px;
+  transition: 0.5s;
 }
 
-/* [CORREÇÃO 4] Novos Campos de RPG */
-.gn-rpg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-.gn-rpg-item { font-size: 1em; display: flex; align-items: baseline; }
-.gn-rpg-label { font-family: 'Bangers'; color: var(--gn-purple); margin-right: 5px; font-size: 1.1em; }
-.gn-rpg-val { font-weight: bold; color: var(--gn-dark); }
+/* --- SISTEMA DE GAVETAS (ACCORDION) & INJEÇÃO DE TÍTULOS --- */
 
-.gn-actions-box {
-  display: flex; flex-wrap: wrap; gap: 8px; padding: 8px;
-  background: rgba(255,255,255,0.5); border: 2px dashed var(--gn-purple); border-radius: 8px;
+/* Estilo Base da Gaveta (<details>) */
+.gn-drawer {
+  margin: 0 30px 10px; border: 2px solid var(--gn-border);
+  background: var(--gn-bar-bg); border-radius: 8px; overflow: hidden;
+  transition: 0.3s;
 }
-.gn-act-pill {
-  flex-grow: 1; text-align: center; background: var(--gn-dark);
-  color: var(--gn-gold); padding: 4px 8px; border-radius: 4px;
-  font-family: 'Bangers'; font-size: 0.9em; border: 1px solid var(--gn-purple);
+.gn-drawer[open] { background: rgba(0,0,0,0.05); }
+
+/* Botão da Gaveta (<summary>) */
+.gn-drawer > summary {
+  padding: 10px 15px; cursor: pointer; list-style: none;
+  font-family: 'Bangers'; font-size: 1.3em; color: var(--gn-panel);
+  background: var(--gn-sec); user-select: none;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.gn-drawer > summary::after { content: '+'; font-size: 1.5em; line-height: 0.5; }
+.gn-drawer[open] > summary::after { content: '-'; }
+.gn-drawer > summary::-webkit-details-marker { display: none; }
+
+/* INJEÇÃO DO TÍTULO "RECEITA" VIA CSS */
+.gn-recipe-drawer > summary::before { content: var(--txt-recipe); letter-spacing: 1px; }
+
+/* Conteúdo Interno da Receita */
+.gn-drawer-content { padding: 15px; display: flex; flex-direction: column; gap: 15px; color: var(--gn-text); }
+
+/* TITULOS INTERNOS INJETADOS VIA CSS */
+.gn-rpg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; font-size: 0.95em; }
+.gn-rpg-item b { color: var(--gn-sec); font-family: 'Bangers'; margin-right: 5px; }
+
+.gn-actions-box::before { content: var(--txt-actions); display: block; font-family: 'Bangers'; color: var(--gn-sec); border-bottom: 2px dotted var(--gn-sec); margin-bottom: 5px; }
+.gn-summary-box::before { content: var(--txt-summary); display: block; font-family: 'Bangers'; color: var(--gn-sec); border-bottom: 2px dotted var(--gn-sec); margin-bottom: 5px; }
+.gn-tech-box::before { content: var(--txt-tech); display: block; font-family: 'Bangers'; color: var(--gn-sec); border-bottom: 2px dotted var(--gn-sec); margin-bottom: 5px; }
+
+.gn-act-pill { 
+  display: inline-block; background: var(--gn-border); color: var(--gn-gold); 
+  padding: 2px 8px; border-radius: 4px; font-size: 0.9em; margin-right: 5px; margin-bottom: 5px;
 }
 
-.gn-section-title {
-  font-family: 'Bangers'; color: var(--gn-purple);
-  font-size: 1.2em; border-bottom: 2px dotted var(--gn-purple);
-  margin: 10px 0 5px; display: inline-block;
+/* GAVETA ANINHADA (TEMPEROS) */
+.gn-sub-drawer {
+  margin-top: 5px; border: 1px dashed var(--gn-sec);
+  background: var(--gn-panel); border-radius: 5px;
 }
-.gn-section-content { font-size: 0.95em; line-height: 1.4; }
+.gn-sub-drawer > summary {
+  padding: 5px 10px; font-family: 'Bangers'; font-size: 1.1em;
+  background: transparent; color: var(--gn-sec); cursor: pointer;
+}
+/* INJEÇÃO DO TÍTULO "TEMPEROS" VIA CSS */
+.gn-sub-drawer > summary::before { content: var(--txt-inventory); }
+.gn-sub-content { padding: 10px; font-size: 0.9em; border-top: 1px dotted var(--gn-sec); }
 
 
-/* MINI CARD PET (Footer) */
+/* ASSINATURA */
+.gengar-container::after {
+  content: "Nan Hazu"; position: absolute; bottom: 15px; right: -25px;
+  font-family: 'Ma Shan Zheng', cursive; font-size: 3.5em; color: var(--gn-accent);
+  transform: rotate(-8deg); text-shadow: 2px 2px 0 var(--gn-gold), 3px 3px 0 var(--gn-border);
+  z-index: 10; pointer-events: none; background: var(--gn-panel); padding: 0 15px;
+  border: 2px solid var(--gn-accent); border-radius: 8px;
+}
+
+/* PET CARD */
 .gengar-pet-card {
-  margin: 10px 30px 20px; background: var(--gn-dark);
+  margin: 10px 30px 20px; background: var(--gn-border);
   padding: 8px 15px 8px 8px; border-radius: 50px 15px 15px 50px;
-  border: 2px solid var(--gn-purple);
-  display: inline-flex; align-items: center; gap: 15px;
-  box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+  border: 2px solid var(--gn-sec); display: inline-flex; align-items: center; gap: 15px;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.3); transition: 0.5s;
 }
 .gengar-pet-img {
   width: 45px; height: 45px; border-radius: 50%;
-  border: 2px solid var(--gn-purple); background: #fff; object-fit: cover;
+  border: 2px solid var(--gn-sec); background: #fff; object-fit: cover;
 }
 .gengar-pet-info { display: flex; flex-direction: column; width: 100px; }
-.gengar-pet-name {
-  color: var(--gn-gold); font-family: 'Bangers'; font-size: 0.9em; line-height: 1; margin-bottom: 4px;
-}
-.gengar-pet-bar {
-  width: 100%; height: 8px; background: #222; border-radius: 4px; overflow: hidden;
-}
-.gengar-pet-fill {
-  height: 100%; background: var(--gn-purple); width: 0%; transition: width 0.5s;
-}
-/* [CORREÇÃO 6] Valor do HP do pet visível */
-.gengar-pet-val {
-  font-family: 'Bangers'; color: var(--gn-gold); font-size: 1em;
-  text-shadow: 1px 1px 0 #000; margin-left: auto; padding-right: 5px;
-}
+.gengar-pet-name { color: var(--gn-gold); font-family: 'Bangers'; font-size: 0.9em; line-height: 1; }
+.gengar-pet-bar { width: 100%; height: 8px; background: #000; border-radius: 4px; overflow: hidden; margin-top: 3px;}
+.gengar-pet-fill { height: 100%; background: var(--gn-sec); width: 0%; transition: width 0.5s; }
+.gengar-pet-val { font-family: 'Bangers'; color: var(--gn-gold); font-size: 1em; margin-left: auto; }
 
 /* MOBILE */
 @media (max-width: 600px) {
   .gengar-container { margin: 10px auto; width: 98%; border-width: 2px; }
   .gengar-header { flex-direction: column; text-align: center; gap: 10px; }
-  .gengar-title-box { text-align: center; }
-  .gengar-stat-row { grid-template-columns: 30px 1fr 60px; font-size: 0.9em; }
-  .gn-rpg-grid { grid-template-columns: 1fr; } /* Grid vira coluna no mobile */
+  .gn-rpg-grid { grid-template-columns: 1fr; }
 }
