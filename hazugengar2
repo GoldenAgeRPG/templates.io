@@ -1,0 +1,214 @@
+/* --- TEMPLATE: HAZU GENGAR v9 (PLATINUM - ISOLATED) --- */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&family=Ma+Shan+Zheng&display=swap');
+
+/* VARIÁVEIS LOCAIS (Escopadas para não vazar) */
+.hz-gn-container {
+  --gn-bg: #fff8e7;
+  --gn-panel: #ffffff;
+  --gn-border: #3e2723;
+  --gn-accent: #d32f2f;
+  --gn-gold: #ffc107;
+  --gn-sec: #673ab7;
+  --gn-text: #3e2723;
+  --gn-bar-bg: #e0e0e0;
+  --gn-shadow: rgba(0,0,0,0.2);
+}
+
+/* TEMA ESCURO (GENGAR) */
+.hz-gn-container.skin-gengar {
+  --gn-bg: #1a0b2e;
+  --gn-panel: #2d1b4e;
+  --gn-border: #000000;
+  --gn-accent: #b026ff;
+  --gn-gold: #00e5ff;
+  --gn-sec: #ff0055;
+  --gn-text: #e0d4fc;
+  --gn-bar-bg: #111111;
+  --gn-shadow: rgba(176, 38, 255, 0.4);
+}
+
+/* --- ESTRUTURA PRINCIPAL --- */
+.hz-gn-container {
+  box-sizing: border-box; 
+  max-width: 700px; 
+  width: 95%; 
+  margin: 40px auto;
+  background-color: var(--gn-bg);
+  background-image: repeating-radial-gradient(circle at 0 0, transparent 0, var(--gn-bg) 10px), 
+                    repeating-linear-gradient(rgba(255,255,255,0.05), transparent);
+  border: 4px solid var(--gn-border);
+  box-shadow: 0 0 0 4px var(--gn-gold), 0 0 0 8px var(--gn-border), 15px 15px 0 var(--gn-shadow);
+  border-radius: 15px; 
+  position: relative;
+  font-family: 'Patrick Hand', cursive; 
+  color: var(--gn-text);
+  padding-bottom: 60px; 
+  overflow: visible; 
+  transition: 0.5s ease;
+  line-height: normal; /* Reset de linha do fórum */
+}
+
+.hz-gn-container * { box-sizing: border-box; } /* Força caixa correta em tudo */
+
+/* BOTÃO TOGGLE */
+.hz-gn-toggle {
+  position: absolute; top: -25px; right: 10px;
+  background: var(--gn-accent); color: #fff; border: 2px solid var(--gn-border);
+  font-family: 'Bangers'; padding: 5px 15px; cursor: pointer;
+  transform: skew(-10deg); box-shadow: 3px 3px 0 var(--gn-border);
+  z-index: 50; transition: 0.3s; font-size: 14px;
+}
+.hz-gn-toggle:hover { top: -28px; box-shadow: 3px 6px 0 var(--gn-border); }
+
+/* HEADER */
+.hz-gn-header {
+  background: var(--gn-gold); padding: 15px 25px;
+  border-bottom: 4px solid var(--gn-border);
+  display: flex; justify-content: space-between; align-items: center;
+  border-radius: 10px 10px 0 0; transition: 0.5s;
+  margin: 0; /* Correção de espaço */
+}
+.hz-gn-title {
+  font-family: 'Bangers', cursive; font-size: 2.8em; color: var(--gn-accent);
+  text-shadow: 2px 2px 0 var(--gn-panel); line-height: 0.9; margin: 0;
+  text-transform: uppercase; letter-spacing: 1px;
+}
+.hz-gn-sub {
+  font-family: 'Bangers', cursive; font-size: 1.3em; color: var(--gn-sec);
+  background: var(--gn-panel); padding: 2px 12px; border-radius: 12px;
+  border: 2px solid var(--gn-border); display: inline-block; margin-top: 5px;
+  transform: rotate(-2deg);
+}
+
+/* IMAGEM */
+.hz-gn-img {
+  margin: 25px; padding: 10px; background: var(--gn-panel);
+  border: 3px solid var(--gn-border); border-radius: 4px;
+  box-shadow: 6px 6px 0 var(--gn-accent); transition: 0.5s;
+}
+.hz-gn-img img {
+  width: 100%; height: 350px; object-fit: cover; border-radius: 2px;
+  border: 1px solid rgba(0,0,0,0.2); display: block;
+}
+
+/* STATUS (Blindado) */
+.hz-gn-stats { 
+  padding: 0 30px 20px; display: flex; flex-direction: column; 
+  gap: 5px; /* Reduzi o espaço conforme pedido */
+}
+.hz-gn-stat-row { 
+  display: grid; grid-template-columns: 40px 1fr 100px; /* Largura fixa para números não quebrarem */
+  align-items: center; gap: 8px; margin: 0;
+}
+.hz-gn-stat-lbl {
+  font-family: 'Bangers', cursive; font-size: 1.4em;
+  color: var(--gn-text); text-align: right; line-height: 1;
+}
+.hz-gn-bar-bg {
+  width: 100%; height: 16px; background: var(--gn-bar-bg);
+  border: 2px solid var(--gn-border); border-radius: 12px; overflow: hidden;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
+}
+.hz-gn-fill { 
+  height: 100%; width: 0%; position: relative; 
+  transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.hz-gn-fill.hp { background: var(--gn-accent); }
+.hz-gn-fill.ea { background: var(--gn-gold); }
+.hz-gn-fill.san { background: var(--gn-sec); }
+
+.hz-gn-stat-val {
+  font-family: 'Bangers'; font-size: 1.1em; color: var(--gn-text); text-align: right; white-space: nowrap;
+}
+
+/* CORPO DO TEXTO */
+.hz-gn-body {
+  margin: 10px 30px 15px; padding: 25px;
+  background: var(--gn-panel); border-radius: 10px;
+  border: 4px dashed var(--gn-gold); box-shadow: 0 0 0 2px var(--gn-accent);
+  position: relative; text-align: justify; line-height: 1.7; font-size: 1.15em;
+  transition: 0.5s;
+}
+
+/* GAVETAS (ACCORDIONS) */
+.hz-gn-drawer {
+  margin: 0 30px 10px; border: 2px solid var(--gn-border);
+  background: var(--gn-bar-bg); border-radius: 8px; overflow: hidden;
+  transition: 0.3s;
+}
+.hz-gn-drawer summary {
+  padding: 10px 15px; cursor: pointer; list-style: none;
+  font-family: 'Bangers'; font-size: 1.3em; color: #fff !important;
+  background: var(--gn-sec); user-select: none;
+  display: flex; align-items: center; justify-content: space-between;
+  outline: none;
+}
+.hz-gn-drawer summary::marker { display: none; } /* Remove triângulo padrão */
+.hz-gn-drawer summary::-webkit-details-marker { display: none; }
+
+.hz-gn-drawer.recipe > summary::before { content: "RECEITA SECRETA"; letter-spacing: 1px; }
+.hz-gn-drawer.inv > summary::before { content: "TEMPEROS (INVENTÁRIO)"; letter-spacing: 1px; }
+
+.hz-gn-drawer-content { padding: 15px; display: flex; flex-direction: column; gap: 15px; color: var(--gn-text); background: var(--gn-panel); }
+
+/* GRID RPG (Correção do print 4) */
+.hz-gn-grid { 
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px; 
+  font-size: 0.95em; border-bottom: 1px dashed var(--gn-sec); padding-bottom: 10px;
+}
+.hz-gn-grid-item b { color: var(--gn-sec); font-family: 'Bangers'; margin-right: 5px; }
+
+/* AÇÕES E OUTROS BLOCOS */
+.hz-gn-box-title {
+  font-family: 'Bangers'; color: var(--gn-sec); border-bottom: 2px dotted var(--gn-sec);
+  margin: 5px 0; display: block; font-size: 1.1em;
+}
+.hz-gn-pill { 
+  display: inline-block; background: var(--gn-border); color: var(--gn-gold); 
+  padding: 3px 8px; border-radius: 4px; font-size: 0.9em; margin: 2px;
+  font-family: 'Bangers'; border: 1px solid var(--gn-sec);
+}
+
+/* SANITY STATUS */
+.hz-gn-san-box {
+  margin-top: 10px; padding: 10px; border: 1px solid var(--gn-sec);
+  background: rgba(103, 58, 183, 0.1); border-radius: 4px; font-size: 0.9em;
+}
+
+/* PET CARD */
+.hz-gn-pet {
+  margin: 10px 30px 20px; background: var(--gn-border);
+  padding: 8px 15px 8px 8px; border-radius: 50px 15px 15px 50px;
+  border: 2px solid var(--gn-sec); display: inline-flex; align-items: center; gap: 15px;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.3); transition: 0.5s;
+}
+.hz-gn-pet img {
+  width: 45px; height: 45px; border-radius: 50%;
+  border: 2px solid var(--gn-sec); background: #fff; object-fit: cover;
+}
+.hz-gn-pet-info { display: flex; flex-direction: column; width: 100px; }
+.hz-gn-pet-name { color: var(--gn-gold); font-family: 'Bangers'; font-size: 0.9em; line-height: 1; }
+.hz-gn-pet-bar { width: 100%; height: 8px; background: #000; border-radius: 4px; overflow: hidden; margin-top: 3px;}
+.hz-gn-pet-fill { height: 100%; background: var(--gn-sec); width: 0%; transition: width 0.5s; }
+.hz-gn-pet-val { font-family: 'Bangers'; color: var(--gn-gold); font-size: 1em; margin-left: auto; }
+
+/* ASSINATURA */
+.hz-gn-container::after {
+  content: "Nan Hazu"; position: absolute; bottom: 15px; right: -25px;
+  font-family: 'Ma Shan Zheng', cursive; font-size: 3.5em; color: var(--gn-accent);
+  transform: rotate(-8deg); text-shadow: 2px 2px 0 var(--gn-gold), 3px 3px 0 var(--gn-border);
+  z-index: 10; pointer-events: none; background: var(--gn-panel); padding: 0 15px;
+  border: 2px solid var(--gn-accent); border-radius: 8px;
+}
+
+/* BBCODES */
+.hz-gn-container b, .hz-gn-container strong { color: var(--gn-accent); font-weight: bold; }
+.hz-gn-container i, .hz-gn-container em { color: var(--gn-sec); font-weight: bold; }
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .hz-gn-container { margin: 10px auto; width: 98%; border-width: 2px; }
+  .hz-gn-header { flex-direction: column; text-align: center; gap: 10px; }
+  .hz-gn-grid { grid-template-columns: 1fr; }
+  .hz-gn-stat-row { grid-template-columns: 35px 1fr 70px; font-size: 0.9em; }
+}
