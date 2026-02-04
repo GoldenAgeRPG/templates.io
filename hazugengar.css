@@ -222,19 +222,21 @@
   .gn-rpg-grid { grid-template-columns: 1fr; }
 }
 
-/* --- CUSTOMIZAÇÃO BBCODE (CORES) --- */
+/* --- CUSTOMIZAÇÃO BBCODE (CORES) - CORRIGIDO --- */
 
-/* Negrito ([b]) assume a cor de Destaque Principal */
+/* Negrito ([b]): Apenas cor e peso. Sem mudar fonte ou tamanho */
 .gengar-container b, 
 .gengar-container strong {
-  color: var(--gn-accent); /* Vermelho (Claro) ou Neon Roxo (Escuro) */
-  font-family: 'Bangers', cursive; /* Opcional: Deixa o negrito na fonte de quadrinhos */
-  letter-spacing: 0.5px;
+  color: var(--gn-accent); /* Vermelho ou Neon */
+  font-weight: bold;
+  font-family: inherit;    /* Herda a fonte do texto normal */
+  font-size: inherit;      /* Garante que o tamanho não muda */
+  text-transform: none;    /* Garante que não força caixa alta */
 }
 
-/* Itálico ([i]) assume a cor Secundária */
+/* Itálico ([i]): Cor Secundária */
 .gengar-container i, 
 .gengar-container em {
-  color: var(--gn-sec); /* Roxo (Claro) ou Pink (Escuro) */
-  font-weight: bold; /* Garante leitura melhor */
+  color: var(--gn-sec);    /* Roxo ou Pink */
+  font-weight: bold;       /* Para melhor leitura */
 }
