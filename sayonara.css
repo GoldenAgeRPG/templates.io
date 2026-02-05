@@ -1,0 +1,219 @@
+/* --- TEMPLATE: SAYONARA (SYN-RAIN VARIATION) --- */
+/* Fontes mais futuristas e limpas */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Orbitron:wght@500;700&display=swap');
+
+/* VARIÁVEIS LOCAIS (Paleta baseada no GIF) */
+.syn-container {
+  --syn-bg-dark: #0a0b14;   /* Fundo quase preto */
+  --syn-panel: #131524;     /* Painéis azul marinho escuro */
+  --syn-border: #1f223b;    /* Bordas metálicas escuras */
+  --syn-accent: #8a2be2;    /* Roxo Elétrico (Principal) */
+  --syn-cyan: #00f7ff;      /* Ciano Neon (Secundário/Glow) */
+  --syn-text: #e0e7ff;      /* Texto claro azulado */
+  --syn-text-dim: #8a94b8;  /* Texto secundário */
+  
+  --syn-glow-purple: 0 0 10px rgba(138, 43, 226, 0.6);
+  --syn-glow-cyan: 0 0 8px rgba(0, 247, 255, 0.4);
+}
+
+/* --- ESTRUTURA PRINCIPAL --- */
+.syn-container {
+  box-sizing: border-box; 
+  max-width: 700px; 
+  width: 95%; 
+  margin: 40px auto;
+  /* Gradiente noturno com uma textura sutil de scanline/chuva digital */
+  background: linear-gradient(to bottom, var(--syn-bg-dark), #1a1c2e),
+              repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 247, 255, 0.03) 3px);
+  border: 1px solid var(--syn-border);
+  /* Glow externo duplo (roxo e ciano) */
+  box-shadow: 0 0 15px rgba(138, 43, 226, 0.3), inset 0 0 30px rgba(0,0,0,0.8);
+  border-radius: 4px; /* Cantos pouco arredondados, mais tech */
+  font-family: 'Montserrat', sans-serif; 
+  color: var(--syn-text);
+  padding-bottom: 30px; 
+  position: relative;
+  overflow: hidden;
+  line-height: normal;
+}
+.syn-container * { box-sizing: border-box; }
+
+/* Decorativo: Linha de Scan no topo */
+.syn-container::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--syn-accent), var(--syn-cyan));
+    box-shadow: var(--syn-glow-cyan);
+}
+
+/* BOTÃO DE SKIN (Não se aplica aqui, mas mantemos a estrutura se quiser criar uma "Sayonara Happy Mode" no futuro) */
+.syn-toggle { display: none; } 
+
+/* HEADER */
+.syn-header {
+  padding: 20px 25px;
+  background: rgba(0,0,0,0.4);
+  border-bottom: 1px solid var(--syn-border);
+  display: flex; justify-content: space-between; align-items: center;
+  backdrop-filter: blur(5px);
+}
+.syn-title-box { display: flex; flex-direction: column; }
+.syn-title {
+  font-family: 'Orbitron', sans-serif; /* Fonte Tech */
+  font-size: 2.2em; color: var(--syn-accent);
+  text-transform: uppercase; letter-spacing: 3px;
+  text-shadow: var(--syn-glow-purple); margin: 0;
+  font-weight: 700;
+}
+.syn-sub {
+  font-family: 'Montserrat', sans-serif;
+  font-size: 0.9em; color: var(--syn-cyan);
+  text-transform: uppercase; letter-spacing: 2px;
+  opacity: 0.8; margin-top: 5px;
+}
+
+/* IMAGEM */
+.syn-img {
+  margin: 20px 25px; height: 300px;
+  border: 1px solid var(--syn-accent);
+  box-shadow: var(--syn-glow-purple);
+  position: relative; overflow: hidden;
+}
+.syn-img img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: contrast(1.1) saturate(1.1); /* Leve realce nas cores */
+}
+/* Efeito de scan na imagem */
+.syn-img::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(transparent 50%, rgba(0, 247, 255, 0.05) 50%);
+    background-size: 100% 4px; pointer-events: none;
+}
+
+/* STATUS (Barras finas e digitais) */
+.syn-stats { 
+  padding: 0 30px 20px; display: flex; flex-direction: column; gap: 10px;
+}
+.syn-stat-row { 
+  display: grid; grid-template-columns: 50px 1fr 80px;
+  align-items: center; gap: 15px; font-family: 'Orbitron'; font-size: 0.9em;
+}
+.syn-stat-lbl { color: var(--syn-text-dim); letter-spacing: 1px; }
+
+.syn-bar-bg {
+  height: 8px; /* Barra fina */
+  background: #08090f;
+  border: 1px solid var(--syn-border);
+  border-radius: 2px; overflow: hidden;
+  position: relative;
+}
+.syn-fill { 
+  height: 100%; width: 0%; position: relative; 
+  transition: width 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  /* O brilho vem da cor da própria barra */
+  box-shadow: 0 0 8px currentColor;
+}
+.syn-fill.hp { background: var(--syn-accent); color: var(--syn-accent); }
+.syn-fill.ea { background: var(--syn-cyan); color: var(--syn-cyan); }
+/* SANidade fica vermelha/rosa pra contrastar */
+.syn-fill.san { background: #ff2a6d; color: #ff2a6d; } 
+
+.syn-stat-val { text-align: right; color: var(--syn-text); font-weight: bold; }
+
+/* CORPO DO TEXTO */
+.syn-body {
+  margin: 10px 25px 20px; padding: 25px;
+  background: rgba(19, 21, 36, 0.7); /* Painel translúcido */
+  border-left: 2px solid var(--syn-accent);
+  text-align: justify; line-height: 1.8; font-size: 1em;
+  color: #ccc;
+}
+
+/* GAVETAS (Estilo Tech HUD) */
+.syn-drawer {
+  margin: 0 25px 10px; border: 1px solid var(--syn-border);
+  background: var(--syn-panel); transition: 0.3s;
+}
+.syn-drawer summary {
+  padding: 12px 15px; cursor: pointer; list-style: none;
+  font-family: 'Orbitron'; font-size: 1.1em; color: var(--syn-text) !important;
+  background: linear-gradient(90deg, rgba(138, 43, 226, 0.2), transparent);
+  border-left: 3px solid var(--syn-accent);
+  display: flex; align-items: center; justify-content: space-between;
+  outline: none; user-select: none; letter-spacing: 1px;
+}
+.syn-drawer summary::marker, .syn-drawer summary::-webkit-details-marker { display: none; }
+/* Ícone de + digital */
+.syn-drawer summary::after { content: '[+]'; color: var(--syn-accent); font-size: 0.8em; }
+.syn-drawer[open] summary::after { content: '[-]'; color: var(--syn-cyan); }
+
+.syn-drawer.recipe > summary::before { content: "// DADOS DE COMBATE"; }
+.syn-drawer.inv > summary::before { content: "// INVENTÁRIO"; }
+
+.syn-drawer-content { padding: 20px; display: flex; flex-direction: column; gap: 20px; background: var(--syn-bg-dark); font-size: 0.95em; }
+
+/* GRID RPG */
+.syn-grid { 
+  display: grid; grid-template-columns: 1fr 1fr; gap: 15px; 
+  padding-bottom: 15px; border-bottom: 1px solid var(--syn-border);
+}
+.syn-grid-item { display: flex; flex-direction: column; gap: 5px; }
+.syn-lbl { color: var(--syn-accent); font-family: 'Orbitron'; font-size: 0.8em; text-transform: uppercase; }
+.syn-val { color: var(--syn-text); font-weight: 600; }
+
+/* AÇÕES E PILLS (Estilo Chip) */
+.syn-box-title {
+  font-family: 'Orbitron'; color: var(--syn-cyan); 
+  display: block; font-size: 0.9em; margin-bottom: 8px; letter-spacing: 1px;
+}
+.syn-pill { 
+  display: inline-block; background: rgba(138, 43, 226, 0.1); color: var(--syn-text); 
+  padding: 4px 10px; border: 1px solid var(--syn-accent); font-size: 0.85em; margin: 3px;
+  font-family: 'Montserrat'; font-weight: 600;
+  box-shadow: inset 0 0 5px rgba(138, 43, 226, 0.2);
+}
+.syn-pet-actions-box { border-top: 1px dashed var(--syn-border); padding-top: 15px; }
+.syn-pill.pet-free { border-color: var(--syn-cyan); color: var(--syn-cyan); background: rgba(0, 247, 255, 0.1); }
+
+/* TÉCNICAS E ITENS */
+.syn-tech, .syn-inv {
+    background: rgba(255,255,255,0.03); padding: 10px;
+    border-left: 2px solid var(--syn-border); margin-bottom: 10px;
+}
+.syn-tech b, .syn-inv b { color: var(--syn-accent); font-family: 'Orbitron'; letter-spacing: 0.5px;}
+.syn-type { color: var(--syn-cyan); font-size: 0.9em; font-family: 'Orbitron'; }
+
+/* SANITY STATUS (Estilo Alerta Digital) */
+.syn-san-box {
+  margin-top: 15px; padding: 12px; border: 1px solid #ff2a6d;
+  background: rgba(255, 42, 109, 0.1); font-size: 0.9em;
+  box-shadow: inset 0 0 10px rgba(255, 42, 109, 0.2);
+}
+
+/* PET FOOTER (Estilo Data Pad pequeno) */
+.syn-pet {
+  position: absolute; bottom: 15px; right: 25px;
+  background: var(--syn-panel); border: 1px solid var(--syn-accent);
+  padding: 5px 15px 5px 5px; display: inline-flex; align-items: center; gap: 10px;
+  box-shadow: var(--syn-glow-purple);
+}
+.syn-pet img {
+  width: 35px; height: 35px;
+  border: 1px solid var(--syn-cyan); object-fit: cover;
+}
+.syn-pet-info { display: flex; flex-direction: column; width: 80px; }
+.syn-pet-name { color: var(--syn-cyan); font-family: 'Orbitron'; font-size: 0.7em; line-height: 1; margin-bottom: 3px;}
+.syn-pet-bar { width: 100%; height: 4px; background: #000; overflow: hidden; }
+.syn-pet-fill { height: 100%; background: var(--syn-cyan); width: 0%; box-shadow: 0 0 4px var(--syn-cyan); }
+.syn-pet-val { font-family: 'Orbitron'; color: var(--syn-text); font-size: 0.8em; margin-left: auto; }
+
+/* BBCODES */
+.syn-container b, .syn-container strong { color: var(--syn-accent); }
+.syn-container i, .syn-container em { color: var(--syn-cyan); }
+
+/* MOBILE */
+@media (max-width: 600px) {
+  .syn-header { flex-direction: column; text-align: center; gap: 10px; }
+  .syn-grid { grid-template-columns: 1fr; }
+  .syn-stat-row { grid-template-columns: 40px 1fr 60px; font-size: 0.8em; }
+  .syn-img { height: 200px; }
+}
