@@ -1,0 +1,222 @@
+/* --- TEMPLATE: HOSHINA (CLOW'S LEGACY THEME) --- */
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Cinzel+Decorative:wght@400;700&family=Comfortaa:wght@300;500;700&display=swap');
+
+/* VARIÁVEIS LOCAIS */
+.hos-container {
+  /* Paleta Sakura */
+  --hos-pink-light: #fff0f5;   /* Fundo quase branco rosado */
+  --hos-pink-med: #ffc4d6;     /* Rosa médio (bordas, detalhes) */
+  --hos-pink-pop: #ff6f91;     /* Rosa vibrante (acentos, barras) */
+  --hos-gold: #e6c200;         /* Dourado mágico */
+  --hos-text: #5e3a46;         /* Texto marrom/vinho suave */
+  --hos-text-light: #8a6a76;   /* Texto secundário */
+  --hos-card-bg: #fffcf9;      /* Fundo estilo papel de carta */
+  
+  --hos-glow: 0 0 15px rgba(255, 111, 145, 0.4);
+  --hos-border: 3px solid var(--hos-pink-med);
+}
+
+/* --- ESTRUTURA PRINCIPAL --- */
+.hos-container {
+  box-sizing: border-box; 
+  max-width: 750px; 
+  width: 95%; 
+  margin: 40px auto;
+  background-color: var(--hos-pink-light);
+  /* Padrão sutil de pétalas de sakura */
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 30c0-5.523 4.477-10 10-10s10 4.477 10 10-4.477 10-10 10-10-4.477-10-10zm0 0c0 5.523-4.477 10-10 10s-10-4.477-10-10 4.477-10 10-10 10 4.477 10 10z' fill='%23ffc4d6' fill-opacity='0.15' fill-rule='evenodd'/%3E%3C/svg%3E");
+  border: 4px double var(--hos-gold);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px -10px rgba(255, 111, 145, 0.5), inset 0 0 60px rgba(255, 255, 255, 0.8);
+  font-family: 'Comfortaa', cursive; 
+  color: var(--hos-text);
+  padding: 25px; 
+  position: relative; 
+  overflow: hidden;
+  line-height: 1.6;
+}
+.hos-container * { box-sizing: border-box; }
+
+/* Decoração de Cantos (Estilo Carta Clow) */
+.hos-container::before, .hos-container::after {
+  content: '✦'; position: absolute; font-size: 30px; color: var(--hos-gold); 
+  text-shadow: 0 0 5px var(--hos-pink-pop); z-index: 2;
+}
+.hos-container::before { top: 10px; left: 15px; }
+.hos-container::after { bottom: 10px; right: 15px; }
+
+
+/* HEADER */
+.hos-header {
+  text-align: center; margin-bottom: 25px; position: relative;
+}
+/* Ícone de Báculo/Asa no topo */
+.hos-header::before {
+    content: '✧*̥˚'; display: block; font-size: 2em; color: var(--hos-gold); 
+    margin-bottom: -15px; text-shadow: var(--hos-glow);
+}
+.hos-title {
+  font-family: 'Cinzel Decorative', cursive; font-size: 3em; 
+  background: linear-gradient(to bottom, var(--hos-gold), var(--hos-pink-pop));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin: 0; letter-spacing: 2px; filter: drop-shadow(0 2px 2px rgba(255,255,255,0.8));
+}
+.hos-sub {
+  font-family: 'Dancing Script', cursive; font-size: 1.5em; color: var(--hos-text-light);
+  position: relative; display: inline-block;
+}
+.hos-sub::before, .hos-sub::after { content: '— 🌸 —'; font-size: 0.8em; opacity: 0.6; margin: 0 10px;}
+
+/* IMAGEM (Moldura Mágica) */
+.hos-img-frame {
+  width: 100%; height: 500px; /* Altura maior para destacar o banner vertical */
+  border-radius: 15px; padding: 8px;
+  background: linear-gradient(45deg, var(--hos-pink-med), var(--hos-card-bg), var(--hos-pink-med));
+  box-shadow: var(--hos-glow), inset 0 0 20px rgba(255,255,255,1);
+  position: relative; margin-bottom: 30px;
+  border: 2px solid var(--hos-gold);
+}
+.hos-img {
+  width: 100%; height: 100%; object-fit: cover; object-position: center top;
+  border-radius: 12px; border: 1px solid var(--hos-pink-med);
+  filter: brightness(1.05) contrast(1.05);
+}
+
+/* STATUS (Fitas Mágicas) */
+.hos-stats { 
+  display: flex; justify-content: space-around; gap: 20px;
+  padding: 20px; background: rgba(255,255,255,0.6);
+  border-radius: 50px; border: 2px dashed var(--hos-pink-med);
+  margin-bottom: 30px;
+}
+.hos-stat-block { 
+  flex: 1; text-align: center; position: relative;
+}
+.hos-stat-lbl {
+  font-family: 'Cinzel Decorative'; font-weight: bold; color: var(--hos-pink-pop);
+  font-size: 0.9em; letter-spacing: 1px; display: block; margin-bottom: 5px;
+}
+.hos-bar-bg {
+  height: 12px; background: var(--hos-pink-light);
+  border: 1px solid var(--hos-pink-med); border-radius: 10px;
+  overflow: visible; position: relative; box-shadow: inset 0 2px 5px rgba(0,0,0,0.05);
+}
+.hos-fill { 
+  height: 100%; border-radius: 10px; position: relative;
+  background: linear-gradient(90deg, var(--hos-pink-med), var(--hos-pink-pop));
+  box-shadow: 0 0 10px var(--hos-pink-pop); transition: width 0.5s ease;
+}
+/* Estrela na ponta da barra */
+.hos-fill::after {
+    content: '★'; position: absolute; right: -6px; top: -5px;
+    color: var(--hos-gold); font-size: 14px; filter: drop-shadow(0 0 5px var(--hos-gold));
+}
+.hos-stat-val {
+  font-family: 'Comfortaa'; font-weight: bold; font-size: 0.85em; color: var(--hos-text-light);
+  margin-top: 3px; display: block;
+}
+
+/* CORPO DO TEXTO */
+.hos-body {
+  padding: 30px; margin-bottom: 30px;
+  background: var(--hos-card-bg); border-radius: 15px;
+  border: 3px dotted var(--hos-pink-med);
+  position: relative; text-align: justify;
+  box-shadow: inset 0 0 30px rgba(255, 240, 245, 1);
+}
+/* Marca d'água de círculo mágico */
+.hos-body::before {
+    content: ''; position: absolute; inset: 10%; opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='45' fill='none' stroke='%23ff6f91' stroke-width='1'/%3E%3Ccircle cx='50' cy='50' r='35' fill='none' stroke='%23ff6f91' stroke-width='0.5' stroke-dasharray='5,5'/%3E%3Cpath d='M50 5 L50 95 M5 50 L95 50' stroke='%23ff6f91' stroke-width='0.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: center; pointer-events: none;
+}
+
+/* GAVETA (A Carta Clow) */
+.hos-drawer {
+  background: transparent; border: none; margin: 0 20px;
+}
+.hos-drawer summary {
+  list-style: none; cursor: pointer; outline: none;
+  background: linear-gradient(135deg, var(--hos-pink-pop), var(--hos-pink-med));
+  padding: 15px; border-radius: 12px; color: #fff;
+  font-family: 'Cinzel Decorative'; letter-spacing: 2px; text-align: center;
+  border: 3px solid var(--hos-gold); box-shadow: 0 5px 15px rgba(255, 111, 145, 0.4);
+  position: relative; overflow: hidden; transition: 0.3s;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+.hos-drawer summary::marker, .hos-drawer summary::-webkit-details-marker { display: none; }
+
+/* Efeito de verso de carta no summary */
+.hos-drawer summary::before {
+    content: 'LIBERTE-SE!'; /* Frase de ativação */
+}
+.hos-drawer[open] summary {
+    background: linear-gradient(135deg, var(--hos-gold), var(--hos-pink-med));
+    color: var(--hos-text); text-shadow: none;
+}
+.hos-drawer[open] summary::before { content: 'SEVAR A CARTA'; }
+
+/* Conteúdo da gaveta */
+.hos-drawer-content {
+    background: var(--hos-card-bg); margin-top: -5px; padding: 25px;
+    border: 3px solid var(--hos-gold); border-top: none;
+    border-radius: 0 0 12px 12px; position: relative;
+    box-shadow: inset 0 0 20px rgba(255, 240, 245, 1);
+    animation: hos-release 0.5s ease-out;
+}
+@keyframes hos-release {
+    from { opacity: 0; transform: translateY(-10px); filter: blur(5px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+/* ELEMENTOS INTERNOS (RPG) */
+.hos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 2px dashed var(--hos-pink-med); }
+.hos-lbl { font-family: 'Cinzel Decorative'; color: var(--hos-pink-pop); font-size: 0.9em; }
+.hos-lbl::before { content: '✧ '; color: var(--hos-gold); }
+.hos-val { font-weight: bold; color: var(--hos-text); }
+
+.hos-pills { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 25px; }
+.hos-pill {
+    background: var(--hos-pink-light); border: 1px solid var(--hos-pink-pop);
+    padding: 5px 12px; border-radius: 20px; font-size: 0.9em; color: var(--hos-text-light);
+    box-shadow: 0 2px 5px rgba(255, 111, 145, 0.1);
+}
+.hos-pill b { color: var(--hos-pink-pop); font-family: 'Cinzel Decorative'; }
+
+.hos-section-title {
+    font-family: 'Cinzel Decorative'; color: var(--hos-pink-pop);
+    text-align: center; display: block; margin: 20px 0 10px;
+    position: relative;
+}
+.hos-section-title::before, .hos-section-title::after { content: ' ~ 🌸 ~ '; color: var(--hos-gold); opacity: 0.7; }
+
+/* Itens e Técnicas */
+.hos-item {
+    background: rgba(255, 255, 255, 0.7); padding: 12px;
+    border-radius: 8px; border: 1px dotted var(--hos-pink-med);
+    margin-bottom: 10px; transition: 0.3s;
+}
+.hos-item:hover { border-color: var(--hos-gold); box-shadow: 0 0 10px var(--hos-pink-light); }
+.hos-item b { color: var(--hos-pink-pop); font-family: 'Cinzel Decorative'; }
+.hos-sub-txt { color: var(--hos-text-light); font-size: 0.9em; }
+
+/* ASSINATURA */
+.hos-signature {
+  position: absolute; bottom: 15px; right: 30px;
+  font-family: 'Dancing Script', cursive; font-size: 2em;
+  color: var(--hos-pink-pop); transform: rotate(-5deg);
+  text-shadow: 1px 1px 0 var(--hos-gold); z-index: 10;
+  pointer-events: none;
+}
+.hos-signature::after { content: ' ✎'; font-size: 0.7em; }
+
+/* BBCODES */
+.hos-container b { color: var(--hos-pink-pop); }
+.hos-container i { color: var(--hos-gold); font-weight: bold; }
+
+@media (max-width: 600px) {
+  .hos-container { padding: 15px; margin: 20px auto; width: 98%; }
+  .hos-img-frame { height: 350px; }
+  .hos-stats { flex-direction: column; gap: 10px; padding: 15px; }
+  .hos-grid { grid-template-columns: 1fr; }
+}
