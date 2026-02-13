@@ -1,0 +1,427 @@
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Share+Tech+Mono&family=Yuji+Syuku&display=swap');
+
+:root {
+    --raid-bg: #121212;
+    --raid-accent: #8b0000;
+    --raid-text: #e0e0e0;
+    --raid-panel: #1e1e1e;
+    --raid-border: #333;
+}
+
+.raid-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: var(--raid-bg);
+    border: 1px solid var(--raid-border);
+    border-left: 5px solid var(--raid-accent);
+    font-family: 'Merriweather', serif;
+    color: var(--raid-text);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    overflow: hidden;
+}
+
+.raid-header {
+    background-color: var(--raid-panel);
+    padding: 30px;
+    border-bottom: 2px solid var(--raid-accent);
+    position: relative;
+    background-image: linear-gradient(45deg, rgba(0,0,0,0.8), transparent);
+}
+
+.raid-title {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 2.5em;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: #fff;
+    margin: 0;
+    line-height: 1;
+    letter-spacing: 2px;
+    text-shadow: 2px 2px 0px var(--raid-accent);
+}
+
+.raid-meta {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 0.9em;
+    color: var(--raid-accent);
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.raid-body {
+    padding: 40px;
+    font-size: 1.05em;
+    line-height: 1.8;
+    color: #cccccc;
+    text-align: justify;
+}
+
+.raid-body b, .raid-body strong {
+    color: #fff;
+    font-weight: 700;
+}
+
+.raid-footer {
+    background-color: #0a0a0a;
+    border-top: 1px solid var(--raid-border);
+    padding: 20px 40px 30px 40px;
+    font-family: 'Chakra Petch', sans-serif;
+}
+
+.raid-footer::before {
+    content: "CONSIDERAÇÕES";
+    display: block;
+    font-weight: 700;
+    color: var(--raid-accent);
+    font-size: 0.9em;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #333;
+    width: 100%;
+}
+
+.raid-notes {
+    font-size: 0.9em;
+    color: #888;
+    line-height: 1.6;
+}
+
+/* =========================================================
+   TV / CÂMERA COM GLITCH + SPOILER DISCRETO (NAMESPACED)
+   Coloque o HTML dentro de .raid-body
+   ========================================================= */
+
+/* Spoiler discreto: abre/fecha sem JS */
+.raid-body .discreet-spoiler {
+    margin: 18px 0;
+}
+
+.raid-body .discreet-spoiler input[type="checkbox"] {
+    display: none;
+}
+
+.raid-body .discreet-spoiler-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 0.95em;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+
+    color: rgba(224,224,224,0.85);
+    cursor: pointer;
+    padding: 6px 10px;
+    border: 1px solid rgba(139,0,0,0.45);
+    background: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01));
+    border-radius: 6px;
+    user-select: none;
+    transition: transform 0.12s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.raid-body .discreet-spoiler-label:hover {
+    border-color: rgba(139,0,0,0.8);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.raid-body .discreet-spoiler .icon-open { display: inline; }
+.raid-body .discreet-spoiler .icon-closed { display: none; }
+
+.raid-body .discreet-spoiler input:checked + .discreet-spoiler-label .icon-open { display: none; }
+.raid-body .discreet-spoiler input:checked + .discreet-spoiler-label .icon-closed { display: inline; }
+
+.raid-body .discreet-spoiler-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.55s ease, margin-top 0.55s ease;
+    margin-top: 0;
+}
+
+.raid-body .discreet-spoiler input:checked + .discreet-spoiler-label + .discreet-spoiler-content {
+    max-height: 2200px;
+    margin-top: 14px;
+}
+
+/* Terminal: tudo isolado pra não mexer no resto */
+.raid-body .terminal-window {
+    --bg: #0c0c1a;
+    --panel: #13141c;
+    --muted: #bfc6e6;
+
+    /* puxando do RAID */
+    --accent-red: var(--raid-accent);
+    --accent-red-dark: #4a0000;
+    --accent-green: #30FF30;
+    --accent-yellow: #FFFF30;
+
+    --text: #e7e9ff;
+    --ui: 'Inter', system-ui, sans-serif;
+    --title: 'Yuji Syuku', serif;
+    --mono: 'Share Tech Mono', monospace;
+    --glass: rgba(255, 255, 255, 0.03);
+    --glass-2: rgba(255, 255, 255, 0.02);
+
+    box-sizing: border-box;
+    width: 100%;
+    margin: 0;
+    font-family: var(--mono);
+
+    background: #0b0b12;
+    border: 1px solid rgba(139, 0, 0, 0.45);
+    border-radius: 10px;
+    box-shadow: 0 0 30px rgba(139, 0, 0, 0.22);
+    overflow: hidden;
+
+    animation: raid-terminal-flicker 3s infinite alternate;
+}
+
+.raid-body .terminal-window * { box-sizing: border-box; }
+
+@keyframes raid-terminal-flicker {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.985; }
+}
+
+@keyframes raid-terminal-glitch {
+    0%   { clip-path: inset(89% 0 3% 0); transform: translate(-5px, 0); }
+    10%  { clip-path: inset(43% 0 16% 0); transform: translate(3px, 2px); }
+    20%  { clip-path: inset(93% 0 2% 0); transform: translate(-2px, -3px); }
+    30%  { clip-path: inset(1% 0 92% 0); transform: translate(5px, 1px); }
+    40%  { clip-path: inset(36% 0 54% 0); transform: translate(1px, -2px); }
+    50%  { clip-path: inset(90% 0 3% 0); transform: translate(-4px, 0); }
+    60%  { clip-path: inset(12% 0 79% 0); transform: translate(3px, -1px); }
+    70%  { clip-path: inset(57% 0 23% 0); transform: translate(-2px, 2px); }
+    80%  { clip-path: inset(10% 0 83% 0); transform: translate(4px, -3px); }
+    90%  { clip-path: inset(71% 0 10% 0); transform: translate(-1px, 1px); }
+    100% { clip-path: inset(89% 0 3% 0); transform: translate(-5px, 0); }
+}
+
+@keyframes raid-terminal-scanlines {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 50px; }
+}
+
+.raid-body .terminal-title-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,0.03);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding: 10px 12px;
+    font-size: 13px;
+}
+
+.raid-body .title-bar-buttons {
+    display: flex;
+    gap: 8px;
+    padding-left: 2px;
+}
+
+.raid-body .title-bar-button {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.raid-body .button-red { background: var(--accent-red); }
+.raid-body .button-yellow { background: var(--accent-yellow); }
+.raid-body .button-green { background: var(--accent-green); }
+
+.raid-body .title-bar-text {
+    color: rgba(231,233,255,0.75);
+    margin: 0 auto;
+    transform: translateX(-25px);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+}
+
+.raid-body .terminal-body {
+    padding: 22px;
+    position: relative;
+    overflow: hidden;
+    background: #000;
+}
+
+.raid-body .scanline-overlay {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 3px);
+    background-size: 100% 3px;
+    animation: raid-terminal-scanlines 0.5s linear infinite;
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0.28;
+}
+
+.raid-body .glitch-wrapper {
+    position: relative;
+    text-align: center;
+    margin-bottom: 18px;
+}
+
+.raid-body .terminal-quote {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.35em;
+    color: #fff;
+    margin: 0;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.raid-body .terminal-quote .glitch-text {
+    position: relative;
+    display: inline-block;
+    color: #ff4040;
+    text-shadow: 0 0 12px rgba(255, 64, 64, 0.55);
+}
+
+.raid-body .terminal-quote .glitch-text::before,
+.raid-body .terminal-quote .glitch-text::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: #000;
+    z-index: 3;
+}
+
+.raid-body .terminal-quote .glitch-text::before {
+    color: #00E5FF;
+    animation: raid-terminal-glitch 1s infinite linear alternate-reverse;
+}
+.raid-body .terminal-quote .glitch-text::after {
+    color: #FF8080;
+    animation: raid-terminal-glitch 0.8s infinite linear alternate;
+}
+
+.raid-body .image-glitch-wrapper {
+    position: relative;
+    height: 380px;
+    background: #000;
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.raid-body .image-glitch-wrapper .main-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.85;
+    filter: grayscale(30%) contrast(1.05);
+}
+
+.raid-body .image-glitch-wrapper::before,
+.raid-body .image-glitch-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-image: var(--glitch-img);
+    background-size: cover;
+    background-position: center;
+    z-index: 2;
+}
+
+.raid-body .image-glitch-wrapper::before {
+    animation: raid-terminal-glitch 1.2s infinite linear alternate-reverse;
+    filter: hue-rotate(45deg);
+    opacity: 0.85;
+}
+.raid-body .image-glitch-wrapper::after {
+    animation: raid-terminal-glitch 0.9s infinite linear alternate;
+    filter: hue-rotate(-45deg);
+    opacity: 0.85;
+}
+
+/* Bloco de falha */
+.raid-body .failure-block {
+    margin-top: 18px;
+    padding: 16px 14px;
+    border: 1px solid rgba(139, 0, 0, 0.85);
+    background: rgba(139, 0, 0, 0.12);
+    border-radius: 6px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.raid-body .failure-block h3,
+.raid-body .failure-block p { position: relative; z-index: 2; margin: 0; }
+
+.raid-body .failure-block h3 {
+    font-family: 'Chakra Petch', sans-serif;
+    font-size: 1.25em;
+    color: #ff4040;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    text-shadow: 0 0 10px rgba(255,64,64,0.55);
+}
+
+.raid-body .failure-block p {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 1.02em;
+    color: rgba(231,233,255,0.95);
+}
+
+.raid-body .glitch-effect-block::before,
+.raid-body .glitch-effect-block::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 1;
+    opacity: 0.6;
+    animation: raid-glitch-bg 0.8s infinite linear alternate-reverse;
+}
+
+.raid-body .glitch-effect-block::before { background: rgba(139,0,0,0.75); }
+.raid-body .glitch-effect-block::after {
+    background: #00E5FF;
+    opacity: 0.22;
+    animation: raid-glitch-bg 1.2s infinite linear alternate;
+}
+
+@keyframes raid-glitch-bg {
+    0%   { transform: translate(-2px, 0) scaleY(1.05); clip-path: inset(5% 0 85% 0); }
+    25%  { transform: translate(5px, 3px) scaleY(0.95); clip-path: inset(70% 0 10% 0); }
+    50%  { transform: translate(-3px, -2px) scaleY(1.03); clip-path: inset(15% 0 65% 0); }
+    75%  { transform: translate(4px, 1px) scaleY(0.97); clip-path: inset(40% 0 30% 0); }
+    100% { transform: translate(-2px, 0) scaleY(1.05); clip-path: inset(5% 0 85% 0); }
+}
+
+/* Glitch no texto do bloco de falha (fica igual ao seu “postagem.css”) */
+.raid-body .failure-block h3::before,
+.raid-body .failure-block h3::after,
+.raid-body .failure-block p::before,
+.raid-body .failure-block p::after {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 3;
+    content: attr(data-text);
+    background: rgba(139, 0, 0, 0.08);
+}
+
+.raid-body .failure-block h3::before,
+.raid-body .failure-block p::before {
+    color: #00E5FF;
+    animation: raid-terminal-glitch 1s infinite linear alternate-reverse;
+}
+
+.raid-body .failure-block h3::after,
+.raid-body .failure-block p::after {
+    color: #FF8080;
+    animation: raid-terminal-glitch 0.8s infinite linear alternate;
+}
