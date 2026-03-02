@@ -1,112 +1,165 @@
-/* --- TEMPLATE: IRON STAR PROTOCOL (YEKATERINA) --- */
-@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=JetBrains+Mono:wght@400;700&family=UnifrakturMaguntia&family=Marck+Script&display=swap');
+/* --- TEMPLATE: USSR PROTOCOL (YEKATERINA) - MODERN UI --- */
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Inter:wght@300;400;600&family=Marck+Script&display=swap');
 
 :root {
-  --is-bg: #050505; /* Preto Absoluto */
-  --is-panel: #0d0d0d; /* Quase Preto */
-  --is-purple: #3a1c5e; /* Roxo Profundo Sombrio */
-  --is-red: #cc0000; /* Vermelho Autoritário */
-  --is-gold: #d4af37; /* Amarelo Queimado / Dourado */
-  --is-white: #e0e0e0; /* Branco Acinzentado */
-  --is-border: #1f1f1f; /* Borda Escura */
+  --kgb-bg-deep: #09070b; /* Preto com um toque mínimo de roxo */
+  --kgb-surface: #120e17; /* Superfície de elevação */
+  --kgb-purple: #6a35b5; /* Roxo vibrante para glow e acentos */
+  --kgb-red: #e62e3d; /* Vermelho moderno e vivo */
+  --kgb-gold: #f0c422; /* Dourado/Amarelo estelar */
+  --kgb-text: #d0cdd4; /* Branco gelo/acinzentado para leitura */
+  --kgb-muted: #6b6475; /* Cinza roxeado para textos secundários */
 }
 
-/* Base do Documento */
-.is-card {
-  position: relative; max-width: 650px; width: 95%; margin: 50px auto;
-  background-color: var(--is-bg); border: 1px solid var(--is-purple);
-  font-family: 'JetBrains Mono', monospace; color: var(--is-white);
-  padding: 0; box-shadow: 0 10px 40px rgba(58, 28, 94, 0.3), inset 0 0 30px rgba(0,0,0,0.9);
-}
-/* Linha de acento interna roxa */
-.is-card::after {
-  content: ''; position: absolute; top: 6px; left: 6px; right: 6px; bottom: 6px;
-  border: 1px solid rgba(58, 28, 94, 0.3); pointer-events: none; z-index: 1;
+/* Base do Container */
+.kgb-card {
+  max-width: 650px; width: 95%; margin: 50px auto;
+  background-color: var(--kgb-bg-deep);
+  font-family: 'Inter', sans-serif; color: var(--kgb-text);
+  border-radius: 4px; overflow: hidden;
+  border: 1px solid rgba(106, 53, 181, 0.3);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255,255,255,0.02) inset;
+  position: relative;
 }
 
-/* Cabeçalho */
-.is-header { padding: 40px 30px 20px; text-align: center; background: #000; border-bottom: 2px solid var(--is-purple); position: relative; }
-.is-title { font-family: 'UnifrakturMaguntia', serif; font-size: 3.5em; color: var(--is-red); line-height: 1; margin: 0; text-shadow: 2px 2px 0px #000; }
-.is-sub { font-family: 'Oswald', sans-serif; font-size: 0.9em; color: var(--is-gold); text-transform: uppercase; letter-spacing: 5px; margin-top: 8px; font-weight: bold; }
-/* Decoração do Header */
-.is-header::before { content: '★'; position: absolute; top: 15px; left: 25px; font-size: 24px; color: var(--is-red); opacity: 0.8; }
-.is-header::after { content: '★'; position: absolute; top: 15px; right: 25px; font-size: 24px; color: var(--is-red); opacity: 0.8; }
+/* Faixa de Topo (Red Line) */
+.kgb-card::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--kgb-red), var(--kgb-purple), var(--kgb-gold));
+  z-index: 10;
+}
+
+/* Header */
+.kgb-header {
+  padding: 40px 40px 25px; position: relative;
+  background: radial-gradient(circle at top right, rgba(230, 46, 61, 0.08), transparent 50%),
+              radial-gradient(circle at top left, rgba(106, 53, 181, 0.08), transparent 50%);
+}
+.kgb-title {
+  font-family: 'Chakra Petch', sans-serif; font-size: 2.2em; font-weight: 700;
+  color: #fff; letter-spacing: 1px; margin: 0; line-height: 1.1;
+  text-shadow: 0 0 20px rgba(230, 46, 61, 0.4);
+}
+.kgb-sub {
+  font-family: 'Chakra Petch', sans-serif; font-size: 0.85em; font-weight: 600;
+  color: var(--kgb-gold); text-transform: uppercase; letter-spacing: 4px; margin-top: 8px;
+}
+.kgb-header-icon {
+  position: absolute; right: 40px; top: 40px;
+  font-size: 28px; color: var(--kgb-red); opacity: 0.8; filter: drop-shadow(0 0 8px rgba(230,46,61,0.5));
+}
 
 /* Banner */
-.is-img-box { width: 100%; height: 350px; position: relative; border-bottom: 2px solid var(--is-red); z-index: 5; background: #000; overflow: hidden; }
-.is-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%) contrast(1.1) brightness(0.9); transition: 0.5s; opacity: 0.8; }
-.is-card:hover .is-img { filter: grayscale(10%) contrast(1.2) brightness(1); opacity: 1; }
+.kgb-img-box {
+  width: 100%; height: 250px; position: relative;
+  border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.kgb-img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(20%) contrast(1.1) brightness(0.85); transition: filter 0.5s ease;
+}
+.kgb-card:hover .kgb-img { filter: grayscale(0%) contrast(1.1) brightness(1); }
 
-/* Status */
-.is-stats { padding: 30px 40px; display: flex; flex-direction: column; gap: 12px; background: #080808; position: relative; z-index: 5; border-bottom: 1px solid var(--is-border); }
-.is-stat-row { display: flex; align-items: center; gap: 15px; }
-.is-label { font-family: 'Oswald'; width: 45px; color: #777; font-size: 0.9em; letter-spacing: 2px; }
-.is-bar-bg { flex-grow: 1; height: 8px; background: #000; border: 1px solid var(--is-border); position: relative; }
-.is-fill { height: 100%; transition: width 1s ease-out; box-shadow: 0 0 10px rgba(255,255,255,0.1); }
-/* Cores das barras */
-.hp-bar { background: var(--is-red); }
-.ea-bar { background: var(--is-gold); }
-.san-bar { background: var(--is-purple); }
-.is-val { position: absolute; right: 0; top: -18px; font-size: 0.75em; font-weight: bold; color: #fff; text-shadow: 1px 1px 1px #000; }
+/* Status Grid */
+.kgb-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  padding: 25px 40px; background: rgba(0,0,0,0.3); border-bottom: 1px solid rgba(106, 53, 181, 0.15);
+}
+.kgb-stat-col { display: flex; flex-direction: column; gap: 6px; }
+.kgb-label {
+  font-family: 'Chakra Petch', sans-serif; font-size: 0.75em; font-weight: 600;
+  color: var(--kgb-muted); letter-spacing: 1px; display: flex; justify-content: space-between;
+}
+.kgb-val { color: #fff; font-family: 'Inter', sans-serif; font-weight: 600; }
+.kgb-bar-bg { width: 100%; height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px; overflow: hidden; }
+.kgb-fill { height: 100%; border-radius: 2px; transition: width 0.8s ease; }
+.kgb-fill.hp { background: var(--kgb-red); box-shadow: 0 0 8px var(--kgb-red); }
+.kgb-fill.ea { background: var(--kgb-gold); box-shadow: 0 0 8px var(--kgb-gold); }
+.kgb-fill.san { background: var(--kgb-purple); box-shadow: 0 0 8px var(--kgb-purple); }
 
 /* Corpo da Narração */
-.is-body {
-  padding: 30px; line-height: 1.8; text-align: justify; font-size: 0.95em; color: #ccc;
-  background-color: var(--is-bg) !important; background-image: none !important;
-  border-left: 5px solid var(--is-purple); margin: 15px 40px 30px;
-  position: relative; z-index: 10; box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+.kgb-body {
+  padding: 35px 40px; line-height: 1.8; font-size: 0.95em; color: var(--kgb-text);
+  background: var(--kgb-bg-deep) !important; background-image: none !important;
+  position: relative;
 }
-/* Tag no corpo */
-.is-tag { position: absolute; top: 5px; right: 12px; font-family: 'Oswald', sans-serif; font-size: 9px; color: var(--is-purple); opacity: 0.7; letter-spacing: 2px; text-transform: uppercase; font-weight: bold; }
+.kgb-body-tag {
+  display: inline-block; padding: 4px 10px; margin-bottom: 15px; border-radius: 4px;
+  background: rgba(230, 46, 61, 0.1); border: 1px solid rgba(230, 46, 61, 0.3);
+  color: var(--kgb-red); font-family: 'Chakra Petch', sans-serif; font-size: 0.7em; font-weight: 700; letter-spacing: 2px;
+}
+.kgb-card b, .kgb-card strong { color: #fff; font-weight: 600; background: rgba(255,255,255,0.05); padding: 0 4px; border-radius: 2px; }
+.kgb-card i, .kgb-card em { color: var(--kgb-gold); font-style: italic; }
 
-/* BBCode */
-.is-card b, .is-card strong { color: var(--is-red); font-weight: bold; }
-.is-card i, .is-card em { color: var(--is-gold); font-style: italic; }
+/* Spoilers Modernos */
+.kgb-drawer { margin: 0 40px 30px; }
+.kgb-drawer > summary {
+  list-style: none; cursor: pointer; padding: 18px 20px;
+  background: var(--kgb-surface); border-radius: 6px;
+  border: 1px solid rgba(106, 53, 181, 0.2); transition: all 0.3s ease;
+  font-family: 'Chakra Petch', sans-serif; font-size: 0.8em; font-weight: 600; letter-spacing: 2px; color: var(--kgb-purple);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.kgb-drawer > summary::before { content: attr(data-label); }
+.kgb-drawer > summary::after { content: '+'; font-size: 1.2em; color: var(--kgb-muted); }
+.kgb-drawer[open] > summary { background: rgba(106, 53, 181, 0.1); border-color: var(--kgb-purple); color: #fff; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+.kgb-drawer[open] > summary::after { content: '−'; color: var(--kgb-purple); }
 
-/* Spoilers (Gavetas) */
-.is-drawer { margin: 0 40px 40px; position: relative; z-index: 10; }
-.is-drawer > summary { list-style: none; cursor: pointer; padding: 15px; background: #0a0a0a; font-family: 'Oswald', sans-serif; letter-spacing: 4px; color: var(--is-gold); text-align: center; font-size: 14px; border: 1px solid var(--is-purple); text-transform: uppercase; transition: 0.3s; }
-.is-drawer > summary::before { content: attr(data-label); }
-.is-drawer[open] > summary { background: var(--is-purple); color: #fff; border-color: var(--is-purple); }
-.is-drawer[open] > summary::before { content: 'FECHAR_PROTOCOLO'; }
+/* Conteúdo do Spoiler */
+.kgb-content {
+  padding: 25px; background: rgba(0,0,0,0.2); border: 1px solid rgba(106, 53, 181, 0.2);
+  border-top: none; border-bottom-left-radius: 6px; border-bottom-right-radius: 6px;
+}
 
-/* Conteúdo Spoiler */
-.is-content { padding: 25px; background-color: #050505 !important; background-image: none !important; border: 1px solid var(--is-purple); border-top: none; position: relative; z-index: 10; }
-.is-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px; }
-.is-lbl { font-size: 0.65em; color: var(--is-purple); font-weight: bold; margin-bottom: 4px; display: block; text-transform: uppercase; letter-spacing: 1px; }
-.is-val-box { font-size: 0.85em; color: #fff; border-bottom: 1px solid var(--is-border); padding-bottom: 4px; }
+/* Grid e Dados */
+.kgb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px; }
+.kgb-lbl { font-family: 'Chakra Petch', sans-serif; font-size: 0.65em; color: var(--kgb-muted); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 4px; }
+.kgb-val-box { font-size: 0.9em; color: #fff; font-weight: 500; }
+
+/* Títulos de Seção com Linha */
+.kgb-section {
+  display: flex; align-items: center; gap: 15px; margin: 30px 0 15px;
+  font-family: 'Chakra Petch', sans-serif; font-size: 0.75em; font-weight: 700; color: var(--kgb-red); letter-spacing: 1px;
+}
+.kgb-section::after { content: ''; flex-grow: 1; height: 1px; background: rgba(230, 46, 61, 0.2); }
 
 /* Injeção de Títulos */
-.is-section { font-family: 'Oswald'; font-size: 0.8em; color: var(--is-red); border-bottom: 1px solid var(--is-border); padding-bottom: 4px; margin: 25px 0 12px; text-transform: uppercase; letter-spacing: 1px; }
-.sec-act::before { content: 'SISTEMA DE AÇÕES'; }
-.sec-res::before { content: 'RESUMO Burocrático'; }
-.sec-apt::before { content: 'APTIDÕES ATIVAS'; }
-.sec-cal::before { content: 'CÁLCULOS LOGÍSTICOS'; }
+.lbl-obj::before { content: 'Diretriz de Operação'; }
+.lbl-pal::before { content: 'Contagem Léxica'; }
+.lbl-tur::before { content: 'Ciclo / Turno'; }
+.lbl-est::before { content: 'Status Logístico'; }
+.sec-act::before { content: 'Matriz de Ações'; }
+.sec-res::before { content: 'Relatório Oficial'; }
+.sec-apt::before { content: 'Protocolos Ativos'; }
+.sec-cal::before { content: 'Balanço Numérico'; }
 
-/* Títulos Grid */
-.lbl-obj::before { content: 'OBJETIVO'; }
-.lbl-pal::before { content: 'PALAVRAS'; }
-.lbl-tur::before { content: 'TURNO'; }
-.lbl-est::before { content: 'ESTILO DE VIDA'; }
+/* Pílulas de Ação (Capsulas Modernas) */
+.kgb-pill-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.kgb-pill {
+  background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1);
+  padding: 6px 12px; border-radius: 20px; color: var(--kgb-text);
+  font-size: 0.8em; font-family: 'Chakra Petch', sans-serif;
+}
+.kgb-pill span { color: var(--kgb-gold); font-weight: 700; margin-left: 5px; }
 
-/* Itens e Pílulas */
-.is-pill-group { display: flex; gap: 10px; margin-bottom: 20px; flex-wrap: wrap; }
-.is-pill { background: #000; border: 1px solid var(--is-red); padding: 5px 12px; color: #fff; font-size: 0.8em; font-family: 'Oswald'; text-transform: uppercase; letter-spacing: 1px; }
-.is-item { background: #0a0a0a; padding: 12px; margin-bottom: 8px; border-left: 3px solid var(--is-gold); font-size: 0.9em; color: #ccc; }
-.is-item b { color: var(--is-gold); text-shadow: none; }
+/* Listas / Itens */
+.kgb-item { font-size: 0.85em; color: var(--kgb-text); margin-bottom: 8px; padding-left: 10px; border-left: 2px solid rgba(106, 53, 181, 0.5); }
 
 /* Sub-Spoiler (Arsenal) */
-.is-sub-drawer { margin: 18px 0 0 0; }
-.is-sub-drawer > summary { background: #080808; font-size: 12px; padding: 10px; border-color: var(--is-gold); color: var(--is-gold); letter-spacing: 2px; }
-.is-sub-drawer > summary::before { content: attr(data-label); }
-.is-sub-drawer[open] > summary { background: var(--is-gold); color: #000; border-color: var(--is-gold); }
-.is-sub-drawer[open] > summary::before { content: 'OCULTAR_ARSENAL'; }
-.is-sub-drawer .is-content { background-color: #030303 !important; border-color: var(--is-gold); }
+.kgb-sub-drawer { margin-top: 15px; }
+.kgb-sub-drawer > summary { background: rgba(0,0,0,0.5); border-color: rgba(240, 196, 34, 0.2); color: var(--kgb-gold); font-size: 0.75em; }
+.kgb-sub-drawer[open] > summary { border-color: var(--kgb-gold); color: #fff; }
+.kgb-sub-drawer .kgb-content { border-color: rgba(240, 196, 34, 0.2); }
+.kgb-sub-drawer .kgb-item { border-left-color: var(--kgb-gold); }
+.kgb-sub-drawer .kgb-item b { color: var(--kgb-gold); font-weight: 600; margin-right: 5px; }
 
-/* Rodapé e Assinatura */
-.is-footer { text-align: right; padding: 20px 40px 40px; position: relative; z-index: 10; margin-top: 20px; border-top: 1px solid var(--is-border); }
-.is-footer::after { content: "Yekaterina Alekseyevna"; font-family: 'Marck Script', cursive; font-size: 3.5em; color: var(--is-white); text-shadow: 0 0 8px rgba(255,255,255,0.2); opacity: 0.9; }
-.is-card:hover .is-footer::after { color: #fff; text-shadow: 0 0 12px rgba(255,255,255,0.4); }
-
-/* Borda Inferior Final */
-.is-bottom-line { position: absolute; bottom: 0; left: 0; width: 100%; height: 5px; background: var(--is-purple); box-shadow: 0 -3px 20px rgba(58, 28, 94, 0.6); z-index: 20; }
+/* Assinatura */
+.kgb-footer { padding: 20px 40px 40px; text-align: right; }
+.kgb-footer::after {
+  content: "Yekaterina Alekseyevna";
+  font-family: 'Marck Script', cursive; font-size: 3.2em;
+  background: linear-gradient(to right, #fff, var(--kgb-text));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  opacity: 0.8; transition: 0.3s;
+}
+.kgb-card:hover .kgb-footer::after { opacity: 1; filter: drop-shadow(0 0 10px rgba(106,53,181,0.4)); }
