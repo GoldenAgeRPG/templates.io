@@ -71,7 +71,7 @@
 .toji-sub-drawer { margin: 15px 0 0 0; }
 .toji-sub-drawer > summary { background: #111; font-size: 12px; padding: 10px; border-color: var(--toji-green); }
 .toji-sub-drawer > summary::before { content: attr(data-label); }
-.toji-sub-drawer[open] > summary::before { content: 'CLOSE_ARSENAL'; }
+.toji-sub-drawer[open] > summary::before { content: 'ENCOBRIR'; }
 .toji-sub-drawer .toji-content { background-color: #050505 !important; border-color: var(--toji-green); }
 
 /* Injeção de Títulos (Grid & Sections) */
