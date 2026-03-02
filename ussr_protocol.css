@@ -1,0 +1,97 @@
+/* --- TEMPLATE: URSS PROTOCOL (YEKATERINA) --- */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=JetBrains+Mono:wght@400;700&family=Marck+Script&display=swap');
+
+:root {
+  --kgb-bg: #0d0d0d;
+  --kgb-red: #8a0303;
+  --kgb-gold: #d4af37;
+  --kgb-white: #e0e0e0;
+  --kgb-border: #1f1f1f;
+}
+
+/* Base do Documento */
+.kgb-card {
+  position: relative; max-width: 650px; width: 95%; margin: 50px auto;
+  background-color: var(--kgb-bg); border: 2px solid var(--kgb-red);
+  font-family: 'JetBrains Mono', monospace; color: var(--kgb-white);
+  padding: 0; box-shadow: 0 10px 30px rgba(138, 3, 3, 0.15), inset 0 0 20px rgba(0,0,0,0.8);
+}
+/* Linha dourada interna */
+.kgb-card::after {
+  content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px;
+  border: 1px solid var(--kgb-gold); opacity: 0.3; pointer-events: none; z-index: 1;
+}
+
+/* Cabeçalho */
+.kgb-header { padding: 30px 30px 15px; text-align: center; background: #050505; border-bottom: 2px solid var(--kgb-red); position: relative; }
+.kgb-title { font-family: 'Oswald', sans-serif; font-size: 2.5em; color: var(--kgb-red); line-height: 1; margin: 0; text-transform: uppercase; letter-spacing: 2px; text-shadow: 2px 2px 0px #000; }
+.kgb-sub { font-family: 'JetBrains Mono'; font-size: 0.85em; color: var(--kgb-gold); text-transform: uppercase; letter-spacing: 4px; margin-top: 8px; font-weight: bold; }
+.kgb-header::before { content: '☭'; position: absolute; top: 15px; left: 20px; font-size: 30px; color: var(--kgb-gold); opacity: 0.8; }
+.kgb-header::after { content: '★'; position: absolute; top: 15px; right: 20px; font-size: 30px; color: var(--kgb-red); opacity: 0.8; }
+
+/* Banner */
+.kgb-img-box { width: 100%; height: 280px; position: relative; border-bottom: 2px solid var(--kgb-gold); z-index: 5; background: #000; }
+.kgb-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(40%) contrast(1.2) sepia(20%) hue-rotate(-10deg); opacity: 0.9; }
+
+/* Status */
+.kgb-stats { padding: 25px 30px; display: flex; flex-direction: column; gap: 10px; background: #080808; position: relative; z-index: 5; }
+.kgb-stat-row { display: flex; align-items: center; gap: 15px; }
+.kgb-label { font-family: 'Oswald'; width: 40px; color: var(--kgb-gold); font-size: 0.9em; letter-spacing: 1px; }
+.kgb-bar-bg { flex-grow: 1; height: 10px; background: #000; border: 1px solid var(--kgb-border); position: relative; }
+.kgb-fill { height: 100%; transition: width 1s ease-out; }
+.kgb-fill.hp { background: var(--kgb-red); }
+.kgb-fill.ea { background: var(--kgb-gold); }
+.kgb-fill.san { background: #444; }
+.kgb-val { position: absolute; right: 0; top: -16px; font-size: 0.75em; font-weight: bold; color: #fff; }
+
+/* Corpo da Narração */
+.kgb-body {
+  padding: 25px 30px; line-height: 1.7; text-align: justify; font-size: 0.9em; color: #ccc;
+  background: #0d0d0d; border-top: 1px dashed var(--kgb-border); border-bottom: 1px dashed var(--kgb-border);
+  position: relative; z-index: 5;
+}
+.kgb-tag { display: inline-block; background: var(--kgb-red); color: #fff; font-family: 'Oswald'; font-size: 10px; padding: 2px 8px; margin-bottom: 10px; letter-spacing: 1px; text-transform: uppercase; }
+
+/* BBCode */
+.kgb-card b, .kgb-card strong { color: var(--kgb-red); font-weight: bold; }
+.kgb-card i, .kgb-card em { color: var(--kgb-gold); font-style: italic; }
+
+/* Spoilers (Gavetas) */
+.kgb-drawer { margin: 0 30px 30px; position: relative; z-index: 5; }
+.kgb-body + .kgb-drawer { margin-top: 30px; }
+.kgb-drawer > summary { list-style: none; cursor: pointer; padding: 12px; background: #111; font-family: 'Oswald'; letter-spacing: 2px; color: var(--kgb-white); text-align: center; font-size: 13px; border: 1px solid var(--kgb-red); text-transform: uppercase; }
+.kgb-drawer > summary::before { content: attr(data-label); }
+.kgb-drawer[open] > summary { background: var(--kgb-red); color: #fff; }
+
+/* Conteúdo Interno */
+.kgb-content { padding: 20px; background: #050505; border: 1px solid var(--kgb-red); border-top: none; }
+.kgb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+.kgb-lbl { font-size: 0.65em; color: var(--kgb-gold); font-weight: bold; margin-bottom: 2px; display: block; }
+.kgb-val-box { font-size: 0.85em; color: #fff; border-bottom: 1px solid var(--kgb-border); padding-bottom: 2px; }
+
+/* Injeção de Títulos */
+.kgb-section { font-family: 'Oswald'; font-size: 0.8em; color: var(--kgb-red); border-bottom: 1px solid var(--kgb-border); padding-bottom: 3px; margin: 20px 0 10px; text-transform: uppercase; }
+.lbl-obj::before { content: 'OBJETIVO'; }
+.lbl-pal::before { content: 'PALAVRAS'; }
+.lbl-tur::before { content: 'TURNO'; }
+.lbl-est::before { content: 'ESTILO DE VIDA'; }
+.sec-act::before { content: 'SISTEMA DE AÇÕES'; }
+.sec-res::before { content: 'RESUMO DA OPERAÇÃO'; }
+.sec-apt::before { content: 'APTIDÕES ATIVAS'; }
+.sec-cal::before { content: 'CÁLCULOS LOGÍSTICOS'; }
+
+/* Itens e Pílulas */
+.kgb-pill-group { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.kgb-pill { background: #1a0202; border: 1px solid var(--kgb-red); padding: 4px 8px; color: #fff; font-size: 0.8em; font-family: 'Oswald'; }
+.kgb-item { background: #0a0a0a; padding: 10px; margin-bottom: 6px; border-left: 3px solid var(--kgb-gold); font-size: 0.85em; color: #ccc; }
+.kgb-item b { color: var(--kgb-gold); }
+
+/* Sub-Spoiler (Arsenal) */
+.kgb-sub-drawer { margin: 15px 0 0 0; }
+.kgb-sub-drawer > summary { background: #0a0a0a; border-color: var(--kgb-gold); color: var(--kgb-gold); }
+.kgb-sub-drawer[open] > summary { background: var(--kgb-gold); color: #000; }
+.kgb-sub-drawer .kgb-content { border-color: var(--kgb-gold); }
+
+/* Assinatura */
+.kgb-footer { text-align: right; padding: 20px 30px 30px; position: relative; z-index: 5; }
+.kgb-footer::after { content: "Yekaterina Alekseyevna"; font-family: 'Marck Script', cursive; font-size: 3em; color: var(--kgb-white); text-shadow: 0 0 5px rgba(255,255,255,0.3); }
