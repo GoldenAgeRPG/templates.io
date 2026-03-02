@@ -1,62 +1,87 @@
-/* --- TEMPLATE: IRON STAR (BRUTALIST THEME) --- */
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;700&family=Oswald:wght@400;700&family=UnifrakturMaguntia&display=swap');
+/* --- TEMPLATE: IRON STAR (REVOLUTIONARY) --- */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Oswald:wght@700&family=UnifrakturMaguntia&display=swap');
 
 .is-container {
-  --is-bg: #0a0a0c;
-  --is-purple: #3a1c5e;
-  --is-red: #cc0000;
-  --is-gold: #ffcc00;
-  --is-white: #f2f2f2;
+  --is-bg: #050505;
+  --is-purple: #1a0f2b;
+  --is-red: #8b0000;
+  --is-gold: #c59d1c;
+  --is-white: #d1d1d1;
   
   box-sizing: border-box;
-  max-width: 700px;
+  max-width: 680px;
   width: 95%;
   margin: 40px auto;
   background: var(--is-bg);
   border: 4px solid var(--is-purple);
-  outline: 2px solid var(--is-gold);
-  outline-offset: -10px;
+  outline: 1px solid var(--is-gold);
+  outline-offset: -12px;
   font-family: 'JetBrains Mono', monospace;
   color: var(--is-white);
-  padding: 30px;
+  padding: 35px;
   position: relative;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+  box-shadow: 0 30px 60px rgba(0,0,0,0.9);
 }
 
-/* Símbolo de Canto */
-.is-container::before { content: '☭'; position: absolute; top: 15px; left: 15px; font-size: 24px; color: var(--is-gold); opacity: 0.8; }
+/* Símbolo Revolucionário (Topo Direito) */
+.is-container::before { 
+  content: '☭'; 
+  position: absolute; 
+  top: 15px; 
+  right: 15px; 
+  font-size: 30px; 
+  color: var(--is-red); 
+  filter: drop-shadow(0 0 5px var(--is-gold));
+}
 
-.is-header { text-align: center; border-bottom: 2px solid var(--is-red); padding-bottom: 15px; margin-bottom: 20px; }
-.is-title { font-family: 'Oswald'; font-size: 3em; text-transform: uppercase; color: var(--is-red); text-shadow: 2px 2px 0 var(--is-purple); margin: 0; }
-.is-sub { font-family: 'UnifrakturMaguntia'; font-size: 1.5em; color: var(--is-gold); }
+/* Assinatura Automática Injetada via CSS */
+.is-container::after {
+  content: 'Yekaterina Alekseyevna';
+  position: absolute;
+  bottom: 20px;
+  right: 35px;
+  font-family: 'UnifrakturMaguntia';
+  font-size: 2.2em;
+  color: var(--is-red);
+  opacity: 0.9;
+  transform: rotate(-2deg);
+  text-shadow: 1px 1px 0 var(--is-gold);
+  pointer-events: none;
+}
 
-.is-img-frame { width: 100%; height: 450px; border: 4px solid var(--is-purple); margin-bottom: 20px; overflow: hidden; background: #000; }
-.is-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%) contrast(110%); }
+.is-header { text-align: center; border-bottom: 3px double var(--is-red); padding-bottom: 20px; margin-bottom: 25px; }
+.is-title { font-family: 'Oswald'; font-size: 3.2em; text-transform: uppercase; color: var(--is-red); letter-spacing: -2px; line-height: 1; margin: 0; }
+.is-sub { font-family: 'JetBrains Mono'; font-weight: bold; font-size: 0.9em; color: var(--is-gold); text-transform: uppercase; letter-spacing: 4px; margin-top: 5px; }
 
-.is-stats { background: rgba(58, 28, 94, 0.2); border: 1px solid var(--is-purple); padding: 15px; margin-bottom: 20px; }
-.is-stat-row { display: grid; grid-template-columns: 50px 1fr 100px; gap: 10px; align-items: center; margin-bottom: 8px; }
-.is-stat-lbl { font-family: 'Oswald'; color: var(--is-gold); font-size: 0.9em; }
-.is-bar-bg { height: 12px; background: #111; border: 1px solid var(--is-purple); }
-.is-fill { height: 100%; background: linear-gradient(90deg, var(--is-purple), var(--is-red)); }
-.is-stat-val { font-size: 0.8em; text-align: right; }
+.is-img-frame { width: 100%; height: 500px; border: 2px solid var(--is-purple); margin-bottom: 25px; overflow: hidden; position: relative; }
+.is-img { width: 100%; height: 100%; object-fit: cover; filter: sepia(20%) contrast(1.2) grayscale(0.2); }
 
-.is-body { padding: 15px; background: rgba(0,0,0,0.3); border-left: 3px solid var(--is-red); margin-bottom: 20px; text-align: justify; }
+.is-stats { background: #000; border: 1px solid #1a1a1f; padding: 20px; margin-bottom: 25px; }
+.is-stat-row { display: grid; grid-template-columns: 40px 1fr 100px; gap: 15px; align-items: center; margin-bottom: 10px; }
+.is-stat-lbl { font-weight: bold; color: var(--is-red); font-size: 0.8em; }
+.is-bar-bg { height: 10px; background: #0a0a0a; border: 1px solid #222; }
+.is-fill { height: 100%; background: var(--is-red); border-right: 2px solid var(--is-gold); }
+.is-stat-val { font-size: 0.8em; text-align: right; color: var(--is-gold); font-weight: bold; }
 
-.is-drawer summary { list-style: none; cursor: pointer; background: var(--is-purple); padding: 10px; text-align: center; font-family: 'Oswald'; border: 1px solid var(--is-gold); color: #fff; }
-.is-drawer summary::before { content: '📂 ACESSAR ARQUIVOS'; }
-.is-drawer[open] summary::before { content: '📁 FECHAR ARQUIVOS'; }
+.is-body { padding: 20px; background: rgba(10,10,10,0.5); border-left: 5px solid var(--is-red); margin-bottom: 25px; text-align: justify; line-height: 1.8; }
 
-.is-drawer-content { background: #111; padding: 20px; border: 1px solid var(--is-gold); border-top: none; }
-.is-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-.is-lbl { color: var(--is-gold); font-size: 0.7em; text-transform: uppercase; display: block; }
-.is-val { border-bottom: 1px solid #333; font-size: 0.9em; }
+.is-drawer summary { list-style: none; cursor: pointer; background: #111; padding: 12px; text-align: center; font-family: 'Oswald'; border: 1px solid var(--is-purple); color: var(--is-red); font-size: 1.1em; letter-spacing: 2px; }
+.is-drawer summary::before { content: '[ ACESSAR_ARQUIVOS_CLASSIFICADOS ]'; }
+.is-drawer[open] summary::before { content: '[ FECHAR_PROTOCOLO ]'; }
 
-.is-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 15px; }
-.is-pill { background: #222; border: 1px solid var(--is-red); padding: 3px 8px; font-size: 0.75em; color: var(--is-red); font-weight: bold; }
+.is-drawer-content { background: #080808; padding: 25px; border: 1px solid var(--is-purple); border-top: none; }
+.is-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+.is-lbl { color: var(--is-red); font-size: 0.65em; font-weight: bold; letter-spacing: 1px; }
+.is-val { border-bottom: 1px solid #1a1a1f; font-size: 0.9em; padding: 3px 0; color: #fff; }
 
-.is-section-title { background: var(--is-red); color: #fff; font-family: 'Oswald'; padding: 4px 10px; display: block; margin: 15px 0 10px; font-size: 0.8em; }
+.is-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 20px; }
+.is-pill { background: #000; border: 1px solid var(--is-gold); padding: 4px 10px; font-size: 0.8em; color: var(--is-white); font-weight: bold; }
 
-.is-item { border: 1px solid #333; padding: 10px; margin-bottom: 5px; font-size: 0.9em; }
-.is-item b { color: var(--is-gold); }
+.is-section-title { background: var(--is-purple); color: var(--is-gold); font-family: 'Oswald'; padding: 5px 15px; display: block; margin: 20px 0 10px; font-size: 0.85em; letter-spacing: 1px; }
 
-.is-signature { text-align: right; margin-top: 20px; font-family: 'UnifrakturMaguntia'; font-size: 2em; color: var(--is-red); opacity: 0.8; }
+.is-item { border: 1px solid #1a1a1f; padding: 12px; margin-bottom: 10px; background: rgba(255,255,255,0.02); }
+.is-item b { color: var(--is-red); text-transform: uppercase; }
+
+/* BBCODES Personalizados */
+.is-container b { color: var(--is-red); }
+.is-container i { color: var(--is-gold); }
