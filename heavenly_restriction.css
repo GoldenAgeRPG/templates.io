@@ -1,4 +1,3 @@
-/* TEMPLATE: HEAVENLY RESTRICTION */
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@700&family=JetBrains+Mono:wght@400;700&family=Italianno&family=Syncopate:wght@700&display=swap');
 
 :root {
@@ -51,7 +50,7 @@
 .toji-tag { position: absolute; top: 5px; right: 10px; font-family: 'Oswald', sans-serif; font-size: 9px; color: var(--toji-green); opacity: 0.6; letter-spacing: 2px; }
 
 /* BBCodes Especiais */
-.toji-card b, .toji-card strong { color: #fff; font-weight: bold; border-bottom: 1px solid var(--toji-green); padding-bottom: 2px; text-shadow: 0 0 5px rgba(106, 140, 78, 0.5); }
+.toji-card b, .toji-card strong { color: #fff; font-weight: bold; text-shadow: 0 0 5px rgba(106, 140, 78, 0.5); }
 .toji-card i, .toji-card em { color: var(--toji-green); font-style: italic; filter: drop-shadow(0 0 2px rgba(106, 140, 78, 0.8)); opacity: 0.9; }
 
 /* Spoilers */
@@ -77,6 +76,7 @@
 /* Sub-Spoiler (Arsenal) */
 .toji-sub-drawer { margin: 15px 0 0 0; }
 .toji-sub-drawer summary { background: #111; font-size: 12px; padding: 10px; border-color: var(--toji-green); }
+.toji-sub-drawer[open] summary::before { content: 'CLOSE_ARSENAL'; }
 .toji-sub-drawer .toji-content { background: #050505; border-color: var(--toji-green); }
 
 /* Rodapé e Assinatura */
