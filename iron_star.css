@@ -1,0 +1,62 @@
+/* --- TEMPLATE: IRON STAR (BRUTALIST THEME) --- */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;700&family=Oswald:wght@400;700&family=UnifrakturMaguntia&display=swap');
+
+.is-container {
+  --is-bg: #0a0a0c;
+  --is-purple: #3a1c5e;
+  --is-red: #cc0000;
+  --is-gold: #ffcc00;
+  --is-white: #f2f2f2;
+  
+  box-sizing: border-box;
+  max-width: 700px;
+  width: 95%;
+  margin: 40px auto;
+  background: var(--is-bg);
+  border: 4px solid var(--is-purple);
+  outline: 2px solid var(--is-gold);
+  outline-offset: -10px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--is-white);
+  padding: 30px;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+}
+
+/* Símbolo de Canto */
+.is-container::before { content: '☭'; position: absolute; top: 15px; left: 15px; font-size: 24px; color: var(--is-gold); opacity: 0.8; }
+
+.is-header { text-align: center; border-bottom: 2px solid var(--is-red); padding-bottom: 15px; margin-bottom: 20px; }
+.is-title { font-family: 'Oswald'; font-size: 3em; text-transform: uppercase; color: var(--is-red); text-shadow: 2px 2px 0 var(--is-purple); margin: 0; }
+.is-sub { font-family: 'UnifrakturMaguntia'; font-size: 1.5em; color: var(--is-gold); }
+
+.is-img-frame { width: 100%; height: 450px; border: 4px solid var(--is-purple); margin-bottom: 20px; overflow: hidden; background: #000; }
+.is-img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%) contrast(110%); }
+
+.is-stats { background: rgba(58, 28, 94, 0.2); border: 1px solid var(--is-purple); padding: 15px; margin-bottom: 20px; }
+.is-stat-row { display: grid; grid-template-columns: 50px 1fr 100px; gap: 10px; align-items: center; margin-bottom: 8px; }
+.is-stat-lbl { font-family: 'Oswald'; color: var(--is-gold); font-size: 0.9em; }
+.is-bar-bg { height: 12px; background: #111; border: 1px solid var(--is-purple); }
+.is-fill { height: 100%; background: linear-gradient(90deg, var(--is-purple), var(--is-red)); }
+.is-stat-val { font-size: 0.8em; text-align: right; }
+
+.is-body { padding: 15px; background: rgba(0,0,0,0.3); border-left: 3px solid var(--is-red); margin-bottom: 20px; text-align: justify; }
+
+.is-drawer summary { list-style: none; cursor: pointer; background: var(--is-purple); padding: 10px; text-align: center; font-family: 'Oswald'; border: 1px solid var(--is-gold); color: #fff; }
+.is-drawer summary::before { content: '📂 ACESSAR ARQUIVOS'; }
+.is-drawer[open] summary::before { content: '📁 FECHAR ARQUIVOS'; }
+
+.is-drawer-content { background: #111; padding: 20px; border: 1px solid var(--is-gold); border-top: none; }
+.is-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+.is-lbl { color: var(--is-gold); font-size: 0.7em; text-transform: uppercase; display: block; }
+.is-val { border-bottom: 1px solid #333; font-size: 0.9em; }
+
+.is-pills { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 15px; }
+.is-pill { background: #222; border: 1px solid var(--is-red); padding: 3px 8px; font-size: 0.75em; color: var(--is-red); font-weight: bold; }
+
+.is-section-title { background: var(--is-red); color: #fff; font-family: 'Oswald'; padding: 4px 10px; display: block; margin: 15px 0 10px; font-size: 0.8em; }
+
+.is-item { border: 1px solid #333; padding: 10px; margin-bottom: 5px; font-size: 0.9em; }
+.is-item b { color: var(--is-gold); }
+
+.is-signature { text-align: right; margin-top: 20px; font-family: 'UnifrakturMaguntia'; font-size: 2em; color: var(--is-red); opacity: 0.8; }
