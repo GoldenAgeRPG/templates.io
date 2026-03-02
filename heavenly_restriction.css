@@ -84,7 +84,7 @@
   font-family: 'Oswald'; letter-spacing: 4px; color: #444; text-align: center;
   transition: 0.3s;
 }
-.toji-drawer summary::before { content: 'INVENTORY_ACCESS'; }
+.toji-drawer summary::before { content: attr(data-label); }
 .toji-drawer[open] summary { color: var(--toji-green); background: #151515; }
 .toji-drawer[open] summary::before { content: 'CLOSE_STORAGE'; }
 
