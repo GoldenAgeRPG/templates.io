@@ -126,8 +126,8 @@
 .lbl-est::before { content: 'Status Logístico'; }
 .sec-act::before { content: 'Matriz de Ações'; }
 .sec-res::before { content: 'Relatório Oficial'; }
-.sec-apt::before { content: 'Protocolos Ativos'; }
-.sec-cal::before { content: 'Balanço Numérico'; }
+.sec-apt::before { content: 'Aptidões Usadas'; }
+.sec-cal::before { content: 'Cálculos'; }
 
 /* Pílulas de Ação (Capsulas Modernas) */
 .kgb-pill-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
