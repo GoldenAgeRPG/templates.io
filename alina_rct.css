@@ -1,0 +1,138 @@
+/* --- TEMPLATE: RCT FLOW (ALINA VOLKOVA) --- */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,700;1,700&family=Great+Vibes&display=swap');
+
+:root {
+  --alina-bg: #0b0c10; /* Fundo escuro protetor (Fotossensibilidade) */
+  --alina-surface: #15161c; /* Superfície de vidro escuro */
+  --alina-border: rgba(255, 255, 255, 0.05);
+  --alina-text: #d2d2d6; /* Cinza claro suave para leitura */
+  /* O Gradiente RCT baseado no print (Verde -> Ciano -> Azul -> Roxo -> Rosa) */
+  --alina-rct: linear-gradient(90deg, #11ffbd, #00e5ff, #2979ff, #9d00ff, #ff007f);
+  --alina-gold: #f9d77e; /* Toque Kitagawa */
+  --alina-pink: #ffb1c8; /* Toque Kitagawa */
+}
+
+/* Animação do Fluxo de Energia */
+@keyframes rct-flow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Base do Card */
+.alina-card {
+  position: relative; max-width: 650px; width: 95%; margin: 50px auto;
+  background-color: var(--alina-bg); border-radius: 16px;
+  font-family: 'Outfit', sans-serif; color: var(--alina-text);
+  padding: 0; overflow: hidden;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.5), inset 0 0 0 1px var(--alina-border);
+}
+
+/* Faixa Superior RCT */
+.alina-card::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+  background: var(--alina-rct); background-size: 200% 200%;
+  animation: rct-flow 4s ease infinite; z-index: 10;
+}
+
+/* Header */
+.alina-header { padding: 35px 30px 20px; text-align: center; position: relative; z-index: 2; }
+.alina-sub { font-family: 'Outfit', sans-serif; font-size: 0.85em; font-weight: 600; color: var(--alina-pink); text-transform: uppercase; letter-spacing: 4px; margin-bottom: 5px; opacity: 0.8; }
+.alina-title {
+  font-family: 'Playfair Display', serif; font-size: 2.8em; margin: 0; line-height: 1.1;
+  background: var(--alina-rct); background-size: 200% 200%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: rct-flow 6s ease infinite; filter: drop-shadow(0 4px 10px rgba(0, 229, 255, 0.15));
+}
+
+/* Imagem */
+.alina-img-box { width: 100%; height: 280px; position: relative; border-top: 1px solid var(--alina-border); border-bottom: 1px solid var(--alina-border); overflow: hidden; }
+.alina-img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.85) contrast(1.1); transition: 0.5s; }
+.alina-card:hover .alina-img { filter: brightness(1) contrast(1.1); transform: scale(1.02); }
+
+/* Status Grid */
+.alina-stats {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px;
+  padding: 25px 35px; background: rgba(0,0,0,0.2); border-bottom: 1px solid var(--alina-border);
+}
+.alina-stat-col { display: flex; flex-direction: column; gap: 8px; }
+.alina-label { font-size: 0.8em; font-weight: 600; color: var(--alina-text); letter-spacing: 1px; display: flex; justify-content: space-between; }
+.alina-val { color: #fff; font-weight: 700; font-family: 'Outfit', sans-serif; }
+.alina-bar-bg { width: 100%; height: 6px; background: rgba(255,255,255,0.05); border-radius: 10px; overflow: hidden; }
+/* Barras com Fluxo RCT animado */
+.alina-fill { height: 100%; border-radius: 10px; background: var(--alina-rct); background-size: 200% 200%; animation: rct-flow 3s ease infinite; transition: width 0.8s ease; }
+
+/* Corpo da Narração */
+.alina-body { padding: 35px 40px; line-height: 1.8; font-size: 0.95em; text-align: justify; position: relative; }
+.alina-tag {
+  display: inline-block; padding: 4px 12px; margin-bottom: 15px; border-radius: 20px;
+  background: rgba(0, 229, 255, 0.1); border: 1px solid rgba(0, 229, 255, 0.3);
+  color: #00e5ff; font-size: 0.7em; font-weight: 700; letter-spacing: 2px; text-transform: uppercase;
+}
+
+/* Modificadores de Texto (Rosa e Dourado) */
+.alina-card b, .alina-card strong { color: var(--alina-gold); font-weight: 600; text-shadow: 0 0 8px rgba(249, 215, 126, 0.2); }
+.alina-card i, .alina-card em { color: var(--alina-pink); font-style: italic; }
+
+/* Spoilers (Gavetas Flow) */
+.alina-drawer { margin: 0 35px 30px; }
+.alina-drawer > summary {
+  list-style: none; cursor: pointer; padding: 15px 20px;
+  background: var(--alina-surface); border-radius: 8px;
+  border: 1px solid var(--alina-border); transition: all 0.3s ease;
+  font-size: 0.85em; font-weight: 600; letter-spacing: 2px; color: #fff;
+  display: flex; justify-content: center; align-items: center; text-transform: uppercase;
+}
+.alina-drawer > summary::before { content: attr(data-label); }
+.alina-drawer[open] > summary { background: rgba(255,255,255,0.03); border-color: rgba(0, 229, 255, 0.3); color: #00e5ff; border-bottom-left-radius: 0; border-bottom-right-radius: 0; }
+
+/* Conteúdo Spoiler */
+.alina-content {
+  padding: 25px; background: rgba(0,0,0,0.15); border: 1px solid var(--alina-border);
+  border-top: none; border-bottom-left-radius: 8px; border-bottom-right-radius: 8px;
+}
+
+/* Grid e Dados */
+.alina-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 25px; }
+.alina-lbl { font-size: 0.7em; color: #888; text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 4px; }
+.alina-val-box { font-size: 0.9em; color: #fff; font-weight: 400; border-bottom: 1px solid var(--alina-border); padding-bottom: 4px; }
+
+/* Títulos de Seção com Linha RCT */
+.alina-section { display: flex; align-items: center; gap: 15px; margin: 30px 0 15px; font-size: 0.75em; font-weight: 700; color: #fff; letter-spacing: 1px; text-transform: uppercase; }
+.alina-section::after { content: ''; flex-grow: 1; height: 1px; background: var(--alina-rct); opacity: 0.5; }
+
+/* Injeção de Títulos pelo CSS */
+.lbl-obj::before { content: 'Diretriz de Foco'; }
+.lbl-pal::before { content: 'Palavras'; }
+.lbl-tur::before { content: 'Turno'; }
+.lbl-est::before { content: 'Vitalidade (Vida)'; }
+.sec-act::before { content: 'Distribuição de Ações'; }
+.sec-res::before { content: 'Resumo dos Eventos'; }
+.sec-apt::before { content: 'Aptidões e Habilidades'; }
+.sec-cal::before { content: 'Cálculo de Energia (RCT)'; }
+
+/* Pílulas de Ação */
+.alina-pill-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 10px; }
+.alina-pill { background: var(--alina-surface); border: 1px solid var(--alina-border); padding: 6px 14px; border-radius: 20px; font-size: 0.8em; font-weight: 600; color: #aaa; }
+.alina-pill span { color: #00e5ff; font-weight: 700; margin-left: 5px; }
+
+/* Listas / Itens */
+.alina-item { font-size: 0.85em; margin-bottom: 10px; padding-left: 12px; border-left: 2px solid var(--alina-pink); color: var(--alina-text); }
+
+/* Sub-Spoilers (Arsenal & Técnicas) */
+.alina-sub-drawer { margin-top: 15px; }
+.alina-sub-drawer > summary { background: rgba(0,0,0,0.3); font-size: 0.75em; border-radius: 6px; border-color: rgba(255,255,255,0.05); }
+.alina-sub-drawer[open] > summary { border-color: rgba(255, 0, 127, 0.3); color: #ff007f; }
+.alina-sub-drawer .alina-item { border-left-color: #ff007f; }
+.alina-sub-drawer .alina-item b { color: #ff007f; font-weight: 600; text-shadow: none; margin-right: 5px; }
+
+/* Assinatura Flow */
+.alina-footer { padding: 10px 40px 40px; text-align: right; }
+.alina-footer::after {
+  content: "Alina Volkova";
+  font-family: 'Great Vibes', cursive; font-size: 3.5em; line-height: 1.2;
+  display: inline-block; padding-bottom: 10px; padding-right: 10px;
+  background: var(--alina-rct); background-size: 200% 200%;
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: rct-flow 5s ease infinite; opacity: 0.9;
+}
