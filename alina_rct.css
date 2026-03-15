@@ -4,7 +4,6 @@
 :root {
   --alina-bg: #07080a; /* Fundo abissal, extremamente escuro para fotossensibilidade */
   --alina-text: #cacedb; /* Cinza prateado muito suave */
-  /* O Gradiente RCT exato solicitado */
   --alina-rct: linear-gradient(90deg, #11ffbd, #00e5ff, #2979ff, #9d00ff, #ff007f);
   --alina-gold: #f9d77e;
   --alina-pink: #ffb1c8;
