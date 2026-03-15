@@ -109,5 +109,13 @@
 .kz-sub-fold { margin-top: 15px; border-color: var(--kz-border); }
 .kz-sub-fold > summary { padding: 8px; font-size: 0.75em; color: var(--kz-orange); }
 
-/* Assinatura Clássica */
-.kz-signature { text-align: right; font-family: 'Cinzel', serif; color: var(--kz-red); font-size: 1em; letter-spacing: 2px; opacity: 0.6; margin-top: 30px; border-top: 1px solid var(--kz-border); padding-top: 15px; }
+/* Assinatura (Injetada via CSS) */
+.kz-footer { text-align: right; margin-top: 30px; border-top: 1px solid var(--kz-border); padding-top: 15px; position: relative; }
+.kz-footer::after {
+  content: "Kanzaki Kyōri";
+  font-family: 'Cinzel', serif; color: var(--kz-red);
+  font-size: 1em; letter-spacing: 2px; opacity: 0.6; transition: 0.4s ease;
+}
+.kz-card:hover .kz-footer::after {
+  opacity: 1; text-shadow: 0 0 12px rgba(186, 32, 32, 0.6);
+}
