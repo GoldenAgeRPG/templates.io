@@ -149,7 +149,7 @@
 /* Assinatura Clássica */
 .kz-footer { padding: 10px 40px 50px; text-align: center; position: relative; }
 .kz-footer::after {
-  content: "Kanzaki Kyōri"; font-family: 'Mr De Haviland', cursive; font-size: 4em;
+  content: "Kanzaki Kyori"; font-family: 'Mr De Haviland', cursive; font-size: 4em;
   color: var(--kz-text); opacity: 0.4; transition: 0.5s;
 }
 .kz-card:hover .kz-footer::after { opacity: 0.8; color: var(--kz-yellow); text-shadow: 0 0 15px rgba(242, 235, 24, 0.4); }
