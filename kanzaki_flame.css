@@ -1,0 +1,155 @@
+/* --- TEMPLATE: EMBER INSTABILITY (KANZAKI KYŌRI) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Raleway:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Mr+De+Haviland&display=swap');
+
+:root {
+  --kz-bg: #0c0b0b;
+  --kz-panel: #141212;
+  --kz-red: #BA2020;
+  --kz-orange: #E69500;
+  --kz-yellow: #F2EB18;
+  --kz-text: #e0e0e0;
+  --kz-muted: #888;
+  --kz-gradient: linear-gradient(90deg, var(--kz-red), var(--kz-orange), var(--kz-yellow), var(--kz-orange), var(--kz-red));
+}
+
+/* Animações de Instabilidade */
+@keyframes ember-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+@keyframes flicker {
+  0%, 100% { opacity: 1; filter: drop-shadow(0 0 5px rgba(186, 32, 32, 0.4)); }
+  50% { opacity: 0.8; filter: drop-shadow(0 0 15px rgba(230, 149, 0, 0.8)); }
+  75% { opacity: 0.9; filter: drop-shadow(0 0 2px rgba(242, 235, 24, 0.5)); }
+}
+
+/* Base do Container - Clássico e Limpo */
+.kz-card {
+  max-width: 650px; width: 95%; margin: 50px auto;
+  background-color: var(--kz-bg);
+  font-family: 'Raleway', sans-serif; color: var(--kz-text);
+  border: 1px solid rgba(255,255,255,0.05);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+  position: relative; overflow: hidden;
+}
+
+/* Linha superior instável */
+.kz-card::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px;
+  background: var(--kz-gradient); background-size: 200% 200%;
+  animation: ember-shift 3s ease infinite; z-index: 10;
+}
+
+/* Hero Section (Banner + Título) */
+.kz-hero { position: relative; width: 100%; height: 350px; }
+.kz-img {
+  width: 100%; height: 100%; object-fit: cover;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 50%, rgba(0,0,0,0) 100%);
+  filter: sepia(20%) contrast(1.1) brightness(0.8);
+}
+.kz-hero-content {
+  position: absolute; bottom: 10px; left: 0; width: 100%;
+  text-align: center; padding: 20px;
+}
+.kz-title {
+  font-family: 'Cinzel', serif; font-size: 2.8em; margin: 0; color: #fff;
+  letter-spacing: 4px; text-transform: uppercase;
+  animation: flicker 4s infinite alternate;
+}
+.kz-sub {
+  font-size: 0.9em; font-weight: 300; letter-spacing: 6px; text-transform: uppercase;
+  color: var(--kz-orange); margin-top: 5px;
+}
+
+/* Status - Layout Clássico (Barras Finas e Centradas) */
+.kz-stats {
+  display: flex; justify-content: center; gap: 40px;
+  padding: 10px 40px 30px; position: relative; z-index: 5;
+}
+.kz-stat-col { display: flex; flex-direction: column; align-items: center; width: 100px; gap: 8px; }
+.kz-label { font-family: 'Cinzel', serif; font-size: 0.8em; color: var(--kz-muted); letter-spacing: 2px; }
+.kz-val { color: #fff; font-weight: 600; font-size: 1.1em; }
+.kz-bar-bg { width: 100%; height: 2px; background: rgba(255,255,255,0.1); position: relative; }
+/* O preenchimento da barra é animado */
+.kz-fill { height: 100%; background: var(--kz-gradient); background-size: 200% 200%; animation: ember-shift 4s linear infinite; transition: width 0.8s ease; }
+
+/* Corpo da Narração */
+.kz-body {
+  padding: 20px 50px 40px; font-weight: 300; line-height: 1.8;
+  font-size: 0.95em; text-align: justify; color: #ccc;
+}
+.kz-tag {
+  display: block; text-align: center; margin-bottom: 20px;
+  font-family: 'Cinzel', serif; font-size: 0.8em; color: var(--kz-yellow);
+  letter-spacing: 4px; border-bottom: 1px solid rgba(242, 235, 24, 0.2);
+  padding-bottom: 10px; width: max-content; margin-left: auto; margin-right: auto;
+}
+
+/* Formatação Textual */
+.kz-card b, .kz-card strong { color: var(--kz-orange); font-weight: 600; text-shadow: 0 0 5px rgba(230, 149, 0, 0.3); }
+.kz-card i, .kz-card em { color: var(--kz-yellow); font-style: italic; font-weight: 400; }
+
+/* Spoilers (Design Clássico em Linha) */
+.kz-drawer { margin: 0 40px 30px; }
+.kz-drawer > summary {
+  list-style: none; cursor: pointer; padding: 15px 0;
+  border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05);
+  font-family: 'Cinzel', serif; font-size: 0.9em; font-weight: 500; letter-spacing: 3px; color: var(--kz-muted);
+  text-transform: uppercase; text-align: center; transition: 0.3s ease;
+}
+.kz-drawer > summary::before { content: attr(data-label); }
+.kz-drawer:hover > summary { color: var(--kz-orange); border-color: rgba(230, 149, 0, 0.3); }
+.kz-drawer[open] > summary { color: var(--kz-yellow); border-bottom-color: transparent; }
+
+/* Conteúdo Spoiler */
+.kz-content { padding: 30px 20px; }
+
+/* Grid Clássico */
+.kz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px; text-align: center; }
+.kz-lbl { font-family: 'Cinzel', serif; font-size: 0.7em; color: var(--kz-red); text-transform: uppercase; letter-spacing: 2px; display: block; margin-bottom: 4px; }
+.kz-val-box { font-size: 0.95em; color: #fff; font-weight: 300; }
+
+/* Títulos de Seção Injetados */
+.kz-section {
+  text-align: center; font-family: 'Cinzel', serif; font-size: 0.85em;
+  color: var(--kz-orange); letter-spacing: 3px; text-transform: uppercase;
+  margin: 30px 0 15px; position: relative;
+}
+/* Linhas laterais clássicas no título */
+.kz-section::before, .kz-section::after {
+  content: ''; position: absolute; top: 50%; width: 25%; height: 1px; background: rgba(230, 149, 0, 0.3);
+}
+.kz-section::before { left: 0; }
+.kz-section::after { right: 0; }
+
+.lbl-obj::before { content: 'Objetivo'; }
+.lbl-pal::before { content: 'Palavras'; }
+.lbl-tur::before { content: 'Turno'; }
+.lbl-est::before { content: 'Estilo de Vida'; }
+.sec-act::before { content: 'Matriz de Ações'; }
+.sec-res::before { content: 'Relatório'; }
+.sec-apt::before { content: 'Aptidões Ativas'; }
+.sec-cal::before { content: 'Cálculos'; }
+
+/* Ações (Texto Limpo e Centralizado) */
+.kz-actions-flow { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 30px; }
+.kz-act-item { font-family: 'Cinzel', serif; font-size: 0.8em; color: var(--kz-muted); letter-spacing: 1px; }
+.kz-act-item span { color: #fff; font-family: 'Raleway', sans-serif; font-weight: 400; font-size: 1.2em; margin-left: 8px; }
+
+/* Listas / Itens */
+.kz-item { font-size: 0.9em; font-weight: 300; margin-bottom: 12px; color: #bbb; padding-left: 15px; border-left: 1px solid var(--kz-red); }
+
+/* Sub-Spoilers */
+.kz-sub-drawer { margin-top: 20px; }
+.kz-sub-drawer > summary { padding: 10px 0; font-size: 0.8em; border-top: none; }
+.kz-sub-drawer .kz-item b { color: var(--kz-orange); font-weight: 600; }
+
+/* Assinatura Clássica */
+.kz-footer { padding: 10px 40px 50px; text-align: center; position: relative; }
+.kz-footer::after {
+  content: "Kanzaki Kyōri"; font-family: 'Mr De Haviland', cursive; font-size: 4em;
+  color: var(--kz-text); opacity: 0.4; transition: 0.5s;
+}
+.kz-card:hover .kz-footer::after { opacity: 0.8; color: var(--kz-yellow); text-shadow: 0 0 15px rgba(242, 235, 24, 0.4); }
