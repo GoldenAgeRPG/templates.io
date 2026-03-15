@@ -106,14 +106,14 @@
 .alina-section { display: flex; align-items: center; gap: 15px; margin: 25px 0 15px; font-size: 0.7em; font-weight: 700; color: #fff; letter-spacing: 2px; text-transform: uppercase; }
 .alina-section::after { content: ''; flex-grow: 1; height: 1px; background: linear-gradient(90deg, rgba(255,255,255,0.1), transparent); }
 
-.lbl-obj::before { content: 'Diretriz'; }
+.lbl-obj::before { content: 'Objetivo'; }
 .lbl-pal::before { content: 'Palavras'; }
 .lbl-tur::before { content: 'Turno'; }
-.lbl-est::before { content: 'Condição Vital'; }
+.lbl-est::before { content: 'Estilo de Vida'; }
 .sec-act::before { content: 'Matriz de Ações'; }
 .sec-res::before { content: 'Resumo dos Acontecimentos'; }
 .sec-apt::before { content: 'Aptidões Ativas'; }
-.sec-cal::before { content: 'Gestão de RCT'; }
+.sec-cal::before { content: 'Calculos'; }
 
 /* Ações em Texto Limpo, não pílulas */
 .alina-actions-flow { display: flex; gap: 25px; flex-wrap: wrap; margin-bottom: 20px; }
