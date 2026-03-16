@@ -1,4 +1,4 @@
-/* --- TEMPLATE DE POSTAGEM (JOGADOR) v3.0 - CLEAN & CALC --- */
+/* --- TEMPLATE DE POSTAGEM (JOGADOR) v3.0 - CLEAN, DOSSIER & CALC --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Yuji+Syuku&family=Share+Tech+Mono&display=swap');
 
 :root {
@@ -53,8 +53,8 @@
 .rp-post-container .vignette-overlay { background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.7) 100%); }
 .rp-post-container .grid-overlay { background-image: url('data:image/svg+xml;utf8,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><g fill="rgba(160, 80, 255, 0.05)" fill-opacity="1" fill-rule="evenodd"><path d="M0 40L40 0H20L0 20M40 40V20L20 40"/></g></svg>'); }
 
-/* Cantos Cyberpunk */
-.rp-post-container .frame-corners { position: absolute; inset: 0; z-index: 5; }
+/* Cantos Animados */
+.rp-post-container .frame-corners { position: absolute; inset: 0; z-index: 5; pointer-events: none; }
 .rp-post-container .frame-corners .corner { position: absolute; width: 20px; height: 20px; }
 .rp-post-container .frame-corners .corner::before,
 .rp-post-container .frame-corners .corner::after { content: ''; position: absolute; background: var(--accent); box-shadow: 0 0 8px var(--accent); }
@@ -81,7 +81,7 @@
 .rp-post-container .post-title::after { background: linear-gradient(to left, transparent, var(--accent) 50%, transparent); }
 .rp-post-container .post-subtitle { font-family: 'Share Tech Mono', monospace; font-size: 13px; color: var(--text); text-transform: uppercase; letter-spacing: 1.5px; margin: 0; opacity: 0.8; }
 
-/* Barras de Status (Isoladas) */
+/* Barras de Status */
 .rp-post-container .jjk-dossier-status-bars { display: flex; flex-direction: column; gap: 8px; max-width: 450px; margin: 25px auto; }
 .rp-post-container .jjk-dossier-status-item { display: flex; align-items: center; gap: 10px; }
 .rp-post-container .jjk-dossier-status-label { font-family: 'Share Tech Mono', monospace; font-size: 12px; font-weight: 700; width: 35px; flex-shrink: 0; color: var(--highlight); }
@@ -90,8 +90,8 @@
 .rp-post-container .jjk-dossier-status-bar-fill { height: 100%; border-radius: 50px; transition: width .5s ease-in-out; }
 .rp-post-container .jjk-dossier-hp-fill { background: linear-gradient(90deg, var(--hp-dark), var(--hp-color)); }
 .rp-post-container .jjk-dossier-ea-fill { background: linear-gradient(90deg, var(--accent-dark), var(--accent)); }
-.rp-post-container .jjk-dossier-san-fill { background: linear-gradient(90deg, var(--san-dark), var(--san-color)); } /* Nova barra de Sanidade */
-.rp-post-container .jjk-dossier-status-value { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Share Tech Mono', monospace; font-size: 10px; font-weight: 700; color: #fff; text-shadow: 0 1px 2px rgba(0, 0, 0, 1); }
+.rp-post-container .jjk-dossier-san-fill { background: linear-gradient(90deg, var(--san-dark), var(--san-color)); }
+.rp-post-container .jjk-dossier-status-value { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-family: 'Share Tech Mono', monospace; font-size: 10px; font-weight: 700; color: #fff; text-shadow: 0 1px 2px #000; }
 
 /* Corpo Principal */
 .rp-post-container .rp-post-content {
@@ -100,38 +100,51 @@
   line-height: 1.7; box-shadow: inset 0 0 15px rgba(160, 80, 255, 0.1); text-align: justify;
 }
 .rp-post-container .rp-post-content::before,
-.rp-post-container .rp-post-content::after { content: ''; position: absolute; width: 20px; height: 20px; opacity: 0.5; }
+.rp-post-container .rp-post-content::after { content: ''; position: absolute; width: 20px; height: 20px; opacity: 0.5; pointer-events: none; }
 .rp-post-container .rp-post-content::before { top: 10px; left: 10px; border-top: 2px solid var(--accent); border-left: 2px solid var(--accent); }
 .rp-post-container .rp-post-content::after { bottom: 10px; right: 10px; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
 .rp-post-container .rp-post-content p { margin: 0 0 1em 0; }
 .rp-post-container .rp-post-content p:last-child { margin-bottom: 0; }
 
-/* Spoilers Padronizados */
-.rp-post-container .rp-spoiler { margin-top: 15px; border: 1px dashed var(--accent); background: rgba(0,0,0,0.3); border-radius: 4px; }
-.rp-post-container .rp-spoiler summary { padding: 10px; cursor: pointer; color: var(--highlight); font-family: 'Share Tech Mono', monospace; text-transform: uppercase; font-size: 12px; font-weight: 700; list-style: none; }
-.rp-post-container .rp-spoiler summary::-webkit-details-marker { display: none; }
-.rp-post-container .rp-spoiler summary::before { content: '>'; margin-right: 8px; color: var(--text-muted); }
-.rp-post-container .rp-spoiler[open] summary::before { content: 'v'; }
-.rp-post-container .rp-spoiler-content { padding: 15px; border-top: 1px dashed rgba(160,80,255,0.2); font-size: 13px; color: var(--text-muted); }
+.rp-post-container b, .rp-post-container strong { color: #fff; font-weight: 700; }
+.rp-post-container i, .rp-post-container em { font-style: italic; color: var(--highlight); }
 
-/* Extras / Notas do Sistema */
-.rp-post-container .rp-post-extras {
-  margin-top: 20px; background: rgba(0, 0, 0, 0.5); border: 1px dashed rgba(160, 80, 255, 0.4);
-  border-radius: 4px; padding: 20px 15px 15px; position: relative;
+/* --- SPOILER / DOSSIÊ TÁTICO --- */
+.rp-post-container .rp-dossier { margin-top: 20px; border: 1px dashed rgba(160,80,255,0.4); background: rgba(0,0,0,0.4); border-radius: 4px; }
+.rp-post-container .rp-dossier > summary {
+  padding: 15px; cursor: pointer; color: var(--highlight); font-family: 'Share Tech Mono', monospace;
+  text-transform: uppercase; font-size: 13px; font-weight: 700; list-style: none; display: flex; align-items: center;
 }
-.rp-post-container .rp-post-extras::before {
-  content: 'INFO // SISTEMA'; position: absolute; top: -10px; left: 15px;
-  background: var(--panel); padding: 0 8px; font-family: 'Share Tech Mono', monospace;
-  font-size: 10px; color: var(--highlight); letter-spacing: 1px; font-weight: 700;
-}
-.rp-post-container .rp-post-extras-content { font-family: 'Inter', sans-serif; font-size: 13px; color: var(--text-muted); line-height: 1.6; }
-.rp-post-container b, .rp-post-container strong { color: var(--text); font-weight: 700; }
-.rp-post-container i, .rp-post-container em { font-style: italic; color: #fff; }
+.rp-post-container .rp-dossier > summary::-webkit-details-marker { display: none; }
+.rp-post-container .rp-dossier > summary::before { content: '>'; margin-right: 10px; color: var(--text-muted); }
+.rp-post-container .rp-dossier[open] > summary::before { content: 'v'; color: var(--accent); }
+.rp-post-container .rp-dossier-content { padding: 0 20px 20px; border-top: 1px dashed rgba(160,80,255,0.2); margin-top: 5px; }
+
+/* Grid e Caixas Táticas */
+.rp-post-container .rp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
+.rp-post-container .rp-data-box { background: rgba(255,255,255,0.02); padding: 12px; border: 1px solid rgba(160,80,255,0.1); border-radius: 4px; display: flex; flex-direction: column; gap: 4px; }
+.rp-post-container .rp-data-lbl { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--accent); text-transform: uppercase; }
+.rp-post-container .rp-data-val { font-size: 13px; color: var(--text); }
+
+/* Ações */
+.rp-post-container .rp-act-grid { display: flex; justify-content: space-between; background: rgba(160,80,255,0.05); padding: 15px; border-radius: 4px; margin-bottom: 25px; border: 1px solid rgba(160,80,255,0.1); }
+.rp-post-container .rp-act-item { text-align: center; font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--text-muted); text-transform: uppercase; }
+.rp-post-container .rp-act-item span { display: block; font-family: 'Inter', sans-serif; font-size: 20px; color: #fff; font-weight: 700; margin-top: 4px; }
+
+/* Títulos de Seção e Listas */
+.rp-post-container .rp-list-title { font-family: 'Share Tech Mono', monospace; font-size: 13px; color: var(--highlight); text-transform: uppercase; border-bottom: 1px dashed rgba(160,80,255,0.3); padding-bottom: 6px; margin: 25px 0 12px; }
+.rp-post-container .rp-list-item { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; padding-left: 15px; position: relative; line-height: 1.6; }
+.rp-post-container .rp-list-item::before { content: '>'; position: absolute; left: 0; color: var(--accent); font-family: 'Share Tech Mono', monospace; font-size: 12px; top: 0px; font-weight: bold; }
+
+/* Sub-Spoilers (Inventário/Técnicas) */
+.rp-post-container .rp-sub-dossier { margin-top: 15px; border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; background: rgba(0,0,0,0.2); }
+.rp-post-container .rp-sub-dossier > summary { padding: 12px; font-size: 12px; }
+.rp-post-container .rp-sub-dossier .rp-list-item b { color: var(--text); }
 
 /* Assinatura CSS */
 .rp-post-container::after {
   content: "Golden Age RPG"; display: block; text-align: right;
   font-family: 'Share Tech Mono', monospace; color: var(--accent);
-  font-size: 10px; opacity: 0.4; margin-top: 20px; letter-spacing: 2px;
+  font-size: 10px; opacity: 0.4; margin-top: 25px; letter-spacing: 2px;
   text-transform: uppercase;
 }
