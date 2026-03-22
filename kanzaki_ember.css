@@ -1,21 +1,26 @@
-/* --- TEMPLATE: EMBER SPARK (KANZAKI KYŌRI) --- */
+/* --- TEMPLATE: EMBER SPARK (KANZAKI KYŌRI) + AUDIO PLAYER --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Raleway:wght@300;400;600&display=swap');
 
 :root {
-  --kz-bg: #0f0d0d; /* Fundo principal */
-  --kz-panel: #171414; /* Fundo secundário para caixas */
-  --kz-border: #2a1f1f; /* Bordas sutis */
+  --kz-bg: #0f0d0d;
+  --kz-panel: #171414;
+  --kz-border: #2a1f1f;
   --kz-red: #BA2020;
   --kz-orange: #E69500;
   --kz-yellow: #F2EB18;
   --kz-text: #d4cfcf;
 }
 
-/* Efeito de Instabilidade (Fagulha) */
 @keyframes ember-flicker {
   0%, 100% { opacity: 1; filter: drop-shadow(0 0 2px var(--kz-red)); }
   50% { opacity: 0.85; filter: drop-shadow(0 0 10px var(--kz-orange)); }
   75% { opacity: 0.95; filter: drop-shadow(0 0 4px var(--kz-yellow)); }
+}
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 rgba(230, 149, 0, 0.7); }
+  70% { box-shadow: 0 0 0 10px rgba(230, 149, 0, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(230, 149, 0, 0); }
 }
 
 /* Moldura Externa */
@@ -25,6 +30,7 @@
   border: 1px solid var(--kz-border);
   box-shadow: 0 10px 40px rgba(0,0,0,0.9);
   font-family: 'Raleway', sans-serif; color: var(--kz-text);
+  position: relative;
 }
 
 /* Moldura Interna Clássica */
@@ -32,31 +38,43 @@
   border: 1px solid rgba(186, 32, 32, 0.4);
   padding: 30px; position: relative;
 }
-/* Detalhes nos cantos da moldura */
 .kz-inner::before, .kz-inner::after {
   content: ''; position: absolute; width: 10px; height: 10px; border: 1px solid var(--kz-orange);
 }
 .kz-inner::before { top: -4px; left: -4px; border-right: none; border-bottom: none; }
 .kz-inner::after { bottom: -4px; right: -4px; border-left: none; border-top: none; }
 
-/* Banner Enquadrado */
-.kz-banner { width: 100%; height: 220px; border: 1px solid var(--kz-red); padding: 4px; margin-bottom: 25px; }
+/* Banner Enquadrado e AUDIO PLAYER */
+.kz-banner { width: 100%; height: 220px; border: 1px solid var(--kz-red); padding: 4px; margin-bottom: 25px; position: relative; }
 .kz-banner img { width: 100%; height: 100%; object-fit: cover; filter: sepia(30%) contrast(1.1) brightness(0.8); }
+
+/* Custom Audio Player (Botão Play Mínimo) */
+.kz-audio-box {
+  position: absolute; top: 15px; right: 15px; z-index: 10;
+  width: 30px; height: 30px; overflow: hidden;
+  border-radius: 50%; background: rgba(0,0,0,0.5);
+  border: 1px solid var(--kz-orange); transition: 0.3s;
+}
+.kz-audio-box:hover { background: rgba(0,0,0,0.8); animation: pulse-ring 1.5s infinite; }
+/* Esconde a barra feia do player original e mostra só o botão play */
+.kz-audio-box audio {
+  width: 100px; height: 50px; position: absolute;
+  top: -10px; left: -15px; opacity: 0.8; filter: invert(1) sepia(1) hue-rotate(350deg) saturate(5);
+  cursor: pointer;
+}
 
 /* Cabeçalho Textual */
 .kz-head { text-align: center; margin-bottom: 35px; border-bottom: 1px solid var(--kz-border); padding-bottom: 20px; }
 .kz-title { font-family: 'Cinzel', serif; font-size: 2.6em; color: #fff; margin: 0; letter-spacing: 4px; animation: ember-flicker 4s infinite alternate; }
 .kz-sub { font-size: 0.85em; font-weight: 600; color: var(--kz-orange); letter-spacing: 6px; text-transform: uppercase; margin-top: 5px; }
 
-/* Status: Sistema de Fio e Fagulha (Sem Barras Cheias) */
+/* Status: Fio e Fagulha */
 .kz-vitals { display: flex; justify-content: space-between; gap: 30px; margin-bottom: 35px; }
 .kz-stat { flex: 1; }
 .kz-stat-txt { display: flex; justify-content: space-between; font-family: 'Cinzel', serif; font-size: 0.8em; color: #777; margin-bottom: 6px; letter-spacing: 1px; }
 .kz-stat-txt span:last-child { color: var(--kz-text); font-family: 'Raleway', sans-serif; font-weight: 600; }
 .kz-wire { width: 100%; height: 1px; background: #333; position: relative; }
-/* A linha preenchida é fina e sólida */
 .kz-spark-fill { height: 2px; background: var(--kz-red); position: absolute; left: 0; top: -0.5px; transition: width 0.8s ease-out; box-shadow: 0 0 5px var(--kz-red); }
-/* A fagulha (ponto brilhante na ponta da linha) */
 .kz-spark-fill::after {
   content: ''; position: absolute; right: -3px; top: -2.5px;
   width: 7px; height: 7px; background: var(--kz-yellow); border-radius: 50%;
@@ -69,7 +87,7 @@
 .kz-body i { color: var(--kz-yellow); font-style: italic; }
 .kz-tag { display: table; font-family: 'Cinzel', serif; font-size: 0.75em; color: var(--kz-red); letter-spacing: 3px; border: 1px solid var(--kz-red); padding: 4px 10px; margin: 0 auto 20px; text-transform: uppercase; }
 
-/* Spoilers (Caixas Rígidas Clássicas) */
+/* Spoilers */
 .kz-fold { margin-bottom: 15px; border: 1px solid var(--kz-border); background: var(--kz-panel); }
 .kz-fold > summary {
   cursor: pointer; padding: 12px; font-family: 'Cinzel', serif; text-align: center;
@@ -79,22 +97,16 @@
 .kz-fold > summary:hover { color: var(--kz-orange); background: rgba(230, 149, 0, 0.05); }
 .kz-fold[open] > summary { color: var(--kz-yellow); border-bottom: 1px solid var(--kz-border); }
 
-/* Conteúdo das Caixas */
+/* Conteúdo */
 .kz-content { padding: 25px; }
 
-/* Dados Táticos (Grid de Caixas) */
+/* Grid Tático */
 .kz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 25px; }
 .kz-data-box { text-align: center; padding: 10px; border: 1px solid var(--kz-border); background: var(--kz-bg); }
 .kz-data-lbl { font-family: 'Cinzel', serif; font-size: 0.65em; color: var(--kz-red); display: block; margin-bottom: 4px; letter-spacing: 1px; }
 .kz-data-val { font-size: 0.9em; color: #fff; font-weight: 400; }
 
-/* Injeção de Títulos */
-.lbl-obj::before { content: 'Foco da Missão'; }
-.lbl-pal::before { content: 'Palavras'; }
-.lbl-tur::before { content: 'Turno'; }
-.lbl-est::before { content: 'Vigor / Condição'; }
-
-/* Ações (Bloco Centralizado) */
+/* Ações */
 .kz-act-title { font-family: 'Cinzel', serif; text-align: center; color: var(--kz-red); font-size: 0.8em; letter-spacing: 2px; margin-bottom: 10px; }
 .kz-act-grid { display: flex; justify-content: space-around; padding: 15px; border: 1px solid var(--kz-border); background: var(--kz-bg); margin-bottom: 25px; }
 .kz-act { text-align: center; font-family: 'Cinzel', serif; font-size: 0.7em; color: #777; letter-spacing: 1px; }
@@ -109,13 +121,13 @@
 .kz-sub-fold { margin-top: 15px; border-color: var(--kz-border); }
 .kz-sub-fold > summary { padding: 8px; font-size: 0.75em; color: var(--kz-orange); }
 
-/* Assinatura (Injetada via CSS) */
+/* Assinatura CSS */
 .kz-footer { text-align: right; margin-top: 30px; border-top: 1px solid var(--kz-border); padding-top: 15px; position: relative; }
 .kz-footer::after {
   content: "Kanzaki Kyōri";
   font-family: 'Cinzel', serif; color: var(--kz-red);
   font-size: 1em; letter-spacing: 2px; opacity: 0.6; transition: 0.4s ease;
 }
-.kz-card:hover .kz-footer::after {
+.kz-wrap:hover .kz-footer::after {
   opacity: 1; text-shadow: 0 0 12px rgba(186, 32, 32, 0.6);
 }
