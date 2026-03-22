@@ -1,23 +1,29 @@
-/* --- TEMPLATE: THE BLACK REAPER (ZENIN RIKUYA) --- */
+/* --- TEMPLATE: THE BLACK REAPER (ZENIN RIKUYA) v3.0 - CLEAN FUUGA --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@300;400;600&family=Share+Tech+Mono&display=swap');
 
 :root {
   --rk-bg: #0a0505;
   --rk-panel: #140808;
-  --rk-red-dark: #4a0205;
+  --rk-red-dark: #4a0205; /* Vermelho profundo do líquido */
   --rk-red-mid: #78040a;
   --rk-red-pop: #ba0a14;
   --rk-text: #d4c5c5;
   --rk-border: #2b0b0e;
+  --rk-cuts: rgba(186, 10, 20, 0.03); /* Cor sutil para os cortes */
 }
 
 /* --- ANIMAÇÕES GERAIS --- */
-/* Cortes (Slashes) do Fundo */
-@keyframes rk-slash-strike {
-  0% { width: 0; opacity: 0; transform: translateX(-10%) rotate(var(--angle)); }
-  10% { width: 120%; opacity: 0.8; transform: translateX(-10%) rotate(var(--angle)); }
-  20% { width: 120%; opacity: 0; transform: translateX(-10%) rotate(var(--angle)); }
-  100% { width: 0; opacity: 0; transform: translateX(-10%) rotate(var(--angle)); }
+/* Efeito de Corte Passando na Tela (Dismantle) */
+@keyframes dismantle-slash {
+  0% { transform: translateX(-100%) skewX(-45deg); opacity: 0; }
+  20% { opacity: 1; }
+  100% { transform: translateX(200%) skewX(-45deg); opacity: 0; }
+}
+
+/* Pulsação das Cortes na Fundo */
+@keyframes slash-fade {
+    0%, 100% { opacity: 0.1; }
+    50% { opacity: 0.3; }
 }
 
 /* Líquido (Ondas) do Rodapé */
@@ -36,37 +42,37 @@
 }
 .rk-wrap * { box-sizing: border-box; }
 
-/* --- EFEITO DE CORTES (BACKGROUND) --- */
-.rk-slashes {
-  position: absolute; inset: 0; z-index: 0;
-  pointer-events: none; overflow: hidden; opacity: 0.6;
+/* Efeito de Corte Flash Over */
+.rk-wrap::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 50%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  animation: dismantle-slash 8s infinite ease-in-out; /* Corte flash lento */
+  pointer-events: none; z-index: 10;
 }
-.rk-slash {
-  position: absolute; height: 2px; background: var(--rk-red-pop);
-  box-shadow: 0 0 8px var(--rk-red-pop), 0 0 15px var(--rk-red-mid);
-  opacity: 0; left: 0;
-  animation: rk-slash-strike infinite ease-out;
-}
-/* Instâncias e Ângulos de Corte */
-.rs-1 { top: 15%; --angle: -25deg; animation-duration: 4.5s; }
-.rs-2 { top: 55%; --angle: 15deg; animation-duration: 5.2s; animation-delay: 1.5s; }
-.rs-3 { top: 35%; --angle: 45deg; animation-duration: 6s; animation-delay: 0.8s; left: auto; right: 0; transform-origin: right; }
-.rs-4 { top: 80%; --angle: -10deg; animation-duration: 4.8s; animation-delay: 2.5s; }
 
-/* --- HEADER COM ÍCONE DE SANTUÁRIO --- */
-.rk-header {
-  text-align: center; padding: 40px 20px 20px;
-  position: relative; z-index: 2;
+/* Cortes sutis no fundo do container */
+.rk-wrap .rk-slashes-bg {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+    background-image: repeating-linear-gradient(135deg, transparent 0px, transparent 100px, var(--rk-cuts) 100px, var(--rk-cuts) 101px);
+    animation: slash-fade 4s infinite alternate;
 }
-/* Ícone de Santuário Flutuante no Background do Header */
-.rk-header::before {
-  content: ''; position: absolute;
-  top: 50%; left: 50%; transform: translate(-50%, -50%);
-  width: 150px; height: 150px; opacity: 0.08; pointer-events: none; z-index: -1;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2,6 L2,8 L4,8 L4,20 L6,20 L6,8 L10,8 L10,20 L12,20 L12,8 L18,8 L18,20 L20,20 L20,8 L22,8 L22,6 M12,2 L2,5 L22,5 L12,2 Z' fill='%23ba0a14'/%3E%3C/svg%3E");
-  background-repeat: no-repeat; background-position: center; background-size: contain;
+
+/* --- HEADER TEXTUAL COM ÍCONE ACIMA --- */
+.rk-header { text-align: center; padding: 50px 20px 20px; position: relative; z-index: 2; }
+
+/* Ícone de Santuário centralizado ACIMA do texto */
+.rk-header .shrine-icon {
+  position: absolute; top: 20px; left: 50%; transform: translateX(-50%);
+  width: 150px; height: 150px; opacity: 0.08; pointer-events: none;
 }
-.rk-title { font-family: 'Cinzel', serif; font-size: 2.8em; font-weight: 800; color: #fff; margin: 0; letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 4px 15px rgba(186, 10, 20, 0.6); line-height: 1; }
+.rk-header .shrine-icon path { fill: var(--rk-red-pop); }
+
+.rk-title {
+  font-family: 'Cinzel', serif; font-size: 2.8em; font-weight: 800; color: #fff;
+  margin: 120px 0 0 0; /* Espaço para o ícone flutuar acima */
+  letter-spacing: 4px; text-transform: uppercase;
+  text-shadow: 0 4px 15px rgba(186, 10, 20, 0.6); line-height: 1;
+}
 .rk-sub { font-family: 'Share Tech Mono', monospace; font-size: 0.9em; color: var(--rk-red-pop); letter-spacing: 6px; text-transform: uppercase; margin-top: 10px; }
 
 /* --- BANNER --- */
@@ -88,7 +94,7 @@
 .rk-body i, .rk-body em { color: var(--rk-text); font-style: italic; }
 .rk-tag { display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: 0.75em; color: var(--rk-red-pop); border: 1px solid var(--rk-red-dark); padding: 4px 10px; margin-bottom: 20px; text-transform: uppercase; background: rgba(186, 10, 20, 0.05); }
 
-/* --- DOSSIÊ (SPOILERS E GRIDS) --- */
+/* --- SPOILERS (FUUGA E GRIDS) --- */
 .rk-fold { margin: 0 40px 30px; border: 1px solid var(--rk-border); background: var(--rk-panel); position: relative; z-index: 2; }
 .rk-fold > summary { cursor: pointer; padding: 15px; font-family: 'Cinzel', serif; text-align: center; color: var(--rk-text); letter-spacing: 2px; text-transform: uppercase; font-size: 0.9em; font-weight: 600; list-style: none; transition: 0.3s; }
 .rk-fold > summary::-webkit-details-marker { display: none; }
@@ -114,11 +120,11 @@
 .rk-sub-fold > summary { padding: 10px; font-size: 0.8em; }
 .rk-sub-fold .rk-item b { color: #fff; font-weight: 600; }
 
-/* --- PISCINA DE LÍQUIDO / SANGUE (FOOTER) --- */
+/* --- PISCINA DE LÍQUIDO / VERMELHO SANGUE (FOOTER) --- */
 .rk-pool { position: relative; height: 120px; width: 100%; margin-top: auto; z-index: 1; border-top: 2px solid var(--rk-border); background: #050202; overflow: hidden; }
 .rk-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background-repeat: repeat-x; background-position: 0 bottom; }
 
-/* SVGs de Onda Ondulante e Lenta */
+/* SVGs de Onda Ondulante com a paleta vermelha profunda */
 .w-1 { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,60 Q300,0 600,60 T1200,60 V120 H0 Z' fill='%234a0205' opacity='0.8'/%3E%3C/svg%3E"); background-size: 1200px 100%; animation: rk-wave-right 8s linear infinite; z-index: 3; }
 .w-2 { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,80 Q300,30 600,80 T1200,80 V120 H0 Z' fill='%2378040a' opacity='0.6'/%3E%3C/svg%3E"); background-size: 1200px 100%; animation: rk-wave-left 12s linear infinite; bottom: 5px; z-index: 2; }
 .w-3 { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,90 Q300,50 600,90 T1200,90 V120 H0 Z' fill='%23ba0a14' opacity='0.9'/%3E%3C/svg%3E"); background-size: 1200px 100%; animation: rk-wave-right 18s linear infinite; bottom: 10px; z-index: 1; }
