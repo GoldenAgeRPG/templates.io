@@ -1,5 +1,5 @@
 /* --- TEMPLATE: THE BLACK REAPER (ZENIN RIKUYA) --- */
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@300;400;600&family=Share+Tech+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@300;400;600&family=Hind:wght@400;700&family=Poppins:ital@1&family=Share+Tech+Mono&display=swap');
 
 :root {
   --rk-bg: #0a0505;
@@ -83,9 +83,37 @@
 .rk-fill { height: 100%; background: var(--rk-red-pop); box-shadow: 0 0 10px var(--rk-red-pop); transition: width 0.8s ease; }
 
 /* --- CORPO E TEXTO --- */
-.rk-body { padding: 30px 40px; font-weight: 300; line-height: 1.8; font-size: 0.95em; text-align: justify; position: relative; z-index: 2; }
-.rk-body b, .rk-body strong { color: var(--rk-red-pop); font-weight: 600; text-shadow: 0 0 5px rgba(186, 10, 20, 0.4); }
-.rk-body i, .rk-body em { color: var(--rk-text); font-style: italic; }
+.rk-body { 
+  padding: 30px 40px; 
+  font-family: 'Hind', sans-serif;
+  font-size: 13px;
+  color: #B0B0B0;
+  line-height: 1.8; 
+  text-align: justify; 
+  position: relative; 
+  z-index: 2; 
+}
+.rk-body b, .rk-body strong { 
+  font-family: 'Hind', sans-serif;
+  font-size: 13.65px;
+  color: #8D2E2E; 
+  font-weight: 700; 
+  text-shadow: none; 
+}
+.rk-body i, .rk-body em { 
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  color: #888888; 
+  font-style: italic; 
+}
+
+/* TAG POSICIONADA ACIMA DA NARRAÇÃO */
+.rk-tag { 
+  display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: 0.75em; 
+  color: var(--rk-red-pop); border: 1px solid var(--rk-red-dark); 
+  padding: 6px 15px; margin-bottom: 25px; text-transform: uppercase; 
+  background: rgba(186, 10, 20, 0.05); letter-spacing: 2px; font-weight: bold;
+}
 
 /* --- DOSSIÊ (SPOILERS E GRIDS) --- */
 .rk-fold { margin: 0 40px 30px; border: 1px solid var(--rk-border); background: var(--rk-panel); position: relative; z-index: 2; }
@@ -116,9 +144,8 @@
 .rk-sub-fold .rk-item b { color: #fff; font-weight: 600; }
 
 /* --- PISCINA DE LÍQUIDO / SANGUE (FOOTER) --- */
-.rk-pool { position: relative; height: 120px; width: 100%; margin-top: auto; z-index: 1; border-top: 2px solid var(--rk-border); background: #050202; overflow: hidden; }
+.rk-pool { position: relative; height: 100px; width: 100%; margin-top: auto; z-index: 1; border-top: 2px solid var(--rk-border); background: #050202; overflow: hidden; }
 .rk-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background-repeat: repeat-x; background-position: 0 bottom; }
-
 /* SVGs de Onda recoloridos para tons de sangue */
 .w-1 { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,60 Q300,0 600,60 T1200,60 V120 H0 Z' fill='%234a0205' opacity='0.8'/%3E%3C/svg%3E"); background-size: 1200px 100%; animation: rk-wave-right 8s linear infinite; z-index: 3; }
 .w-2 { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,80 Q300,30 600,80 T1200,80 V120 H0 Z' fill='%2378040a' opacity='0.6'/%3E%3C/svg%3E"); background-size: 1200px 100%; animation: rk-wave-left 12s linear infinite; bottom: 5px; z-index: 2; }
