@@ -107,14 +107,6 @@
   font-style: italic; 
 }
 
-/* TAG POSICIONADA ACIMA DA NARRAÇÃO */
-.rk-tag { 
-  display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: 0.75em; 
-  color: var(--rk-red-pop); border: 1px solid var(--rk-red-dark); 
-  padding: 6px 15px; margin-bottom: 25px; text-transform: uppercase; 
-  background: rgba(186, 10, 20, 0.05); letter-spacing: 2px; font-weight: bold;
-}
-
 /* --- DOSSIÊ (SPOILERS E GRIDS) --- */
 .rk-fold { margin: 0 40px 30px; border: 1px solid var(--rk-border); background: var(--rk-panel); position: relative; z-index: 2; }
 .rk-fold > summary { cursor: pointer; padding: 15px; font-family: 'Cinzel', serif; text-align: center; color: var(--rk-text); letter-spacing: 2px; text-transform: uppercase; font-size: 0.9em; font-weight: 600; list-style: none; transition: 0.3s; }
