@@ -1,1 +1,157 @@
 
+/* --- TEMPLATE: THE BLACK REAPER (ZENIN RIKUYA) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@300;400;600&family=Hind:wght@400;700&family=Poppins:ital@1&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --rk-bg: #0a0505;
+  --rk-panel: #140808;
+  --rk-red-dark: #4a0205;
+  --rk-red-mid: #78040a;
+  --rk-red-pop: #ba0a14;
+  --rk-text: #d4c5c5;
+  --rk-border: #2b0b0e;
+}
+
+/* --- ANIMAÇÕES GERAIS --- */
+/* Cortes (Slashes) do Fundo com Variáveis de Ângulo */
+@keyframes rk-slash-strike {
+  0% { width: 0; opacity: 0; transform: translateX(-10%) rotate(var(--angle)); }
+  10% { width: 120%; opacity: 0.8; transform: translateX(-10%) rotate(var(--angle)); }
+  20% { width: 120%; opacity: 0; transform: translateX(-10%) rotate(var(--angle)); }
+  100% { width: 0; opacity: 0; transform: translateX(-10%) rotate(var(--angle)); }
+}
+
+/* Líquido (Ondas) do Rodapé */
+@keyframes rk-wave-right { 0% { background-position: 0 bottom; } 100% { background-position: 1200px bottom; } }
+@keyframes rk-wave-left { 0% { background-position: 0 bottom; } 100% { background-position: -1200px bottom; } }
+
+/* --- CONTAINER PRINCIPAL --- */
+.rk-wrap {
+  max-width: 680px; width: 95%; margin: 50px auto;
+  background-color: var(--rk-bg);
+  border: 2px solid var(--rk-border);
+  box-shadow: 0 15px 40px rgba(0,0,0,0.9), inset 0 0 50px rgba(74, 2, 5, 0.3);
+  position: relative; overflow: hidden;
+  font-family: 'Inter', sans-serif; color: var(--rk-text);
+  display: flex; flex-direction: column;
+}
+.rk-wrap * { box-sizing: border-box; }
+
+/* --- EFEITO DE CORTES (BACKGROUND) --- */
+.rk-slashes {
+  position: absolute; inset: 0; z-index: 0;
+  pointer-events: none; overflow: hidden; opacity: 0.6;
+}
+.rk-slash {
+  position: absolute; height: 2px; background: var(--rk-red-pop);
+  box-shadow: 0 0 8px var(--rk-red-pop), 0 0 15px var(--rk-red-mid);
+  opacity: 0; left: 0;
+  animation: rk-slash-strike infinite ease-out;
+}
+/* Instâncias e Ângulos de Corte */
+.rs-1 { top: 15%; --angle: -25deg; animation-duration: 4.5s; }
+.rs-2 { top: 55%; --angle: 15deg; animation-duration: 5.2s; animation-delay: 1.5s; }
+.rs-3 { top: 35%; --angle: 45deg; animation-duration: 6s; animation-delay: 0.8s; left: auto; right: 0; transform-origin: right; }
+.rs-4 { top: 80%; --angle: -10deg; animation-duration: 4.8s; animation-delay: 2.5s; }
+
+/* --- HEADER COM ÍCONE DE SANTUÁRIO --- */
+.rk-header {
+  text-align: center; padding: 40px 20px 20px;
+  position: relative; z-index: 2;
+}
+/* Ícone de Santuário Flutuante no Background do Header */
+.rk-header::before {
+  content: ''; position: absolute;
+  top: 50%; left: 50%; transform: translate(-50%, -50%);
+  width: 150px; height: 150px; opacity: 0.08; pointer-events: none; z-index: -1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2,6 L2,8 L4,8 L4,20 L6,20 L6,8 L10,8 L10,20 L12,20 L12,8 L18,8 L18,20 L20,20 L20,8 L22,8 L22,6 M12,2 L2,5 L22,5 L12,2 Z' fill='%23ba0a14'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: center; background-size: contain;
+}
+.rk-title { font-family: 'Cinzel', serif; font-size: 2.8em; font-weight: 800; color: #fff; margin: 0; letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 4px 15px rgba(186, 10, 20, 0.6); line-height: 1; }
+.rk-sub { font-family: 'Share Tech Mono', monospace; font-size: 0.9em; color: var(--rk-red-pop); letter-spacing: 6px; text-transform: uppercase; margin-top: 10px; }
+
+/* --- BANNER --- */
+.rk-banner { width: 100%; height: 250px; position: relative; z-index: 2; border-top: 2px solid var(--rk-red-dark); border-bottom: 2px solid var(--rk-red-dark); }
+.rk-banner img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(30%) contrast(1.2) brightness(0.8); }
+.rk-banner::after { content: ''; position: absolute; inset: 0; background: radial-gradient(circle, transparent 40%, rgba(10,5,5,0.8) 100%); }
+
+/* --- STATUS (BARRAS) --- */
+.rk-vitals { display: flex; gap: 20px; padding: 25px 40px; position: relative; z-index: 2; background: rgba(0,0,0,0.4); border-bottom: 1px solid var(--rk-border); }
+.rk-stat { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.rk-stat-head { display: flex; justify-content: space-between; font-family: 'Share Tech Mono', monospace; font-size: 0.8em; color: var(--rk-red-mid); font-weight: bold; }
+.rk-val { color: #fff; }
+.rk-track { width: 100%; height: 4px; background: #111; border-radius: 2px; overflow: hidden; border: 1px solid var(--rk-border); }
+.rk-fill { height: 100%; background: var(--rk-red-pop); box-shadow: 0 0 10px var(--rk-red-pop); transition: width 0.8s ease; }
+
+/* --- CORPO E TEXTO --- */
+.rk-body { 
+  padding: 30px 40px; 
+  font-family: 'Hind', sans-serif;
+  font-size: 13px;
+  color: #B0B0B0;
+  line-height: 1.8; 
+  text-align: justify; 
+  position: relative; 
+  z-index: 2; 
+}
+.rk-body b, .rk-body strong { 
+  font-family: 'Hind', sans-serif;
+  font-size: 13.65px;
+  color: #8D2E2E; 
+  font-weight: 700; 
+  text-shadow: none; 
+}
+.rk-body i, .rk-body em { 
+  font-family: 'Poppins', sans-serif;
+  font-size: 13px;
+  color: #888888; 
+  font-style: italic; 
+}
+
+/* TAG POSICIONADA ACIMA DA NARRAÇÃO */
+.rk-tag { 
+  display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: 0.75em; 
+  color: var(--rk-red-pop); border: 1px solid var(--rk-red-dark); 
+  padding: 6px 15px; margin-bottom: 25px; text-transform: uppercase; 
+  background: rgba(186, 10, 20, 0.05); letter-spacing: 2px; font-weight: bold;
+}
+
+/* --- DOSSIÊ (SPOILERS E GRIDS) --- */
+.rk-fold { margin: 0 40px 30px; border: 1px solid var(--rk-border); background: var(--rk-panel); position: relative; z-index: 2; }
+.rk-fold > summary { cursor: pointer; padding: 15px; font-family: 'Cinzel', serif; text-align: center; color: var(--rk-text); letter-spacing: 2px; text-transform: uppercase; font-size: 0.9em; font-weight: 600; list-style: none; transition: 0.3s; }
+.rk-fold > summary::-webkit-details-marker { display: none; }
+.rk-fold > summary:hover { color: #fff; background: rgba(186, 10, 20, 0.05); }
+.rk-fold[open] > summary { color: var(--rk-red-pop); border-bottom: 1px solid var(--rk-border); }
+.rk-content { padding: 25px; }
+
+/* Grids Táticos */
+.rk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
+.rk-data-box { background: rgba(0,0,0,0.3); border: 1px solid var(--rk-border); padding: 12px; display: flex; flex-direction: column; gap: 4px; }
+.rk-data-lbl { font-family: 'Share Tech Mono', monospace; font-size: 0.7em; color: var(--rk-red-mid); text-transform: uppercase; }
+.rk-data-val { color: #fff; font-size: 0.9em; font-weight: 300; }
+
+.rk-act-grid { display: flex; justify-content: space-around; background: rgba(186, 10, 20, 0.05); padding: 15px; border: 1px solid var(--rk-border); margin-bottom: 30px; }
+.rk-act { text-align: center; font-family: 'Share Tech Mono', monospace; font-size: 0.75em; color: var(--rk-red-mid); }
+.rk-act span { display: block; font-family: 'Cinzel', serif; font-size: 1.8em; color: var(--rk-red-pop); margin-top: 5px; font-weight: bold; }
+
+/* Listas / Títulos */
+.rk-list-title { font-family: 'Share Tech Mono', monospace; font-size: 0.8em; color: var(--rk-red-pop); text-transform: uppercase; border-bottom: 1px dashed var(--rk-border); padding-bottom: 5px; margin: 25px 0 10px; }
+.rk-item { font-size: 0.85em; font-weight: 300; margin-bottom: 10px; padding-left: 15px; position: relative; }
+.rk-item::before { content: '>'; position: absolute; left: 0; color: var(--rk-red-mid); font-family: 'Share Tech Mono', monospace; font-weight: bold; }
+
+/* Sub-Spoilers */
+.rk-sub-fold { margin-top: 15px; border-color: var(--rk-border); background: rgba(0,0,0,0.2); }
+.rk-sub-fold > summary { padding: 10px; font-size: 0.8em; }
+.rk-sub-fold .rk-item b { color: #fff; font-weight: 600; }
+
+/* --- PISCINA DE LÍQUIDO / SANGUE (FOOTER) --- */
+.rk-pool { position: relative; height: 100px; width: 100%; margin-top: auto; z-index: 1; border-top: 2px solid var(--rk-border); background: #050202; overflow: hidden; }
+.rk-wave { position: absolute; bottom: 0; left: 0; width: 100%; height: 100%; background-repeat: repeat-x; background-position: 0 bottom; }
+/* SVGs de Onda recoloridos para tons de sangue */
+.w-1 { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,60 Q300,0 600,60 T1200,60 V120 H0 Z' fill='%234a0205' opacity='0.8'/%3E%3C/svg%3E"); background-size: 1200px 100%; animation: rk-wave-right 8s linear infinite; z-index: 3; }
+.w-2 { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,80 Q300,30 600,80 T1200,80 V120 H0 Z' fill='%2378040a' opacity='0.6'/%3E%3C/svg%3E"); background-size: 1200px 100%; animation: rk-wave-left 12s linear infinite; bottom: 5px; z-index: 2; }
+.w-3 { background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,90 Q300,50 600,90 T1200,90 V120 H0 Z' fill='%23ba0a14' opacity='0.9'/%3E%3C/svg%3E"); background-size: 1200px 100%; animation: rk-wave-right 18s linear infinite; bottom: 10px; z-index: 1; }
+
+/* Assinatura CSS */
+.rk-footer { position: absolute; bottom: 35px; width: 100%; text-align: center; z-index: 10; pointer-events: none; }
+.rk-footer::after { content: "Zenin Rikuya"; font-family: 'Cinzel', serif; font-size: 1.8em; font-weight: 800; letter-spacing: 4px; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.8), 0 0 20px var(--rk-red-pop); opacity: 0.8; }
