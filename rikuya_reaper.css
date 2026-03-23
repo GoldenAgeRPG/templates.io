@@ -1,4 +1,3 @@
-
 /* --- TEMPLATE: THE BLACK REAPER (ZENIN RIKUYA) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@600;800&family=Inter:wght@300;400;600&family=Hind:wght@400;700&family=Poppins:ital@1&family=Share+Tech+Mono&display=swap');
 
@@ -94,7 +93,7 @@
   position: relative; 
   z-index: 2; 
 }
-.rk-body b, .rk-body strong { 
+.rk-body b, .rk-body strong, .rk-content b, .rk-content strong { 
   font-family: 'Hind', sans-serif;
   font-size: 13.65px;
   color: #8D2E2E; 
@@ -106,14 +105,6 @@
   font-size: 13px;
   color: #888888; 
   font-style: italic; 
-}
-
-/* TAG POSICIONADA ACIMA DA NARRAÇÃO */
-.rk-tag { 
-  display: inline-block; font-family: 'Share Tech Mono', monospace; font-size: 0.75em; 
-  color: var(--rk-red-pop); border: 1px solid var(--rk-red-dark); 
-  padding: 6px 15px; margin-bottom: 25px; text-transform: uppercase; 
-  background: rgba(186, 10, 20, 0.05); letter-spacing: 2px; font-weight: bold;
 }
 
 /* --- DOSSIÊ (SPOILERS E GRIDS) --- */
@@ -129,6 +120,7 @@
 .rk-data-box { background: rgba(0,0,0,0.3); border: 1px solid var(--rk-border); padding: 12px; display: flex; flex-direction: column; gap: 4px; }
 .rk-data-lbl { font-family: 'Share Tech Mono', monospace; font-size: 0.7em; color: var(--rk-red-mid); text-transform: uppercase; }
 .rk-data-val { color: #fff; font-size: 0.9em; font-weight: 300; }
+.rk-data-val a { color: inherit; text-decoration: none; }
 
 .rk-act-grid { display: flex; justify-content: space-around; background: rgba(186, 10, 20, 0.05); padding: 15px; border: 1px solid var(--rk-border); margin-bottom: 30px; }
 .rk-act { text-align: center; font-family: 'Share Tech Mono', monospace; font-size: 0.75em; color: var(--rk-red-mid); }
@@ -139,10 +131,12 @@
 .rk-item { font-size: 0.85em; font-weight: 300; margin-bottom: 10px; padding-left: 15px; position: relative; }
 .rk-item::before { content: '>'; position: absolute; left: 0; color: var(--rk-red-mid); font-family: 'Share Tech Mono', monospace; font-weight: bold; }
 
+/* Texto Resumo */
+.rk-summary-text { font-size: 0.85em; font-weight: 300; margin-bottom: 15px; line-height: 1.8; text-align: justify; }
+
 /* Sub-Spoilers */
 .rk-sub-fold { margin-top: 15px; border-color: var(--rk-border); background: rgba(0,0,0,0.2); }
 .rk-sub-fold > summary { padding: 10px; font-size: 0.8em; }
-.rk-sub-fold .rk-item b { color: #fff; font-weight: 600; }
 
 /* --- PISCINA DE LÍQUIDO / SANGUE (FOOTER) --- */
 .rk-pool { position: relative; height: 100px; width: 100%; margin-top: auto; z-index: 1; border-top: 2px solid var(--rk-border); background: #050202; overflow: hidden; }
