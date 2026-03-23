@@ -130,6 +130,15 @@
 .rk-list-title { font-family: 'Share Tech Mono', monospace; font-size: 0.8em; color: var(--rk-red-pop); text-transform: uppercase; border-bottom: 1px dashed var(--rk-border); padding-bottom: 5px; margin: 25px 0 10px; }
 .rk-item { font-size: 0.85em; font-weight: 300; margin-bottom: 10px; padding-left: 15px; position: relative; }
 .rk-item::before { content: '>'; position: absolute; left: 0; color: var(--rk-red-mid); font-family: 'Share Tech Mono', monospace; font-weight: bold; }
+.rk-item { 
+  font-size: 0.85em; 
+  font-weight: 300; 
+  margin-bottom: 10px; 
+  padding-left: 15px; 
+  position: relative; 
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
 
 /* Texto Resumo */
 .rk-summary-text { font-size: 0.85em; font-weight: 300; margin-bottom: 15px; line-height: 1.8; text-align: justify; }
