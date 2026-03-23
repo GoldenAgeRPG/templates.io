@@ -139,6 +139,10 @@
   word-wrap: break-word;
   overflow-wrap: break-word;
 }
+.rk-item b, .rk-item strong {
+  font-family: inherit;
+  font-size: inherit;
+}
 
 /* Texto Resumo */
 .rk-summary-text { font-size: 0.85em; font-weight: 300; margin-bottom: 15px; line-height: 1.8; text-align: justify; }
