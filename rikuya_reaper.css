@@ -133,6 +133,10 @@
 
 /* Texto Resumo */
 .rk-summary-text { font-size: 0.85em; font-weight: 300; margin-bottom: 15px; line-height: 1.8; text-align: justify; }
+.rk-summary-text b, .rk-summary-text strong {
+  font-family: inherit;
+  font-size: inherit;
+}
 
 /* Sub-Spoilers */
 .rk-sub-fold { margin-top: 15px; border-color: var(--rk-border); background: rgba(0,0,0,0.2); }
