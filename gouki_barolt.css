@@ -1,4 +1,4 @@
-/* --- TEMPLATE: GOUKI BAROLT (V3 - GLITCH & CRACKS) --- */
+/* --- TEMPLATE: GOUKI BAROLT --- */
 @import url('https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Oswald:wght@300;400;600;700&display=swap');
 
 :root {
@@ -19,7 +19,8 @@
   background-color: var(--gb-bg);
   background-image: radial-gradient(circle at 50% 0%, rgba(42, 123, 189, 0.05) 0%, transparent 60%);
   border: 1px solid var(--gb-border);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(91, 50, 135, 0.1);
+  border-radius: 35px 0 35px 0; /* Quebra o formato retangular padrão */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), inset 0 0 20px rgba(91, 50, 135, 0.1);
   position: relative;
   overflow: hidden;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -101,26 +102,44 @@
   pointer-events: none;
 }
 
-/* --- CITAÇÃO (GLITCH TEXT) --- */
+/* --- CITAÇÃO (TEXTO PURO + ASPAS) --- */
 .gb-quote-wrapper {
-  margin: 25px 35px 15px;
-  padding: 12px 20px;
-  border-left: 4px solid var(--gb-blue-glow);
-  background: linear-gradient(90deg, rgba(22, 17, 31, 0.8) 0%, transparent 90%);
+  margin: 15px auto 20px;
+  text-align: center;
   position: relative;
   z-index: 2;
+  max-width: 85%;
 }
 
 .gb-quote-text {
   font-family: 'Oswald', sans-serif;
-  font-size: 1.15em;
-  font-weight: 400;
+  font-size: 0.9em;
+  font-weight: 300;
   color: #f0edf2;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   margin: 0;
-  /* Efeito Glitch idêntico à imagem de referência */
   text-shadow: 1px 0px 0px rgba(255, 0, 0, 0.7), -1px 0px 0px rgba(0, 200, 255, 0.7);
+}
+
+.gb-quote-text::before {
+  content: '“';
+  color: var(--gb-blue-glow);
+  font-size: 1.6em;
+  line-height: 0;
+  vertical-align: -0.2em;
+  margin-right: 6px;
+  text-shadow: none;
+}
+
+.gb-quote-text::after {
+  content: '”';
+  color: var(--gb-blue-glow);
+  font-size: 1.6em;
+  line-height: 0;
+  vertical-align: -0.2em;
+  margin-left: 6px;
+  text-shadow: none;
 }
 
 /* --- STATUS --- */
