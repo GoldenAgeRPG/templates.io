@@ -1,25 +1,26 @@
-/* --- TEMPLATE: GOUKI BAROLT --- */
-@import url('https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Oswald:wght@600;700&display=swap');
+/* --- TEMPLATE: GOUKI BAROLT (V2) --- */
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@500;700&family=Oswald:wght@300;400;600;700&display=swap');
 
 :root {
-  --gb-bg: #0d0a12;
-  --gb-panel: #16111f;
+  --gb-bg: #0b090f;
+  --gb-panel: #14101c;
   --gb-purple: #5b3287;
-  --gb-purple-dark: #32194f;
+  --gb-purple-dark: #2a1640;
   --gb-blue: #2a7bbd;
   --gb-blue-glow: #4ca1e6;
-  --gb-text: #c5bccc;
-  --gb-border: #231833;
+  --gb-text: #d1cbd6;
+  --gb-border: #2a1b3d;
 }
 
 /* --- CONTAINER PRINCIPAL --- */
 .gb-wrap {
-  max-width: 600px;
+  max-width: 620px;
   width: 95%;
   margin: 40px auto;
-  background: radial-gradient(circle at top right, var(--gb-panel) 0%, var(--gb-bg) 70%);
+  background-color: var(--gb-bg);
+  background-image: radial-gradient(circle at 50% 0%, rgba(42, 123, 189, 0.05) 0%, transparent 60%);
   border: 1px solid var(--gb-border);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), inset 0 0 40px rgba(42, 123, 189, 0.05);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(91, 50, 135, 0.2);
   position: relative;
   overflow: hidden;
   font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
@@ -28,98 +29,143 @@
   flex-direction: column;
 }
 
-.gb-wrap * {
-  box-sizing: border-box;
-}
+.gb-wrap * { box-sizing: border-box; }
 
-/* --- BANNER --- */
-.gb-banner {
-  width: 100%;
-  height: 250px;
+/* --- HEADER --- */
+.gb-header {
+  padding: 35px 20px 25px;
+  text-align: center;
   position: relative;
   z-index: 2;
+  background: linear-gradient(180deg, rgba(0,0,0,0.6) 0%, transparent 100%);
+}
+
+.gb-title {
+  font-family: 'Teko', sans-serif;
+  font-size: 3.2em;
+  color: #fff;
+  letter-spacing: 2px;
+  margin: 0;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: 0 0 15px rgba(91, 50, 135, 0.8), 2px 2px 0px #000;
+}
+
+.gb-sub {
+  font-family: 'Oswald', sans-serif;
+  color: var(--gb-blue-glow);
+  letter-spacing: 5px;
+  font-size: 0.8em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 5px;
+}
+
+/* --- BANNER COM SCANLINES --- */
+.gb-banner {
+  width: 100%;
+  height: 220px;
+  position: relative;
+  z-index: 2;
+  border-top: 2px solid var(--gb-purple-dark);
   border-bottom: 2px solid var(--gb-purple-dark);
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.8);
 }
 
 .gb-banner img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: contrast(1.1) brightness(0.85);
+  filter: contrast(1.15) brightness(0.8) grayscale(20%);
 }
 
-/* --- CITAÇÕES --- */
-.gb-quote {
-  text-align: center;
-  font-family: 'Teko', sans-serif;
-  font-size: 1.8em;
-  color: var(--gb-blue-glow);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin: 15px 20px;
+.gb-banner::after {
+  content: ''; position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.25) 2px, rgba(0,0,0,0.25) 4px);
+  pointer-events: none;
+}
+
+/* --- CITAÇÃO ESTILIZADA --- */
+.gb-quote-box {
+  background: linear-gradient(90deg, rgba(42, 27, 61, 0.7) 0%, transparent 100%);
+  border-left: 4px solid var(--gb-blue-glow);
+  padding: 15px 20px;
+  margin: 25px 35px 15px;
   position: relative;
   z-index: 2;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9);
-  line-height: 1.2;
+  box-shadow: inset 20px 0 30px rgba(0,0,0,0.5);
 }
 
-.gb-quote::before, .gb-quote::after {
-  content: '"';
-  color: var(--gb-purple);
+.gb-quote-text {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 300;
+  font-size: 1.1em;
+  color: #e6e0eb;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.4;
+  text-shadow: 1px 1px 2px #000;
 }
 
 /* --- STATUS --- */
 .gb-vitals {
-  display: flex;
-  gap: 15px;
-  padding: 15px 30px;
-  position: relative;
-  z-index: 2;
-  background: rgba(0, 0, 0, 0.6);
-  border-bottom: 1px solid var(--gb-border);
+  display: flex; gap: 15px; padding: 15px 35px; position: relative; z-index: 2;
+  background: rgba(0, 0, 0, 0.4); border-bottom: 1px solid var(--gb-border);
 }
 
-.gb-stat { flex: 1; display: flex; flex-direction: column; gap: 5px; }
-.gb-stat-head { display: flex; justify-content: space-between; font-family: 'Oswald', sans-serif; font-size: 0.85em; color: var(--gb-purple); letter-spacing: 1px; }
-.gb-val { color: #fff; }
-.gb-track { width: 100%; height: 5px; background: #0a0a0a; border-radius: 2px; overflow: hidden; border: 1px solid #000; }
-.gb-fill { height: 100%; background: linear-gradient(90deg, var(--gb-purple), var(--gb-blue)); box-shadow: 0 0 8px var(--gb-blue); transition: width 0.5s ease; }
+.gb-stat { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.gb-stat-head { display: flex; justify-content: space-between; font-family: 'Oswald', sans-serif; font-size: 0.85em; color: var(--gb-purple); letter-spacing: 1px; font-weight: 600; }
+.gb-val { color: #fff; font-weight: 400; }
+.gb-track { width: 100%; height: 4px; background: #000; border-radius: 2px; overflow: hidden; box-shadow: inset 0 1px 3px rgba(0,0,0,0.8); }
+.gb-fill { height: 100%; background: linear-gradient(90deg, var(--gb-purple), var(--gb-blue-glow)); box-shadow: 0 0 10px var(--gb-purple); transition: width 0.5s ease; }
 
 /* --- CORPO E TEXTO --- */
-.gb-body { padding: 25px 35px; font-size: 14px; line-height: 1.7; text-align: justify; position: relative; z-index: 2; }
-.gb-body b, .gb-body strong { color: var(--gb-blue-glow); font-weight: bold; }
-.gb-body i, .gb-body em { color: #8c7e99; }
+.gb-body {
+  padding: 20px 35px 30px;
+  font-size: 14px;
+  line-height: 1.7;
+  text-align: justify;
+  position: relative;
+  z-index: 2;
+}
 
-/* --- LINHA DE ENCERRAMENTO --- */
-.gb-endline { height: 2px; background: linear-gradient(90deg, transparent, var(--gb-purple), var(--gb-blue), transparent); margin: 20px auto; width: 80%; position: relative; z-index: 2; }
+.gb-body b, .gb-body strong { color: var(--gb-blue-glow); font-weight: bold; text-shadow: 0 0 2px rgba(76, 161, 230, 0.3); }
+.gb-body i, .gb-body em { color: #9c8ea8; }
 
-/* --- DOSSIÊ --- */
-.gb-fold { margin: 0 35px 25px; border: 1px solid var(--gb-border); background: var(--gb-panel); position: relative; z-index: 2; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
-.gb-fold > summary { cursor: pointer; padding: 12px; font-family: 'Oswald', sans-serif; text-align: center; color: var(--gb-text); letter-spacing: 2px; text-transform: uppercase; font-size: 0.95em; list-style: none; transition: 0.3s; background: linear-gradient(90deg, transparent, rgba(91, 50, 135, 0.1), transparent); }
+/* --- DOSSIÊ / FOLDERS --- */
+.gb-fold { margin: 0 35px 25px; border: 1px solid var(--gb-border); background: var(--gb-panel); position: relative; z-index: 2; transition: border-color 0.3s, box-shadow 0.3s; }
+.gb-fold:hover { border-color: var(--gb-purple); box-shadow: 0 0 15px rgba(91, 50, 135, 0.2); }
+.gb-fold > summary { cursor: pointer; padding: 12px; font-family: 'Oswald', sans-serif; text-align: center; color: var(--gb-text); letter-spacing: 2px; text-transform: uppercase; font-size: 0.95em; list-style: none; transition: 0.3s; background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.4), transparent); font-weight: 600; }
 .gb-fold > summary::-webkit-details-marker { display: none; }
-.gb-fold > summary:hover { color: #fff; text-shadow: 0 0 5px var(--gb-blue); }
-.gb-fold[open] > summary { color: var(--gb-blue-glow); border-bottom: 1px solid var(--gb-border); }
+.gb-fold > summary:hover { color: #fff; text-shadow: 0 0 8px var(--gb-blue-glow); }
+.gb-fold[open] > summary { color: var(--gb-blue-glow); border-bottom: 1px solid var(--gb-border); background: rgba(0,0,0,0.6); }
 .gb-content { padding: 20px; font-size: 13px; }
 
 /* Grids Táticos */
 .gb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-.gb-data-box { background: rgba(0, 0, 0, 0.4); border-left: 2px solid var(--gb-purple); padding: 8px 12px; display: flex; flex-direction: column; }
-.gb-data-lbl { font-family: 'Oswald', sans-serif; font-size: 0.75em; color: var(--gb-purple); text-transform: uppercase; }
+.gb-data-box { background: rgba(0, 0, 0, 0.5); border-left: 2px solid var(--gb-purple); padding: 8px 12px; display: flex; flex-direction: column; transition: border-color 0.2s; }
+.gb-data-box:hover { border-color: var(--gb-blue-glow); }
+.gb-data-lbl { font-family: 'Oswald', sans-serif; font-size: 0.75em; color: var(--gb-purple); text-transform: uppercase; font-weight: 600; }
 .gb-data-val { color: #fff; font-size: 0.9em; }
-.gb-data-val a { color: var(--gb-blue-glow); text-decoration: none; }
+.gb-data-val a { color: var(--gb-blue-glow); text-decoration: none; transition: 0.2s; }
+.gb-data-val a:hover { text-shadow: 0 0 5px var(--gb-blue-glow); }
 
 /* Ações */
-.gb-act-grid { display: flex; justify-content: space-around; background: rgba(42, 123, 189, 0.05); padding: 12px; border: 1px solid var(--gb-border); margin-bottom: 20px; }
-.gb-act { text-align: center; font-family: 'Oswald', sans-serif; font-size: 0.8em; color: var(--gb-text); }
-.gb-act span { display: block; font-family: 'Teko', sans-serif; font-size: 2em; color: var(--gb-blue-glow); margin-top: 2px; line-height: 1; }
+.gb-act-grid { display: flex; justify-content: space-around; background: linear-gradient(180deg, rgba(42, 123, 189, 0.05) 0%, transparent 100%); padding: 15px 10px; border: 1px solid var(--gb-border); margin-bottom: 20px; border-radius: 4px; }
+.gb-act { text-align: center; font-family: 'Oswald', sans-serif; font-size: 0.8em; color: var(--gb-text); font-weight: 600; }
+.gb-act span { display: block; font-family: 'Teko', sans-serif; font-size: 2.2em; color: var(--gb-blue-glow); margin-top: 2px; line-height: 1; text-shadow: 0 2px 5px #000; }
 
-/* Listas */
-.gb-list-title { font-family: 'Oswald', sans-serif; font-size: 0.85em; color: var(--gb-blue); text-transform: uppercase; border-bottom: 1px solid var(--gb-border); padding-bottom: 4px; margin: 15px 0 8px; }
-.gb-item { margin-bottom: 6px; padding-left: 12px; position: relative; }
-.gb-item::before { content: '■'; position: absolute; left: 0; top: 1px; font-size: 0.7em; color: var(--gb-purple); }
-.gb-summary-text { font-size: 0.9em; font-weight: 300; margin-bottom: 15px; line-height: 1.6; text-align: justify; }
+/* Listas e Blocos de Texto */
+.gb-list-title { font-family: 'Oswald', sans-serif; font-size: 0.85em; color: var(--gb-blue); text-transform: uppercase; border-bottom: 1px dashed var(--gb-border); padding-bottom: 4px; margin: 15px 0 10px; font-weight: 600; }
+.gb-item { margin-bottom: 8px; padding-left: 15px; position: relative; line-height: 1.5; }
+.gb-item::before { content: '>'; position: absolute; left: 0; top: 0px; font-size: 0.8em; color: var(--gb-purple); font-weight: bold; font-family: 'Courier New', Courier, monospace; }
+.gb-summary-text { font-size: 0.9em; margin-bottom: 15px; line-height: 1.6; text-align: justify; background: rgba(0,0,0,0.3); padding: 10px; border-radius: 4px; border-left: 2px solid var(--gb-border); }
+
+/* Sub-Spoilers (Inventário/Técnicas) */
+.gb-sub-fold { margin-top: 15px; border-color: transparent; background: rgba(0,0,0,0.3); box-shadow: none; border-left: 2px solid var(--gb-border); }
+.gb-sub-fold:hover { box-shadow: none; border-left-color: var(--gb-blue-glow); }
+.gb-sub-fold > summary { padding: 10px; font-size: 0.85em; background: transparent; text-align: left; }
 
 /* --- ASSINATURA --- */
-.gb-footer { text-align: center; padding: 15px 0 25px; position: relative; z-index: 2; background: linear-gradient(0deg, #000 0%, transparent 100%); }
-.gb-footer::after { content: "GOUKI BAROLT"; font-family: 'Oswald', sans-serif; font-size: 1.5em; font-weight: 700; letter-spacing: 5px; color: #fff; text-transform: uppercase; text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8), 0 0 15px var(--gb-purple); display: block; }
+.gb-footer { text-align: center; padding: 25px 0 35px; position: relative; z-index: 2; background: linear-gradient(0deg, #050408 0%, transparent 100%); border-top: 1px solid var(--gb-border); margin-top: 20px; }
+.gb-footer::after { content: "GOUKI BAROLT"; font-family: 'Teko', sans-serif; font-size: 2em; letter-spacing: 8px; color: #fff; text-transform: uppercase; text-shadow: 0 0 20px rgba(91, 50, 135, 0.8), 2px 2px 0px #000; display: block; opacity: 0.9; }
