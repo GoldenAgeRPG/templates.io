@@ -1,0 +1,113 @@
+/* --- TEMPLATE: DEATH PAINTING - BOOGIE WOOGIE (V2 - COM DOSSIÊ) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Permanent+Marker&family=Nunito:ital,wght@0,400;0,700;0,800;1,400;1,700&display=swap');
+
+:root {
+  --dp-bg: #050505;
+  --dp-panel: #0d0d0d;
+  --dp-green: #00ff41;
+  --dp-text: #ccc;
+  --dp-border-solid: #1f1f1f;
+}
+
+/* Animação: Giro do Ícone (Horário e Constante) */
+@keyframes icon-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* Animação: Pulsação Venenosa */
+@keyframes toxic-breathe {
+  0%, 100% { box-shadow: 0 0 15px rgba(0, 255, 65, 0.1); border-color: #1a1a1a; }
+  50% { box-shadow: 0 0 30px rgba(0, 255, 65, 0.25); border-color: var(--dp-green); }
+}
+
+/* CONTAINER PRINCIPAL */
+.bw-container {
+  box-sizing: border-box;
+  max-width: 650px;
+  width: 95%;
+  margin: 50px auto;
+  background-color: var(--dp-bg);
+  background-image: radial-gradient(circle at 30% 20%, #0a110a 0%, #050505 70%);
+  border: 3px solid #1a1a1a;
+  box-shadow: inset 0 0 0 5px var(--dp-border-solid);
+  border-radius: 40px 120px 40px 120px; 
+  color: var(--dp-text);
+  font-family: 'Nunito', sans-serif;
+  position: relative;
+  overflow: hidden;
+  animation: toxic-breathe 6s infinite ease-in-out;
+}
+.bw-container * { box-sizing: border-box; }
+
+/* HEADER */
+.bw-header { text-align: center; padding: 30px 20px 15px 20px; position: relative; border-bottom: none; }
+.bw-icon { width: 45px; height: 45px; margin-bottom: 8px; filter: drop-shadow(0 0 5px var(--dp-green)); animation: icon-spin 4s linear infinite; transform-origin: center; }
+.bw-icon path { fill: var(--dp-green); }
+
+.bw-title { font-family: 'Cinzel', serif; font-weight: 900; font-size: 2.2em; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin: 0; text-shadow: 0 2px 5px #000; line-height: 1; }
+.bw-subtitle { font-family: 'Cinzel', serif; font-size: 0.75em; color: var(--dp-green); text-transform: uppercase; letter-spacing: 5px; margin-top: 5px; font-weight: 700; opacity: 0.9; }
+
+/* IMAGEM */
+.bw-image-frame { width: 100%; margin: 0; height: 300px; position: relative; overflow: hidden; background: transparent; mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%); -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%); }
+.bw-image-frame::after { content: ''; position: absolute; inset: 0; box-shadow: inset 5px 0 0 0 var(--dp-border-solid), inset -5px 0 0 0 var(--dp-border-solid), inset 0px 25px 20px -5px #050505; z-index: 2; pointer-events: none; }
+.bw-image-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; position: relative; z-index: 1; transition: 0.5s transform; }
+.bw-container:hover .bw-image-frame img { transform: scale(1.05); }
+
+/* STATUS */
+.bw-stats-panel { padding: 10px 45px; display: flex; flex-direction: column; gap: 8px; margin-top: 5px; position: relative; z-index: 5; }
+.bw-stat-row { display: flex; align-items: center; gap: 15px; }
+.bw-label { font-family: 'Permanent Marker', cursive; color: var(--dp-green); font-size: 1.1em; width: 35px; text-align: right; text-shadow: none; }
+.bw-bar-bg { flex-grow: 1; height: 12px; background: #111; border-radius: 10px; border: 1px solid #333; overflow: hidden; position: relative; }
+.bw-fill { height: 100%; width: 0%; background: var(--dp-green); box-shadow: 0 0 8px var(--dp-green); border-radius: 10px; transition: width 0.6s ease; }
+.bw-val { font-family: 'Nunito', sans-serif; font-weight: 800; font-size: 0.9em; min-width: 80px; text-align: right; color: #fff; text-shadow: none; }
+
+/* CONTEÚDO */
+.bw-content { padding: 20px 50px 30px; font-size: 1.1em; line-height: 1.7; color: var(--dp-text); text-align: justify; }
+.bw-content b, .bw-content strong { color: var(--dp-green); font-weight: 800; }
+.bw-content i, .bw-content em { color: #fff; font-family: 'Nunito', sans-serif; font-weight: 700; font-style: italic; font-size: inherit; text-transform: none; letter-spacing: normal; }
+
+/* --- DOSSIÊ / FOLDERS (NOVAS FUNÇÕES) --- */
+.bw-fold { margin: 0 50px 30px; border: 1px solid var(--dp-border-solid); background: rgba(0,0,0,0.6); border-radius: 10px; position: relative; z-index: 2; transition: border-color 0.3s; }
+.bw-fold:hover { border-color: rgba(0, 255, 65, 0.4); }
+.bw-fold > summary { cursor: pointer; padding: 15px; font-family: 'Cinzel', serif; text-align: center; color: var(--dp-text); letter-spacing: 2px; text-transform: uppercase; font-size: 0.95em; list-style: none; transition: 0.3s; background: rgba(255, 255, 255, 0.02); border-radius: 10px; font-weight: 700; }
+.bw-fold > summary::-webkit-details-marker { display: none; }
+.bw-fold > summary:hover { color: #fff; text-shadow: 0 0 8px var(--dp-green); }
+.bw-fold[open] > summary { color: var(--dp-green); border-bottom: 1px solid var(--dp-border-solid); border-radius: 10px 10px 0 0; background: rgba(0, 255, 65, 0.05); }
+.bw-content-fold { padding: 25px; font-size: 0.95em; font-family: 'Nunito', sans-serif; }
+
+/* Grids Táticos */
+.bw-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
+.bw-data-box { background: rgba(255, 255, 255, 0.02); border-left: 2px solid var(--dp-green); padding: 10px 12px; display: flex; flex-direction: column; transition: 0.2s; }
+.bw-data-box:hover { background: rgba(0, 255, 65, 0.05); }
+.bw-data-lbl { font-family: 'Cinzel', serif; font-size: 0.75em; color: var(--dp-green); text-transform: uppercase; font-weight: 900; letter-spacing: 1px; }
+.bw-data-val { color: #fff; font-size: 0.9em; margin-top: 2px; }
+.bw-data-val a { color: var(--dp-green); text-decoration: none; transition: 0.2s; }
+.bw-data-val a:hover { text-shadow: 0 0 5px var(--dp-green); }
+
+/* Ações */
+.bw-act-grid { display: flex; justify-content: space-around; background: rgba(0, 255, 65, 0.03); padding: 15px; border: 1px solid var(--dp-border-solid); margin-bottom: 25px; border-radius: 8px; }
+.bw-act { text-align: center; font-family: 'Cinzel', serif; font-size: 0.85em; color: var(--dp-text); font-weight: 700; letter-spacing: 1px; }
+.bw-act span { display: block; font-family: 'Permanent Marker', cursive; font-size: 2.2em; color: var(--dp-green); margin-top: 5px; line-height: 1; text-shadow: 0 2px 5px #000; }
+
+/* Listas e Blocos de Texto */
+.bw-list-title { font-family: 'Cinzel', serif; font-size: 0.85em; color: var(--dp-green); text-transform: uppercase; border-bottom: 1px dashed var(--dp-border-solid); padding-bottom: 4px; margin: 20px 0 10px; font-weight: 900; letter-spacing: 1px; }
+.bw-item { margin-bottom: 8px; padding-left: 15px; position: relative; line-height: 1.5; }
+.bw-item::before { content: '>'; position: absolute; left: 0; top: 0px; font-size: 0.9em; color: var(--dp-green); font-weight: 900; }
+.bw-summary-text { font-size: 0.95em; margin-bottom: 15px; line-height: 1.6; text-align: justify; background: rgba(255,255,255,0.02); padding: 12px; border-radius: 8px; border-left: 2px solid var(--dp-border-solid); }
+
+/* Sub-Spoilers (Inventário/Técnicas) */
+.bw-sub-fold { margin-top: 15px; border-color: transparent; background: rgba(255,255,255,0.02); border-left: 2px solid var(--dp-border-solid); border-radius: 0 8px 8px 0; }
+.bw-sub-fold:hover { border-left-color: var(--dp-green); }
+.bw-sub-fold > summary { padding: 12px; font-size: 0.85em; background: transparent; text-align: left; }
+
+/* ASSINATURA */
+.bw-signature { text-align: right; padding: 0 60px 30px 60px; height: auto; }
+.bw-signature::after { content: 'REKKEN KAGAMI'; font-family: 'Permanent Marker', cursive; font-size: 1.5em; color: #111; text-shadow: -1px -1px 0 var(--dp-green), 1px -1px 0 var(--dp-green), -1px 1px 0 var(--dp-green), 1px 1px 0 var(--dp-green); transform: rotate(-2deg); display: inline-block; opacity: 0.8; }
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .bw-container { margin: 20px auto; border-radius: 20px 60px 20px 60px; }
+  .bw-content, .bw-stats-panel, .bw-signature { padding-left: 25px; padding-right: 25px; }
+  .bw-fold { margin: 10px 25px 30px; }
+}
