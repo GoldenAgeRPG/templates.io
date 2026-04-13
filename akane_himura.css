@@ -1,0 +1,146 @@
+/* --- TEMPLATE: AKANE HIMURA (MAKIMA VIBE) --- */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Inter:wght@300;400;600&family=Cinzel:wght@600;800&display=swap');
+
+:root {
+  --mk-bg: #0a0808;
+  --mk-panel: #120e0e;
+  --mk-red: #a80f14;
+  --mk-red-glow: #e61920;
+  --mk-red-dark: #3b0608;
+  --mk-text: #d9d0d0;
+  --mk-border: #2e1516;
+}
+
+/* Pulsação Opressiva Sutil */
+@keyframes mk-control-aura {
+  0%, 100% { box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), inset 0 0 15px rgba(168, 15, 20, 0.05); border-color: var(--mk-border); }
+  50% { box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), inset 0 0 30px rgba(168, 15, 20, 0.15); border-color: #4a1012; }
+}
+
+/* CONTAINER PRINCIPAL */
+.mk-wrap {
+  max-width: 620px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--mk-bg);
+  background-image: linear-gradient(180deg, #0f0a0a 0%, var(--mk-bg) 100%);
+  border: 1px solid var(--mk-border);
+  position: relative;
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  color: var(--mk-text);
+  display: flex;
+  flex-direction: column;
+  animation: mk-control-aura 6s infinite ease-in-out;
+}
+
+.mk-wrap * { box-sizing: border-box; }
+
+/* HEADER */
+.mk-header {
+  padding: 40px 20px 25px;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.mk-icon {
+  width: 35px; height: 35px;
+  margin-bottom: 15px;
+  color: var(--mk-red);
+  filter: drop-shadow(0 0 5px rgba(168, 15, 20, 0.6));
+}
+.mk-icon path { fill: currentColor; }
+
+.mk-title {
+  font-family: 'Cinzel', serif;
+  font-weight: 800;
+  font-size: 2.4em;
+  color: #fff;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin: 0;
+  text-shadow: 0 2px 10px rgba(168, 15, 20, 0.5);
+  line-height: 1;
+}
+
+.mk-sub {
+  font-family: 'Inter', sans-serif;
+  color: var(--mk-red);
+  letter-spacing: 6px;
+  font-size: 0.75em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+/* BANNER */
+.mk-banner-wrapper { padding: 0 30px; position: relative; z-index: 2; margin-top: 10px; }
+.mk-banner {
+  width: 100%;
+  height: 180px;
+  position: relative;
+  border-top: 1px solid var(--mk-red);
+  border-bottom: 1px solid var(--mk-red);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.8);
+  overflow: hidden;
+}
+.mk-banner img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1) brightness(0.85); transition: transform 0.5s ease; }
+.mk-wrap:hover .mk-banner img { transform: scale(1.03); }
+.mk-banner::after { content: ''; position: absolute; inset: 0; box-shadow: inset 0 0 20px rgba(0,0,0,0.9); pointer-events: none; }
+
+/* CITAÇÃO */
+.mk-quote-wrapper { margin: 25px 40px 15px; text-align: center; position: relative; z-index: 2; border-top: 1px solid var(--mk-red-dark); border-bottom: 1px solid var(--mk-red-dark); padding: 15px 0; background: linear-gradient(90deg, transparent, rgba(168, 15, 20, 0.05), transparent); }
+.mk-quote-text { font-family: 'Playfair Display', serif; font-size: 1.1em; font-style: italic; font-weight: 400; color: #f0edf2; letter-spacing: 1px; margin: 0; }
+
+/* STATUS */
+.mk-vitals { display: flex; gap: 15px; padding: 15px 40px; position: relative; z-index: 2; background: rgba(0, 0, 0, 0.4); border-top: 1px solid var(--mk-border); border-bottom: 1px solid var(--mk-border); }
+.mk-stat { flex: 1; display: flex; flex-direction: column; gap: 6px; }
+.mk-stat-head { display: flex; justify-content: space-between; font-family: 'Cinzel', serif; font-size: 0.85em; color: var(--mk-red); letter-spacing: 1px; font-weight: 800; }
+.mk-val { color: #fff; font-family: 'Inter', sans-serif; font-weight: 400; }
+.mk-track { width: 100%; height: 3px; background: #000; overflow: hidden; }
+.mk-fill { height: 100%; background: var(--mk-red); box-shadow: 0 0 8px var(--mk-red-glow); transition: width 0.5s ease; }
+
+/* CORPO E TEXTO */
+.mk-body { padding: 30px 40px; font-size: 14px; line-height: 1.8; text-align: justify; position: relative; z-index: 2; font-weight: 300; }
+.mk-body b, .mk-body strong { color: var(--mk-red-glow); font-family: 'Playfair Display', serif; font-weight: 700; font-size: 1.05em; letter-spacing: 0.5px; }
+.mk-body i, .mk-body em { color: #fff; font-family: 'Playfair Display', serif; font-style: italic; }
+
+/* DOSSIÊ / FOLDERS */
+.mk-fold { margin: 0 40px 30px; border: 1px solid var(--mk-border); background: var(--mk-panel); position: relative; z-index: 2; transition: border-color 0.3s; }
+.mk-fold:hover { border-color: var(--mk-red); }
+.mk-fold > summary { cursor: pointer; padding: 15px; font-family: 'Cinzel', serif; text-align: center; color: var(--mk-text); letter-spacing: 2px; text-transform: uppercase; font-size: 0.95em; list-style: none; transition: 0.3s; background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.4), transparent); font-weight: 600; }
+.mk-fold > summary::-webkit-details-marker { display: none; }
+.mk-fold > summary:hover { color: #fff; text-shadow: 0 0 8px var(--mk-red); }
+.mk-fold[open] > summary { color: var(--mk-red-glow); border-bottom: 1px solid var(--mk-border); background: rgba(0,0,0,0.8); }
+.mk-content-fold { padding: 25px; font-size: 0.95em; font-family: 'Inter', sans-serif; font-weight: 300; }
+
+/* Grids Táticos */
+.mk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
+.mk-data-box { background: rgba(0, 0, 0, 0.3); border-left: 2px solid var(--mk-red); padding: 10px 12px; display: flex; flex-direction: column; transition: 0.2s; }
+.mk-data-box:hover { background: rgba(168, 15, 20, 0.05); }
+.mk-data-lbl { font-family: 'Cinzel', serif; font-size: 0.75em; color: var(--mk-red); text-transform: uppercase; font-weight: 800; letter-spacing: 1px; }
+.mk-data-val { color: #fff; font-size: 0.9em; margin-top: 2px; }
+.mk-data-val a { color: var(--mk-red-glow); text-decoration: none; transition: 0.2s; }
+.mk-data-val a:hover { text-shadow: 0 0 5px var(--mk-red-glow); }
+
+/* Ações */
+.mk-act-grid { display: flex; justify-content: space-around; background: rgba(168, 15, 20, 0.03); padding: 15px; border: 1px solid var(--mk-border); margin-bottom: 25px; }
+.mk-act { text-align: center; font-family: 'Cinzel', serif; font-size: 0.85em; color: var(--mk-text); font-weight: 600; letter-spacing: 1px; }
+.mk-act span { display: block; font-family: 'Playfair Display', serif; font-size: 2em; font-weight: 700; color: var(--mk-red-glow); margin-top: 5px; line-height: 1; text-shadow: 0 2px 5px #000; }
+
+/* Listas e Blocos de Texto */
+.mk-list-title { font-family: 'Cinzel', serif; font-size: 0.85em; color: var(--mk-red); text-transform: uppercase; border-bottom: 1px solid var(--mk-border); padding-bottom: 4px; margin: 20px 0 10px; font-weight: 800; letter-spacing: 1px; }
+.mk-item { margin-bottom: 8px; padding-left: 15px; position: relative; line-height: 1.5; }
+.mk-item::before { content: '♦'; position: absolute; left: 0; top: 0px; font-size: 0.8em; color: var(--mk-red-dark); font-weight: 900; }
+.mk-summary-text { font-size: 0.95em; margin-bottom: 15px; line-height: 1.6; text-align: justify; background: rgba(0,0,0,0.2); padding: 15px; border-left: 2px solid var(--mk-red-dark); position: relative; }
+
+/* Sub-Spoilers */
+.mk-sub-fold { margin-top: 15px; border-color: var(--mk-border); background: transparent; border-left: 2px solid var(--mk-red-dark); border-right: none; border-top: none; border-bottom: none; }
+.mk-sub-fold:hover { border-left-color: var(--mk-red); }
+.mk-sub-fold > summary { padding: 12px; font-size: 0.85em; background: rgba(0,0,0,0.4); text-align: left; border: 1px solid var(--mk-border); }
+.mk-sub-fold[open] > summary { border-bottom: 1px solid var(--mk-border); background: rgba(168, 15, 20, 0.05); }
+
+/* ASSINATURA */
+.mk-signature { text-align: center; padding: 10px 40px 40px; position: relative; z-index: 2; }
+.mk-signature::after { content: 'AKANE HIMURA'; font-family: 'Cinzel', serif; font-weight: 800; font-size: 1.2em; color: #fff; letter-spacing: 8px; text-shadow: 0 0 15px rgba(168, 15, 20, 0.8); display: block; opacity: 0.8; border-top: 1px solid var(--mk-red-dark); padding-top: 20px; width: 60%; margin: 0 auto; }
