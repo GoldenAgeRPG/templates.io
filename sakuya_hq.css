@@ -1,0 +1,305 @@
+/* --- TEMPLATE: SAKUYA REINA (COMIC BOOK / HQ STYLE) --- */
+@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&display=swap');
+
+:root {
+  --hq-bg: #fdf6e3; /* Cor de página de quadrinho vintage */
+  --hq-dots: #e6dec8;
+  --hq-black: #111111;
+  --hq-white: #ffffff;
+  --hq-red: #e63946;
+  --hq-blue: #457b9d;
+  --hq-yellow: #ffb703;
+  --hq-green: #2a9d8f;
+  --hq-border: 4px solid var(--hq-black);
+  --hq-shadow: 6px 6px 0px var(--hq-black);
+}
+
+/* CONTAINER PRINCIPAL (Com textura Halftone/Retícula) */
+.hq-wrap {
+  max-width: 650px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--hq-bg);
+  background-image: 
+    radial-gradient(var(--hq-dots) 20%, transparent 20%), 
+    radial-gradient(var(--hq-dots) 20%, transparent 20%);
+  background-size: 10px 10px;
+  background-position: 0 0, 5px 5px;
+  border: var(--hq-border);
+  box-shadow: 10px 10px 0px rgba(0,0,0,0.8);
+  position: relative;
+  font-family: 'Patrick Hand', cursive;
+  color: var(--hq-black);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  gap: 15px;
+}
+
+.hq-wrap * { box-sizing: border-box; }
+
+/* HEADER E TÍTULO */
+.hq-header {
+  text-align: center;
+  position: relative;
+  background: var(--hq-white);
+  border: var(--hq-border);
+  box-shadow: var(--hq-shadow);
+  padding: 15px 10px;
+  transform: rotate(-1deg);
+  margin-bottom: 5px;
+}
+
+.hq-title {
+  font-family: 'Bangers', cursive;
+  font-size: 3.5em;
+  color: var(--hq-yellow);
+  letter-spacing: 3px;
+  margin: 0;
+  line-height: 1;
+  text-transform: uppercase;
+  /* Efeito 3D Comic */
+  text-shadow: 
+    -2px -2px 0 #000,  
+     2px -2px 0 #000,
+    -2px  2px 0 #000,
+     2px  2px 0 #000,
+     4px  4px 0 var(--hq-red),
+     6px  6px 0 #000;
+}
+
+.hq-sub {
+  font-family: 'Bangers', cursive;
+  color: var(--hq-white);
+  background: var(--hq-black);
+  display: inline-block;
+  padding: 2px 10px;
+  font-size: 1.2em;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transform: rotate(1deg);
+  margin-top: 10px;
+}
+
+/* BANNER (Painel de Quadrinho) */
+.hq-banner-wrapper {
+  position: relative;
+}
+
+.hq-banner {
+  width: 100%;
+  height: 200px;
+  border: var(--hq-border);
+  box-shadow: var(--hq-shadow);
+  overflow: hidden;
+  background: var(--hq-white);
+}
+
+.hq-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: contrast(1.1) saturate(1.2); /* Deixa as cores mais estouradas estilo HQ */
+}
+
+/* STATUS BARS (HP/EA/SAN) */
+.hq-vitals {
+  display: flex;
+  gap: 15px;
+  position: relative;
+}
+
+.hq-stat {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: var(--hq-white);
+  border: var(--hq-border);
+  box-shadow: 4px 4px 0px var(--hq-black);
+  padding: 8px 12px;
+}
+
+/* Cores específicas para os painéis de status */
+.hq-stat:nth-child(1) { background: #ffe5e5; }
+.hq-stat:nth-child(2) { background: #e5f1ff; }
+.hq-stat:nth-child(3) { background: #fffae5; }
+
+.hq-stat-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: 'Bangers', cursive;
+  font-size: 1.2em;
+  letter-spacing: 1px;
+  margin-bottom: 5px;
+}
+
+.hq-stat:nth-child(1) .hq-stat-head { color: var(--hq-red); }
+.hq-stat:nth-child(2) .hq-stat-head { color: var(--hq-blue); }
+.hq-stat:nth-child(3) .hq-stat-head { color: var(--hq-yellow); text-shadow: 1px 1px 0 #000; }
+
+.hq-val { font-family: 'Patrick Hand', cursive; font-size: 0.9em; color: var(--hq-black); font-weight: bold; }
+
+.hq-track { width: 100%; height: 12px; background: var(--hq-white); border: 2px solid var(--hq-black); position: relative; }
+.hq-fill { height: 100%; border-right: 2px solid var(--hq-black); transition: width 0.5s ease; }
+
+.hq-stat:nth-child(1) .hq-fill { background: var(--hq-red); }
+.hq-stat:nth-child(2) .hq-fill { background: var(--hq-blue); }
+.hq-stat:nth-child(3) .hq-fill { background: var(--hq-yellow); }
+
+/* CORPO DO TEXTO (Balão de Fala) */
+.hq-body {
+  background: var(--hq-white);
+  border: var(--hq-border);
+  border-radius: 20px;
+  padding: 25px 30px;
+  font-size: 17px;
+  line-height: 1.6;
+  text-align: justify;
+  position: relative;
+  box-shadow: var(--hq-shadow);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Rabinho do balão de fala */
+.hq-body::before {
+  content: '';
+  position: absolute;
+  top: -20px;
+  left: 40px;
+  border-width: 0 0 20px 25px;
+  border-style: solid;
+  border-color: transparent transparent var(--hq-black) transparent;
+}
+.hq-body::after {
+  content: '';
+  position: absolute;
+  top: -12px;
+  left: 44px;
+  border-width: 0 0 14px 18px;
+  border-style: solid;
+  border-color: transparent transparent var(--hq-white) transparent;
+}
+
+.hq-body b, .hq-body strong { font-family: 'Bangers', cursive; font-size: 1.2em; letter-spacing: 1px; color: var(--hq-red); }
+.hq-body i, .hq-body em { background: var(--hq-yellow); font-style: normal; padding: 0 4px; border: 1px solid #000; font-weight: bold; box-shadow: 2px 2px 0 #000; }
+
+/* DOSSIÊ / FOLDERS */
+.hq-fold { 
+  border: var(--hq-border); 
+  background: var(--hq-white); 
+  box-shadow: var(--hq-shadow); 
+  transition: transform 0.2s;
+}
+.hq-fold > summary { 
+  cursor: pointer; 
+  padding: 12px; 
+  font-family: 'Bangers', cursive; 
+  font-size: 1.5em; 
+  text-align: center; 
+  color: var(--hq-white);
+  background: var(--hq-black);
+  letter-spacing: 2px; 
+  list-style: none; 
+}
+.hq-fold > summary::-webkit-details-marker { display: none; }
+.hq-fold > summary:hover { background: var(--hq-red); }
+.hq-fold[open] > summary { background: var(--hq-blue); border-bottom: var(--hq-border); }
+.hq-content-fold { padding: 20px; font-size: 16px; background: #fafafa; }
+
+/* Grids Táticos (Aesthetics de HQ) */
+.hq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
+.hq-data-box { 
+  background: var(--hq-yellow); 
+  border: 3px solid var(--hq-black); 
+  padding: 10px; 
+  display: flex; 
+  flex-direction: column; 
+  box-shadow: 3px 3px 0 var(--hq-black);
+  transform: rotate(-1deg);
+}
+.hq-data-box:nth-child(even) { transform: rotate(1deg); background: #e0f7fa; }
+.hq-data-lbl { font-family: 'Bangers', cursive; font-size: 1.2em; color: var(--hq-black); text-transform: uppercase; letter-spacing: 1px; line-height: 1; }
+.hq-data-val { font-weight: bold; margin-top: 4px; }
+.hq-data-val a { color: var(--hq-red); text-decoration: none; border-bottom: 2px dashed var(--hq-red); }
+
+/* Ações (Painéis Coloridos) */
+.hq-act-grid { display: flex; gap: 10px; margin-bottom: 25px; }
+.hq-act { 
+  flex: 1;
+  text-align: center; 
+  border: 3px solid var(--hq-black);
+  box-shadow: 3px 3px 0 var(--hq-black);
+  padding: 10px 5px;
+}
+.hq-act:nth-child(1) { background: var(--hq-red); color: var(--hq-white); transform: rotate(-2deg); }
+.hq-act:nth-child(2) { background: var(--hq-blue); color: var(--hq-white); transform: rotate(1deg); }
+.hq-act:nth-child(3) { background: var(--hq-green); color: var(--hq-white); transform: rotate(-1deg); }
+.hq-act:nth-child(4) { background: var(--hq-yellow); color: var(--hq-black); transform: rotate(2deg); }
+
+.hq-act .lbl { font-family: 'Bangers', cursive; font-size: 1.2em; letter-spacing: 1px; display: block; line-height: 1;}
+.hq-act span { display: block; font-family: 'Bangers', cursive; font-size: 2.5em; margin-top: 5px; line-height: 1; text-shadow: 2px 2px 0 #000; color: var(--hq-white); }
+
+/* Listas e Blocos de Texto */
+.hq-list-title { 
+  font-family: 'Bangers', cursive; 
+  font-size: 1.4em; 
+  color: var(--hq-white); 
+  background: var(--hq-black);
+  display: inline-block;
+  padding: 2px 10px;
+  text-transform: uppercase; 
+  letter-spacing: 2px; 
+  margin: 15px 0 10px; 
+  transform: skewX(-10deg);
+}
+.hq-item { margin-bottom: 8px; padding-left: 20px; position: relative; font-weight: bold;}
+.hq-item::before { 
+  content: '★'; 
+  position: absolute; 
+  left: 0; top: 2px; 
+  font-size: 0.9em; 
+  color: var(--hq-red); 
+}
+.hq-summary-text { 
+  font-size: 1em; 
+  margin-bottom: 15px; 
+  background: var(--hq-white); 
+  padding: 15px; 
+  border: 2px dashed var(--hq-black);
+  font-weight: bold;
+}
+
+/* Sub-Spoilers */
+.hq-sub-fold { margin-top: 15px; transform: none; box-shadow: 3px 3px 0 var(--hq-black); }
+.hq-sub-fold > summary { font-size: 1.2em; background: #eee; color: var(--hq-black); text-align: left; padding: 10px; }
+.hq-sub-fold > summary:hover { background: var(--hq-yellow); }
+
+/* ASSINATURA (Selo Comic) */
+.hq-signature { 
+  text-align: right; 
+  padding: 10px 10px 20px; 
+  position: relative; 
+}
+.hq-signature::after { 
+  content: 'SAKUYA REINA'; 
+  font-family: 'Bangers', cursive; 
+  font-size: 2em; 
+  color: var(--hq-white); 
+  background: var(--hq-red);
+  border: 3px solid var(--hq-black);
+  padding: 5px 15px;
+  box-shadow: 4px 4px 0 var(--hq-black);
+  letter-spacing: 2px; 
+  display: inline-block; 
+  transform: rotate(-3deg);
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+  .hq-vitals { flex-direction: column; gap: 10px; }
+  .hq-act-grid { flex-wrap: wrap; }
+  .hq-act { min-width: 45%; }
+  .hq-body { padding: 15px 20px; }
+}
