@@ -1,15 +1,16 @@
-/* --- TEMPLATE: HIROTO GOJO (JUNJI ITO / UZUMAKI - CANVAS) --- */
+/* --- TEMPLATE: HIROTO GOJO (JUNJI ITO / DARK MODE + BLUE) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400;1,700&family=Special+Elite&display=swap');
 
 :root {
-  --uz-bg: #ececec;
-  --uz-dark: #070707;
-  --uz-blood: #8a0303;
-  --uz-white: #ffffff;
-  --uz-border: 4px solid var(--uz-dark);
+  --uz-bg: #0b0c10;
+  --uz-panel: #15161c;
+  --uz-ink: #d1d1d6; /* Nanquim invertido (Claro) */
+  --uz-blue: #3b82f6; /* O Azul espectral */
+  --uz-black: #000000; /* Para sombras densas */
+  --uz-border: 3px solid var(--uz-ink);
 }
 
-@keyframes uz-flicker { 0%, 100% { opacity: 0.9; } 50% { opacity: 1; } }
+@keyframes uz-flicker { 0%, 100% { opacity: 0.8; } 50% { opacity: 1; } }
 
 /* CONTAINER PRINCIPAL */
 .uz-wrap {
@@ -17,15 +18,14 @@
   width: 95%;
   margin: 40px auto;
   background-color: var(--uz-bg);
-  /* Retícula de Mangá suave de fundo */
-  background-image: radial-gradient(var(--uz-dark) 10%, transparent 15%), radial-gradient(var(--uz-dark) 10%, transparent 15%);
+  background-image: radial-gradient(rgba(255,255,255,0.05) 10%, transparent 15%), radial-gradient(rgba(255,255,255,0.05) 10%, transparent 15%);
   background-size: 8px 8px;
   background-position: 0 0, 4px 4px;
   border: var(--uz-border);
-  box-shadow: 15px 15px 0px rgba(0,0,0,0.95);
+  box-shadow: 15px 15px 0px var(--uz-black);
   position: relative;
   font-family: 'Cormorant Garamond', serif;
-  color: var(--uz-dark);
+  color: var(--uz-ink);
   display: flex;
   flex-direction: column;
   padding: 20px;
@@ -35,16 +35,15 @@
 
 .uz-wrap * { box-sizing: border-box; }
 
-/* O CANVAS DAS ESPIRAIS */
+/* CANVAS ESPIRAIS */
 .uz-bg-canvas {
   position: absolute;
   top: 0; left: 0;
   width: 100%; height: 100%;
   pointer-events: none;
-  z-index: 1; /* Fica acima do bg reticulado, abaixo do conteúdo */
+  z-index: 1;
 }
 
-/* Camada base de proteção para o conteúdo */
 .uz-content-layer {
   position: relative;
   z-index: 2;
@@ -53,127 +52,117 @@
   gap: 15px;
 }
 
-/* HEADER E TÍTULO */
+/* HEADER */
 .uz-header {
   text-align: center;
-  background: var(--uz-dark);
+  background: var(--uz-panel);
   border: 2px solid var(--uz-bg);
-  outline: 4px solid var(--uz-dark);
+  outline: 3px solid var(--uz-ink);
   padding: 30px 10px;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.25'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.1'/%3E%3C/svg%3E");
   animation: uz-flicker 8s infinite;
 }
 
-.uz-title { font-family: 'Special Elite', cursive; font-size: 3.2em; color: var(--uz-white); letter-spacing: 5px; margin: 0; line-height: 1; text-transform: uppercase; text-shadow: 3px 3px 0px var(--uz-blood), -2px -2px 0px #fff; }
-.uz-sub { font-family: 'Special Elite', cursive; color: var(--uz-bg); font-size: 1.1em; letter-spacing: 8px; text-transform: uppercase; margin-top: 10px; border-top: 1px solid #333; padding-top: 10px; display: inline-block;}
+.uz-title { font-family: 'Special Elite', cursive; font-size: 3.2em; color: var(--uz-ink); letter-spacing: 5px; margin: 0; line-height: 1; text-transform: uppercase; text-shadow: 3px 3px 0px var(--uz-blue), -2px -2px 0px var(--uz-black); }
+.uz-sub { font-family: 'Special Elite', cursive; color: var(--uz-ink); font-size: 1.1em; letter-spacing: 8px; text-transform: uppercase; margin-top: 10px; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 10px; display: inline-block; opacity: 0.8;}
 
 /* BANNER */
-.uz-banner { width: 100%; height: 250px; border: var(--uz-border); background: var(--uz-dark); position: relative; overflow: hidden; box-shadow: 8px 8px 0 rgba(0,0,0,0.9); }
-.uz-banner img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.5) brightness(0.8); transition: transform 15s ease-in-out; }
+.uz-banner { width: 100%; height: 250px; border: var(--uz-border); background: var(--uz-black); position: relative; overflow: hidden; box-shadow: 8px 8px 0 var(--uz-black); }
+.uz-banner img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.2) brightness(0.8); transition: transform 15s ease-in-out; }
 .uz-wrap:hover .uz-banner img { transform: scale(1.15) rotate(2deg); }
 
 /* STATUS BARS */
 .uz-vitals { display: flex; gap: 15px; }
-.uz-stat { flex: 1; display: flex; flex-direction: column; background: rgba(255,255,255,0.95); border: 3px solid var(--uz-dark); padding: 12px; box-shadow: 5px 5px 0px rgba(0,0,0,0.9); position: relative; overflow: hidden;}
-.uz-stat-head { display: flex; justify-content: space-between; align-items: baseline; font-family: 'Special Elite', cursive; font-size: 1.1em; font-weight: bold; margin-bottom: 5px; border-bottom: 2px dashed #999; padding-bottom: 4px;}
-.uz-stat-head span { color: var(--uz-dark); }
-.uz-val { font-family: 'Special Elite', cursive; font-size: 1em; color: var(--uz-blood); }
-.uz-track { width: 100%; height: 8px; background: #ccc; border: 1px solid var(--uz-dark); position: relative; overflow: hidden; }
-.uz-fill { height: 100%; background: var(--uz-dark); transition: width 0.5s ease; }
-.uz-stat:nth-child(1) .uz-fill { background: var(--uz-blood); }
+.uz-stat { flex: 1; display: flex; flex-direction: column; background: var(--uz-panel); border: 2px solid var(--uz-ink); padding: 12px; box-shadow: 5px 5px 0px var(--uz-black); position: relative; overflow: hidden;}
+.uz-stat-head { display: flex; justify-content: space-between; align-items: baseline; font-family: 'Special Elite', cursive; font-size: 1.1em; font-weight: bold; margin-bottom: 5px; border-bottom: 2px dashed rgba(255,255,255,0.2); padding-bottom: 4px;}
+.uz-stat-head span { color: var(--uz-ink); }
+.uz-val { font-family: 'Special Elite', cursive; font-size: 1em; color: var(--uz-blue); }
+.uz-track { width: 100%; height: 8px; background: rgba(255,255,255,0.1); border: 1px solid var(--uz-ink); position: relative; overflow: hidden; }
+.uz-fill { height: 100%; background: var(--uz-ink); transition: width 0.5s ease; }
+.uz-stat:nth-child(1) .uz-fill { background: var(--uz-blue); }
 
 /* CORPO DO TEXTO */
-.uz-body { background: rgba(255,255,255,0.95); border: 3px solid var(--uz-dark); outline: 2px solid var(--uz-dark); outline-offset: 4px; padding: 30px 35px; font-size: 17px; line-height: 1.7; text-align: justify; margin: 10px 0; box-shadow: inset 0 0 20px rgba(0,0,0,0.05); }
-.uz-body b, .uz-body strong { font-family: 'Special Elite', cursive; font-size: 1.1em; color: var(--uz-blood); }
-.uz-body i, .uz-body em { font-style: italic; font-weight: bold; color: #333; background: rgba(0,0,0,0.05); padding: 0 4px;}
+.uz-body { background: var(--uz-panel); border: 2px solid var(--uz-ink); outline: 2px solid var(--uz-ink); outline-offset: 3px; padding: 30px 35px; font-size: 17px; line-height: 1.7; text-align: justify; margin: 10px 0; box-shadow: inset 0 0 20px rgba(0,0,0,0.5); }
+.uz-body b, .uz-body strong { font-family: 'Special Elite', cursive; font-size: 1.1em; color: var(--uz-blue); }
+.uz-body i, .uz-body em { font-style: italic; font-weight: bold; color: var(--uz-ink); background: rgba(255,255,255,0.05); padding: 0 4px;}
 
-/* DOSSIÊ / FOLDERS */
-.uz-fold { border: var(--uz-border); background: var(--uz-white); box-shadow: 6px 6px 0 rgba(0,0,0,0.9); }
-.uz-fold > summary { cursor: pointer; padding: 15px; font-family: 'Special Elite', cursive; font-size: 1.3em; text-align: center; color: var(--uz-white); background: var(--uz-dark); letter-spacing: 4px; list-style: none; transition: 0.3s; position: relative; overflow: hidden;}
+/* DOSSIÊ */
+.uz-fold { border: var(--uz-border); background: var(--uz-panel); box-shadow: 6px 6px 0 var(--uz-black); }
+.uz-fold > summary { cursor: pointer; padding: 15px; font-family: 'Special Elite', cursive; font-size: 1.3em; text-align: center; color: var(--uz-panel); background: var(--uz-ink); letter-spacing: 4px; list-style: none; transition: 0.3s; position: relative; overflow: hidden;}
 .uz-fold > summary::-webkit-details-marker { display: none; }
-.uz-fold > summary:hover { color: var(--uz-blood); text-shadow: 1px 1px 0 #fff; }
-.uz-fold[open] > summary { border-bottom: 4px solid var(--uz-dark); }
-.uz-content-fold { padding: 25px; font-size: 16px; background: #f9f9f9; border: 4px solid var(--uz-white); }
+.uz-fold > summary:hover { color: var(--uz-blue); text-shadow: 1px 1px 0 var(--uz-black); }
+.uz-fold[open] > summary { border-bottom: 3px solid var(--uz-ink); }
+.uz-content-fold { padding: 25px; font-size: 16px; background: var(--uz-bg); border: 3px solid var(--uz-panel); }
 
 /* Grids Táticos */
 .uz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
-.uz-data-box { background: var(--uz-white); border: 2px solid var(--uz-dark); padding: 12px; display: flex; flex-direction: column; box-shadow: 2px 2px 0 var(--uz-dark); transition: transform 0.2s;}
-.uz-data-box:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--uz-dark); }
-.uz-data-lbl { font-family: 'Special Elite', cursive; font-size: 0.85em; color: #555; text-transform: uppercase; border-bottom: 2px solid var(--uz-dark); padding-bottom: 4px;}
-.uz-data-val { font-weight: bold; margin-top: 5px; font-family: 'Special Elite', cursive; color: var(--uz-dark); font-size: 1.1em;}
-.uz-data-val a { color: var(--uz-blood); text-decoration: none; border-bottom: 2px dashed var(--uz-blood); }
+.uz-data-box { background: var(--uz-panel); border: 2px solid var(--uz-ink); padding: 12px; display: flex; flex-direction: column; box-shadow: 2px 2px 0 var(--uz-black); transition: transform 0.2s;}
+.uz-data-box:hover { transform: translate(-2px, -2px); box-shadow: 4px 4px 0 var(--uz-black); }
+.uz-data-lbl { font-family: 'Special Elite', cursive; font-size: 0.85em; color: #999; text-transform: uppercase; border-bottom: 2px solid var(--uz-ink); padding-bottom: 4px;}
+.uz-data-val { font-weight: bold; margin-top: 5px; font-family: 'Special Elite', cursive; color: var(--uz-ink); font-size: 1.1em;}
+.uz-data-val a { color: var(--uz-blue); text-decoration: none; border-bottom: 2px dashed var(--uz-blue); }
 
 /* Ações */
 .uz-act-grid { display: flex; gap: 10px; margin-bottom: 25px; }
-.uz-act { flex: 1; text-align: center; border: 3px solid var(--uz-dark); background: var(--uz-white); padding: 10px 5px; box-shadow: 4px 4px 0 var(--uz-dark);}
-.uz-act .lbl { font-family: 'Special Elite', cursive; font-size: 1em; display: block; color: var(--uz-dark); border-bottom: 1px dashed #ccc; padding-bottom: 4px;}
-.uz-act span { display: block; font-family: 'Special Elite', cursive; font-size: 2.2em; margin-top: 5px; line-height: 1; color: var(--uz-blood); text-shadow: 1px 1px 0 #000;}
+.uz-act { flex: 1; text-align: center; border: 2px solid var(--uz-ink); background: var(--uz-panel); padding: 10px 5px; box-shadow: 4px 4px 0 var(--uz-black);}
+.uz-act .lbl { font-family: 'Special Elite', cursive; font-size: 1em; display: block; color: var(--uz-ink); border-bottom: 1px dashed rgba(255,255,255,0.2); padding-bottom: 4px;}
+.uz-act span { display: block; font-family: 'Special Elite', cursive; font-size: 2.2em; margin-top: 5px; line-height: 1; color: var(--uz-blue); text-shadow: 2px 2px 0 var(--uz-black);}
 
-/* Listas e Blocos de Texto */
-.uz-list-title { font-family: 'Special Elite', cursive; font-size: 1.3em; color: var(--uz-white); background: var(--uz-dark); display: inline-block; padding: 6px 15px; text-transform: uppercase; letter-spacing: 2px; margin: 15px 0 10px; box-shadow: 3px 3px 0 var(--uz-blood);}
+/* Listas */
+.uz-list-title { font-family: 'Special Elite', cursive; font-size: 1.3em; color: var(--uz-panel); background: var(--uz-ink); display: inline-block; padding: 6px 15px; text-transform: uppercase; letter-spacing: 2px; margin: 15px 0 10px; box-shadow: 3px 3px 0 var(--uz-blue);}
 .uz-item { margin-bottom: 8px; padding-left: 20px; position: relative; font-weight: bold;}
-.uz-item::before { content: 'Ø'; position: absolute; left: 0; top: 0px; font-size: 1.1em; color: var(--uz-blood); font-family: 'Special Elite', cursive;}
-.uz-summary-text { font-size: 1em; margin-bottom: 15px; background: var(--uz-white); padding: 15px; border: 2px solid var(--uz-dark); border-left: 6px solid var(--uz-dark); box-shadow: inset 4px 4px 0 rgba(0,0,0,0.05);}
+.uz-item::before { content: 'Ø'; position: absolute; left: 0; top: 0px; font-size: 1.1em; color: var(--uz-blue); font-family: 'Special Elite', cursive;}
+.uz-summary-text { font-size: 1em; margin-bottom: 15px; background: var(--uz-panel); padding: 15px; border: 2px solid var(--uz-ink); border-left: 6px solid var(--uz-ink); box-shadow: inset 4px 4px 0 rgba(0,0,0,0.3);}
 
-/* =======================================================
-   ESPÍRITOS AMALDIÇOADOS (CARDS COM HOVER APRIMORADO)
-   ======================================================= */
+/* ESPÍRITOS AMALDIÇOADOS */
 .uz-spirits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
-.uz-spirit-card { 
-  display: flex; flex-direction: column;
-  background: var(--uz-dark); border: 2px solid var(--uz-dark); 
-  box-shadow: 4px 4px 0 var(--uz-blood); 
-  position: relative; overflow: hidden; cursor: help;
-  height: 170px;
-}
+.uz-spirit-card { display: flex; flex-direction: column; background: var(--uz-panel); border: 2px solid var(--uz-ink); box-shadow: 4px 4px 0 var(--uz-blue); position: relative; overflow: hidden; cursor: help; height: 170px; }
 .uz-sp-base { display: flex; height: 100%; width: 100%; transition: 0.3s; }
-.uz-spirit-img-wrap { width: 40%; height: 100%; border-right: 2px solid var(--uz-dark); background: #000; flex-shrink: 0; }
-.uz-spirit-img-wrap img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.5) brightness(0.7); transition: 0.3s;}
-.uz-spirit-data { flex: 1; padding: 10px; display: flex; flex-direction: column; justify-content: center; gap: 8px; background: var(--uz-white); transition: 0.3s;}
-.uz-spirit-name { font-family: 'Special Elite', cursive; font-size: 1em; font-weight: bold; color: var(--uz-dark); text-transform: uppercase; border-bottom: 2px solid var(--uz-dark); padding-bottom: 4px; margin-bottom: 4px; line-height: 1.1;}
+.uz-spirit-img-wrap { width: 40%; height: 100%; border-right: 2px solid var(--uz-ink); background: #000; flex-shrink: 0; }
+.uz-spirit-img-wrap img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.3) brightness(0.8); transition: 0.3s;}
+.uz-spirit-data { flex: 1; padding: 10px; display: flex; flex-direction: column; justify-content: center; gap: 8px; background: var(--uz-panel); transition: 0.3s;}
+.uz-spirit-name { font-family: 'Special Elite', cursive; font-size: 1em; font-weight: bold; color: var(--uz-ink); text-transform: uppercase; border-bottom: 2px solid var(--uz-ink); padding-bottom: 4px; margin-bottom: 4px; line-height: 1.1;}
 .uz-spirit-stat { display: flex; flex-direction: column; gap: 2px; }
-.uz-s-head { display: flex; justify-content: space-between; font-size: 0.8em; font-family: 'Special Elite', cursive; font-weight: bold; }
-.uz-s-val { color: var(--uz-blood); }
-.uz-s-track { width: 100%; height: 5px; background: #ccc; border: 1px solid var(--uz-dark);}
-.uz-s-fill { height: 100%; background: var(--uz-dark); }
-.uz-s-fill.uz-hp { background: var(--uz-blood); }
+.uz-s-head { display: flex; justify-content: space-between; font-size: 0.8em; font-family: 'Special Elite', cursive; font-weight: bold; color: var(--uz-ink);}
+.uz-s-val { color: var(--uz-blue); }
+.uz-s-track { width: 100%; height: 5px; background: rgba(255,255,255,0.1); border: 1px solid var(--uz-ink);}
+.uz-s-fill { height: 100%; background: var(--uz-ink); }
+.uz-s-fill.uz-hp { background: var(--uz-blue); }
 
-/* EFEITO AO PASSAR O MOUSE (VÉU NEGRO) */
 .uz-spirit-overlay {
   position: absolute; inset: 0;
-  background: rgba(5, 5, 5, 0.98);
-  color: var(--uz-white);
+  background: rgba(11, 12, 16, 0.98);
+  color: var(--uz-ink);
   padding: 12px 15px;
   display: flex; flex-direction: column; gap: 8px;
   opacity: 0; visibility: hidden;
   transition: all 0.3s ease;
   overflow-y: auto;
   z-index: 10;
-  border: 2px solid var(--uz-blood);
+  border: 2px solid var(--uz-blue);
 }
 .uz-spirit-card:hover .uz-spirit-overlay { opacity: 1; visibility: visible; }
 .uz-spirit-card:hover .uz-spirit-img-wrap img { filter: brightness(0.2); }
 .uz-spirit-card:hover .uz-spirit-data { filter: brightness(0.2); }
 
-/* Scrollbar do véu */
 .uz-spirit-overlay::-webkit-scrollbar { width: 4px; }
 .uz-spirit-overlay::-webkit-scrollbar-track { background: transparent; }
-.uz-spirit-overlay::-webkit-scrollbar-thumb { background: var(--uz-blood); }
+.uz-spirit-overlay::-webkit-scrollbar-thumb { background: var(--uz-blue); }
 
-.uz-sp-title { font-family: 'Special Elite', cursive; font-size: 0.9em; color: var(--uz-blood); text-transform: uppercase; border-bottom: 1px dashed var(--uz-blood); padding-bottom: 2px; margin-bottom: 4px;}
-.uz-sp-text { font-size: 0.85em; line-height: 1.4; color: #ddd; margin-bottom: 8px;}
+.uz-sp-title { font-family: 'Special Elite', cursive; font-size: 0.9em; color: var(--uz-blue); text-transform: uppercase; border-bottom: 1px dashed var(--uz-blue); padding-bottom: 2px; margin-bottom: 4px;}
+.uz-sp-text { font-size: 0.85em; line-height: 1.4; color: #ccc; margin-bottom: 8px;}
 .uz-sp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 8px; }
-.uz-sp-grid-item { display: flex; justify-content: space-between; background: rgba(255,255,255,0.05); padding: 2px 5px; font-size: 0.8em; font-family: 'Special Elite', cursive; border-left: 2px solid var(--uz-blood);}
-.uz-sp-grid-item span:last-child { color: var(--uz-white); font-weight: bold;}
+.uz-sp-grid-item { display: flex; justify-content: space-between; background: rgba(255,255,255,0.05); padding: 2px 5px; font-size: 0.8em; font-family: 'Special Elite', cursive; border-left: 2px solid var(--uz-blue);}
+.uz-sp-grid-item span:last-child { color: var(--uz-ink); font-weight: bold;}
 
 /* Sub-Spoilers */
-.uz-sub-fold { margin-top: 15px; border-width: 2px; box-shadow: 4px 4px 0 var(--uz-dark); }
-.uz-sub-fold > summary { font-size: 1.1em; background: #e0e0e0; color: var(--uz-dark); text-align: left; padding: 10px; }
-.uz-sub-fold > summary:hover { background: var(--uz-dark); color: #fff; }
+.uz-sub-fold { margin-top: 15px; border: 2px solid var(--uz-ink); box-shadow: 4px 4px 0 var(--uz-black); }
+.uz-sub-fold > summary { font-size: 1.1em; background: var(--uz-panel); color: var(--uz-ink); text-align: left; padding: 10px; }
+.uz-sub-fold > summary:hover { background: var(--uz-ink); color: var(--uz-panel); }
 
 /* ASSINATURA */
 .uz-signature { text-align: right; padding: 10px 10px 20px; position: relative; z-index: 2; margin-top: 20px; }
-.uz-signature::after { content: 'HIROTO GOJO'; font-family: 'Special Elite', cursive; font-size: 1.8em; color: var(--uz-dark); border-bottom: 4px solid var(--uz-blood); padding-bottom: 5px; letter-spacing: 6px; display: inline-block; text-shadow: 2px 2px 0px #fff; }
+.uz-signature::after { content: 'HIROTO GOJO'; font-family: 'Special Elite', cursive; font-size: 1.8em; color: var(--uz-ink); border-bottom: 4px solid var(--uz-blue); padding-bottom: 5px; letter-spacing: 6px; display: inline-block; text-shadow: 2px 2px 0px var(--uz-black); }
 
 @media (max-width: 600px) {
   .uz-vitals { flex-direction: column; }
