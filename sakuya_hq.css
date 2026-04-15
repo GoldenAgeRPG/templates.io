@@ -1,8 +1,8 @@
-/* --- TEMPLATE: SAKUYA REINA (COMIC BOOK / HQ STYLE) --- */
+/* --- TEMPLATE: SAKUYA REINA (COMIC BOOK / HQ STYLE V2) --- */
 @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&display=swap');
 
 :root {
-  --hq-bg: #fdf6e3; /* Cor de página de quadrinho vintage */
+  --hq-bg: #fdf6e3; 
   --hq-dots: #e6dec8;
   --hq-black: #111111;
   --hq-white: #ffffff;
@@ -14,7 +14,7 @@
   --hq-shadow: 6px 6px 0px var(--hq-black);
 }
 
-/* CONTAINER PRINCIPAL (Com textura Halftone/Retícula) */
+/* CONTAINER PRINCIPAL */
 .hq-wrap {
   max-width: 650px;
   width: 95%;
@@ -47,7 +47,7 @@
   box-shadow: var(--hq-shadow);
   padding: 15px 10px;
   transform: rotate(-1deg);
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 .hq-title {
@@ -58,14 +58,9 @@
   margin: 0;
   line-height: 1;
   text-transform: uppercase;
-  /* Efeito 3D Comic */
   text-shadow: 
-    -2px -2px 0 #000,  
-     2px -2px 0 #000,
-    -2px  2px 0 #000,
-     2px  2px 0 #000,
-     4px  4px 0 var(--hq-red),
-     6px  6px 0 #000;
+    -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 2px 2px 0 #000,
+     4px  4px 0 var(--hq-red), 6px  6px 0 #000;
 }
 
 .hq-sub {
@@ -81,9 +76,10 @@
   margin-top: 10px;
 }
 
-/* BANNER (Painel de Quadrinho) */
+/* BANNER & PAINÉIS SOBREPOSTOS */
 .hq-banner-wrapper {
   position: relative;
+  margin-bottom: 15px;
 }
 
 .hq-banner {
@@ -99,47 +95,53 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: contrast(1.1) saturate(1.2); /* Deixa as cores mais estouradas estilo HQ */
+  filter: contrast(1.1) saturate(1.2);
 }
 
-/* STATUS BARS (HP/EA/SAN) */
-.hq-vitals {
-  display: flex;
-  gap: 15px;
-  position: relative;
+/* Painéis Extras (Imagens Menores) */
+.hq-panel {
+  position: absolute;
+  border: var(--hq-border);
+  box-shadow: 4px 4px 0px var(--hq-black);
+  background: var(--hq-white);
+  overflow: hidden;
+  z-index: 3;
+  transition: all 0.2s ease;
 }
+.hq-panel img { width: 100%; height: 100%; object-fit: cover; filter: contrast(1.1) saturate(1.2); }
 
+.hq-panel-1 { width: 140px; height: 140px; bottom: -20px; left: -15px; transform: rotate(-6deg); }
+.hq-panel-1:hover { transform: rotate(-6deg) scale(1.1); z-index: 10; box-shadow: 6px 6px 0px var(--hq-black); }
+
+.hq-panel-2 { width: 120px; height: 150px; top: -15px; right: 130px; transform: rotate(5deg); }
+.hq-panel-2:hover { transform: rotate(5deg) scale(1.1); z-index: 10; box-shadow: 6px 6px 0px var(--hq-black); }
+
+.hq-panel-3 { width: 160px; height: 100px; bottom: -15px; right: -10px; transform: rotate(-4deg); }
+.hq-panel-3:hover { transform: rotate(-4deg) scale(1.1); z-index: 10; box-shadow: 6px 6px 0px var(--hq-black); }
+
+/* STATUS BARS (HP/EA/SAN) COM HOVER */
+.hq-vitals { display: flex; gap: 15px; position: relative; }
 .hq-stat {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
+  flex: 1; display: flex; flex-direction: column;
   background: var(--hq-white);
   border: var(--hq-border);
   box-shadow: 4px 4px 0px var(--hq-black);
   padding: 8px 12px;
+  position: relative;
+  transition: all 0.2s ease;
 }
+.hq-stat:hover { transform: translateY(-4px); box-shadow: 4px 8px 0px var(--hq-black); z-index: 2; }
 
-/* Cores específicas para os painéis de status */
 .hq-stat:nth-child(1) { background: #ffe5e5; }
 .hq-stat:nth-child(2) { background: #e5f1ff; }
 .hq-stat:nth-child(3) { background: #fffae5; }
 
-.hq-stat-head {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  font-family: 'Bangers', cursive;
-  font-size: 1.2em;
-  letter-spacing: 1px;
-  margin-bottom: 5px;
-}
-
+.hq-stat-head { display: flex; justify-content: space-between; align-items: baseline; font-family: 'Bangers', cursive; font-size: 1.2em; letter-spacing: 1px; margin-bottom: 5px; }
 .hq-stat:nth-child(1) .hq-stat-head { color: var(--hq-red); }
 .hq-stat:nth-child(2) .hq-stat-head { color: var(--hq-blue); }
 .hq-stat:nth-child(3) .hq-stat-head { color: var(--hq-yellow); text-shadow: 1px 1px 0 #000; }
 
 .hq-val { font-family: 'Patrick Hand', cursive; font-size: 0.9em; color: var(--hq-black); font-weight: bold; }
-
 .hq-track { width: 100%; height: 12px; background: var(--hq-white); border: 2px solid var(--hq-black); position: relative; }
 .hq-fill { height: 100%; border-right: 2px solid var(--hq-black); transition: width 0.5s ease; }
 
@@ -161,140 +163,68 @@
   margin-top: 10px;
   margin-bottom: 10px;
 }
-
-/* Rabinho do balão de fala */
-.hq-body::before {
-  content: '';
-  position: absolute;
-  top: -20px;
-  left: 40px;
-  border-width: 0 0 20px 25px;
-  border-style: solid;
-  border-color: transparent transparent var(--hq-black) transparent;
-}
-.hq-body::after {
-  content: '';
-  position: absolute;
-  top: -12px;
-  left: 44px;
-  border-width: 0 0 14px 18px;
-  border-style: solid;
-  border-color: transparent transparent var(--hq-white) transparent;
-}
-
+.hq-body::before { content: ''; position: absolute; top: -20px; left: 40px; border-width: 0 0 20px 25px; border-style: solid; border-color: transparent transparent var(--hq-black) transparent; }
+.hq-body::after { content: ''; position: absolute; top: -12px; left: 44px; border-width: 0 0 14px 18px; border-style: solid; border-color: transparent transparent var(--hq-white) transparent; }
 .hq-body b, .hq-body strong { font-family: 'Bangers', cursive; font-size: 1.2em; letter-spacing: 1px; color: var(--hq-red); }
 .hq-body i, .hq-body em { background: var(--hq-yellow); font-style: normal; padding: 0 4px; border: 1px solid #000; font-weight: bold; box-shadow: 2px 2px 0 #000; }
 
 /* DOSSIÊ / FOLDERS */
-.hq-fold { 
-  border: var(--hq-border); 
-  background: var(--hq-white); 
-  box-shadow: var(--hq-shadow); 
-  transition: transform 0.2s;
-}
-.hq-fold > summary { 
-  cursor: pointer; 
-  padding: 12px; 
-  font-family: 'Bangers', cursive; 
-  font-size: 1.5em; 
-  text-align: center; 
-  color: var(--hq-white);
-  background: var(--hq-black);
-  letter-spacing: 2px; 
-  list-style: none; 
-}
+.hq-fold { border: var(--hq-border); background: var(--hq-white); box-shadow: var(--hq-shadow); transition: transform 0.2s; }
+.hq-fold > summary { cursor: pointer; padding: 12px; font-family: 'Bangers', cursive; font-size: 1.5em; text-align: center; color: var(--hq-white); background: var(--hq-black); letter-spacing: 2px; list-style: none; }
 .hq-fold > summary::-webkit-details-marker { display: none; }
 .hq-fold > summary:hover { background: var(--hq-red); }
 .hq-fold[open] > summary { background: var(--hq-blue); border-bottom: var(--hq-border); }
 .hq-content-fold { padding: 20px; font-size: 16px; background: #fafafa; }
 
-/* Grids Táticos (Aesthetics de HQ) */
+/* Grids Táticos COM HOVER */
 .hq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
 .hq-data-box { 
-  background: var(--hq-yellow); 
-  border: 3px solid var(--hq-black); 
-  padding: 10px; 
-  display: flex; 
-  flex-direction: column; 
-  box-shadow: 3px 3px 0 var(--hq-black);
-  transform: rotate(-1deg);
+  background: var(--hq-yellow); border: 3px solid var(--hq-black); padding: 10px; 
+  display: flex; flex-direction: column; box-shadow: 3px 3px 0 var(--hq-black);
+  transform: rotate(-1deg); position: relative; transition: all 0.2s ease;
 }
 .hq-data-box:nth-child(even) { transform: rotate(1deg); background: #e0f7fa; }
+.hq-data-box:nth-child(odd):hover { transform: rotate(-3deg) scale(1.05); box-shadow: 5px 5px 0 var(--hq-black); z-index: 2; }
+.hq-data-box:nth-child(even):hover { transform: rotate(3deg) scale(1.05); box-shadow: 5px 5px 0 var(--hq-black); z-index: 2; }
+
 .hq-data-lbl { font-family: 'Bangers', cursive; font-size: 1.2em; color: var(--hq-black); text-transform: uppercase; letter-spacing: 1px; line-height: 1; }
 .hq-data-val { font-weight: bold; margin-top: 4px; }
 .hq-data-val a { color: var(--hq-red); text-decoration: none; border-bottom: 2px dashed var(--hq-red); }
 
-/* Ações (Painéis Coloridos) */
+/* Ações (Painéis Coloridos) COM HOVER */
 .hq-act-grid { display: flex; gap: 10px; margin-bottom: 25px; }
 .hq-act { 
-  flex: 1;
-  text-align: center; 
-  border: 3px solid var(--hq-black);
-  box-shadow: 3px 3px 0 var(--hq-black);
-  padding: 10px 5px;
+  flex: 1; text-align: center; border: 3px solid var(--hq-black);
+  box-shadow: 3px 3px 0 var(--hq-black); padding: 10px 5px;
+  position: relative; transition: all 0.2s ease;
 }
 .hq-act:nth-child(1) { background: var(--hq-red); color: var(--hq-white); transform: rotate(-2deg); }
 .hq-act:nth-child(2) { background: var(--hq-blue); color: var(--hq-white); transform: rotate(1deg); }
 .hq-act:nth-child(3) { background: var(--hq-green); color: var(--hq-white); transform: rotate(-1deg); }
 .hq-act:nth-child(4) { background: var(--hq-yellow); color: var(--hq-black); transform: rotate(2deg); }
 
+.hq-act:nth-child(1):hover { transform: rotate(-4deg) scale(1.08); box-shadow: 5px 5px 0 var(--hq-black); z-index: 2; }
+.hq-act:nth-child(2):hover { transform: rotate(3deg) scale(1.08); box-shadow: 5px 5px 0 var(--hq-black); z-index: 2; }
+.hq-act:nth-child(3):hover { transform: rotate(-3deg) scale(1.08); box-shadow: 5px 5px 0 var(--hq-black); z-index: 2; }
+.hq-act:nth-child(4):hover { transform: rotate(4deg) scale(1.08); box-shadow: 5px 5px 0 var(--hq-black); z-index: 2; }
+
 .hq-act .lbl { font-family: 'Bangers', cursive; font-size: 1.2em; letter-spacing: 1px; display: block; line-height: 1;}
 .hq-act span { display: block; font-family: 'Bangers', cursive; font-size: 2.5em; margin-top: 5px; line-height: 1; text-shadow: 2px 2px 0 #000; color: var(--hq-white); }
 
 /* Listas e Blocos de Texto */
-.hq-list-title { 
-  font-family: 'Bangers', cursive; 
-  font-size: 1.4em; 
-  color: var(--hq-white); 
-  background: var(--hq-black);
-  display: inline-block;
-  padding: 2px 10px;
-  text-transform: uppercase; 
-  letter-spacing: 2px; 
-  margin: 15px 0 10px; 
-  transform: skewX(-10deg);
-}
+.hq-list-title { font-family: 'Bangers', cursive; font-size: 1.4em; color: var(--hq-white); background: var(--hq-black); display: inline-block; padding: 2px 10px; text-transform: uppercase; letter-spacing: 2px; margin: 15px 0 10px; transform: skewX(-10deg); }
 .hq-item { margin-bottom: 8px; padding-left: 20px; position: relative; font-weight: bold;}
-.hq-item::before { 
-  content: '★'; 
-  position: absolute; 
-  left: 0; top: 2px; 
-  font-size: 0.9em; 
-  color: var(--hq-red); 
-}
-.hq-summary-text { 
-  font-size: 1em; 
-  margin-bottom: 15px; 
-  background: var(--hq-white); 
-  padding: 15px; 
-  border: 2px dashed var(--hq-black);
-  font-weight: bold;
-}
+.hq-item::before { content: '★'; position: absolute; left: 0; top: 2px; font-size: 0.9em; color: var(--hq-red); }
+.hq-summary-text { font-size: 1em; margin-bottom: 15px; background: var(--hq-white); padding: 15px; border: 2px dashed var(--hq-black); font-weight: bold; }
 
 /* Sub-Spoilers */
 .hq-sub-fold { margin-top: 15px; transform: none; box-shadow: 3px 3px 0 var(--hq-black); }
 .hq-sub-fold > summary { font-size: 1.2em; background: #eee; color: var(--hq-black); text-align: left; padding: 10px; }
 .hq-sub-fold > summary:hover { background: var(--hq-yellow); }
 
-/* ASSINATURA (Selo Comic) */
-.hq-signature { 
-  text-align: right; 
-  padding: 10px 10px 20px; 
-  position: relative; 
-}
-.hq-signature::after { 
-  content: 'SAKUYA REINA'; 
-  font-family: 'Bangers', cursive; 
-  font-size: 2em; 
-  color: var(--hq-white); 
-  background: var(--hq-red);
-  border: 3px solid var(--hq-black);
-  padding: 5px 15px;
-  box-shadow: 4px 4px 0 var(--hq-black);
-  letter-spacing: 2px; 
-  display: inline-block; 
-  transform: rotate(-3deg);
-}
+/* ASSINATURA */
+.hq-signature { text-align: right; padding: 10px 10px 20px; position: relative; }
+.hq-signature::after { content: 'SAKUYA REINA'; font-family: 'Bangers', cursive; font-size: 2em; color: var(--hq-white); background: var(--hq-red); border: 3px solid var(--hq-black); padding: 5px 15px; box-shadow: 4px 4px 0 var(--hq-black); letter-spacing: 2px; display: inline-block; transform: rotate(-3deg); }
 
 /* Responsividade */
 @media (max-width: 600px) {
@@ -302,4 +232,7 @@
   .hq-act-grid { flex-wrap: wrap; }
   .hq-act { min-width: 45%; }
   .hq-body { padding: 15px 20px; }
+  .hq-panel-1 { width: 100px; height: 100px; }
+  .hq-panel-2 { width: 90px; height: 110px; right: 90px; }
+  .hq-panel-3 { width: 110px; height: 80px; }
 }
