@@ -1,0 +1,185 @@
+/* --- TEMPLATE: HIROTO GOJO (JUNJI ITO / UZUMAKI STYLE) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,700;1,400;1,700&family=Special+Elite&display=swap');
+
+:root {
+  --uz-bg: #ececec; /* Papel velho / Cinza pálido */
+  --uz-dark: #0a0a0a; /* Nanquim preto */
+  --uz-blood: #8a0303; /* Sangue seco */
+  --uz-white: #ffffff;
+  --uz-border: 4px solid var(--uz-dark);
+}
+
+/* Efeito Espiral Hipnótico */
+@keyframes uz-spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg); }
+  100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* CONTAINER PRINCIPAL */
+.uz-wrap {
+  max-width: 650px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--uz-bg);
+  border: var(--uz-border);
+  box-shadow: 12px 12px 0px rgba(0,0,0,0.9);
+  position: relative;
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--uz-dark);
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+  gap: 15px;
+  overflow: hidden;
+}
+
+.uz-wrap * { box-sizing: border-box; }
+
+/* Fundo Espiral (Ilusão de Ótica) */
+.uz-wrap::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 200%; height: 200%;
+  background: repeating-radial-gradient(circle at center, transparent 0, transparent 15px, rgba(0, 0, 0, 0.04) 16px, rgba(0, 0, 0, 0.04) 20px);
+  animation: uz-spin 40s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* HEADER E TÍTULO */
+.uz-header {
+  text-align: center;
+  position: relative;
+  background: var(--uz-dark);
+  border: 2px solid var(--uz-bg);
+  outline: 2px solid var(--uz-dark);
+  padding: 25px 10px;
+  z-index: 2;
+  /* Ruído de Mangá */
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.15'/%3E%3C/svg%3E");
+}
+
+.uz-title {
+  font-family: 'Special Elite', cursive;
+  font-size: 3em;
+  color: var(--uz-white);
+  letter-spacing: 5px;
+  margin: 0;
+  line-height: 1;
+  text-transform: uppercase;
+  text-shadow: 3px 3px 0px var(--uz-blood);
+}
+
+.uz-sub {
+  font-family: 'Special Elite', cursive;
+  color: var(--uz-bg);
+  font-size: 1.1em;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+/* BANNER (Painel de Quadrinho de Terror) */
+.uz-banner-wrapper { position: relative; z-index: 2; }
+.uz-banner {
+  width: 100%; height: 220px;
+  border: var(--uz-border);
+  background: var(--uz-dark);
+  position: relative;
+  overflow: hidden;
+}
+.uz-banner img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(100%) contrast(1.4) brightness(0.9); /* Estética Mangá */
+  transition: transform 10s linear;
+}
+.uz-wrap:hover .uz-banner img { transform: scale(1.1); }
+
+/* STATUS BARS (HP/EA/SAN) */
+.uz-vitals { display: flex; gap: 15px; position: relative; z-index: 2; }
+.uz-stat {
+  flex: 1; display: flex; flex-direction: column;
+  background: var(--uz-white);
+  border: 3px solid var(--uz-dark);
+  padding: 10px;
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.8);
+}
+
+.uz-stat-head { display: flex; justify-content: space-between; align-items: baseline; font-family: 'Special Elite', cursive; font-size: 1.1em; font-weight: bold; margin-bottom: 5px; border-bottom: 1px dotted #ccc; padding-bottom: 2px;}
+.uz-stat-head span { color: var(--uz-dark); }
+.uz-val { font-family: 'Special Elite', cursive; font-size: 0.95em; color: var(--uz-blood); }
+
+.uz-track { width: 100%; height: 8px; background: #ddd; border: 1px solid var(--uz-dark); position: relative; overflow: hidden; }
+.uz-fill { height: 100%; background: var(--uz-dark); transition: width 0.5s ease; }
+.uz-stat:nth-child(1) .uz-fill { background: var(--uz-blood); } /* HP em sangue */
+
+/* CORPO DO TEXTO */
+.uz-body {
+  background: var(--uz-white);
+  border: 2px solid var(--uz-dark);
+  outline: 1px solid var(--uz-dark);
+  outline-offset: 3px;
+  padding: 25px 30px;
+  font-size: 16px;
+  line-height: 1.7;
+  text-align: justify;
+  position: relative;
+  z-index: 2;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.uz-body b, .uz-body strong { font-family: 'Special Elite', cursive; font-size: 1.1em; color: var(--uz-blood); }
+.uz-body i, .uz-body em { font-style: italic; font-weight: bold; color: #444; }
+
+/* DOSSIÊ / FOLDERS */
+.uz-fold { border: 3px solid var(--uz-dark); background: var(--uz-white); position: relative; z-index: 2; }
+.uz-fold > summary { cursor: pointer; padding: 12px; font-family: 'Special Elite', cursive; font-size: 1.2em; text-align: center; color: var(--uz-white); background: var(--uz-dark); letter-spacing: 3px; list-style: none; transition: 0.3s;}
+.uz-fold > summary::-webkit-details-marker { display: none; }
+.uz-fold > summary:hover { background: var(--uz-blood); }
+.uz-fold[open] > summary { border-bottom: 3px solid var(--uz-dark); }
+.uz-content-fold { padding: 20px; font-size: 16px; background: var(--uz-bg); border: 4px solid var(--uz-white); }
+
+/* Grids Táticos */
+.uz-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 25px; }
+.uz-data-box { background: var(--uz-white); border: 2px solid var(--uz-dark); padding: 10px; display: flex; flex-direction: column; }
+.uz-data-lbl { font-family: 'Special Elite', cursive; font-size: 0.85em; color: #666; text-transform: uppercase; border-bottom: 1px solid #ddd; padding-bottom: 3px;}
+.uz-data-val { font-weight: bold; margin-top: 5px; font-family: 'Special Elite', cursive; color: var(--uz-dark); }
+.uz-data-val a { color: var(--uz-blood); text-decoration: underline; }
+
+/* Ações */
+.uz-act-grid { display: flex; gap: 10px; margin-bottom: 25px; }
+.uz-act { flex: 1; text-align: center; border: 2px solid var(--uz-dark); background: var(--uz-white); padding: 10px 5px; }
+.uz-act .lbl { font-family: 'Special Elite', cursive; font-size: 1em; display: block; color: #666; }
+.uz-act span { display: block; font-family: 'Special Elite', cursive; font-size: 2em; margin-top: 5px; line-height: 1; color: var(--uz-blood); }
+
+/* Listas e Blocos de Texto */
+.uz-list-title { font-family: 'Special Elite', cursive; font-size: 1.2em; color: var(--uz-white); background: var(--uz-dark); display: inline-block; padding: 4px 12px; text-transform: uppercase; letter-spacing: 2px; margin: 15px 0 10px; }
+.uz-item { margin-bottom: 8px; padding-left: 20px; position: relative; font-weight: bold;}
+.uz-item::before { content: '»'; position: absolute; left: 0; top: 2px; font-size: 1em; color: var(--uz-blood); }
+.uz-summary-text { font-size: 0.95em; margin-bottom: 15px; background: var(--uz-white); padding: 15px; border: 1px solid var(--uz-dark); border-left: 5px solid var(--uz-dark); }
+
+/* ESPÍRITOS AMALDIÇOADOS (NOVO) */
+.uz-spirits-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 20px; }
+.uz-spirit-card { display: flex; background: var(--uz-white); border: 2px solid var(--uz-dark); box-shadow: 3px 3px 0 var(--uz-dark); overflow: hidden; }
+.uz-spirit-img-wrap { width: 90px; height: auto; border-right: 2px solid var(--uz-dark); background: #000; flex-shrink: 0; }
+.uz-spirit-img-wrap img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%) contrast(1.5); }
+.uz-spirit-data { flex: 1; padding: 10px 15px; display: flex; flex-direction: column; justify-content: center; gap: 6px; }
+.uz-spirit-name { font-family: 'Special Elite', cursive; font-size: 1.1em; font-weight: bold; color: var(--uz-dark); text-transform: uppercase; border-bottom: 1px solid #ccc; padding-bottom: 4px; margin-bottom: 4px; }
+.uz-spirit-stat { display: flex; flex-direction: column; gap: 2px; }
+.uz-s-head { display: flex; justify-content: space-between; font-size: 0.8em; font-family: 'Special Elite', cursive; font-weight: bold; }
+.uz-s-val { color: var(--uz-blood); }
+.uz-s-track { width: 100%; height: 4px; background: #ddd; }
+.uz-s-fill { height: 100%; background: var(--uz-dark); }
+.uz-s-fill.uz-hp { background: var(--uz-blood); }
+
+/* Sub-Spoilers */
+.uz-sub-fold { margin-top: 15px; border-width: 2px; box-shadow: 3px 3px 0 var(--uz-dark); }
+.uz-sub-fold > summary { font-size: 1em; background: #eee; color: var(--uz-dark); text-align: left; padding: 10px; }
+.uz-sub-fold > summary:hover { background: var(--uz-dark); color: #fff; }
+
+/* ASSINATURA */
+.uz-signature { text-align: right; padding: 10px 10px 20px; position: relative; z-index: 2; margin-top: 10px; }
+.uz-signature::after { content: 'HIROTO GOJO'; font-family: 'Special Elite', cursive; font-size: 1.5em; color: var(--uz-dark); border-bottom: 3px solid var(--uz-blood); padding-bottom: 5px; letter-spacing: 4px; display: inline-block; }
