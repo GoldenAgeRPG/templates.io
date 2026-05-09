@@ -1,4 +1,4 @@
-/* --- TEMPLATE: MALEVOLENT SHRINE V5.4 (ADAM MYERS - DARK/EMBER) --- */
+/* --- TEMPLATE: MALEVOLENT SHRINE V5.5 (ADAM MYERS - PURE CSS) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Kaushan+Script&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap');
 
 :root {
@@ -7,9 +7,10 @@
   --shrine-red-deep: #240103;
   --shrine-red-mid: #4a0409;
   --shrine-red-pop: #8a0614;
-  --shrine-ember: #e63900; /* Laranja avermelhado para faíscas */
+  --shrine-ember: #e63900; 
   --shrine-bone: #c2c2c2;
   --shrine-text: #9e9e9e;
+  --shrine-gold: #c9a063;
 }
 
 /* --- ANIMAÇÕES --- */
@@ -34,13 +35,21 @@
   0%, 100% { filter: drop-shadow(0 0 5px var(--shrine-red-mid)) drop-shadow(0 0 10px var(--shrine-red-deep)); }
   50% { filter: drop-shadow(0 0 15px var(--shrine-red-pop)) drop-shadow(0 0 30px var(--shrine-red-mid)); }
 }
+/* NOVA ANIMAÇÃO DO BANNER */
 @keyframes banner-breathe {
-  0% { transform: scale(1); filter: grayscale(80%) contrast(1.3) brightness(0.6) sepia(0.5) hue-rotate(-10deg); }
-  100% { transform: scale(1.05); filter: grayscale(50%) contrast(1.4) brightness(0.8) sepia(0.6) hue-rotate(-15deg); }
+  0% { transform: scale(1); filter: grayscale(80%) contrast(1.3) brightness(0.5) sepia(0.4) hue-rotate(-10deg); }
+  50% { transform: scale(1.08); filter: grayscale(40%) contrast(1.5) brightness(0.8) sepia(0.7) hue-rotate(-20deg) drop-shadow(0 0 15px var(--shrine-red-pop)); }
+  100% { transform: scale(1); filter: grayscale(80%) contrast(1.3) brightness(0.5) sepia(0.4) hue-rotate(-10deg); }
 }
 @keyframes ember-pulse {
   0%, 100% { text-shadow: 0 0 8px var(--shrine-red-pop), 0 0 15px var(--shrine-red-deep); }
   50% { text-shadow: 0 0 15px var(--shrine-ember), 0 0 25px var(--shrine-red-pop); }
+}
+@keyframes ember-float {
+  0% { transform: translateY(50px) scale(1); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(-400px) scale(0.5); opacity: 0; }
 }
 
 /* --- CONTAINER --- */
@@ -82,8 +91,8 @@
 .malevolent-aura-left { left: 0; }
 .malevolent-aura-right { right: 0; }
 
-/* --- CAMADA DE CORTES (CSS PURO) --- */
-.malevolent-slash-layer { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
+/* --- CAMADA DE CORTES E FAGULHAS (CSS PURO) --- */
+.malevolent-fx-layer { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
 .slash-instance { position: absolute; height: 2px; background: var(--shrine-ember); box-shadow: 0 0 8px var(--shrine-ember), 0 0 15px var(--shrine-red-pop); opacity: 0; }
 .slash-left { transform-origin: left; animation: cleave-strike-left infinite ease-out; }
 .slash-right { transform-origin: right; animation: cleave-strike-right infinite ease-out; }
@@ -94,6 +103,13 @@
 .s-5 { top: 80%; right: -20%; width: 150%; transform: rotate(-25deg); animation-duration: 5.8s; animation-delay: 0.2s; }
 .s-6 { top: 20%; right: -20%; width: 150%; transform: rotate(-45deg); animation-duration: 7s; animation-delay: 3.5s; }
 
+.ember-instance { position: absolute; bottom: -10px; width: 4px; height: 4px; border-radius: 50%; background: var(--shrine-ember); box-shadow: 0 0 10px var(--shrine-ember); animation: ember-float linear infinite; opacity: 0;}
+.e-1 { left: 10%; animation-duration: 4.5s; animation-delay: 0s; }
+.e-2 { left: 25%; animation-duration: 5.2s; animation-delay: 1.2s; background: var(--shrine-gold); box-shadow: 0 0 10px var(--shrine-gold);}
+.e-3 { left: 45%; animation-duration: 3.8s; animation-delay: 0.5s; }
+.e-4 { left: 65%; animation-duration: 6.1s; animation-delay: 2s; }
+.e-5 { left: 85%; animation-duration: 4.9s; animation-delay: 0.8s; background: var(--shrine-gold); box-shadow: 0 0 10px var(--shrine-gold);}
+
 /* --- HEADER --- */
 .malevolent-v5-header {
   position: relative; z-index: 2; text-align: center; padding: 45px 20px 25px;
@@ -103,13 +119,13 @@
 .malevolent-v5-title { font-family: 'Cinzel Decorative', serif; font-size: 2.4em; font-weight: 900; color: var(--shrine-bone); text-shadow: 0 4px 15px var(--shrine-red-deep); letter-spacing: 2px; margin: 0; line-height: 1; text-transform: uppercase; }
 .malevolent-v5-subtitle { font-family: 'Kaushan Script', cursive; font-size: 1.8em; color: var(--shrine-red-pop); margin-top: 10px; filter: drop-shadow(0 0 8px rgba(138, 6, 20, 0.6)); letter-spacing: 2px; }
 
-/* --- IMAGEM (ANIMADA) --- */
+/* --- IMAGEM (ANIMADA FORTE) --- */
 .malevolent-v5-image-wrapper { padding: 35px 25px; position: relative; z-index: 2; display: flex; justify-content: center; }
 .malevolent-v5-frame { width: 100%; height: 350px; position: relative; clip-path: polygon(5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 0% 5%); background: var(--shrine-black); animation: shrine-bleed 5s infinite ease-in-out; border: 2px solid var(--shrine-red-deep); overflow: hidden; }
-.malevolent-v5-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; animation: banner-breathe 10s infinite alternate ease-in-out; }
-.malevolent-v5-frame:hover img { filter: grayscale(20%) contrast(1.5) brightness(0.9) saturate(1.8) hue-rotate(-5deg); animation-play-state: paused; transform: scale(1.1); transition: all 0.5s ease; }
+.malevolent-v5-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; animation: banner-breathe 8s infinite ease-in-out; }
+.malevolent-v5-frame:hover img { animation-play-state: paused; filter: grayscale(0%) contrast(1.4) brightness(0.9) saturate(1.5); transform: scale(1.1); transition: all 0.5s ease; }
 
-/* --- STATUS --- */
+/* --- STATUS (AGORA COM SAN) --- */
 .malevolent-v5-stats {
   position: relative; z-index: 2; background: rgba(3,2,2,0.8); padding: 25px 40px;
   border-top: 1px solid var(--shrine-red-mid); border-bottom: 1px solid var(--shrine-red-mid);
@@ -121,8 +137,11 @@
 .malevolent-stat-val { font-family: 'Spectral', serif; font-weight: 700; color: var(--shrine-bone); text-align: right; font-size: 1.15em; white-space: nowrap; margin: 0; padding: 0; text-shadow: 2px 2px 4px #000;}
 .malevolent-stat-track { width: 100%; height: 8px; background: #000; border: 1px solid var(--shrine-red-deep); box-shadow: inset 0 1px 3px rgba(0,0,0,0.9);}
 .malevolent-stat-fill { height: 100%; transition: width 0.6s ease-out; }
+
+/* HP/EA/SAN Cores */
 .malevolent-hp-fill { background: linear-gradient(90deg, var(--shrine-red-deep), var(--shrine-red-pop), var(--shrine-ember)); box-shadow: 0 0 10px var(--shrine-ember); }
-.malevolent-ea-fill { background: linear-gradient(90deg, #111, #333, var(--shrine-bone)); box-shadow: 0 0 10px rgba(255,255,255,0.1); }
+.malevolent-ea-fill { background: linear-gradient(90deg, #111, #444, var(--shrine-gold)); box-shadow: 0 0 10px rgba(201, 160, 99, 0.4); }
+.malevolent-san-fill { background: linear-gradient(90deg, #111, #333, var(--shrine-bone)); box-shadow: 0 0 10px rgba(194, 194, 194, 0.3); }
 
 /* --- CONTEÚDO --- */
 .malevolent-v5-content { position: relative; z-index: 2; padding: 40px 50px; text-align: justify; line-height: 1.9; font-size: 1.15em; margin: 0 10px; color: var(--shrine-bone); }
