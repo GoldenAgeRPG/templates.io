@@ -117,8 +117,8 @@
   box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
 }
 .malevolent-stat-item { display: grid; grid-template-columns: 35px 1fr min-content; align-items: center; gap: 15px; width: 100%; }
-.malevolent-stat-label { font-family: 'Cinzel Decorative', serif; font-weight: 900; color: var(--shrine-red-pop); text-align: right; font-size: 1.00em; margin: 0; padding: 0; text-shadow: 0 0 5px rgba(138, 6, 20, 0.5);}
-.malevolent-stat-val { font-family: 'Spectral', serif; font-weight: 700; color: var(--shrine-bone); text-align: right; font-size: 1.00em; white-space: nowrap; margin: 0; padding: 0; text-shadow: 2px 2px 4px #000;}
+.malevolent-stat-label { font-family: 'Cinzel Decorative', serif; font-weight: 900; color: var(--shrine-red-pop); text-align: right; font-size: 0.85em; margin: 0; padding: 0; text-shadow: 0 0 5px rgba(138, 6, 20, 0.5);}
+.malevolent-stat-val { font-family: 'Spectral', serif; font-weight: 700; color: var(--shrine-bone); text-align: right; font-size: 0.95em; white-space: nowrap; margin: 0; padding: 0; text-shadow: 2px 2px 4px #000;}
 .malevolent-stat-track { width: 100%; height: 8px; background: #000; border: 1px solid var(--shrine-red-deep); box-shadow: inset 0 1px 3px rgba(0,0,0,0.9);}
 .malevolent-stat-fill { height: 100%; transition: width 0.6s ease-out; }
 .malevolent-hp-fill { background: linear-gradient(90deg, var(--shrine-red-deep), var(--shrine-red-pop), var(--shrine-ember)); box-shadow: 0 0 10px var(--shrine-ember); }
