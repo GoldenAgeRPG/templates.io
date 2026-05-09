@@ -1,18 +1,18 @@
-/* --- TEMPLATE: MALEVOLENT SHRINE V5.3 (ADAM MYERS - DOMAIN EXPANSION) --- */
+/* --- TEMPLATE: MALEVOLENT SHRINE V5.4 (ADAM MYERS - DARK/EMBER) --- */
 @import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Kaushan+Script&family=Spectral:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&display=swap');
 
 :root {
-  --shrine-black: #050505;
-  --shrine-panel: #0d0d0d;
-  --shrine-red-deep: #2b0307;
-  --shrine-red-mid: #51080d;
-  --shrine-red-pop: #8f0010; /* Levemente mais vibrante */
+  --shrine-black: #030202;
+  --shrine-panel: #0a0606;
+  --shrine-red-deep: #240103;
+  --shrine-red-mid: #4a0409;
+  --shrine-red-pop: #8a0614;
+  --shrine-ember: #e63900; /* Laranja avermelhado para faíscas */
   --shrine-bone: #c2c2c2;
   --shrine-text: #9e9e9e;
-  --shrine-gold: #c9a063;
 }
 
-/* --- ANIMAÇÕES GERAIS --- */
+/* --- ANIMAÇÕES --- */
 @keyframes cleave-strike-left {
   0% { width: 0; opacity: 0; left: 0; }
   10% { width: 150%; opacity: 1; left: -25%; }
@@ -27,34 +27,38 @@
 }
 @keyframes aura-rise {
   0% { background-position: 0 100%; opacity: 0.1; }
-  50% { opacity: 0.5; }
+  50% { opacity: 0.4; }
   100% { background-position: 0 0; opacity: 0.1; }
 }
 @keyframes shrine-bleed {
   0%, 100% { filter: drop-shadow(0 0 5px var(--shrine-red-mid)) drop-shadow(0 0 10px var(--shrine-red-deep)); }
   50% { filter: drop-shadow(0 0 15px var(--shrine-red-pop)) drop-shadow(0 0 30px var(--shrine-red-mid)); }
 }
+@keyframes banner-breathe {
+  0% { transform: scale(1); filter: grayscale(80%) contrast(1.3) brightness(0.6) sepia(0.5) hue-rotate(-10deg); }
+  100% { transform: scale(1.05); filter: grayscale(50%) contrast(1.4) brightness(0.8) sepia(0.6) hue-rotate(-15deg); }
+}
 @keyframes ember-pulse {
   0%, 100% { text-shadow: 0 0 8px var(--shrine-red-pop), 0 0 15px var(--shrine-red-deep); }
-  50% { text-shadow: 0 0 15px var(--shrine-gold), 0 0 25px var(--shrine-red-pop); }
+  50% { text-shadow: 0 0 15px var(--shrine-ember), 0 0 25px var(--shrine-red-pop); }
 }
 
-/* --- CONTAINER (VIGA ARQUITETÔNICA ADICIONADA) --- */
+/* --- CONTAINER --- */
 .malevolent-v5-container {
   max-width: 700px; width: 95%; margin: 60px auto;
   background-color: var(--shrine-black);
   color: var(--shrine-text);
   font-family: 'Spectral', serif;
-  border: 2px solid var(--shrine-gold);
-  border-top: 10px solid var(--shrine-red-deep); /* Viga do Templo */
-  box-shadow: 0 0 80px rgba(0,0,0,1), inset 0 0 50px rgba(43, 3, 7, 0.8);
+  border: 2px solid var(--shrine-red-mid);
+  border-top: 10px solid var(--shrine-red-deep);
+  box-shadow: 0 0 80px rgba(0,0,0,1), inset 0 0 50px rgba(36, 1, 3, 0.9);
   position: relative; overflow: hidden;
   padding: 0;
   border-radius: 4px;
 }
 .malevolent-v5-container::before {
   content: ''; position: absolute; top: 0; left: 5%; width: 90%; height: 2px;
-  background: linear-gradient(90deg, transparent, var(--shrine-gold), transparent);
+  background: linear-gradient(90deg, transparent, var(--shrine-ember), transparent);
   z-index: 10;
 }
 .malevolent-v5-container * { box-sizing: border-box; }
@@ -62,14 +66,14 @@
 /* Textura de Fundo */
 .malevolent-v5-bg {
   position: absolute; inset: 0; pointer-events: none; z-index: 0;
-  background-image: linear-gradient(to bottom, rgba(5,5,5,0.9), var(--shrine-black)), url('https://www.transparenttextures.com/patterns/dark-matter.png');
+  background-image: linear-gradient(to bottom, rgba(3,2,2,0.9), var(--shrine-black)), url('https://www.transparenttextures.com/patterns/dark-matter.png');
   opacity: 0.6;
 }
 
 /* --- ENERGIA LATERAL --- */
 .malevolent-aura-left, .malevolent-aura-right {
   position: absolute; top: 0; bottom: 0; width: 12px; z-index: 5;
-  background: repeating-linear-gradient(to top, transparent 0%, var(--shrine-red-deep) 10%, var(--shrine-gold) 30%, transparent 50%);
+  background: repeating-linear-gradient(to top, transparent 0%, var(--shrine-red-deep) 10%, var(--shrine-ember) 30%, transparent 50%);
   background-size: 100% 200px;
   animation: aura-rise 3s linear infinite;
   filter: blur(6px);
@@ -78,9 +82,9 @@
 .malevolent-aura-left { left: 0; }
 .malevolent-aura-right { right: 0; }
 
-/* --- CAMADA DE CORTES E FAGULHAS --- */
+/* --- CAMADA DE CORTES (CSS PURO) --- */
 .malevolent-slash-layer { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
-.slash-instance { position: absolute; height: 2px; background: var(--shrine-bone); box-shadow: 0 0 8px var(--shrine-bone), 0 0 15px var(--shrine-red-pop); opacity: 0; }
+.slash-instance { position: absolute; height: 2px; background: var(--shrine-ember); box-shadow: 0 0 8px var(--shrine-ember), 0 0 15px var(--shrine-red-pop); opacity: 0; }
 .slash-left { transform-origin: left; animation: cleave-strike-left infinite ease-out; }
 .slash-right { transform-origin: right; animation: cleave-strike-right infinite ease-out; }
 .s-1 { top: 30%; left: -20%; width: 150%; transform: rotate(-35deg); animation-duration: 4s; }
@@ -93,100 +97,98 @@
 /* --- HEADER --- */
 .malevolent-v5-header {
   position: relative; z-index: 2; text-align: center; padding: 45px 20px 25px;
-  background: radial-gradient(circle at top center, rgba(81, 8, 13, 0.4) 0%, transparent 80%);
+  background: radial-gradient(circle at top center, rgba(74, 4, 9, 0.4) 0%, transparent 80%);
   border-bottom: 1px solid var(--shrine-red-deep); margin: 0 20px;
 }
 .malevolent-v5-title { font-family: 'Cinzel Decorative', serif; font-size: 2.4em; font-weight: 900; color: var(--shrine-bone); text-shadow: 0 4px 15px var(--shrine-red-deep); letter-spacing: 2px; margin: 0; line-height: 1; text-transform: uppercase; }
-.malevolent-v5-subtitle { font-family: 'Kaushan Script', cursive; font-size: 1.8em; color: var(--shrine-gold); margin-top: 10px; filter: drop-shadow(0 0 8px rgba(201, 160, 99, 0.4)); letter-spacing: 2px; }
+.malevolent-v5-subtitle { font-family: 'Kaushan Script', cursive; font-size: 1.8em; color: var(--shrine-red-pop); margin-top: 10px; filter: drop-shadow(0 0 8px rgba(138, 6, 20, 0.6)); letter-spacing: 2px; }
 
-/* --- IMAGEM (MOLDURA REFINADA) --- */
+/* --- IMAGEM (ANIMADA) --- */
 .malevolent-v5-image-wrapper { padding: 35px 25px; position: relative; z-index: 2; display: flex; justify-content: center; }
-.malevolent-v5-frame { width: 100%; height: 350px; position: relative; clip-path: polygon(5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 0% 5%); background: var(--shrine-black); animation: shrine-bleed 5s infinite ease-in-out; border: 2px solid var(--shrine-red-deep); }
-.malevolent-v5-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; filter: grayscale(80%) contrast(1.3) brightness(0.6) sepia(0.3) hue-rotate(-10deg); transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
-
-/* O Hover Dominante */
-.malevolent-v5-frame:hover img { transform: scale(1.08); filter: grayscale(0%) contrast(1.4) brightness(0.9) saturate(1.5); }
+.malevolent-v5-frame { width: 100%; height: 350px; position: relative; clip-path: polygon(5% 0%, 95% 0%, 100% 5%, 100% 95%, 95% 100%, 5% 100%, 0% 95%, 0% 5%); background: var(--shrine-black); animation: shrine-bleed 5s infinite ease-in-out; border: 2px solid var(--shrine-red-deep); overflow: hidden; }
+.malevolent-v5-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top; animation: banner-breathe 10s infinite alternate ease-in-out; }
+.malevolent-v5-frame:hover img { filter: grayscale(20%) contrast(1.5) brightness(0.9) saturate(1.8) hue-rotate(-5deg); animation-play-state: paused; transform: scale(1.1); transition: all 0.5s ease; }
 
 /* --- STATUS --- */
 .malevolent-v5-stats {
-  position: relative; z-index: 2; background: rgba(5,5,5,0.8); padding: 25px 40px;
-  border-top: 1px solid var(--shrine-gold); border-bottom: 1px solid var(--shrine-gold);
+  position: relative; z-index: 2; background: rgba(3,2,2,0.8); padding: 25px 40px;
+  border-top: 1px solid var(--shrine-red-mid); border-bottom: 1px solid var(--shrine-red-mid);
   display: flex; flex-direction: column; gap: 15px; margin: 0 20px;
   box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
 }
 .malevolent-stat-item { display: grid; grid-template-columns: 35px 1fr min-content; align-items: center; gap: 15px; width: 100%; }
-.malevolent-stat-label { font-family: 'Cinzel Decorative', serif; font-weight: 900; color: var(--shrine-gold); text-align: right; font-size: 1em; margin: 0; padding: 0; text-shadow: 0 0 5px rgba(201, 160, 99, 0.5);}
+.malevolent-stat-label { font-family: 'Cinzel Decorative', serif; font-weight: 900; color: var(--shrine-red-pop); text-align: right; font-size: 1em; margin: 0; padding: 0; text-shadow: 0 0 5px rgba(138, 6, 20, 0.5);}
 .malevolent-stat-val { font-family: 'Spectral', serif; font-weight: 700; color: var(--shrine-bone); text-align: right; font-size: 1.15em; white-space: nowrap; margin: 0; padding: 0; text-shadow: 2px 2px 4px #000;}
-.malevolent-stat-track { width: 100%; height: 8px; background: #000; border: 1px solid var(--shrine-red-mid); box-shadow: inset 0 1px 3px rgba(0,0,0,0.9);}
+.malevolent-stat-track { width: 100%; height: 8px; background: #000; border: 1px solid var(--shrine-red-deep); box-shadow: inset 0 1px 3px rgba(0,0,0,0.9);}
 .malevolent-stat-fill { height: 100%; transition: width 0.6s ease-out; }
-.malevolent-hp-fill { background: linear-gradient(90deg, var(--shrine-red-deep), var(--shrine-red-pop), var(--shrine-gold)); box-shadow: 0 0 10px var(--shrine-red-pop); }
-.malevolent-ea-fill { background: linear-gradient(90deg, #111, #555, var(--shrine-bone)); box-shadow: 0 0 10px rgba(255,255,255,0.2); }
+.malevolent-hp-fill { background: linear-gradient(90deg, var(--shrine-red-deep), var(--shrine-red-pop), var(--shrine-ember)); box-shadow: 0 0 10px var(--shrine-ember); }
+.malevolent-ea-fill { background: linear-gradient(90deg, #111, #333, var(--shrine-bone)); box-shadow: 0 0 10px rgba(255,255,255,0.1); }
 
 /* --- CONTEÚDO --- */
 .malevolent-v5-content { position: relative; z-index: 2; padding: 40px 50px; text-align: justify; line-height: 1.9; font-size: 1.15em; margin: 0 10px; color: var(--shrine-bone); }
-.malevolent-v5-content b, .malevolent-v5-content strong { color: var(--shrine-gold); font-family: 'Spectral', serif; font-weight: 700; text-transform: none !important; text-shadow: 0 0 8px rgba(201, 160, 99, 0.3);}
-.malevolent-v5-content i, .malevolent-v5-content em { color: var(--shrine-red-pop); font-family: 'Spectral', serif; font-style: italic !important; font-weight: 600; border-bottom: 1px solid rgba(143, 0, 16, 0.3);}
+.malevolent-v5-content b, .malevolent-v5-content strong { color: var(--shrine-red-pop); font-family: 'Spectral', serif; font-weight: 700; text-transform: none !important; text-shadow: 0 0 8px rgba(138, 6, 20, 0.3);}
+.malevolent-v5-content i, .malevolent-v5-content em { color: var(--shrine-ember); font-family: 'Spectral', serif; font-style: italic !important; font-weight: 600; border-bottom: 1px solid rgba(230, 57, 0, 0.2);}
 
 /* --- EXTRAS (DOSSIÊ) --- */
-.malevolent-v5-extras { margin: 0 40px 30px; border: 1px solid var(--shrine-red-deep); background: rgba(10,10,10,0.9); position: relative; z-index: 2; box-shadow: 0 10px 20px rgba(0,0,0,0.6);}
-.malevolent-v5-extras > summary { cursor: pointer; padding: 18px; font-family: 'Cinzel Decorative', serif; text-align: center; color: var(--shrine-gold); font-size: 1.1em; list-style: none; transition: 0.3s; border-bottom: 1px solid #111; font-weight: 900;}
+.malevolent-v5-extras { margin: 0 40px 30px; border: 1px solid var(--shrine-red-deep); background: rgba(5,2,2,0.9); position: relative; z-index: 2; box-shadow: 0 10px 20px rgba(0,0,0,0.8);}
+.malevolent-v5-extras > summary { cursor: pointer; padding: 18px; font-family: 'Cinzel Decorative', serif; text-align: center; color: var(--shrine-red-pop); font-size: 1.1em; list-style: none; transition: 0.3s; border-bottom: 1px solid #111; font-weight: 900;}
 .malevolent-v5-extras > summary::-webkit-details-marker { display: none; }
-.malevolent-v5-extras > summary:hover { color: var(--shrine-red-pop); background: #000; text-shadow: 0 0 8px var(--shrine-red-pop); }
-.malevolent-v5-extras[open] > summary { border-bottom: 2px solid var(--shrine-red-pop); color: var(--shrine-red-pop); animation: ember-pulse 3s infinite;}
+.malevolent-v5-extras > summary:hover { color: var(--shrine-ember); background: #000; text-shadow: 0 0 8px var(--shrine-ember); }
+.malevolent-v5-extras[open] > summary { border-bottom: 2px solid var(--shrine-red-pop); color: var(--shrine-ember); animation: ember-pulse 3s infinite;}
 .malevolent-fold-content { padding: 25px; font-size: 0.95em; color: #999; }
 
 /* Grids Táticos */
 .sk-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
 .sk-data-box { background: rgba(0,0,0,0.6); border-left: 3px solid var(--shrine-red-mid); padding: 10px 15px; display: flex; flex-direction: column; transition: 0.2s;}
-.sk-data-box:hover { background: rgba(43, 3, 7, 0.4); border-left-color: var(--shrine-gold); transform: translateX(2px);}
-.sk-data-lbl { font-family: 'Cinzel Decorative', serif; font-size: 0.75em; color: var(--shrine-gold); text-transform: uppercase; font-weight: bold;}
-.sk-data-val { color: var(--shrine-bone); font-size: 1em; margin-top:4px;}
-.sk-data-val a { color: var(--shrine-red-pop); text-decoration: none; border-bottom: 1px dashed var(--shrine-red-pop);}
+.sk-data-box:hover { background: rgba(36, 1, 3, 0.4); border-left-color: var(--shrine-ember); transform: translateX(2px);}
+.sk-data-lbl { font-family: 'Cinzel Decorative', serif; font-size: 0.75em; color: var(--shrine-red-pop); text-transform: uppercase; font-weight: bold;}
+.sk-data-val { color: var(--shrine-bone); font-size: 0.95em; margin-top:2px;}
+.sk-data-val a { color: var(--shrine-ember); text-decoration: none; border-bottom: 1px dashed var(--shrine-ember);}
 
-.sk-act-grid { display: flex; justify-content: space-around; background: linear-gradient(180deg, rgba(43, 3, 7, 0.4), transparent); padding: 15px; border: 1px solid var(--shrine-red-deep); margin-bottom: 25px; border-radius: 4px;}
+.sk-act-grid { display: flex; justify-content: space-around; background: linear-gradient(180deg, rgba(36, 1, 3, 0.4), transparent); padding: 15px; border: 1px solid var(--shrine-red-deep); margin-bottom: 25px; border-radius: 4px;}
 .sk-act { text-align: center; font-family: 'Cinzel Decorative', serif; font-size: 0.8em; color: var(--shrine-text); }
-.sk-act span { display: block; font-family: 'Spectral', serif; font-size: 2.2em; color: var(--shrine-gold); font-weight: bold; margin-top: 5px; text-shadow: 0 2px 10px rgba(201, 160, 99, 0.3);}
+.sk-act span { display: block; font-family: 'Spectral', serif; font-size: 2.2em; color: var(--shrine-red-pop); font-weight: bold; margin-top: 5px; text-shadow: 0 2px 10px rgba(138, 6, 20, 0.3);}
 
-.sk-list-title { font-family: 'Cinzel Decorative', serif; font-size: 0.95em; color: var(--shrine-bone); background: linear-gradient(90deg, var(--shrine-red-deep), transparent); border-left: 4px solid var(--shrine-gold); display: block; padding: 8px 15px; text-transform: uppercase; letter-spacing: 2px; margin: 20px 0 12px; font-weight: bold;}
+.sk-list-title { font-family: 'Cinzel Decorative', serif; font-size: 0.95em; color: var(--shrine-bone); background: linear-gradient(90deg, var(--shrine-red-deep), transparent); border-left: 4px solid var(--shrine-ember); display: block; padding: 8px 15px; text-transform: uppercase; letter-spacing: 2px; margin: 20px 0 12px; font-weight: bold;}
 .sk-item { margin-bottom: 8px; padding-left: 20px; position: relative; color: var(--shrine-bone); line-height: 1.6;}
-.sk-item::before { content: '✦'; position: absolute; left: 0; color: var(--shrine-red-pop); font-size: 0.8em;}
+.sk-item::before { content: '✦'; position: absolute; left: 0; color: var(--shrine-ember); font-size: 0.8em;}
 
 /* Técnicas & Arsenal */
 .sk-techs-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
-.sk-tech-card { display: flex; flex-direction: column; background: var(--shrine-panel); border: 1px solid var(--shrine-gold); box-shadow: 0 4px 15px rgba(0,0,0,0.8); position: relative; overflow: hidden; cursor: help; height: 180px; }
+.sk-tech-card { display: flex; flex-direction: column; background: var(--shrine-panel); border: 1px solid var(--shrine-red-mid); box-shadow: 0 4px 15px rgba(0,0,0,0.8); position: relative; overflow: hidden; cursor: help; height: 180px; }
 .sk-tech-base { display: flex; height: 100%; width: 100%; transition: 0.3s; }
-.sk-tech-img-wrap { width: 40%; height: 100%; border-right: 1px solid var(--shrine-gold); background: #000; flex-shrink: 0; }
-.sk-tech-img-wrap img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(80%) contrast(1.4) brightness(0.6) sepia(0.4) hue-rotate(-20deg); transition: 0.4s;}
+.sk-tech-img-wrap { width: 40%; height: 100%; border-right: 1px solid var(--shrine-red-deep); background: #000; flex-shrink: 0; }
+.sk-tech-img-wrap img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(80%) contrast(1.4) brightness(0.6) sepia(0.4) hue-rotate(-10deg); transition: 0.4s;}
 .sk-tech-data { flex: 1; padding: 12px; display: flex; flex-direction: column; justify-content: center; gap: 8px; background: var(--shrine-black); transition: 0.3s;}
-.sk-tech-name { font-family: 'Cinzel Decorative', serif; font-size: 0.95em; font-weight: bold; color: var(--shrine-gold); text-transform: uppercase; border-bottom: 1px solid var(--shrine-red-deep); padding-bottom: 6px; margin-bottom: 4px; line-height: 1.2;}
+.sk-tech-name { font-family: 'Cinzel Decorative', serif; font-size: 0.95em; font-weight: bold; color: var(--shrine-red-pop); text-transform: uppercase; border-bottom: 1px solid var(--shrine-red-deep); padding-bottom: 6px; margin-bottom: 4px; line-height: 1.2;}
 .sk-tech-stat { display: flex; flex-direction: column; gap: 4px; }
 .sk-s-head { display: flex; justify-content: space-between; font-size: 0.8em; font-family: 'Special Elite', cursive; font-weight: bold; color: var(--shrine-text);}
 .sk-s-val { color: var(--shrine-bone); }
-.sk-s-track { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px;}
-.sk-s-fill { height: 100%; background: var(--shrine-gold); border-radius: 2px;}
+.sk-s-track { width: 100%; height: 4px; background: rgba(255,255,255,0.05); border-radius: 2px;}
+.sk-s-fill { height: 100%; background: var(--shrine-bone); border-radius: 2px;}
 .sk-s-fill.sk-blood-bar { background: var(--shrine-red-pop); }
 
-.sk-tech-overlay { position: absolute; inset: 0; background: rgba(5, 5, 5, 0.95); color: var(--shrine-bone); padding: 15px; display: flex; flex-direction: column; gap: 10px; opacity: 0; visibility: hidden; transition: all 0.3s ease; overflow-y: auto; z-index: 10; border: 2px solid var(--shrine-red-pop); }
+.sk-tech-overlay { position: absolute; inset: 0; background: rgba(3, 2, 2, 0.95); color: var(--shrine-bone); padding: 15px; display: flex; flex-direction: column; gap: 10px; opacity: 0; visibility: hidden; transition: all 0.3s ease; overflow-y: auto; z-index: 10; border: 2px solid var(--shrine-ember); }
 .sk-tech-card:hover .sk-tech-overlay { opacity: 1; visibility: visible; }
-.sk-tech-card:hover .sk-tech-img-wrap img { filter: brightness(0.2) contrast(1.5) sepia(1) hue-rotate(-20deg); }
+.sk-tech-card:hover .sk-tech-img-wrap img { filter: brightness(0.3) contrast(1.5) sepia(1) hue-rotate(-10deg); }
 .sk-tech-card:hover .sk-tech-data { filter: brightness(0.1); }
 .sk-tech-overlay::-webkit-scrollbar { width: 4px; }
-.sk-tech-overlay::-webkit-scrollbar-thumb { background: var(--shrine-red-pop); }
+.sk-tech-overlay::-webkit-scrollbar-thumb { background: var(--shrine-ember); }
 
-.sk-sp-title { font-family: 'Cinzel Decorative', serif; font-size: 0.85em; color: var(--shrine-gold); text-transform: uppercase; border-bottom: 1px dashed var(--shrine-gold); padding-bottom: 4px; margin-bottom: 4px; font-weight: bold;}
+.sk-sp-title { font-family: 'Cinzel Decorative', serif; font-size: 0.85em; color: var(--shrine-red-pop); text-transform: uppercase; border-bottom: 1px dashed var(--shrine-red-pop); padding-bottom: 4px; margin-bottom: 4px; font-weight: bold;}
 .sk-sp-text { font-size: 0.9em; line-height: 1.5; color: #bbb; margin-bottom: 8px; text-align: justify;}
 .sk-sp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 8px; }
-.sk-sp-grid-item { display: flex; justify-content: space-between; background: rgba(255,255,255,0.03); padding: 4px 6px; font-size: 0.85em; font-family: 'Special Elite', cursive; border-left: 2px solid var(--shrine-red-pop);}
+.sk-sp-grid-item { display: flex; justify-content: space-between; background: rgba(255,255,255,0.02); padding: 4px 6px; font-size: 0.85em; font-family: 'Special Elite', cursive; border-left: 2px solid var(--shrine-ember);}
 .sk-sp-grid-item span:last-child { color: var(--shrine-bone); font-weight: bold;}
 
 /* Sub-Spoilers */
-.sk-sub-fold { margin-top: 20px; border: 1px solid var(--shrine-red-deep); box-shadow: none; background: #050505;}
-.sk-sub-fold > summary { font-size: 1em; background: #0a0a0a; color: var(--shrine-text); text-align: left; padding: 12px; border: none; font-weight: normal; font-family: 'Cinzel Decorative', serif;}
-.sk-sub-fold > summary:hover { color: var(--shrine-gold); background: #000;}
+.sk-sub-fold { margin-top: 20px; border: 1px solid var(--shrine-red-deep); box-shadow: none; background: #030202;}
+.sk-sub-fold > summary { font-size: 1em; background: #0a0606; color: var(--shrine-text); text-align: left; padding: 12px; border: none; font-weight: normal; font-family: 'Cinzel Decorative', serif;}
+.sk-sub-fold > summary:hover { color: var(--shrine-ember); background: #000;}
 
 /* --- FOOTER --- */
-.malevolent-v5-footer { text-align: center; padding: 40px; position: relative; z-index: 2; border-top: 2px solid var(--shrine-gold); background: linear-gradient(to top, var(--shrine-red-deep), transparent); margin: 0 20px; }
-.malevolent-v5-signature::after { content: 'Adam Myers'; font-family: 'Kaushan Script', cursive; font-size: 2.8em; color: var(--shrine-gold); text-shadow: 2px 2px 10px rgba(0,0,0,0.9), 0 0 15px var(--shrine-red-pop); letter-spacing: 2px; }
+.malevolent-v5-footer { text-align: center; padding: 40px; position: relative; z-index: 2; border-top: 2px solid var(--shrine-red-mid); background: linear-gradient(to top, var(--shrine-red-deep), transparent); margin: 0 20px; }
+.malevolent-v5-signature::after { content: 'Adam Myers'; font-family: 'Kaushan Script', cursive; font-size: 2.8em; color: var(--shrine-red-pop); text-shadow: 2px 2px 10px rgba(0,0,0,0.9), 0 0 15px var(--shrine-red-mid); letter-spacing: 2px; }
 
 @media (max-width: 600px) {
   .malevolent-v5-container { width: 100%; border-width: 1px; }
