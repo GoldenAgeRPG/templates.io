@@ -1,0 +1,208 @@
+/* --- TEMPLATE: SAYURI GOJO (STREETWEAR / NEO-BRUTALISM) --- */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&family=Teko:wght@400;600;700&family=Permanent+Marker&display=swap');
+
+:root {
+  --sg-bg: #0a0a0c;
+  --sg-panel: #141417;
+  --sg-cyan: #05d9e8;
+  --sg-pink: #ff2a6d;
+  --sg-white: #f1f1f1;
+  --sg-grey: #888888;
+  --sg-border: 3px solid var(--sg-white);
+  --sg-shadow-cyan: 6px 6px 0px var(--sg-cyan);
+  --sg-shadow-pink: 6px 6px 0px var(--sg-pink);
+}
+
+/* --- ANIMAÇÕES --- */
+@keyframes tape-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes glitch-skew {
+  0%, 100% { transform: skew(0deg); }
+  20% { transform: skew(-5deg); }
+  40% { transform: skew(5deg); }
+  60% { transform: skew(-2deg); }
+  80% { transform: skew(2deg); }
+}
+
+/* --- CONTAINER PRINCIPAL --- */
+.sg-wrap {
+  max-width: 650px;
+  width: 95%;
+  margin: 40px auto;
+  background-color: var(--sg-bg);
+  background-image: linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 20px 20px;
+  border: var(--sg-border);
+  box-shadow: 12px 12px 0px var(--sg-cyan);
+  position: relative;
+  font-family: 'Space Grotesk', sans-serif;
+  color: var(--sg-white);
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  transition: box-shadow 0.3s ease;
+}
+.sg-wrap:hover { box-shadow: 12px 12px 0px var(--sg-pink); }
+.sg-wrap * { box-sizing: border-box; }
+
+/* --- HEADER & TAPE --- */
+.sg-header {
+  padding: 30px 20px 10px;
+  text-align: center;
+  background: var(--sg-panel);
+  border-bottom: var(--sg-border);
+  position: relative;
+}
+
+.sg-title {
+  font-family: 'Teko', sans-serif;
+  font-size: 4em;
+  font-weight: 700;
+  color: var(--sg-white);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  line-height: 0.9;
+  margin: 0;
+  text-shadow: 3px 3px 0px var(--sg-pink);
+}
+
+.sg-sub {
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 0.9em;
+  font-weight: 700;
+  color: var(--sg-bg);
+  background: var(--sg-cyan);
+  display: inline-block;
+  padding: 4px 12px;
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  margin-top: 10px;
+  transform: rotate(-2deg);
+}
+
+/* Fita estilo Hypebeast */
+.sg-tape {
+  background: var(--sg-pink);
+  color: var(--sg-white);
+  font-family: 'Teko', sans-serif;
+  font-weight: 700;
+  font-size: 1.5em;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 5px 0;
+  transform: rotate(2deg) scale(1.05);
+  border-top: 2px solid var(--sg-white);
+  border-bottom: 2px solid var(--sg-white);
+  position: relative;
+  z-index: 5;
+  margin-top: -10px;
+  margin-bottom: 20px;
+}
+.sg-tape-text {
+  display: inline-block;
+  animation: tape-scroll 12s linear infinite;
+}
+
+/* --- BANNER --- */
+.sg-banner-wrapper { padding: 0 25px; position: relative; z-index: 2; }
+.sg-banner {
+  width: 100%;
+  height: 220px;
+  border: var(--sg-border);
+  box-shadow: var(--sg-shadow-cyan);
+  background: var(--sg-bg);
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.sg-banner img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: contrast(1.2) saturate(1.2);
+  transition: transform 0.4s ease;
+}
+.sg-banner:hover { box-shadow: var(--sg-shadow-pink); transform: translate(-2px, -2px); }
+.sg-banner:hover img { transform: scale(1.05); }
+
+/* --- STATUS BARS --- */
+.sg-vitals { display: flex; gap: 15px; padding: 25px; }
+.sg-stat {
+  flex: 1; display: flex; flex-direction: column;
+  background: var(--sg-panel);
+  border: 2px solid var(--sg-white);
+  padding: 10px;
+  box-shadow: 4px 4px 0px var(--sg-cyan);
+  transition: all 0.2s ease;
+}
+.sg-stat:hover { transform: translateY(-3px); box-shadow: 4px 7px 0px var(--sg-pink); }
+.sg-stat-head { display: flex; justify-content: space-between; align-items: baseline; font-family: 'Teko', sans-serif; font-size: 1.4em; font-weight: 700; margin-bottom: 5px; }
+.sg-stat-head span:first-child { color: var(--sg-white); }
+.sg-val { font-family: 'Space Grotesk', sans-serif; font-size: 0.7em; font-weight: 700; color: var(--sg-cyan); }
+.sg-track { width: 100%; height: 10px; background: var(--sg-bg); border: 2px solid var(--sg-white); position: relative; }
+.sg-fill { height: 100%; background: var(--sg-cyan); transition: width 0.5s ease; border-right: 2px solid var(--sg-white); }
+.sg-stat:nth-child(1) .sg-fill { background: var(--sg-pink); }
+.sg-stat:nth-child(1) .sg-val { color: var(--sg-pink); }
+
+/* --- CORPO DO TEXTO --- */
+.sg-body {
+  background: var(--sg-panel);
+  border-top: var(--sg-border);
+  border-bottom: var(--sg-border);
+  padding: 30px 35px;
+  font-size: 16px;
+  line-height: 1.8;
+  text-align: justify;
+  margin: 10px 0 20px;
+}
+.sg-body b, .sg-body strong { font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--sg-cyan); background: rgba(5, 217, 232, 0.1); padding: 0 4px; }
+.sg-body i, .sg-body em { font-style: italic; color: var(--sg-pink); }
+
+/* --- DOSSIÊ / FOLDERS --- */
+.sg-fold { margin: 0 25px 25px; border: var(--sg-border); background: var(--sg-panel); box-shadow: var(--sg-shadow-pink); transition: all 0.2s ease; }
+.sg-fold:hover { transform: translate(-2px, -2px); box-shadow: 8px 8px 0px var(--sg-cyan); }
+.sg-fold > summary { cursor: pointer; padding: 15px; font-family: 'Teko', sans-serif; font-size: 1.8em; font-weight: 700; text-align: center; color: var(--sg-bg); background: var(--sg-white); letter-spacing: 2px; list-style: none; transition: 0.2s; text-transform: uppercase; }
+.sg-fold > summary::-webkit-details-marker { display: none; }
+.sg-fold > summary:hover { background: var(--sg-pink); color: var(--sg-white); }
+.sg-fold[open] > summary { background: var(--sg-cyan); color: var(--sg-bg); border-bottom: var(--sg-border); }
+.sg-content-fold { padding: 25px; font-size: 15px; }
+
+/* Grids Táticos */
+.sg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
+.sg-data-box { background: var(--sg-bg); border: 2px solid var(--sg-white); padding: 12px; display: flex; flex-direction: column; box-shadow: 3px 3px 0 var(--sg-grey); }
+.sg-data-box:hover { box-shadow: 3px 3px 0 var(--sg-cyan); }
+.sg-data-lbl { font-family: 'Teko', sans-serif; font-size: 1.2em; color: var(--sg-grey); text-transform: uppercase; letter-spacing: 1px; line-height: 1; }
+.sg-data-val { font-weight: 700; margin-top: 4px; color: var(--sg-white); }
+.sg-data-val a { color: var(--sg-pink); text-decoration: none; border-bottom: 2px solid var(--sg-pink); }
+.sg-data-val a:hover { color: var(--sg-cyan); border-color: var(--sg-cyan); }
+
+/* Ações */
+.sg-act-grid { display: flex; gap: 10px; margin-bottom: 25px; }
+.sg-act { flex: 1; text-align: center; border: 2px solid var(--sg-white); background: var(--sg-bg); padding: 10px 5px; box-shadow: 3px 3px 0 var(--sg-grey); }
+.sg-act:hover { box-shadow: 3px 3px 0 var(--sg-pink); transform: translateY(-2px); }
+.sg-act .lbl { font-family: 'Teko', sans-serif; font-size: 1.3em; display: block; color: var(--sg-white); line-height: 1; }
+.sg-act span { display: block; font-family: 'Space Grotesk', sans-serif; font-size: 1.8em; font-weight: 700; margin-top: 5px; line-height: 1; color: var(--sg-cyan); }
+
+/* Listas e Blocos de Texto */
+.sg-list-title { font-family: 'Teko', sans-serif; font-size: 1.6em; color: var(--sg-bg); background: var(--sg-white); display: inline-block; padding: 2px 15px; text-transform: uppercase; letter-spacing: 1px; margin: 15px 0 10px; box-shadow: 4px 4px 0 var(--sg-pink); }
+.sg-item { margin-bottom: 8px; padding-left: 20px; position: relative; font-weight: 600; }
+.sg-item::before { content: '►'; position: absolute; left: 0; top: 0px; font-size: 1.2em; color: var(--sg-cyan); font-family: 'Teko', sans-serif; }
+.sg-summary-text { font-size: 0.95em; margin-bottom: 15px; background: var(--sg-bg); padding: 15px; border: 2px solid var(--sg-white); border-left: 6px solid var(--sg-pink); }
+
+/* Sub-Spoilers */
+.sg-sub-fold { margin-top: 15px; box-shadow: 4px 4px 0 var(--sg-cyan); }
+.sg-sub-fold:hover { transform: none; box-shadow: 4px 4px 0 var(--sg-pink); }
+.sg-sub-fold > summary { font-size: 1.4em; background: var(--sg-white); color: var(--sg-bg); text-align: left; padding: 10px 15px; }
+
+/* ASSINATURA (Estilo Grafite/Tag) */
+.sg-signature { text-align: right; padding: 10px 25px 30px; position: relative; z-index: 2; margin-top: 10px; }
+.sg-signature::after { content: 'SAYURI GOJO'; font-family: 'Permanent Marker', cursive; font-size: 2.2em; color: var(--sg-white); text-shadow: 3px 3px 0px var(--sg-pink); transform: rotate(-3deg); display: inline-block; }
+
+@media (max-width: 600px) {
+  .sg-vitals { flex-direction: column; padding: 15px; }
+  .sg-header { padding: 20px 15px 10px; }
+  .sg-title { font-size: 3em; }
+  .sg-fold { margin: 0 15px 25px; }
+}
