@@ -1,4 +1,4 @@
-/* --- TEMPLATE DE POSTAGEM (JOGADOR) v3.0 - CLEAN, DOSSIER & CALC --- */
+/* --- TEMPLATE DE POSTAGEM (JOGADOR) v4.0 - CLEAN, DOSSIER & CALC --- */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Yuji+Syuku&family=Share+Tech+Mono&display=swap');
 
 :root {
@@ -98,53 +98,3 @@
 .rp-post-content::after { bottom: 10px; right: 10px; border-bottom: 2px solid var(--accent); border-right: 2px solid var(--accent); }
 .rp-post-content p { margin: 0 0 1em 0; }
 .rp-post-content p:last-child { margin-bottom: 0; }
-
-b, strong { color: #fff; font-weight: 700; }
-i, em { font-style: italic; color: var(--highlight); }
-
-.rp-dossier { margin-top: 20px; border: 1px dashed rgba(160,80,255,0.4); background: rgba(0,0,0,0.4); border-radius: 4px; }
-.rp-dossier > summary {
-  padding: 15px; cursor: pointer; color: var(--highlight); font-family: 'Share Tech Mono', monospace;
-  text-transform: uppercase; font-size: 13px; font-weight: 700; list-style: none; display: flex; align-items: center;
-}
-.rp-dossier > summary::-webkit-details-marker { display: none; }
-.rp-dossier > summary::before { content: '>'; margin-right: 10px; color: var(--text-muted); }
-.rp-dossier[open] > summary::before { content: 'v'; color: var(--accent); }
-.rp-dossier-content { padding: 0 20px 20px; border-top: 1px dashed rgba(160,80,255,0.2); margin-top: 5px; }
-
-.rp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
-.rp-data-box { background: rgba(255,255,255,0.02); padding: 12px; border: 1px solid rgba(160,80,255,0.1); border-radius: 4px; display: flex; flex-direction: column; gap: 4px; }
-.rp-data-lbl { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--accent); text-transform: uppercase; }
-.rp-data-val { font-size: 13px; color: var(--text); }
-.rp-data-val a { color: var(--highlight); text-decoration: none; }
-
-.rp-act-grid { display: flex; justify-content: space-between; background: rgba(160,80,255,0.05); padding: 15px; border-radius: 4px; margin-bottom: 25px; border: 1px solid rgba(160,80,255,0.1); }
-.rp-act-item { text-align: center; font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--text-muted); text-transform: uppercase; width: 100%; }
-.rp-act-item span { display: block; font-family: 'Inter', sans-serif; font-size: 20px; color: #fff; font-weight: 700; margin-top: 4px; }
-
-.rp-list-title { font-family: 'Share Tech Mono', monospace; font-size: 13px; color: var(--highlight); text-transform: uppercase; border-bottom: 1px dashed rgba(160,80,255,0.3); padding-bottom: 6px; margin: 25px 0 12px; }
-.rp-list-item { font-size: 13px; color: var(--text-muted); margin-bottom: 8px; padding-left: 15px; position: relative; line-height: 1.6; }
-.rp-list-item::before { content: '>'; position: absolute; left: 0; color: var(--accent); font-family: 'Share Tech Mono', monospace; font-size: 12px; top: 0px; font-weight: bold; }
-.rp-post-extras-content { font-size: 13px; color: var(--text-muted); line-height: 1.6; padding: 10px; background: rgba(0,0,0,0.3); border-radius: 4px; border-left: 2px solid var(--accent); }
-
-/* --- Injeção de Títulos via CSS --- */
-.rp-title-notes::before { content: "Considerações"; }
-.rp-title-summary::before { content: "Resumo das Ações"; }
-.rp-title-effects::before { content: "Efeitos"; }
-.rp-title-aptitudes::before { content: "Aptidões"; }
-.rp-title-calc::before { content: "Cálculos"; }
-.rp-sub-dossier > summary.rp-title-inv::before { content: "Inventário / Armas"; }
-.rp-sub-dossier > summary.rp-title-tech::before { content: "Técnicas Utilizadas"; }
-
-.rp-sub-dossier { margin-top: 15px; border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; background: rgba(0,0,0,0.2); }
-.rp-sub-dossier > summary { padding: 12px; font-size: 12px; cursor: pointer; color: var(--highlight); font-family: 'Share Tech Mono', monospace; text-transform: uppercase; font-weight: 700; list-style: none;}
-.rp-sub-dossier > summary::-webkit-details-marker { display: none; }
-.rp-sub-dossier .rp-list-item b { color: var(--text); }
-
-/* --- Assinatura do Fórum --- */
-.rp-post-container::after {
-  content: "Golden Age RPG"; display: block; text-align: right;
-  font-family: 'Share Tech Mono', monospace; color: var(--accent);
-  font-size: 10px; opacity: 0.4; margin-top: 25px; letter-spacing: 2px;
-  text-transform: uppercase;
-}
