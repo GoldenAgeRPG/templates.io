@@ -1,0 +1,129 @@
+/* --- TEMPLATE: RAID MASTER (SYSTEM ALERT) --- */
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,700;1,400;1,700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap');
+
+:root {
+    --rd-bg: #0a0a0c;
+    --rd-panel: #141418;
+    --rd-accent: #b30000;
+    --rd-accent-glow: #ff1a1a;
+    --rd-text: #d4d4dc;
+    --rd-border: #2a2a35;
+    --rd-alert: #ffcc00;
+}
+
+@keyframes rd-pulse {
+    0%, 100% { box-shadow: inset 5px 0 0 var(--rd-accent), 0 0 15px rgba(179, 0, 0, 0.2); }
+    50% { box-shadow: inset 5px 0 0 var(--rd-accent-glow), 0 0 25px rgba(255, 26, 26, 0.4); }
+}
+
+@keyframes rd-scanline {
+    0% { transform: translateY(-100%); }
+    100% { transform: translateY(100%); }
+}
+
+/* CONTAINER PRINCIPAL */
+.rd-container {
+    max-width: 800px;
+    width: 95%;
+    margin: 30px auto;
+    background-color: var(--rd-bg);
+    border: 1px solid var(--rd-border);
+    font-family: 'Merriweather', serif;
+    color: var(--rd-text);
+    position: relative;
+    overflow: hidden;
+    animation: rd-pulse 4s infinite;
+}
+.rd-container * { box-sizing: border-box; }
+
+/* SCANLINE EFFECT OVERLAY */
+.rd-container::before {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to bottom, transparent 50%, rgba(0,0,0,0.2) 51%);
+    background-size: 100% 4px; pointer-events: none; z-index: 10; opacity: 0.5;
+}
+
+/* BANNER DE IMAGEM */
+.rd-banner {
+    width: 100%; height: 250px; position: relative;
+    border-bottom: 2px solid var(--rd-accent);
+}
+.rd-banner img {
+    width: 100%; height: 100%; object-fit: cover; object-position: center;
+    filter: grayscale(40%) contrast(1.2);
+}
+.rd-banner::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, var(--rd-bg) 0%, transparent 80%);
+}
+
+/* HEADER E TÍTULOS */
+.rd-header {
+    padding: 0 40px; margin-top: -50px; position: relative; z-index: 5;
+}
+.rd-title {
+    font-family: 'Chakra Petch', sans-serif; font-size: 3em; font-weight: 700;
+    text-transform: uppercase; color: #fff; margin: 0; line-height: 1;
+    letter-spacing: 2px; text-shadow: 3px 3px 0px var(--rd-accent), -1px -1px 0px #000;
+}
+.rd-meta {
+    display: inline-block; font-family: 'Chakra Petch', sans-serif; font-size: 0.9em;
+    color: var(--rd-text); background: var(--rd-accent); padding: 5px 15px;
+    margin-top: 10px; text-transform: uppercase; letter-spacing: 2px; font-weight: 700;
+    box-shadow: 3px 3px 0 rgba(0,0,0,0.5); border-left: 3px solid var(--rd-alert);
+}
+
+/* GRID DE STATUS (Mestre da Mesa) */
+.rd-status-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+    padding: 30px 40px 10px 40px; font-family: 'Chakra Petch', sans-serif;
+}
+.rd-stat-box {
+    background: var(--rd-panel); border: 1px solid var(--rd-border);
+    padding: 10px 15px; border-radius: 4px; border-top: 2px solid var(--rd-accent);
+}
+.rd-stat-lbl { font-size: 0.75em; color: var(--rd-accent-glow); text-transform: uppercase; letter-spacing: 1px; display: block; margin-bottom: 5px; }
+.rd-stat-val { font-size: 1.1em; color: #fff; font-weight: 700; text-transform: uppercase; }
+
+/* INIMIGOS / BOSS HP */
+.rd-enemies-panel {
+    margin: 10px 40px 20px; padding: 20px; background: rgba(179, 0, 0, 0.05);
+    border: 1px dashed var(--rd-accent); border-radius: 4px;
+}
+.rd-enemy-row { margin-bottom: 12px; }
+.rd-enemy-row:last-child { margin-bottom: 0; }
+.rd-enemy-name { font-family: 'Chakra Petch', sans-serif; font-size: 0.9em; font-weight: 700; color: #fff; text-transform: uppercase; display: flex; justify-content: space-between; margin-bottom: 5px; }
+.rd-enemy-hp-text { color: var(--rd-accent-glow); }
+.rd-hp-track { width: 100%; height: 8px; background: #000; border: 1px solid var(--rd-border); border-radius: 10px; overflow: hidden; }
+.rd-hp-fill { height: 100%; background: linear-gradient(90deg, #660000, var(--rd-accent-glow)); box-shadow: 0 0 10px var(--rd-accent-glow); transition: width 0.5s; }
+
+/* CORPO DO TEXTO (Narrações) */
+.rd-body {
+    padding: 20px 40px 40px; font-size: 1.05em; line-height: 1.8; color: #cccccc; text-align: justify;
+}
+.rd-body b, .rd-body strong { color: #fff; font-weight: 700; border-bottom: 1px solid var(--rd-accent); }
+.rd-body i, .rd-body em { color: #aaa; font-style: italic; }
+
+/* FOOTER (Regras e Diretrizes) */
+.rd-footer {
+    background-color: var(--rd-panel); border-top: 2px solid var(--rd-border);
+    padding: 30px 40px; font-family: 'Chakra Petch', sans-serif; position: relative;
+}
+.rd-footer::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
+    background: repeating-linear-gradient(45deg, var(--rd-alert), var(--rd-alert) 10px, #000 10px, #000 20px);
+}
+.rd-footer-title {
+    font-weight: 700; color: var(--rd-alert); font-size: 1.1em; margin-bottom: 15px;
+    letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; gap: 10px;
+}
+.rd-footer-title::before { content: '⚠'; font-size: 1.2em; }
+.rd-notes { font-size: 0.95em; color: #999; line-height: 1.6; }
+.rd-note-item { margin-bottom: 8px; padding-left: 15px; position: relative; }
+.rd-note-item::before { content: '>'; position: absolute; left: 0; color: var(--rd-accent-glow); font-weight: 700; }
+
+@media (max-width: 600px) {
+    .rd-status-grid { grid-template-columns: 1fr; }
+    .rd-header, .rd-status-grid, .rd-enemies-panel, .rd-body, .rd-footer { padding-left: 20px; padding-right: 20px; }
+    .rd-title { font-size: 2.2em; }
+}
