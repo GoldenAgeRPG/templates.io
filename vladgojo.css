@@ -120,7 +120,7 @@
 
 /* Assinatura no Rodapé Injetada */
 .vg-footer-sig { text-align: right; padding: 20px 45px 30px; border-top: 1px solid rgba(158,0,21,0.2); position: relative; z-index: 2; margin-top: 10px; }
-.vg-footer-sig::after { content: 'VLADIMIR GOJO'; font-family: 'Noto Serif JP', serif; color: var(--blood-red); font-size: 22px; font-weight: 900; letter-spacing: 5px; text-transform: uppercase; text-shadow: 3px 3px 0px #000, 0 0 15px rgba(158,0,21,0.8); }
+.vg-footer-sig::after { content: 'Ryomen Vladimir'; font-family: 'Noto Serif JP', serif; color: var(--blood-red); font-size: 22px; font-weight: 900; letter-spacing: 5px; text-transform: uppercase; text-shadow: 3px 3px 0px #000, 0 0 15px rgba(158,0,21,0.8); }
 
 @media (max-width: 600px) {
   .vg-hud { grid-template-columns: 1fr; }
