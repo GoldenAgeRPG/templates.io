@@ -1,0 +1,138 @@
+/* --- TEMPLATE DE POSTAGEM - VLADIMIR GOJO (STAR RAGE / BLACK HOLE) --- */
+@import url('https://fonts.googleapis.com/css2?family=Chakra+Petch:ital,wght@0,400;0,700;1,700&family=Noto+Serif+JP:wght@400;900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --bg-void: #030204;
+  --bg-mass: #0a080c;
+  --text-main: #d3d3db;
+  --blood-red: #9e0015;
+  --dark-red: #3d0008;
+  --star-core: #ffe6e6;
+  --text-muted: #828291;
+}
+
+/* Container Principal */
+.vg-post {
+  box-sizing: border-box; max-width: 740px; width: 95%; margin: 40px auto;
+  font-family: 'Chakra Petch', sans-serif; color: var(--text-main); 
+  background: var(--bg-void); position: relative;
+  box-shadow: 0 40px 100px rgba(0, 0, 0, 1), inset 0 0 15px rgba(158, 0, 21, 0.3);
+  overflow: hidden; padding: 0; border: 1px solid #140d10;
+}
+.vg-post * { box-sizing: border-box; }
+
+/* Efeito de Buraco Negro (Singularidade e Disco de Acreção) */
+@keyframes bh-spin {
+  0% { transform: scale(1) rotate(0deg); opacity: 0.7; }
+  50% { transform: scale(1.05) rotate(180deg); opacity: 1; }
+  100% { transform: scale(1) rotate(360deg); opacity: 0.7; }
+}
+.vg-blackhole {
+  position: absolute; top: -120px; right: -120px; width: 550px; height: 550px;
+  background: radial-gradient(circle, rgba(0,0,0,0.9) 10%, rgba(158,0,21,0.6) 25%, rgba(158,0,21,0.2) 45%, transparent 70%);
+  border-radius: 50%; pointer-events: none; z-index: 2;
+  animation: bh-spin 18s linear infinite;
+  box-shadow: 0 0 50px rgba(158,0,21,0.5), inset 0 0 40px rgba(158,0,21,0.7);
+  mix-blend-mode: hard-light;
+}
+
+/* Cabeçalho Visual (Banner Superior) */
+.vg-header { position: relative; width: 100%; height: 380px; z-index: 1; overflow: hidden; border-bottom: 3px solid var(--blood-red); box-shadow: 0 15px 40px rgba(0,0,0,0.9); }
+.vg-header-img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; filter: contrast(1.2) brightness(0.65) grayscale(20%); transition: transform 6s cubic-bezier(0.2, 0.8, 0.2, 1); }
+.vg-post:hover .vg-header-img { transform: scale(1.08); } 
+.vg-header-overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--bg-void) 0%, transparent 85%), radial-gradient(circle at center, transparent 40%, rgba(0,0,0,0.8) 100%); z-index: 2; pointer-events: none;}
+
+/* Kanji Temático - Star Rage (星怒) */
+.vg-kanji-bg {
+  position: absolute; top: 15px; right: 25px; font-family: 'Noto Serif JP', serif;
+  font-size: 130px; font-weight: 900; writing-mode: vertical-lr; color: rgba(255, 230, 230, 0.02);
+  -webkit-text-stroke: 1px rgba(158, 0, 21, 0.4); line-height: 0.8; letter-spacing: -15px;
+  text-shadow: 0 0 50px rgba(0,0,0,1); z-index: 3;
+}
+
+/* Título e Textos do Header */
+.vg-title-box { position: absolute; bottom: 30px; left: 35px; border-left: 8px solid var(--blood-red); padding-left: 20px; background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, transparent 100%); padding-right: 60px; z-index: 4; }
+.vg-title { font-family: 'Noto Serif JP', serif; font-size: 48px; font-weight: 900; color: var(--star-core); margin: 0; line-height: 1.1; text-transform: uppercase; text-shadow: 4px 4px 0px var(--dark-red), 0 0 35px rgba(158, 0, 21, 1); letter-spacing: -1px; }
+.vg-subtitle { font-family: 'Share Tech Mono', monospace; font-size: 14px; color: #fff; margin-top: 10px; text-transform: uppercase; letter-spacing: 6px; background: rgba(0,0,0,0.8); display: inline-block; padding: 5px 12px; border: 1px solid var(--dark-red); }
+
+/* HUD de Status */
+.vg-hud { display: grid; grid-template-columns: repeat(3, 1fr); background: rgba(0,0,0,0.95); position: relative; z-index: 2; border-bottom: 2px solid var(--dark-red); box-shadow: 0 10px 25px rgba(0,0,0,1); }
+.vg-stat-block { padding: 20px 30px; border-right: 1px solid rgba(255,255,255,0.03); display: flex; flex-direction: column; gap: 12px; }
+.vg-stat-block:last-child { border-right: none; }
+.vg-stat-header { display: flex; justify-content: space-between; align-items: baseline; }
+.vg-stat-lbl { font-family: 'Share Tech Mono', monospace; font-size: 15px; font-weight: bold; color: var(--blood-red); text-shadow: 0 0 10px rgba(158,0,21,0.6); }
+.vg-stat-val { font-family: 'Chakra Petch', sans-serif; font-size: 15px; font-weight: 700; color: var(--star-core); }
+.vg-bar-bg { width: 100%; height: 8px; background: #050406; overflow: hidden; border: 1px solid rgba(158,0,21,0.4); transform: skewX(-25deg); box-shadow: inset 0 0 8px #000; }
+.vg-bar-fill { height: 100%; background: linear-gradient(90deg, var(--dark-red), var(--blood-red)); transition: width 0.4s ease; box-shadow: 0 0 15px var(--blood-red); }
+.vg-bar-fill.san { background: linear-gradient(90deg, #1f2d3d, #5c84a8); box-shadow: 0 0 15px #5c84a8; }
+.vg-bar-fill.ea { background: linear-gradient(90deg, #3d002e, #a8007d); box-shadow: 0 0 15px #a8007d; }
+
+/* Corpo da Narração */
+.vg-body { padding: 50px 45px; font-size: 15px; line-height: 1.8; color: var(--text-main); position: relative; z-index: 2; text-align: justify; }
+.vg-body p { margin: 0 0 1.2em; }
+.vg-body p:last-child { margin: 0; }
+.vg-body b, .vg-body strong { color: var(--star-core); font-weight: 700; background: rgba(158, 0, 21, 0.2); padding: 0 6px; border-radius: 2px; text-shadow: 0 0 6px rgba(158,0,21,0.5); }
+.vg-body i, .vg-body em { color: var(--blood-red); font-style: italic; }
+.vg-body blockquote { border-left: 5px solid var(--blood-red); background: linear-gradient(90deg, rgba(158,0,21,0.15) 0%, transparent 100%); padding: 18px 25px; margin: 20px 0; font-style: italic; color: #a5a5b5; box-shadow: inset 30px 0 40px -20px rgba(158,0,21,0.4); }
+
+/* Sistema Tático (Black Hole) */
+.vg-dossier { margin: 0 45px 35px; border: 1px solid var(--dark-red); background: rgba(5, 4, 6, 0.95); position: relative; z-index: 2; box-shadow: 0 20px 50px rgba(0,0,0,1); }
+.vg-dossier-summary { 
+  padding: 20px 30px; cursor: pointer; list-style: none; display: flex; align-items: center;
+  background: linear-gradient(90deg, var(--dark-red) 0%, rgba(0,0,0,0.95) 100%); outline: none;
+}
+.vg-dossier-summary::-webkit-details-marker { display: none; }
+
+/* Título Injetado pelo CSS */
+.vg-dossier-summary::before { content: '▶'; color: var(--star-core); font-size: 12px; margin-right: 15px; transition: 0.3s; text-shadow: 0 0 10px #fff; }
+.vg-dossier[open] .vg-dossier-summary::before { transform: rotate(90deg); color: var(--blood-red); text-shadow: 0 0 10px var(--blood-red); }
+.vg-dossier-summary::after { content: 'BLACK HOLE'; margin-left: auto; color: var(--blood-red); font-family: 'Chakra Petch', sans-serif; font-size: 18px; font-weight: 900; letter-spacing: 4px; text-shadow: 0 0 15px rgba(158,0,21,0.9); }
+
+.vg-dossier-inner { padding: 40px; border-top: 4px solid var(--dark-red); }
+
+/* Dados e Grid */
+.vg-info-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 35px; }
+.vg-info-box { background: rgba(255,255,255,0.02); padding: 18px; border-bottom: 4px solid var(--dark-red); transition: 0.3s; }
+.vg-info-box:hover { background: rgba(158,0,21,0.15); border-color: var(--blood-red); }
+.vg-info-lbl { display: block; font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--blood-red); text-transform: uppercase; margin-bottom: 8px; font-weight: bold; letter-spacing: 1px; }
+.vg-info-val { font-size: 15px; font-weight: 700; color: var(--star-core); }
+.vg-info-val a { color: var(--star-core); text-decoration: none; border-bottom: 1px dashed var(--blood-red); }
+
+/* Pontos de Ação */
+.vg-actions { display: flex; justify-content: space-between; padding: 25px 35px; background: rgba(0,0,0,0.95); border: 1px solid rgba(158,0,21,0.5); margin-bottom: 40px; transform: skewX(-10deg); box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
+.vg-act { text-align: center; transform: skewX(10deg); flex: 1; border-right: 1px dashed rgba(158,0,21,0.4); }
+.vg-act:last-child { border-right: none; }
+.vg-act-lbl { font-family: 'Share Tech Mono', monospace; font-size: 13px; color: var(--text-muted); font-weight: bold; letter-spacing: 2px; }
+.vg-act-val { font-family: 'Chakra Petch', sans-serif; font-size: 32px; font-weight: 700; color: var(--blood-red); display: block; margin-top: 8px; text-shadow: 0 0 20px rgba(158,0,21,0.8); }
+
+/* Blocos de Texto (Considerações, Cálculos, etc) */
+.vg-text-block { margin-bottom: 35px; }
+.vg-text-block:last-child { margin-bottom: 0; }
+.vg-block-title { font-family: 'Chakra Petch', sans-serif; font-size: 17px; font-weight: 700; color: var(--blood-red); text-transform: uppercase; border-bottom: 2px solid rgba(158, 0, 21, 0.4); padding-bottom: 10px; margin-bottom: 18px; display: flex; align-items: center; gap: 12px; letter-spacing: 2px; }
+.vg-block-title::before { content: ''; display: inline-block; width: 12px; height: 12px; background: var(--blood-red); transform: rotate(45deg); box-shadow: 0 0 10px var(--blood-red); }
+.vg-block-content { font-size: 14px; color: var(--text-muted); line-height: 1.8; }
+.vg-list-item { margin-bottom: 12px; padding-left: 22px; position: relative; }
+.vg-list-item::before { content: '■'; position: absolute; left: 0; top: 2px; color: var(--dark-red); font-size: 12px; }
+
+/* Sub-Dossiês (Inventário/Técnicas) - Cards de Itens */
+.vg-sub { margin-top: 25px; border: 1px solid rgba(158,0,21,0.3); background: rgba(0,0,0,0.95); box-shadow: 0 8px 25px rgba(0,0,0,0.8); }
+.vg-sub > summary { padding: 18px 25px; font-size: 14px; font-weight: 700; color: var(--text-main); text-transform: uppercase; cursor: pointer; background: rgba(255,255,255,0.03); border-bottom: 1px solid transparent; transition: 0.3s; letter-spacing: 1px; outline: none; }
+.vg-sub[open] > summary { border-bottom-color: rgba(158,0,21,0.4); color: var(--star-core); }
+
+.vg-item-card { margin: 15px 0; border-left: 4px solid var(--blood-red); background: linear-gradient(90deg, rgba(158,0,21,0.1) 0%, rgba(0,0,0,0.4) 100%); padding: 15px 20px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+.vg-item-card:first-child { margin-top: 0; }
+.vg-item-card:last-child { margin-bottom: 0; }
+.vg-item-title { font-family: 'Chakra Petch', sans-serif; font-size: 16px; font-weight: 700; color: var(--star-core); text-transform: uppercase; margin-bottom: 10px; text-shadow: 0 0 10px rgba(158,0,21,0.8); border-bottom: 1px solid rgba(158,0,21,0.3); padding-bottom: 5px; }
+.vg-item-desc { font-size: 14px; color: var(--text-main); line-height: 1.7; }
+
+/* Assinatura no Rodapé Injetada */
+.vg-footer-sig { text-align: right; padding: 20px 45px 30px; border-top: 1px solid rgba(158,0,21,0.2); position: relative; z-index: 2; margin-top: 10px; }
+.vg-footer-sig::after { content: 'VLADIMIR GOJO'; font-family: 'Noto Serif JP', serif; color: var(--blood-red); font-size: 22px; font-weight: 900; letter-spacing: 5px; text-transform: uppercase; text-shadow: 3px 3px 0px #000, 0 0 15px rgba(158,0,21,0.8); }
+
+@media (max-width: 600px) {
+  .vg-hud { grid-template-columns: 1fr; }
+  .vg-stat-block { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
+  .vg-info-grid { grid-template-columns: 1fr 1fr; }
+  .vg-blackhole { width: 400px; height: 400px; top: -50px; right: -50px; }
+  .vg-kanji-bg { font-size: 90px; }
+}
