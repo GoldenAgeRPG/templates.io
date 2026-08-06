@@ -16,116 +16,118 @@
   box-sizing: border-box; max-width: 740px; width: 95%; margin: 40px auto;
   font-family: 'Chakra Petch', sans-serif; color: var(--text-main); 
   background: var(--bg-void); position: relative;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.9), inset 0 0 0 1px rgba(217, 0, 27, 0.1);
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 1), inset 0 0 0 2px rgba(217, 0, 27, 0.15);
   overflow: hidden; padding: 0 0 20px 0;
 }
 .vg-post * { box-sizing: border-box; }
 
-/* Efeito de Gravidade / Buraco Negro ao Fundo */
+/* Efeito de Buraco Negro (Massa/Gravidade) */
+@keyframes bh-spin {
+  0% { transform: translateY(-30%) rotate(0deg) scale(1); opacity: 0.6; }
+  50% { transform: translateY(-30%) rotate(180deg) scale(1.2); opacity: 0.9; filter: drop-shadow(0 0 40px var(--dark-red)); }
+  100% { transform: translateY(-30%) rotate(360deg) scale(1); opacity: 0.6; }
+}
 .vg-post::before {
-  content: ''; position: absolute; top: -20%; left: -20%; width: 140%; height: 140%;
-  background: radial-gradient(circle at 50% 20%, rgba(217, 0, 27, 0.08) 0%, rgba(0, 0, 0, 0.9) 40%, var(--bg-void) 70%);
-  z-index: 0; pointer-events: none;
+  content: ''; position: absolute; top: 0%; right: -20%; width: 700px; height: 700px;
+  background: radial-gradient(circle, #000 5%, rgba(102, 0, 13, 0.6) 25%, rgba(217, 0, 27, 0.1) 50%, transparent 70%);
+  border-radius: 50%; pointer-events: none; z-index: 0;
+  animation: bh-spin 18s linear infinite; mix-blend-mode: screen;
 }
 
-/* Corte Diagonal (Cleave/Dismantle) Animado */
-@keyframes vg-slash {
-  0% { transform: translateX(-150%) translateY(-150%) rotate(35deg); opacity: 0; }
-  10% { opacity: 1; box-shadow: 0 0 20px var(--blood-red), 0 0 40px var(--star-core); }
-  20%, 100% { transform: translateX(150%) translateY(150%) rotate(35deg); opacity: 0; }
-}
-.vg-post::after {
-  content: ''; position: absolute; top: 0; left: 0; width: 200%; height: 2px;
-  background: var(--star-core); opacity: 0; z-index: 10; pointer-events: none;
-  animation: vg-slash 8s infinite cubic-bezier(0.1, 0.8, 0.1, 1);
-}
-
-/* Cabeçalho Visual (Banner Superior) */
-.vg-header { position: relative; width: 100%; height: 320px; z-index: 1; overflow: hidden; border-bottom: 4px solid var(--dark-red); }
-.vg-header-img { width: 100%; height: 100%; object-fit: cover; object-position: center 30%; filter: contrast(1.1) brightness(0.8) sepia(0.2) hue-rotate(-10deg); }
-.vg-header-overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--bg-void) 0%, transparent 60%); }
-.vg-kanji-bg {
-  position: absolute; top: 10px; right: 15px; font-family: 'Noto Serif JP', serif;
-  font-size: 80px; font-weight: 900; writing-mode: vertical-lr; color: transparent;
-  -webkit-text-stroke: 1px rgba(255, 230, 230, 0.1); line-height: 0.8; letter-spacing: -10px;
-}
-.vg-kanji-bg::after { content: '星怒'; position: absolute; top: 0; right: 80px; -webkit-text-stroke: 1px rgba(217, 0, 27, 0.15); font-size: 60px; }
-
-/* Título e Textos do Header */
-.vg-title-box { position: absolute; bottom: 20px; left: 30px; border-left: 5px solid var(--blood-red); padding-left: 15px; }
-.vg-title { font-family: 'Noto Serif JP', serif; font-size: 36px; font-weight: 900; color: var(--star-core); margin: 0; line-height: 1; text-transform: uppercase; text-shadow: 2px 2px 0px var(--dark-red), 0 0 15px rgba(217, 0, 27, 0.8); }
-.vg-subtitle { font-family: 'Share Tech Mono', monospace; font-size: 13px; color: var(--text-main); margin-top: 8px; text-transform: uppercase; letter-spacing: 3px; background: rgba(0,0,0,0.6); display: inline-block; padding: 4px 8px; }
-
-/* HUD de Status (Pesado e Angular) */
-.vg-hud { display: grid; grid-template-columns: repeat(3, 1fr); background: var(--bg-mass); position: relative; z-index: 2; border-bottom: 1px solid rgba(255,255,255,0.02); }
-.vg-stat-block { padding: 15px 20px; border-right: 1px solid rgba(0,0,0,0.5); display: flex; flex-direction: column; gap: 8px; }
-.vg-stat-block:last-child { border-right: none; }
-.vg-stat-header { display: flex; justify-content: space-between; align-items: baseline; }
-.vg-stat-lbl { font-family: 'Share Tech Mono', monospace; font-size: 14px; font-weight: bold; color: var(--blood-red); text-shadow: 0 0 5px rgba(217,0,27,0.3); }
-.vg-stat-val { font-family: 'Chakra Petch', sans-serif; font-size: 13px; font-weight: 700; color: var(--star-core); }
-.vg-bar-bg { width: 100%; height: 6px; background: #000; overflow: hidden; border: 1px solid rgba(217,0,27,0.2); transform: skewX(-15deg); }
-.vg-bar-fill { height: 100%; background: linear-gradient(90deg, var(--dark-red), var(--blood-red)); transition: width 0.4s ease; box-shadow: 0 0 10px var(--blood-red); }
-.vg-bar-fill.san { background: linear-gradient(90deg, #2c3e50, #5c84a8); box-shadow: 0 0 10px #5c84a8; }
-.vg-bar-fill.ea { background: linear-gradient(90deg, #5a0044, #a8007d); box-shadow: 0 0 10px #a8007d; }
-
-/* Corpo da Narração */
-.vg-body { padding: 35px; font-size: 14px; line-height: 1.7; color: var(--text-main); position: relative; z-index: 2; text-align: justify; }
-.vg-body p { margin: 0 0 1.2em; }
-.vg-body p:last-child { margin: 0; }
-.vg-body b, .vg-body strong { color: var(--star-core); font-weight: 700; background: rgba(217, 0, 27, 0.15); padding: 0 4px; border-radius: 2px; }
-.vg-body i, .vg-body em { color: var(--blood-red); font-style: italic; }
-.vg-body blockquote { border-left: 3px solid var(--blood-red); background: rgba(0,0,0,0.4); padding: 10px 15px; margin: 15px 0; font-style: italic; color: #a5a5b5; }
-
-/* Sistema Tático (Estilo Domínio/Santuário) */
-.vg-dossier { margin: 0 35px 25px; border: 1px solid var(--dark-red); background: rgba(18, 14, 20, 0.9); position: relative; z-index: 2; }
-.vg-dossier > summary { 
-  padding: 15px 20px; cursor: pointer; font-family: 'Noto Serif JP', serif; font-size: 14px; font-weight: 900; 
-  color: var(--star-core); text-transform: uppercase; list-style: none; display: flex; align-items: center; 
-  background: linear-gradient(90deg, var(--dark-red), transparent); 
-}
-.vg-dossier > summary::-webkit-details-marker { display: none; }
-.vg-dossier > summary::before { content: '▶'; margin-right: 12px; color: var(--blood-red); font-size: 10px; transition: 0.2s; }
-.vg-dossier[open] > summary::before { transform: rotate(90deg); }
-.vg-dossier-inner { padding: 25px; border-top: 1px solid var(--dark-red); }
-
-/* Dados e Grid */
-.vg-info-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 25px; }
-.vg-info-box { background: rgba(0,0,0,0.5); padding: 10px; border-bottom: 2px solid var(--dark-red); }
-.vg-info-lbl { display: block; font-family: 'Share Tech Mono', monospace; font-size: 10px; color: var(--blood-red); text-transform: uppercase; margin-bottom: 4px; }
-.vg-info-val { font-size: 13px; font-weight: 700; color: var(--star-core); }
-.vg-info-val a { color: var(--star-core); text-decoration: none; border-bottom: 1px dashed var(--blood-red); }
-
-/* Pontos de Ação */
-.vg-actions { display: flex; justify-content: space-between; padding: 15px 25px; background: #000; border: 1px solid rgba(255,255,255,0.05); margin-bottom: 25px; transform: skewX(-5deg); }
-.vg-act { text-align: center; transform: skewX(5deg); }
-.vg-act-lbl { font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--text-muted); }
-.vg-act-val { font-family: 'Chakra Petch', sans-serif; font-size: 22px; font-weight: 700; color: var(--blood-red); display: block; margin-top: 2px; text-shadow: 0 0 8px rgba(217,0,27,0.4); }
-
-/* Blocos de Texto (Considerações, Cálculos, etc) */
-.vg-text-block { margin-bottom: 20px; }
-.vg-text-block:last-child { margin-bottom: 0; }
-.vg-block-title { font-family: 'Chakra Petch', sans-serif; font-size: 13px; font-weight: 700; color: var(--blood-red); text-transform: uppercase; border-bottom: 1px solid rgba(217, 0, 27, 0.3); padding-bottom: 6px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
-.vg-block-title::before { content: ''; display: inline-block; width: 6px; height: 6px; background: var(--blood-red); transform: rotate(45deg); }
-.vg-block-content { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
-.vg-list-item { margin-bottom: 8px; padding-left: 15px; position: relative; }
-.vg-list-item::before { content: '■'; position: absolute; left: 0; top: 1px; color: var(--dark-red); font-size: 10px; }
-
-/* Sub-Dossiês (Inventário/Técnicas) */
-.vg-sub { margin-top: 15px; border: 1px solid rgba(255,255,255,0.05); background: rgba(0,0,0,0.6); }
-.vg-sub > summary { padding: 10px 15px; font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; cursor: pointer; }
-.vg-sub b { color: var(--star-core); }
-
-/* Assinatura CSS */
+/* Assinatura no Rodapé */
 .vg-post::after {
   content: "Vladimir Gojo"; display: block; text-align: right;
   font-family: 'Noto Serif JP', serif; color: var(--blood-red);
-  font-size: 16px; font-weight: 900; opacity: 0.8; padding: 0 35px 15px; letter-spacing: 2px;
+  font-size: 18px; font-weight: 900; opacity: 0.9; padding: 20px 35px 15px; letter-spacing: 3px;
   text-transform: uppercase; position: relative; z-index: 2;
-  text-shadow: 2px 2px 0px rgba(0,0,0,1);
+  text-shadow: 3px 3px 0px rgba(0,0,0,1), 0 0 10px rgba(217,0,27,0.5);
 }
+
+/* Cabeçalho Visual (Banner Superior) */
+.vg-header { position: relative; width: 100%; height: 350px; z-index: 1; overflow: hidden; border-bottom: 5px solid var(--dark-red); }
+.vg-header-img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; filter: contrast(1.15) brightness(0.65) grayscale(20%); }
+.vg-header-overlay { position: absolute; inset: 0; background: linear-gradient(to top, var(--bg-void) 0%, transparent 80%); }
+
+/* Kanji Temático */
+.vg-kanji-bg {
+  position: absolute; top: 20px; right: 20px; font-family: 'Noto Serif JP', serif;
+  font-size: 90px; font-weight: 900; writing-mode: vertical-lr; color: rgba(255, 230, 230, 0.03);
+  -webkit-text-stroke: 1px rgba(217, 0, 27, 0.4); line-height: 0.8; letter-spacing: -5px;
+  text-shadow: 0 0 25px rgba(0,0,0,0.9);
+}
+
+/* Título e Textos do Header */
+.vg-title-box { position: absolute; bottom: 30px; left: 35px; border-left: 6px solid var(--blood-red); padding-left: 15px; background: linear-gradient(90deg, rgba(0,0,0,0.85) 0%, transparent 100%); padding-right: 50px; }
+.vg-title { font-family: 'Noto Serif JP', serif; font-size: 44px; font-weight: 900; color: var(--star-core); margin: 0; line-height: 1.1; text-transform: uppercase; text-shadow: 3px 3px 0px var(--dark-red), 0 0 25px rgba(217, 0, 27, 1); }
+.vg-subtitle { font-family: 'Share Tech Mono', monospace; font-size: 14px; color: var(--text-main); margin-top: 10px; text-transform: uppercase; letter-spacing: 5px; }
+
+/* HUD de Status (Pesado e Angular) */
+.vg-hud { display: grid; grid-template-columns: repeat(3, 1fr); background: rgba(0,0,0,0.9); position: relative; z-index: 2; border-bottom: 2px solid var(--dark-red); box-shadow: 0 8px 20px rgba(0,0,0,0.9); }
+.vg-stat-block { padding: 18px 25px; border-right: 1px solid rgba(255,255,255,0.05); display: flex; flex-direction: column; gap: 10px; }
+.vg-stat-block:last-child { border-right: none; }
+.vg-stat-header { display: flex; justify-content: space-between; align-items: baseline; }
+.vg-stat-lbl { font-family: 'Share Tech Mono', monospace; font-size: 15px; font-weight: bold; color: var(--blood-red); text-shadow: 0 0 8px rgba(217,0,27,0.6); }
+.vg-stat-val { font-family: 'Chakra Petch', sans-serif; font-size: 14px; font-weight: 700; color: var(--star-core); }
+.vg-bar-bg { width: 100%; height: 8px; background: #050406; overflow: hidden; border: 1px solid rgba(217,0,27,0.4); transform: skewX(-20deg); box-shadow: inset 0 0 5px #000; }
+.vg-bar-fill { height: 100%; background: linear-gradient(90deg, var(--dark-red), var(--blood-red)); transition: width 0.4s ease; box-shadow: 0 0 15px var(--blood-red); }
+.vg-bar-fill.san { background: linear-gradient(90deg, #1f2d3d, #5c84a8); box-shadow: 0 0 15px #5c84a8; }
+.vg-bar-fill.ea { background: linear-gradient(90deg, #3d002e, #a8007d); box-shadow: 0 0 15px #a8007d; }
+
+/* Corpo da Narração */
+.vg-body { padding: 45px 40px; font-size: 14.5px; line-height: 1.8; color: var(--text-main); position: relative; z-index: 2; text-align: justify; }
+.vg-body p { margin: 0 0 1.2em; }
+.vg-body p:last-child { margin: 0; }
+.vg-body b, .vg-body strong { color: var(--star-core); font-weight: 700; background: rgba(217, 0, 27, 0.2); padding: 0 5px; border-radius: 2px; text-shadow: 0 0 5px rgba(217,0,27,0.5); }
+.vg-body i, .vg-body em { color: var(--blood-red); font-style: italic; }
+.vg-body blockquote { border-left: 4px solid var(--blood-red); background: linear-gradient(90deg, rgba(217,0,27,0.15) 0%, transparent 100%); padding: 15px 20px; margin: 18px 0; font-style: italic; color: #a5a5b5; box-shadow: inset 25px 0 35px -20px rgba(217,0,27,0.4); }
+
+/* Sistema Tático */
+.vg-dossier { margin: 0 40px 30px; border: 1px solid var(--dark-red); background: rgba(5, 4, 6, 0.9); position: relative; z-index: 2; box-shadow: 0 15px 35px rgba(0,0,0,0.9); }
+.vg-dossier > summary { 
+  padding: 18px 25px; cursor: pointer; font-family: 'Noto Serif JP', serif; font-size: 16px; font-weight: 900; 
+  color: var(--star-core); text-transform: uppercase; list-style: none; display: flex; align-items: center; 
+  background: linear-gradient(90deg, var(--dark-red) 0%, rgba(0,0,0,0.9) 100%); 
+  letter-spacing: 2px;
+}
+.vg-dossier > summary::-webkit-details-marker { display: none; }
+.vg-dossier > summary::before { content: '▶'; margin-right: 15px; color: var(--star-core); font-size: 12px; transition: 0.3s; text-shadow: 0 0 10px #fff; }
+.vg-dossier > summary::after { content: 'BLACK HOLE'; margin-left: auto; font-family: 'Chakra Petch', sans-serif; letter-spacing: 4px; color: var(--blood-red); text-shadow: 0 0 10px rgba(217,0,27,0.8); }
+.vg-dossier[open] > summary::before { transform: rotate(90deg); color: var(--blood-red); text-shadow: 0 0 10px var(--blood-red); }
+.vg-dossier-inner { padding: 35px; border-top: 3px solid var(--dark-red); }
+
+/* Dados e Grid */
+.vg-info-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 30px; }
+.vg-info-box { background: rgba(255,255,255,0.02); padding: 15px; border-bottom: 3px solid var(--dark-red); transition: 0.3s; }
+.vg-info-box:hover { background: rgba(217,0,27,0.15); border-color: var(--blood-red); }
+.vg-info-lbl { display: block; font-family: 'Share Tech Mono', monospace; font-size: 11px; color: var(--blood-red); text-transform: uppercase; margin-bottom: 8px; font-weight: bold; }
+.vg-info-val { font-size: 14.5px; font-weight: 700; color: var(--star-core); }
+.vg-info-val a { color: var(--star-core); text-decoration: none; border-bottom: 1px dashed var(--blood-red); }
+
+/* Pontos de Ação */
+.vg-actions { display: flex; justify-content: space-between; padding: 20px 30px; background: rgba(0,0,0,0.9); border: 1px solid rgba(217,0,27,0.4); margin-bottom: 35px; transform: skewX(-8deg); box-shadow: 0 8px 20px rgba(0,0,0,0.6); }
+.vg-act { text-align: center; transform: skewX(8deg); flex: 1; border-right: 1px dashed rgba(217,0,27,0.4); }
+.vg-act:last-child { border-right: none; }
+.vg-act-lbl { font-family: 'Share Tech Mono', monospace; font-size: 12px; color: var(--text-muted); font-weight: bold; letter-spacing: 1px; }
+.vg-act-val { font-family: 'Chakra Petch', sans-serif; font-size: 28px; font-weight: 700; color: var(--blood-red); display: block; margin-top: 6px; text-shadow: 0 0 15px rgba(217,0,27,0.7); }
+
+/* Blocos de Texto (Considerações, Cálculos, etc) */
+.vg-text-block { margin-bottom: 30px; }
+.vg-text-block:last-child { margin-bottom: 0; }
+.vg-block-title { font-family: 'Chakra Petch', sans-serif; font-size: 16px; font-weight: 700; color: var(--blood-red); text-transform: uppercase; border-bottom: 2px solid rgba(217, 0, 27, 0.4); padding-bottom: 8px; margin-bottom: 15px; display: flex; align-items: center; gap: 12px; letter-spacing: 2px; }
+.vg-block-title::before { content: ''; display: inline-block; width: 10px; height: 10px; background: var(--blood-red); transform: rotate(45deg); box-shadow: 0 0 8px var(--blood-red); }
+.vg-block-content { font-size: 13.5px; color: var(--text-muted); line-height: 1.8; }
+.vg-list-item { margin-bottom: 12px; padding-left: 20px; position: relative; }
+.vg-list-item::before { content: '■'; position: absolute; left: 0; top: 1px; color: var(--dark-red); font-size: 11px; }
+
+/* Sub-Dossiês (Inventário/Técnicas) */
+.vg-sub { margin-top: 25px; border: 1px solid rgba(217,0,27,0.3); background: rgba(0,0,0,0.9); box-shadow: 0 5px 15px rgba(0,0,0,0.7); }
+.vg-sub > summary { padding: 15px 20px; font-size: 13px; font-weight: 700; color: var(--text-main); text-transform: uppercase; cursor: pointer; background: rgba(255,255,255,0.03); border-bottom: 1px solid transparent; transition: 0.3s; }
+.vg-sub[open] > summary { border-bottom-color: rgba(217,0,27,0.3); }
+.vg-sub b { color: var(--star-core); }
 
 @media (max-width: 600px) {
   .vg-hud { grid-template-columns: 1fr; }
-  .vg-stat-block { border-right: none; border-bottom: 1px solid rgba(0,0,0,0.5); }
+  .vg-stat-block { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.05); }
   .vg-info-grid { grid-template-columns: 1fr 1fr; }
+  .vg-post::before { width: 400px; height: 400px; top: -5%; right: -10%; }
 }
