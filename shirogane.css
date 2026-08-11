@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
+.sh-post {
+  box-sizing: border-box; max-width: 750px; width: 95%; margin: 40px auto;
+  background: #ffffff; color: #1a1a1a; font-family: 'Poppins', sans-serif;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.15); border-radius: 16px; overflow: hidden;
+  border: 1px solid #e0e0e0; outline: none;
+}
+.sh-post * { box-sizing: border-box; }
+
+/* Cabeçalho */
+.sh-header { height: 320px; position: relative; background: #1a1a1a; display: flex; overflow: hidden; }
+.sh-banner { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1); position: relative; z-index: 0; }
+.sh-post:hover .sh-banner { transform: scale(1.04); }
+
+/* Efeito de Cruzes Flutuantes no Header */
+@keyframes sh-float {
+  0% { background-position: 0 0; }
+  100% { background-position: 60px -60px; }
+}
+.sh-header::after {
+  content: ''; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M28 28H10v4h18v18h4V32h18v-4H32V10h-4v18z' fill='%23ffffff' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+  animation: sh-float 20s linear infinite;
+}
+
+.sh-overlay {
+  position: absolute; inset: 0; z-index: 2;
+  background: linear-gradient(to top, rgba(26,26,26,0.95) 5%, transparent 70%);
+  display: flex; flex-direction: column; justify-content: flex-end; padding: 35px 45px;
+}
+
+/* Decorações Lacrimosa (Cruz e Coração) */
+.sh-cross { position: absolute; top: 25px; right: 35px; color: #1a1a1a; font-size: 80px; font-weight: 900; line-height: 1; opacity: 0.8; transform: rotate(15deg); -webkit-text-stroke: 2px #ffffff; }
+
+.sh-title-wrap { display: flex; align-items: center; gap: 12px; margin-bottom: 5px; }
+.sh-heart { color: #e62e3d; font-size: 32px; animation: sh-beat 2s infinite; line-height: 1; }
+@keyframes sh-beat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.15); } }
+
+.sh-title { font-size: 38px; font-weight: 900; color: #ffffff; text-transform: uppercase; margin: 0; letter-spacing: -1px; line-height: 1; }
+.sh-subtitle { font-family: 'Share Tech Mono', monospace; font-size: 13px; color: #cccccc; margin-left: 44px; letter-spacing: 4px; text-transform: uppercase; }
+
+/* HUD */
+.sh-hud { display: grid; grid-template-columns: repeat(3, 1fr); background: #1a1a1a; padding: 20px 45px; gap: 20px; border-bottom: 4px solid #e62e3d; }
+.sh-stat { display: flex; flex-direction: column; gap: 6px; }
+.sh-stat-top { display: flex; justify-content: space-between; align-items: center; }
+.sh-stat-lbl { color: #ffffff; font-weight: 900; font-size: 14px; letter-spacing: 1px; }
+.sh-stat-val { color: #aaaaaa; font-family: 'Share Tech Mono', monospace; font-size: 13px; }
+.sh-bar-bg { width: 100%; height: 6px; background: #333333; border-radius: 3px; overflow: hidden; }
+.sh-bar-fill { height: 100%; background: #e62e3d; border-radius: 3px; transition: width 0.4s ease; }
+.sh-bar-fill.ea { background: #ffffff; }
+.sh-bar-fill.san { background: #666666; }
+
+/* Corpo */
+.sh-body { padding: 45px; font-size: 15px; line-height: 1.8; color: #2d2d2d; text-align: justify; }
+.sh-body p { margin: 0 0 1.2em; }
+.sh-body p:last-child { margin: 0; }
+.sh-body b, .sh-body strong { color: #e62e3d; font-weight: 900; }
+.sh-body i, .sh-body em { color: #666666; font-style: italic; }
+.sh-body blockquote { border-left: 4px solid #1a1a1a; background: #f7f7f7; padding: 18px 25px; margin: 20px 0; font-style: italic; border-radius: 0 8px 8px 0; color: #555; }
+
+/* Dossier / Sistema Tático */
+.sh-dossier { margin: 0 45px 35px; border-radius: 8px; overflow: hidden; border: 1px solid #e0e0e0; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+.sh-dossier-sum { background: #fcfcfc; padding: 20px 25px; font-weight: 900; color: #1a1a1a; cursor: pointer; display: flex; align-items: center; border-left: 6px solid #e62e3d; transition: 0.2s; list-style: none; outline: none; }
+.sh-dossier-sum::-webkit-details-marker { display: none; }
+.sh-dossier-sum:hover { background: #f0f0f0; }
+.sh-dossier-sum::before { content: '+'; margin-right: 12px; color: #1a1a1a; font-size: 22px; font-weight: 900; transition: 0.3s; line-height: 1; }
+.sh-dossier[open] .sh-dossier-sum::before { transform: rotate(45deg); color: #e62e3d; }
+.sh-dossier-sum::after { content: 'SYSTEM DOSSIER'; margin-left: auto; font-family: 'Share Tech Mono', monospace; font-size: 13px; color: #888; letter-spacing: 2px; }
+
+.sh-dossier-inner { padding: 30px; background: #ffffff; border-top: 1px solid #e0e0e0; }
+
+/* Grid de Info */
+.sh-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; }
+.sh-box { background: #f9f9f9; padding: 15px; border-radius: 6px; border: 1px solid #eeeeee; text-align: center; transition: 0.2s; }
+.sh-box:hover { border-color: #e62e3d; background: #fff5f6; }
+.sh-box-lbl { display: block; font-size: 11px; font-weight: 900; color: #888888; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 5px; }
+.sh-box-val { font-family: 'Share Tech Mono', monospace; font-size: 15px; color: #1a1a1a; font-weight: bold; }
+.sh-box-val a { color: #e62e3d; text-decoration: none; border-bottom: 1px dashed #e62e3d; }
+
+/* Pontos de Ação */
+.sh-actions { display: flex; background: #1a1a1a; border-radius: 8px; overflow: hidden; margin-bottom: 35px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+.sh-act { flex: 1; text-align: center; padding: 18px; border-right: 1px dashed #333333; }
+.sh-act:last-child { border-right: none; }
+.sh-act-lbl { display: block; color: #aaaaaa; font-size: 11px; font-weight: 900; letter-spacing: 1px; }
+.sh-act-val { display: block; color: #ffffff; font-size: 26px; font-weight: 900; margin-top: 8px; font-family: 'Share Tech Mono', monospace; }
+.sh-act-val.red { color: #e62e3d; }
+
+/* Blocos de Texto */
+.sh-block { margin-bottom: 25px; }
+.sh-block:last-child { margin-bottom: 0; }
+.sh-block-title { font-weight: 900; color: #1a1a1a; font-size: 15px; text-transform: uppercase; display: flex; align-items: center; gap: 10px; margin-bottom: 12px; border-bottom: 2px solid #f0f0f0; padding-bottom: 8px; }
+.sh-block-title::before { content: '♥'; color: #e62e3d; font-size: 16px; }
+.sh-block-content { font-size: 14px; color: #444444; line-height: 1.7; }
+
+.sh-list-item { position: relative; padding-left: 20px; margin-bottom: 8px; }
+.sh-list-item::before { content: '+'; position: absolute; left: 0; color: #e62e3d; font-weight: 900; }
+
+/* Sub-Dossiês (Itens e Técnicas) */
+.sh-sub { margin-top: 20px; border: 1px solid #e0e0e0; background: #ffffff; border-radius: 6px; overflow: hidden; }
+.sh-sub > summary { padding: 15px 20px; font-size: 13px; font-weight: 900; color: #1a1a1a; text-transform: uppercase; cursor: pointer; background: #fcfcfc; transition: 0.3s; letter-spacing: 1px; outline: none; }
+.sh-sub[open] > summary { border-bottom: 1px solid #e0e0e0; background: #fff5f6; color: #e62e3d; }
+.sh-sub-inner { padding: 20px; background: #fcfcfc; }
+
+.sh-item-card { background: #ffffff; border: 1px solid #eeeeee; border-left: 4px solid #1a1a1a; padding: 18px 20px; border-radius: 0 6px 6px 0; margin-bottom: 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.02); }
+.sh-item-card:last-child { margin-bottom: 0; }
+.sh-item-title { font-weight: 900; color: #e62e3d; font-size: 15px; margin-bottom: 10px; padding-bottom: 5px; border-bottom: 1px solid #eeeeee; display: flex; align-items: center; gap: 8px; }
+.sh-item-title::before { content: '+'; color: #1a1a1a; font-weight: 900; }
+.sh-item-desc { font-size: 13.5px; color: #444444; line-height: 1.7; }
+
+/* Assinatura */
+.sh-footer { text-align: right; padding: 0 45px 35px; }
+.sh-footer-sig { font-size: 26px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; display: inline-block; position: relative; padding-bottom: 5px; }
+.sh-sig-black { color: #1a1a1a; }
+.sh-sig-red { color: #e62e3d; }
+.sh-footer-sig::after { content: ''; position: absolute; bottom: 0; right: 0; width: 40%; height: 4px; background: #e62e3d; border-radius: 2px; }
+
+@media (max-width: 600px) {
+  .sh-hud { grid-template-columns: 1fr; gap: 15px; }
+  .sh-grid { grid-template-columns: 1fr 1fr; }
+  .sh-cross { top: -10px; right: -10px; font-size: 120px; opacity: 0.1; -webkit-text-stroke: 0; color: #fff; }
+  .sh-title { font-size: 28px; }
+}
