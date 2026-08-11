@@ -108,12 +108,19 @@
 .sh-item-title::before { content: '+'; color: #1a1a1a; font-weight: 900; }
 .sh-item-desc { font-size: 13.5px; color: #444444; line-height: 1.7; }
 
-/* Assinaturaaa */
+/* Assinatura Injetada via CSS */
 .sh-footer { text-align: right; padding: 0 45px 35px; }
-.sh-footer-sig { font-size: 26px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; display: inline-block; position: relative; padding-bottom: 5px; }
-.sh-sig-black { color: #1a1a1a; }
-.sh-sig-red { color: #e62e3d; }
-.sh-footer-sig::after { content: ''; position: absolute; bottom: 0; right: 0; width: 40%; height: 4px; background: #e62e3d; border-radius: 2px; }
+.sh-footer-sig { 
+  display: inline-block; position: relative; padding-bottom: 5px;
+  font-size: 26px; font-weight: 900; letter-spacing: 4px; text-transform: uppercase; 
+  -webkit-user-select: none; -moz-user-select: none; -ms-user-select: none; user-select: none; 
+  background-image: linear-gradient(#e62e3d, #e62e3d);
+  background-size: 40% 4px;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+}
+.sh-footer-sig::before { content: 'SHIRO'; color: #1a1a1a; }
+.sh-footer-sig::after { content: 'GANE'; color: #e62e3d; }
 
 @media (max-width: 600px) {
   .sh-hud { grid-template-columns: 1fr; gap: 15px; }
