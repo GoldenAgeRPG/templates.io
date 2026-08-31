@@ -216,3 +216,26 @@
   .mari-content, .mari-stats, .mari-header { padding-left: 15px; padding-right: 15px; }
   .mari-signature::after { font-size: 1.5em; }
 }
+/* DOSSIÊ / EPISTEME */
+.mari-fold { margin: 0 30px 20px; border: 1px solid var(--metal-chrome-dark); background: rgba(10,14,23,0.8); border-radius: 4px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); }
+.mari-fold > summary { cursor: pointer; padding: 15px; font-family: 'Cinzel Decorative', cursive; font-size: 1.2em; text-align: center; color: var(--metal-accent-gold); letter-spacing: 3px; list-style: none; transition: 0.3s; background: linear-gradient(to bottom, #111, #05070a); border-radius: 4px; text-transform: uppercase; }
+.mari-fold > summary::-webkit-details-marker { display: none; }
+.mari-fold > summary:hover { color: #fff; background: linear-gradient(to bottom, #1a2436, #111); }
+.mari-fold[open] > summary { border-bottom: 1px solid var(--metal-chrome-dark); border-radius: 4px 4px 0 0; }
+.mari-content-fold { padding: 25px; font-size: 0.9em; background: rgba(0,0,0,0.3); border-radius: 0 0 4px 4px; }
+
+/* Grids Táticos (Episteme) */
+.mari-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
+.mari-data-box { background: rgba(10,14,23,0.8); border: 1px solid var(--metal-chrome-dark); padding: 12px; display: flex; flex-direction: column; text-align: center; border-radius: 4px; }
+.mari-data-lbl { font-family: 'Montserrat', sans-serif; font-size: 0.75em; color: var(--metal-chrome-mid); text-transform: uppercase; border-bottom: 1px solid var(--metal-chrome-dark); padding-bottom: 4px; margin-bottom: 6px;}
+.mari-data-val { font-weight: 700; font-size: 1.1em; color: var(--metal-chrome-light); }
+
+/* Ações (ATK, DEF, SUP, LIV) */
+.mari-act-grid { display: flex; gap: 10px; margin-bottom: 25px; }
+.mari-act { flex: 1; text-align: center; border: 1px solid var(--metal-chrome-dark); background: rgba(10,14,23,0.8); padding: 10px 5px; border-radius: 4px; }
+.mari-act .lbl { font-family: 'Montserrat', sans-serif; font-size: 0.75em; display: block; color: var(--metal-chrome-mid); border-bottom: 1px dashed var(--metal-chrome-dark); padding-bottom: 4px; margin-bottom: 6px;}
+.mari-act span { display: block; font-weight: 700; font-size: 1.8em; color: var(--metal-accent-gold); }
+
+/* Títulos Internos do Resumo/Cálculos */
+.mari-list-title { font-family: 'Cinzel Decorative', cursive; font-size: 1.1em; color: var(--metal-accent-blue); border-bottom: 1px solid var(--metal-chrome-dark); padding-bottom: 5px; margin: 20px 0 10px; }
+.mari-content-fold p { margin-top: 0; margin-bottom: 15px; color: var(--metal-chrome-light); line-height: 1.6; }
