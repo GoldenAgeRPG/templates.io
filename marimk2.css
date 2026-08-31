@@ -1,0 +1,218 @@
+/* --- TEMPLATE: MARI EL-MELLOI (MERCURY RISING v8 - FLUID FIX / REINES NP) --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Montserrat:wght@300;400;600;700&display=swap');
+
+:root {
+  --metal-bg: #0a0e17; /* Fundo oceânico/metálico extremamente escuro */
+  --metal-dark: #05070a;
+  --metal-chrome-light: #e8e8e8;
+  --metal-chrome-mid: #8a9bb5; /* Prata com toque de azul */
+  --metal-chrome-dark: #2a3a53; /* Prata oxidado puxado pro teal/azul */
+  --metal-accent-blue: #64b5f6; /* Azul brilhante aquático */
+  --metal-accent-gold: #c5a86a; /* Dourado Aristocrático (El-Melloi) */
+}
+
+/* --- ANIMAÇÕES --- */
+
+/* Loop Infinito de Background (Sem Stutter) */
+@keyframes wave-scroll-right {
+  0% { background-position: 0 bottom; }
+  100% { background-position: 1200px bottom; }
+}
+@keyframes wave-scroll-left {
+  0% { background-position: 0 bottom; }
+  100% { background-position: -1200px bottom; }
+}
+
+@keyframes metal-rise {
+  0% { transform: translateY(100px) scale(0.5); opacity: 0; }
+  10% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(-400px) scale(1); opacity: 0; }
+}
+
+/* CONTAINER PRINCIPAL */
+.mari-container {
+  box-sizing: border-box; max-width: 800px; width: 95%; margin: 40px auto;
+  background-color: var(--metal-bg);
+  display: grid; grid-template-columns: 60px 1fr 60px; grid-template-rows: auto auto 1fr auto auto;
+  border: 2px solid var(--metal-chrome-dark);
+  border-image: linear-gradient(to bottom, var(--metal-chrome-light), var(--metal-chrome-dark)) 1;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.9); position: relative; overflow: hidden;
+  font-family: 'Montserrat', sans-serif; color: var(--metal-chrome-light);
+}
+.mari-container * { box-sizing: border-box; }
+
+/* LATERAIS */
+.mari-sidebar {
+  grid-row: 1 / -1; position: relative;
+  background: linear-gradient(to right, #05070a, #0a0e17, #05070a);
+  border-right: 1px solid var(--metal-chrome-dark); border-left: 1px solid var(--metal-chrome-dark);
+  overflow: hidden; z-index: 0;
+}
+.mari-sidebar.left { grid-column: 1; border-left: none; }
+.mari-sidebar.right { grid-column: 3; border-right: none; }
+
+/* BOLHAS (Mercúrio Reines) */
+.metal-bubble {
+  position: absolute; bottom: -40px; border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff, var(--metal-accent-blue) 10%, var(--metal-chrome-mid) 40%, var(--metal-chrome-dark) 80%, var(--metal-dark) 100%);
+  box-shadow: inset -2px -2px 5px rgba(0,0,0,0.8), 0 0 8px rgba(100,181,246,0.5);
+  opacity: 0; animation: metal-rise linear infinite;
+}
+.mb1 { width: 20px; height: 20px; left: 10%; animation-duration: 12s; animation-delay: 0s; }
+.mb2 { width: 35px; height: 35px; left: 40%; animation-duration: 15s; animation-delay: 5s; }
+.mb3 { width: 15px; height: 15px; left: 70%; animation-duration: 10s; animation-delay: 2s; }
+.mb4 { width: 25px; height: 25px; left: 20%; animation-duration: 14s; animation-delay: 8s; }
+.mb5 { width: 30px; height: 30px; left: 50%; animation-duration: 18s; animation-delay: 1s; }
+
+/* CONTEÚDO CENTRAL */
+.mari-content-col {
+  grid-column: 2; background: var(--metal-bg); position: relative; z-index: 2;
+  display: flex; flex-direction: column;
+}
+
+/* HEADER */
+.mari-header {
+  text-align: center; padding: 30px 20px;
+  background: linear-gradient(to bottom, #101522, var(--metal-bg));
+  border-bottom: 2px solid var(--metal-chrome-dark);
+}
+.mari-icon-wrapper {
+  width: 50px; height: 50px; margin: 0 auto 10px;
+  background: linear-gradient(135deg, var(--metal-accent-gold), #fff);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 2px #000);
+}
+.mari-icon-wrapper svg { width: 100%; height: 100%; fill: currentColor; }
+.mari-title {
+  font-family: 'Cinzel Decorative', cursive; font-size: 2.2em; margin: 0; letter-spacing: 2px;
+  background: linear-gradient(to bottom, #fff, var(--metal-accent-gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 8px rgba(197,168,106,0.3);
+}
+.mari-subtitle {
+  font-family: 'Montserrat', sans-serif; font-size: 0.9em; color: var(--metal-chrome-mid);
+  text-transform: uppercase; letter-spacing: 3px; margin-top: 5px;
+}
+
+/* IMAGEM */
+.mari-image-frame {
+  width: 100%; height: 350px; position: relative;
+  border-bottom: 3px solid var(--metal-chrome-dark); background: #000;
+}
+.mari-image-frame img {
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
+  filter: grayscale(0.5) contrast(1.1) brightness(0.95); transition: 0.5s;
+}
+.mari-container:hover .mari-image-frame img { filter: grayscale(0.1) contrast(1.1); }
+
+/* STATUS ISOLADOS */
+.mari-stats {
+  padding: 20px 30px; display: flex; flex-direction: column; gap: 15px;
+  background: rgba(10,14,23,0.8); border-bottom: 1px solid var(--metal-chrome-dark);
+}
+
+.mari-stat-item { 
+  display: grid; grid-template-columns: 50px 1fr 80px; align-items: center; gap: 15px; 
+}
+.mari-stat-label {
+  font-family: 'Cinzel Decorative', cursive; font-weight: 700;
+  color: var(--metal-chrome-light) !important; font-size: 0.9em; text-align: right;
+}
+
+.mari-bar-wrapper {
+  width: 100%; height: 12px; background: #05070a;
+  border-radius: 10px; overflow: hidden; border: 1px solid var(--metal-chrome-dark);
+  box-shadow: inset 0 2px 5px #000;
+}
+
+.mari-hp-fill, .mari-ea-fill, .mari-san-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--metal-chrome-dark), var(--metal-chrome-light), var(--metal-chrome-mid));
+  border-radius: 10px; box-shadow: 0 0 10px var(--metal-accent-blue);
+  transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+  position: relative; overflow: hidden;
+}
+
+.mari-ea-fill {
+  background: linear-gradient(90deg, #5a4925, var(--metal-accent-gold), #ffe599);
+  box-shadow: 0 0 10px var(--metal-accent-gold);
+}
+
+.mari-hp-fill::after, .mari-ea-fill::after, .mari-san-fill::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 50%;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+}
+
+.mari-stat-val {
+  font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 0.9em;
+  color: var(--metal-chrome-light) !important; text-align: right;
+}
+
+/* CONTEÚDO */
+.mari-content {
+  padding: 30px; font-size: 1.1em; line-height: 1.8;
+  color: var(--metal-chrome-light); text-align: justify; background: var(--metal-bg);
+}
+.mari-content b { color: #fff; font-weight: 700; text-shadow: 0 0 5px var(--metal-chrome-mid); }
+.mari-content i { color: var(--metal-accent-blue); }
+
+/* EXTRAS */
+.mari-extras {
+  margin: 0 30px 20px; padding: 20px;
+  background: rgba(10,14,23,0.5); border: 1px solid var(--metal-chrome-dark);
+  color: var(--metal-chrome-mid); font-family: 'Montserrat';
+  text-align: left; font-size: 0.9em; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+  border-radius: 4px;
+}
+.mari-extras p { margin: 0 0 10px 0; }
+.mari-extras p:last-child { margin: 0; }
+.mari-extras b { color: var(--metal-accent-gold); font-family: 'Cinzel Decorative'; letter-spacing: 1px;}
+
+/* --- RODAPÉ & PISCINA DE METAL --- */
+.mari-footer-pool {
+  grid-column: 1 / -1; position: relative; height: 120px; background: #05070a;
+  overflow: hidden; border-top: 3px solid var(--metal-chrome-dark); margin-top: auto;
+}
+
+.metal-wave {
+  position: absolute; bottom: 0; left: 0; 
+  width: 100%; height: 100%;
+  background-repeat: repeat-x; 
+  background-position: 0 bottom;
+}
+
+/* Ondas recalculadas com as cores de Sima Yi */
+.wave1 {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3ClinearGradient id='a' x1='50%25' y1='0%25' x2='50%25' y2='100%25'%3E%3Cstop offset='0%25' stop-color='%23e8e8e8'/%3E%3Cstop offset='100%25' stop-color='%238a9bb5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0,60 Q300,0 600,60 T1200,60 V120 H0 Z' fill='url(%23a)' opacity='0.8'/%3E%3C/svg%3E");
+  background-size: 1200px 100%;
+  animation: wave-scroll-right 8s linear infinite; z-index: 3;
+}
+.wave2 {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,80 Q300,30 600,80 T1200,80 V120 H0 Z' fill='%2364b5f6' opacity='0.3'/%3E%3C/svg%3E");
+  background-size: 1200px 100%;
+  animation: wave-scroll-left 12s linear infinite; bottom: 5px; z-index: 2;
+}
+.wave3 {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1200 120' preserveAspectRatio='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0,90 Q300,50 600,90 T1200,90 V120 H0 Z' fill='%232a3a53' opacity='0.9'/%3E%3C/svg%3E");
+  background-size: 1200px 100%;
+  animation: wave-scroll-right 18s linear infinite; bottom: 10px; z-index: 1;
+}
+
+.mari-signature {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  z-index: 10; text-align: center; width: 100%;
+}
+.mari-signature::after {
+  content: 'Mari El-Melloi Archisorte'; font-family: 'Cinzel Decorative', serif; font-size: 1.8em;
+  background: linear-gradient(to bottom, #fff 30%, var(--metal-accent-gold) 70%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.9)); font-weight: 700;
+}
+
+@media (max-width: 700px) {
+  .mari-container { grid-template-columns: 0 1fr 0; border: 1px solid var(--metal-chrome-dark); }
+  .mari-sidebar { display: none; }
+  .mari-content, .mari-stats, .mari-header { padding-left: 15px; padding-right: 15px; }
+  .mari-signature::after { font-size: 1.5em; }
+}
