@@ -60,7 +60,7 @@
 /* BOLHAS (Restritas às colunas laterais que tem 60px de largura) */
 .metal-bubble {
   position: absolute; border-radius: 50%;
-  background: radial-gradient(circle at 30% 30%, #fff, var(--metal-accent-blue) 10%, var(--metal-chrome-mid) 40%, var(--metal-chrome-dark) 80%;
+  background: radial-gradient(circle at 30% 30%, #fff, var(--metal-accent-blue) 10%, var(--metal-chrome-mid) 40%, var(--metal-chrome-dark) 80%, var(--metal-chrome-dark) 100%;
   box-shadow: inset -2px -2px 5px rgba(0,0,0,0.8), 0 0 8px rgba(100,181,246,0.5);
   opacity: 0; animation: metal-rise linear infinite;
 }
