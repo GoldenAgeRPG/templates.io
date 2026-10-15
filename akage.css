@@ -1,0 +1,392 @@
+/* ==========================================================================
+   AKAGE · Template & Editor Minimalista (AwesomeBB / Forumeiros)
+   ========================================================================== */
+
+.akage-post {
+  --akage-void: #14171a;
+  --akage-panel: #1e2428;
+  --akage-accent: #5a8c97;
+  --akage-danger: #8c4052;
+  --akage-sun: #b3937b;
+  --akage-text: #d8dde1;
+  --akage-light: #9ab4bd;
+  --akage-name: "DAICHI O'CONNOR";
+  --akage-tab: "Akage";
+  
+  box-sizing: border-box;
+  width: 740px;
+  max-width: 100%;
+  margin: 24px auto;
+  background: var(--akage-void);
+  color: var(--akage-text);
+  border: 1px solid #293238;
+  border-radius: 28px;
+  overflow: hidden;
+  font: 15px/1.85 system-ui, -apple-system, sans-serif;
+  text-align: left;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(90, 140, 151, 0.1);
+  isolation: isolate;
+}
+
+.akage-post *, .akage-post *::before, .akage-post *::after {
+  box-sizing: border-box;
+}
+
+/* Capa & Smartphone Header */
+.akage-post .akage-cover {
+  height: 320px;
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--akage-panel), var(--akage-void));
+  border-bottom: 2px solid #293238;
+}
+
+.akage-post .akage-image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 35%;
+  filter: saturate(1.1) brightness(0.95);
+  margin: 0;
+  border: 0;
+}
+
+.akage-post .akage-cover::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, var(--akage-void) 0%, rgba(20, 23, 26, 0.6) 30%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Stickers / Elementos Decorativos nas Bordas */
+.akage-post .akage-decorations {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  z-index: 3;
+  pointer-events: none;
+}
+
+.akage-post .akage-sticker {
+  background: rgba(20, 23, 26, 0.75);
+  border: 1px solid rgba(179, 147, 123, 0.3);
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+  backdrop-filter: blur(4px);
+  color: var(--akage-sun);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.akage-post .akage-watermark {
+  position: absolute;
+  bottom: 15px;
+  left: 30px;
+  font-family: Georgia, serif;
+  font-size: 64px;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.04);
+  letter-spacing: -4px;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.akage-post .akage-heading {
+  position: absolute;
+  bottom: 24px;
+  left: 32px;
+  right: 32px;
+  z-index: 2;
+}
+
+.akage-post .akage-kicker {
+  font: 10px/1.6 system-ui, sans-serif;
+  letter-spacing: 3px;
+  color: var(--akage-sun);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.akage-post .akage-title {
+  font: 700 36px/1.15 system-ui, sans-serif;
+  color: #fff;
+  margin: 0 0 8px 0;
+  padding: 0;
+  border: 0;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+  overflow-wrap: anywhere;
+}
+
+.akage-post .akage-subtitle {
+  font: 12px/1.6 system-ui, sans-serif;
+  letter-spacing: 1.5px;
+  color: var(--akage-light);
+  text-transform: uppercase;
+}
+
+/* Divisor Estilizado */
+.akage-post .akage-divider {
+  text-align: center;
+  color: var(--akage-accent);
+  font-size: 14px;
+  letter-spacing: 12px;
+  padding: 8px 0;
+  opacity: 0.6;
+}
+
+/* HUD / Widgets de Status (Pílulas) */
+.akage-post .akage-hud {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  padding: 12px 32px 24px;
+}
+
+.akage-post .akage-stat-box {
+  background: var(--akage-panel);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 16px;
+  padding: 12px 16px;
+}
+
+.akage-post .akage-stathead {
+  display: flex;
+  justify-content: space-between;
+  font: 600 11px/1.4 system-ui, sans-serif;
+  letter-spacing: 1px;
+  color: var(--akage-light);
+  margin-bottom: 8px;
+}
+
+.akage-post .akage-track {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 9px;
+  overflow: hidden;
+}
+
+.akage-post .akage-fill {
+  display: block;
+  height: 100%;
+  border-radius: 9px;
+  background: linear-gradient(90deg, var(--akage-accent), var(--akage-danger));
+  box-shadow: 0 0 10px rgba(90, 140, 151, 0.4);
+  transition: width 0.3s ease;
+}
+
+/* Corpo do Texto (Estilo App de Mensagens / Notas) */
+.akage-post .akage-body {
+  padding: 20px 36px 32px;
+  overflow-wrap: anywhere;
+  font-size: 15px;
+  color: var(--akage-text);
+}
+
+.akage-post b, .akage-post strong {
+  color: #fff;
+  font-weight: 700;
+}
+
+.akage-post i, .akage-post em {
+  color: var(--akage-light);
+  font-style: italic;
+}
+
+.akage-post blockquote {
+  margin: 20px 0;
+  padding: 16px 20px;
+  border: 0;
+  border-left: 3px solid var(--akage-accent);
+  background: rgba(90, 140, 151, 0.08);
+  border-radius: 0 12px 12px 0;
+  color: #e2e8ed;
+  font-style: italic;
+}
+
+/* Dossiê / Spoiler Principal */
+.akage-post .akage-dossier {
+  margin: 0 24px 24px;
+  border: 1px solid #263138;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(30, 36, 40, 0.4);
+}
+
+.akage-post .akage-dossier > summary {
+  cursor: pointer;
+  list-style: none;
+  background: linear-gradient(90deg, rgba(90, 140, 151, 0.15), rgba(140, 64, 82, 0.1));
+  padding: 16px 22px;
+  font: 600 12px/1.5 system-ui, sans-serif;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.akage-post .akage-dossier > summary::-webkit-details-marker {
+  display: none;
+}
+
+.akage-post .akage-dossier > summary::before {
+  content: var(--akage-tab);
+}
+
+.akage-post .akage-dossier > summary::after {
+  content: "+";
+  font: 18px/1 system-ui, sans-serif;
+  color: var(--akage-accent);
+  background: rgba(20,23,26,0.5);
+  width: 28px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+
+.akage-post .akage-dossier[open] > summary::after {
+  content: "−";
+  color: var(--akage-danger);
+}
+
+.akage-post .akage-dossier > summary:focus-visible {
+  outline: 2px solid var(--akage-accent);
+}
+
+.akage-post .akage-content {
+  padding: 24px;
+  overflow-wrap: anywhere;
+}
+
+.akage-post .akage-meta,
+.akage-post .akage-actions {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.akage-post .akage-cell {
+  padding: 12px 14px;
+  background: var(--akage-void);
+  border: 1px solid rgba(255,255,255,0.04);
+  border-radius: 12px;
+  font: 13px/1.5 system-ui, sans-serif;
+}
+
+.akage-post .akage-label {
+  display: block;
+  font: 700 9px/1.5 system-ui, sans-serif;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--akage-sun);
+  margin-bottom: 4px;
+}
+
+.akage-post .akage-section {
+  margin: 24px 0 0;
+  font-size: 13px;
+}
+
+.akage-post .akage-section-title {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  font: 700 11px/1.6 system-ui, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  color: var(--akage-sun);
+  margin-bottom: 12px;
+}
+
+.akage-post .akage-section-title::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+}
+
+.akage-post .akage-item {
+  padding: 14px 16px;
+  margin: 10px 0;
+  background: rgba(20, 23, 26, 0.6);
+  border-radius: 12px;
+  border-left: 3px solid var(--akage-accent);
+  border: 1px solid rgba(255,255,255,0.03);
+  border-left-width: 3px;
+}
+
+/* Sub-spoilers / Acordeons internos */
+.akage-post .akage-subfold {
+  margin: 16px 0 0;
+  border: 1px solid rgba(255,255,255,0.06);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(20, 23, 26, 0.4);
+}
+
+.akage-post .akage-subfold > summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 12px 16px;
+  font: 600 11px/1.5 system-ui, sans-serif;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--akage-light);
+  background: rgba(90, 140, 151, 0.08);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.akage-post .akage-subfold > summary::-webkit-details-marker {
+  display: none;
+}
+
+.akage-post .akage-subfold > summary::after {
+  content: "+";
+}
+
+.akage-post .akage-subfold[open] > summary::after {
+  content: "−";
+}
+
+.akage-post .akage-subcontent {
+  padding: 12px 16px 16px;
+}
+
+/* Rodapé / Assinatura */
+.akage-post .akage-signature {
+  text-align: right;
+  padding: 0 36px 28px;
+  font: 600 12px/1.8 system-ui, sans-serif;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--akage-sun);
+}
+
+.akage-post .akage-signature::before {
+  content: "✦ ";
+  color: var(--akage-accent);
+}
+
+.akage-post .akage-signature::after {
+  content: var(--akage-name);
+}
+
+/* Responsividade */
+@media(max-width: 600px) {
+  .akage-post .akage-cover { height: 260px; }
+  .akage-post .akage-heading { left: 20px; right: 20px; }
+  .akage-post .akage-title { font-size: 28px; }
+  .akage-post .akage-hud { padding: 10px 20px 20px; gap: 10px; }
+  .akage-post .akage-body { padding: 16px 20px 24px; }
+  .akage-post .akage-meta, .akage-post .akage-actions { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .akage-post .akage-dossier { margin: 0 12px 20px; }
+}
