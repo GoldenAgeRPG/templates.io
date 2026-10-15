@@ -1,0 +1,58 @@
+/* 01 — Identidade: edite estes tokens para personalizar. */
+.suki-post {
+  --suki-void:#1B1D29; --suki-panel:#52183f; --suki-accent:#80006B;
+  --suki-text:#d3d3db; --suki-light:#e7b9de;
+  --suki-name:"ITSUKI OKKOTSU"; --suki-tab:"Suki";
+  box-sizing:border-box; width:740px; max-width:100%; margin:24px auto;
+  background:var(--suki-void); color:var(--suki-text); border:1px solid #734761;
+  border-radius:18px; overflow:hidden; font:15px/1.85 Georgia,serif;
+  text-align:left; box-shadow:0 18px 65px #0005; isolation:isolate;
+}
+.suki-post *, .suki-post *::before, .suki-post *::after {box-sizing:border-box;}
+/* 02 — Capa e ornamentos */
+.suki-post .suki-cover {height:350px; position:relative; overflow:hidden; background:linear-gradient(135deg,var(--suki-panel),var(--suki-void));}
+.suki-post .suki-image {display:block; width:100%; height:100%; object-fit:cover; object-position:center 35%; opacity:.8; margin:0; border:0;}
+.suki-post .suki-cover::after {content:""; position:absolute; inset:0; background:linear-gradient(0deg,#1b1d29 1%,#1b1d291a 85%),linear-gradient(90deg,#52183f80,transparent); pointer-events:none;}
+.suki-post .suki-decoration {position:absolute; top:6px; left:22px; font:100px/1 Georgia,serif; letter-spacing:-8px; color:#ffffff13; white-space:nowrap; z-index:1; pointer-events:none;}
+.suki-post .suki-heading {position:absolute; bottom:30px; left:38px; right:38px; z-index:2;}
+.suki-post .suki-kicker {font:9px/1.6 Arial,sans-serif; letter-spacing:3px; color:var(--suki-light); text-transform:uppercase;}
+.suki-post .suki-title {font:normal 44px/1.12 Georgia,serif; color:#f5eaf4; margin:13px 0; padding:0; border:0; text-shadow:0 2px 24px #80006b99; overflow-wrap:anywhere;}
+.suki-post .suki-subtitle {font:11px/1.8 Arial,sans-serif; letter-spacing:2px; color:var(--suki-text); text-transform:uppercase;}
+.suki-post .suki-divider {text-align:center; color:var(--suki-light); font-size:16px; letter-spacing:14px; padding:4px; opacity:.7;}
+/* 03 — HUD: larguras gravadas no HTML final */
+.suki-post .suki-hud {display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; padding:12px 38px 26px;}
+.suki-post .suki-stathead {display:flex; justify-content:space-between; gap:8px; font:10px/1.8 Arial,sans-serif; letter-spacing:1px; margin-bottom:10px;}
+.suki-post .suki-track {height:5px; background:#ffffff12; border-radius:9px;}
+.suki-post .suki-fill {display:block; height:100%; border-radius:9px; background:linear-gradient(90deg,var(--suki-accent),#dfa3ce); box-shadow:0 0 12px #b8309c88;}
+/* 04 — Narração e BBCode convertido */
+.suki-post .suki-body {padding:25px 42px 36px; overflow-wrap:anywhere;}
+.suki-post b,.suki-post strong {color:#edc4e5; font-weight:700;}
+.suki-post i,.suki-post em {color:#bfa9cd; font-style:italic;}
+.suki-post blockquote {margin:20px 0; padding:14px 20px; border:0; border-left:2px solid #a94591; background:#52183f50; color:#dfc9e0; font-style:italic;}
+/* 05 — Dossiê sem JavaScript no fórum */
+.suki-post .suki-dossier {margin:0 24px 26px; border:1px solid #754061; border-radius:10px; overflow:hidden; background:#52183f24;}
+.suki-post .suki-dossier>summary {cursor:pointer; list-style:none; background:linear-gradient(90deg,#52183f,#52183f33); padding:15px 20px; font:12px/1.7 Georgia,serif; letter-spacing:4px; text-transform:uppercase; color:#efd5e9;}
+.suki-post .suki-dossier>summary::-webkit-details-marker {display:none;}
+.suki-post .suki-dossier>summary::before {content:var(--suki-tab);}
+.suki-post .suki-dossier>summary::after {content:"+"; float:right; font:18px/1 Arial,sans-serif;}
+.suki-post .suki-dossier[open]>summary::after {content:"−";}
+.suki-post .suki-dossier>summary:focus-visible {outline:2px solid #edc4e5; outline-offset:-4px;}
+.suki-post .suki-content {padding:22px; overflow-wrap:anywhere;}
+.suki-post .suki-meta,.suki-post .suki-actions {display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin-bottom:20px;}
+.suki-post .suki-cell {padding:10px; background:#1b1d29; border:1px solid #ffffff0c; border-radius:6px; font:12px/1.7 Arial,sans-serif;}
+.suki-post .suki-label {display:block; font:9px/1.7 Arial,sans-serif; letter-spacing:1.5px; text-transform:uppercase; color:#c99cbf; margin-bottom:6px;}
+.suki-post .suki-section {margin:22px 0 0; font-size:13px;}
+.suki-post .suki-section-title {display:flex; gap:12px; align-items:center; font:11px/1.7 Arial,sans-serif; text-transform:uppercase; letter-spacing:2px; color:var(--suki-light); margin-bottom:12px;}
+.suki-post .suki-section-title::after {content:""; flex:1; height:1px; background:#734761;}
+.suki-post .suki-item {padding:12px 14px; margin:9px 0; background:#1b1d2980; border-left:2px solid var(--suki-accent);}
+/* 06 — Assinatura injetada exclusivamente via CSS */
+.suki-post .suki-signature {text-align:right; padding:0 36px 26px; font:14px/1.8 Georgia,serif; letter-spacing:3px; text-transform:uppercase; color:var(--suki-light);}
+.suki-post .suki-signature::before {content:"✦ "; color:#a94591;}
+.suki-post .suki-signature::after {content:var(--suki-name);}
+/* 07 — Telas pequenas */
+@media(max-width:600px) {
+ .suki-post .suki-cover{height:290px;} .suki-post .suki-heading{left:24px;right:24px;}
+ .suki-post .suki-title{font-size:34px;} .suki-post .suki-hud{padding:10px 24px 20px;gap:14px;}
+ .suki-post .suki-body{padding:20px 24px 30px;} .suki-post .suki-meta{grid-template-columns:repeat(2,minmax(0,1fr));}
+ .suki-post .suki-dossier{margin:0 14px 22px;} .suki-post .suki-content{padding:14px;}
+}
