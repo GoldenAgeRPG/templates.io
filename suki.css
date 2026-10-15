@@ -56,3 +56,29 @@
  .suki-post .suki-body{padding:20px 24px 30px;} .suki-post .suki-meta{grid-template-columns:repeat(2,minmax(0,1fr));}
  .suki-post .suki-dossier{margin:0 14px 22px;} .suki-post .suki-content{padding:14px;}
 }
+/* 08 — Revisão 1.1: cortejo espectral, contraste e sub-spoilers */
+.suki-post .suki-decoration {
+ top:22px; left:26px; right:26px; z-index:2;
+ font:normal 74px/1.15 Georgia,"Yu Mincho",serif; letter-spacing:8px;
+ color:#f2c9e3a6; text-shadow:0 2px 4px #170b20,0 0 28px #80006baa;
+ white-space:normal; overflow-wrap:anywhere; max-height:172px; overflow:hidden;
+ -webkit-text-stroke:.5px #f8d7ee66; pointer-events:none;
+}
+.suki-post .suki-heading {z-index:4;}
+.suki-post .suki-aura {position:absolute;inset:0;z-index:3;pointer-events:none;overflow:hidden;}
+.suki-post .suki-aura::before,.suki-post .suki-aura::after {
+ content:"";position:absolute;inset:-25%;opacity:.7;
+ background:radial-gradient(ellipse at 18% 64%,#bc32ad66,transparent 35%),radial-gradient(ellipse at 83% 25%,#806ad84d,transparent 30%);
+ filter:blur(18px);animation:suki-spectral-drift 12s ease-in-out infinite alternate;
+}
+.suki-post .suki-aura::after {background:radial-gradient(circle at 20% 65%,#f9c7ee 0 1px,transparent 3px),radial-gradient(circle at 74% 39%,#f9c7ee 0 1px,transparent 4px),radial-gradient(circle at 58% 76%,#caa3ee 0 1px,transparent 3px);filter:drop-shadow(0 0 5px #d77ac7);animation-duration:9s;animation-direction:alternate-reverse;}
+@keyframes suki-spectral-drift {from{transform:translate(-2%,3%) scale(1);opacity:.4;}to{transform:translate(3%,-4%) scale(1.08);opacity:.85;}}
+.suki-post .suki-subfold {margin:18px 0 0;border:1px solid #734761;border-radius:7px;overflow:hidden;background:#1b1d2970;}
+.suki-post .suki-subfold>summary {cursor:pointer;list-style:none;padding:12px 15px;font:11px/1.7 Arial,sans-serif;letter-spacing:2px;text-transform:uppercase;color:#edc4e5;background:#52183f55;}
+.suki-post .suki-subfold>summary::-webkit-details-marker {display:none;}
+.suki-post .suki-subfold>summary::after {content:"+";float:right;}
+.suki-post .suki-subfold[open]>summary::after {content:"−";}
+.suki-post .suki-subfold>summary:focus-visible {outline:2px solid #edc4e5;outline-offset:-3px;}
+.suki-post .suki-subcontent {padding:4px 12px 12px;}
+@media(max-width:600px){.suki-post .suki-decoration{font-size:52px;letter-spacing:4px;left:22px;right:22px;}}
+@media(prefers-reduced-motion:reduce){.suki-post .suki-aura::before,.suki-post .suki-aura::after{animation:none;}}
