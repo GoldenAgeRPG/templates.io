@@ -1,0 +1,69 @@
+/* Golden Age RPG — Grimório v3.0
+   CSS EXCLUSIVO ao template .gamals-v3. NÃO altere elementos do fórum.
+   Hospedagem: https://goldenagerpg.github.io/templates.io/grimoriomalshiks.css */
+.gamals-v3.ga-bestiary{--gm-ac:#e78bb9;--gm-line:#423345;display:block;position:relative;isolation:isolate;box-sizing:border-box;width:100%;max-width:920px;min-width:0;margin:0 auto 16px;padding:0;overflow:hidden;background:#101018;color:#ede9ee;font:12px/1.5 'Segoe UI',Arial,sans-serif;border:1px solid #45384a;border-radius:0;box-shadow:0 8px 28px #0005;text-align:left}
+.gamals-v3.ga-bestiary[data-collection="shiki"],.gamals-v3.ga-bestiary[data-collection="ten"]{--gm-ac:#85d9ca;--gm-line:#30544d}
+.gamals-v3.ga-bestiary,.gamals-v3.ga-bestiary *,.gamals-v3.ga-bestiary *:before,.gamals-v3.ga-bestiary *:after{box-sizing:border-box}
+.gamals-v3.ga-bestiary .ga-bes-mast{position:relative;display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:96px;padding:16px 20px;background:linear-gradient(100deg,#241b2a,#15121c 70%,#13121b);border-bottom:1px solid #66415b;color:#fff}
+.gamals-v3.ga-bestiary .ga-bes-overline{display:block;font-size:9px;font-weight:800;letter-spacing:1.6px;color:#dea4c4;text-transform:uppercase;line-height:1.6}
+.gamals-v3.ga-bestiary .ga-bes-mast h2{display:block;margin:5px 0 4px;padding:0;border:0;background:transparent;color:#fff;font:normal 24px/1.15 Georgia,serif;letter-spacing:-.25px;text-transform:none;text-shadow:none;max-width:100%;}
+.gamals-v3.ga-bestiary .ga-bes-mastmeta{display:flex;flex-wrap:wrap;gap:5px 10px;font-size:10px;color:#aaa1b1;line-height:1.3}
+.gamals-v3.ga-bestiary .ga-bes-sigil{font:32px Georgia,serif;color:#bb83a7;opacity:.45;flex:none;border:1px solid #644460;background:#2c202d;width:51px;height:51px;display:grid;place-items:center}
+.gamals-v3.ga-bestiary .ga-bes-layout{display:grid;grid-template-columns:157px minmax(0,1fr);min-width:0;background:#0c0d14}
+.gamals-v3.ga-bestiary .ga-bes-side{display:flex;flex-direction:column;gap:5px;min-width:0;min-height:220px;padding:16px 8px;background:linear-gradient(#17141e,#11131b);border-right:1px solid #39313e}
+.gamals-v3.ga-bestiary .ga-bes-side-title{display:block;margin:0 5px 9px;font-size:9px;letter-spacing:1.15px;font-weight:800;color:#8f8496}
+.gamals-v3.ga-bestiary .ga-bes-switch{display:block;position:relative;min-width:0;margin:0;padding:0;border:0;background:none;cursor:pointer;color:inherit;font:inherit;line-height:1.4}
+.gamals-v3.ga-bestiary .ga-bes-switch input{position:absolute!important;top:0!important;left:0!important;width:1px!important;height:1px!important;opacity:0!important;clip-path:inset(50%);pointer-events:none;margin:0!important;}
+.gamals-v3.ga-bestiary .ga-bes-switch>span{display:flex;gap:5px;align-items:center;min-height:37px;padding:8px 7px;color:#a9a2af;font-size:11px;font-weight:600;border:1px solid transparent;background:transparent;transition:background .15s,color .15s,border-color .15s;overflow-wrap:anywhere}
+.gamals-v3.ga-bestiary .ga-bes-switch>span small{font-size:8px;color:#887685}
+.gamals-v3.ga-bestiary .ga-bes-switch>span b{font-weight:700;flex:1;min-width:0}
+.gamals-v3.ga-bestiary .ga-bes-switch>span em{font-style:normal;color:#9a8493;min-width:16px;text-align:center;font-size:9px}
+.gamals-v3.ga-bestiary .ga-bes-switch:hover>span{background:#2a202d;color:#fff}
+.gamals-v3.ga-bestiary .ga-bes-switch input:checked+span{background:linear-gradient(90deg,#432439,#28212f);color:#ffe5f5;border-color:#875071;border-left:3px solid var(--gm-ac)}
+.gamals-v3.ga-bestiary .ga-bes-switch input:checked+span small,.gamals-v3.ga-bestiary .ga-bes-switch input:checked+span em{color:var(--gm-ac)}
+.gamals-v3.ga-bestiary .ga-bes-switch input:focus-visible+span{outline:2px solid var(--gm-ac);outline-offset:2px}
+.gamals-v3.ga-bestiary .ga-bes-display{min-width:0;padding:15px 17px 7px;background:radial-gradient(circle at 95% 5%,#33233720,transparent 25%),#101018}
+.gamals-v3.ga-bestiary .ga-bes-view{display:none!important;min-width:0}
+.gamals-v3.ga-bestiary .ga-bes-view[data-default="true"]{display:block!important}
+@supports selector(:has(*)){
+ .gamals-v3.ga-bestiary .ga-bes-view[data-default="true"]{display:none!important}
+ .gamals-v3.ga-bestiary:has(.ga-bes-switch input[data-tab="g0"]:checked) .ga-bes-view[data-panel="g0"],
+ .gamals-v3.ga-bestiary:has(.ga-bes-switch input[data-tab="g1"]:checked) .ga-bes-view[data-panel="g1"],
+ .gamals-v3.ga-bestiary:has(.ga-bes-switch input[data-tab="g2"]:checked) .ga-bes-view[data-panel="g2"],
+ .gamals-v3.ga-bestiary:has(.ga-bes-switch input[data-tab="g3"]:checked) .ga-bes-view[data-panel="g3"],
+ .gamals-v3.ga-bestiary:has(.ga-bes-switch input[data-tab="g4"]:checked) .ga-bes-view[data-panel="g4"],
+ .gamals-v3.ga-bestiary:has(.ga-bes-switch input[data-tab="g5"]:checked) .ga-bes-view[data-panel="g5"],
+ .gamals-v3.ga-bestiary:has(.ga-bes-switch input[data-tab="registry"]:checked) .ga-bes-view[data-panel="registry"]{display:block!important}
+}
+.gamals-v3.ga-bestiary .ga-bes-view-head{display:flex;align-items:end;justify-content:space-between;gap:6px;padding:2px 0 10px;margin:0 0 14px;border-bottom:1px solid var(--gm-line)}
+.gamals-v3.ga-bestiary .ga-bes-view-head span{display:block;color:var(--gm-ac);font-weight:800;font-size:9px;letter-spacing:1.2px}
+.gamals-v3.ga-bestiary .ga-bes-view-head h3{font:normal 21px/1.2 Georgia,serif;color:#f5edf3;margin:3px 0 0;padding:0;border:0;text-transform:none}
+.gamals-v3.ga-bestiary .ga-bes-view-head strong{font-size:9px;font-weight:800;color:#ae9dac;white-space:nowrap}
+.gamals-v3.ga-bestiary .ga-bes-none{padding:24px 12px;text-align:center;color:#988e9e;font-size:11px;border:1px dashed #39303b;margin:0 0 14px}
+.gamals-v3.ga-bestiary .ga-bes-card{display:block;margin:0 0 12px;background:#191720;border:1px solid #3e3541;box-shadow:inset 3px 0 0 var(--gm-ac);padding:0;min-width:0;color:#e7e0e8;overflow:hidden}
+.gamals-v3.ga-bestiary .ga-bes-cardhead{display:grid;grid-template-columns:80px minmax(0,1fr);align-items:start;gap:12px;padding:12px 12px 9px;min-width:0}
+.gamals-v3.ga-bestiary .ga-bes-art{display:block;width:80px;height:86px;overflow:hidden;background:#27202b;border:1px solid #554253}
+.gamals-v3.ga-bestiary .ga-bes-art img{display:block;width:100%;height:100%;object-fit:cover;max-width:none}
+.gamals-v3.ga-bestiary .ga-bes-noart{display:grid;place-items:center;color:#997d97;font:32px Georgia,serif;height:100%}
+.gamals-v3.ga-bestiary .ga-bes-intro{min-width:0}
+.gamals-v3.ga-bestiary .ga-bes-number{display:block;color:var(--gm-ac);font-weight:800;font-size:9px;letter-spacing:1px;text-transform:uppercase}
+.gamals-v3.ga-bestiary .ga-bes-intro h4{font:normal 19px/1.2 Georgia,serif;margin:4px 0 3px;padding:0;color:#fff;overflow-wrap:anywhere;text-transform:none;border:0;background:none}
+.gamals-v3.ga-bestiary .ga-bes-alias{color:#c0a8ba;font-size:11px;font-style:italic;margin:0 0 4px}
+.gamals-v3.ga-bestiary .ga-bes-tagrow{display:flex;gap:5px;flex-wrap:wrap;align-items:center;margin:0}
+.gamals-v3.ga-bestiary .ga-bes-tag{display:inline-block;padding:2px 6px;color:var(--gm-ac);border:1px solid var(--gm-line);background:#17111a;font-size:9px;font-weight:700}
+.gamals-v3.ga-bestiary .ga-bes-link{font-size:10px;color:var(--gm-ac)!important;font-weight:bold;text-decoration:underline;margin-left:auto;overflow-wrap:anywhere}
+.gamals-v3.ga-bestiary .ga-bes-snapshot{display:flex;flex-wrap:wrap;gap:5px;padding:0 12px 10px}
+.gamals-v3.ga-bestiary .ga-bes-meter{display:inline-flex;align-items:baseline;flex-wrap:wrap;gap:5px;padding:4px 7px;border:1px solid #3e3541;background:#12131b;font-size:10px;max-width:100%;min-width:0}
+.gamals-v3.ga-bestiary .ga-bes-meter b{font-weight:700;color:#aaa0ad;font-size:9px}
+.gamals-v3.ga-bestiary .ga-bes-meter strong{font-weight:800;color:#ece7f0;font-size:10px;overflow-wrap:anywhere}
+.gamals-v3.ga-bestiary .ga-bes-minisec{margin:0 12px 9px;padding-top:8px;border-top:1px solid #3b3240;min-width:0}
+.gamals-v3.ga-bestiary .ga-bes-minititle{font-size:9px;letter-spacing:1.25px;font-weight:800;color:var(--gm-ac);text-transform:uppercase;margin-bottom:6px}
+.gamals-v3.ga-bestiary .ga-bes-stats,.gamals-v3.ga-bestiary .ga-bes-aptlist,.gamals-v3.ga-bestiary .ga-bes-techlist{display:flex;gap:5px;flex-wrap:wrap;min-width:0}
+.gamals-v3.ga-bestiary .ga-bes-stat,.gamals-v3.ga-bestiary .ga-bes-apt,.gamals-v3.ga-bestiary .ga-bes-tech{display:inline-flex;align-items:baseline;gap:6px;max-width:100%;padding:4px 6px;background:#201d28;border:1px solid #433847;color:#e9e4ec;font-size:10px;overflow-wrap:anywhere}
+.gamals-v3.ga-bestiary .ga-bes-stat b{color:#aea2b1;font-size:9px;font-weight:700}
+.gamals-v3.ga-bestiary .ga-bes-stat strong,.gamals-v3.ga-bestiary .ga-bes-apt strong{color:var(--gm-ac);font-weight:800}
+.gamals-v3.ga-bestiary .ga-bes-tech{border-left:2px solid var(--gm-ac);display:inline-block}
+.gamals-v3.ga-bestiary .ga-bes-tech b{font-weight:700}
+.gamals-v3.ga-bestiary .ga-bes-foot{display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px;padding:9px 15px;background:#15131b;border-top:1px solid #39303b;color:#9e8798;font-size:9px;letter-spacing:.7px}
+@media(max-width:620px){.gamals-v3.ga-bestiary .ga-bes-mast{padding:13px}.gamals-v3.ga-bestiary .ga-bes-mast h2{font-size:21px}.gamals-v3.ga-bestiary .ga-bes-sigil{width:36px;height:36px;font-size:22px}.gamals-v3.ga-bestiary .ga-bes-layout{grid-template-columns:111px minmax(0,1fr)}.gamals-v3.ga-bestiary .ga-bes-side{padding:12px 5px;gap:4px}.gamals-v3.ga-bestiary .ga-bes-switch>span{padding:7px 4px;font-size:10px;gap:3px}.gamals-v3.ga-bestiary .ga-bes-side-title{margin-left:4px;font-size:8px}.gamals-v3.ga-bestiary .ga-bes-display{padding:11px 8px 1px}.gamals-v3.ga-bestiary .ga-bes-cardhead{grid-template-columns:58px minmax(0,1fr);gap:8px;padding:9px 8px}.gamals-v3.ga-bestiary .ga-bes-art{width:58px;height:67px}.gamals-v3.ga-bestiary .ga-bes-intro h4{font-size:16px}.gamals-v3.ga-bestiary .ga-bes-snapshot{padding:0 8px 8px}.gamals-v3.ga-bestiary .ga-bes-minisec{margin:0 8px 8px}.gamals-v3.ga-bestiary .ga-bes-view-head h3{font-size:18px}.gamals-v3.ga-bestiary .ga-bes-view-head strong{font-size:8px}}
+@media(max-width:370px){.gamals-v3.ga-bestiary .ga-bes-layout{grid-template-columns:90px minmax(0,1fr)}.gamals-v3.ga-bestiary .ga-bes-switch>span small{display:none}.gamals-v3.ga-bestiary .ga-bes-switch>span{font-size:9px}.gamals-v3.ga-bestiary .ga-bes-cardhead{display:block}.gamals-v3.ga-bestiary .ga-bes-art{float:left;margin:0 8px 4px 0}.gamals-v3.ga-bestiary .ga-bes-snapshot{clear:both}.gamals-v3.ga-bestiary .ga-bes-overline{font-size:8px}}
