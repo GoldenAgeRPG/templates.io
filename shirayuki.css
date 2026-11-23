@@ -218,3 +218,8 @@
 .sy-post.sy-v2 .sy-ops>summary.sy-ops-header:hover::after{color:#edd5ff;transform:rotate(90deg)}
 .sy-post.sy-v2 .sy-ops:not([open])>.sy-ops-body{display:none!important}
 .sy-post.sy-v2 .sy-ops>summary:focus-visible{outline:2px solid #bc8cda;outline-offset:2px}
+/* V2.2 — Os quatro spoilers de dados vivem exclusivamente dentro de In the End. */
+.sy-post.sy-v2 .sy-ops-folds{margin:0 16px 17px;padding:11px 0 0;border-top:1px solid #57405d;display:grid;gap:11px}
+.sy-post.sy-v2 .sy-ops-folds>.sy-spoiler{margin:0;min-width:0}
+.sy-post.sy-v2 .sy-ops[open]>summary.sy-ops-header{border-bottom:1px solid #4d3957}
+@media(max-width:560px){.sy-post.sy-v2 .sy-ops-folds{margin:0 11px 12px;gap:9px;padding-top:9px}}
