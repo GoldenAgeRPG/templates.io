@@ -1,7 +1,7 @@
 
-/* SHIRAYUKI V2. */
+/* SHIRAYUKI V2 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700&family=Cormorant+Garamond:wght@500;600;700&display=swap');
-.sy-post.sy-v2{--sy-signature:"白雪";--sy-watermark:"白雪";--sy-resume:"Resumo";--sy-calc:"Cálculos";--sy-effects:"Efeitos";--sy-inventory:"Equipamentos";--sy-techniques:"Técnicas";--sy-records:"Outros registros";--sy-ink:#d9d3df;--sy-muted:#a99bad;--sy-purple:#533b5c;--sy-voice:#783cb4;--sy-frost:#d5c8f0;--sy-line:#49394f;--sy-bg:#151418;--sy-panel:#1d1921;}
+.sy-post.sy-v2{--sy-signature:"白雪";--sy-ops-title:"In the End";--sy-watermark:"白雪";--sy-resume:"Resumo";--sy-calc:"Cálculos";--sy-effects:"Efeitos";--sy-inventory:"Equipamentos";--sy-techniques:"Técnicas";--sy-records:"Outros registros";--sy-ink:#d9d3df;--sy-muted:#a99bad;--sy-purple:#533b5c;--sy-voice:#783cb4;--sy-frost:#d5c8f0;--sy-line:#49394f;--sy-bg:#151418;--sy-panel:#1d1921;}
 .sy-post.sy-v2,.sy-post.sy-v2 :where(*){all:revert;box-sizing:border-box}
 .sy-post.sy-v2{display:block;position:relative;isolation:isolate;width:760px;max-width:100%;margin:28px auto;background:var(--sy-bg);color:var(--sy-ink);font:15px/1.9 Georgia,'Times New Roman',serif;text-align:left;overflow:hidden;box-shadow:0 18px 65px #0008;border:1px solid var(--sy-line);float:none;clear:both;overflow-wrap:anywhere;}
 .sy-post.sy-v2 :where(*){box-sizing:border-box;color:inherit;font:inherit;text-align:inherit;letter-spacing:normal;text-transform:none;text-shadow:none;float:none;clear:none;margin:0;padding:0;border:0;background:transparent;box-shadow:none;min-width:0;max-width:none;position:static;}
@@ -206,3 +206,15 @@
 .sy-post.sy-v2 .sy-foot:hover .sy-signature::after{color:#eee1fa;text-shadow:0 0 20px #caa2f4a0}
 @media(max-width:560px){.sy-post.sy-v2 .sy-frame{padding:0 13px 17px}.sy-post.sy-v2 .sy-caption{padding:18px 1px}.sy-post.sy-v2 .sy-subtitle{font-size:19px}.sy-post.sy-v2 .sy-vitals{gap:8px}.sy-post.sy-v2 .sy-gauge{padding:9px 6px}.sy-post.sy-v2 .sy-anomaly{padding:11px 10px}.sy-post.sy-v2 .sy-info-grid{padding:12px;gap:8px}.sy-post.sy-v2 .sy-info{padding:9px 8px}.sy-post.sy-v2 .sy-actions{margin:0 12px 13px}.sy-post.sy-v2 .sy-aux-meta{margin:0 12px 12px}.sy-post.sy-v2 .sy-spoiler>summary{padding:12px 13px}.sy-post.sy-v2 .sy-spoiler-content{padding:15px}.sy-post.sy-v2 .sy-foot{min-height:85px}.sy-post.sy-v2 .sy-signature::after{font-size:34px}.sy-post.sy-v2 .sy-floral::before{left:-235px}}
 @media(prefers-reduced-motion:reduce){.sy-post.sy-v2 *, .sy-post.sy-v2 *::before,.sy-post.sy-v2 *::after{animation:none!important;transition:none!important}}
+
+/* V2.1 — Quadro de dados expansível. Título exclusivamente por CSS. */
+.sy-post.sy-v2 .sy-ops>summary.sy-ops-header{display:flex;align-items:center;justify-content:space-between;gap:16px;cursor:pointer;list-style:none;user-select:none;transition:background .35s ease,border-color .35s ease}
+.sy-post.sy-v2 .sy-ops>summary.sy-ops-header::-webkit-details-marker{display:none}
+.sy-post.sy-v2 .sy-ops>summary.sy-ops-header:hover{background:linear-gradient(90deg,#65467288,#35243c32 82%)}
+.sy-post.sy-v2 .sy-ops:not([open])>summary.sy-ops-header{border-bottom:0}
+.sy-post.sy-v2 details.sy-ops .sy-ops-title::before{content:var(--sy-ops-title)}
+.sy-post.sy-v2 .sy-ops>summary.sy-ops-header::after{content:'+';margin-left:auto;color:#d1b5ea;font:19px/1 Arial,sans-serif;transition:transform .35s ease,color .35s ease}
+.sy-post.sy-v2 .sy-ops[open]>summary.sy-ops-header::after{content:'−'}
+.sy-post.sy-v2 .sy-ops>summary.sy-ops-header:hover::after{color:#edd5ff;transform:rotate(90deg)}
+.sy-post.sy-v2 .sy-ops:not([open])>.sy-ops-body{display:none!important}
+.sy-post.sy-v2 .sy-ops>summary:focus-visible{outline:2px solid #bc8cda;outline-offset:2px}
