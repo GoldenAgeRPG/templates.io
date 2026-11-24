@@ -1,7 +1,7 @@
 
 /* SHIRAYUKI V2 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700&family=Cormorant+Garamond:wght@500;600;700&display=swap');
-.sy-post.sy-v2{--sy-signature:"白雪";--sy-ops-title:"In the End";--sy-watermark:"白雪";--sy-resume:"Resumo";--sy-calc:"Cálculos";--sy-effects:"Efeitos";--sy-inventory:"Equipamentos";--sy-techniques:"Técnicas";--sy-records:"Outros registros";--sy-ink:#d9d3df;--sy-muted:#a99bad;--sy-purple:#533b5c;--sy-voice:#783cb4;--sy-frost:#d5c8f0;--sy-line:#49394f;--sy-bg:#151418;--sy-panel:#1d1921;}
+.sy-post.sy-v2{--sy-signature:"白雪";--sy-ops-title:"Silver as Moonlight";--sy-watermark:"白雪";--sy-resume:"Resumo";--sy-calc:"Cálculos";--sy-effects:"Efeitos";--sy-inventory:"Equipamentos";--sy-techniques:"Técnicas";--sy-records:"Outros registros";--sy-ink:#d9d3df;--sy-muted:#a99bad;--sy-purple:#533b5c;--sy-voice:#783cb4;--sy-frost:#d5c8f0;--sy-line:#49394f;--sy-bg:#151418;--sy-panel:#1d1921;}
 .sy-post.sy-v2,.sy-post.sy-v2 :where(*){all:revert;box-sizing:border-box}
 .sy-post.sy-v2{display:block;position:relative;isolation:isolate;width:760px;max-width:100%;margin:28px auto;background:var(--sy-bg);color:var(--sy-ink);font:15px/1.9 Georgia,'Times New Roman',serif;text-align:left;overflow:hidden;box-shadow:0 18px 65px #0008;border:1px solid var(--sy-line);float:none;clear:both;overflow-wrap:anywhere;}
 .sy-post.sy-v2 :where(*){box-sizing:border-box;color:inherit;font:inherit;text-align:inherit;letter-spacing:normal;text-transform:none;text-shadow:none;float:none;clear:none;margin:0;padding:0;border:0;background:transparent;box-shadow:none;min-width:0;max-width:none;position:static;}
@@ -239,3 +239,11 @@
 .sy-post.sy-v2 .sy-snow-particle{position:absolute;top:-22px;left:var(--sx,50%);display:block;color:#e9dfff;font:var(--ss,11px)/1 Georgia,serif;text-shadow:0 0 7px #fff8,0 0 14px #d7b8f5a0;opacity:0;will-change:top,transform;animation:sy-snow-fall var(--sd,18s) linear infinite;animation-delay:var(--sl,0s)}
 @keyframes sy-snow-fall{0%{top:-24px;opacity:0;transform:translate3d(0,0,0) rotate(0deg)}10%{opacity:var(--so,.7)}84%{opacity:var(--so,.7)}100%{top:calc(100% + 28px);opacity:0;transform:translate3d(var(--sw,30px),0,0) rotate(180deg)}}
 @media(prefers-reduced-motion:reduce){.sy-post.sy-v2 .sy-snow-layer{display:none!important}}
+
+/* V2.4 — Hierarquia da legenda: frase breve à direita, ornamento central, frase principal centralizada. */
+.sy-post.sy-v2 .sy-caption{display:flex;flex-direction:column;align-items:stretch;gap:0}
+.sy-post.sy-v2 .sy-caption .sy-kicker{order:0;align-self:stretch;width:100%;margin:0;text-align:right}
+.sy-post.sy-v2 .sy-caption .sy-caption-ornament{order:1;align-self:center;display:flex;justify-content:center;align-items:center;gap:12px;width:min(64%,380px);max-width:100%;margin:12px auto 13px;text-align:center}
+.sy-post.sy-v2 .sy-caption .sy-caption-ornament::before,.sy-post.sy-v2 .sy-caption .sy-caption-ornament::after{display:block;flex:1 1 0;width:auto;max-width:none;height:1px}
+.sy-post.sy-v2 .sy-caption .sy-subtitle{order:2;align-self:stretch;width:100%;margin:0;text-align:center}
+@media(max-width:560px){.sy-post.sy-v2 .sy-caption .sy-caption-ornament{width:min(76%,320px);margin:10px auto 12px}.sy-post.sy-v2 .sy-caption .sy-kicker{font-size:9px;letter-spacing:1.8px}}
