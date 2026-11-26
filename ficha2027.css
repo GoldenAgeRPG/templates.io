@@ -258,7 +258,9 @@
 .ga27.fx-prisma .ga-hero{background-size:140% 160%;animation:ga-sky-travel 12s ease-in-out infinite alternate}
 }
 
-.ga27.divider-ondas .ga-seam {
+.ga27.divider-ondas .ga-seam,
+.ga27.divider-fogo .ga-seam,
+.ga27.divider-maredupla .ga-seam {
   height: 32px;
   margin-top: -16px;
   background: transparent;
